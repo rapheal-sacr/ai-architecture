@@ -1,0 +1,366 @@
+# Machine-readable claim ledger for the WAM falsification plan.
+#
+# status: untested | running | PASS | FAIL | PARTIAL
+# predicted: what this plan expects before running (pre-registration)
+#
+# Keeping this separate from PLAN.md so experiment runners can assert against
+# it and so the pre-registered prediction cannot be quietly edited after a run
+# without showing up in the diff.
+
+meta:
+  design_docs:
+    - "Architecture Design/wam_L8_L9_ledger_anchored_self_improvement.md"     # Part I
+    - "Architecture Design/wam_L8_L9_part2_mechanisms.md"                     # Part II
+    - "Architecture Design/wam_L8_L9_part3_response_to_review.md"             # Part III
+    - "Architecture Design/transformer_vs_write_ahead_memory.png"             # L0-L6
+    - "Architecture Design/wam_L7_ledger_anchored_plasticity.png"             # L7
+  rigs:
+    A: "ledger simulator, no model, runs on the M2 in seconds to minutes"
+    B: "small real model, MLX, <=3B 4-bit, 8 GB ceiling"
+    C: "rented GPU, episodic, survivors only"
+
+claims:
+
+  # -- Root 0 - invariants -------------------------------------------------
+  - id: E0.1
+    tier: L7
+    claim: "I4 - competence regenerates from provenance alone"
+    source: "L7 card; Part II section G calls this untested"
+    rig: A
+    kill: "any non-tombstoned competence not returning within delta; or recompile cost O(ledger) with unbounded ledger"
+    predicted: uncertain
+    status: untested
+
+  - id: E0.2
+    tier: L7
+    claim: "tombstone cascade reaches every adapter influenced by an entry"
+    source: "L7 card - 'unlearning by construction rather than by approximation'"
+    rig: A
+    kill: "any residual influence of a tombstoned entry after cascade + recompile"
+    predicted: FAIL
+    predicted_reason: >
+      Provenance is recorded entry->adapter, but Part I section 7 says the skill
+      card generates the adapter's training set. The real path is
+      entry -> card -> card-conditioned rollouts -> adapter. Unless provenance
+      takes the transitive closure through those rollouts, parametric carryover
+      survives the cascade and unlearning is approximate after all.
+    status: untested
+
+  - id: E0.3
+    tier: L8
+    claim: "I3 no-compounding holds for synthetic experience without new machinery"
+    source: "Part I section 2; Part III section 6.1"
+    rig: A
+    kill: "any promotion whose provenance closure contains only synthetic + inferred"
+    predicted: uncertain
+    predicted_reason: >
+      Part III section 6.1 requires every L8 task to chain to an `observed`
+      entry. Unclear whether that is enforceable when a task derives from a gap,
+      which is a statistic over many entries rather than a pointer to one.
+    status: untested
+
+  - id: E0.4
+    tier: cross
+    claim: "I1 - every promoted capability resolves to observed entries"
+    source: "Part I section 10, claim-level auditability"
+    rig: A
+    kill: "resolution fraction < 1.0"
+    predicted: uncertain
+    status: untested
+
+  # -- Root 1 - estimator quality ------------------------------------------
+  - id: E1.1
+    tier: L7
+    claim: "occupied rank = #{sigma_k > eps} is a computed constraint, not a guessed integer"
+    source: "Part II section A"
+    rig: A
+    kill: "no decade-wide elasticity plateau (K1); or held-out leakage > 5% / free-write interference > 5% (K2)"
+    predicted: FAIL
+    status: FAIL
+    result: results/e1_1_spectrum_knee.json
+    finding: >
+      Fails on 3 of 4 streams. Power-law: no plateau, 29x rank swing, 75%
+      leakage. Realistic domain mixture: budget well posed but empty - 6 free
+      directions of 128, so allocation deadlocks into permanent reclamation.
+      Even the design's own assumed bimodal shape fails, and the failure is
+      quantised in units of one committed direction (4.2% of energy each) -
+      the auto-placed eps missed by two. No safety margin at the cut.
+
+  - id: E1.2
+    tier: L7
+    claim: "three lambda timescales with release requiring unanimity makes rank release safe"
+    source: "Part III section 2"
+    rig: A
+    kill: "time-to-deadlock finite - budget fills monotonically and regions never release"
+    predicted: FAIL
+    predicted_reason: >
+      The long-lambda estimator releases almost nothing, so unanimity means
+      near-zero release. Compounds with E1.1's finding that realistic traffic
+      starts with almost no free rank.
+    status: untested
+
+  - id: E1.3
+    tier: L4
+    claim: "posterior variance predicts realized error (calibration audit)"
+    source: "Part III section 1 - the design's own recommended audit"
+    rig: B
+    kill: "Spearman rho < 0.5 between predicted variance and realized error"
+    predicted: uncertain
+    note: "E1.4 already shows rho = -0.99 for the epistemic reading in simulation"
+    status: untested
+
+  - id: E1.4
+    tier: L8
+    claim: "L4's RLS error covariance is already an epistemic gap detector"
+    source: "Part I section 3; Part II section A reading 2"
+    rig: A
+    kill: "noise regions capture > 3x fair share of practice budget (A1); or gate signal rho < 0.5 vs realized error (A2)"
+    predicted: FAIL
+    status: FAIL
+    result: results/e1_4_aleatoric_magnet.json
+    finding: >
+      Posterior variance is epistemic + aleatoric and the two readings need
+      opposite quantities. Predictive reading: one coin-flip region in twelve
+      takes 51% of the practice budget (6.2x fair share), rising with horizon -
+      an absorbing state, because 4p(1-p) peaks at p=0.5 where a coin flip
+      lives permanently. Part III section 6.3's per-source cap only reduces
+      this to 4.1x. Epistemic reading fixes the magnet but inverts the gate to
+      rho = -0.99. Fix that passes both - score gaps by reducible variance
+      (a derivative, not a level): 1.0x fair share, rho = +1.00, no competence
+      cost. Damage is compute misallocation, not capability loss (~0.005
+      competence), which still matters given Part III section 10.
+
+  - id: E1.5
+    tier: L7
+    claim: "per-layer R_t is cheap-but-not-free at depth"
+    source: "Part II section A"
+    rig: B
+    kill: "not a kill - measures wall-clock/memory, and the buffer size below which the spectrum is too noisy to threshold (feeds E1.1)"
+    predicted: uncertain
+    status: untested
+
+  # -- Root 2 - verification coverage and cost (binding) -------------------
+  - id: E2.1
+    tier: Assay
+    claim: "probe harvesting turns the Assay from a content-production line into a sealing policy"
+    source: "Part III section 5"
+    rig: A
+    kill: "any harvested T2 probe whose verified outcome traces to a T3 judge"
+    predicted: FAIL
+    predicted_reason: >
+      Tier laundering. 'Resolves with a verified outcome' does not specify a
+      tier, so a T3-judged outcome becomes a T2 probe by the act of freezing and
+      hiding it. Follow-up matters more than the kill: measure what fraction of
+      traffic survives a strict T0/T1-only filter. If small, harvesting
+      supplements the domains that already have verifiers and does nothing for
+      the T3 domains that need them - meaning it does not attack the binding
+      constraint at all.
+    status: untested
+
+  - id: E2.2
+    tier: Assay
+    claim: "verifier synthesis moves a domain from T3 to T1 via the discovery/verification asymmetry"
+    source: "Part III section 9 - declared highest-leverage item"
+    rig: manual then B
+    kill: "synthesized verifier disagrees with held-out human labels, or fails to reject known-bad cases the base judge accepted"
+    predicted: uncertain
+    note: "Part III's own roadmap item 6 says do this by hand on one domain before building machinery. Follow that."
+    status: untested
+
+  - id: E2.3
+    tier: L9
+    claim: "the staged evaluation ladder makes an archive affordable"
+    source: "Part I section 4; Part II section E"
+    rig: A
+    kill: "low Spearman rho between SMALL-suite and FULL-suite scores - the cheap filter would be buying affordability with unmeasured false negatives"
+    predicted: uncertain
+    status: untested
+
+  - id: E2.4
+    tier: Assay
+    claim: "sealed-suite drift fires before the incumbent score does"
+    source: "Part II section G, Goodhart canary drill"
+    rig: A
+    kill: "incumbent score moves first"
+    predicted: uncertain
+    status: untested
+
+  - id: E2.5
+    tier: Assay
+    claim: "harvested suites inherit traffic coverage bias (design admits this - quantify it)"
+    source: "Part III section 5"
+    rig: A
+    kill: "not a kill - measures bias magnitude and compounding rate when the harvested suite also steers the curriculum"
+    predicted: uncertain
+    status: untested
+
+  # -- Root 3 - signature ontology and transfer ----------------------------
+  - id: E3.1
+    tier: L7
+    claim: "ranking by net transfer accumulates abstractions; ranking by target gain accumulates patches"
+    source: "Part II section B - the central generalization claim"
+    rig: A
+    kill: "net-transfer arm does not beat target-gain arm on held-out compositional tasks"
+    predicted: uncertain
+    status: untested
+
+  - id: E3.2
+    tier: L7
+    claim: "writing a tau row for every off-target delta collapses the transfer cold start"
+    source: "Part III section 4a"
+    rig: A
+    kill: "censoring bias large and systematically toward the diagonal - which would make T confidently wrong rather than merely sparse, worse than cold start"
+    predicted: uncertain
+    predicted_reason: "rejected candidates are rejected by the same gate, so the tau sample is censored"
+    status: untested
+
+  - id: E3.3
+    tier: L3
+    claim: "choose the partition that maximizes off-diagonal mass in aggregated T"
+    source: "Part III section 3"
+    rig: A
+    kill: "objective maximized by a degenerate partition"
+    predicted: FAIL
+    predicted_reason: >
+      Off-diagonal mass is maximized by maximally fine partitions - one region
+      per task makes everything off-diagonal. As stated this is not an
+      optimization, it is a drive toward atomisation. Needs a regulariser or MDL
+      term the design does not specify.
+    status: untested
+
+  - id: E3.4
+    tier: L3
+    claim: "storing tau at observation grain makes re-partition a re-aggregation, not data loss"
+    source: "Part III section 3"
+    rig: A
+    kill: "T does not reconstruct after re-partition"
+    predicted: PASS
+    note: "strongest mechanism in Part III; expected to hold"
+    status: untested
+
+  # -- Root 4 - search space and loop safety -------------------------------
+  - id: E4.1
+    tier: Router
+    claim: "the scalar/textual firewall means the system cannot talk itself into a promotion"
+    source: "Part I section 6"
+    rig: A
+    kill: "a biased textual generator shifts arm posteriors measurably while writing zero scalars"
+    predicted: FAIL
+    predicted_reason: >
+      The firewall governs who may write posteriors. But the textual channel
+      picks which candidates are proposed, and only proposed candidates get
+      scored - so it controls the sampling distribution over the scalar channel
+      without ever writing to it. A valve, not a wall.
+    status: untested
+
+  - id: E4.2
+    tier: L9
+    claim: "the blast-radius fixed point - L9 may never edit the Assay or the gate's tier requirements"
+    source: "Part I section 4"
+    rig: A
+    kill: "nonempty intersection between the Assay's execution dependencies and the L9-editable set"
+    predicted: FAIL
+    predicted_reason: >
+      Part I section 4 puts 'L7's gate thresholds' and 'retrieval policy' in the
+      L9-editable set. eps, eps_reg, noise_leeway and the shrinkage on w are
+      thresholds, so L9 can lower the bar without touching a tier requirement.
+      And T1 counterfactual replay runs through retrieval, so L9 owns code the
+      T1 verifier depends on.
+    deliverable: "actual dependency graph, plus a corrected minimal non-editable set"
+    status: untested
+
+  - id: E4.3
+    tier: L1
+    claim: "refutation scope errors are bounded by expiry"
+    source: "Part I sections 2, 9"
+    rig: A
+    kill: "capability holes never surface within N cycles"
+    predicted: FAIL
+    predicted_reason: "the design admits no gap detector will see these; expiry 'helps, it is not a proof'"
+    fixes_to_test: ["mandatory expiry sampling", "scope-width penalty"]
+    status: untested
+
+  - id: E4.4
+    tier: L1
+    claim: "refutation permanence (I6) is affordable"
+    source: "Part I section 8"
+    rig: A
+    kill: "refutations dominate the retrieval budget at realistic ledger sizes"
+    predicted: uncertain
+    status: untested
+
+  - id: E4.5
+    tier: Router
+    claim: "typed arm tuples are a genuine search-space expansion"
+    source: "Part III section 7"
+    rig: A
+    kill: "<10% of the artifact x edit_type product is semantically valid - mostly a rejection engine, not an expansion"
+    predicted: uncertain
+    status: untested
+
+  # -- Rig B - claims that need a model ------------------------------------
+  - id: E5.1
+    tier: L2
+    claim: "L2 compresses to ~1/400 of the latent pages, megabytes per user"
+    rig: B
+    kill: "ratio far off, or retrieval quality collapses at that ratio"
+    predicted: uncertain
+    status: untested
+
+  - id: E5.2
+    tier: L2
+    claim: "Memory Interleave (retrieve -> infer -> retrieve) beats single-shot retrieval"
+    rig: B
+    kill: "no gain over a matched retrieval budget"
+    predicted: uncertain
+    status: untested
+
+  - id: E5.3
+    tier: L5
+    claim: "K consecutive failed reflections is a better deliberation trigger than a learned predicate"
+    source: "Part II section D"
+    rig: B
+    kill: "does not improve the latency/accuracy frontier over the predicate alone"
+    predicted: uncertain
+    status: untested
+
+  - id: E5.4
+    tier: L3
+    claim: "cos <= 0.93 admission control prevents bank collapse; failure-despite-guidance is the sharpest distillation signal"
+    source: "Part I section 7"
+    rig: B
+    kill: "bank collapses anyway, or the signal does not beat uniform failure sampling"
+    predicted: uncertain
+    status: untested
+
+  - id: E5.5
+    tier: L6
+    claim: "counterfactual replay is the one signal that is free and clean"
+    source: "Part II section F stage 1"
+    rig: B
+    kill: "a candidate write changes retrieval for subsequent queries, contaminating delta with downstream effects"
+    predicted: uncertain
+    predicted_reason: "the label is asserted to be causally attributed to one memory decision; downstream retrieval changes would break that"
+    status: untested
+
+# -- repairs proposed by experiments, not yet adopted ----------------------
+repairs:
+  - id: R1
+    from: E1.1
+    proposal: >
+      Replace counted free rank with a measured energy criterion: allocate a
+      candidate basis, measure the perturbation on held-out traffic, reject
+      above tolerance. Turns "count directions below eps" into a T1
+      counterfactual the design already has, and composes with the promotion
+      gate instead of sitting beside it.
+    cost: "one eval per allocation instead of a threshold comparison"
+    status: proposed
+
+  - id: R2
+    from: E1.4
+    proposal: >
+      Score gaps by reducible variance - the decline in variance attributable
+      to prior practice - rather than by variance level.
+    evidence: "passed A1 and A2 at zero competence cost in E1.4"
+    open: "stability under noisy pass-rate estimates is untested"
+    status: proposed

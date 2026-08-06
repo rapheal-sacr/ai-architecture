@@ -1,0 +1,99 @@
+{
+  "seed": 20260806,
+  "cycles": 400,
+  "rows": [
+    {
+      "arm": "predictive",
+      "noise_share_overall": 0.447,
+      "noise_share_late": 0.5131,
+      "fair_share": 0.0833,
+      "magnet_multiple": 6.16,
+      "learnable_competence": 0.9247,
+      "learnable_ceiling": 0.9267,
+      "competence_shortfall": 0.002,
+      "gate_calibration_rho": 1.0,
+      "A1_not_a_noise_magnet": false,
+      "A2_gate_calibrated": true,
+      "verdict": "FAIL"
+    },
+    {
+      "arm": "predictive+cap",
+      "noise_share_overall": 0.3103,
+      "noise_share_late": 0.341,
+      "fair_share": 0.0833,
+      "magnet_multiple": 4.09,
+      "learnable_competence": 0.9254,
+      "learnable_ceiling": 0.9267,
+      "competence_shortfall": 0.0013,
+      "gate_calibration_rho": 1.0,
+      "A1_not_a_noise_magnet": false,
+      "A2_gate_calibrated": true,
+      "verdict": "FAIL"
+    },
+    {
+      "arm": "epistemic",
+      "noise_share_overall": 0.154,
+      "noise_share_late": 0.1604,
+      "fair_share": 0.0833,
+      "magnet_multiple": 1.92,
+      "learnable_competence": 0.9267,
+      "learnable_ceiling": 0.9267,
+      "competence_shortfall": 0.0,
+      "gate_calibration_rho": -0.993,
+      "A1_not_a_noise_magnet": true,
+      "A2_gate_calibrated": false,
+      "verdict": "FAIL"
+    },
+    {
+      "arm": "reducible",
+      "noise_share_overall": 0.0833,
+      "noise_share_late": 0.0833,
+      "fair_share": 0.0833,
+      "magnet_multiple": 1.0,
+      "learnable_competence": 0.9267,
+      "learnable_ceiling": 0.9267,
+      "competence_shortfall": 0.0,
+      "gate_calibration_rho": 1.0,
+      "A1_not_a_noise_magnet": true,
+      "A2_gate_calibrated": true,
+      "verdict": "PASS"
+    }
+  ],
+  "budget_sweep": [
+    {
+      "cycles": 10,
+      "predictive_competence": 0.4605,
+      "reducible_competence": 0.4521,
+      "competence_lost_to_magnet": -0.0084,
+      "predictive_noise_share": 0.0864
+    },
+    {
+      "cycles": 25,
+      "predictive_competence": 0.7112,
+      "reducible_competence": 0.7186,
+      "competence_lost_to_magnet": 0.0074,
+      "predictive_noise_share": 0.1224
+    },
+    {
+      "cycles": 50,
+      "predictive_competence": 0.8611,
+      "reducible_competence": 0.8622,
+      "competence_lost_to_magnet": 0.0011,
+      "predictive_noise_share": 0.1998
+    },
+    {
+      "cycles": 100,
+      "predictive_competence": 0.9106,
+      "reducible_competence": 0.9175,
+      "competence_lost_to_magnet": 0.0069,
+      "predictive_noise_share": 0.3897
+    },
+    {
+      "cycles": 200,
+      "predictive_competence": 0.9216,
+      "reducible_competence": 0.9264,
+      "competence_lost_to_magnet": 0.0048,
+      "predictive_noise_share": 0.4912
+    }
+  ]
+}
