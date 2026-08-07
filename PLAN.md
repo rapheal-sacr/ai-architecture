@@ -47,6 +47,7 @@ structural work first, which is the right order anyway.
 | E1.1 | `#{σ_k > ε}` is a computed budget | **PARTIAL** — fails on 2 of 4 streams |
 | E1.1b | the budget works under the energy/GPM criterion | **PASS** — but see E1.1c |
 | E1.1c | …does it hold *per domain*, not just on the traffic mean? | **FAIL** — partially reverses E1.1b |
+| E1.1d | tail-safe free rank vs subscription ratio | **the missing curve** — boundary sits at 1.0× |
 | E1.2 | three-λ unanimity makes rank release safe | **FAIL** on both criteria — architectural |
 | E1.4 | posterior variance is an epistemic gap detector | **FAIL** |
 | E0.2 | the tombstone cascade reaches the weights | **PARTIAL** — one arm withdrawn |
@@ -269,6 +270,45 @@ the stated reason for building it.
 
 ---
 
+### E1.1d · The whole record was measured on the cliff edge
+
+Every free-rank number here is taken at one point. E1.1c's configs are 64, 128
+and 128 directions of traffic against dim 128; E1.2's world is 16 × 8 = 128.
+Both are **exactly Σr_d/d = 1**. Joint feasibility takes free rank as its primary
+axis, so a feasible region computed at one subscription slice would repeat the
+level-vs-ratio error one level up.
+
+```
+  overlap    subscr   tail-safe rho   committed   free   usable
+  0.0          0.50           0.999          62     66     yes
+  0.0          1.00           0.999         109     19     yes
+  0.0          1.50           0.999         123      5      NO
+  0.7          1.50           0.995          89     39     yes
+  0.7          3.00            0.99          87     41     yes
+
+  feasibility boundary (last usable subscription)
+    overlap 0.0  ->  1.0    (19 free)      first unusable 1.5
+    overlap 0.4  ->  1.0    (21 free)      first unusable 1.5
+    overlap 0.7  ->  3.0+   (41 free)      no unusable point swept
+```
+
+**The boundary at low overlap is subscription 1.0 — which is exactly where every
+prior measurement was taken.** One step up to 1.5× and the budget is gone (5–6
+free); one step down to 0.5× and it is comfortable (66 free). So "17–18 free at
+tail-safe" and "6–15 under the release rules" are readings *at the cliff*, and
+that is the single most important context for both.
+
+**Overlap moves the boundary by at least 3×**, so it is not a refinement — it
+decides whether an operating envelope exists at all. Together with the real
+subscription ratio it determines whether any L7 budget finding bites in
+practice, which makes both Rig B measurements rather than one.
+
+(At overlap 0.7 free rank is non-monotone in subscription — 97, 88, 69, 39, 50,
+41 — most likely the discrete retention grid, since tail-safe ρ jumps between
+0.99 and 0.995 there. Not interpreted.)
+
+---
+
 ### E1.2 · The three-λ rule is unsafe in both directions at once
 
 Part III §2's asymmetry — allocate on the short estimator, release only on
@@ -302,10 +342,16 @@ release rule can touch it. Compose that with E1.1c and it is a two-line proof:
 > undetectable, for any parameter setting**
 
 That cannot be argued down by a seed count. The simulation only *sizes* it:
-under `short_only`, **85.8% of the worst domain's subspace is overwritten** while
-a traffic-weighted check reports 16.6% — a **5.2× blindness factor** — and the
-worst-hit domain sits at mean traffic rank 11.1 of 16. Unanimity is less
-damaging in absolute terms (0.517) and **blinder** (7.2×).
+under `short_only` a traffic-weighted check reports 16.6% damage where the worst
+domain is at 85.8% — a **5.2× blindness factor**; unanimity is less damaging
+(0.517) and *blinder* (7.2×).
+
+**The ratio is the finding, not the level.** Domains partition the space
+disjointly here, so every allocation damages someone by construction and the
+level cannot come out low — it is a distributional statistic at subscription
+1.0 and overlap 0, which E1.1d shows is precisely the feasibility boundary and
+the pessimistic end of the overlap axis. The *ratio* is two views of the same
+damage, so it survives whether or not the damage was avoidable.
 
 So §2's justification, *"if the direction was actually committed, the promotion
 gate's non-regression test catches it,"* is false for structural reasons no
@@ -762,11 +808,12 @@ retires generator risk and settles what Phase 1 left conditional:
 
 | Measurement | Settles |
 |---|---|
+| **E1.3 — predicted variance vs realized error on held-out queries** | **first, not fifth.** The weighting rule fixes protection statistics by computing them per region; it cannot reach anisotropy *within* a region. Partitioning finer to convert within- into between-region walks straight into E3.3's atomisation result, so partitioning cannot solve it at *any* grain. E1.3 is the only instrument left that does not depend on a partition |
+| **per-region subspace overlap** and the **subscription ratio** of real traffic | E1.1d makes these jointly decisive: they move the feasibility boundary from 1.0× to beyond 3.0×, and every Rig A free-rank number was taken at 1.0× |
 | per-region activation feature spectra from a small MLX model | whether any Rig A spectrum stream resembles a real one — retires B4-class risk |
-| **variance of spectrum shape across regions** | whether E1.1b's empty intersection bites, i.e. whether ρ can be a global constant |
-| realised interference from a free-basis write on real activations | whether R1's per-region ρ search is necessary and whether it is cheap |
+| the **spillover differential** — narrow adapter vs broad, paired on one probe set | E3.1b makes this the measurement that decides §B, and much cheaper than a level |
 | observed correlation between checkability and difficulty on real traffic | where E2.1 sits on its own sweep — the number that decides Part III §5 |
-| E1.3 calibration audit, E1.5 per-layer cost | Root 1's remaining claims, which need a model anyway |
+| E1.5 per-layer cost | Root 1's remaining claim, which needs a model anyway |
 
 **Phase 3 — remaining Rig A claims**, re-run against whatever Phase 2 says the
 generators should look like: E1.2, E3.1, E3.2, E3.4, E4.1, E4.3, E4.4, E4.5,

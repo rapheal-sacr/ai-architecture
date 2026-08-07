@@ -115,7 +115,6 @@ BURN_IN = 300
 ADAPTER_HALFLIFE = 80
 ARRIVAL = 0.10
 ADAPTER_SIGNAL = 4.0
-RARE_MASS = 0.05          # domain traffic share below which a check cannot see it
 
 RULES = ("unanimity", "short_only", "medium_only", "long_only")
 ORDERS = ("ascending", "descending", "random")
@@ -137,27 +136,13 @@ class Budget:
         self.rates = rates / rates.sum()
         self.occupied = np.zeros(DIM, dtype=bool)
         self.adapters: list[dict] = []
-        # -- oracle, from the generating process, independent of every estimator
         self.base_rate = EVENTS_PER_CYCLE * self.rates[self.domain] / DIRS_PER_DOMAIN
-        self.domain_mass = self.rates[self.domain]
 
     def normalised(self, key):
         return self.sig[key] * (1.0 - self.lams[key])
 
     def committed(self, key):
         return self.normalised(key) > EPS
-
-    def truly_committed(self):
-        """Oracle: writing here damages something, whatever the estimators think.
-
-        NOTE this is a THRESHOLDED oracle and it is the wrong instrument for the
-        rare-domain question -- `base_rate > EPS` makes rare domains uncommitted
-        BY DEFINITION, so allocating into them is never flagged. That reproduces
-        the traffic weighting the finding is about, one level up. Retained only
-        for the coarse "did we write into a high-traffic direction" reading;
-        `domain_damage` below is the instrument that actually answers U2.
-        """
-        return (self.base_rate > EPS) | self.occupied
 
     def domain_damage(self):
         """Fraction of each domain's own subspace currently overwritten.
@@ -202,7 +187,7 @@ class Budget:
                 alive.append(a)
         self.adapters = alive
 
-        served = starved = allocated = unsafe = unsafe_rare = 0
+        served = starved = allocated = 0
         if self.rng.random() < self.arrival:
             idx = np.where(self.free_mask())[0]
             if len(idx) >= RANK_REQUEST:
@@ -214,24 +199,15 @@ class Budget:
                 else:
                     order = self.rng.permutation(idx)
                 dirs = order[:RANK_REQUEST]
-                # oracle read BEFORE marking occupied, or every allocation is
-                # trivially "committed" by its own occupancy
-                bad = self.truly_committed()[dirs]
                 self.occupied[dirs] = True
                 self.adapters.append({"dirs": dirs})
                 served, allocated = 1, RANK_REQUEST
-                unsafe = int(bad.sum())
-                # Rare-ownership is a property of each DIRECTION, not of the set.
-                # Summing mass over the whole unsafe set and thresholding once let
-                # a single frequent-domain direction zero the entire event.
-                unsafe_rare = int(np.sum(bad & (self.domain_mass[dirs] < RARE_MASS)))
             else:
                 starved = 1
 
         dmg = self.domain_damage()
         return {"free": int(self.free_mask().sum()), "served": served,
                 "starved": starved, "allocated": allocated,
-                "unsafe": unsafe, "unsafe_rare": unsafe_rare,
                 "worst_damage": float(dmg.max()),
                 "traffic_damage": float(np.sum(self.rates * dmg)),
                 "worst_domain": int(np.argmax(dmg))}
@@ -239,8 +215,7 @@ class Budget:
 
 def run(rule, seed, lam_long=LAMBDAS["long"], order="ascending"):
     b = Budget(rule, np.random.default_rng(seed), lam_long, order)
-    frees, tot = [], {"served": 0, "starved": 0, "allocated": 0,
-                      "unsafe": 0, "unsafe_rare": 0}
+    frees, tot = [], {"served": 0, "starved": 0, "allocated": 0}
     worst, traffic, worst_dom = [], [], []
     for c in range(CYCLES):
         r = b.step()
@@ -252,13 +227,10 @@ def run(rule, seed, lam_long=LAMBDAS["long"], order="ascending"):
             for k in tot:
                 tot[k] += r[k]
     req = tot["served"] + tot["starved"]
-    alloc = max(tot["allocated"], 1)
     return {
         "mean_free_rank": float(np.mean(frees)),
         "starve_rate": tot["starved"] / max(req, 1),
         "allocated": tot["allocated"],
-        "unsafe_rate": tot["unsafe"] / alloc,
-        "unsafe_rare_rate": tot["unsafe_rare"] / alloc,
         "adapters_live": len(b.adapters),
         "worst_damage": float(np.mean(worst)),
         "traffic_damage": float(np.mean(traffic)),
@@ -278,8 +250,6 @@ def run_many(rule, lam_long=LAMBDAS["long"], order="ascending"):
             "starve_se": round(float(np.std([r["starve_rate"] for r in rs]))
                                / np.sqrt(N_SEEDS), 3),
             "allocated": int(sum(r["allocated"] for r in rs)),
-            "unsafe_rate": round(m("unsafe_rate"), 3),
-            "unsafe_rare_rate": round(m("unsafe_rare_rate"), 3),
             "adapters_live": round(m("adapters_live"), 1),
             "worst_damage": round(m("worst_damage"), 3),
             "traffic_damage": round(m("traffic_damage"), 3),
@@ -300,10 +270,8 @@ def main() -> int:
     for _ in range(400):
         base.step()
     traffic_only = int(base.free_mask().sum())
-    oracle_committed = int(base.truly_committed().sum())
     ARRIVAL = _keep
-    print(f"  traffic-only free rank: {traffic_only}/{DIM};"
-          f" oracle holds {oracle_committed} directions truly committed\n")
+    print(f"  traffic-only free rank: {traffic_only}/{DIM}\n")
 
     rows = [run_many(r) for r in RULES]
     hdr = (f"  {'release rule':<14}{'mean free':>11}{'starve':>9}{'se':>7}{'live':>7}"
@@ -314,9 +282,15 @@ def main() -> int:
               f"{r['starve_se']:>7.3f}{r['adapters_live']:>7.1f}"
               f"{r['worst_damage']:>11.3f}{r['traffic_damage']:>13.3f}"
               f"{r['blindness']:>7.1f}{r['worst_domain_rank']:>11.1f}")
-    print("  worst dmg   fraction of the WORST domain's subspace overwritten")
+    print("  worst dmg   fraction of the WORST domain's subspace overwritten.")
+    print("              CONTINGENT: domains here partition the space disjointly, so")
+    print("              every allocation damages someone by construction and this")
+    print("              level cannot come out low. It is a distributional statistic")
+    print("              at subscription 1.0 and inter-domain overlap 0 -- the")
+    print("              pessimistic end of the axis E1.1c Panel C found decisive.")
     print("  traffic dmg the same, averaged over traffic -- what a check would see")
-    print("  blind       ratio: how much the traffic-weighted check understates it")
+    print("  blind       THE FINDING. Two views of the SAME damage, so the ratio")
+    print("              survives whether or not the damage was avoidable.")
     print(f"  worst dom   mean traffic rank of the worst-hit domain (0=most frequent,"
           f" {N_DOMAINS-1}=rarest)")
 
@@ -373,7 +347,7 @@ def main() -> int:
     out = pathlib.Path(__file__).resolve().parents[2] / "results" / "e1_2_lambda_unanimity.json"
     out.write_text(json.dumps(
         {"seed": SEED, "dim": DIM, "eps": EPS, "lambdas": LAMBDAS, "n_seeds": N_SEEDS,
-         "traffic_only_free_rank": traffic_only, "oracle_committed": oracle_committed,
+         "traffic_only_free_rank": traffic_only,
          "rows": rows, "allocation_order": orders, "lambda_long_sweep": sweep,
          "best_lambda_long": best["lambda_long"],
          "U1_as_preregistered": bool(u1), "U1_relative": bool(u1r),

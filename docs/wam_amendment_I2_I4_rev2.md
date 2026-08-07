@@ -235,6 +235,29 @@ that may not exist.
 relative to `S(A)` is the honest statement of how much of I4 the item-level test
 can see at all.
 
+### The weighting rule applies to E0.1's own instrument
+
+This is the third place the same defect could land, and E0.1 is the most
+dangerous of the three because the failure it would hide is the one the rest of
+the record predicts.
+
+**`S(A)` pass/fail counts must be per-region and unweighted.** A recompile that
+preserves frequent-domain competence and loses rare-domain competence registers
+as I4 *holding* under any pooled or traffic-weighted count. And that is exactly
+the expected failure: the provenance most likely to have decayed or been
+superseded between compile and recompile is the sparse, rare-domain kind. **So
+the arm most likely to show over-forgetting is the arm a pooled metric is
+blindest to.**
+
+Concretely: report over-forgetting as a **worst-region rate alongside the pooled
+rate**, exactly as E1.2's `domain_damage` now does, with the ratio between them
+as the blindness factor. If the two diverge on A1, that divergence is the
+finding — and a pooled-only E0.1 would report a pass.
+
+**A5 reports the max, not the mean.** `|P|` is presumably heavy-tailed across
+adapters, so a mean recompile cost understates the tail by construction. The
+reportable number is the worst adapter's cost, with the mean beside it.
+
 ---
 
 ## What I would not fix yet

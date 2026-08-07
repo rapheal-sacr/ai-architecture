@@ -1,0 +1,211 @@
+{
+  "seed": 20260806,
+  "dim": 128,
+  "domain_rank": 8,
+  "rank_request": 8,
+  "interference_limit": 0.05,
+  "rows": [
+    {
+      "n_domains": 4,
+      "share": 0.0,
+      "subscription": 0.25,
+      "measured_overlap": 0.061,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 32,
+      "free_rank": 96,
+      "usable": true
+    },
+    {
+      "n_domains": 8,
+      "share": 0.0,
+      "subscription": 0.5,
+      "measured_overlap": 0.06,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 63,
+      "free_rank": 65,
+      "usable": true
+    },
+    {
+      "n_domains": 16,
+      "share": 0.0,
+      "subscription": 1.0,
+      "measured_overlap": 0.062,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 109,
+      "free_rank": 19,
+      "usable": true
+    },
+    {
+      "n_domains": 24,
+      "share": 0.0,
+      "subscription": 1.5,
+      "measured_overlap": 0.063,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 123,
+      "free_rank": 5,
+      "usable": false
+    },
+    {
+      "n_domains": 32,
+      "share": 0.0,
+      "subscription": 2.0,
+      "measured_overlap": 0.063,
+      "tail_safe_retention": null,
+      "committed_rank": null,
+      "free_rank": 0,
+      "usable": false
+    },
+    {
+      "n_domains": 48,
+      "share": 0.0,
+      "subscription": 3.0,
+      "measured_overlap": 0.063,
+      "tail_safe_retention": 0.9995,
+      "committed_rank": 128,
+      "free_rank": 0,
+      "usable": false
+    },
+    {
+      "n_domains": 4,
+      "share": 0.4,
+      "subscription": 0.25,
+      "measured_overlap": 0.152,
+      "tail_safe_retention": 0.995,
+      "committed_rank": 31,
+      "free_rank": 97,
+      "usable": true
+    },
+    {
+      "n_domains": 8,
+      "share": 0.4,
+      "subscription": 0.5,
+      "measured_overlap": 0.144,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 62,
+      "free_rank": 66,
+      "usable": true
+    },
+    {
+      "n_domains": 16,
+      "share": 0.4,
+      "subscription": 1.0,
+      "measured_overlap": 0.142,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 107,
+      "free_rank": 21,
+      "usable": true
+    },
+    {
+      "n_domains": 24,
+      "share": 0.4,
+      "subscription": 1.5,
+      "measured_overlap": 0.139,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 122,
+      "free_rank": 6,
+      "usable": false
+    },
+    {
+      "n_domains": 32,
+      "share": 0.4,
+      "subscription": 2.0,
+      "measured_overlap": 0.142,
+      "tail_safe_retention": null,
+      "committed_rank": null,
+      "free_rank": 0,
+      "usable": false
+    },
+    {
+      "n_domains": 48,
+      "share": 0.4,
+      "subscription": 3.0,
+      "measured_overlap": 0.142,
+      "tail_safe_retention": 0.9995,
+      "committed_rank": 128,
+      "free_rank": 0,
+      "usable": false
+    },
+    {
+      "n_domains": 4,
+      "share": 0.7,
+      "subscription": 0.25,
+      "measured_overlap": 0.734,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 31,
+      "free_rank": 97,
+      "usable": true
+    },
+    {
+      "n_domains": 8,
+      "share": 0.7,
+      "subscription": 0.5,
+      "measured_overlap": 0.729,
+      "tail_safe_retention": 0.99,
+      "committed_rank": 40,
+      "free_rank": 88,
+      "usable": true
+    },
+    {
+      "n_domains": 16,
+      "share": 0.7,
+      "subscription": 1.0,
+      "measured_overlap": 0.728,
+      "tail_safe_retention": 0.99,
+      "committed_rank": 59,
+      "free_rank": 69,
+      "usable": true
+    },
+    {
+      "n_domains": 24,
+      "share": 0.7,
+      "subscription": 1.5,
+      "measured_overlap": 0.727,
+      "tail_safe_retention": 0.995,
+      "committed_rank": 89,
+      "free_rank": 39,
+      "usable": true
+    },
+    {
+      "n_domains": 32,
+      "share": 0.7,
+      "subscription": 2.0,
+      "measured_overlap": 0.729,
+      "tail_safe_retention": 0.99,
+      "committed_rank": 78,
+      "free_rank": 50,
+      "usable": true
+    },
+    {
+      "n_domains": 48,
+      "share": 0.7,
+      "subscription": 3.0,
+      "measured_overlap": 0.728,
+      "tail_safe_retention": 0.99,
+      "committed_rank": 87,
+      "free_rank": 41,
+      "usable": true
+    }
+  ],
+  "boundaries": [
+    {
+      "share": 0.0,
+      "last_usable_subscription": 1.0,
+      "free_rank_there": 19,
+      "first_unusable_subscription": 1.5
+    },
+    {
+      "share": 0.4,
+      "last_usable_subscription": 1.0,
+      "free_rank_there": 21,
+      "first_unusable_subscription": 1.5
+    },
+    {
+      "share": 0.7,
+      "last_usable_subscription": 3.0,
+      "free_rank_there": 41,
+      "first_unusable_subscription": null
+    }
+  ],
+  "S2_boundary_moves_with_overlap": true,
+  "S3_usable_at_low_subscription": true
+}

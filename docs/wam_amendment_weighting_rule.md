@@ -52,10 +52,12 @@ it routes and may stay traffic-weighted.
 | Consolidator "decay unused entries" | L0–L6 card | frequency of reference | **P** | inferred |
 | L2 LRU — "hot and recent history stays encoded, cold history exists only as text" | L2 card | recency + frequency | **P** | inferred |
 | sealed-suite drift | Part I §10 | traffic, via the harvested suite | **P** | inferred |
+| I4's `S(A)` pass/fail counts | E0.1's own instrument | pooled over items, hence traffic | **P** | inferred, and the most dangerous |
+| A5's recompile cost over `|P|` | E0.1 | mean over adapters, `|P|` heavy-tailed | **P** | inferred |
 | router arm value / cost-per-promotion | Part III §10 | traffic | **R** | correct as-is |
 | improvement-rate-per-tier | Part I §10 | traffic | **R** | correct as-is |
 
-**Eleven protection sites, three of them measured and eight inferred from the
+**Thirteen protection sites, three of them measured and ten inferred from the
 design text.** More than the four item 10 anticipated, and the pattern is that
 *every* statistic in the stack defaults to traffic-weighted because traffic is
 what the system sees. Frequency weighting is not a choice anyone made; it is what
@@ -97,6 +99,14 @@ question — whether tail-safe protection, bounded recompile, acceptable cascade
 breadth and deletion latency have a non-empty intersection — gets *harder* under
 this amendment, because per-region protection is what makes tail-safe ρ expensive
 in the first place.
+
+**Region count is now a variable in the feasibility problem, not a constant.**
+Per-region sampling costs probe budget linear in region count; region count is
+set by the partition; the partition objective is E3.3. So Root 3 appears inside
+Root 1's feasibility problem — a fifth edge in the coupled system, and it means
+joint feasibility must take region count as an axis alongside subscription ratio
+and overlap (E1.1d). Region count enters twice and in opposite directions: more
+regions means finer protection, and more regions means more probe budget.
 
 **Region granularity is now load-bearing twice.** Signature ontology already
 determined `T`'s index set (Part III §3, E3.3). It now also determines what

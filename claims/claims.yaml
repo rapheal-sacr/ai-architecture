@@ -319,6 +319,39 @@ claims:
       failure to a specification defect, and makes R1 a demonstrated fix rather
       than a sketch.
 
+  - id: E1.1d
+    tier: L7
+    claim: "tail-safe free rank as a function of subscription ratio -- the curve joint feasibility needs"
+    source: "every free-rank number in the record was measured at exactly 1.0x subscription"
+    rig: A
+    kill: "S1 (deliverable, not pass/fail) the subscription at which tail-safe free rank drops below RANK_REQUEST, per overlap; S2 boundary insensitive to overlap; S3 no usable point even at 0.25x with high overlap"
+    predicted: uncertain
+    status: PASS
+    result: results/e1_1d_subscription_curve.json
+    finding: >
+      S1: at overlap 0.0 and 0.4 the last usable subscription is 1.0x (19 and 21
+      free directions) and 1.5x is already unusable (5 and 6 free). At overlap
+      0.7 every swept point up to 3.0x stays usable, with 41 free at 3.0x.
+      S2 passes: the boundary moves from 1.0x to beyond 3.0x with overlap.
+      S3 passes: 0.25x subscription leaves 97 free at every overlap.
+    the_uncomfortable_reading: >
+      The boundary at low overlap sits at subscription 1.0 - and E1.1c's CONFIGS,
+      E1.2's world, and therefore every free-rank number in this programme were
+      measured at exactly 1.0x. The record was taken ON the cliff edge. One step
+      to 1.5x and the budget is gone; one step down to 0.5x and it is comfortable
+      (66-88 free). That is the single most important context for "17-18 free at
+      tail-safe" and "6-15 under the release rules".
+    consequence_for_rig_b: >
+      Overlap is not a refinement, it decides whether an operating envelope
+      exists at all: it moves the boundary by at least 3x. So the Rig B
+      per-region overlap measurement and the subscription ratio of real traffic
+      jointly determine whether any of the L7 budget findings bite in practice.
+    unexplained: >
+      At overlap 0.7 free rank is non-monotone in subscription: 97, 88, 69, 39,
+      50, 41 across 0.25x to 3.0x. Likely the discrete retention grid rather than
+      structure, since tail-safe rho jumps between 0.99 and 0.995 there. Not
+      interpreted.
+
   - id: E1.2
     tier: L7
     claim: "three lambda timescales with release requiring unanimity makes rank release safe"
@@ -346,10 +379,16 @@ claims:
       estimator, the only downstream catch is traffic-weighted, therefore
       allocation errors in low-mass domains are undetectable for ANY parameter
       setting. Two lines, no seed count required.
-      Sized: under short_only, 85.8% of the WORST domain's subspace is
-      overwritten while a traffic-weighted check reports 16.6% - a blindness
-      factor of 5.2x - and the worst-hit domain has mean traffic rank 11.1 of 16.
-      Unanimity is less damaging in absolute terms (0.517) and BLINDER (7.2x).
+      Sized: under short_only the traffic-weighted check reports 16.6% damage
+      where the worst domain is at 85.8% - a BLINDNESS FACTOR of 5.2x - and
+      unanimity is less damaging in absolute terms (0.517) and blinder (7.2x).
+      THE RATIO IS THE FINDING, NOT THE LEVEL. Domains partition the space
+      disjointly here, so every allocation damages someone by construction and
+      the level cannot come out low - it is a distributional statistic at
+      subscription 1.0 and inter-domain overlap 0, which E1.1d shows is exactly
+      the feasibility boundary and the pessimistic end of the overlap axis. The
+      ratio is two views of the SAME damage, so it survives whether or not the
+      damage was avoidable.
       So Part III section 2's stated justification for the asymmetry, "if the
       direction was actually committed, the promotion gate's non-regression test
       catches it", is false for structural reasons no tuning reaches.
@@ -419,6 +458,19 @@ claims:
     predicted: uncertain
     note: "E1.4 already shows rho = -0.99 for the epistemic reading in simulation"
     status: untested
+    promoted_to_first_in_rig_b: >
+      The weighting rule fixes protection statistics by computing them per
+      region. It cannot reach anisotropy WITHIN a region - practised in some
+      directions, unprobed in others - because the region is sampled as a unit.
+      The obvious response, partition more finely so within-region variation
+      becomes between-region, walks straight into E3.3's atomisation result. So
+      partitioning cannot solve it at ANY grain: coarse hides the anisotropy,
+      fine destroys the transfer structure, and no middle setting does both.
+      That leaves exactly one instrument that does not depend on a partition:
+      predicted variance against realized error on held-out queries. This is it.
+      After the weighting rule it is the only measurement left that can catch the
+      residual failure mode, so it goes FIRST in the Rig B block rather than
+      being one of five.
 
   - id: E1.1c
     tier: L7
