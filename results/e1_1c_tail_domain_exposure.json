@@ -1,0 +1,430 @@
+{
+  "seed": 20260806,
+  "dim": 128,
+  "rank_request": 8,
+  "interference_limit": 0.05,
+  "panels": [
+    {
+      "n_domains": 8,
+      "domain_rank": 8,
+      "rate_ratio": 8.0,
+      "curve": [
+        {
+          "retention": 0.9,
+          "committed_rank": 31,
+          "free_rank": 97,
+          "interf_traffic": 0.0846,
+          "leak_traffic": 0.1288,
+          "interf_worst": 0.1893,
+          "leak_worst": 0.4491,
+          "n_domains_failing": 7
+        },
+        {
+          "retention": 0.95,
+          "committed_rank": 41,
+          "free_rank": 87,
+          "interf_traffic": 0.0577,
+          "leak_traffic": 0.0593,
+          "interf_worst": 0.168,
+          "leak_worst": 0.3109,
+          "n_domains_failing": 6
+        },
+        {
+          "retention": 0.99,
+          "committed_rank": 55,
+          "free_rank": 73,
+          "interf_traffic": 0.0318,
+          "leak_traffic": 0.0138,
+          "interf_worst": 0.1235,
+          "leak_worst": 0.1027,
+          "n_domains_failing": 5
+        },
+        {
+          "retention": 0.995,
+          "committed_rank": 59,
+          "free_rank": 69,
+          "interf_traffic": 0.0198,
+          "leak_traffic": 0.0068,
+          "interf_worst": 0.0903,
+          "leak_worst": 0.0553,
+          "n_domains_failing": 2
+        },
+        {
+          "retention": 0.999,
+          "committed_rank": 63,
+          "free_rank": 65,
+          "interf_traffic": 0.0062,
+          "leak_traffic": 0.0006,
+          "interf_worst": 0.026,
+          "leak_worst": 0.0054,
+          "n_domains_failing": 0
+        },
+        {
+          "retention": 0.9995,
+          "committed_rank": 64,
+          "free_rank": 64,
+          "interf_traffic": 0.0,
+          "leak_traffic": 0.0,
+          "interf_worst": 0.0,
+          "leak_worst": 0.0,
+          "n_domains_failing": 0
+        }
+      ],
+      "tail_safe": {
+        "retention": 0.999,
+        "committed_rank": 63,
+        "free_rank": 65,
+        "interf_traffic": 0.0062,
+        "leak_traffic": 0.0006,
+        "interf_worst": 0.026,
+        "leak_worst": 0.0054,
+        "n_domains_failing": 0
+      },
+      "spearman_rate_vs_leakage": -1.0,
+      "exposure_by_rate": [
+        0.0021,
+        0.0135,
+        0.0389,
+        0.0961,
+        0.1155,
+        0.1503,
+        0.2314,
+        0.3109
+      ],
+      "repairs_at_095": [
+        {
+          "arm": "baseline",
+          "committed_rank": 41,
+          "free_rank": 87,
+          "interf_worst": 0.1443,
+          "n_domains_failing": 6
+        },
+        {
+          "arm": "R-a worst-case rank",
+          "committed_rank": 59,
+          "free_rank": 69,
+          "interf_worst": 0.0825,
+          "n_domains_failing": 2
+        },
+        {
+          "arm": "R-b freq-balanced R_t",
+          "committed_rank": 47,
+          "free_rank": 81,
+          "interf_worst": 0.089,
+          "n_domains_failing": 8
+        }
+      ],
+      "P1_pass": false,
+      "P2_pass": false
+    },
+    {
+      "n_domains": 16,
+      "domain_rank": 8,
+      "rate_ratio": 16.0,
+      "curve": [
+        {
+          "retention": 0.9,
+          "committed_rank": 50,
+          "free_rank": 78,
+          "interf_traffic": 0.0615,
+          "leak_traffic": 0.1103,
+          "interf_worst": 0.1239,
+          "leak_worst": 0.3444,
+          "n_domains_failing": 14
+        },
+        {
+          "retention": 0.95,
+          "committed_rank": 65,
+          "free_rank": 63,
+          "interf_traffic": 0.043,
+          "leak_traffic": 0.0533,
+          "interf_worst": 0.1033,
+          "leak_worst": 0.2049,
+          "n_domains_failing": 12
+        },
+        {
+          "retention": 0.99,
+          "committed_rank": 90,
+          "free_rank": 38,
+          "interf_traffic": 0.0215,
+          "leak_traffic": 0.0112,
+          "interf_worst": 0.0727,
+          "leak_worst": 0.0549,
+          "n_domains_failing": 4
+        },
+        {
+          "retention": 0.995,
+          "committed_rank": 98,
+          "free_rank": 30,
+          "interf_traffic": 0.0169,
+          "leak_traffic": 0.0056,
+          "interf_worst": 0.0505,
+          "leak_worst": 0.0271,
+          "n_domains_failing": 1
+        },
+        {
+          "retention": 0.999,
+          "committed_rank": 110,
+          "free_rank": 18,
+          "interf_traffic": 0.0089,
+          "leak_traffic": 0.0012,
+          "interf_worst": 0.0355,
+          "leak_worst": 0.0079,
+          "n_domains_failing": 0
+        },
+        {
+          "retention": 0.9995,
+          "committed_rank": 114,
+          "free_rank": 14,
+          "interf_traffic": 0.0064,
+          "leak_traffic": 0.0006,
+          "interf_worst": 0.0242,
+          "leak_worst": 0.004,
+          "n_domains_failing": 0
+        }
+      ],
+      "tail_safe": {
+        "retention": 0.999,
+        "committed_rank": 110,
+        "free_rank": 18,
+        "interf_traffic": 0.0089,
+        "leak_traffic": 0.0012,
+        "interf_worst": 0.0355,
+        "leak_worst": 0.0079,
+        "n_domains_failing": 0
+      },
+      "spearman_rate_vs_leakage": -0.965,
+      "exposure_by_rate": [
+        0.0014,
+        0.0079,
+        0.0144,
+        0.0321,
+        0.0409,
+        0.0655,
+        0.1348,
+        0.1028,
+        0.1537,
+        0.112,
+        0.174,
+        0.1645,
+        0.192,
+        0.1968,
+        0.2049,
+        0.189
+      ],
+      "repairs_at_095": [
+        {
+          "arm": "baseline",
+          "committed_rank": 65,
+          "free_rank": 63,
+          "interf_worst": 0.1082,
+          "n_domains_failing": 11
+        },
+        {
+          "arm": "R-a worst-case rank",
+          "committed_rank": 90,
+          "free_rank": 38,
+          "interf_worst": 0.0738,
+          "n_domains_failing": 5
+        },
+        {
+          "arm": "R-b freq-balanced R_t",
+          "committed_rank": 74,
+          "free_rank": 54,
+          "interf_worst": 0.0809,
+          "n_domains_failing": 13
+        }
+      ],
+      "P1_pass": false,
+      "P2_pass": false
+    },
+    {
+      "n_domains": 32,
+      "domain_rank": 4,
+      "rate_ratio": 32.0,
+      "curve": [
+        {
+          "retention": 0.9,
+          "committed_rank": 48,
+          "free_rank": 80,
+          "interf_traffic": 0.0573,
+          "leak_traffic": 0.1135,
+          "interf_worst": 0.1734,
+          "leak_worst": 0.5025,
+          "n_domains_failing": 28
+        },
+        {
+          "retention": 0.95,
+          "committed_rank": 63,
+          "free_rank": 65,
+          "interf_traffic": 0.0437,
+          "leak_traffic": 0.0593,
+          "interf_worst": 0.1397,
+          "leak_worst": 0.3295,
+          "n_domains_failing": 25
+        },
+        {
+          "retention": 0.99,
+          "committed_rank": 89,
+          "free_rank": 39,
+          "interf_traffic": 0.0214,
+          "leak_traffic": 0.0116,
+          "interf_worst": 0.0773,
+          "leak_worst": 0.092,
+          "n_domains_failing": 12
+        },
+        {
+          "retention": 0.995,
+          "committed_rank": 98,
+          "free_rank": 30,
+          "interf_traffic": 0.0143,
+          "leak_traffic": 0.0054,
+          "interf_worst": 0.0816,
+          "leak_worst": 0.0629,
+          "n_domains_failing": 4
+        },
+        {
+          "retention": 0.999,
+          "committed_rank": 111,
+          "free_rank": 17,
+          "interf_traffic": 0.0077,
+          "leak_traffic": 0.001,
+          "interf_worst": 0.0432,
+          "leak_worst": 0.0113,
+          "n_domains_failing": 0
+        },
+        {
+          "retention": 0.9995,
+          "committed_rank": 114,
+          "free_rank": 14,
+          "interf_traffic": 0.0056,
+          "leak_traffic": 0.0005,
+          "interf_worst": 0.0298,
+          "leak_worst": 0.0052,
+          "n_domains_failing": 0
+        }
+      ],
+      "tail_safe": {
+        "retention": 0.999,
+        "committed_rank": 111,
+        "free_rank": 17,
+        "interf_traffic": 0.0077,
+        "leak_traffic": 0.001,
+        "interf_worst": 0.0432,
+        "leak_worst": 0.0113,
+        "n_domains_failing": 0
+      },
+      "spearman_rate_vs_leakage": -0.917,
+      "exposure_by_rate": [
+        0.0005,
+        0.0023,
+        0.0066,
+        0.0113,
+        0.0138,
+        0.0257,
+        0.0331,
+        0.0432,
+        0.0757,
+        0.0753,
+        0.1268,
+        0.0922,
+        0.115,
+        0.0696,
+        0.1512,
+        0.1657,
+        0.0919,
+        0.1667,
+        0.1981,
+        0.2296,
+        0.183,
+        0.1675,
+        0.2097,
+        0.2654,
+        0.1918,
+        0.2935,
+        0.2917,
+        0.2335,
+        0.1839,
+        0.3295,
+        0.1794,
+        0.2068
+      ],
+      "repairs_at_095": [
+        {
+          "arm": "baseline",
+          "committed_rank": 63,
+          "free_rank": 65,
+          "interf_worst": 0.1315,
+          "n_domains_failing": 25
+        },
+        {
+          "arm": "R-a worst-case rank",
+          "committed_rank": 100,
+          "free_rank": 28,
+          "interf_worst": 0.0718,
+          "n_domains_failing": 2
+        },
+        {
+          "arm": "R-b freq-balanced R_t",
+          "committed_rank": 76,
+          "free_rank": 52,
+          "interf_worst": 0.087,
+          "n_domains_failing": 24
+        }
+      ],
+      "P1_pass": false,
+      "P2_pass": false
+    }
+  ],
+  "overlap_sweep": [
+    {
+      "n_domains": 16,
+      "share": 0.0,
+      "mean_subspace_overlap": 0.062,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 110,
+      "free_rank": 18
+    },
+    {
+      "n_domains": 16,
+      "share": 0.4,
+      "mean_subspace_overlap": 0.142,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 107,
+      "free_rank": 21
+    },
+    {
+      "n_domains": 16,
+      "share": 0.7,
+      "mean_subspace_overlap": 0.728,
+      "tail_safe_retention": 0.995,
+      "committed_rank": 71,
+      "free_rank": 57
+    },
+    {
+      "n_domains": 32,
+      "share": 0.0,
+      "mean_subspace_overlap": 0.031,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 111,
+      "free_rank": 17
+    },
+    {
+      "n_domains": 32,
+      "share": 0.4,
+      "mean_subspace_overlap": 0.122,
+      "tail_safe_retention": 0.999,
+      "committed_rank": 108,
+      "free_rank": 20
+    },
+    {
+      "n_domains": 32,
+      "share": 0.7,
+      "mean_subspace_overlap": 0.723,
+      "tail_safe_retention": 0.995,
+      "committed_rank": 71,
+      "free_rank": 57
+    }
+  ],
+  "verdict": "FAIL"
+}

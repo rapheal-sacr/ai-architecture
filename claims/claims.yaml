@@ -296,6 +296,21 @@ claims:
       the energy criterion, it is what makes the energy criterion operable. It
       is also cheap: interference is a projection against an activation buffer,
       not a counterfactual replay.
+    partially_reversed_by: E1.1c
+    reversal: >
+      Both halves of this verdict are TRAFFIC-WEIGHTED. rank_for_energy sums
+      energy over calibration queries drawn at Zipfian visit rates, and
+      leakage_by_rank / interference_by_rank return a MEAN over the same
+      distribution. So protection is allocated in proportion to frequency, a
+      rare domain's subspace lands below the cut and is classified free, and the
+      metric that should catch it averages over the distribution that made the
+      domain rare. Asked per domain on equal-sized probe sets, 6/8, 12/16 and
+      25/32 domains exceed the interference limit at rho = 0.95 while the
+      traffic mean reads 0.043-0.058 and passes.
+      The operating point must move to the tail-safe retention, rho = 0.999,
+      where free rank is 18/128 and 17/128 - 13-14% of dimension against the
+      ~50% reported here at rho = 0.95. "Empty only at 5x over-subscription" was
+      measured at a retention that is not tail-safe and should not be quoted.
     consequence: >
       E1.1's failure does NOT survive the strongest faithful reading. The
       subspace budget is sound; Part II section A states it in a form
@@ -326,6 +341,106 @@ claims:
     predicted: uncertain
     note: "E1.4 already shows rho = -0.99 for the epistemic reading in simulation"
     status: untested
+
+  - id: E1.1c
+    tier: L7
+    claim: "E1.1b's PASS holds per domain, not only on the traffic average"
+    source: "audit of E1.1b's aggregation"
+    rig: A
+    kill: "P1 any domain exceeds the interference limit at rho=0.95; P2 per-domain exposure monotone in rarity (Spearman <= -0.5); P3 reports the tail-safe retention and the free rank there"
+    predicted: uncertain
+    status: FAIL
+    result: results/e1_1c_tail_domain_exposure.json
+    finding: >
+      P1 and P2 both FAIL. At rho = 0.95, 6/8, 12/16 and 25/32 domains exceed the
+      interference bar while the traffic mean passes at 0.043-0.058.
+      Spearman(traffic rate, domain leakage) is -1.000, -0.965, -0.917 - MONOTONE
+      in rarity across all three configurations, so this is the criterion doing
+      what it is defined to do rather than one unlucky domain.
+      P3: tail-safe retention is rho = 0.999, free rank 18/128 and 17/128 at 16
+      and 32 domains - 13-14% of dimension, against a rank-8 request. Room for
+      roughly two adapters.
+    why_it_matters_here_specifically: >
+      L7's own admitted failure mode is coverage bias, and the rare-domain tail
+      is exactly the long-tail personal knowledge the ledger exists to preserve.
+      A budget safe on average and unsafe in the tail is unsafe for WAM's stated
+      purpose specifically.
+    both_obvious_repairs_fail: >
+      R-a (union of every domain's own top-r) cuts worst leakage ~7x and still
+      misses the interference bar. R-b (frequency-balanced R_t) barely moves it.
+      The honest repair is that rho stops being a free parameter: set it from
+      measured worst-domain interference. Same move as R1 and R7 - measure what
+      happened rather than trust the bookkeeping rule. Affordable, since it needs
+      domain labels only at calibration time.
+    leakage_is_not_interference: >
+      R-a cuts worst leakage 7x while leaving worst interference above the bar,
+      because interference_by_rank writes into U_free[:, :r], the LARGEST sub-cut
+      directions. G1 should always be the interference arm; any repair evaluated
+      on leakage alone will look better than it is.
+    falsifier_partly_succeeds: >
+      Panel C sweeps domain-subspace overlap. At overlap 0.73 the tail-safe
+      retention relaxes to 0.995 and free rank triples to 57. So the severity is
+      a function of real per-region subspace overlap - a Rig B measurement, and
+      the same activation pass PLAN.md section 3 already schedules.
+    consequence_for_E1_2: >
+      E1.2's predicted deadlock explicitly compounded with the retracted B4
+      number. It now compounds with a LIVE one only ~3x larger: 17-18 free
+      directions at the tail-safe point against a rank-8 request. E1.2 is the
+      strongest remaining candidate for a genuine architectural failure and
+      should be promoted.
+
+  - id: E3.1b
+    tier: L7
+    claim: "E3.1's T4 inversion is caused by spillover per se"
+    source: "audit of E3.1's T4 regime"
+    rig: A
+    kill: "S1 symmetric spillover also inverts the margin (T4 stands); S2 symmetric preserves while patch-only inverts (T4 is an asymmetry artifact); S3 reports the differential threshold"
+    predicted: uncertain
+    status: FAIL
+    result: results/e3_1b_spillover_symmetry.json
+    finding: >
+      S2 CONFIRMED - T4 is an asymmetry artifact. Symmetric spillover of the same
+      magnitude PRESERVES the margin and improves it: +0.176 at 0.02 and +0.210
+      at 0.05, against +0.085 clean. Patch-only at 0.02 inverts to -0.010.
+      Compositional-only acquisition goes 0.017 patch-only to 0.350 symmetric.
+      S3: the ranking tolerates 0.030 of EXCESS patch spillover over skill
+      spillover before inverting.
+    corrects: >
+      This partially REHABILITATES the architecture's central generalization
+      claim. The condition Part II section B owes is differential, not absolute,
+      and the Rig B measurement changes from a level to a paired difference -
+      narrow adapter versus broad on the same probe set, which also removes the
+      between-run variance that would dominate two separate level measurements.
+    what_survives_unchanged: >
+      Both arms collapse in absolute terms under patch-only spillover (3.9 and
+      3.1 skills against 9.2 and 10.1 clean), and E3.1c Panel B locates the
+      patch-only crossing at eps* = 0.015, so E3.1's chosen 0.02 sat just past it.
+
+  - id: E3.1c
+    tier: L7
+    claim: "the transfer MATRIX earns anything over a one-line breadth penalty"
+    source: "Root 3 justification test"
+    rig: A
+    kill: "N1 best breadth arm within 0.02 of net transfer in all regimes; N2 breadth beats transfer anywhere; N3 eps* outside [0,0.10]; N4 comp-only sensitive to tie-break"
+    predicted: uncertain
+    status: PARTIAL
+    result: results/e3_1c_narrowness_baseline.json
+    finding: >
+      N1 ok and N2 ok - the transfer STATISTIC wins. The best breadth arm falls
+      short by 0.093, 0.031 and 0.088 across the three regimes, so
+      "d.sum() - d.max()" beats both target gain and a scale-free breadth
+      penalty, and the one-line alternative loses.
+      N3: eps* = 0.015 for patch-only spillover, inside the informative range.
+      N4 FAILS: comp-only spread across tie-break rules is 0.550.
+    the_distinction_that_matters: >
+      No arm in E3.1 ever consults accumulated history. `transfer` scores
+      d.sum() - d.max() on the CURRENT candidate's measured deltas. So the
+      STATISTIC now has evidence; the MATRIX has none, in either direction. That
+      matters because everything expensive hangs off the matrix: tau storage at
+      observation grain, the partition objective, the censoring bias, and the L3
+      compiled signature-ontology view. T's three remaining uses - L8 curriculum
+      prior, L7 merge prior, diagonal-T as a memorisation diagnostic - are
+      unevidenced and were never the stated reason for building it.
 
   - id: E1.4
     tier: L8
@@ -549,15 +664,23 @@ claims:
       (spread 0.775). The published 0.55 is simply the "first" rule.
     superseded_by: E3.1b
     condition_the_design_does_not_state: >
-      Part II section B is conditionally true, and the condition is that narrow
-      patches must have near-zero REAL off-target effect. The design never states
-      it. Whether it holds is empirical and not obviously favourable: a low-rank
-      adapter fit to one region is not region-confined, so small positive
-      spillover to neighbours is plausible. Measuring real patch spillover is a
-      Rig B/C question and it decides whether the central generalization claim
-      holds in practice.
+      SUPERSEDED BY E3.1b - the condition stated here is the wrong one.
+      This entry originally read: "narrow patches must have near-zero REAL
+      off-target effect ... measuring real patch spillover is a Rig B/C question".
+      That is the ABSOLUTE condition and it is implausible. T4 applies spillover
+      only where kind == "patch"; skills get none. But net transfer is a SUM over
+      off-target regions, so adding the same constant to every candidate shifts
+      every score equally and cannot change the ranking. Only an ASYMMETRY can
+      invert the margin, and T4's stated justification - "a low-rank update fit
+      to one region is not region-confined" - does not distinguish the two
+      candidate types. A skill adapter is also low-rank and fit to a BROADER
+      distribution, so on that reasoning it should spill more.
+      The real condition is DIFFERENTIAL: patches must not spill over more than
+      skills by more than ~0.03, which in this world's units is 0.5 x GAIN_SKILL
+      or 0.21 x GAIN_PATCH, and should be carried as a ratio. Much weaker, and
+      arguably favourable a priori.
 
-  - id: E3.1b
+  - id: E3.1d
     tier: L7
     claim: "E3.1's compositional-only acquisition figure measures the ranking rule"
     source: "independent audit of a number this plan published in PLAN.md, README.md and claims.yaml"
@@ -578,6 +701,13 @@ claims:
       scores span 0.053 to 0.582 across the same rules. In the noisy regimes
       spread is 0.000, because noise breaks the ties, so those results are
       unaffected.
+    reconciles_with: >
+      E3.1c Panel C is an independent run of the same test. Identical on shared
+      rules (first 0.550 both; random 0.508 vs 0.515; prefer_patch 0.000 vs
+      0.005). E3.1d adds a fourth rule, prefer_skill, at 0.780, which widens the
+      spread from 0.550 to 0.775. A superset, not a disagreement. E3.1d also
+      extracts what Panel C did not: clean-regime COMPOSITIONAL scores are
+      contaminated too, spanning 0.053-0.582.
     consequence: >
       Strike 55%/72% from all documents. The mechanism claim survives on
       analytic grounds that need no number. Report E3.1's margins from the noisy

@@ -1,0 +1,180 @@
+{
+  "seed": 20260806,
+  "trials": 24,
+  "theta": 0.02,
+  "betas": [
+    0.02,
+    0.05,
+    0.1,
+    0.2
+  ],
+  "panel_a": {
+    "clean": {
+      "transfer": {
+        "compositional": 0.3487,
+        "sd": 0.1306,
+        "skills": 10.08,
+        "comp_only": 0.55
+      },
+      "target": {
+        "compositional": 0.2635,
+        "sd": 0.1358,
+        "skills": 9.17,
+        "comp_only": 0.208
+      },
+      "scope": {
+        "compositional": 0.2554,
+        "sd": 0.1404,
+        "skills": 9.08,
+        "comp_only": 0.217,
+        "beta": 0.1
+      },
+      "entropy": {
+        "compositional": 0.2554,
+        "sd": 0.1404,
+        "skills": 9.08,
+        "comp_only": 0.217,
+        "beta": 0.2
+      }
+    },
+    "noisy probes": {
+      "transfer": {
+        "compositional": 0.2687,
+        "sd": 0.0986,
+        "skills": 9.21,
+        "comp_only": 0.433
+      },
+      "target": {
+        "compositional": 0.2106,
+        "sd": 0.1292,
+        "skills": 8.54,
+        "comp_only": 0.175
+      },
+      "scope": {
+        "compositional": 0.2283,
+        "sd": 0.1108,
+        "skills": 8.75,
+        "comp_only": 0.292,
+        "beta": 0.2
+      },
+      "entropy": {
+        "compositional": 0.2377,
+        "sd": 0.0842,
+        "skills": 8.92,
+        "comp_only": 0.242,
+        "beta": 0.02
+      }
+    },
+    "noisy + spurious": {
+      "transfer": {
+        "compositional": 0.2065,
+        "sd": 0.1019,
+        "skills": 8.46,
+        "comp_only": 0.283
+      },
+      "target": {
+        "compositional": 0.0752,
+        "sd": 0.0389,
+        "skills": 6.29,
+        "comp_only": 0.017
+      },
+      "scope": {
+        "compositional": 0.0767,
+        "sd": 0.0771,
+        "skills": 6.08,
+        "comp_only": 0.108,
+        "beta": 0.2
+      },
+      "entropy": {
+        "compositional": 0.1188,
+        "sd": 0.0768,
+        "skills": 7.04,
+        "comp_only": 0.2,
+        "beta": 0.2
+      }
+    }
+  },
+  "panel_b_sweep": [
+    {
+      "spillover": 0.0,
+      "margin": 0.1313,
+      "target": 0.0752,
+      "transfer": 0.2065,
+      "skills_transfer": 8.46
+    },
+    {
+      "spillover": 0.005,
+      "margin": 0.0636,
+      "target": 0.0579,
+      "transfer": 0.1215,
+      "skills_transfer": 7.12
+    },
+    {
+      "spillover": 0.01,
+      "margin": 0.016,
+      "target": 0.0417,
+      "transfer": 0.0577,
+      "skills_transfer": 5.46
+    },
+    {
+      "spillover": 0.015,
+      "margin": -0.0052,
+      "target": 0.029,
+      "transfer": 0.0238,
+      "skills_transfer": 4.12
+    },
+    {
+      "spillover": 0.02,
+      "margin": -0.0096,
+      "target": 0.0154,
+      "transfer": 0.0058,
+      "skills_transfer": 3.08
+    },
+    {
+      "spillover": 0.03,
+      "margin": -0.0011,
+      "target": 0.0015,
+      "transfer": 0.0004,
+      "skills_transfer": 1.42
+    },
+    {
+      "spillover": 0.05,
+      "margin": 0.0,
+      "target": 0.0,
+      "transfer": 0.0,
+      "skills_transfer": 0.04
+    },
+    {
+      "spillover": 0.1,
+      "margin": 0.0,
+      "target": 0.0,
+      "transfer": 0.0,
+      "skills_transfer": 0.0
+    }
+  ],
+  "eps_star": 0.015,
+  "panel_c_ties": {
+    "first": {
+      "compositional": 0.3487,
+      "sd": 0.1306,
+      "skills": 10.08,
+      "comp_only": 0.55
+    },
+    "random": {
+      "compositional": 0.3175,
+      "sd": 0.1472,
+      "skills": 9.62,
+      "comp_only": 0.508
+    },
+    "prefer_patch": {
+      "compositional": 0.0521,
+      "sd": 0.036,
+      "skills": 5.71,
+      "comp_only": 0.0
+    }
+  },
+  "comp_only_spread": 0.55,
+  "N1_matrix_redundant": false,
+  "N2_breadth_better": false,
+  "N4_tiebreak_artifact": true
+}

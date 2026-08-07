@@ -1,4 +1,4 @@
-"""E3.1b -- Is E3.1's compositional-only acquisition figure a tiebreak artifact?
+"""E3.1d -- Is E3.1's compositional-only acquisition figure a tiebreak artifact?
 
 E3.1 reported, and this plan published in PLAN.md, README.md and claims.yaml:
 
@@ -152,7 +152,7 @@ def main() -> int:
         print("     deltas CANNOT see a candidate whose per-region deltas are all")
         print("     zero. That needs no number.\n")
 
-    out = ROOT / "results" / "e3_1b_tiebreak_audit.json"
+    out = ROOT / "results" / "e3_1d_tiebreak_audit.json"
     out.write_text(json.dumps(
         {"seed": SEED, "panels": panels, "worst_spread": worst,
          "N4_tiebreak_artifact": bool(artifact)}, indent=2))

@@ -45,7 +45,8 @@ structural work first, which is the right order anyway.
 | ID | Claim | Verdict |
 |---|---|---|
 | E1.1 | `#{σ_k > ε}` is a computed budget | **PARTIAL** — fails on 2 of 4 streams |
-| E1.1b | the budget works under the energy/GPM criterion | **PASS** — all 4 streams |
+| E1.1b | the budget works under the energy/GPM criterion | **PASS** — but see E1.1c |
+| E1.1c | …does it hold *per domain*, not just on the traffic mean? | **FAIL** — partially reverses E1.1b |
 | E1.4 | posterior variance is an epistemic gap detector | **FAIL** |
 | E0.2 | the tombstone cascade reaches the weights | **PARTIAL** — one arm withdrawn |
 | E0.2b | *rebuild:* functional ground truth + a third influence path | **FAIL** on both criteria |
@@ -54,7 +55,9 @@ structural work first, which is the right order anyway.
 | E0.2c | *does the ceiling hold under better policies?* | **PASS** — it does not; E0.2b demoted. Its D3 superseded |
 | E0.2d | is admission control a lever on cascade breadth? | **FAIL** — inverts E0.2c's D3. A **missing control surface** |
 | E3.1 | net-transfer ranking accumulates abstractions | **PARTIAL** — T1–T3 pass, T4 fails |
-| E3.1b | is E3.1's comp-only figure real? | **FAIL** — tiebreak artifact, spread 0.775. Figure withdrawn |
+| E3.1b | is T4's inversion caused by spillover, or by *asymmetry*? | **FAIL** — asymmetry artifact. Partially rehabilitates §B |
+| E3.1c | does the transfer *matrix* beat a one-line breadth penalty? | **PARTIAL** — the statistic wins; the matrix is unevidenced |
+| E3.1d | is E3.1's comp-only figure real? | **FAIL** — tiebreak artifact, spread 0.775. Figure withdrawn |
 | E2.1 | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 criteria |
 
 **Two published conclusions have been withdrawn.** Both are recorded in
@@ -160,6 +163,110 @@ realistic ratio there is ample free rank.
 This is the single most important correction in Phase 1. The mechanism E1.1
 declared broken is sound; §A just states it in the one form that does not work,
 while citing the form that does.
+
+### E1.1c · E1.1b's PASS was a traffic-average artifact
+
+**This partially reverses E1.1b by the same move E1.1b used on E1.1: not a new
+mechanism, a corrected aggregation.**
+
+`rank_for_energy` sums energy over calibration queries drawn at Zipfian rates,
+and `leakage_by_rank` / `interference_by_rank` return a **mean over the same
+distribution**. Choice and measurement are weighted identically — so protection
+is allocated in proportion to frequency, a rare domain's subspace lands below
+the cut and is classified free, and the metric that should catch it averages
+over the distribution that made the domain rare.
+
+Same G1 bar, asked per domain on equal-sized probe sets:
+
+```
+--- 16 domains, rank 8, rate ratio 16x ---
+     rho    r  free  int_traffic  int_worst  leak_worst   failing
+  0.9500   65    63       0.0430     0.1033      0.2049     12/16   <- E1.1b's operating point
+  0.9900   90    38       0.0215     0.0727      0.0549      4/16
+  0.9990  110    18       0.0089     0.0355      0.0079      0/16   <- tail-safe
+```
+
+**P1 fails** — 6/8, 12/16 and 25/32 domains exceed the bar at ρ=0.95 while the
+traffic mean reads 0.043–0.058 and passes. **P2 fails and makes it structural**:
+Spearman(rate, leakage) = **−1.000, −0.965, −0.917**, monotone in rarity across
+all three configs. A single unlucky domain would not correlate.
+
+**The number to carry forward:** tail-safe retention is ρ=0.999, free rank
+**18/128 and 17/128** — 13–14% of dimension against the ~50% E1.1b reports at
+ρ=0.95. Room for about two rank-8 adapters. *"Empty only at 5× over-subscription"
+was measured at a retention that is not tail-safe* and is withdrawn as a
+headline.
+
+This matters here more than it would elsewhere: L7's admitted failure mode is
+coverage bias, and the rare-domain tail is exactly the long-tail personal
+knowledge the ledger exists to preserve.
+
+**Both obvious repairs fail.** R-a (union of per-domain top-r) cuts worst
+leakage ~7× and still misses the interference bar; R-b (frequency-balanced `R_t`)
+barely moves. The honest repair is that **ρ stops being a free parameter and
+becomes a measured one**, set from worst-domain interference — the same move as
+R1 and R7, and affordable since it needs domain labels only at calibration time.
+
+**Leakage and interference are not interchangeable, and interference binds.**
+`interference_by_rank` writes into `U_free[:, :r]`, the *largest* sub-cut
+directions. G1 should always be the interference arm; any repair evaluated on
+leakage alone will look better than it is.
+
+**The falsifier partly succeeds.** Panel C sweeps domain-subspace overlap: at
+overlap 0.73 tail-safe relaxes to 0.995 and free rank triples to 57. So severity
+is a function of **real per-region subspace overlap** — a Rig B measurement, and
+the same activation pass §3 already schedules.
+
+### E3.1b · T4's inversion is an asymmetry artifact — §B is partly rehabilitated
+
+T4 applies spillover only where `kind == "patch"`; skills get none. But net
+transfer is a **sum** over off-target regions, so adding the same constant to
+every candidate shifts every score equally and cannot change the ranking. Only
+an asymmetry can invert the margin — and T4's stated justification, *"a low-rank
+update fit to one region is not region-confined,"* does not distinguish the two
+candidate types. A skill adapter is also low-rank, fit to a *broader*
+distribution, so on that reasoning it should spill **more**.
+
+```
+regime                              target  transfer   margin
+clean                                0.264     0.349   +0.085
+noisy + spurious                     0.075     0.206   +0.131
+spill 0.02  patch only  (E3.1 T4)    0.015     0.006   -0.010
+spill 0.02  symmetric                0.040     0.216   +0.176
+spill 0.05  symmetric                0.034     0.245   +0.210
+```
+
+Symmetric spillover **preserves and improves** the margin. So the condition §B
+owes is **not** the one this plan published. Not *"narrow patches must have
+near-zero real off-target effect"* — that is the absolute condition and it is
+implausible. The actual condition is **differential**: patches must not spill
+more than skills by more than ~0.03, which is `0.5 × GAIN_SKILL` in this world's
+units and should be carried as a **ratio**.
+
+That condition is much weaker, arguably favourable a priori, and it makes the
+Rig B measurement **cheaper**: measure the *difference* in off-target spillover
+between a narrow adapter and a broad one, paired on the same probe set, rather
+than the level of either.
+
+### E3.1c · The transfer *statistic* is evidenced; the transfer *matrix* is not
+
+The comparison that decides whether Root 3 is justified is not target-vs-transfer
+— it is net transfer against the cheapest thing that also removes the reward for
+narrowness: a scale-free breadth penalty that aggregates no per-region magnitudes.
+
+Net transfer wins in all three regimes, by 0.093 / 0.031 / 0.088. The one-line
+alternative loses, so the statistic earns its keep.
+
+**But no arm in E3.1 ever consults accumulated history.** `transfer` scores
+`d.sum() − d.max()` on the *current* candidate's measured deltas. So the
+**statistic** has evidence and the **matrix** has none, in either direction —
+and everything expensive hangs off the matrix: τ storage at observation grain,
+the partition objective, the censoring bias, and the L3 compiled
+signature-ontology view. T's three remaining uses — L8 curriculum prior, L7 merge
+prior, diagonal-T as a memorisation diagnostic — are unevidenced and were never
+the stated reason for building it.
+
+---
 
 ### E1.4 · The gate reading and the gap reading cannot be the same number
 
