@@ -806,8 +806,11 @@ something.
 ```
 
 At fleet 64 / 8h recompile / 4-way parallelism / 7-day tolerance, the C3∧C4
-window is non-empty only for cascade breadth **≤ 0.31** — and E0.2d's *lowest*
-measured breadth is **0.65**, at the minimum achievable card multiplicity. So the
+window is non-empty only for cascade breadth **≤ 0.31** — and E0.2d's lowest
+breadth is **0.65** — though "measured" is doing more work there than the number
+supports, since 0.65 came from `entry_multiplicity` in E0.2c's world and inherits
+that chosen range. The direction is not in doubt at a 0.65-versus-0.31 gap; the
+precision is. So the
 window is empty there, but conditionally on breadth. Easing any one hardware
 constraint opens it at any breadth.
 
@@ -817,23 +820,57 @@ a hardware purchase. E0.2d established the design has *no lever* on breadth, so
 joint feasibility turns **provenance-aware admission from a missing mechanism
 into the mechanism that decides whether an operating envelope exists.**
 
-**Per-constraint attribution is the useful output, and it is humbling:**
+**The ranking I drew from the attribution table is withdrawn.** An earlier
+version concluded "C1 is the least binding constraint" and that "most of this
+programme's effort went to the non-binding constraint." Both are wrong, and my
+own lint catches why: **the elimination fraction measures grid freedom, not
+bindingness.** C1's drivers sit on a balanced 45-point grid; C4's and C6's
+tolerances were single pinned numbers, and PROFILES was six named bundles rather
+than a factorial. A constraint whose drivers are finely swept will always look
+less binding, because the grid hands it room to be satisfied.
+
+The readable form is a curve against each constraint's *own* tolerance:
 
 ```
-  constraint                  eliminates   of sweep   ALONE
-  C4 restoration latency           56700      58.3%   13716
-  C6 over-forgetting               55728      57.3%    8262
-  C3 deletion throughput           24300      25.0%    4572
-  C5 recompile bounded             19440      20.0%    2232
-  C2 probe budget                  19440      20.0%     540
-  C1 tail-safe free rank           10800      11.1%     108
+  C6 over-forget tol   0.05 0.10 0.20 0.35 0.50  ->  0.78 0.62 0.43 0.22 0.11
+  C4 latency days         3    7   14   30   60  ->  0.79 0.58 0.25 0.25 0.00
+  C3 deletions/day     0.25 0.50 1.00 2.00 4.00  ->  0.06 0.08 0.25 0.29 0.53
+  C2 probe budget      2000 4000 6000  10k  20k  ->  0.40 0.20 0.20 0.00 0.00
 ```
 
-`ALONE` is what fixing that constraint would actually gain. **C1 — the subspace
-budget, the subject of E1.1, E1.1b, E1.1c, E1.1d and E1.2 — is the least binding
-of the six**, eliminating 11% and almost never blocking alone. Most of this
-programme's effort went to the non-binding constraint, which is precisely what
-Part III §0 warns against.
+Every one spans most of [0,1]. At a single tolerance the ranking is a statement
+about the tolerances, not about the design.
+
+**And the self-criticism attached to it was wrong on its own terms.**
+Feasibility-binding and correctness-relevant are different properties, and a
+feasibility sweep can only see the first. What the C1 work produced was three
+*soundness* findings — the budget specified in a form that does not work
+(E1.1/b), protection allocated by frequency (E1.1c), and allocation writing into
+still-committed directions undetectably (E1.2 U2). A configuration can satisfy
+C1 comfortably while the mechanism satisfying it is wrong in all three ways.
+Part III §0's warning is about where improvement *rate* is bottlenecked, not
+about where specification errors live.
+
+### What this study actually produced
+
+Not the 9.1%. **The design's uncertainty is now localised into four quantities,
+none of which has been measured:**
+
+| Quantity | Gates | How to resolve |
+|---|---|---|
+| **`H`, recompile wall-clock** | the C3∧C4 window | Rig B — an afternoon |
+| **support redundancy + threshold** | C6 | harvested-probe provenance, the same interaction sample as the tier audit |
+| **latency tolerance `L`** | C4 | not a measurement — a product requirement to write down |
+| **cascade breadth `β`** | whether any window exists at all | **R9** — a mechanism that does not exist |
+
+Support redundancy is C6's version of `H`: a 3-entry, 2-of-3 support was pinned
+in every earlier run and loses ~16% of items to the decay rate alone. Putting it
+on an axis moved feasibility from 7.1% to 9.1%, and it gates the constraint with
+the steepest tolerance curve.
+
+Three of the four are cheap or free; the fourth is the architectural gap. That is
+the correct shape for a feasibility study's answer, and it is a better result
+than a percentage.
 
 **Three errors corrected here, and one changed the headline.** The union was
 modelled as *linear* in batch and clipped at fleet; adapters are touched

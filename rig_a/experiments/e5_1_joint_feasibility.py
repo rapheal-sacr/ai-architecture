@@ -99,6 +99,10 @@ DECAY_POLICY = ("use_based", "stratified")
 # and dominate the sweep: a 3-entry support with a 2-of-3 pass threshold
 # loses ~16% of items to 25% decay INHERENTLY, whatever the draw does.
 DECAY_RATE = (0.05, 0.15, 0.25)
+# C6's version of H: a pinned structural choice that gates 57% of eliminations.
+# (support size, pass threshold as a fraction). 3-entry/2-of-3 was the only value
+# in earlier runs, and a 3-entry support loses ~16% of items to decay rate alone.
+SUPPORT_SHAPES = ((3, 0.5), (6, 0.34), (10, 0.30))
 
 # -- tolerances --------------------------------------------------------------
 PROBE_BUDGET = 6000          # evaluations available per protection statistic
@@ -165,7 +169,7 @@ def tail_safe_free_rank(n_regions, domain_rank, share, rng) -> int:
 
 # ---------------------------------------------------------------- C6, measured
 def worst_over_forgetting(n_regions, draw_fraction, decay_policy, decay_rate,
-                          rng) -> float:
+                          support_shape, rng) -> float:
     """E0.1's mechanism: a bounded draw over decayed provenance.
 
     `decay_policy` is an axis because the first run of this experiment had C6
@@ -187,11 +191,13 @@ def worst_over_forgetting(n_regions, draw_fraction, decay_policy, decay_rate,
     rates /= rates.sum()
     usage = rates[region] * rng.uniform(0.5, 1.5, size=n_entries)
 
+    sup_size, sup_thresh = support_shape
     items = []
     for _ in range(30 * n_regions):
         r = int(rng.choice(n_regions, p=rates))
         pool = np.where(region == r)[0]
-        items.append((r, set(rng.choice(pool, size=3, replace=False).tolist())))
+        k = min(sup_size, len(pool))
+        items.append((r, set(rng.choice(pool, size=k, replace=False).tolist())))
 
     cap = max(int(draw_fraction * n_entries), 1)
 
@@ -226,7 +232,8 @@ def worst_over_forgetting(n_regions, draw_fraction, decay_policy, decay_rate,
         if len(sel) < 5:
             continue
         lost = [1.0 for s in sel
-                if len(s & before) / len(s) >= 0.5 and len(s & after) / len(s) < 0.5]
+                if len(s & before) / len(s) >= sup_thresh
+                and len(s & after) / len(s) < sup_thresh]
         per_region_rate.append(len(lost) / len(sel))
     return max(per_region_rate) if per_region_rate else 0.0
 
@@ -313,19 +320,19 @@ def main() -> int:
 
     print("  measuring C6 (worst-region over-forgetting) ...")
     c6 = {}
-    for R, f, dp, dc in itertools.product(REGIONS, DRAW_FRACTION, DECAY_POLICY,
-                                          DECAY_RATE):
-        c6[(R, f, dp, dc)] = float(np.mean([
-            worst_over_forgetting(R, f, dp, dc, np.random.default_rng(SEED + i))
-            for i in range(3)]))
+    for R, f, dp, dc, sh in itertools.product(REGIONS, DRAW_FRACTION, DECAY_POLICY,
+                                              DECAY_RATE, SUPPORT_SHAPES):
+        c6[(R, f, dp, dc, sh)] = float(np.mean([
+            worst_over_forgetting(R, f, dp, dc, sh, np.random.default_rng(SEED + i))
+            for i in range(2)]))
 
     rows, feasible = [], []
-    for prof, R, dr, so, po, f, b, dp, dc in itertools.product(
+    for prof, R, dr, so, po, f, b, dp, dc, sh in itertools.product(
             PROFILES, REGIONS, DOMAIN_RANKS, SUBSPACE_OVERLAP, PROVENANCE_OVERLAP,
-            DRAW_FRACTION, BATCH, DECAY_POLICY, DECAY_RATE):
+            DRAW_FRACTION, BATCH, DECAY_POLICY, DECAY_RATE, SUPPORT_SHAPES):
         sub = R * dr / DIM
         free = c1[(R, dr, so)]
-        over = c6[(R, f, dp, dc)]
+        over = c6[(R, f, dp, dc, sh)]
         dpd = deletions_per_day(prof, po, b)
         lat = restore_latency_days(prof, b, po)
         probes = probe_cost(R)
@@ -342,7 +349,7 @@ def main() -> int:
         row = {"profile": prof[0], "regions": R, "domain_rank": dr, "subscription": round(sub, 2),
                "subspace_overlap": so, "provenance_overlap": po,
                "draw_fraction": f, "batch": b, "decay_policy": dp,
-               "decay_rate": dc,
+               "decay_rate": dc, "support_shape": sh,
                "free_rank": free, "over_forget_worst": round(over, 3),
                "deletions_per_day": round(dpd, 2), "latency_days": round(lat, 2),
                "probe_cost": probes,
@@ -372,8 +379,58 @@ def main() -> int:
     for k, v in sorted(binds.items(), key=lambda kv: -kv[1]):
         a = alone.get(k, 0)
         print(f"      {k:<26}{v:>12}{100*v/n:>9.1f}%{a:>8}{a:>20}")
-    print("      'ALONE' is configs this constraint is the ONLY thing blocking;")
-    print("      fixing a constraint gains exactly that many configurations.")
+    print("      'ALONE' is configs this constraint is the ONLY thing blocking.")
+    print()
+    print("      DO NOT RANK CONSTRAINTS ON THESE NUMBERS. Each constraint's")
+    print("      elimination fraction depends on how finely ITS OWN drivers were")
+    print("      swept. C1's drivers sit on a balanced 45-point grid (regions x")
+    print("      domain_rank x subspace_overlap); C4's and C6's tolerances were")
+    print("      single pinned values until this run. A constraint whose drivers")
+    print("      are finely swept will always look less binding, because the grid")
+    print("      hands it room to be satisfied. The curves below are the readable")
+    print("      form; the column above is not.")
+
+    # -- elimination curves: each constraint against its OWN tolerance ---------
+    print("\n  Elimination as a curve against each constraint's own tolerance.")
+    print("  This is the only form in which cross-constraint comparison means")
+    print("  anything, and it is 'report the curve, not the endpoint' applied to")
+    print("  the tolerances themselves.\n")
+    curves = {}
+
+    def frac_failing(pred):
+        return sum(1 for r in rows if pred(r)) / len(rows)
+
+    print(f"      {'C6 over-forget tol':<22}" + "".join(f"{t:>9.2f}" for t in
+          (0.05, 0.10, 0.20, 0.35, 0.50)))
+    c6c = [round(frac_failing(lambda r, t=t: r["over_forget_worst"] > t), 3)
+           for t in (0.05, 0.10, 0.20, 0.35, 0.50)]
+    curves["C6"] = c6c
+    print(f"      {'  fraction eliminated':<22}" + "".join(f"{v:>9.3f}" for v in c6c))
+
+    print(f"\n      {'C4 latency tol (days)':<22}" + "".join(f"{t:>9.0f}" for t in
+          (3, 7, 14, 30, 60)))
+    c4c = [round(frac_failing(lambda r, t=t: r["latency_days"] > t), 3)
+           for t in (3, 7, 14, 30, 60)]
+    curves["C4"] = c4c
+    print(f"      {'  fraction eliminated':<22}" + "".join(f"{v:>9.3f}" for v in c4c))
+
+    print(f"\n      {'C3 deletions/day floor':<22}" + "".join(f"{t:>9.2f}" for t in
+          (0.25, 0.5, 1.0, 2.0, 4.0)))
+    c3c = [round(frac_failing(lambda r, t=t: r["deletions_per_day"] < t), 3)
+           for t in (0.25, 0.5, 1.0, 2.0, 4.0)]
+    curves["C3"] = c3c
+    print(f"      {'  fraction eliminated':<22}" + "".join(f"{v:>9.3f}" for v in c3c))
+
+    print(f"\n      {'C2 probe budget':<22}" + "".join(f"{t:>9.0f}" for t in
+          (2000, 4000, 6000, 10000, 20000)))
+    c2c = [round(frac_failing(lambda r, t=t: r["probe_cost"] > t), 3)
+           for t in (2000, 4000, 6000, 10000, 20000)]
+    curves["C2"] = c2c
+    print(f"      {'  fraction eliminated':<22}" + "".join(f"{v:>9.3f}" for v in c2c))
+
+    print("\n      Every one spans most of [0,1] across a defensible tolerance")
+    print("      range, which is the point: at a single tolerance the ranking is")
+    print("      a statement about the tolerances, not about the design.")
 
     # -- interiority: is the feasible set touching the edges of the box? -------
     print("\n  Is any feasible configuration INTERIOR to each axis?")
@@ -478,6 +535,7 @@ def main() -> int:
                         "restore_latency_max_days": RESTORE_LATENCY_MAX_DAYS,
                         "over_forget_max": OVER_FORGET_MAX},
          "batch_windows": windows, "attribution": {"eliminates": binds, "alone": alone},
+         "elimination_curves": curves,
          "interiority": interior,
          "F1_non_empty": bool(f1), "F2_diagonal_non_empty": bool(f2),
          "feasible_use_based": sum(r["feasible"] for r in as_written),
