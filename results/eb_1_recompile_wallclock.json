@@ -1,0 +1,109 @@
+{
+  "seed": 20260806,
+  "seq_len": 512,
+  "batch": 1,
+  "lora_layers": 8,
+  "rows": [
+    {
+      "model": "Qwen2.5-0.5B-4bit",
+      "rank": 4,
+      "trainable_params": 733184,
+      "s_per_step": 0.5096,
+      "tokens_per_s": 1004.7
+    },
+    {
+      "model": "Qwen2.5-0.5B-4bit",
+      "rank": 8,
+      "trainable_params": 1466368,
+      "s_per_step": 0.5317,
+      "tokens_per_s": 963.0
+    },
+    {
+      "model": "Qwen2.5-0.5B-4bit",
+      "rank": 16,
+      "trainable_params": 2932736,
+      "s_per_step": 0.5212,
+      "tokens_per_s": 982.3
+    },
+    {
+      "model": "Qwen2.5-0.5B-4bit",
+      "rank": 32,
+      "trainable_params": 5865472,
+      "s_per_step": 0.5323,
+      "tokens_per_s": 961.8
+    },
+    {
+      "model": "Qwen2.5-1.5B-4bit",
+      "rank": 4,
+      "trainable_params": 1318912,
+      "s_per_step": 1.2256,
+      "tokens_per_s": 417.7
+    },
+    {
+      "model": "Qwen2.5-1.5B-4bit",
+      "rank": 8,
+      "trainable_params": 2637824,
+      "s_per_step": 1.2274,
+      "tokens_per_s": 417.1
+    },
+    {
+      "model": "Qwen2.5-1.5B-4bit",
+      "rank": 16,
+      "trainable_params": 5275648,
+      "s_per_step": 1.2136,
+      "tokens_per_s": 421.9
+    },
+    {
+      "model": "Qwen2.5-1.5B-4bit",
+      "rank": 32,
+      "trainable_params": 10551296,
+      "s_per_step": 1.2398,
+      "tokens_per_s": 413.0
+    }
+  ],
+  "seq_sweep": [
+    {
+      "seq_len": 128,
+      "s_per_step": 0.2946,
+      "tokens_per_s": 434.5,
+      "us_per_token": 2301.6
+    },
+    {
+      "seq_len": 256,
+      "s_per_step": 0.563,
+      "tokens_per_s": 454.7,
+      "us_per_token": 2199.1
+    },
+    {
+      "seq_len": 512,
+      "s_per_step": 1.2378,
+      "tokens_per_s": 413.6,
+      "us_per_token": 2417.6
+    },
+    {
+      "seq_len": 1024,
+      "s_per_step": 43.2638,
+      "tokens_per_s": 23.7,
+      "us_per_token": 42249.8
+    }
+  ],
+  "per_token_drift": 0.0993588286117048,
+  "memory_cliff_seq_len": 1024,
+  "H1_linear": true,
+  "H2_rank_cheap": true,
+  "H3_draw_for_8h": [
+    {
+      "model": "Qwen2.5-0.5B-4bit",
+      "tokens_per_s": 972.65,
+      "draw_for_8h": 18237
+    },
+    {
+      "model": "Qwen2.5-1.5B-4bit",
+      "tokens_per_s": 417.4,
+      "draw_for_8h": 7826
+    }
+  ],
+  "tokens_per_entry": 512,
+  "epochs": 3,
+  "H_measured_hours_at_cap300_1p5B": 0.30666027791087686
+}

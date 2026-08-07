@@ -1064,6 +1064,13 @@ claims:
                                      -> R9, a mechanism that does not exist
       Three of the four are cheap or free; the fourth is the architectural gap.
       That is the correct shape for a feasibility study's answer.
+    superseded_in_part_by: >
+      EB.1 measured H. At the design's own profile the C3/C4 window is OPEN at
+      the measured H = 0.31h (draw cap 300, 1.5B) and EMPTY only at the assumed
+      H = 8h. So "the design's own stated profile admits zero configurations"
+      holds only under an assumption that does not survive measurement at the
+      draw cap the record establishes. The breadth-conditional reading below
+      stands; the H-driven half does not.
     the_conditional_verdict: >
       At the design's own stated profile (fleet 64, 8h recompile, 4-way
       parallelism, 7-day tolerance) the C3/C4 window is non-empty only for
@@ -1140,6 +1147,51 @@ claims:
       tolerances.
 
 
+  - id: EB.1
+    tier: L7
+    rig: B
+    claim: "L7 adapters compile in hours-days (Part I section 7 substrate table)"
+    source: "the only thing standing behind H = 8h in E5.1, which carried an infeasibility verdict"
+    kill: "H1 per-token cost not stable in sequence length within the memory envelope; H2 rank a material cost driver (>2x from rank 4 to 32); H3 reports the throughput anchor (not pass/fail)"
+    predicted: uncertain
+    status: FAIL
+    result: results/eb_1_recompile_wallclock.json
+    hardware: "Apple M2, 8 GB, MLX 0.29.3, Qwen2.5 0.5B and 1.5B at 4-bit, LoRA over 8 layers"
+    finding: >
+      H is not a constant and the design never states its determinants. It is
+        H = draw_size * tokens_per_entry * epochs / throughput
+      and Parts I-III state none of the three. Measured throughput: 973 tok/s at
+      0.5B, 417 tok/s at 1.5B.
+      H2 passes decisively - rank 4 to 32 changes wall-clock by +4.5% and +2.2%.
+      Rank is a BUDGET quantity, not a TIME quantity, so the subspace budget and
+      H are not coupled and E5.1 needs no extra edge.
+      H1 passes within the memory envelope: +9.9% per-token drift across 128-512
+      at 1.5B. So capping the draw does bound H and E0.1's A6 resolution holds.
+      H3, the number E5.1 needed: at E0.1's established draw cap of 300 entries,
+      H is 18 MINUTES at 1.5B, not 8 hours. Reaching 8 hours needs a draw of
+      ~7,800 entries, more than an order of magnitude past the cap.
+    consequence_for_E5_1: >
+      At the design's own profile (fleet 64, 4-way parallel, 7-day tolerance):
+        assumed  H = 8h     drain 5.33d   window [5.33, 3.33]  EMPTY
+        measured H = 0.31h  drain 0.20d   window [0.20, 13.59]  OPEN
+      E5.1's infeasibility at that profile was carried ENTIRELY by the assumed H.
+      One of the four gating quantities is now resolved, and it was the one
+      carrying the verdict.
+    scope: >
+      An M2 at 1.5B is not production hardware and these seconds are not
+      production H. What transfers is the STRUCTURE - H scales in drawn tokens,
+      is bounded by the draw cap, and is insensitive to rank - plus a throughput
+      anchor a production run can be checked against. Whether production H is 19
+      minutes or 8 hours depends on model size and hardware the design never
+      states, which is itself the finding: "hours-days" was never a checkable
+      claim.
+    rig_limit_worth_recording: >
+      A memory cliff at seq_len 1024 for the 1.5B model and 2048 for the 0.5B -
+      per-token cost jumps 17x. The cliff SCALES WITH MODEL SIZE, so it is paging
+      on 8 GB rather than quadratic attention, which would blow up at the same
+      length regardless. This bounds what Rig B can measure on this machine and
+      is reported rather than buried in a drift statistic.
+
 # -- rig bugs found so far, all of which changed a reported result ---------
 #
 # Kept in the ledger rather than only in git history, because the rate and the
@@ -1163,6 +1215,20 @@ bugs:
       Cached weights are constants - stale, not sensitive. Produced a confident
       PASS on the claim this plan most expected to fail, and was caught only
       because U1 and U2 contradicted each other.
+
+  - id: B12
+    where: eb_1_recompile_wallclock H1
+    bug: "reported H1 NO on +1986% per-token drift, all of it from one point: 1.5B at seq 1024 jumping 17-19x"
+    effect: >
+      would have published "capping the draw does not bound H", contradicting
+      E0.1's A6 resolution - and the run's own output was self-contradictory,
+      printing H1 NO and then asserting that capping the draw does bound H two
+      lines later. Quadratic attention from 512 to 1024 predicts about 2x, not
+      19x. Re-running on the 0.5B model put the identical cliff at 2048 instead
+      of 1024: the blowup point scales with MODEL SIZE, which is paging on 8 GB,
+      not the algorithm.
+    caught_by: "asking why a number was so extreme -- the fourth time that question, not a cross-check, found the bug"
+    fix: "detect the cliff, exclude beyond-cliff points from the drift statistic, report the memory envelope as its own finding"
 
   - id: B11
     where: e5_1_joint_feasibility per-constraint attribution

@@ -28,7 +28,7 @@ or the model is small.
 | Rig | What | Where |
 |---|---|---|
 | **A** | Ledger simulator, no model. Synthetic world with known ground truth. | Laptop, seconds–minutes |
-| **B** | Small real model, MLX, ≤3B 4-bit | Laptop, 8 GB ceiling |
+| **B** | Small real model, MLX, ≤3B 4-bit | Laptop, 8 GB ceiling — memory cliff at seq 1024 (1.5B) |
 | **C** | Rented GPU, episodic | Survivors only |
 
 ## Status
@@ -55,6 +55,8 @@ or the model is small.
 | [E2.1](rig_a/experiments/e2_1_tier_laundering.py) | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 — 29–63% of an unfiltered "T2" suite is laundered T3 judge opinion, and the harvested slice tests each domain's easy corner. But the strict-filter **yield is high** (33–68%), contradicting this plan's own prediction |
 
 | [E5.1](rig_a/experiments/e5_1_joint_feasibility.py) | **joint feasibility** — do the coupled constraints intersect? | **9.1%** of 291,600 configurations, interior on every axis. At the design's own profile the window is empty *conditionally on cascade breadth* (needs ≤0.31 against ~0.65). Four routes out and only one isn't a hardware purchase, which promotes **R9**. The real output is that the design's uncertainty is now **four unmeasured numbers with named resolution paths** — see PLAN.md |
+
+| [EB.1](rig_b/eb_1_recompile_wallclock.py) | **`H`** — L7 adapters compile in "hours–days" | **FAIL** — `H` is not a constant but `draw × tokens × epochs / throughput`, and the design states none of the three. Measured: at E0.1's draw cap of 300 entries, **18 minutes at 1.5B, not 8 hours**. E5.1's C3∧C4 window goes **EMPTY → OPEN** at the measured value, so its infeasibility at the design's own profile was carried entirely by the assumption |
 
 **Two published conclusions have been withdrawn** (E1.1's "realistic traffic
 leaves 6 free directions", E0.2's "transitive closure fixes it completely").

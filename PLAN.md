@@ -858,7 +858,7 @@ none of which has been measured:**
 
 | Quantity | Gates | How to resolve |
 |---|---|---|
-| **`H`, recompile wall-clock** | the C3∧C4 window | Rig B — an afternoon |
+| ~~**`H`, recompile wall-clock**~~ | the C3∧C4 window | **RESOLVED — EB.1.** 18 min at the established draw cap, not 8h. The window is **OPEN** at the measured value |
 | **support redundancy + threshold** | C6 | harvested-probe provenance, the same interaction sample as the tier audit |
 | **latency tolerance `L`** | C4 | not a measurement — a product requirement to write down |
 | **cascade breadth `β`** | whether any window exists at all | **R9** — a mechanism that does not exist |
@@ -868,9 +868,11 @@ in every earlier run and loses ~16% of items to the decay rate alone. Putting it
 on an axis moved feasibility from 7.1% to 9.1%, and it gates the constraint with
 the steepest tolerance curve.
 
-Three of the four are cheap or free; the fourth is the architectural gap. That is
-the correct shape for a feasibility study's answer, and it is a better result
-than a percentage.
+**One of the four is now resolved** — `H`, by EB.1, and it was the one carrying
+the infeasibility verdict. Of the remaining three, one needs interaction data
+this project does not yet have, one is a product requirement rather than a
+measurement, and the third is the architectural gap. That is the correct shape
+for a feasibility study's answer, and a better result than a percentage.
 
 **Three errors corrected here, and one changed the headline.** The union was
 modelled as *linear* in batch and clipped at fleet; adapters are touched
@@ -891,6 +893,58 @@ the direction the weighting rule predicts.)*
 breadth are computed from relationships measured elsewhere. This composes prior
 measurements under chosen tolerances — it is not an independent measurement, and
 F3's ordering is only as good as those tolerances.
+
+---
+
+### EB.1 · `H` measured — and it was carrying E5.1's infeasibility verdict
+
+The first Rig B measurement. Part I §7's substrate table gives L7 adapters a
+single timescale, "hours–days", and that sentence was the only thing standing
+behind `H = 8h` in E5.1 — where the entire C3∧C4 window turns on it.
+
+**`H` is not a constant.** It is `draw × tokens_per_entry × epochs / throughput`,
+and Parts I–III state none of the three. Measured on an M2 with MLX, Qwen2.5 at
+4-bit, LoRA over 8 layers:
+
+```
+  model                 tok/s     100     300    1000    3000   draw for 8h
+  Qwen2.5-0.5B-4bit       973   0.04h   0.13h   0.44h   1.32h        18,237
+  Qwen2.5-1.5B-4bit       417   0.10h   0.31h   1.02h   3.07h         7,826
+```
+
+**At E0.1's established draw cap of 300 entries, `H` is 18 minutes at 1.5B — not
+8 hours.** Reaching 8 hours needs ~7,800 drawn entries, more than an order of
+magnitude past the cap. And the consequence for E5.1 is direct:
+
+```
+  assumed  H = 8h      drain 5.33d   window [5.33, 3.33]   EMPTY
+  measured H = 0.31h   drain 0.20d   window [0.20, 13.59]   OPEN
+```
+
+**E5.1's infeasibility at the design's own profile was carried entirely by the
+assumed `H`.** One of the four gating quantities is resolved, and it was the one
+carrying the verdict.
+
+**H2 passes decisively:** rank 4→32 moves wall-clock +4.5% and +2.2%. Rank is a
+*budget* quantity, not a *time* quantity, so the subspace budget and `H` are not
+coupled and E5.1 needs no extra edge.
+
+**H1 passes within the memory envelope** (+9.9% per-token drift across 128–512),
+so capping the draw does bound `H` and E0.1's A6 resolution holds — but getting
+there required correcting my own verdict. See §4a, **B12**.
+
+**Scope, stated rather than laundered.** An M2 at 1.5B is not production
+hardware and these seconds are not production `H`. What transfers is the
+structure — `H` scales in drawn tokens, is bounded by the cap, and is
+insensitive to rank — plus a throughput anchor a production run can be checked
+against. Whether production `H` is 19 minutes or 8 hours depends on model size
+and hardware the design never states, **which is itself the finding**: "hours–
+days" was never a checkable claim.
+
+*Rig limit worth recording:* a memory cliff at seq_len 1024 (1.5B) and 2048
+(0.5B), where per-token cost jumps 17×. It scales with model size, so it is
+paging on 8 GB rather than quadratic attention. That bounds what Rig B can
+measure here.
 
 ---
 
@@ -1130,6 +1184,14 @@ All are in `claims/claims.yaml` under `bugs:`, in the code, and in git history:
   nothing — R6, R7 and R8 were described in this document for two commits while
   missing from the machine-readable ledger. Python's `str.replace` fails open.
   Every scripted patch now asserts its anchor exists.
+
+- **B12** EB.1 reported `H1 NO` on +1986% per-token drift, all of it from one
+  point — and the run's own output was self-contradictory, printing the failure
+  and then asserting the opposite two lines later. Quadratic attention predicts
+  ~2× from 512→1024, not 19×. The 0.5B model put the identical cliff at 2048
+  instead of 1024, so the blowup **scales with model size** — paging on 8 GB, not
+  the algorithm. Caught by *"why is this number so extreme?"*, which is now the
+  fourth bug that question has found and the mechanism that keeps working.
 
 B3 is instructive for one reason and B4 for another.
 
