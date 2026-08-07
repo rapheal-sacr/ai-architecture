@@ -47,6 +47,7 @@ structural work first, which is the right order anyway.
 | E1.1 | `#{σ_k > ε}` is a computed budget | **PARTIAL** — fails on 2 of 4 streams |
 | E1.1b | the budget works under the energy/GPM criterion | **PASS** — but see E1.1c |
 | E1.1c | …does it hold *per domain*, not just on the traffic mean? | **FAIL** — partially reverses E1.1b |
+| E1.2 | three-λ unanimity makes rank release safe | **FAIL** on both criteria — architectural |
 | E1.4 | posterior variance is an epistemic gap detector | **FAIL** |
 | E0.2 | the tombstone cascade reaches the weights | **PARTIAL** — one arm withdrawn |
 | E0.2b | *rebuild:* functional ground truth + a third influence path | **FAIL** on both criteria |
@@ -265,6 +266,59 @@ the partition objective, the censoring bias, and the L3 compiled
 signature-ontology view. T's three remaining uses — L8 curriculum prior, L7 merge
 prior, diagonal-T as a memorisation diagnostic — are unevidenced and were never
 the stated reason for building it.
+
+---
+
+### E1.2 · The three-λ rule is unsafe in both directions at once
+
+Part III §2's asymmetry — allocate on the short estimator, release only on
+unanimity — is argued from blast radius and it is sound as far as it goes. What
+it never prices is the **rate**. Release is what replenishes the free pool, and
+unanimity means the pool replenishes at the speed of the *slowest* estimator.
+
+```
+  traffic-only free rank, no adapters: 69/128
+
+  release rule    mean free  starve rate     sd   live  unsafe dirs  of which rare
+  unanimity             6.3        0.711  0.040    1.1            0              0
+  short_only           15.2        0.216  0.046    6.1         5222             57
+  medium_only           8.7        0.507  0.062    2.8         2051             69
+  long_only            10.7        0.678  0.097    1.3            0              0
+  (mean of 12 seeds)
+```
+
+**U1′ fails.** The budget starts at 69 free directions and unanimity collapses it
+to **6.3** — the ratchet destroys 91% of it. Requests starve at 0.711 against
+short_only's 0.216, a **3.29×** ratio, and unanimity sustains 1.1 live adapters
+where short_only sustains 6.1. *The rule adopted to protect the budget is what
+empties it.*
+
+**U2 fails, and this is the half that makes it architectural.** Allocating on the
+short estimator put 5222 direction-allocations into directions the long estimator
+still held committed — and **57 of those sat in rare domains** whose traffic mass
+is under 0.05, invisible to a traffic-weighted non-regression check. So §2's
+stated justification for the asymmetry, *"if the direction was actually
+committed, the promotion gate's non-regression test catches it,"* is **false
+exactly where it matters**.
+
+**Why this is not a threshold to retune.** The two failures have *opposite*
+repairs. Tighten release and the budget starves; loosen allocation and you write
+into committed directions nothing downstream can see. No setting of the
+three-λ rule is safe in both directions, and the design offers no third option.
+
+**And it unifies with E1.1c.** U2's failure *is* E1.1c's finding seen from the
+allocation side: a traffic-weighted energy cut classifies rare-domain subspaces
+as free, and a traffic-weighted non-regression check cannot see interference in
+rare domains. One anisotropy, two symptoms — which is exactly amendment item
+10's point, now measured on both sides of the estimator.
+
+**Registered honestly:** U1's pre-registered absolute form (unanimity >0.20 AND
+short_only <0.05) does *not* fire, because it assumed short_only would be
+comfortable and it is not. Re-registered as relative; both verdicts print every
+run. And the λ_long sweep is **non-monotone** even at 12 seeds (0.530, 0.647,
+0.753, 0.711, 0.567), peaking at 0.995. The spread exceeds the seed sd, so it is
+probably real, but no mechanism is offered and it should not be used to pick
+λ_long.
 
 ---
 
@@ -867,10 +921,11 @@ repair. Two have now run:
 - **E0.2d** (admission control bounds cascade breadth) — fails, and the repair
   is a mechanism that does not exist rather than a threshold that needs moving.
 
-Three remain untested: **E0.1** (I4, competence regenerating from provenance —
-which Part II §G itself calls a design intention rather than a tested property),
-**E1.2** (three-λ unanimity and time-to-deadlock), **E2.3** (whether the cheap
-rung preserves the ranking the expensive rung would give).
+**E1.2** has now run and **fails on both criteria**, in opposite directions —
+the second finding with no local repair. Two remain untested: **E0.1** (I4,
+competence regenerating from provenance — which Part II §G itself calls a design
+intention rather than a tested property) and **E2.3** (whether the cheap rung
+preserves the ranking the expensive rung would give).
 
 So the accurate summary is: *most* failures found are specification defects,
 one is a missing control surface, one central claim holds conditionally, and

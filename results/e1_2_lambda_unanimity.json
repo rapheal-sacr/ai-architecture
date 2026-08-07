@@ -1,0 +1,113 @@
+{
+  "seed": 20260806,
+  "dim": 128,
+  "eps": 1.0,
+  "lambdas": {
+    "short": 0.9,
+    "medium": 0.98,
+    "long": 0.999
+  },
+  "traffic_only_free_rank": 69,
+  "adapter_halflife": 80,
+  "rows": [
+    {
+      "rule": "unanimity",
+      "mean_free_rank": 6.3,
+      "starve_rate": 0.711,
+      "starve_sd": 0.04,
+      "adapters_live": 1.1,
+      "unsafe_alloc_dirs": 0,
+      "unsafe_rare_dirs": 0
+    },
+    {
+      "rule": "short_only",
+      "mean_free_rank": 15.2,
+      "starve_rate": 0.216,
+      "starve_sd": 0.046,
+      "adapters_live": 6.1,
+      "unsafe_alloc_dirs": 5222,
+      "unsafe_rare_dirs": 57
+    },
+    {
+      "rule": "medium_only",
+      "mean_free_rank": 8.7,
+      "starve_rate": 0.507,
+      "starve_sd": 0.062,
+      "adapters_live": 2.8,
+      "unsafe_alloc_dirs": 2051,
+      "unsafe_rare_dirs": 69
+    },
+    {
+      "rule": "long_only",
+      "mean_free_rank": 10.7,
+      "starve_rate": 0.678,
+      "starve_sd": 0.097,
+      "adapters_live": 1.3,
+      "unsafe_alloc_dirs": 0,
+      "unsafe_rare_dirs": 0
+    }
+  ],
+  "lambda_long_sweep": [
+    {
+      "lambda_long": 0.98,
+      "halflife": 34.3,
+      "rule": "unanimity",
+      "mean_free_rank": 8.1,
+      "starve_rate": 0.53,
+      "starve_sd": 0.061,
+      "adapters_live": 4.8,
+      "unsafe_alloc_dirs": 0,
+      "unsafe_rare_dirs": 0
+    },
+    {
+      "lambda_long": 0.99,
+      "halflife": 69.0,
+      "rule": "unanimity",
+      "mean_free_rank": 6.6,
+      "starve_rate": 0.647,
+      "starve_sd": 0.042,
+      "adapters_live": 2.2,
+      "unsafe_alloc_dirs": 0,
+      "unsafe_rare_dirs": 0
+    },
+    {
+      "lambda_long": 0.995,
+      "halflife": 138.3,
+      "rule": "unanimity",
+      "mean_free_rank": 5.4,
+      "starve_rate": 0.753,
+      "starve_sd": 0.038,
+      "adapters_live": 2.3,
+      "unsafe_alloc_dirs": 0,
+      "unsafe_rare_dirs": 0
+    },
+    {
+      "lambda_long": 0.999,
+      "halflife": 692.8,
+      "rule": "unanimity",
+      "mean_free_rank": 6.3,
+      "starve_rate": 0.711,
+      "starve_sd": 0.04,
+      "adapters_live": 1.1,
+      "unsafe_alloc_dirs": 0,
+      "unsafe_rare_dirs": 0
+    },
+    {
+      "lambda_long": 0.9995,
+      "halflife": 1385.9,
+      "rule": "unanimity",
+      "mean_free_rank": 7.8,
+      "starve_rate": 0.567,
+      "starve_sd": 0.059,
+      "adapters_live": 3.2,
+      "unsafe_alloc_dirs": 0,
+      "unsafe_rare_dirs": 0
+    }
+  ],
+  "U1_as_preregistered": true,
+  "U1_relative_reregistered": false,
+  "unanimity_vs_short_starve_ratio": 3.29,
+  "U2_allocation_caught": false,
+  "n_seeds": 12,
+  "verdict": "FAIL"
+}

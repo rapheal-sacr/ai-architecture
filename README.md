@@ -38,6 +38,7 @@ or the model is small.
 | [E1.1](rig_a/experiments/e1_1_spectrum_knee.py) | `#{σ_k > ε}` is a computed budget | **PARTIAL** — the literal ε-threshold formulation fails on 2 of 4 streams. Leakage is quantised in units of one committed direction, and the auto-placed ε missed by two: placing it correctly requires already knowing the rank it computes |
 | [E1.1b](rig_a/experiments/e1_1b_energy_criterion.py) | the budget works under the energy/GPM criterion | **PASS** — all 4 streams, power law included. **Reverses E1.1's conclusion**: the mechanism is sound, §A just states it in the one form that does not work. *But its operating point is corrected by E1.1c* |
 | [E1.1c](rig_a/experiments/e1_1c_tail_domain_exposure.py) | …does that hold *per domain*, not just on the traffic mean? | **FAIL** — partially reverses E1.1b. At ρ=0.95, **12/16 domains** exceed the interference bar while the traffic mean passes. Spearman(rate, leakage) = −0.965, monotone in rarity, so structural. Tail-safe is ρ=0.999 with free rank **17–18/128**, not ~50% |
+| [E1.2](rig_a/experiments/e1_2_lambda_unanimity.py) | three-λ unanimity makes rank release safe | **FAIL** on both, in opposite directions. Unanimity collapses the budget from 69 free directions to **6.3** and starves **3.29×** more than the fast rule; but allocating on the short estimator writes into still-committed directions, **57 of them in rare domains** a traffic-weighted check cannot see. Tightening one breaks the other — **architectural** |
 | [E1.4](rig_a/experiments/e1_4_aleatoric_magnet.py) | posterior variance is an epistemic gap detector | **FAIL** — one coin-flip region in twelve captures 51% of the practice budget, because the frontier reward `4p(1−p)` peaks exactly where a coin flip lives. Switching to epistemic variance fixes the magnet and inverts the gate to ρ = −0.99 |
 | [E0.2](rig_a/experiments/e0_2_transitive_unlearning.py) | the tombstone cascade reaches the weights | **PARTIAL** — the `transitive` arm was a **tautology** and is withdrawn; the 95.9% figure for `direct` is a knob. The finding it owed and did not produce: cascade invalidates ~54% of adapters per tombstone, implying a tombstone-rate ceiling |
 | [E0.2b](rig_a/experiments/e0_2b_influence_and_ceiling.py) | *rebuild* — functional ground truth, third influence path | **FAIL** — `transitive` provenance recalls **0.913, not 1.0**, and no set-based closure can reach 1.0 because the residual dependency is on a retrieval that was never run. And the correct cascade touches 69% of the fleet, putting sustainable deletions **below 1/day** across much of the plausible cost space |
@@ -60,11 +61,13 @@ withdrawn.** The first eight experiments all asked *local mechanism* questions,
 and local errors are locally repairable by construction — cheap-to-test
 correlated with locally-repairable throughout.
 
-Two claims that could fail architecturally have now run: **E3.1** passes
-conditionally (on a condition the design does not state), and **E0.2d** fails
-in a way no rewording fixes — the design has no lever on cascade breadth at all.
-**Three remain untested**: E0.1 (I4, which Part II §G itself calls a design
-intention rather than a tested property), E1.2, E2.3.
+Three claims that could fail architecturally have now run: **E3.1** passes
+conditionally (on a condition the design does not state, and E3.1b shows that
+condition is much weaker than first reported); **E0.2d** fails in a way no
+rewording fixes — the design has no lever on cascade breadth; and **E1.2** fails
+in *both* directions at once, with opposite repairs. **Two remain untested**:
+E0.1 (I4, which Part II §G itself calls a design intention rather than a tested
+property) and E2.3.
 
 **The counterweight, and it is the number worth watching.** Six rig errors
 against zero confirmed architectural failures. That ratio is expected when new
