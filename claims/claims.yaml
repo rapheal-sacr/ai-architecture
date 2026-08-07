@@ -93,6 +93,50 @@ claims:
       Cached weights are constants; they are stale, not sensitive. Only
       comparison against a clean recompile detects the leak.
 
+  - id: E0.2b
+    tier: L7
+    claim: "REBUILD of E0.2 with functionally-computed ground truth and a third influence path"
+    source: "L7 card; rebuild mandated after E0.2's transitive arm was withdrawn as tautological"
+    rig: A
+    kill: "C1 transitive recall < 1.0 against functional ground truth; C2 sustainable tombstone rate < 1/day at any plausible recompile cost"
+    predicted: uncertain
+    status: FAIL
+    result: results/e0_2b_influence_and_ceiling.json
+    method: >
+      Ground truth is never enumerated. An entry influences an adapter iff
+      DELETING it moves that adapter's weights - the world run twice. That is
+      the exact operation a tombstone performs and is independent of every
+      provenance policy, including unenumerated ones. The world also adds a path
+      no set-based closure can capture: rollouts retrieve their conditioning
+      card by query similarity, so deleting an entry can hand a rollout to a
+      DIFFERENT card. Provenance records the card that was selected; the card
+      that would have been selected was never run.
+    finding: >
+      C1 fails. Transitive recall is 0.913, not 1.0 - it misses ~9% of adapters
+      that deletion genuinely moves, and only 61% of tombstones get complete
+      coverage (198 misses observed). The gap is exactly the retrieval path:
+      87% of tombstones reassign at least one rollout to a different card, 3.41
+      on average. Direct provenance recalls 0.126. Neither policy over-fires
+      (0.00), so both are conservative in the wrong direction - they
+      under-invalidate silently.
+      C2 fails. True cascade is 69% of the fleet per tombstone; at 24h per
+      adapter recompile with 4 in parallel that is 0.72 sustainable tombstones
+      per day. The ceiling surface shows it falls below 1/day across much of
+      the plausible space (25% cascade at 8h is 0.75/day).
+    corrects: >
+      R3 (transitive provenance) is INCOMPLETE, not a fix. This corrects the
+      earlier claim that closure through the conditioning card "closes it
+      completely" - which was the tautological result. No set-based closure can
+      close it, because the missing dependency is on a counterfactual retrieval
+      that was never executed.
+    caveat: >
+      The 69% cascade fraction is a property of this world's card overlap and
+      rollout-to-adapter assignment, not of the design. The ceiling is therefore
+      reported as a surface over cascade breadth and recompile cost rather than
+      as a single number. What is structural is the shape: cost per tombstone
+      scales linearly with both factors, and the design's own substrate table
+      already fixes one of them at "hours-days".
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"

@@ -1,0 +1,125 @@
+{
+  "seed": 20260806,
+  "n_worlds": 12,
+  "n_adapters": 8,
+  "recall": {
+    "policies": {
+      "direct": {
+        "mean_recall": 0.1259,
+        "perfect_recall_fraction": 0.0825,
+        "mean_over_fire": 0.0
+      },
+      "transitive": {
+        "mean_recall": 0.913,
+        "perfect_recall_fraction": 0.611,
+        "mean_over_fire": 0.0
+      }
+    },
+    "mean_true_cascade": 5.53,
+    "mean_true_cascade_fraction": 0.692,
+    "mean_selection_flips": 3.41,
+    "tombstones_causing_a_flip": 0.874,
+    "n_transitive_misses": 198,
+    "miss_examples": [
+      {
+        "world": 0,
+        "entry": 0,
+        "missed_adapters": [
+          5
+        ],
+        "selection_flips": 3
+      },
+      {
+        "world": 0,
+        "entry": 4,
+        "missed_adapters": [
+          4
+        ],
+        "selection_flips": 2
+      },
+      {
+        "world": 0,
+        "entry": 11,
+        "missed_adapters": [
+          4
+        ],
+        "selection_flips": 3
+      },
+      {
+        "world": 0,
+        "entry": 14,
+        "missed_adapters": [
+          4,
+          7
+        ],
+        "selection_flips": 2
+      },
+      {
+        "world": 0,
+        "entry": 15,
+        "missed_adapters": [
+          2,
+          4
+        ],
+        "selection_flips": 6
+      }
+    ]
+  },
+  "ceiling": [
+    {
+      "recompile_hours_per_adapter": 2,
+      "adapter_hours_per_tombstone": 11.06,
+      "sustainable_tombstones_per_day": 8.68
+    },
+    {
+      "recompile_hours_per_adapter": 8,
+      "adapter_hours_per_tombstone": 44.24,
+      "sustainable_tombstones_per_day": 2.17
+    },
+    {
+      "recompile_hours_per_adapter": 24,
+      "adapter_hours_per_tombstone": 132.72,
+      "sustainable_tombstones_per_day": 0.72
+    }
+  ],
+  "ceiling_surface": [
+    {
+      "cascade_fraction": 0.05,
+      "adapters_touched": 3.2,
+      "per_day_at_2h": 15.0,
+      "per_day_at_8h": 3.75,
+      "per_day_at_24h": 1.25
+    },
+    {
+      "cascade_fraction": 0.1,
+      "adapters_touched": 6.4,
+      "per_day_at_2h": 7.5,
+      "per_day_at_8h": 1.88,
+      "per_day_at_24h": 0.62
+    },
+    {
+      "cascade_fraction": 0.25,
+      "adapters_touched": 16.0,
+      "per_day_at_2h": 3.0,
+      "per_day_at_8h": 0.75,
+      "per_day_at_24h": 0.25
+    },
+    {
+      "cascade_fraction": 0.5,
+      "adapters_touched": 32.0,
+      "per_day_at_2h": 1.5,
+      "per_day_at_8h": 0.38,
+      "per_day_at_24h": 0.12
+    },
+    {
+      "cascade_fraction": 0.7,
+      "adapters_touched": 44.8,
+      "per_day_at_2h": 1.07,
+      "per_day_at_8h": 0.27,
+      "per_day_at_24h": 0.09
+    }
+  ],
+  "C1_transitive_complete": false,
+  "C2_rate_operational": false,
+  "verdict": "FAIL"
+}

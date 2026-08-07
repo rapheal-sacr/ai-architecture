@@ -48,6 +48,7 @@ structural work first, which is the right order anyway.
 | E1.1b | the budget works under the energy/GPM criterion | **PASS** — all 4 streams |
 | E1.4 | posterior variance is an epistemic gap detector | **FAIL** |
 | E0.2 | the tombstone cascade reaches the weights | **PARTIAL** — one arm withdrawn |
+| E0.2b | *rebuild:* functional ground truth + a third influence path | **FAIL** on both criteria |
 | E4.2 | the blast-radius fixed point seals the Assay | **FAIL** |
 | E3.3 | max off-diagonal mass is a partition objective | **FAIL** |
 | E2.1 | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 criteria |
@@ -336,6 +337,52 @@ That is a sanity check, not evidence the objective works when the true
 structure is non-nested, overlapping, hierarchical, or absent from the
 candidate family — which is the realistic case for a signature ontology.
 
+### E0.2b · Rebuilt — and `transitive` provenance is provably incomplete
+
+E0.2's ground truth shared the mechanism's model. This rebuild removes that two
+ways: ground truth is **never enumerated** — an entry influences an adapter iff
+*deleting it moves that adapter's weights*, the world run twice — and the world
+adds a path no set-based closure can capture. Rollouts **retrieve** their
+conditioning card by query similarity, so deleting an entry can hand a rollout
+to a different card. Provenance records the card that *was* selected; the card
+that *would have been* selected was never run and is recorded nowhere.
+
+```
+  policy          mean recall   always complete   over-fires
+  direct               0.1259             0.083         0.00
+  transitive           0.9130             0.611         0.00
+
+  true cascade: 5.53 adapters per tombstone (69% of the fleet)
+  retrieval flips: 3.41 rollouts reassigned per tombstone; 87% of tombstones cause >= 1
+```
+
+**C1 fails, and it corrects me.** `transitive` recalls **0.913, not 1.0** —
+missing ~9% of adapters that deletion genuinely moves, with complete coverage on
+only 61% of tombstones. My earlier claim that closure through the conditioning
+card "closes it completely" was the tautological result and is wrong. **No
+set-based closure can close this**, because the missing dependency is on a
+counterfactual retrieval that was never executed. Note also that neither policy
+*over*-fires: both under-invalidate, silently.
+
+**C2 fails — the ceiling is real.** The correct cascade touches 69% of the fleet,
+and adapters are "hours–days" per the design's own substrate table:
+
+```
+  cascade  touched     2h /day     8h /day    24h /day
+       5%      3.2       15.00        3.75        1.25
+      10%      6.4        7.50        1.88        0.62
+      25%     16.0        3.00        0.75        0.25
+      50%     32.0        1.50        0.38        0.12
+      70%     44.8        1.07        0.27        0.09
+```
+
+Sustainable tombstones per day, fleet of 64. Below 1.0 deletion requests queue
+faster than they clear. **Much of the plausible space sits below 1/day** — 25%
+cascade at 8h is 0.75. Reported as a surface rather than a single number because
+the 69% is a property of this world's card overlap, not of the design; what is
+structural is that cost scales linearly with cascade breadth × recompile time,
+and the design already fixes the second factor at hours–days.
+
 ### E2.1 · Probe harvesting: viable, but it launders tiers and samples the easy corner
 
 Part III §0 argues verification coverage is the binding constraint on the whole
@@ -584,10 +631,19 @@ mechanism.
 Passed both criteria at zero competence cost. Open: stability under noisy p̂.
 
 **R3 · Record provenance as the transitive closure through the conditioning
-card (E0.2).** **Its supporting evidence has been withdrawn** — the arm that
-"validated" it was a tautology. The argument for it still stands on its own
-terms; it simply has no measurement behind it, and needs a rebuilt E0.2 with
-functionally-computed ground truth before it can be called tested.
+card (E0.2 → E0.2b).** **Necessary but provably insufficient.** E0.2b measures
+it at 0.913 recall against functional ground truth: it is a large improvement
+over `direct` (0.126) and it cannot reach 1.0, because the residual dependency
+is on a retrieval that was never run. Take it, but do not treat it as closing
+the question.
+
+**R7 · Verify unlearning instead of inferring it (E0.2b).** After a cascade,
+recompute the affected adapters and compare against the held weights — the same
+operation E0.2b uses as ground truth. Affordable because it runs once per
+deletion, not once per promotion. Structurally the same move as R1: measure what
+happened rather than count what a bookkeeping rule predicts. Open: verification
+detects an incomplete cascade, it does not make the correct cascade affordable,
+so C2 stands regardless.
 
 **R4 · Bound threshold values, and split the boundary into seal and pin
 (E4.2).** Three parts, in descending order of leverage:
@@ -613,8 +669,8 @@ which is the part with no repair yet.
 
 ### What the Phase 1 results say collectively
 
-**Every failure so far is a specification defect**, and the two candidates for
-"architectural" both dissolved on closer testing:
+**Almost every failure so far is a specification defect**, and the two original
+candidates for "architectural" both dissolved on closer testing:
 
 - E1.1 looked architectural until the energy criterion was put in the verdict
   path. It is a defect in how §A is written.
@@ -624,7 +680,21 @@ The defects are real and worth fixing — a provenance set recorded at the wrong
 point, a boundary that constrains membership but not values, an objective with
 no opposing force, a gap signal reading the wrong quantity, a harvest policy
 with no tier predicate. Each repairs with machinery already in the design.
-**Nothing found so far threatens the ledger-first thesis.**
+
+**One finding is not a specification defect.** E0.2b's C2 — the tombstone-rate
+ceiling — is arithmetic on the design's central move. "Weights are a derived
+view of the ledger" plus "real deletion via tombstone + cascade" plus "adapters
+recompile in hours–days" jointly fix deletion throughput at
+`capacity / (cascade breadth × recompile time)`. No rewording changes that. You
+can shrink cascade breadth with more specialised adapters and less card overlap,
+but you cannot drive it to zero, and the design offers no mechanism for bounding
+it. **This is the first genuinely architectural cost found so far**, and unlike
+the others it has no repair on the list — R7 detects an incomplete cascade but
+does not make a correct one cheaper.
+
+Nothing found so far threatens the ledger-first thesis. The deletion ceiling
+constrains the *rate* at which one of its promises can be kept, not whether the
+promise is coherent.
 
 The honest counterweight: **both serious errors found in Phase 1 were in the
 rig, not in the architecture**, and one of them manufactured a headline that
