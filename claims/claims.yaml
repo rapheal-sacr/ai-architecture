@@ -1077,6 +1077,61 @@ claims:
     predicted_reason: "the label is asserted to be causally attributed to one memory decision; downstream retrieval changes would break that"
     status: untested
 
+  - id: E5.1
+    tier: cross
+    claim: "the coupled constraints have a non-empty feasible region"
+    source: "every experiment so far moved one thing with everything else at defaults"
+    rig: A
+    kill: "F1 feasible region empty over the whole swept space; F2 empty on the correlated overlap diagonal; F3 (a map, not a verdict) which constraint binds where"
+    predicted: uncertain
+    status: PASS
+    result: results/e5_1_joint_feasibility.json
+    finding: >
+      F1 and F2 pass, but the shape is the finding, not the verdict. 486 of
+      46,656 swept configurations are feasible - about 1% - and they sit in the
+      extreme corner of every axis at once: the fewest regions swept (8), the
+      lowest subscription (0.25x), the highest subspace overlap (0.7), the
+      smallest draw fraction (0.25) and a small batch.
+    the_headline: >
+      THE DESIGN'S OWN STATED PROFILE ADMITS ZERO CONFIGURATIONS. At fleet 64,
+      8-hour recompile, 4-way parallelism and a 7-day restoration tolerance,
+      C3 (deletion throughput) and C4 (restoration latency) are jointly
+      unsatisfiable BY ARITHMETIC, independent of every other axis:
+        C3 needs batch >= D*FLEET*H/C = 5.33
+        C4 needs batch <= A*(L - FLEET*H/C) = 3.33
+      The drain term FLEET*H/C alone consumes 5.33 of the 7-day budget. Easing
+      ANY ONE of recompile time, parallelism or fleet size opens the window to
+      [1.33, 11.33] and yields 108 feasible configurations. Easing the latency
+      tolerance ALONE does not, because C3's floor scales with the same
+      FLEET*H/C term.
+    closed_form: "feasible iff D*FLEET*H/C <= A*(L - FLEET*H/C)"
+    two_rig_errors_en_route: >
+      This experiment reported EMPTY twice before this run and both times it was
+      an unswept parameter, not the design.
+      (i) C6 failed in 100% of configurations including at an UNCAPPED draw,
+      because the decay rate was fixed at 0.25 and a 3-entry support with a
+      2-of-3 threshold loses ~16% of items to that rate inherently. Decay rate
+      is now an axis.
+      (ii) The whole sweep was then dominated by fixed deployment constants, and
+      the emptiness was the C3/C4 arithmetic above rather than anything measured.
+      Deployment profile is now an axis and the closed-form window is reported
+      beside it. Reporting "the feasible region is empty" from either run would
+      have been a statement about my constants, not about the architecture.
+    unexplained: >
+      Global use-based decay yields MORE feasible configurations (324) than
+      per-region stratified decay (162), which is the opposite of the weighting
+      rule's direction. Likely an interaction between the stratified draw's
+      per-region cap and low region counts, where the two policies converge. Not
+      interpreted, and it should be before the weighting rule is applied to the
+      Consolidator.
+    what_this_does_not_establish: >
+      C1 and C6 are measured; C2, C3, C4 and cascade breadth are computed
+      arithmetically from relationships measured in E1.1c/d, E0.1, E0.2c and
+      E0.2d. So this is a composition of prior measurements under stated
+      tolerances, not an independent measurement. The tolerances themselves
+      (probe budget, 1 deletion/day, 7-day latency, 20% over-forgetting) are
+      choices, and F3's ranking is only as good as they are.
+
 # -- rig bugs found so far, all of which changed a reported result ---------
 #
 # Kept in the ledger rather than only in git history, because the rate and the
@@ -1100,6 +1155,19 @@ bugs:
       Cached weights are constants - stale, not sensitive. Produced a confident
       PASS on the claim this plan most expected to fail, and was caught only
       because U1 and U2 contradicted each other.
+
+  - id: B9
+    where: e5_1_joint_feasibility
+    bug: "reported an EMPTY feasible region twice, from unswept parameters rather than from the design"
+    effect: >
+      Run 1: C6 fixed the decay rate at 0.25 and failed in 100% of configs
+      including at an uncapped draw, so it measured the decay model rather than
+      the draw cap. Run 2: deployment constants were fixed, and the emptiness was
+      a two-constraint arithmetic conflict at those constants, independent of
+      every swept axis. Publishing either would have been a claim about my
+      constants. Caught both times by asking why a constraint never
+      discriminated.
+    fix: "sweep the parameter; report the closed-form boundary alongside the sweep"
 
   - id: B8
     where: e0_1_verified_recompilability, arm A4

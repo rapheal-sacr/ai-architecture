@@ -62,6 +62,7 @@ structural work first, which is the right order anyway.
 | E3.1c | does the transfer *matrix* beat a one-line breadth penalty? | **PARTIAL** — the statistic wins; the matrix is unevidenced |
 | E3.1d | is E3.1's comp-only figure real? | **FAIL** — tiebreak artifact, spread 0.775. Figure withdrawn |
 | E2.1 | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 criteria |
+| E5.1 | **joint feasibility** — do the constraints intersect? | **~1%** of the space, and **0** at the design's own profile |
 
 **Two published conclusions have been withdrawn.** Both are recorded in
 `claims/claims.yaml` under `retracted:` and in `bugs:` — see §4a.
@@ -778,6 +779,64 @@ checkability profile is an assumption stated in the source file. What this
 establishes is the shape of the damage as a function of that correlation, and
 which regime harvesting requires. Locating real traffic on that curve is Rig B
 work, and it is what actually decides whether §5's optimism is warranted.
+
+---
+
+### E5.1 · The feasible region is about 1% of the space, and empty at the design's own profile
+
+Every experiment before this moved one thing with everything else at defaults.
+That finds mechanisms; it does not find out whether a design is buildable,
+because the constraints are coupled and each tightens under the others. A thesis
+of this kind fails by the feasible region emptying, not by refutation.
+
+Six constraints — tail-safe free rank, probe budget, deletion throughput,
+restoration latency, bounded recompile, worst-region over-forgetting — over
+46,656 configurations spanning region count, subscription, subspace overlap,
+provenance overlap, draw fraction, batch size, decay policy, decay rate and
+deployment profile.
+
+**486 feasible, about 1%** — and they sit in the extreme corner of *every* axis
+at once: fewest regions (8), lowest subscription (0.25×), highest subspace
+overlap (0.7), smallest draw (0.25), small batch.
+
+**The design's own stated profile admits zero.** At fleet 64, 8-hour recompile,
+4-way parallelism and a 7-day restoration tolerance, C3 and C4 are jointly
+unsatisfiable *by arithmetic*, independent of every other axis:
+
+```
+  profile               need b >=  need b <=    window
+  as specified               5.33       3.33     EMPTY
+  fast recompile             1.33      11.33      open
+  high parallelism           1.33      11.33      open
+  small fleet                1.33      11.33      open
+  tolerant latency           5.33      49.33      open   (but 0 feasible)
+```
+
+The closed form is `D·FLEET·H/C ≤ A·(L − FLEET·H/C)`, and the drain term
+`FLEET·H/C` alone consumes **5.33 of the 7-day budget**. Easing any *one* of
+recompile time, parallelism or fleet size opens the window and yields 108
+feasible configurations. **Easing the latency tolerance alone does not**, because
+C3's floor scales with the same term — which is the non-obvious part, and the
+practical guidance: buy faster recompiles or more parallelism, not more patience.
+
+**This experiment reported EMPTY twice before this run, and both times it was an
+unswept parameter of mine rather than the design.** First C6 dominated at 100%
+because the decay rate was fixed at 0.25 — a 3-entry support with a 2-of-3
+threshold loses ~16% of items to that rate inherently, whatever the draw does.
+Then the whole sweep was dominated by fixed deployment constants. Publishing
+either would have been a claim about my constants. Both were caught by the same
+question: *why does this constraint never discriminate?*
+
+**What it does not establish.** C1 and C6 are measured here; C2, C3, C4 and
+cascade breadth are computed from relationships measured in E1.1c/d, E0.1, E0.2c
+and E0.2d. So this is a composition of prior measurements under stated
+tolerances, not an independent measurement — and the tolerances are choices.
+
+*Unexplained:* global use-based decay yields **more** feasible configurations
+(324) than per-region stratified decay (162), the opposite of the weighting
+rule's direction. Probably an interaction between the stratified draw's
+per-region cap and low region counts. It should be understood before the
+weighting rule is applied to the Consolidator.
 
 ---
 

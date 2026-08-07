@@ -54,6 +54,8 @@ or the model is small.
 | [E3.3](rig_a/experiments/e3_3_offdiagonal_degeneracy.py) | "maximize off-diagonal mass" is a partition objective | **FAIL** — monotone in fineness, so its argmax is total atomisation, and it ranks the planted true structure near the *bottom*. The replacement objective is validated only inside a family containing the answer |
 | [E2.1](rig_a/experiments/e2_1_tier_laundering.py) | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 — 29–63% of an unfiltered "T2" suite is laundered T3 judge opinion, and the harvested slice tests each domain's easy corner. But the strict-filter **yield is high** (33–68%), contradicting this plan's own prediction |
 
+| [E5.1](rig_a/experiments/e5_1_joint_feasibility.py) | **joint feasibility** — do the coupled constraints intersect? | **~1%** of 46,656 configurations, all in the extreme corner of every axis — and **zero** at the design's own stated profile, where deletion throughput and restoration latency are jointly unsatisfiable *by arithmetic*. Easing recompile time, parallelism or fleet size opens it; easing latency alone does not |
+
 **Two published conclusions have been withdrawn** (E1.1's "realistic traffic
 leaves 6 free directions", E0.2's "transitive closure fixes it completely").
 Both are recorded in `claims/claims.yaml` under `retracted:`.
