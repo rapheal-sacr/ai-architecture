@@ -54,6 +54,7 @@ structural work first, which is the right order anyway.
 | E0.2c | *does the ceiling hold under better policies?* | **PASS** — it does not; E0.2b demoted. Its D3 superseded |
 | E0.2d | is admission control a lever on cascade breadth? | **FAIL** — inverts E0.2c's D3. A **missing control surface** |
 | E3.1 | net-transfer ranking accumulates abstractions | **PARTIAL** — T1–T3 pass, T4 fails |
+| E3.1b | is E3.1's comp-only figure real? | **FAIL** — tiebreak artifact, spread 0.775. Figure withdrawn |
 | E2.1 | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 criteria |
 
 **Two published conclusions have been withdrawn.** Both are recorded in
@@ -386,6 +387,46 @@ the 69% is a property of this world's card overlap, not of the design; what is
 structural is that cost scales linearly with cascade breadth × recompile time,
 and the design already fixes the second factor at hours–days.
 
+### E3.1b · The compositional-only figure was measuring pool order
+
+A number this plan published in three places turns out to measure nothing about
+the ranking rule. Under net transfer:
+
+```
+regular skill (>=2 regions)   target= 0.060   transfer= 0.060
+comp-only skill               target= 0.000   transfer= 0.000
+patch                         target= 0.140   transfer= 0.000
+already-learned skill         target= 0.000   transfer= 0.000
+```
+
+Three classes tie at exactly zero, and the selection loop uses strict `>`, so
+the tie goes to whichever candidate the pool emitted first. Varying only the
+tiebreak rule:
+
+```
+tiebreak           comp_only   compositional   skills
+first                  0.550           0.333     9.88   <- the published number
+random                 0.515           0.329     9.78
+prefer_patch           0.005           0.053     5.65
+prefer_skill           0.780           0.582    11.85
+spread                 0.775
+```
+
+**The contamination is wider than the one figure.** Clean-regime *compositional
+scores* span 0.053–0.582 across the same rules, so T1's margin rests on an
+unspecified tiebreak too. It survives under neutral rules (first 0.333, random
+0.329, both over target's 0.264) and inverts under an adversarial one. The
+noisy regimes show spread 0.000 — noise breaks the ties — so T2's result is
+untouched.
+
+This is the same defect as B3, B6 and the empty kill criterion: **a quantity
+that cannot vary with the thing it claims to measure.** It passed the
+postcondition lint's letter (the metric does vary) while failing its intent
+(it varies with something else entirely). The lint needs the stronger form:
+*name the input that would flip it, and check nothing else flips it more.*
+
+---
+
 ### E2.1 · Probe harvesting: viable, but it launders tiers and samples the easy corner
 
 Part III §0 argues verification coverage is the binding constraint on the whole
@@ -575,8 +616,19 @@ defect — *an operation that cannot report failure*:
 | tooling | `str.replace` patching `claims.yaml` | fails open — a missing anchor silently does nothing |
 
 Hit in a criterion, in code, and in tooling, which is decent evidence it is the
-general one. The lint is uniform: for every mutation, assert it changed
-something; for every criterion, name the input that would flip it.
+general one.
+
+**E3.1b forces a stronger form.** The comp-only figure *did* vary — it passed
+the lint's letter — but it varied with pool emission order rather than with the
+ranking rule it was cited as evidence for. So the lint is:
+
+> For every mutation, assert it changed something. For every criterion, name the
+> input that would flip it — **and check that nothing irrelevant flips it more.**
+
+The cheap version of the second clause is a nuisance sweep: vary something that
+*should not* matter (tiebreak order, emission order, seed, iteration order) and
+confirm the metric is stable. Had that run on E3.1, the 55% would never have
+been published.
 
 **Treat a perfect in-rig score as a warning.** Three repairs currently score
 perfectly — 0 leaks, exact recovery, 1.0× fair share. In a simulator whose
@@ -790,11 +842,23 @@ T1–T3 pass. The margin *grows* under measurement noise, which I did not predic
 target ranking takes a max over noisy per-region deltas, net transfer takes a
 sum, and summing is variance-reducing.
 
+**Quote the noisy rows, not the clean one.** E3.1b shows the clean regime is
+tiebreak-contaminated — transfer's compositional score there spans 0.053 to
+0.582 depending on how exact ties are resolved. The tied set exists only because
+a noiseless world produces exact ties. In the noisy regimes spread is 0.000
+across all four tiebreak rules, so the +0.147 margin is artifact-free while the
++0.085 one is not.
+
 **But the mechanism is not the one Part II §B describes.** Net transfer does not
-*detect* generality — it removes the reward for *narrowness*. Evidence: transfer
-acquires compositional-only skills at 55% while learning 72% of skills overall,
-so it still under-acquires exactly the skills whose value is invisible to a
-first-order measure. It merely stops patches crowding them out.
+*detect* generality — it removes the reward for *narrowness*. The argument is
+**analytic and needs no number**: a first-order statistic over per-region deltas
+cannot distinguish a candidate whose per-region deltas are all zero from one
+already applied, and compositional-only skills are exactly that case.
+
+> **Withdrawn.** An earlier version of this section cited "transfer acquires
+> compositional-only skills at 55% while learning 72% overall" as evidence.
+> E3.1b shows that figure measures pool emission order, not the ranking rule —
+> see below. It has been struck from all documents.
 
 **Which means §B is conditionally true, and the condition is unstated:** narrow
 patches must have near-zero *real* off-target effect. Give patches a systematic

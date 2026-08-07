@@ -506,10 +506,20 @@ claims:
       is this formula right, is this list complete - and local errors are
       locally fixable by construction, which is why the "every failure is a spec
       defect" record was closer to selection than to evidence.
+    clean_regime_caveat: >
+      E3.1b also shows the CLEAN regime's compositional scores are themselves
+      tiebreak-sensitive: transfer's compositional score spans 0.053
+      (prefer_patch) to 0.582 (prefer_skill) against 0.333 under "first". So T1's
+      +0.085 margin holds under neutral tiebreaks (first 0.333, random 0.329,
+      both above target's 0.264) but is not robust to adversarial tie
+      resolution. The tied set exists only because a noiseless world produces
+      exact ties; in the noisy regimes spread is 0.000 across all four rules, so
+      T2's +0.147 margin is artifact-free. Quote the noisy regimes, not the
+      clean one.
     finding: >
       T1, T2, T3 pass; T4 FAILS. Clean regime: transfer 0.349 compositional
-      versus target 0.264, margin +0.085, and transfer acquires 55% of
-      compositional-only skills against target's 21%. The margin GROWS under
+      versus target 0.264, margin +0.085 (but see clean_regime_caveat). The
+      margin GROWS under
       measurement noise to +0.147, 173% of clean - because target ranking takes
       a max over noisy per-region deltas while net transfer takes a sum, and
       summing is variance-reducing. That was not predicted.
@@ -522,11 +532,22 @@ claims:
       Net transfer does not DETECT generality. It removes the reward for
       narrowness: when patches have near-zero real off-target effect they score
       ~0 on the statistic while general candidates score positive, so generality
-      wins by default. Evidence that this is the mechanism rather than detection:
-      transfer acquires compositional-only skills at 55% while learning 72% of
+      wins by default.
+      The supporting argument is ANALYTIC, not numerical: a first-order
+      statistic over per-region deltas cannot distinguish a candidate whose
+      per-region deltas are all zero from one already applied. Compositional-only
+      skills are exactly that case, so no such statistic can see them.
+    withdrawn_evidence_verbatim: >
+      "transfer acquires compositional-only skills at 55% while learning 72% of
       skills overall, so it still UNDER-acquires exactly the skills whose value
-      is invisible to a first-order measure. It merely stops patches crowding
-      them out.
+      is invisible to a first-order measure."
+    withdrawn_because: >
+      E3.1b: the figure is a tiebreak artifact. Patches, compositional-only
+      skills and already-learned skills all score exactly 0.000 under net
+      transfer, and the selection loop uses strict `>`, so the tie is resolved by
+      pool emission order. Across tiebreak rules comp_only spans 0.005 to 0.780
+      (spread 0.775). The published 0.55 is simply the "first" rule.
+    superseded_by: E3.1b
     condition_the_design_does_not_state: >
       Part II section B is conditionally true, and the condition is that narrow
       patches must have near-zero REAL off-target effect. The design never states
@@ -535,6 +556,32 @@ claims:
       spillover to neighbours is plausible. Measuring real patch spillover is a
       Rig B/C question and it decides whether the central generalization claim
       holds in practice.
+
+  - id: E3.1b
+    tier: L7
+    claim: "E3.1's compositional-only acquisition figure measures the ranking rule"
+    source: "independent audit of a number this plan published in PLAN.md, README.md and claims.yaml"
+    rig: A
+    kill: "N4 - comp_only spread across tiebreak rules exceeds 0.10"
+    predicted: FAIL
+    status: FAIL
+    result: results/e3_1b_tiebreak_audit.json
+    finding: >
+      The figure is an artifact. Under net transfer a patch scores 0.000 (its
+      only gain is at the target, which the statistic excludes), a
+      compositional-only skill scores 0.000 (all its deltas are zero by
+      construction), and an already-learned skill scores 0.000. Three classes
+      tie, and E3.1's selection loop uses strict `>`, so pool emission order
+      decides. Clean regime comp_only by rule: first 0.550, random 0.515,
+      prefer_patch 0.005, prefer_skill 0.780 - spread 0.775.
+      The contamination extends past comp_only: clean-regime COMPOSITIONAL
+      scores span 0.053 to 0.582 across the same rules. In the noisy regimes
+      spread is 0.000, because noise breaks the ties, so those results are
+      unaffected.
+    consequence: >
+      Strike 55%/72% from all documents. The mechanism claim survives on
+      analytic grounds that need no number. Report E3.1's margins from the noisy
+      regimes; the clean regime is a noiseless-world artifact.
 
   - id: E3.2
     tier: L7

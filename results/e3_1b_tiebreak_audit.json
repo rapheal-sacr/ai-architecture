@@ -1,0 +1,63 @@
+{
+  "seed": 20260806,
+  "panels": [
+    {
+      "regime": "clean",
+      "noise": 0.0,
+      "spurious": 0.0,
+      "rules": {
+        "first": {
+          "comp_only": 0.55,
+          "compositional": 0.333,
+          "skills": 9.88
+        },
+        "random": {
+          "comp_only": 0.515,
+          "compositional": 0.329,
+          "skills": 9.78
+        },
+        "prefer_patch": {
+          "comp_only": 0.005,
+          "compositional": 0.053,
+          "skills": 5.65
+        },
+        "prefer_skill": {
+          "comp_only": 0.78,
+          "compositional": 0.582,
+          "skills": 11.85
+        }
+      },
+      "comp_only_spread": 0.775
+    },
+    {
+      "regime": "noisy + spurious",
+      "noise": 0.03,
+      "spurious": 0.03,
+      "rules": {
+        "first": {
+          "comp_only": 0.35,
+          "compositional": 0.212,
+          "skills": 8.6
+        },
+        "random": {
+          "comp_only": 0.35,
+          "compositional": 0.212,
+          "skills": 8.6
+        },
+        "prefer_patch": {
+          "comp_only": 0.35,
+          "compositional": 0.212,
+          "skills": 8.6
+        },
+        "prefer_skill": {
+          "comp_only": 0.35,
+          "compositional": 0.212,
+          "skills": 8.6
+        }
+      },
+      "comp_only_spread": 0.0
+    }
+  ],
+  "worst_spread": 0.775,
+  "N4_tiebreak_artifact": true
+}
