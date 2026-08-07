@@ -997,6 +997,24 @@ retires generator risk and settles what Phase 1 left conditional:
 | **recompile wall-clock `H`** — time to compile one adapter at target rank on target hardware | **the cheapest decisive item in the block.** The C3∧C4 window turns on `H = 8h`, which is an assumption, not a measurement. At 30 minutes the window opens with no architectural change — and this gates the only infeasibility currently presented as unconditional. An afternoon's work |
 | E1.5 per-layer cost | Root 1's remaining claim, which needs a model anyway |
 
+**Rig A is closed here, deliberately.** Nine rig bugs in nineteen experiments is
+a stable error rate, not a converging one; every remaining Rig A number is
+conditional on generators whose realism is unmeasured; and three of the four
+quantities that now gate the design are resolved *outside* the simulator. The
+failure mode to guard against is continuing to run Rig A because Rig A is where
+the machinery is. The next two items are afternoons and each moves more than
+another simulation can:
+
+1. **`H`, recompile wall-clock** — Rig B. Gates the only infeasibility currently
+   presented as unconditional. If it is 30 minutes rather than 8 hours the
+   window opens with no architectural change.
+2. **Support redundancy and pass threshold** — from harvested-probe provenance,
+   the same interaction sample as the tier audit. Gates C6, whose tolerance
+   curve is the steepest of the four.
+
+Then **E2.3**, the last untested claim in the architecturally-consequential
+class — *after* those two, not before.
+
 **Phase 3 — remaining Rig A claims**, re-run against whatever Phase 2 says the
 generators should look like: E1.2, E3.1, E3.2, E3.4, E4.1, E4.3, E4.4, E4.5,
 E0.1, E0.3, E0.4, E2.3, E2.4, E2.5.
