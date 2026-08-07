@@ -340,13 +340,19 @@ claims:
       0.216, a ratio of 3.29x. Unanimity sustains 1.1 live adapters; short_only
       sustains 6.1. The safety rule adopted to protect the budget is what empties
       it.
-      U2: allocating on the short estimator alone put 5222 direction-allocations
-      into directions the LONG estimator still considered committed, and 57 of
-      those sat in rare domains whose traffic mass is below 0.05 - invisible to a
-      traffic-weighted non-regression check. So Part III section 2's stated
-      justification for the asymmetry, "if the direction was actually committed,
-      the promotion gate's non-regression test catches it", is FALSE exactly
-      where it matters.
+      U2 is a COMPOSITION, not a measurement, and stronger for it. Allocation
+      ranks on the short estimator in EVERY arm, so no lambda_long and no release
+      rule can touch it. Compose with E1.1c: allocation consults only the fast
+      estimator, the only downstream catch is traffic-weighted, therefore
+      allocation errors in low-mass domains are undetectable for ANY parameter
+      setting. Two lines, no seed count required.
+      Sized: under short_only, 85.8% of the WORST domain's subspace is
+      overwritten while a traffic-weighted check reports 16.6% - a blindness
+      factor of 5.2x - and the worst-hit domain has mean traffic rank 11.1 of 16.
+      Unanimity is less damaging in absolute terms (0.517) and BLINDER (7.2x).
+      So Part III section 2's stated justification for the asymmetry, "if the
+      direction was actually committed, the promotion gate's non-regression test
+      catches it", is false for structural reasons no tuning reaches.
     why_this_is_architectural: >
       The two failures have opposite repairs. Tightening release (unanimity)
       starves the budget; loosening allocation (short-only) writes into committed
@@ -366,12 +372,43 @@ claims:
       tight for every rule. Re-registered as relative: U1' fails if unanimity
       starves >=1.5x the fastest rule. Ratio is 3.29x. Both verdicts print every
       run.
-    unexplained: >
-      The lambda_long sweep is NOT monotone even at 12 seeds - starve rate 0.530,
-      0.647, 0.753, 0.711, 0.567 across lambda_long 0.98 to 0.9995, peaking at
-      0.995. The spread exceeds the seed standard deviation (0.04-0.10) so it is
-      probably real, but no mechanism is offered and it should not be used to pick
-      lambda_long.
+    sweep_reading: >
+      Starve rate across lambda_long 0.98-0.9995: 0.530, 0.647, 0.753, 0.711,
+      0.567, with standard errors of 0.011-0.028 at 12 seeds. Worsening from 0.98
+      to 0.995 then partially recovering. The non-monotonicity is unexplained and
+      IRRELEVANT: U1' fails across the entire swept range, since even the best
+      point starves at 0.530 against short_only's 0.216 - 2.45x.
+      The sweep's real content: unanimity's best swept configuration is
+      lambda_long = 0.98, which IS lambda_medium. Unanimity is least bad exactly
+      where the three-timescale structure degenerates to two, so the third
+      timescale contributes nothing but cost at every setting tested. That is a
+      sharper indictment of Part III section 2 than the starvation number.
+    allocation_order: >
+      Predicted to be the mechanism, measured as a minor one. The allocator takes
+      least-visited free directions first, and least-visited is identical to
+      rarest-domain, so the prediction was that it preferentially targets the
+      tail. Directionally confirmed, much weaker than expected: worst-domain
+      damage 0.858 at mean traffic rank 11.1 (ascending), 0.815 at 9.2
+      (descending), 0.841 at 10.5 (random). All three concentrate on the rarer
+      half.
+      The reason is more damning than the prediction: ordering only selects
+      WITHIN the free pool, and the pool is rare-domain-dominated under every
+      rule because low traffic is what "free" looks like to a visit-weighted
+      estimator. Pool composition is the mechanism; ordering is a detail. So
+      allocation order is not available as a repair.
+    metric_defects_fixed: >
+      Three, all found by review before the numbers were quoted anywhere.
+      (i) the raw count 5222 had no denominator - now a RATE per allocated
+      direction; (ii) rare-ownership was summed over the whole allocation event
+      and thresholded once, so a single frequent-domain direction zeroed the
+      event - now counted per direction; (iii) `unanimity` and `long_only`
+      reported zero unsafe because their free_mask already contains the long
+      estimator, making U2 undefined rather than satisfied for the two arms that
+      looked best.
+      A second attempt used a THRESHOLDED oracle (base_rate > EPS) which is worse
+      in a subtler way - it makes rare domains uncommitted BY DEFINITION,
+      reproducing inside the instrument the exact traffic weighting the finding
+      is about. The measure is now per-domain overwritten fraction, unweighted.
 
   - id: E1.3
     tier: L4

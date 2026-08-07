@@ -293,32 +293,71 @@ short_only's 0.216, a **3.29×** ratio, and unanimity sustains 1.1 live adapters
 where short_only sustains 6.1. *The rule adopted to protect the budget is what
 empties it.*
 
-**U2 fails, and this is the half that makes it architectural.** Allocating on the
-short estimator put 5222 direction-allocations into directions the long estimator
-still held committed — and **57 of those sat in rare domains** whose traffic mass
-is under 0.05, invisible to a traffic-weighted non-regression check. So §2's
-stated justification for the asymmetry, *"if the direction was actually
-committed, the promotion gate's non-regression test catches it,"* is **false
-exactly where it matters**.
+**U2 is not a simulation result — it is a composition, and stronger for it.**
+Allocation ranks on the short estimator in *every* arm, so no λ_long and no
+release rule can touch it. Compose that with E1.1c and it is a two-line proof:
+
+> allocation consults only the fast estimator · the only downstream catch is
+> traffic-weighted · **therefore allocation errors in low-mass domains are
+> undetectable, for any parameter setting**
+
+That cannot be argued down by a seed count. The simulation only *sizes* it:
+under `short_only`, **85.8% of the worst domain's subspace is overwritten** while
+a traffic-weighted check reports 16.6% — a **5.2× blindness factor** — and the
+worst-hit domain sits at mean traffic rank 11.1 of 16. Unanimity is less
+damaging in absolute terms (0.517) and **blinder** (7.2×).
+
+So §2's justification, *"if the direction was actually committed, the promotion
+gate's non-regression test catches it,"* is false for structural reasons no
+tuning reaches.
+
+**Allocation order: predicted to be the mechanism, measured as a minor one.**
+The allocator takes least-visited free directions first, and least-visited is
+identical to rarest-domain — so the prediction was that it preferentially
+targets the tail. Directionally confirmed and much weaker than expected:
+ascending 0.858 damage at rank 11.1, descending 0.815 at 9.2, random 0.841 at
+10.5. All three concentrate on the rarer half.
+
+The reason is more damning than the prediction. Ordering only selects *within*
+the free pool, and **the pool is rare-domain-dominated under every rule**,
+because low traffic is what "free" looks like to a visit-weighted estimator.
+Pool composition is the mechanism; ordering is a detail — which means allocation
+order is not available as a repair.
 
 **Why this is not a threshold to retune.** The two failures have *opposite*
 repairs. Tighten release and the budget starves; loosen allocation and you write
 into committed directions nothing downstream can see. No setting of the
 three-λ rule is safe in both directions, and the design offers no third option.
 
-**And it unifies with E1.1c.** U2's failure *is* E1.1c's finding seen from the
-allocation side: a traffic-weighted energy cut classifies rare-domain subspaces
-as free, and a traffic-weighted non-regression check cannot see interference in
-rare domains. One anisotropy, two symptoms — which is exactly amendment item
-10's point, now measured on both sides of the estimator.
+**And it generalises past item 10.** Four measured symptoms of one anisotropy,
+all in L7: the energy cut classifies rare-domain subspace as free (E1.1c); the
+allocator's free pool is rare-domain-dominated under every ordering (E1.2); the
+non-regression gate cannot see the damage there (E1.1c, E1.2 U2); and the gate's
+`qᵀR⁻¹q` reads practised-but-unprobed directions as known (analytic, untested).
 
-**Registered honestly:** U1's pre-registered absolute form (unanimity >0.20 AND
-short_only <0.05) does *not* fire, because it assumed short_only would be
-comfortable and it is not. Re-registered as relative; both verdicts print every
-run. And the λ_long sweep is **non-monotone** even at 12 seeds (0.530, 0.647,
-0.753, 0.711, 0.567), peaking at 0.995. The spread exceeds the seed sd, so it is
-probably real, but no mechanism is offered and it should not be used to pick
-λ_long.
+That is not four findings, it is one finding four times — so amendment item 10's
+"two weightings of one estimator" is too narrow. The rule is: **any statistic
+used for protection or allocation must be computed per region on equal-sized
+samples; only statistics used for routing may be traffic-weighted.** Enumerating
+Parts I–III against it finds **eleven protection sites**, three measured and
+eight inferred — written up in
+[docs/wam_amendment_weighting_rule.md](docs/wam_amendment_weighting_rule.md).
+The pattern is that every statistic in the stack defaults to traffic-weighted,
+because traffic is what the system sees: frequency weighting is not a choice
+anyone made, it is what you get by not making one.
+
+**The λ_long sweep says more than starvation.** U1′ fails across the *entire*
+swept range — even the best point starves at 0.530 against `short_only`'s 0.216.
+And that best point is **λ_long = 0.98, which is λ_medium**: unanimity is least
+bad exactly where the three-timescale structure degenerates to two, so **the
+third timescale contributes nothing but cost at every setting tested.** That is
+a sharper indictment of §2 than the starvation number. (The sweep is
+non-monotone; SEs are 0.011–0.028, so it is probably real, unexplained, and
+irrelevant to the verdict.)
+
+**Registered honestly:** U1's pre-registered absolute form does *not* fire,
+because it assumed `short_only` would be comfortable and it is not. Re-registered
+as relative; both verdicts print every run.
 
 ---
 
@@ -765,6 +804,15 @@ ground truth and the mechanism share a definition, both measurements agree and
 both are wrong. A second measurement of `true_influencers − provenance` would
 also have returned zero. Unit tests do not help either, because the code is
 correct; it is the criterion that is empty.
+
+**Verify the manipulation took before interpreting a comparison.** The lint below
+checks a criterion's logical *form*. B7 passed that check and still failed: U1
+*could* have returned the other answer in principle, but in that run no arm ever
+had free rank, so the arms never differed on the quantity being varied and U1
+"passed" on a comparison that never happened. Assert that the arms actually
+differ on the manipulated quantity — in B7's case, `free_rank > 0` for at least
+one arm. This is a standard manipulation check and it is the third distinct
+instance here of *the run did not exercise the criterion*.
 
 **Every mutation and every criterion must have a postcondition that some
 possible input would violate.** Three failures in this programme are the same
