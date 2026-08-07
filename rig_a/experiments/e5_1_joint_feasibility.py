@@ -85,11 +85,14 @@ INTERFERENCE_LIMIT = 0.05
 RETENTIONS = (0.95, 0.99, 0.995, 0.999, 0.9995)
 
 # -- swept axes --------------------------------------------------------------
-REGIONS = (8, 16, 32)
+# 2 and 4 added after the first interiority check: the feasible set sat at the
+# minimum swept region count, so the boundary was outside the box.
+REGIONS = (2, 4, 8, 16, 32)
 DOMAIN_RANKS = (4, 8, 16)              # with REGIONS gives subscription 0.25x-4x
 SUBSPACE_OVERLAP = (0.0, 0.4, 0.7)
 PROVENANCE_OVERLAP = (0.1, 0.4, 0.7)   # -> cascade breadth, via E0.2d
-DRAW_FRACTION = (0.25, 0.5, 0.75, 1.0)
+# 0.10 added for the same reason.
+DRAW_FRACTION = (0.10, 0.25, 0.5, 0.75, 1.0)
 BATCH = (1, 4, 16, 64)
 DECAY_POLICY = ("use_based", "stratified")
 # Swept, because fixing it at 0.25 made C6 fail in 95.8% of configurations
@@ -235,7 +238,18 @@ def cascade_breadth(prov_overlap: float) -> float:
 
 
 def union_size(fleet, prov_overlap, batch):
-    return max(min(fleet, fleet * cascade_breadth(prov_overlap) * batch), 1.0)
+    """Adapters touched by a batch of `batch` tombstones.
+
+    Each adapter is touched independently with probability beta per tombstone,
+    so the union saturates EXPONENTIALLY: fleet * (1 - (1-beta)^batch). An
+    earlier version used fleet * beta * batch clipped at fleet, which is linear
+    and always at or above the correct value -- at beta 0.1 and batch 10 it
+    claimed the whole fleet where the true figure is 65%. That overstated C3's
+    cost most severely in the LOW-breadth regime, which is exactly where
+    feasibility lives.
+    """
+    beta = cascade_breadth(prov_overlap)
+    return max(fleet * (1.0 - (1.0 - beta) ** batch), 1.0)
 
 
 def deletions_per_day(prof, prov_overlap: float, batch: int) -> float:
@@ -250,14 +264,38 @@ def restore_latency_days(prof, batch: int, prov_overlap: float) -> float:
     return fill + drain
 
 
-def batch_window(prof, prov_overlap: float) -> tuple[float, float]:
-    """The closed-form C3-and-C4 window on batch size, at saturated union."""
+def batch_window(prof, beta: float, bmax: int = 400) -> list[int]:
+    """Batch sizes satisfying C3 AND C4 -- a FIXED POINT, not an interval.
+
+    U depends on b, so the two conditions are
+
+        D * U(b) * H / C  <=  b  <=  A * (L - U(b) * H / C)
+
+    and both bounds move with b. An earlier version evaluated them at the
+    SATURATED union U = FLEET, which pins cascade breadth at its worst possible
+    value and then reports the result as holding "independent of every other
+    axis". It is independent of the other axes only because breadth was pinned --
+    the pessimistic-corner pattern for the third time in this programme, after
+    E1.2's disjoint domains and E1.1c/d's overlap 0.
+    """
     _, fleet, h, par, lat = prof
     c = par * 24.0
-    drain = fleet * h / c
-    lo = DELETIONS_PER_DAY_MIN * fleet * h / c
-    hi = DELETION_ARRIVAL_PER_DAY * (lat - drain)
-    return lo, hi
+    out = []
+    for b in range(1, bmax + 1):
+        u = max(fleet * (1.0 - (1.0 - beta) ** b), 1.0)
+        if DELETIONS_PER_DAY_MIN * u * h / c <= b <= DELETION_ARRIVAL_PER_DAY * (lat - u * h / c):
+            out.append(b)
+    return out
+
+
+def breadth_threshold(prof, lo=0.01, hi=1.0, steps=200) -> float | None:
+    """Largest cascade breadth at which the C3/C4 window is still non-empty."""
+    best = None
+    for i in range(steps + 1):
+        beta = lo + (hi - lo) * i / steps
+        if batch_window(prof, beta):
+            best = beta
+    return best
 
 
 def probe_cost(n_regions: int) -> int:
@@ -318,15 +356,43 @@ def main() -> int:
     print(f"\n  swept {n} configurations; {len(feasible)} feasible"
           f" ({100*len(feasible)/n:.1f}%)\n")
 
-    # F3 -- which constraint binds
-    binds = {}
+    # F3 -- per-constraint ATTRIBUTION, not just a fail count. The useful output
+    # is how much each constraint eliminates ALONE, because that is the repair
+    # ordering: a constraint that only ever fails alongside others buys nothing
+    # when fixed.
+    binds, alone = {}, {}
     for r in rows:
         for k in r["failed"]:
             binds[k] = binds.get(k, 0) + 1
-    print("  F3  how often each constraint fails, across the whole sweep")
-    print(f"      {'constraint':<26}{'fails':>8}{'of sweep':>11}")
+        if len(r["failed"]) == 1:
+            alone[r["failed"][0]] = alone.get(r["failed"][0], 0) + 1
+    print("  F3  per-constraint attribution -- the repair ordering")
+    print(f"      {'constraint':<26}{'eliminates':>12}{'of sweep':>10}"
+          f"{'ALONE':>8}{'-> fixing it gains':>20}")
     for k, v in sorted(binds.items(), key=lambda kv: -kv[1]):
-        print(f"      {k:<26}{v:>8}{100*v/n:>10.1f}%")
+        a = alone.get(k, 0)
+        print(f"      {k:<26}{v:>12}{100*v/n:>9.1f}%{a:>8}{a:>20}")
+    print("      'ALONE' is configs this constraint is the ONLY thing blocking;")
+    print("      fixing a constraint gains exactly that many configurations.")
+
+    # -- interiority: is the feasible set touching the edges of the box? -------
+    print("\n  Is any feasible configuration INTERIOR to each axis?")
+    print("  (all-corner feasibility is a warning about where I looked, not a")
+    print("   measurement of density -- the true boundary may be outside the box)")
+    axes = {"regions": REGIONS, "domain_rank": DOMAIN_RANKS,
+            "subspace_overlap": SUBSPACE_OVERLAP,
+            "provenance_overlap": PROVENANCE_OVERLAP,
+            "draw_fraction": DRAW_FRACTION, "batch": BATCH, "decay_rate": DECAY_RATE}
+    interior = {}
+    print(f"      {'axis':<20}{'swept':>22}{'feasible values':>26}{'interior?':>11}")
+    for name, vals in axes.items():
+        got = sorted({r[name] for r in feasible})
+        lo, hi = min(vals), max(vals)
+        inside = [v for v in got if lo < v < hi]
+        interior[name] = {"swept": list(vals), "feasible_values": got,
+                          "has_interior": bool(inside)}
+        print(f"      {name:<20}{str(list(vals)):>22}{str(got):>26}"
+              f"{('yes' if inside else 'EDGE'):>11}")
 
     # the correlated diagonal: subspace and provenance overlap move together
     diag = [r for r in rows
@@ -335,16 +401,27 @@ def main() -> int:
     print(f"\n  F2  correlated diagonal (subspace overlap ~ provenance overlap):"
           f" {len(diag_ok)}/{len(diag)} feasible")
 
-    print("\n  The C3-and-C4 window on batch size, per profile (saturated union).")
-    print("  Fixing one profile is what produced EMPTY in the first two runs:")
-    print(f"      {'profile':<20}{'need b >=':>11}{'need b <=':>11}{'window':>10}")
+    print("\n  The C3-and-C4 window is a FIXED POINT in batch size, and it is a")
+    print("  function of cascade breadth. Solved per profile:")
+    print(f"      {'profile':<20}{'max beta':>10}{'window at b=0.30':>19}"
+          f"{'window at measured beta':>26}")
     windows = []
     for prof in PROFILES:
-        lo, hi = batch_window(prof, 0.4)
-        windows.append({"profile": prof[0], "b_min": round(lo, 2), "b_max": round(hi, 2),
-                        "open": bool(hi >= lo)})
-        print(f"      {prof[0]:<20}{lo:>11.2f}{hi:>11.2f}"
-              f"{('open' if hi >= lo else 'EMPTY'):>10}")
+        thr = breadth_threshold(prof)
+        w30 = batch_window(prof, 0.30)
+        wmeas = batch_window(prof, cascade_breadth(0.1))   # E0.2d's LOWEST measured
+        windows.append({"profile": prof[0],
+                        "max_breadth": round(thr, 3) if thr else None,
+                        "window_at_0.30": [min(w30), max(w30)] if w30 else None,
+                        "window_at_measured_beta": [min(wmeas), max(wmeas)] if wmeas else None})
+        f30 = f"{min(w30)}..{max(w30)}" if w30 else "EMPTY"
+        fm = f"{min(wmeas)}..{max(wmeas)}" if wmeas else "EMPTY"
+        print(f"      {prof[0]:<20}{(f'{thr:.2f}' if thr else 'none'):>10}{f30:>19}{fm:>26}")
+    print(f"\n    E0.2d's LOWEST measured cascade breadth is"
+          f" {cascade_breadth(0.1):.2f}, at one card per entry -- the minimum")
+    print("    multiplicity achievable. So the binding question is not batch size:")
+    print("    it is whether cascade breadth can be brought below the threshold at")
+    print("    all, and no admission threshold reaches it. That is R9.")
 
     by_profile = {}
     for r in rows:
@@ -400,7 +477,8 @@ def main() -> int:
                         "deletions_per_day_min": DELETIONS_PER_DAY_MIN,
                         "restore_latency_max_days": RESTORE_LATENCY_MAX_DAYS,
                         "over_forget_max": OVER_FORGET_MAX},
-         "batch_windows": windows,
+         "batch_windows": windows, "attribution": {"eliminates": binds, "alone": alone},
+         "interiority": interior,
          "F1_non_empty": bool(f1), "F2_diagonal_non_empty": bool(f2),
          "feasible_use_based": sum(r["feasible"] for r in as_written),
          "feasible_stratified_decay": sum(r["feasible"] for r in compliant),

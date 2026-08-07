@@ -1034,103 +1034,73 @@ claims:
 
   # -- Rig B - claims that need a model ------------------------------------
   - id: E5.1
-    tier: L2
-    claim: "L2 compresses to ~1/400 of the latent pages, megabytes per user"
-    rig: B
-    kill: "ratio far off, or retrieval quality collapses at that ratio"
-    predicted: uncertain
-    status: untested
-
-  - id: E5.2
-    tier: L2
-    claim: "Memory Interleave (retrieve -> infer -> retrieve) beats single-shot retrieval"
-    rig: B
-    kill: "no gain over a matched retrieval budget"
-    predicted: uncertain
-    status: untested
-
-  - id: E5.3
-    tier: L5
-    claim: "K consecutive failed reflections is a better deliberation trigger than a learned predicate"
-    source: "Part II section D"
-    rig: B
-    kill: "does not improve the latency/accuracy frontier over the predicate alone"
-    predicted: uncertain
-    status: untested
-
-  - id: E5.4
-    tier: L3
-    claim: "cos <= 0.93 admission control prevents bank collapse; failure-despite-guidance is the sharpest distillation signal"
-    source: "Part I section 7"
-    rig: B
-    kill: "bank collapses anyway, or the signal does not beat uniform failure sampling"
-    predicted: uncertain
-    status: untested
-
-  - id: E5.5
-    tier: L6
-    claim: "counterfactual replay is the one signal that is free and clean"
-    source: "Part II section F stage 1"
-    rig: B
-    kill: "a candidate write changes retrieval for subsequent queries, contaminating delta with downstream effects"
-    predicted: uncertain
-    predicted_reason: "the label is asserted to be causally attributed to one memory decision; downstream retrieval changes would break that"
-    status: untested
-
-  - id: E5.1
     tier: cross
     claim: "the coupled constraints have a non-empty feasible region"
     source: "every experiment so far moved one thing with everything else at defaults"
     rig: A
-    kill: "F1 feasible region empty over the whole swept space; F2 empty on the correlated overlap diagonal; F3 (a map, not a verdict) which constraint binds where"
+    kill: "F1 feasible region empty over the whole swept space; F2 empty on the correlated overlap diagonal; F3 per-constraint attribution (a repair ordering, not a verdict)"
     predicted: uncertain
     status: PASS
     result: results/e5_1_joint_feasibility.json
     finding: >
-      F1 and F2 pass, but the shape is the finding, not the verdict. 486 of
-      46,656 swept configurations are feasible - about 1% - and they sit in the
-      extreme corner of every axis at once: the fewest regions swept (8), the
-      lowest subscription (0.25x), the highest subspace overlap (0.7), the
-      smallest draw fraction (0.25) and a small batch.
-    the_headline: >
-      THE DESIGN'S OWN STATED PROFILE ADMITS ZERO CONFIGURATIONS. At fleet 64,
-      8-hour recompile, 4-way parallelism and a 7-day restoration tolerance,
-      C3 (deletion throughput) and C4 (restoration latency) are jointly
-      unsatisfiable BY ARITHMETIC, independent of every other axis:
-        C3 needs batch >= D*FLEET*H/C = 5.33
-        C4 needs batch <= A*(L - FLEET*H/C) = 3.33
-      The drain term FLEET*H/C alone consumes 5.33 of the 7-day budget. Easing
-      ANY ONE of recompile time, parallelism or fleet size opens the window to
-      [1.33, 11.33] and yields 108 feasible configurations. Easing the latency
-      tolerance ALONE does not, because C3's floor scales with the same
-      FLEET*H/C term.
-    closed_form: "feasible iff D*FLEET*H/C <= A*(L - FLEET*H/C)"
-    two_rig_errors_en_route: >
-      This experiment reported EMPTY twice before this run and both times it was
-      an unswept parameter, not the design.
-      (i) C6 failed in 100% of configurations including at an UNCAPPED draw,
-      because the decay rate was fixed at 0.25 and a 3-entry support with a
-      2-of-3 threshold loses ~16% of items to that rate inherently. Decay rate
-      is now an axis.
-      (ii) The whole sweep was then dominated by fixed deployment constants, and
-      the emptiness was the C3/C4 arithmetic above rather than anything measured.
-      Deployment profile is now an axis and the closed-form window is reported
-      beside it. Reporting "the feasible region is empty" from either run would
-      have been a statement about my constants, not about the architecture.
-    unexplained: >
-      Global use-based decay yields MORE feasible configurations (324) than
-      per-region stratified decay (162), which is the opposite of the weighting
-      rule's direction. Likely an interaction between the stratified draw's
-      per-region cap and low region counts, where the two policies converge. Not
-      interpreted, and it should be before the weighting rule is applied to the
-      Consolidator.
+      6858 of 97,200 configurations feasible - 7.1%. F1 and F2 pass. Every axis
+      now has feasible values strictly INTERIOR to its swept range, so the box is
+      adequate and the density figure means something.
+    the_conditional_verdict: >
+      At the design's own stated profile (fleet 64, 8h recompile, 4-way
+      parallelism, 7-day tolerance) the C3/C4 window is non-empty only for
+      cascade breadth <= 0.31. E0.2d's LOWEST measured breadth is 0.65, at one
+      card per entry - the minimum multiplicity achievable. So the window is
+      empty at that profile, but CONDITIONALLY ON BREADTH, not unconditionally.
+      Easing any one of recompile time, parallelism or fleet size opens the
+      window at ANY breadth (max beta 1.00).
+    promotes_R9: >
+      This is the payoff. The four routes out are: faster recompiles, more
+      parallelism, a smaller fleet, or cascade breadth below ~0.31 - and only the
+      last is not a hardware purchase. E0.2d found the design has NO lever on
+      breadth, so joint feasibility promotes R9 (provenance-aware admission) from
+      a missing mechanism to THE mechanism that decides whether an operating
+      envelope exists.
+    attribution_is_the_useful_output: >
+      Per constraint, configs eliminated and configs eliminated ALONE (which is
+      exactly what fixing it would gain):
+        C4 restoration latency   58.3%   alone 13716
+        C6 over-forgetting       57.3%   alone  8262
+        C3 deletion throughput   25.0%   alone  4572
+        C5 recompile bounded     20.0%   alone  2232
+        C2 probe budget          20.0%   alone   540
+        C1 tail-safe free rank   11.1%   alone   108
+      C1 is the constraint this programme spent E1.1, E1.1b, E1.1c, E1.1d and
+      E1.2 on, and it is the LEAST binding of the six - eliminating 11% and
+      almost never blocking alone. Most of the effort went to the non-binding
+      constraint, which is exactly what Part III section 0 warns against.
+    three_errors_corrected_here: >
+      (i) union_size was LINEAR in batch and clipped at fleet. Adapters are
+      touched independently, so the union saturates EXPONENTIALLY,
+      fleet*(1-(1-beta)^b) - at beta 0.1 and batch 10 the linear form claimed the
+      whole fleet where the true value is 65%. It overstated C3's cost most
+      severely in the low-breadth regime, exactly where feasibility lives.
+      (ii) batch_window was evaluated at the SATURATED union, pinning cascade
+      breadth at its worst possible value, and the result was then reported as
+      holding "independent of every other axis". It was independent only because
+      breadth was pinned - the pessimistic-corner pattern for the third time,
+      after E1.2's disjoint domains and E1.1c/d's overlap 0. The window is a
+      FIXED POINT, U(b)*H/C <= b <= A*(L - U(b)*H/C), not an interval.
+      (iii) the box was too small on two axes. The feasible set sat at the
+      minimum swept region count and draw fraction, so "~1% feasible" was a
+      statement about where I looked. Extending both, it is 7.1%.
+    anomaly_resolved: >
+      The earlier report that global use-based decay yielded MORE feasible
+      configurations than per-region stratified decay was an artifact of the
+      linear union form and the undersized box. Corrected: stratified 3510
+      against use_based 3348, which is the direction the weighting rule predicts.
     what_this_does_not_establish: >
-      C1 and C6 are measured; C2, C3, C4 and cascade breadth are computed
-      arithmetically from relationships measured in E1.1c/d, E0.1, E0.2c and
-      E0.2d. So this is a composition of prior measurements under stated
-      tolerances, not an independent measurement. The tolerances themselves
-      (probe budget, 1 deletion/day, 7-day latency, 20% over-forgetting) are
-      choices, and F3's ranking is only as good as they are.
+      C1 and C6 are measured; C2, C3, C4 and cascade breadth are computed from
+      relationships measured in E1.1c/d, E0.1, E0.2c and E0.2d. This is a
+      composition of prior measurements under chosen tolerances, not an
+      independent measurement, and F3's ordering is only as good as those
+      tolerances.
+
 
 # -- rig bugs found so far, all of which changed a reported result ---------
 #
@@ -1155,6 +1125,22 @@ bugs:
       Cached weights are constants - stale, not sensitive. Produced a confident
       PASS on the claim this plan most expected to fail, and was caught only
       because U1 and U2 contradicted each other.
+
+  - id: B10
+    where: e5_1_joint_feasibility union_size and batch_window
+    bug: >
+      union modelled as LINEAR in batch and clipped at fleet, rather than the
+      exponential saturation fleet*(1-(1-beta)^b) that independent per-tombstone
+      touching implies; and the closed-form window evaluated at the SATURATED
+      union, pinning cascade breadth at its worst value.
+    effect: >
+      overstated C3's cost most severely in the low-breadth regime where
+      feasibility lives, and turned a breadth-conditional result into one
+      reported as "independent of every other axis". Third instance of the
+      pessimistic-corner pattern after E1.2's disjoint domains and E1.1c/d's
+      overlap 0.
+    also: "the box was too small on two axes, so the reported ~1% density was a statement about where I looked; corrected to 7.1%"
+    fix: "exponential union; solve the window as a fixed point; interiority check on every axis"
 
   - id: B9
     where: e5_1_joint_feasibility

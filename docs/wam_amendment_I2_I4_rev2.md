@@ -208,6 +208,40 @@ happen before any `|P|` cap is designed.
 
 ---
 
+## D · I7 · Compile adequacy — the gap the whole record has been circling
+
+E0.1's A1b is the sharpest result in that experiment and it does not belong in a
+test note. Under a usage-capped draw, use-based decay of the tail changes
+nothing — those entries were never in the draw, so the competence they support
+was already absent at **compile** time. I4 then compares two equally
+impoverished artifacts and reports success.
+
+**I4 checks recompile fidelity. It says nothing about compile adequacy.**
+
+That gap is the entire record in one sentence. Every finding in this programme
+has been rare-region blindness — the energy cut, the allocator's free pool, the
+non-regression gate, the gap set, probe harvesting, the Consolidator's decay,
+the draw — and **no invariant asserts that the training draw covers what the
+ledger supports.** A system that bounds its costs by never learning the tail
+satisfies I2, I4 and the amended I4 completely.
+
+> **I7 · Compile adequacy.** For adapter `A` over region set `R`, the draw from
+> which `A` was compiled must cover every region in `R` at a stated minimum
+> per-region sampling rate. Coverage is reported per region, unweighted, and a
+> region below the floor is recorded as **uncovered** rather than absent.
+
+This is where A6's relocation lives. Capping the draw bounds recompile cost —
+that part holds — but *which* entries the cap admits is a protection decision,
+and a usage-weighted draw is exactly what the weighting rule forbids. Without
+I7 that observation has nowhere to sit except a test note, and it will be lost.
+
+The distinction I7 forces is between **absent** and **uncovered**: absent means
+the ledger never had it, uncovered means the ledger has it and the compile did
+not look. Only the second is a defect, and nothing in Parts I–III can currently
+tell them apart.
+
+---
+
 ## What E0.1 looks like after this
 
 | Arm | Holds fixed | Varies | Fails if |

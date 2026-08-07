@@ -54,7 +54,7 @@ or the model is small.
 | [E3.3](rig_a/experiments/e3_3_offdiagonal_degeneracy.py) | "maximize off-diagonal mass" is a partition objective | **FAIL** — monotone in fineness, so its argmax is total atomisation, and it ranks the planted true structure near the *bottom*. The replacement objective is validated only inside a family containing the answer |
 | [E2.1](rig_a/experiments/e2_1_tier_laundering.py) | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 — 29–63% of an unfiltered "T2" suite is laundered T3 judge opinion, and the harvested slice tests each domain's easy corner. But the strict-filter **yield is high** (33–68%), contradicting this plan's own prediction |
 
-| [E5.1](rig_a/experiments/e5_1_joint_feasibility.py) | **joint feasibility** — do the coupled constraints intersect? | **~1%** of 46,656 configurations, all in the extreme corner of every axis — and **zero** at the design's own stated profile, where deletion throughput and restoration latency are jointly unsatisfiable *by arithmetic*. Easing recompile time, parallelism or fleet size opens it; easing latency alone does not |
+| [E5.1](rig_a/experiments/e5_1_joint_feasibility.py) | **joint feasibility** — do the coupled constraints intersect? | **7.1%** of 97,200 configurations, interior on every axis. At the design's own profile the window is empty *conditionally on cascade breadth* (needs ≤0.31; lowest measured is 0.65). Four routes out and only one isn't a hardware purchase — which promotes **R9** to the mechanism that decides whether an envelope exists. And the attribution is humbling: **C1, the subspace budget this programme mostly studied, is the least binding constraint** |
 
 **Two published conclusions have been withdrawn** (E1.1's "realistic traffic
 leaves 6 free directions", E0.2's "transitive closure fixes it completely").
@@ -83,8 +83,14 @@ The strategic consequence: **generator error is now the dominant error source,
 and no Rig A work reduces it.** Rig B has moved ahead of the remaining 13
 claims — see PLAN.md §3.
 
-Eight repairs proposed (R1–R8), **none adopted**. R8's admission-threshold
-component is withdrawn by E0.2d and replaced by provenance-aware admission. See PLAN.md §5.
+Ten repairs proposed (R1–R10), **none adopted**. R8's admission-threshold
+component is withdrawn by E0.2d; **R9 (provenance-aware admission) is promoted
+by E5.1** from a missing mechanism to the one that decides feasibility.
+
+One new invariant proposed — **I7 · Compile adequacy** — because every finding
+here has been rare-region blindness and no invariant asserts that the training
+draw covers what the ledger supports. A system that bounds its costs by never
+learning the tail satisfies I2 and I4 completely. See PLAN.md §5.
 
 ## Running
 

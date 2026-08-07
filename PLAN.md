@@ -782,61 +782,78 @@ work, and it is what actually decides whether §5's optimism is warranted.
 
 ---
 
-### E5.1 · The feasible region is about 1% of the space, and empty at the design's own profile
+### E5.1 · 7.1% feasible, and the binding constraint is not the one I studied
 
 Every experiment before this moved one thing with everything else at defaults.
-That finds mechanisms; it does not find out whether a design is buildable,
-because the constraints are coupled and each tightens under the others. A thesis
-of this kind fails by the feasible region emptying, not by refutation.
+That finds mechanisms; it cannot tell you whether a design is buildable, because
+the constraints are coupled and each tightens under the others.
 
-Six constraints — tail-safe free rank, probe budget, deletion throughput,
-restoration latency, bounded recompile, worst-region over-forgetting — over
-46,656 configurations spanning region count, subscription, subspace overlap,
-provenance overlap, draw fraction, batch size, decay policy, decay rate and
-deployment profile.
+Six constraints over **97,200 configurations** spanning region count,
+subscription, subspace overlap, provenance overlap, draw fraction, batch, decay
+policy, decay rate and deployment profile. **6858 feasible — 7.1%**, with
+feasible values strictly interior to every axis, so the density figure means
+something.
 
-**486 feasible, about 1%** — and they sit in the extreme corner of *every* axis
-at once: fewest regions (8), lowest subscription (0.25×), highest subspace
-overlap (0.7), smallest draw (0.25), small batch.
-
-**The design's own stated profile admits zero.** At fleet 64, 8-hour recompile,
-4-way parallelism and a 7-day restoration tolerance, C3 and C4 are jointly
-unsatisfiable *by arithmetic*, independent of every other axis:
+**The verdict at the design's own profile is conditional, not absolute.**
 
 ```
-  profile               need b >=  need b <=    window
-  as specified               5.33       3.33     EMPTY
-  fast recompile             1.33      11.33      open
-  high parallelism           1.33      11.33      open
-  small fleet                1.33      11.33      open
-  tolerant latency           5.33      49.33      open   (but 0 feasible)
+  profile               max beta   window at 0.30   window at measured beta
+  as specified              0.31             5..5                    EMPTY
+  fast recompile            1.00            1..11                    1..11
+  high parallelism          1.00            1..11                    1..11
+  small fleet               1.00            1..11                    1..11
+  tolerant latency          1.00            5..49                     6..49
 ```
 
-The closed form is `D·FLEET·H/C ≤ A·(L − FLEET·H/C)`, and the drain term
-`FLEET·H/C` alone consumes **5.33 of the 7-day budget**. Easing any *one* of
-recompile time, parallelism or fleet size opens the window and yields 108
-feasible configurations. **Easing the latency tolerance alone does not**, because
-C3's floor scales with the same term — which is the non-obvious part, and the
-practical guidance: buy faster recompiles or more parallelism, not more patience.
+At fleet 64 / 8h recompile / 4-way parallelism / 7-day tolerance, the C3∧C4
+window is non-empty only for cascade breadth **≤ 0.31** — and E0.2d's *lowest*
+measured breadth is **0.65**, at the minimum achievable card multiplicity. So the
+window is empty there, but conditionally on breadth. Easing any one hardware
+constraint opens it at any breadth.
 
-**This experiment reported EMPTY twice before this run, and both times it was an
-unswept parameter of mine rather than the design.** First C6 dominated at 100%
-because the decay rate was fixed at 0.25 — a 3-entry support with a 2-of-3
-threshold loses ~16% of items to that rate inherently, whatever the draw does.
-Then the whole sweep was dominated by fixed deployment constants. Publishing
-either would have been a claim about my constants. Both were caught by the same
-question: *why does this constraint never discriminate?*
+**This is what promotes R9.** Four routes out: faster recompiles, more
+parallelism, a smaller fleet, or breadth below ~0.31 — and only the last is not
+a hardware purchase. E0.2d established the design has *no lever* on breadth, so
+joint feasibility turns **provenance-aware admission from a missing mechanism
+into the mechanism that decides whether an operating envelope exists.**
 
-**What it does not establish.** C1 and C6 are measured here; C2, C3, C4 and
-cascade breadth are computed from relationships measured in E1.1c/d, E0.1, E0.2c
-and E0.2d. So this is a composition of prior measurements under stated
-tolerances, not an independent measurement — and the tolerances are choices.
+**Per-constraint attribution is the useful output, and it is humbling:**
 
-*Unexplained:* global use-based decay yields **more** feasible configurations
-(324) than per-region stratified decay (162), the opposite of the weighting
-rule's direction. Probably an interaction between the stratified draw's
-per-region cap and low region counts. It should be understood before the
-weighting rule is applied to the Consolidator.
+```
+  constraint                  eliminates   of sweep   ALONE
+  C4 restoration latency           56700      58.3%   13716
+  C6 over-forgetting               55728      57.3%    8262
+  C3 deletion throughput           24300      25.0%    4572
+  C5 recompile bounded             19440      20.0%    2232
+  C2 probe budget                  19440      20.0%     540
+  C1 tail-safe free rank           10800      11.1%     108
+```
+
+`ALONE` is what fixing that constraint would actually gain. **C1 — the subspace
+budget, the subject of E1.1, E1.1b, E1.1c, E1.1d and E1.2 — is the least binding
+of the six**, eliminating 11% and almost never blocking alone. Most of this
+programme's effort went to the non-binding constraint, which is precisely what
+Part III §0 warns against.
+
+**Three errors corrected here, and one changed the headline.** The union was
+modelled as *linear* in batch and clipped at fleet; adapters are touched
+independently, so it saturates *exponentially* — at β=0.1, batch 10, the linear
+form claimed the whole fleet where the truth is 65%, overstating C3's cost most
+severely in the low-breadth regime where feasibility lives. The window was then
+evaluated at the *saturated* union, pinning breadth at its worst value and
+letting the result be reported as "independent of every other axis" — the
+pessimistic-corner pattern for the third time, after E1.2's disjoint domains and
+E1.1c/d's overlap 0. And the box was too small on two axes, so the earlier "~1%"
+was a statement about where I looked.
+
+*(The earlier anomaly — use-based decay appearing to beat stratified — was an
+artifact of the linear union form. Corrected: stratified 3510 vs use-based 3348,
+the direction the weighting rule predicts.)*
+
+**What this does not establish.** C1 and C6 are measured; C2, C3, C4 and cascade
+breadth are computed from relationships measured elsewhere. This composes prior
+measurements under chosen tolerances — it is not an independent measurement, and
+F3's ordering is only as good as those tolerances.
 
 ---
 
@@ -940,6 +957,7 @@ retires generator risk and settles what Phase 1 left conditional:
 | per-region activation feature spectra from a small MLX model | whether any Rig A spectrum stream resembles a real one — retires B4-class risk |
 | the **spillover differential** — narrow adapter vs broad, paired on one probe set | E3.1b makes this the measurement that decides §B, and much cheaper than a level |
 | observed correlation between checkability and difficulty on real traffic | where E2.1 sits on its own sweep — the number that decides Part III §5 |
+| **recompile wall-clock `H`** — time to compile one adapter at target rank on target hardware | **the cheapest decisive item in the block.** The C3∧C4 window turns on `H = 8h`, which is an assumption, not a measurement. At 30 minutes the window opens with no architectural change — and this gates the only infeasibility currently presented as unconditional. An afternoon's work |
 | E1.5 per-layer cost | Root 1's remaining claim, which needs a model anyway |
 
 **Phase 3 — remaining Rig A claims**, re-run against whatever Phase 2 says the
@@ -978,6 +996,15 @@ ground truth and the mechanism share a definition, both measurements agree and
 both are wrong. A second measurement of `true_influencers − provenance` would
 also have returned zero. Unit tests do not help either, because the code is
 correct; it is the criterion that is empty.
+
+**A constraint that never binds and a constraint that always binds are equally
+uninformative, and both are more likely a pinned parameter than a property.**
+This generalises the manipulation check from a per-*arm* question to a
+per-*constraint* one, and it is now the most productive single question in the
+programme — it found B7, B8, and both of B9's near-publications. The standing
+instrument is the per-constraint attribution table (E5.1 F3): eliminated, and
+eliminated *alone*. A constraint at 100% or 0% is a bug report about the sweep
+until proven otherwise.
 
 **Verify the manipulation took before interpreting a comparison.** The lint below
 checks a criterion's logical *form*. B7 passed that check and still failed: U1
