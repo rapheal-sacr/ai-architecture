@@ -66,12 +66,14 @@
   },
   "injection": {
     "baseline_promotion_rate": 0.0054,
-    "relaxed_promotion_rate": 0.3221,
-    "delta": 0.3166,
     "noise_leeway_sweep": [
       {
         "noise_leeway": 0.0,
         "promotion_rate": 0.0861
+      },
+      {
+        "noise_leeway": 0.01,
+        "promotion_rate": 0.0748
       },
       {
         "noise_leeway": 0.02,
@@ -90,8 +92,37 @@
         "promotion_rate": 0.0
       }
     ],
+    "eps_reg_sweep": [
+      {
+        "eps_reg": 0.005,
+        "promotion_rate": 0.0022
+      },
+      {
+        "eps_reg": 0.01,
+        "promotion_rate": 0.0034
+      },
+      {
+        "eps_reg": 0.02,
+        "promotion_rate": 0.0054
+      },
+      {
+        "eps_reg": 0.05,
+        "promotion_rate": 0.014
+      },
+      {
+        "eps_reg": 0.1,
+        "promotion_rate": 0.0175
+      },
+      {
+        "eps_reg": 0.5,
+        "promotion_rate": 0.0175
+      }
+    ],
+    "reachable_spread_individual": 0.0861,
+    "joint_relaxed_promotion_rate": 0.3221,
     "tier_requirements_changed": false,
-    "S2_thresholds_inert": false
+    "bounds_on_values_in_rule": false,
+    "S2_values_bounded": false
   },
   "verdict": "FAIL"
 }

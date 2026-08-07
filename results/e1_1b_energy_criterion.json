@@ -1,0 +1,341 @@
+{
+  "seed": 20260806,
+  "dim": 128,
+  "rank_request": 8,
+  "rows": [
+    {
+      "stream": "bimodal (shape the design assumes)",
+      "curve": [
+        {
+          "retention": 0.9,
+          "committed_rank": 22,
+          "free_rank": 106,
+          "leak_calib": 0.0838,
+          "leak_test": 0.0888,
+          "interference": 0.1009,
+          "usable": true,
+          "safe": false
+        },
+        {
+          "retention": 0.95,
+          "committed_rank": 23,
+          "free_rank": 105,
+          "leak_calib": 0.0434,
+          "leak_test": 0.0428,
+          "interference": 0.0581,
+          "usable": true,
+          "safe": false
+        },
+        {
+          "retention": 0.99,
+          "committed_rank": 24,
+          "free_rank": 104,
+          "leak_calib": 0.0019,
+          "leak_test": 0.0019,
+          "interference": 0.0049,
+          "usable": true,
+          "safe": true
+        },
+        {
+          "retention": 0.999,
+          "committed_rank": 70,
+          "free_rank": 58,
+          "leak_calib": 0.0011,
+          "leak_test": 0.0011,
+          "interference": 0.0049,
+          "usable": true,
+          "safe": true
+        }
+      ],
+      "workable_retentions": [
+        0.99,
+        0.999
+      ],
+      "leak_blowup_at_95": 0.99,
+      "G1_budget_workable": true,
+      "G2_estimate_generalises": true,
+      "verdict": "PASS"
+    },
+    {
+      "stream": "exponential (soft knee)",
+      "curve": [
+        {
+          "retention": 0.9,
+          "committed_rank": 20,
+          "free_rank": 108,
+          "leak_calib": 0.1033,
+          "leak_test": 0.1013,
+          "interference": 0.088,
+          "usable": true,
+          "safe": false
+        },
+        {
+          "retention": 0.95,
+          "committed_rank": 26,
+          "free_rank": 102,
+          "leak_calib": 0.0508,
+          "leak_test": 0.0501,
+          "interference": 0.0634,
+          "usable": true,
+          "safe": false
+        },
+        {
+          "retention": 0.99,
+          "committed_rank": 39,
+          "free_rank": 89,
+          "leak_calib": 0.0107,
+          "leak_test": 0.0108,
+          "interference": 0.03,
+          "usable": true,
+          "safe": true
+        },
+        {
+          "retention": 0.999,
+          "committed_rank": 58,
+          "free_rank": 70,
+          "leak_calib": 0.0011,
+          "leak_test": 0.0011,
+          "interference": 0.0093,
+          "usable": true,
+          "safe": true
+        }
+      ],
+      "workable_retentions": [
+        0.99,
+        0.999
+      ],
+      "leak_blowup_at_95": 0.99,
+      "G1_budget_workable": true,
+      "G2_estimate_generalises": true,
+      "verdict": "PASS"
+    },
+    {
+      "stream": "power law alpha=1.0",
+      "curve": [
+        {
+          "retention": 0.9,
+          "committed_rank": 77,
+          "free_rank": 51,
+          "leak_calib": 0.1057,
+          "leak_test": 0.1052,
+          "interference": 0.054,
+          "usable": true,
+          "safe": false
+        },
+        {
+          "retention": 0.95,
+          "committed_rank": 100,
+          "free_rank": 28,
+          "leak_calib": 0.0522,
+          "leak_test": 0.0518,
+          "interference": 0.048,
+          "usable": true,
+          "safe": true
+        },
+        {
+          "retention": 0.99,
+          "committed_rank": 122,
+          "free_rank": 6,
+          "leak_calib": 0.0105,
+          "leak_test": 0.0107,
+          "interference": 0.0456,
+          "usable": false,
+          "safe": true
+        },
+        {
+          "retention": 0.999,
+          "committed_rank": 128,
+          "free_rank": 0,
+          "leak_calib": 0.0,
+          "leak_test": 0.0,
+          "interference": 0.0,
+          "usable": false,
+          "safe": true
+        }
+      ],
+      "workable_retentions": [
+        0.95
+      ],
+      "leak_blowup_at_95": 0.99,
+      "G1_budget_workable": true,
+      "G2_estimate_generalises": true,
+      "verdict": "PASS"
+    },
+    {
+      "stream": "domain mixture (realistic WAM traffic)",
+      "curve": [
+        {
+          "retention": 0.9,
+          "committed_rank": 46,
+          "free_rank": 82,
+          "leak_calib": 0.1157,
+          "leak_test": 0.1255,
+          "interference": 0.0724,
+          "usable": true,
+          "safe": false
+        },
+        {
+          "retention": 0.95,
+          "committed_rank": 61,
+          "free_rank": 67,
+          "leak_calib": 0.0562,
+          "leak_test": 0.0595,
+          "interference": 0.0494,
+          "usable": true,
+          "safe": true
+        },
+        {
+          "retention": 0.99,
+          "committed_rank": 87,
+          "free_rank": 41,
+          "leak_calib": 0.0112,
+          "leak_test": 0.0113,
+          "interference": 0.0237,
+          "usable": true,
+          "safe": true
+        },
+        {
+          "retention": 0.999,
+          "committed_rank": 106,
+          "free_rank": 22,
+          "leak_calib": 0.0011,
+          "leak_test": 0.0012,
+          "interference": 0.0092,
+          "usable": true,
+          "safe": true
+        }
+      ],
+      "workable_retentions": [
+        0.95,
+        0.99,
+        0.999
+      ],
+      "leak_blowup_at_95": 1.06,
+      "G1_budget_workable": true,
+      "G2_estimate_generalises": true,
+      "verdict": "PASS"
+    }
+  ],
+  "capacity_sweep": [
+    {
+      "dim": 128,
+      "n_domains": 4,
+      "traffic_rank": 40,
+      "fill_ratio": 0.312,
+      "best_safe_free_rank": 92,
+      "workable": true
+    },
+    {
+      "dim": 128,
+      "n_domains": 8,
+      "traffic_rank": 80,
+      "fill_ratio": 0.625,
+      "best_safe_free_rank": 62,
+      "workable": true
+    },
+    {
+      "dim": 128,
+      "n_domains": 16,
+      "traffic_rank": 160,
+      "fill_ratio": 1.25,
+      "best_safe_free_rank": 56,
+      "workable": true
+    },
+    {
+      "dim": 128,
+      "n_domains": 32,
+      "traffic_rank": 320,
+      "fill_ratio": 2.5,
+      "best_safe_free_rank": 38,
+      "workable": true
+    },
+    {
+      "dim": 128,
+      "n_domains": 64,
+      "traffic_rank": 640,
+      "fill_ratio": 5.0,
+      "best_safe_free_rank": 0,
+      "workable": false
+    },
+    {
+      "dim": 256,
+      "n_domains": 4,
+      "traffic_rank": 40,
+      "fill_ratio": 0.156,
+      "best_safe_free_rank": 218,
+      "workable": true
+    },
+    {
+      "dim": 256,
+      "n_domains": 8,
+      "traffic_rank": 80,
+      "fill_ratio": 0.312,
+      "best_safe_free_rank": 183,
+      "workable": true
+    },
+    {
+      "dim": 256,
+      "n_domains": 16,
+      "traffic_rank": 160,
+      "fill_ratio": 0.625,
+      "best_safe_free_rank": 164,
+      "workable": true
+    },
+    {
+      "dim": 256,
+      "n_domains": 32,
+      "traffic_rank": 320,
+      "fill_ratio": 1.25,
+      "best_safe_free_rank": 117,
+      "workable": true
+    },
+    {
+      "dim": 256,
+      "n_domains": 64,
+      "traffic_rank": 640,
+      "fill_ratio": 2.5,
+      "best_safe_free_rank": 76,
+      "workable": true
+    },
+    {
+      "dim": 512,
+      "n_domains": 4,
+      "traffic_rank": 40,
+      "fill_ratio": 0.078,
+      "best_safe_free_rank": 474,
+      "workable": true
+    },
+    {
+      "dim": 512,
+      "n_domains": 8,
+      "traffic_rank": 80,
+      "fill_ratio": 0.156,
+      "best_safe_free_rank": 437,
+      "workable": true
+    },
+    {
+      "dim": 512,
+      "n_domains": 16,
+      "traffic_rank": 160,
+      "fill_ratio": 0.312,
+      "best_safe_free_rank": 370,
+      "workable": true
+    },
+    {
+      "dim": 512,
+      "n_domains": 32,
+      "traffic_rank": 320,
+      "fill_ratio": 0.625,
+      "best_safe_free_rank": 330,
+      "workable": true
+    },
+    {
+      "dim": 512,
+      "n_domains": 64,
+      "traffic_rank": 640,
+      "fill_ratio": 1.25,
+      "best_safe_free_rank": 228,
+      "workable": true
+    }
+  ]
+}

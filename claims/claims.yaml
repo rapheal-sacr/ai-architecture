@@ -44,18 +44,49 @@ claims:
       entry -> card -> card-conditioned rollouts -> adapter. Unless provenance
       takes the transitive closure through those rollouts, parametric carryover
       survives the cascade and unlearning is approximate after all.
-    status: FAIL
+    status: PARTIAL
     result: results/e0_2_transitive_unlearning.json
     finding: >
-      Confirmed. Under `direct` provenance - the literal reading of "the ledger
-      entry IDs it was compiled from", where compilation sees rollouts rather
-      than cards - all 6 adapters carry incomplete provenance, 186 genuine
-      influence relationships go unrecorded, and 95.9% of them survive
-      deletion. The cascade fires on 0.13 adapters per tombstone instead of
-      3.23: it almost never fires at all. Recording provenance as the
-      transitive closure through the conditioning card fixes it completely
-      (0 leaks, complete provenance). This is a recording-policy bug, not a
-      mechanism failure - the cascade works, it is just given the wrong set.
+      Under `direct` provenance - the literal reading of "the ledger entry IDs
+      it was compiled from", where compilation sees rollouts rather than cards -
+      recorded provenance omits influence paths that exist, and the cascade
+      fires on 0.13 adapters per tombstone rather than 3.23. That a gap exists
+      is established by argument, not by this run.
+    retracted: >
+      The reported transitive-arm result - "0 leaks, complete provenance, fixes
+      it completely" - is WITHDRAWN as tautological. record_provenance(policy=
+      "transitive") and true_influencers execute the same loop body, so U2 is
+      X - X = the empty set for every world, seed and parameterisation. The arm
+      could not have returned any other answer. What was demonstrated is that a
+      two-hop influence model is closed under two-hop closure.
+    also_invalid: >
+      The 95.9% figure for `direct` is the difference between two code paths and
+      its magnitude is set by how often this world's rollouts happen to cite
+      card sources directly. It is a knob, not a measurement of the design.
+    deeper_problems:
+      - >
+        true_influencers enumerates exactly two hop types, so any third path is
+        invisible to the GROUND TRUTH as well as to both arms. Real third paths
+        in the design: entry -> gap statistics -> challenger task distribution
+        -> which rollouts exist; and entry -> retrieval ranking -> which card
+        surfaced -> rollouts.
+      - >
+        Set membership is the wrong shape for parametric carryover. If a
+        tombstoned entry shaped a card, the card would have been different, so
+        EVERY rollout conditioned on it would have been different - not only the
+        rollouts citing that entry.
+    rebuild_required: >
+      Ground truth must be computed functionally - perturb an entry, propagate
+      through the world, observe which adapter weights move - so it is
+      structurally independent of any provenance bookkeeping. Add at least one
+      influence path neither policy captures.
+    real_finding_owed: >
+      The number nobody has priced: transitive cascade invalidates ~54% of
+      adapters per tombstone, and adapters are hours-to-days per the design's own
+      substrate table. That implies a tombstone-rate ceiling above which
+      unlearning-by-construction is unaffordable. That ceiling decides whether
+      L7's strongest claim is operationally real, and E0.2 should have produced
+      it.
     measurement_note: >
       The first version tested whether weights *changed* under substitution of
       the deleted value and reported zero leakage despite 186 missing paths.
@@ -92,15 +123,52 @@ claims:
     rig: A
     kill: "no decade-wide elasticity plateau (K1); or held-out leakage > 5% / free-write interference > 5% (K2)"
     predicted: FAIL
-    status: FAIL
+    status: PARTIAL
     result: results/e1_1_spectrum_knee.json
+    scope: >
+      This tests only the LITERAL formulation, #{sigma_k > eps}, with eps placed
+      at the curvature knee. It is not a verdict on the subspace budget as a
+      mechanism - see E1.1b, which tests the stronger reading and reverses the
+      conclusion.
     finding: >
-      Fails on 3 of 4 streams. Power-law: no plateau, 29x rank swing, 75%
-      leakage. Realistic domain mixture: budget well posed but empty - 6 free
-      directions of 128, so allocation deadlocks into permanent reclamation.
-      Even the design's own assumed bimodal shape fails, and the failure is
-      quantised in units of one committed direction (4.2% of energy each) -
-      the auto-placed eps missed by two. No safety margin at the cut.
+      Fails on 2 of 4 streams. Power law: no interior plateau, 29x rank swing
+      across two decades of eps, 75% leakage. Bimodal - the design's own assumed
+      shape - also fails, and instructively: leakage is quantised in units of
+      one committed direction (4.2% of energy each) because eps is a hard cut,
+      and the automatic knee-finder missed by two. Placing eps correctly
+      requires already knowing the rank eps is being used to compute.
+    retracted: >
+      The originally reported third failure - "realistic domain mixture leaves
+      6 free directions of 128, so allocation deadlocks into permanent
+      reclamation" - is WITHDRAWN. It was an artifact of stream_domain_mixture
+      re-drawing its domain subspaces on every call, so train and held-out sets
+      came from unrelated subspaces. With the generator fixed the domain mixture
+      PASSES with 68 free directions and zero leakage. See bugs.B4.
+
+  - id: E1.1b
+    tier: L7
+    claim: "the subspace budget works under the energy/GPM criterion (top-r by cumulative energy)"
+    source: "Part II section A's own pointer to GPM: 'truncated SVD over a small activation buffer - what GPM actually does'"
+    rig: A
+    kill: "G1 no retention level yields free rank >= 8 at interference <= 5% on held-out traffic; G2 test leakage > 2x calibration leakage"
+    predicted: uncertain
+    status: PASS
+    result: results/e1_1b_energy_criterion.json
+    finding: >
+      All four streams pass, including power law (workable at rho=0.95, 28 free
+      directions, interference 0.048) and the realistic domain mixture (workable
+      at 0.95/0.99/0.999, 67/41/22 free directions). G2 passes everywhere -
+      leakage blowup from calibration to test is ~1.0x, so the spectrum estimate
+      generalises off its own sample. Capacity sweep across dim in {128,256,512}
+      and 4-64 domains: the budget only goes empty at a fill ratio of 5.0, i.e.
+      5x over-subscription. At every realistic ratio there is ample free rank.
+    consequence: >
+      E1.1's failure does NOT survive the strongest faithful reading. The
+      subspace budget is sound; Part II section A states it in a form
+      (thresholding eigenvalues) that is ill-posed, while pointing at a form
+      (cumulative energy) that is not. This demotes E1.1 from an architectural
+      failure to a specification defect, and makes R1 a demonstrated fix rather
+      than a sketch.
 
   - id: E1.2
     tier: L7
@@ -171,7 +239,30 @@ claims:
       supplements the domains that already have verifiers and does nothing for
       the T3 domains that need them - meaning it does not attack the binding
       constraint at all.
-    status: untested
+    status: FAIL
+    result: results/e2_1_tier_laundering.json
+    finding: >
+      H1 fails: under the policy as written, with no tier filter, 29-63% of the
+      harvested "T2" suite is T3-adjudicated judge opinion, rising with the
+      correlation between checkability and easiness. Cheap to fix with an
+      explicit tier filter, but the policy as stated does not have one.
+      H3 fails at high correlation: mean per-domain difficulty bias reaches
+      0.095 at correlation 0.75 and 0.176 at 1.0, so the harvested suite tests
+      each domain's easy corner while reporting coverage of the domain.
+    prediction_wrong: >
+      H2 PASSES, contradicting this plan's own pre-registered follow-up. A
+      strict T0/T1 filter yields 33-68% of traffic and covers 94-97% of traffic
+      mass - not the small fraction predicted. So the claim that "harvesting
+      supplements only domains that already have verifiers and does nothing for
+      the T3 domains" is NOT supported. Harvesting is viable as a suite source;
+      its problem is representativeness, not yield.
+    key_caveat: >
+      The correlation between checkability and easiness is SWEPT, not measured,
+      and the per-domain checkability profile is an assumption stated in the
+      source. What this establishes is the shape of the damage as a function of
+      that correlation, and which regime harvesting requires. Locating real
+      traffic on that curve is Rig B work and is the thing that decides whether
+      Part III section 5's optimism is warranted.
 
   - id: E2.2
     tier: Assay
@@ -301,10 +392,16 @@ claims:
       Both halves fail. Static reachability: all four Assay tiers reach
       L9-editable code - T0 through dispatch and tool_schemas, T1/T2/T3 through
       retrieval_policy. A verifier L9 may not edit still runs on code it may.
-      Injection: moving only permitted thresholds (eps, noise_leeway, eps_reg)
-      takes the promotion rate from 0.005 to 0.322, a 64x increase, with zero
-      tier requirements changed - so the rule reports full compliance
-      throughout. noise_leeway alone spans 0.086 to 0.000.
+      Injection, restated structurally: the rule enumerates WHICH thresholds
+      L9 may edit and places no bound on their VALUES, so the reachable set is
+      unbounded and the rule reports compliance across all of it. Any single
+      threshold moves the promotion rate by up to 0.086; all three relaxed
+      together reach 0.322 against a 0.005 baseline, because the gate is a
+      conjunction and the constraints compound. Quoting the 64x endpoint alone
+      was the weaker framing - it invites the reply that no reasonable operator
+      would set eps_reg to 0.50, which concedes the point, since the rule does
+      not require an operator to be reasonable and an L9 archive optimising for
+      promotion count is not one.
     deliverable_result: >
       Sealing the whole dependency closure over-seals: it would freeze
       l1_entries, l2_pages, l3_views and l7_adapters, which the system exists
@@ -398,18 +495,65 @@ claims:
     predicted_reason: "the label is asserted to be causally attributed to one memory decision; downstream retrieval changes would break that"
     status: untested
 
+# -- rig bugs found so far, all of which changed a reported result ---------
+#
+# Kept in the ledger rather than only in git history, because the rate and the
+# kind matter: every one of these produced a confident number first.
+bugs:
+  - id: B1
+    where: e1_1_spectrum_knee.widest_plateau
+    bug: "counted saturation regions (rank pinned at 1 or dim) as elasticity plateaus"
+    effect: "credited a power-law spectrum with a 3.82-decade plateau it does not have"
+
+  - id: B2
+    where: world.Region.practice
+    bug: "competence advanced once per cycle regardless of tasks allocated"
+    effect: "a region starved to one task learned as fast as one given a hundred, hiding the entire cost of misallocated budget"
+
+  - id: B3
+    where: ledger.residual_influence
+    bug: "measured whether weights CHANGED under substitution of the deleted value"
+    effect: >
+      reported zero leakage for a policy with 186 missing influence paths.
+      Cached weights are constants - stale, not sensitive. Produced a confident
+      PASS on the claim this plan most expected to fail, and was caught only
+      because U1 and U2 contradicted each other.
+
+  - id: B4
+    where: spectrum.stream_domain_mixture
+    bug: "re-drew qr(normal(...)) domain subspaces on every call"
+    effect: >
+      train and held-out sets came from unrelated subspaces, so 99% of train
+      energy needed 37 directions while the same fraction of test energy needed
+      127 of 128. This manufactured the headline "realistic traffic saturates
+      the space, leaving 6 free directions" finding, which was reported and has
+      now been withdrawn. The most consequential bug so far, and the only one
+      that biased a result AGAINST the design.
+    caught_by: >
+      A capacity sweep added to check whether the result was an artifact of the
+      chosen dimension. It was. Nothing in the original experiment would have
+      surfaced it.
+
 # -- repairs proposed by experiments, not yet adopted ----------------------
 repairs:
   - id: R1
-    from: E1.1
+    from: E1.1, E1.1b
     proposal: >
-      Replace counted free rank with a measured energy criterion: allocate a
-      candidate basis, measure the perturbation on held-out traffic, reject
-      above tolerance. Turns "count directions below eps" into a T1
-      counterfactual the design already has, and composes with the promotion
-      gate instead of sitting beside it.
-    cost: "one eval per allocation instead of a threshold comparison"
-    status: proposed
+      Restate the subspace budget in Part II section A using the energy
+      criterion the design already points at - keep the top-r directions
+      holding a chosen fraction rho of held-out feature energy - instead of
+      thresholding eigenvalues at eps. Pick r on a calibration sample and
+      measure on a fresh one.
+    evidence: >
+      DEMONSTRATED, not sketched. E1.1b: all four streams workable, including
+      power law and the realistic domain mixture, with the free-rank budget
+      only emptying at 5x over-subscription.
+    status: demonstrated
+    note: >
+      This supersedes the original R1, which proposed a measured-perturbation
+      allocation rule as a speculative replacement. That is still worth having
+      as a belt-and-braces check at allocation time, but it is no longer needed
+      to rescue the mechanism.
 
   - id: R2
     from: E1.4

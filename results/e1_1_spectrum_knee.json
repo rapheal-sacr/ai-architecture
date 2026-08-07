@@ -63,13 +63,13 @@
       "rank_at_eps_div10": 128,
       "rank_at_eps_x10": 120,
       "rank_swing_per_2_decades": 1.07,
-      "r95_committed": 122,
-      "free_rank_at_95pct": 6,
-      "heldout_leakage": 0.0595,
-      "free_write_interference": 0.1049,
+      "r95_committed": 60,
+      "free_rank_at_95pct": 68,
+      "heldout_leakage": 0.0,
+      "free_write_interference": 0.0,
       "K1_threshold_stable": true,
-      "K2_free_means_free": false,
-      "verdict": "FAIL"
+      "K2_free_means_free": true,
+      "verdict": "PASS"
     }
   ]
 }

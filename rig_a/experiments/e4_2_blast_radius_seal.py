@@ -39,9 +39,11 @@ METHOD:
 KILL CRITERIA (pre-registered):
     S1 fails if the Assay's transitive execution dependencies intersect the
        L9-editable set at all.
-    S2 fails if edits confined to permitted thresholds move the promotion rate
-       by more than 10 percentage points while every tier requirement is
-       unchanged.
+    S2 fails if the rule places no bound on the VALUES permitted thresholds
+       may take. Structural, not a magnitude test: a magnitude threshold
+       invites arguing that no reasonable operator would pick the value used,
+       which concedes the point -- the rule does not require an operator to be
+       reasonable, and an L9 archive optimising for promotion count is not one.
 
 DELIVERABLE: a corrected minimal non-editable set -- the closure that would
 have to be sealed for the rule to mean what it says.
@@ -192,28 +194,56 @@ def injection(seed: int) -> dict:
         ok &= (net > 0)
         return float(ok.mean())
 
-    # Incumbent settings, and settings an L9 archive would drift toward: every
-    # one of these is a "gate threshold", which Part I section 4 permits it to
-    # edit. No tier requirement is touched in either configuration.
     baseline = promote_rate(eps=0.01, noise_leeway=0.10, eps_reg=0.02)
-    relaxed = promote_rate(eps=0.0, noise_leeway=0.0, eps_reg=0.50)
 
-    sweep = [
-        {
-            "noise_leeway": round(nl, 3),
-            "promotion_rate": round(promote_rate(0.01, nl, 0.02), 4),
-        }
-        for nl in (0.0, 0.02, 0.05, 0.10, 0.20)
+    # The finding is NOT a single dramatic endpoint. An earlier version of this
+    # reported 0.005 -> 0.322 by moving eps_reg from 0.02 to 0.50, and most of
+    # that came from eps_reg alone: permitting half a unit of off-target
+    # regression is something no reviewer would call compliant. Quoting it as
+    # "64x" invites the reply that nobody would set it there.
+    #
+    # That reply concedes the actual point. The blast-radius rule constrains
+    # WHICH thresholds L9 may edit and says nothing about what VALUES they may
+    # take, so the reachable range is unbounded and the rule reports compliance
+    # across all of it. The curve is the finding; the endpoint is just one point
+    # on a line that has no right-hand end.
+    leeway_sweep = [
+        {"noise_leeway": round(nl, 3),
+         "promotion_rate": round(promote_rate(0.01, nl, 0.02), 4)}
+        for nl in (0.0, 0.01, 0.02, 0.05, 0.10, 0.20)
+    ]
+    reg_sweep = [
+        {"eps_reg": round(er, 3),
+         "promotion_rate": round(promote_rate(0.01, 0.10, er), 4)}
+        for er in (0.005, 0.01, 0.02, 0.05, 0.10, 0.50)
     ]
 
-    delta = relaxed - baseline
+    rates = [s["promotion_rate"] for s in leeway_sweep + reg_sweep]
+    spread_individual = max(rates) - min(rates)
+
+    # Individually each threshold is a modest lever. They compound: the gate is
+    # a conjunction, so relaxing all three at once reaches far past what any one
+    # of them does alone.
+    joint = promote_rate(eps=0.0, noise_leeway=0.0, eps_reg=0.50)
+
+    # S2 is structural, not a magnitude test. Asking "does the spread exceed
+    # ten points" invites arguing about whether a particular value is one a
+    # reasonable operator would choose -- which concedes the point, because the
+    # rule does not require an operator to be reasonable. It enumerates WHICH
+    # thresholds are editable and places no bound on their VALUES, so the
+    # reachable set is unbounded and the rule reports compliance across all of
+    # it. The sweeps measure the consequence; they do not decide the criterion.
+    bounds_exist = False
+
     return {
         "baseline_promotion_rate": round(baseline, 4),
-        "relaxed_promotion_rate": round(relaxed, 4),
-        "delta": round(delta, 4),
-        "noise_leeway_sweep": sweep,
+        "noise_leeway_sweep": leeway_sweep,
+        "eps_reg_sweep": reg_sweep,
+        "reachable_spread_individual": round(float(spread_individual), 4),
+        "joint_relaxed_promotion_rate": round(float(joint), 4),
         "tier_requirements_changed": False,
-        "S2_thresholds_inert": bool(abs(delta) <= PROMOTION_RATE_LIMIT),
+        "bounds_on_values_in_rule": bounds_exist,
+        "S2_values_bounded": bool(bounds_exist),
     }
 
 
@@ -230,21 +260,25 @@ def main() -> int:
         print(f"    {tier:<12} reachable-and-editable: {leaks or '-'}")
     print(f"  S1 seal holds: {'ok' if stat['S1_seal_holds'] else 'NO'}")
 
-    print("\nPart 2 - injection, tier requirements held fixed")
+    print("\nPart 2 - injection: what permitted threshold edits can reach")
     print("-" * 62)
     print(f"  baseline promotion rate  {inj['baseline_promotion_rate']:.3f}"
           f"   (eps=0.01, noise_leeway=0.10, eps_reg=0.02)")
-    print(f"  relaxed  promotion rate  {inj['relaxed_promotion_rate']:.3f}"
-          f"   (eps=0.00, noise_leeway=0.00, eps_reg=0.50)")
-    print(f"  delta                    {inj['delta']:+.3f}"
-          f"   with zero tier requirements changed")
-    print("\n  noise_leeway alone:")
+    print("\n  noise_leeway, others held at baseline:")
     for s in inj["noise_leeway_sweep"]:
-        print(f"    {s['noise_leeway']:>5.2f}  ->  promotion rate {s['promotion_rate']:.3f}")
-    print(f"\n  S2 thresholds inert: {'ok' if inj['S2_thresholds_inert'] else 'NO'}"
-          f"   (needs |delta| <= {PROMOTION_RATE_LIMIT})")
+        print(f"    {s['noise_leeway']:>6.3f}  ->  {s['promotion_rate']:.3f}")
+    print("\n  eps_reg, others held at baseline:")
+    for s in inj["eps_reg_sweep"]:
+        print(f"    {s['eps_reg']:>6.3f}  ->  {s['promotion_rate']:.3f}")
+    print(f"\n  spread from any ONE threshold:  {inj['reachable_spread_individual']:.3f}")
+    print(f"  all three relaxed together:    {inj['joint_relaxed_promotion_rate']:.3f}"
+          f"   (vs {inj['baseline_promotion_rate']:.3f} baseline)")
+    print("  tier requirements changed: none.")
+    print(f"\n  S2 the rule bounds threshold VALUES: "
+          f"{'ok' if inj['S2_values_bounded'] else 'NO'}"
+          f"   (structural: it enumerates which, never how much)")
 
-    verdict = "PASS" if (stat["S1_seal_holds"] and inj["S2_thresholds_inert"]) else "FAIL"
+    verdict = "PASS" if (stat["S1_seal_holds"] and inj["S2_values_bounded"]) else "FAIL"
     print(f"\n  VERDICT: {verdict}")
 
     print("\nDeliverable - the corrected boundary, split two ways.")

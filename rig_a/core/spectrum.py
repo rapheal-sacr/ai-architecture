@@ -111,33 +111,52 @@ def stream_exponential(
     return rng.normal(size=(n, dim)) * scale
 
 
-def stream_domain_mixture(
-    n: int,
-    dim: int,
-    n_domains: int,
-    domain_rank: int,
-    alpha: float,
-    rng: np.random.Generator,
-) -> tuple[np.ndarray, np.ndarray]:
+class DomainMixture:
     """The realistic case, and the one WAM actually runs on.
 
     Traffic is a mixture of domain signatures. Each domain occupies its own
     random low-rank subspace with power-law structure *within* the subspace,
     and domains are visited at unequal rates -- which is what real traffic
-    looks like. Returns (features, domain_label_per_row).
-    """
-    bases = [np.linalg.qr(rng.normal(size=(dim, domain_rank)))[0] for _ in range(n_domains)]
-    within = np.arange(1, domain_rank + 1, dtype=float) ** (-alpha / 2.0)
-    # Zipfian visit rates: a few domains dominate the traffic.
-    rates = 1.0 / np.arange(1, n_domains + 1, dtype=float)
-    rates /= rates.sum()
+    looks like.
 
-    labels = rng.choice(n_domains, size=n, p=rates)
-    feats = np.empty((n, dim))
-    for i, d in enumerate(labels):
-        coeffs = rng.normal(size=domain_rank) * within
-        feats[i] = bases[d] @ coeffs
-    return feats, labels
+    The domain subspaces are drawn ONCE, at construction, and every `sample`
+    call draws from the same world. This is not incidental. An earlier version
+    was a bare function that re-drew `qr(normal(...))` on every call, so a
+    train set and a "held-out" set came from unrelated subspaces -- and every
+    measurement taken across them was measuring generalisation to a different
+    world rather than to held-out traffic. It reported that 99% of train energy
+    needed 37 directions while the same fraction of test energy needed 127 of
+    128, which then read as "realistic traffic saturates the space." That
+    conclusion was an artifact of the generator.
+    """
+
+    def __init__(
+        self,
+        dim: int,
+        n_domains: int,
+        domain_rank: int,
+        alpha: float,
+        rng: np.random.Generator,
+    ) -> None:
+        self.dim = dim
+        self.n_domains = n_domains
+        self.domain_rank = domain_rank
+        self.bases = [
+            np.linalg.qr(rng.normal(size=(dim, domain_rank)))[0] for _ in range(n_domains)
+        ]
+        self.within = np.arange(1, domain_rank + 1, dtype=float) ** (-alpha / 2.0)
+        # Zipfian visit rates: a few domains dominate the traffic.
+        rates = 1.0 / np.arange(1, n_domains + 1, dtype=float)
+        self.rates = rates / rates.sum()
+
+    def sample(self, n: int, rng: np.random.Generator) -> tuple[np.ndarray, np.ndarray]:
+        """Draw n observations from this world. Returns (features, domain labels)."""
+        labels = rng.choice(self.n_domains, size=n, p=self.rates)
+        feats = np.empty((n, self.dim))
+        for i, d in enumerate(labels):
+            coeffs = rng.normal(size=self.domain_rank) * self.within
+            feats[i] = self.bases[d] @ coeffs
+        return feats, labels
 
 
 # -- diagnostics -----------------------------------------------------------
@@ -202,6 +221,54 @@ def interference_from_free_write(
     normalisation the result would just track the arbitrary scale of the write.
     """
     U_free = est.free_basis(eps)
+    if U_free.shape[1] == 0:
+        return 0.0
+    r = min(rank_request, U_free.shape[1])
+    basis = U_free[:, :r]
+    delta_W = basis @ rng.normal(size=(r, readout.shape[1]))
+    delta_W *= write_norm * np.linalg.norm(readout) / np.linalg.norm(delta_W)
+
+    base = queries @ readout
+    perturbed = queries @ (readout + delta_W)
+    num = np.linalg.norm(perturbed - base, axis=1)
+    den = np.linalg.norm(base, axis=1)
+    return float(np.mean(num / np.maximum(den, 1e-30)))
+
+
+def free_basis_by_rank(est: RtEstimator, committed_rank: int) -> np.ndarray:
+    """Free basis under the energy/GPM criterion: everything below the top-r directions."""
+    _, U = est.eig()
+    return U[:, committed_rank:]
+
+
+def leakage_by_rank(est: RtEstimator, committed_rank: int, queries: np.ndarray) -> float:
+    """Fraction of `queries` energy outside the top-`committed_rank` directions.
+
+    Measured on a set the rank was NOT chosen from, this is a real test. Measured
+    on the set the rank was chosen from it is circular: picking r to capture 95%
+    of a set's energy guarantees 5% leakage on that same set. The gap between the
+    two is whether the spectrum estimate generalises.
+    """
+    U_free = free_basis_by_rank(est, committed_rank)
+    if U_free.shape[1] == 0:
+        return 0.0
+    proj = queries @ U_free
+    num = np.sum(proj**2, axis=1)
+    den = np.sum(queries**2, axis=1)
+    return float(np.mean(num / np.maximum(den, 1e-30)))
+
+
+def interference_by_rank(
+    est: RtEstimator,
+    committed_rank: int,
+    queries: np.ndarray,
+    readout: np.ndarray,
+    rank_request: int,
+    rng: np.random.Generator,
+    write_norm: float = 0.10,
+) -> float:
+    """Output perturbation from an adapter written into the energy-criterion free basis."""
+    U_free = free_basis_by_rank(est, committed_rank)
     if U_free.shape[1] == 0:
         return 0.0
     r = min(rank_request, U_free.shape[1])

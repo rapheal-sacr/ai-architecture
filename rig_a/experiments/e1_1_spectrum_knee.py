@@ -52,7 +52,7 @@ from rig_a.core.spectrum import (  # noqa: E402
     rank_elasticity,
     rank_for_energy,
     stream_bimodal,
-    stream_domain_mixture,
+    DomainMixture,
     stream_exponential,
     stream_power_law,
 )
@@ -163,8 +163,9 @@ def main() -> int:
     h = stream_power_law(N_HELDOUT, DIM, alpha=1.0, rng=rng)
     rows.append(evaluate("power law alpha=1.0", f, h, rng))
 
-    f, _ = stream_domain_mixture(N_OBS, DIM, n_domains=12, domain_rank=10, alpha=1.0, rng=rng)
-    h, _ = stream_domain_mixture(N_HELDOUT, DIM, n_domains=12, domain_rank=10, alpha=1.0, rng=rng)
+    world = DomainMixture(DIM, n_domains=12, domain_rank=10, alpha=1.0, rng=rng)
+    f, _ = world.sample(N_OBS, rng)
+    h, _ = world.sample(N_HELDOUT, rng)   # same world, genuinely held out
     rows.append(evaluate("domain mixture (realistic WAM traffic)", f, h, rng))
 
     hdr = (
