@@ -51,7 +51,9 @@ structural work first, which is the right order anyway.
 | E0.2b | *rebuild:* functional ground truth + a third influence path | **FAIL** on both criteria |
 | E4.2 | the blast-radius fixed point seals the Assay | **FAIL** |
 | E3.3 | max off-diagonal mass is a partition objective | **FAIL** |
-| E0.2c | *does the ceiling hold under better policies?* | **PASS** — it does not; E0.2b demoted |
+| E0.2c | *does the ceiling hold under better policies?* | **PASS** — it does not; E0.2b demoted. Its D3 superseded |
+| E0.2d | is admission control a lever on cascade breadth? | **FAIL** — inverts E0.2c's D3. A **missing control surface** |
+| E3.1 | net-transfer ranking accumulates abstractions | **PARTIAL** — T1–T3 pass, T4 fails |
 | E2.1 | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 criteria |
 
 **Two published conclusions have been withdrawn.** Both are recorded in
@@ -562,6 +564,20 @@ both are wrong. A second measurement of `true_influencers − provenance` would
 also have returned zero. Unit tests do not help either, because the code is
 correct; it is the criterion that is empty.
 
+**Every mutation and every criterion must have a postcondition that some
+possible input would violate.** Three failures in this programme are the same
+defect — *an operation that cannot report failure*:
+
+| Where | The operation | Why it could not fail |
+|---|---|---|
+| kill criterion | `true_influencers − provenance` | both sides were the same loop body, so the difference was `∅` for every world |
+| code | E1.1b's `safe` flag *(as first drafted)* | leakage on the calibration sample is `1−ρ` by construction |
+| tooling | `str.replace` patching `claims.yaml` | fails open — a missing anchor silently does nothing |
+
+Hit in a criterion, in code, and in tooling, which is decent evidence it is the
+general one. The lint is uniform: for every mutation, assert it changed
+something; for every criterion, name the input that would flip it.
+
 **Treat a perfect in-rig score as a warning.** Three repairs currently score
 perfectly — 0 leaks, exact recovery, 1.0× fair share. In a simulator whose
 ground truth is authored alongside the hypothesis, a perfect score is more often
@@ -673,6 +689,34 @@ removes 29–63% of a harvested suite that is laundered judge opinion. The
 cheapest repair on the list. It does not address the representativeness problem,
 which is the part with no repair yet.
 
+### What the results say collectively — and what the record cannot support
+
+**The "every failure is a specification defect" line was selection, not
+evidence, and it is withdrawn.** The first eight experiments all asked *local
+mechanism* questions — is this formula right (E1.1, E1.4), is this list complete
+(E4.2), is this objective right (E3.3), does this provenance set cover the paths
+(E0.2), does this filter yield enough (E2.1). Local mechanism errors are
+*by construction* locally repairable, so the record was close to tautological
+given which claims were chosen. Cheap-to-test correlated with
+locally-repairable throughout.
+
+The claims that can fail architecturally are the ones where failure has no local
+repair. Two have now run:
+
+- **E3.1** (net transfer accumulates abstractions) — passes conditionally, on a
+  condition the design does not state.
+- **E0.2d** (admission control bounds cascade breadth) — fails, and the repair
+  is a mechanism that does not exist rather than a threshold that needs moving.
+
+Three remain untested: **E0.1** (I4, competence regenerating from provenance —
+which Part II §G itself calls a design intention rather than a tested property),
+**E1.2** (three-λ unanimity and time-to-deadlock), **E2.3** (whether the cheap
+rung preserves the ranking the expensive rung would give).
+
+So the accurate summary is: *most* failures found are specification defects,
+one is a missing control surface, one central claim holds conditionally, and
+**three of the five architecturally-consequential claims have not been tested.**
+
 ### What the Phase 1 results say collectively
 
 **Almost every failure so far is a specification defect**, and the two original
@@ -687,8 +731,8 @@ point, a boundary that constrains membership but not values, an objective with
 no opposing force, a gap signal reading the wrong quantity, a harvest policy
 with no tier predicate. Each repairs with machinery already in the design.
 
-**The claimed architectural finding has been demoted.** E0.2b's ceiling assumed
-the most expensive deletion policy in the space, and E0.2c takes it apart:
+**E0.2b's ceiling was demoted, and E0.2c's replacement was then itself
+corrected.** E0.2c takes the ceiling apart correctly:
 
 - **Correctness is not rate-limited at all.** Disabling an affected adapter is
   ~28,800× cheaper than recompiling it, and disabling is what makes deletion
@@ -701,12 +745,66 @@ the most expensive deletion policy in the space, and E0.2c takes it apart:
   monotonically with card-bank duplication, 63.1% at one card per entry to
   98.8% at six.
 
-What replaces it is better: **the first cross-tier constraint in the programme.**
-L3's admission threshold sets L7's deletion cost — and SESA's stated cos ≤ 0.93
-is far too loose to bind it, since mean card cosine of 0.779 already yields
-98.8% breadth. That is a curve the design can choose a point on, not a wall.
+But E0.2c's own conclusion — that L3's admission threshold is the lever on
+breadth — was a **common cause, not an intervention**. It varied entry
+multiplicity and watched card cosine and cascade breadth rise together. E0.2d
+separates them by holding provenance fixed and moving content cosine alone:
 
-So **every failure found so far is a specification defect.**
+```
+Panel B - provenance held at overlap 0.307, vary content rotation
+      rotation  prov overlap  card cosine   cascade
+          0.00         0.307        0.519     97.0%
+          0.50         0.307        0.205     96.9%
+          1.00         0.307        0.033     96.7%
+                                    ^^^^^      ^^^^
+                              moves 0.498   moves 0.009
+```
+
+**Content cosine is not a lever on cascade breadth.** SESA's cos ≤ 0.93 is a
+redundancy filter on card *content*; breadth is set by *provenance overlap* —
+how many cards share a source entry. E0.2c's world coupled them only because
+card content was built as the mean of its source entries. In a real bank they
+come apart: two cards can capture different patterns in the same entries and be
+near-orthogonal in content while sharing every source.
+
+**This is a missing control surface, and it does not reduce to a spec defect.**
+The design has no stated lever on cascade breadth at all. The repair is not
+retuning 0.93 — it is provenance-aware admission, capping source-entry overlap
+between admitted cards, which is a new mechanism. A missing control surface
+cannot be fixed by rewording. **This is the closest thing the programme has
+produced to an architectural finding.**
+
+### E3.1 · Net-transfer ranking works — under a condition the design never states
+
+The first claim tested here whose failure would have had no local repair.
+
+```
+regime                        target   transfer   margin
+clean                          0.264      0.349    +0.085
+noisy probes                   0.176      0.277    +0.101
+noisy + spurious               0.071      0.219    +0.147   (173% of clean)
+patches with REAL spillover    0.021      0.013    -0.008   <- T4 fails
+```
+
+T1–T3 pass. The margin *grows* under measurement noise, which I did not predict:
+target ranking takes a max over noisy per-region deltas, net transfer takes a
+sum, and summing is variance-reducing.
+
+**But the mechanism is not the one Part II §B describes.** Net transfer does not
+*detect* generality — it removes the reward for *narrowness*. Evidence: transfer
+acquires compositional-only skills at 55% while learning 72% of skills overall,
+so it still under-acquires exactly the skills whose value is invisible to a
+first-order measure. It merely stops patches crowding them out.
+
+**Which means §B is conditionally true, and the condition is unstated:** narrow
+patches must have near-zero *real* off-target effect. Give patches a systematic
++0.02 spillover and the margin inverts and both arms collapse — every candidate
+looks good on net transfer, the signal saturates, and the gate stops
+discriminating at all (3.6–4.2 skills learned against 9–10). Whether real
+adapters have that spillover is empirical and not obviously favourable: a
+low-rank update fit to one region is not region-confined. **Measuring real patch
+spillover decides whether the architecture's central generalization claim holds
+in practice**, and it is a Rig B/C measurement.
 
 Nothing found so far threatens the ledger-first thesis. The deletion ceiling
 constrains the *rate* at which one of its promises can be kept, not whether the

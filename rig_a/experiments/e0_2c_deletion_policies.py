@@ -32,9 +32,38 @@ KILL CRITERIA (pre-registered):
        compliance from recompilation.
     D2 fails if batching does not reduce per-deletion cost at high cascade
        breadth, i.e. if the union does not saturate.
-    D3 fails if cascade breadth is insensitive to card-bank overlap -- if so,
-       admission control is not a lever on deletion cost and E0.2b's ceiling
-       stands as stated.
+    D3 fails if cascade breadth is insensitive to card-bank overlap.
+
+D3's RESULT HAS BEEN SUPERSEDED -- see E0.2d. This sweep varies entry
+multiplicity and observes card cosine AND cascade breadth rising together, which
+is a common cause, not an intervention. E0.2d holds provenance fixed and moves
+content cosine alone: breadth does not follow. So `D3_admission_is_a_lever` as
+reported here is WRONG. Admission control scores card CONTENT; breadth is set by
+PROVENANCE overlap, and in this world those coincide only because card content
+is built from source entries.
+
+TWO FURTHER LIMITS ON THE NUMBERS BELOW.
+
+Fleet size is 8 and BATCH_SIZES runs to 16, so at the largest batches the window
+exceeds the fleet and every batch necessarily touches every adapter -- "the union
+saturates at fleet size" is then arithmetic, not a discovered property. E0.2b
+used a fleet of 64, so the eager-vs-batched comparison ACROSS the two experiments
+is confounded by an 8x fleet difference and the raw deletions/day figures are not
+comparable. The general form is what to quote:
+
+    cost per deletion = |union(B)| x recompile / B,  and |union(B)| -> fleet
+    so batching gain  = breadth x B / fleet, capped at B once breadth ~ fleet
+
+The gain is the batch size and it is unbounded in B, which is why breadth drops
+out. But that RELOCATES the cost rather than removing it: B is bounded by how
+long competence may stay degraded, because the window must fill before the
+recompile fires. At a low deletion arrival rate a large window means a long
+degraded period. Competence-restoration latency as a function of arrival rate is
+the honest successor to E0.2b's ceiling, and it is NOT measured here.
+
+D1's ratio is 8h/1s -- two chosen constants, not a measurement. It is sound as a
+scale argument (disabling is orders of magnitude cheaper than recompiling) and
+should not be quoted to three significant figures.
 
 Is there a world that produces the other verdict? For D2, yes: with disjoint
 cascades the union grows linearly and batching buys nothing, which is precisely
@@ -156,9 +185,14 @@ def main() -> int:
     print("  Correctness (entry stops influencing output) is bought by the first.")
     print("  Competence is restored by the second. Only the second is rate-limited.")
 
-    print(f"\n  D1 disabling decouples compliance from recompile: {'ok' if d1 else 'NO'}")
-    print(f"  D2 batching amortises at high overlap:            {'ok' if d2 else 'NO'}")
-    print(f"  D3 admission control is a lever on breadth:       {'ok' if d3 else 'NO'}\n")
+    print(f"\n  D1 disabling decouples compliance from recompile: {'ok' if d1 else 'NO'}"
+          f"   (scale argument, not a measured ratio)")
+    print(f"  D2 batching amortises:                            {'ok' if d2 else 'NO'}"
+          f"   (fleet={N_ADAPTERS} < max batch {max(BATCH_SIZES)}: saturation is")
+    print(f"                                                         partly arithmetic;"
+          f" quote the general form)")
+    print(f"  D3 admission control is a lever on breadth:       SUPERSEDED by E0.2d,"
+          f" which inverts it\n")
 
     out = pathlib.Path(__file__).resolve().parents[2] / "results" / "e0_2c_deletion_policies.json"
     out.write_text(json.dumps(

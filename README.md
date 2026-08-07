@@ -41,6 +41,8 @@ or the model is small.
 | [E0.2](rig_a/experiments/e0_2_transitive_unlearning.py) | the tombstone cascade reaches the weights | **PARTIAL** — the `transitive` arm was a **tautology** and is withdrawn; the 95.9% figure for `direct` is a knob. The finding it owed and did not produce: cascade invalidates ~54% of adapters per tombstone, implying a tombstone-rate ceiling |
 | [E0.2b](rig_a/experiments/e0_2b_influence_and_ceiling.py) | *rebuild* — functional ground truth, third influence path | **FAIL** — `transitive` provenance recalls **0.913, not 1.0**, and no set-based closure can reach 1.0 because the residual dependency is on a retrieval that was never run. And the correct cascade touches 69% of the fleet, putting sustainable deletions **below 1/day** across much of the plausible cost space |
 | [E0.2c](rig_a/experiments/e0_2c_deletion_policies.py) | *does that ceiling hold under better policies?* | **PASS** — it does not. Disabling is 28,800× cheaper than recompiling and is what makes deletion sound; batching makes throughput independent of cascade breadth. E0.2b demoted. Replaced by a real finding: **cascade breadth rises 63%→99% with card-bank duplication, so L3 admission sets L7 deletion cost** |
+| [E0.2d](rig_a/experiments/e0_2d_admission_lever.py) | is admission control a lever on cascade breadth? | **FAIL** — inverts E0.2c's D3. With provenance held fixed, card cosine moves **0.498** and breadth moves **0.009**. cos ≤ 0.93 scores *content*; breadth is set by *provenance overlap*. The design has **no lever on cascade breadth** — a missing control surface, not a threshold to retune |
+| [E3.1](rig_a/experiments/e3_1_transfer_ranking.py) | net-transfer ranking accumulates abstractions | **PARTIAL** — passes clean (+0.085) and *grows* under noise (+0.147), but inverts to **−0.008** when patches carry real off-target spillover. §B is conditionally true on a condition the design never states |
 | [E4.2](rig_a/experiments/e4_2_blast_radius_seal.py) | the blast-radius fixed point seals the Assay | **FAIL** twice — all four Assay tiers execute through L9-editable code; and the rule bounds *which* thresholds are editable while placing no bound on their *values*, so the reachable set is unbounded and compliance is reported across all of it |
 | [E3.3](rig_a/experiments/e3_3_offdiagonal_degeneracy.py) | "maximize off-diagonal mass" is a partition objective | **FAIL** — monotone in fineness, so its argmax is total atomisation, and it ranks the planted true structure near the *bottom*. The replacement objective is validated only inside a family containing the answer |
 | [E2.1](rig_a/experiments/e2_1_tier_laundering.py) | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 — 29–63% of an unfiltered "T2" suite is laundered T3 judge opinion, and the harvested slice tests each domain's easy corner. But the strict-filter **yield is high** (33–68%), contradicting this plan's own prediction |
@@ -49,15 +51,16 @@ or the model is small.
 leaves 6 free directions", E0.2's "transitive closure fixes it completely").
 Both are recorded in `claims/claims.yaml` under `retracted:`.
 
-**Every failure found so far is a specification defect**, repairable with
-machinery already in the design. The one finding promoted to "architectural" —
-E0.2b's deletion ceiling — was demoted by E0.2c, which showed it assumed the
-most expensive deletion policy available. What replaced it is better: the first
-cross-tier constraint in the programme, **L3's card-bank admission threshold
-sets L7's deletion cost**, and the design's stated cos ≤ 0.93 is too loose to
-bind it.
+**"Every failure is a specification defect" was selection, not evidence, and is
+withdrawn.** The first eight experiments all asked *local mechanism* questions,
+and local errors are locally repairable by construction — cheap-to-test
+correlated with locally-repairable throughout.
 
-Nothing found so far threatens the ledger-first thesis.
+Two claims that could fail architecturally have now run: **E3.1** passes
+conditionally (on a condition the design does not state), and **E0.2d** fails
+in a way no rewording fixes — the design has no lever on cascade breadth at all.
+**Three remain untested**: E0.1 (I4, which Part II §G itself calls a design
+intention rather than a tested property), E1.2, E2.3.
 
 **The counterweight, and it is the number worth watching.** Six rig errors
 against zero confirmed architectural failures. That ratio is expected when new
@@ -71,7 +74,8 @@ The strategic consequence: **generator error is now the dominant error source,
 and no Rig A work reduces it.** Rig B has moved ahead of the remaining 13
 claims — see PLAN.md §3.
 
-Eight repairs proposed (R1–R8), **none adopted**. See PLAN.md §5.
+Eight repairs proposed (R1–R8), **none adopted**. R8's admission-threshold
+component is withdrawn by E0.2d and replaced by provenance-aware admission. See PLAN.md §5.
 
 ## Running
 

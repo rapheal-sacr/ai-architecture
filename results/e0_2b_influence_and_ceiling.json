@@ -5,81 +5,80 @@
   "recall": {
     "policies": {
       "direct": {
-        "mean_recall": 0.0608,
-        "perfect_recall_fraction": 0.0118,
+        "mean_recall": 0.0708,
+        "perfect_recall_fraction": 0.0233,
         "mean_over_fire": 0.0
       },
       "transitive": {
-        "mean_recall": 0.877,
-        "perfect_recall_fraction": 0.5338,
+        "mean_recall": 0.8729,
+        "perfect_recall_fraction": 0.4884,
         "mean_over_fire": 0.0
       }
     },
-    "mean_true_cascade": 4.95,
-    "mean_true_cascade_fraction": 0.619,
-    "mean_selection_flips": 2.65,
-    "tombstones_causing_a_flip": 0.906,
-    "n_transitive_misses": 317,
+    "mean_true_cascade": 5.02,
+    "mean_true_cascade_fraction": 0.627,
+    "mean_selection_flips": 2.83,
+    "tombstones_causing_a_flip": 0.913,
+    "n_transitive_misses": 352,
     "miss_examples": [
+      {
+        "world": 0,
+        "entry": 0,
+        "missed_adapters": [
+          0
+        ],
+        "selection_flips": 1
+      },
       {
         "world": 0,
         "entry": 1,
         "missed_adapters": [
-          0,
+          2,
           4
         ],
         "selection_flips": 6
       },
       {
         "world": 0,
+        "entry": 2,
+        "missed_adapters": [
+          6
+        ],
+        "selection_flips": 1
+      },
+      {
+        "world": 0,
         "entry": 3,
         "missed_adapters": [
-          0
+          6
         ],
-        "selection_flips": 3
-      },
-      {
-        "world": 0,
-        "entry": 4,
-        "missed_adapters": [
-          4
-        ],
-        "selection_flips": 2
-      },
-      {
-        "world": 0,
-        "entry": 7,
-        "missed_adapters": [
-          0
-        ],
-        "selection_flips": 2
+        "selection_flips": 7
       },
       {
         "world": 0,
         "entry": 10,
         "missed_adapters": [
-          1,
-          3
+          6
         ],
-        "selection_flips": 3
+        "selection_flips": 2
       }
     ]
   },
   "ceiling": [
     {
       "recompile_hours_per_adapter": 2,
-      "adapter_hours_per_tombstone": 9.9,
-      "sustainable_tombstones_per_day": 9.7
+      "adapter_hours_per_tombstone": 10.04,
+      "sustainable_tombstones_per_day": 9.56
     },
     {
       "recompile_hours_per_adapter": 8,
-      "adapter_hours_per_tombstone": 39.6,
-      "sustainable_tombstones_per_day": 2.42
+      "adapter_hours_per_tombstone": 40.16,
+      "sustainable_tombstones_per_day": 2.39
     },
     {
       "recompile_hours_per_adapter": 24,
-      "adapter_hours_per_tombstone": 118.8,
-      "sustainable_tombstones_per_day": 0.81
+      "adapter_hours_per_tombstone": 120.48,
+      "sustainable_tombstones_per_day": 0.8
     }
   ],
   "ceiling_surface": [

@@ -1,0 +1,129 @@
+{
+  "seed": 20260806,
+  "regimes": [
+    {
+      "regime": "clean",
+      "noise": 0.0,
+      "spurious": 0.0,
+      "spillover": 0.0,
+      "arms": {
+        "target": {
+          "compositional": 0.2635,
+          "compositional_sd": 0.1358,
+          "skills": 9.17,
+          "comp_only": 0.208,
+          "patches": 10.0
+        },
+        "transfer": {
+          "compositional": 0.3487,
+          "compositional_sd": 0.1306,
+          "skills": 10.08,
+          "comp_only": 0.55,
+          "patches": 6.12
+        },
+        "hybrid": {
+          "compositional": 0.2483,
+          "compositional_sd": 0.1259,
+          "skills": 9.0,
+          "comp_only": 0.208,
+          "patches": 9.92
+        }
+      }
+    },
+    {
+      "regime": "noisy probes",
+      "noise": 0.03,
+      "spurious": 0.0,
+      "spillover": 0.0,
+      "arms": {
+        "target": {
+          "compositional": 0.1758,
+          "compositional_sd": 0.1021,
+          "skills": 8.08,
+          "comp_only": 0.233,
+          "patches": 10.0
+        },
+        "transfer": {
+          "compositional": 0.2771,
+          "compositional_sd": 0.1515,
+          "skills": 9.12,
+          "comp_only": 0.458,
+          "patches": 8.38
+        },
+        "hybrid": {
+          "compositional": 0.2192,
+          "compositional_sd": 0.1125,
+          "skills": 8.46,
+          "comp_only": 0.35,
+          "patches": 9.58
+        }
+      }
+    },
+    {
+      "regime": "noisy + spurious",
+      "noise": 0.03,
+      "spurious": 0.03,
+      "spillover": 0.0,
+      "arms": {
+        "target": {
+          "compositional": 0.0715,
+          "compositional_sd": 0.0549,
+          "skills": 6.04,
+          "comp_only": 0.108,
+          "patches": 10.0
+        },
+        "transfer": {
+          "compositional": 0.2188,
+          "compositional_sd": 0.0941,
+          "skills": 8.67,
+          "comp_only": 0.35,
+          "patches": 8.38
+        },
+        "hybrid": {
+          "compositional": 0.1544,
+          "compositional_sd": 0.0766,
+          "skills": 7.79,
+          "comp_only": 0.233,
+          "patches": 9.33
+        }
+      }
+    },
+    {
+      "regime": "patches with real spillover",
+      "noise": 0.03,
+      "spurious": 0.03,
+      "spillover": 0.02,
+      "arms": {
+        "target": {
+          "compositional": 0.0208,
+          "compositional_sd": 0.0266,
+          "skills": 4.17,
+          "comp_only": 0.025,
+          "patches": 10.0
+        },
+        "transfer": {
+          "compositional": 0.0125,
+          "compositional_sd": 0.0266,
+          "skills": 3.58,
+          "comp_only": 0.05,
+          "patches": 9.54
+        },
+        "hybrid": {
+          "compositional": 0.0087,
+          "compositional_sd": 0.0135,
+          "skills": 3.25,
+          "comp_only": 0.017,
+          "patches": 9.75
+        }
+      }
+    }
+  ],
+  "margin_clean": 0.0852,
+  "margin_hard": 0.1473,
+  "T1_beats_target_clean": true,
+  "T2_survives_measurement": true,
+  "T3_acquires_compositional_only": true,
+  "T4_survives_real_spillover": false,
+  "margin_adversarial": -0.0083,
+  "verdict": "FAIL"
+}

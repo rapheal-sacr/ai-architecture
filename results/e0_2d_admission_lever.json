@@ -1,0 +1,81 @@
+{
+  "seed": 20260806,
+  "panel_a": [
+    {
+      "multiplicity": 1,
+      "content_rotation": 0.0,
+      "mean_card_cosine": 0.046,
+      "provenance_overlap": 0.0,
+      "cascade_fraction": 0.627
+    },
+    {
+      "multiplicity": 2,
+      "content_rotation": 0.0,
+      "mean_card_cosine": 0.224,
+      "provenance_overlap": 0.095,
+      "cascade_fraction": 0.844
+    },
+    {
+      "multiplicity": 3,
+      "content_rotation": 0.0,
+      "mean_card_cosine": 0.384,
+      "provenance_overlap": 0.2,
+      "cascade_fraction": 0.943
+    },
+    {
+      "multiplicity": 4,
+      "content_rotation": 0.0,
+      "mean_card_cosine": 0.519,
+      "provenance_overlap": 0.307,
+      "cascade_fraction": 0.97
+    },
+    {
+      "multiplicity": 6,
+      "content_rotation": 0.0,
+      "mean_card_cosine": 0.779,
+      "provenance_overlap": 0.561,
+      "cascade_fraction": 0.978
+    }
+  ],
+  "panel_b": [
+    {
+      "multiplicity": 4,
+      "content_rotation": 0.0,
+      "mean_card_cosine": 0.519,
+      "provenance_overlap": 0.307,
+      "cascade_fraction": 0.97
+    },
+    {
+      "multiplicity": 4,
+      "content_rotation": 0.25,
+      "mean_card_cosine": 0.456,
+      "provenance_overlap": 0.307,
+      "cascade_fraction": 0.97
+    },
+    {
+      "multiplicity": 4,
+      "content_rotation": 0.5,
+      "mean_card_cosine": 0.205,
+      "provenance_overlap": 0.307,
+      "cascade_fraction": 0.969
+    },
+    {
+      "multiplicity": 4,
+      "content_rotation": 0.75,
+      "mean_card_cosine": 0.021,
+      "provenance_overlap": 0.307,
+      "cascade_fraction": 0.961
+    },
+    {
+      "multiplicity": 4,
+      "content_rotation": 1.0,
+      "mean_card_cosine": 0.033,
+      "provenance_overlap": 0.307,
+      "cascade_fraction": 0.967
+    }
+  ],
+  "L1_breadth_tracks_provenance": true,
+  "L2_breadth_tracks_cosine": false,
+  "cosine_actually_moved": true,
+  "d3_inverts": true
+}

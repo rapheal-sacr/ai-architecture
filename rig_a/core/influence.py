@@ -45,6 +45,7 @@ class InfluenceWorld:
     n_adapters: int
     rng: field(default=None)
     card_overlap: float = 1.0
+    content_rotation: float = 0.0
 
     def __post_init__(self) -> None:
         r = self.rng
@@ -75,6 +76,27 @@ class InfluenceWorld:
         self.card_sources = [sorted(set(s)) if s else [int(participants[0])] for s in slots]
         self.entry_multiplicity = m
 
+        # Per-card distillation projection. A skill card is not the mean of its
+        # source entries -- it is a distillation that captures one PATTERN in
+        # them, and two cards distilled from the same entries can capture
+        # different patterns and come out near-orthogonal in content while
+        # sharing every source.
+        #
+        # `content_rotation` interpolates between those regimes:
+        #   0  content is the raw source mean, so content cosine tracks
+        #      provenance overlap exactly -- which is an artifact of the
+        #      construction, not a property of card banks
+        #   1  content is an independently rotated view of the same information,
+        #      so content cosine is decoupled from provenance overlap
+        #
+        # This exists so that "does admission control bound cascade breadth" can
+        # be asked as an intervention on content cosine, rather than inferred
+        # from a sweep that moves content and provenance together.
+        self.rotations = []
+        for _ in range(self.n_cards):
+            q, _ = np.linalg.qr(r.normal(size=(self.dim, self.dim)))
+            self.rotations.append(q)
+
         # Each rollout carries a query. Which card conditions it is decided at
         # generation time by retrieval, not fixed in advance.
         self.queries = r.normal(size=(self.n_rollouts, self.dim))
@@ -92,12 +114,35 @@ class InfluenceWorld:
     # -- the world as a pure function of (values, alive) --------------------
 
     def card_values(self, alive: np.ndarray) -> np.ndarray:
+        """Card content: what retrieval matches against and admission control scores.
+
+        Still a pure function of the live source entries -- deleting a source
+        still moves the card, so influence still propagates -- but the
+        distillation is a per-card projection rather than a raw mean, so content
+        similarity need not track provenance overlap.
+        """
+        t = self.content_rotation
         out = np.zeros((self.n_cards, self.dim))
         for c, srcs in enumerate(self.card_sources):
             live = [e for e in srcs if alive[e]]
             if live:
-                out[c] = self.values[live].mean(axis=0)
+                mean = self.values[live].mean(axis=0)
+                out[c] = (1.0 - t) * mean + t * (self.rotations[c] @ mean)
         return out
+
+    def provenance_overlap(self) -> float:
+        """Mean Jaccard overlap of source sets -- the quantity breadth actually tracks.
+
+        This is what a provenance-aware admission rule would have to bound. It
+        is a different object from `mean_card_cosine`, which scores content.
+        """
+        sets = [set(s) for s in self.card_sources]
+        vals = []
+        for i in range(len(sets)):
+            for j in range(i + 1, len(sets)):
+                u = len(sets[i] | sets[j])
+                vals.append(len(sets[i] & sets[j]) / u if u else 0.0)
+        return float(np.mean(vals)) if vals else 0.0
 
     def selected_cards(self, alive: np.ndarray) -> np.ndarray:
         """Retrieval: each rollout takes the card its query matches best.

@@ -458,6 +458,84 @@ claims:
     predicted: uncertain
     status: untested
 
+  - id: E0.2d
+    tier: L3 x L7
+    claim: "card-bank admission control (cos <= 0.93) is a lever on cascade breadth"
+    source: "E0.2c reported D3_admission_is_a_lever: true; this tests it as an intervention"
+    rig: A
+    kill: "L1 breadth does not respond to provenance overlap; L2 breadth does not respond to content cosine with provenance held fixed"
+    predicted: uncertain
+    status: FAIL
+    result: results/e0_2d_admission_lever.json
+    finding: >
+      L2 FAILS and E0.2c's D3 INVERTS. Panel A reproduces E0.2c: multiplicity
+      1->6 moves provenance overlap 0.000->0.561, card cosine 0.046->0.779 and
+      cascade breadth 62.7%->97.8% together - a common cause, not an
+      intervention. Panel B holds provenance fixed at overlap 0.307 and varies
+      only the per-card distillation projection: card cosine moves 0.519->0.021,
+      a range of 0.498, while cascade breadth moves 97.0%->96.7%, a range of
+      0.009.
+    consequence: >
+      Content cosine is not a lever on cascade breadth. SESA's cos <= 0.93 is a
+      redundancy filter on card CONTENT; breadth is set by PROVENANCE overlap -
+      how many cards share a source entry. E0.2c's world coupled the two only
+      because card content was constructed as the mean of its source entries. In
+      a real bank they come apart: two cards can capture different patterns in
+      the same entries and be near-orthogonal in content while sharing every
+      source.
+    why_this_is_not_a_spec_defect: >
+      The design has NO stated lever on cascade breadth. The repair is not
+      retuning 0.93 - it is provenance-aware admission, capping source-entry
+      overlap between admitted cards, which is a NEW MECHANISM. A missing
+      control surface cannot be fixed by rewording, so this is the closest thing
+      the programme has produced to an architectural finding.
+    corrects: "E0.2c's D3, and the claim in that commit that L3 admission sets L7 deletion cost"
+
+  - id: E3.1
+    tier: L7
+    claim: "ranking by net transfer accumulates abstractions rather than patches"
+    source: "Part II section B - the central generalization claim of the architecture"
+    rig: A
+    kill: "T1 transfer does not beat target on held-out compositional tasks in the clean regime; T2 the margin does not survive probe noise and spurious off-target correlation; T3 transfer does not acquire compositional-only skills; T4 the margin does not survive patches carrying REAL positive spillover"
+    predicted: uncertain
+    status: PARTIAL
+    result: results/e3_1_transfer_ranking.json
+    significance: >
+      The first claim tested in this programme whose failure would have had no
+      local repair. Every earlier experiment asked a local mechanism question -
+      is this formula right, is this list complete - and local errors are
+      locally fixable by construction, which is why the "every failure is a spec
+      defect" record was closer to selection than to evidence.
+    finding: >
+      T1, T2, T3 pass; T4 FAILS. Clean regime: transfer 0.349 compositional
+      versus target 0.264, margin +0.085, and transfer acquires 55% of
+      compositional-only skills against target's 21%. The margin GROWS under
+      measurement noise to +0.147, 173% of clean - because target ranking takes
+      a max over noisy per-region deltas while net transfer takes a sum, and
+      summing is variance-reducing. That was not predicted.
+      T4: give patches a systematically positive off-target spillover of 0.02
+      and the margin collapses to -0.008. Both arms fall apart (compositional
+      0.021 and 0.013 against 0.264 and 0.349 clean) because every candidate
+      then looks good on net transfer, the ranking signal saturates, and the
+      gate stops discriminating at all - it learns 3.6-4.2 skills against 9-10.
+    mechanism_is_not_the_stated_one: >
+      Net transfer does not DETECT generality. It removes the reward for
+      narrowness: when patches have near-zero real off-target effect they score
+      ~0 on the statistic while general candidates score positive, so generality
+      wins by default. Evidence that this is the mechanism rather than detection:
+      transfer acquires compositional-only skills at 55% while learning 72% of
+      skills overall, so it still UNDER-acquires exactly the skills whose value
+      is invisible to a first-order measure. It merely stops patches crowding
+      them out.
+    condition_the_design_does_not_state: >
+      Part II section B is conditionally true, and the condition is that narrow
+      patches must have near-zero REAL off-target effect. The design never states
+      it. Whether it holds is empirical and not obviously favourable: a low-rank
+      adapter fit to one region is not region-confined, so small positive
+      spillover to neighbours is plausible. Measuring real patch spillover is a
+      Rig B/C question and it decides whether the central generalization claim
+      holds in practice.
+
   - id: E3.2
     tier: L7
     claim: "writing a tau row for every off-target delta collapses the transfer cold start"
@@ -789,12 +867,45 @@ repairs:
       Split deletion into two service levels: DISABLE affected adapters
       immediately, which is what makes deletion sound, then BATCH recompilation
       over a window to restore competence. Set L3's admission threshold with
-      deletion cost in mind, since it is the lever that sets cascade breadth -
-      and set it tighter than cos <= 0.93, which does not bind.
+      deletion cost in mind.
+      WITHDRAWN IN PART by E0.2d: the original text said "set it tighter than
+      cos <= 0.93, which does not bind". That presumed cosine is a lever on
+      breadth, and it is not. Replaced by R9.
     evidence: >
       E0.2c: disabling is ~28,800x cheaper than recompiling; batching at window
       16 makes throughput independent of cascade breadth at 24 deletions/day.
     open: >
       Competence during the disabled window is unmeasured, and at 98.8% cascade
       breadth that is nearly the whole adapter fleet off at once.
+    status: proposed
+
+  - id: R9
+    from: E0.2d
+    proposal: >
+      Add provenance-aware admission to L3: cap SOURCE-ENTRY overlap between
+      admitted cards, alongside the existing content-cosine redundancy filter.
+      Content cosine and provenance overlap are different axes and only the
+      second sets cascade breadth.
+    why_new_mechanism: >
+      This is not a threshold change. The design currently has no instrument
+      that acts on provenance overlap, so there is no setting of cos <= 0.93
+      that controls deletion cost. A missing control surface cannot be
+      reworded into existence.
+    open: >
+      Untested. Capping provenance overlap constrains which cards may coexist,
+      and the cost to card-bank coverage is unmeasured - it may trade deletion
+      throughput against skill-library completeness.
+    status: proposed
+
+  - id: R10
+    from: E3.1
+    proposal: >
+      State Part II section B's unstated condition explicitly, and measure it:
+      net-transfer ranking separates abstractions from patches only while narrow
+      patches have near-zero REAL off-target effect. Measure adapter spillover on
+      real models before relying on the rule.
+    evidence: >
+      E3.1 T4: with a systematic +0.02 patch spillover the transfer margin
+      inverts to -0.008 and both arms collapse, because the ranking signal
+      saturates and stops discriminating.
     status: proposed
