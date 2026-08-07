@@ -859,7 +859,7 @@ none of which has been measured:**
 | Quantity | Gates | How to resolve |
 |---|---|---|
 | ~~**`H`, recompile wall-clock**~~ | the C3∧C4 window | **RESOLVED — EB.1.** 18 min at the established draw cap, not 8h. The window is **OPEN** at the measured value |
-| **support redundancy + threshold** | C6 | harvested-probe provenance, the same interaction sample as the tier audit |
+| **support redundancy + threshold** | C6 | **procedure written** ([docs](docs/support_redundancy_procedure.md)) with a decision rule attached ([E5.2](rig_a/experiments/e5_2_support_decision_table.py)): if real probes rest on **≥5 supporting entries, C6 stops binding**. Awaiting an interaction corpus — not measurable here |
 | **latency tolerance `L`** | C4 | not a measurement — a product requirement to write down |
 | **cascade breadth `β`** | whether any window exists at all | **R9** — a mechanism that does not exist |
 
@@ -1192,6 +1192,12 @@ All are in `claims/claims.yaml` under `bugs:`, in the code, and in git history:
   instead of 1024, so the blowup **scales with model size** — paging on 8 GB, not
   the algorithm. Caught by *"why is this number so extreme?"*, which is now the
   fourth bug that question has found and the mechanism that keeps working.
+
+- **B13** E5.2's first decision table conflated compile adequacy with decay
+  robustness and reported over-forgetting *conditional on passing*, so the
+  denominator moved with `k` and **k=10 came out worse than k=3** — backwards for
+  anything called redundancy, and unusable as the lookup it claimed to be. Caught
+  by the table being non-monotone in the direction it informs.
 
 B3 is instructive for one reason and B4 for another.
 

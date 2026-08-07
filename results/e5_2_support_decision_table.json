@@ -1,0 +1,223 @@
+{
+  "seed": 20260806,
+  "regions": 16,
+  "c6_tolerance": 0.2,
+  "i7_floor": 0.8,
+  "shapes_clearing_C6": [
+    [
+      5,
+      2
+    ],
+    [
+      5,
+      3
+    ],
+    [
+      8,
+      2
+    ],
+    [
+      8,
+      3
+    ],
+    [
+      10,
+      3
+    ],
+    [
+      10,
+      4
+    ]
+  ],
+  "rows": [
+    {
+      "k": 3,
+      "m": 2,
+      "decay_rate": 0.05,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.025,
+      "clears_C6": true
+    },
+    {
+      "k": 3,
+      "m": 2,
+      "decay_rate": 0.15,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.1,
+      "clears_C6": true
+    },
+    {
+      "k": 3,
+      "m": 2,
+      "decay_rate": 0.25,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.25,
+      "clears_C6": false
+    },
+    {
+      "k": 5,
+      "m": 2,
+      "decay_rate": 0.05,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 5,
+      "m": 2,
+      "decay_rate": 0.15,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.006,
+      "clears_C6": true
+    },
+    {
+      "k": 5,
+      "m": 2,
+      "decay_rate": 0.25,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.038,
+      "clears_C6": true
+    },
+    {
+      "k": 5,
+      "m": 3,
+      "decay_rate": 0.05,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 5,
+      "m": 3,
+      "decay_rate": 0.15,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.062,
+      "clears_C6": true
+    },
+    {
+      "k": 5,
+      "m": 3,
+      "decay_rate": 0.25,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.156,
+      "clears_C6": true
+    },
+    {
+      "k": 8,
+      "m": 2,
+      "decay_rate": 0.05,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 8,
+      "m": 2,
+      "decay_rate": 0.15,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 8,
+      "m": 2,
+      "decay_rate": 0.25,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 8,
+      "m": 3,
+      "decay_rate": 0.05,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 8,
+      "m": 3,
+      "decay_rate": 0.15,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 8,
+      "m": 3,
+      "decay_rate": 0.25,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.006,
+      "clears_C6": true
+    },
+    {
+      "k": 10,
+      "m": 3,
+      "decay_rate": 0.05,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 10,
+      "m": 3,
+      "decay_rate": 0.15,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 10,
+      "m": 3,
+      "decay_rate": 0.25,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 10,
+      "m": 4,
+      "decay_rate": 0.05,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 10,
+      "m": 4,
+      "decay_rate": 0.15,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.0,
+      "clears_C6": true
+    },
+    {
+      "k": 10,
+      "m": 4,
+      "decay_rate": 0.25,
+      "draw_fraction": 1.0,
+      "pass_before": 1.0,
+      "over_forget_worst": 0.013,
+      "clears_C6": true
+    }
+  ]
+}

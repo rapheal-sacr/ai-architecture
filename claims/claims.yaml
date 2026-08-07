@@ -1192,6 +1192,35 @@ claims:
       length regardless. This bounds what Rig B can measure on this machine and
       is reported rather than buried in a drift statistic.
 
+  - id: E5.2
+    tier: cross
+    rig: A
+    claim: "NONE -- this is a decision table, not an experiment"
+    source: "support redundancy is E5.1's second gating quantity and is not measurable on any rig here"
+    kill: "deliberately none. Registering a kill criterion would imply this measures the design; it measures the consequences of a parameter nobody has measured."
+    status: reference
+    result: results/e5_2_support_decision_table.json
+    procedure: docs/support_redundancy_procedure.md
+    finding: >
+      THE LOOKUP: if real harvested probes rest on 5 or more supporting entries,
+      C6 stops binding. Only the 3-entry shape (2 of 3) fails, and only at high
+      decay (0.250 against a 0.20 tolerance). Every shape with k >= 5 clears at
+      every swept decay rate.
+      That 2-of-3 shape was the value pinned in every run before E5.1 swept it,
+      so the constant carrying the constraint was the pessimistic end of its
+      range - the same shape of problem as H, and resolvable the same way.
+    second_table_matters_more: >
+      Compile adequacy (I7) binds harder than C6 at aggressive draw caps. No
+      support shape clears an 0.80 coverage floor at a 25% draw; 2-of-8 needs
+      f >= 0.50 and 2-of-3 needs f >= 0.75. So the draw cap and support
+      redundancy trade against each other, and at low caps the binding constraint
+      is whether the compile covered the region at all rather than whether decay
+      broke it. That is I7's whole point and why it needed to be an invariant.
+    watch_for: >
+      k correlating with region frequency. If rare regions have systematically
+      smaller support sets, C6, I7 and the whole weighting-rule enumeration all
+      bind hardest in the same place and the anisotropy gains a fifth symptom.
+
 # -- rig bugs found so far, all of which changed a reported result ---------
 #
 # Kept in the ledger rather than only in git history, because the rate and the
@@ -1215,6 +1244,23 @@ bugs:
       Cached weights are constants - stale, not sensitive. Produced a confident
       PASS on the claim this plan most expected to fail, and was caught only
       because U1 and U2 contradicted each other.
+
+  - id: B13
+    where: e5_2_support_decision_table, first version
+    bug: >
+      conflated two mechanisms in one table - compile adequacy (does the DRAW
+      contain enough support) and decay robustness (does DECAY break it) - and
+      reported over-forgetting as a rate conditional on having passed. The
+      denominator therefore moved with k.
+    effect: >
+      produced a table where k=10 looked WORSE than k=3, which is backwards for
+      anything called redundancy, and was unusable as the lookup it claimed to
+      be. Also listed thresholds 0.50 and 0.34 as separate rows at k=3, where
+      both mean "2 of 3" - identical numbers, no signal.
+    fix: >
+      two tables, each monotone in the direction it informs; support expressed as
+      "m of k" rather than a fraction, since fractions are ambiguous at small k.
+    caught_by: "the table being non-monotone in the direction it claimed to inform"
 
   - id: B12
     where: eb_1_recompile_wallclock H1
