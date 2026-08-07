@@ -40,9 +40,22 @@ structural work first, which is the right order anyway.
 
 ---
 
-## 1 · Status — two experiments run, both found breakage
+## 1 · Status — Phase 1 complete, five experiments, five breakages
 
-Rig A is built and two of the cheap decisive tests are complete.
+Rig A is built and all five Phase 1 tests are done. Every one failed, and the
+three predicted breaks (E0.2, E4.2, E3.3) broke for the predicted reason.
+
+| ID | Claim | Verdict |
+|---|---|---|
+| E1.1 | occupied rank is a computed budget | **FAIL** |
+| E1.4 | posterior variance is an epistemic gap detector | **FAIL** |
+| E0.2 | the tombstone cascade reaches the weights | **FAIL** ★ predicted |
+| E4.2 | the blast-radius fixed point seals the Assay | **FAIL** ★ predicted |
+| E3.3 | max off-diagonal mass is a partition objective | **FAIL** ★ predicted |
+
+Three of the five have cheap, well-understood repairs (R2, R3, R5). One (R4)
+is a boundary redesign with a real cost. One (E1.1) does not yet have a repair
+that is known to work — see §5.
 
 ### E1.1 · `occupied rank = #{σ_k > ε}` is not a well-posed budget
 
@@ -154,6 +167,89 @@ does not improve when practised stops asking for budget. This is a small change
 to the gap-set definition and it is the first concrete repair this plan
 proposes.
 
+### E0.2 · The tombstone cascade almost never fires
+
+L7's strongest safety claim — "unlearning by construction rather than by
+approximation," the one thing it offers that EWC and LwF cannot — depends on
+recorded provenance covering every path an entry took to the weights. Part I §7
+describes a path it may not cover: *"the card is what generates the adapter's
+training set."*
+
+```
+provenance policy     incomplete  missing  cascade  leaks    rate    worst   U1   U2  verdict
+direct                         6      186     0.13    186   0.959   0.2640   no   no  FAIL
+transitive                     0        0     3.23      0   0.000   0.0000   ok   ok  PASS
+```
+
+Under `direct` provenance — the literal reading of "the ledger entry IDs it was
+compiled from," where compilation sees rollouts rather than cards — **all six
+adapters carry incomplete provenance, 186 genuine influence relationships go
+unrecorded, and 95.9% of them survive deletion.** The cascade fires on 0.13
+adapters per tombstone instead of 3.23: it barely fires at all.
+
+The good news is that this is a **recording-policy bug, not a mechanism
+failure**. The cascade works correctly; it is handed the wrong set. Taking the
+transitive closure through the conditioning card closes it completely.
+
+### E4.2 · The seal leaks two independent ways
+
+```
+Assay depends on 11 artifacts transitively
+of which L9 may edit: ['dispatch', 'retrieval_policy', 'tool_schemas']
+  assay_t0     reachable-and-editable: ['dispatch', 'tool_schemas']
+  assay_t1     reachable-and-editable: ['retrieval_policy']
+  assay_t2     reachable-and-editable: ['retrieval_policy']
+  assay_t3     reachable-and-editable: ['retrieval_policy']
+```
+
+**Reachability.** All four Assay tiers run on code L9 is permitted to edit. A
+verifier L9 may not edit still executes through a retrieval policy it may. T1
+counterfactual replay replays real queries — through retrieval.
+
+**Thresholds are not requirements.** Moving only permitted thresholds:
+
+```
+baseline promotion rate  0.005   (eps=0.01, noise_leeway=0.10, eps_reg=0.02)
+relaxed  promotion rate  0.322   (eps=0.00, noise_leeway=0.00, eps_reg=0.50)
+delta                    +0.317   with zero tier requirements changed
+```
+
+A **64× increase in promotion rate** while the blast-radius rule reports full
+compliance throughout, because `noise_leeway` is a threshold and "T2 required
+for weight promotion" is a requirement, and only the latter is sealed.
+
+The deliverable turned out more useful than the finding. Sealing the whole
+dependency closure **over-seals** — it would freeze `l1_entries`, `l2_pages`,
+`l3_views` and `l7_adapters`, which the system exists to update. The closure
+splits in two: *seal* the harness code a verifier executes through, and *pin*
+the derived views by stamping each Assay run with the versions it ran against —
+which is the mechanism WAM already uses for L2 pages and weight versions. See
+R4.
+
+### E3.3 · The partition objective is monotone in fineness
+
+```
+  regions   offdiag mass   predictive MSE   rows/cell
+        1         0.0000         0.001485     30000.0
+        4         0.1957         0.000910      1875.0   <- true structure
+       32         0.9058         0.000978        29.3
+      192         0.9908         0.001577         0.8   <- objective's argmax
+```
+
+Splitting a region can only move mass off the diagonal, never onto it, so the
+objective has no opposing force and its argmax is **total atomisation** — one
+region per signature, 0.8 measurements per cell. The planted 4-cluster truth
+scores 0.1957, near the *bottom*: the objective does not merely fail to find
+the true structure, it ranks it as nearly the worst candidate available.
+
+Part III §3 names this exact failure — "too-fine signatures make T diagonal and
+starve transfer" — and then adopts an objective that is monotone in fineness.
+
+**Replacement:** score a partition by the held-out predictive error of the T it
+induces. T exists to predict transfer, so score it on prediction. Too coarse
+averages away structure, too fine has no data per cell, and the two pull
+against each other. The argmin lands exactly on the planted 4 clusters.
+
 ---
 
 ## 2 · The claim ledger
@@ -230,14 +326,22 @@ seriously and weights the phase schedule accordingly.
 
 Ordered by *how fast a result can invalidate a tier*, not by stack order.
 
-**Phase 1 — cheap decisive (Rig A).** E1.1 ✅, E1.4 ✅, then E0.2, E4.2, E3.3.
-All five can kill a mechanism outright and none needs a model. Two already
-have. E4.2 and E3.3 are close to pure analysis.
+**Phase 1 — cheap decisive (Rig A). ✅ Complete.** E1.1, E1.4, E0.2, E4.2,
+E3.3. All five failed; the three predicted breaks broke for the predicted
+reason. Total runtime under a minute on the M2.
 
-**Phase 2 — loop dynamics (Rig A).** E1.2, E3.1, E3.2, E4.1, E4.3, E4.4, E0.1,
-E0.3, E0.4, E2.3, E2.4, E2.5, E4.5. This is where the simulator earns its
-keep: every one of these is a question about whether a loop converges, and
-none of them is a question about language.
+**Phase 2 — loop dynamics and repair validation (Rig A).** Two tracks now,
+run together:
+
+*New claims:* E1.2, E3.1, E3.2, E4.1, E4.3, E4.4, E0.1, E0.3, E0.4, E2.3,
+E2.4, E2.5, E4.5. Every one is a question about whether a loop converges, and
+none is a question about language.
+
+*Repair validation:* R2–R5 each need pre-registered criteria and a run against
+the arm they replace. A repair that passed the test that motivated it has
+survived exactly one adversary. R4 additionally needs its cost measured —
+sealing the retrieval policy narrows L9's search space and that loss should be
+quantified, not assumed small.
 
 **Phase 3 — the binding constraint.** E2.1, then E2.2 by hand on one domain.
 Per Part III §0 this is the highest-leverage work in the whole programme, and
@@ -267,11 +371,25 @@ falsification threshold in its docstring before the first run. This is the
 scalar/textual firewall applied to the research process: without it, a result
 can always be narrated into a pass.
 
-**Report metric bugs as findings.** Two occurred already while building E1.1
-and E1.4 — a plateau detector that counted saturation regions as knees, and a
-world model where competence advanced per cycle rather than per task, hiding
-the cost of misallocated budget. Both changed the result. Both are in the git
-history and noted in the code.
+**Report metric bugs as findings.** Three occurred while building Phase 1, all
+of which changed a result, all noted in the code and in git history:
+
+- E1.1's plateau detector counted *saturation* regions (rank pinned at 1 or at
+  `dim`) as knees, which credited a power-law spectrum with a 3.82-decade
+  plateau it does not have.
+- E1.4's world advanced competence per *cycle* rather than per *task*, so a
+  region starved to one task learned as fast as one given a hundred, hiding
+  the entire cost of misallocated budget.
+- E0.2 first measured whether weights *changed* when the deleted value was
+  substituted, and reported **zero leakage for a policy with 186 missing
+  influence paths**. Cached weights are constants — they are stale, not
+  sensitive — and only comparison against a clean recompile detects the leak.
+
+The third is the instructive one: it produced a confident PASS on the claim
+this plan most expected to fail, and the only reason it was caught is that U1
+and U2 contradicted each other. **Cross-checks between two measurements of the
+same claim are worth their cost**, which is also, not coincidentally, the
+argument Part III §1 makes about unifying three estimators into one.
 
 **A repaired mechanism must be re-registered and re-run.** The `reducible`
 variance fix from E1.4 is a proposal that passed one test, not a fix. It needs
@@ -280,26 +398,61 @@ under noisy pass-rate estimates, which is untested.
 
 ---
 
-## 5 · Repairs already indicated
+## 5 · Repairs indicated
 
-Two, from the two experiments run:
+Five, from the five experiments. **None is adopted.** Each is a proposal that
+survived one test, which is not the same as a fix — every one needs its own
+pre-registered criteria and its own run in Phase 2.
 
-**R1 · Replace counted free rank with an energy criterion (from E1.1).** The
-failure is that ε is a hard cut on a soft spectrum, so being off by one
-direction is unbounded damage. An allocation rule that does not require a knee:
-allocate a candidate adapter's basis, then *measure* the resulting perturbation
-on held-out traffic and reject if it exceeds a tolerance. This replaces "count
-directions below ε" with "measure what the write actually disturbs" — which is
-a T1 counterfactual, a verifier the design already has. It also composes with
-the promotion gate instead of sitting beside it. Cost: an eval per allocation
-instead of a threshold comparison. Worth testing against the current rule.
+**R1 · Replace counted free rank with a measured energy criterion (E1.1).** ε
+is a hard cut on a soft spectrum, so being off by one direction is unbounded
+damage. An allocation rule that needs no knee: allocate a candidate basis, then
+*measure* the perturbation on held-out traffic and reject above a tolerance.
+This replaces "count directions below ε" with "measure what the write actually
+disturbs" — a T1 counterfactual the design already has, composing with the
+promotion gate instead of sitting beside it. Cost: an eval per allocation.
+**Untested.** This is the weakest-supported repair on the list and E1.1 is the
+finding with no demonstrated fix.
 
-**R2 · Score gaps by reducible variance, not variance (from E1.4).** A
-derivative, not a level. Passed both kill criteria at zero competence cost.
-Needs its own testing for stability under noisy p̂.
+**R2 · Score gaps by reducible variance (E1.4).** A derivative, not a level.
+Passed both criteria at zero competence cost. Open: stability under noisy p̂.
 
-Neither is built. Both belong in Phase 2 as arms to compare, not as adopted
-fixes.
+**R3 · Record provenance as the transitive closure through the conditioning
+card (E0.2).** One line in the recording policy; eliminates all 186 unrecorded
+paths and all leakage. Open: the simulated influence path is linear and
+additive, so whether real parametric carryover is fully captured by set-closure
+is a Rig B question — the honest answer may be that provenance *bounds* the
+leak rather than closing it.
+
+**R4 · Split the blast-radius boundary into seal and pin (E4.2).** Seal the
+harness code any verifier executes through; pin derived views by stamping each
+Assay run with the versions it ran against. And move gate thresholds — ε,
+ε_reg, `noise_leeway` — from the L9-editable list to the sealed list, since
+they are the promotion bar in everything but name. Open, and it is a real cost:
+sealing the retrieval policy removes it from L9's search space, which is
+exactly where SIA found scaffold edits pay.
+
+**R5 · Score partitions by held-out predictive error, not off-diagonal mass
+(E3.3).** Same τ rows, same observation grain, but an interior optimum instead
+of a monotone drive to atomisation. Open: tested only on nested partitions
+aligned with the truth.
+
+### What the Phase 1 results say collectively
+
+Four of the five failures are **specification defects, not architectural
+ones** — a provenance set recorded at the wrong point, two lists whose boundary
+doesn't match the property it claims to enforce, an objective with no opposing
+force, a gap signal reading the wrong quantity. Each has a repair that reuses
+machinery already in the design, and none of them threatens the ledger-first
+thesis.
+
+E1.1 is the exception and should be treated differently. It is not a spec bug;
+it is a claim about the shape of real feature spectra, and it fails on the
+shape transformers actually produce. The subspace budget is the one Phase 1
+mechanism that may need replacing rather than correcting, and R1 is a sketch
+rather than a demonstrated alternative. **That makes E1.5 and E1.3 (Rig B, real
+activations) the highest-priority remaining measurements** — they decide
+whether R1 is even necessary.
 
 ---
 

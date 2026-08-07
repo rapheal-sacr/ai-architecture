@@ -1,0 +1,67 @@
+{
+  "seed": 20260806,
+  "true_clusters": 4,
+  "rows": [
+    {
+      "regions": 1,
+      "offdiag_mass": 0.0,
+      "predictive_mse": 0.001485,
+      "mean_rows_per_cell": 30000.0
+    },
+    {
+      "regions": 2,
+      "offdiag_mass": 0.1288,
+      "predictive_mse": 0.001286,
+      "mean_rows_per_cell": 7500.0
+    },
+    {
+      "regions": 4,
+      "offdiag_mass": 0.1957,
+      "predictive_mse": 0.00091,
+      "mean_rows_per_cell": 1875.0
+    },
+    {
+      "regions": 8,
+      "offdiag_mass": 0.5932,
+      "predictive_mse": 0.000913,
+      "mean_rows_per_cell": 468.8
+    },
+    {
+      "regions": 16,
+      "offdiag_mass": 0.7996,
+      "predictive_mse": 0.000929,
+      "mean_rows_per_cell": 117.2
+    },
+    {
+      "regions": 32,
+      "offdiag_mass": 0.9058,
+      "predictive_mse": 0.000978,
+      "mean_rows_per_cell": 29.3
+    },
+    {
+      "regions": 64,
+      "offdiag_mass": 0.9578,
+      "predictive_mse": 0.00126,
+      "mean_rows_per_cell": 7.3
+    },
+    {
+      "regions": 96,
+      "offdiag_mass": 0.977,
+      "predictive_mse": 0.001488,
+      "mean_rows_per_cell": 3.3
+    },
+    {
+      "regions": 192,
+      "offdiag_mass": 0.9908,
+      "predictive_mse": 0.001577,
+      "mean_rows_per_cell": 0.8
+    }
+  ],
+  "objective_argmax": 192,
+  "replacement_argmin": 4,
+  "monotone_in_fineness": true,
+  "D1_not_monotone": false,
+  "D2_recovers_truth": false,
+  "replacement_recovers_truth": true,
+  "verdict": "FAIL"
+}

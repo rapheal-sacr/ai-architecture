@@ -1,0 +1,97 @@
+{
+  "seed": 20260806,
+  "static": {
+    "assay_dependency_closure": [
+      "dispatch",
+      "judge_model",
+      "l1_entries",
+      "l1_schema",
+      "l2_pages",
+      "l3_views",
+      "l7_adapters",
+      "retrieval_policy",
+      "sealed_probes",
+      "signature_ontology",
+      "tool_schemas"
+    ],
+    "leaking_artifacts": [
+      "dispatch",
+      "retrieval_policy",
+      "tool_schemas"
+    ],
+    "leaks_per_tier": {
+      "assay_t0": [
+        "dispatch",
+        "tool_schemas"
+      ],
+      "assay_t1": [
+        "retrieval_policy"
+      ],
+      "assay_t2": [
+        "retrieval_policy"
+      ],
+      "assay_t3": [
+        "retrieval_policy"
+      ]
+    },
+    "gate_closure_leaks": [
+      "dispatch",
+      "l7_gate_thresholds",
+      "retrieval_policy",
+      "tool_schemas"
+    ],
+    "must_seal": [
+      "assay_t0",
+      "assay_t1",
+      "assay_t2",
+      "assay_t3",
+      "blast_radius_rule",
+      "dispatch",
+      "judge_model",
+      "l1_schema",
+      "promotion_gate",
+      "promotion_gate_tier_requirements",
+      "retrieval_policy",
+      "tool_schemas"
+    ],
+    "must_pin": [
+      "l1_entries",
+      "l2_pages",
+      "l3_views",
+      "l7_adapters",
+      "sealed_probes",
+      "signature_ontology"
+    ],
+    "S1_seal_holds": false
+  },
+  "injection": {
+    "baseline_promotion_rate": 0.0054,
+    "relaxed_promotion_rate": 0.3221,
+    "delta": 0.3166,
+    "noise_leeway_sweep": [
+      {
+        "noise_leeway": 0.0,
+        "promotion_rate": 0.0861
+      },
+      {
+        "noise_leeway": 0.02,
+        "promotion_rate": 0.0633
+      },
+      {
+        "noise_leeway": 0.05,
+        "promotion_rate": 0.0312
+      },
+      {
+        "noise_leeway": 0.1,
+        "promotion_rate": 0.0054
+      },
+      {
+        "noise_leeway": 0.2,
+        "promotion_rate": 0.0
+      }
+    ],
+    "tier_requirements_changed": false,
+    "S2_thresholds_inert": false
+  },
+  "verdict": "FAIL"
+}

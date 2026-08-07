@@ -1,0 +1,31 @@
+{
+  "seed": 20260806,
+  "rows": [
+    {
+      "policy": "direct",
+      "adapters_with_incomplete_provenance": 6,
+      "total_missing_provenance_entries": 186,
+      "mean_cascade_size": 0.13,
+      "leaking_adapter_entry_pairs": 186,
+      "leak_trials": 194,
+      "leak_rate": 0.9588,
+      "worst_residual_norm": 0.264023,
+      "U1_no_residual": false,
+      "U2_provenance_complete": false,
+      "verdict": "FAIL"
+    },
+    {
+      "policy": "transitive",
+      "adapters_with_incomplete_provenance": 0,
+      "total_missing_provenance_entries": 0,
+      "mean_cascade_size": 3.23,
+      "leaking_adapter_entry_pairs": 0,
+      "leak_trials": 194,
+      "leak_rate": 0.0,
+      "worst_residual_norm": 0.0,
+      "U1_no_residual": true,
+      "U2_provenance_complete": true,
+      "verdict": "PASS"
+    }
+  ]
+}

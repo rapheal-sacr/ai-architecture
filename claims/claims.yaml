@@ -36,7 +36,7 @@ claims:
     claim: "tombstone cascade reaches every adapter influenced by an entry"
     source: "L7 card - 'unlearning by construction rather than by approximation'"
     rig: A
-    kill: "any residual influence of a tombstoned entry after cascade + recompile"
+    kill: "any adapter whose post-cascade weights differ from a clean recompile with the entry gone"
     predicted: FAIL
     predicted_reason: >
       Provenance is recorded entry->adapter, but Part I section 7 says the skill
@@ -44,7 +44,23 @@ claims:
       entry -> card -> card-conditioned rollouts -> adapter. Unless provenance
       takes the transitive closure through those rollouts, parametric carryover
       survives the cascade and unlearning is approximate after all.
-    status: untested
+    status: FAIL
+    result: results/e0_2_transitive_unlearning.json
+    finding: >
+      Confirmed. Under `direct` provenance - the literal reading of "the ledger
+      entry IDs it was compiled from", where compilation sees rollouts rather
+      than cards - all 6 adapters carry incomplete provenance, 186 genuine
+      influence relationships go unrecorded, and 95.9% of them survive
+      deletion. The cascade fires on 0.13 adapters per tombstone instead of
+      3.23: it almost never fires at all. Recording provenance as the
+      transitive closure through the conditioning card fixes it completely
+      (0 leaks, complete provenance). This is a recording-policy bug, not a
+      mechanism failure - the cascade works, it is just given the wrong set.
+    measurement_note: >
+      The first version tested whether weights *changed* under substitution of
+      the deleted value and reported zero leakage despite 186 missing paths.
+      Cached weights are constants; they are stale, not sensitive. Only
+      comparison against a clean recompile detects the leak.
 
   - id: E0.3
     tier: L8
@@ -226,7 +242,19 @@ claims:
       per task makes everything off-diagonal. As stated this is not an
       optimization, it is a drive toward atomisation. Needs a regulariser or MDL
       term the design does not specify.
-    status: untested
+    status: FAIL
+    result: results/e3_3_offdiagonal_degeneracy.json
+    finding: >
+      Confirmed, and worse than predicted. Off-diagonal mass is strictly
+      monotone in fineness (0.0000 at 1 region to 0.9908 at 192), so its argmax
+      is total atomisation - one region per signature, 0.8 measurements per
+      cell. The planted 4-cluster truth scores 0.1957, near the bottom of the
+      range: the objective does not merely fail to find the true structure, it
+      ranks it as nearly the worst candidate. Splitting a region can only move
+      mass off the diagonal and never onto it, so there is no opposing force.
+      Replacement tested: score a partition by held-out predictive MSE of the T
+      it induces. Bias and variance pull against each other and the argmin
+      lands exactly on the planted 4 clusters.
 
   - id: E3.4
     tier: L3
@@ -267,7 +295,34 @@ claims:
       And T1 counterfactual replay runs through retrieval, so L9 owns code the
       T1 verifier depends on.
     deliverable: "actual dependency graph, plus a corrected minimal non-editable set"
-    status: untested
+    status: FAIL
+    result: results/e4_2_blast_radius_seal.json
+    finding: >
+      Both halves fail. Static reachability: all four Assay tiers reach
+      L9-editable code - T0 through dispatch and tool_schemas, T1/T2/T3 through
+      retrieval_policy. A verifier L9 may not edit still runs on code it may.
+      Injection: moving only permitted thresholds (eps, noise_leeway, eps_reg)
+      takes the promotion rate from 0.005 to 0.322, a 64x increase, with zero
+      tier requirements changed - so the rule reports full compliance
+      throughout. noise_leeway alone spans 0.086 to 0.000.
+    deliverable_result: >
+      Sealing the whole dependency closure over-seals: it would freeze
+      l1_entries, l2_pages, l3_views and l7_adapters, which the system exists
+      to update. The closure splits in two. SEAL the harness code a verifier
+      executes through (retrieval_policy, dispatch, tool_schemas, judge_model,
+      promotion_gate). PIN the derived views - they may change, but an Assay
+      run must name the versions it ran against, which is the same stamping
+      WAM already applies to L2 pages and weight versions.
+
+  - id: E4.2b
+    tier: L9
+    claim: "gate THRESHOLDS and gate TIER REQUIREMENTS are distinct objects and only the latter needs sealing"
+    source: "implied by Part I section 4's two lists"
+    rig: A
+    kill: "threshold-only edits move the promotion rate materially"
+    predicted: FAIL
+    status: FAIL
+    note: "split out of E4.2 after the run; the injection half is really a separate claim"
 
   - id: E4.3
     tier: L1
@@ -363,4 +418,42 @@ repairs:
       to prior practice - rather than by variance level.
     evidence: "passed A1 and A2 at zero competence cost in E1.4"
     open: "stability under noisy pass-rate estimates is untested"
+    status: proposed
+
+  - id: R3
+    from: E0.2
+    proposal: >
+      Record adapter provenance as the transitive closure through the
+      conditioning skill card, not just the entries a trajectory cited
+      outright. One line in the recording policy.
+    evidence: "eliminates all 186 unrecorded influence paths and all leakage in E0.2"
+    open: >
+      The simulated influence path is linear and additive. Whether real
+      parametric carryover from card-conditioned rollouts is fully captured by
+      set-closure over the card's sources is a Rig B question, and the honest
+      answer may be that provenance bounds the leak rather than closing it.
+    status: proposed
+
+  - id: R4
+    from: E4.2
+    proposal: >
+      Split the blast-radius boundary in two. SEAL harness code any verifier
+      executes through (retrieval policy, dispatch, tool schemas, judge model,
+      the promotion gate itself). PIN derived views by stamping each Assay run
+      with the versions it ran against, reusing the L2 weight-version
+      mechanism. And move gate thresholds - eps, eps_reg, noise_leeway - from
+      the L9-editable list to the sealed list, since they are the promotion bar
+      in everything but name.
+    evidence: "E4.2 static reachability and injection"
+    open: "sealing retrieval policy removes it from L9's search space, which is where SIA found scaffold edits actually pay. Cost of the seal is unmeasured."
+    status: proposed
+
+  - id: R5
+    from: E3.3
+    proposal: >
+      Replace "maximize off-diagonal mass" with "minimize held-out predictive
+      error of the induced T". Same data, same observation-grain tau rows, and
+      it has an interior optimum instead of a monotone drive to atomisation.
+    evidence: "recovers the planted 4-cluster structure exactly in E3.3"
+    open: "tested on nested partitions aligned with the truth; unaligned or non-nested candidate partitions are untested"
     status: proposed
