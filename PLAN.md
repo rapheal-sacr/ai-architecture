@@ -51,6 +51,7 @@ structural work first, which is the right order anyway.
 | E0.2b | *rebuild:* functional ground truth + a third influence path | **FAIL** on both criteria |
 | E4.2 | the blast-radius fixed point seals the Assay | **FAIL** |
 | E3.3 | max off-diagonal mass is a partition objective | **FAIL** |
+| E0.2c | *does the ceiling hold under better policies?* | **PASS** — it does not; E0.2b demoted |
 | E2.1 | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 criteria |
 
 **Two published conclusions have been withdrawn.** Both are recorded in
@@ -493,53 +494,48 @@ seriously and weights the phase schedule accordingly.
 
 ---
 
-## 3 · Phase schedule
+## 3 · Phase schedule — reordered
 
-Ordered by *how fast a result can invalidate a tier*, not by stack order.
+**Rig B is no longer a later phase. It is the calibration input every Rig A
+result is conditional on, and it moves ahead of the remaining claims.**
 
-**Phase 1 — cheap decisive (Rig A). ✅ Complete.** E1.1, E1.4, E0.2, E4.2,
-E3.3. All five failed; the three predicted breaks broke for the predicted
-reason. Total runtime under a minute on the M2.
+The reason is the error record. Generator error is now the dominant error
+source in this programme — B4 and B5 were both generators, and B4 manufactured
+a headline that survived a full write-up. No amount of additional Rig A work
+reduces it, because the generators are the unmeasured input to all of it. A
+single real activation spectrum would have killed B4 on sight.
 
-**Phase 2 — loop dynamics and repair validation (Rig A).** Two tracks now,
-run together:
+It is also the measurement that decides whether E1.1b's empty-intersection
+result matters. The question is *not* which spectrum shape a transformer
+produces — it is **how much shape varies across regions**, because that variance
+is exactly what determines whether one ρ can serve a fleet. Four synthetic
+shapes cannot answer that. One model's per-region activation spectra can.
 
-*New claims:* E1.2, E3.1, E3.2, E4.1, E4.3, E4.4, E0.1, E0.3, E0.4, E2.3,
-E2.4, E2.5, E4.5. Every one is a question about whether a loop converges, and
-none is a question about language.
+**Phase 1 — cheap decisive (Rig A).** Complete: E1.1, E1.1b, E1.4, E0.2,
+E0.2b, E0.2c, E4.2, E3.3, E2.1.
 
-*Repair validation, framed adversarially.* Not "run R2–R5 against the arm they
-replace" — a repair that beats the arm it replaced, in the world that motivated
-it, has told you nothing. **Build the world designed to defeat each repair, from
-outside the model class the repair assumes:**
+**Phase 2 — Rig B calibration (moved up, now blocking).** The smallest set that
+retires generator risk and settles what Phase 1 left conditional:
 
-| Repair | The world built to kill it |
+| Measurement | Settles |
 |---|---|
-| R2 reducible variance | a never-practised region (no prior variance to difference) and a region on a long plateau that later breaks through |
-| R3 transitive provenance | a third influence path — entry → retrieval ranking → which card surfaced — that closure through cards cannot see |
-| R5 predictive-error partitioning | true structure that is non-nested, overlapping, hierarchical, or absent from the candidate family |
-| R4 value bounds | an L9 archive optimising promotion count against the bounds, to find whether any admissible setting still moves the bar materially |
-| R6 tier filter | a domain where T0 verification exists but is systematically available only for the easy slice |
+| per-region activation feature spectra from a small MLX model | whether any Rig A spectrum stream resembles a real one — retires B4-class risk |
+| **variance of spectrum shape across regions** | whether E1.1b's empty intersection bites, i.e. whether ρ can be a global constant |
+| realised interference from a free-basis write on real activations | whether R1's per-region ρ search is necessary and whether it is cheap |
+| observed correlation between checkability and difficulty on real traffic | where E2.1 sits on its own sweep — the number that decides Part III §5 |
+| E1.3 calibration audit, E1.5 per-layer cost | Root 1's remaining claims, which need a model anyway |
 
-R4 additionally needs the cost of its *sealing* component measured separately
-from its *bounding* component, since only the former narrows L9's search space.
+**Phase 3 — remaining Rig A claims**, re-run against whatever Phase 2 says the
+generators should look like: E1.2, E3.1, E3.2, E3.4, E4.1, E4.3, E4.4, E4.5,
+E0.1, E0.3, E0.4, E2.3, E2.4, E2.5.
 
-**Phase 3 — the binding constraint.** E2.1, then E2.2 by hand on one domain.
-Per Part III §0 this is the highest-leverage work in the whole programme, and
-E2.2 is a research bet that should be settled manually before any machinery is
-built around it.
+**Phase 4 — adversarial repair validation.** Not rematches — worlds built to
+kill each repair, from outside the model class it assumes (see §5).
 
-**Phase 4 — Rig B.** E1.3, E1.5, E5.1–E5.5. Stand up the MLX harness. Feed
-E1.3 and E1.5 back into E1.1: the simulator asked "under what spectrum shapes
-is the budget well posed" — Rig B answers "and does a real model produce one."
+**Phase 5 — Rig C.** Survivors only.
 
-**Phase 5 — Rig C.** Only mechanisms that survived. Given the E1.1 result, L7
-adapter compilation should not get GPU hours until the budget question has an
-answer.
-
-**Bootstrap order note.** The design's own Part I §11 sequence (L1 types → seal
-the Assay → fast path → L9 on T0 → router → L8 challenger) is a *build* order
-and it is a good one. This is a *test* order and it deliberately runs the other
+**Bootstrap order note.** The design's own Part I §11 sequence is a *build*
+order and a good one. This is a *test* order and it deliberately runs the other
 way, hitting the deepest assumptions first. Both should run; they are not in
 conflict.
 
@@ -591,6 +587,16 @@ All are in `claims/claims.yaml` under `bugs:`, in the code, and in git history:
   needed 37 directions while the same fraction of test energy needed 127 of 128.
   This **manufactured a headline finding** that was reported and has now been
   withdrawn.
+
+- **B5** the card-overlap knob in `influence.py` shrank the pool of entries
+  feeding any card, instead of raising how many cards each entry feeds — so
+  cascade breadth moved the *wrong way* and would have reported the L3/L7
+  coupling with an inverted sign. Caught because the direction was implausible.
+- **B6** *(process, not code)* three `str.replace` calls patching
+  `claims/claims.yaml` anchored on text that was not there, and silently did
+  nothing — R6, R7 and R8 were described in this document for two commits while
+  missing from the machine-readable ledger. Python's `str.replace` fails open.
+  Every scripted patch now asserts its anchor exists.
 
 B3 is instructive for one reason and B4 for another.
 
@@ -681,16 +687,26 @@ point, a boundary that constrains membership but not values, an objective with
 no opposing force, a gap signal reading the wrong quantity, a harvest policy
 with no tier predicate. Each repairs with machinery already in the design.
 
-**One finding is not a specification defect.** E0.2b's C2 — the tombstone-rate
-ceiling — is arithmetic on the design's central move. "Weights are a derived
-view of the ledger" plus "real deletion via tombstone + cascade" plus "adapters
-recompile in hours–days" jointly fix deletion throughput at
-`capacity / (cascade breadth × recompile time)`. No rewording changes that. You
-can shrink cascade breadth with more specialised adapters and less card overlap,
-but you cannot drive it to zero, and the design offers no mechanism for bounding
-it. **This is the first genuinely architectural cost found so far**, and unlike
-the others it has no repair on the list — R7 detects an incomplete cascade but
-does not make a correct one cheaper.
+**The claimed architectural finding has been demoted.** E0.2b's ceiling assumed
+the most expensive deletion policy in the space, and E0.2c takes it apart:
+
+- **Correctness is not rate-limited at all.** Disabling an affected adapter is
+  ~28,800× cheaper than recompiling it, and disabling is what makes deletion
+  sound — recompilation restores *competence*. E0.2b reported a service-quality
+  limit as a correctness limit.
+- **Batching makes throughput independent of cascade breadth.** Per-deletion
+  cost is `|union|/b × recompile` and `|union|` saturates at fleet size, so at
+  window 16 every breadth gives 24 deletions/day against 1.57–2.53 eager.
+- **Breadth is a knob the design already holds.** Cascade breadth rises
+  monotonically with card-bank duplication, 63.1% at one card per entry to
+  98.8% at six.
+
+What replaces it is better: **the first cross-tier constraint in the programme.**
+L3's admission threshold sets L7's deletion cost — and SESA's stated cos ≤ 0.93
+is far too loose to bind it, since mean card cosine of 0.779 already yields
+98.8% breadth. That is a curve the design can choose a point on, not a wall.
+
+So **every failure found so far is a specification defect.**
 
 Nothing found so far threatens the ledger-first thesis. The deletion ceiling
 constrains the *rate* at which one of its promises can be kept, not whether the

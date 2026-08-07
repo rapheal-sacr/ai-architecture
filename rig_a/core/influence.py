@@ -44,17 +44,36 @@ class InfluenceWorld:
     n_rollouts: int
     n_adapters: int
     rng: field(default=None)
+    card_overlap: float = 1.0
 
     def __post_init__(self) -> None:
         r = self.rng
         self.values = r.normal(size=(self.n_entries, self.dim))
 
-        # Each card distils an overlapping slice of the ledger.
-        per = max(self.n_entries // self.n_cards, 2)
-        self.card_sources = [
-            sorted(r.choice(self.n_entries, size=per, replace=False).tolist())
-            for _ in range(self.n_cards)
-        ]
+        # `card_overlap` is a MULTIPLICITY: how many cards each participating
+        # entry feeds. That is the knob L3's admission control actually turns --
+        # SESA admits a candidate card only at cosine <= 0.93 against the bank,
+        # which bounds how much cards may duplicate one another, which bounds
+        # how many cards one entry can feed, which is cascade breadth.
+        #
+        # Participation is held FIXED as multiplicity varies. An earlier version
+        # drew shared sources from a pool whose size shrank as overlap rose, so
+        # raising "overlap" mostly reduced how many entries fed any card at all,
+        # and cascade breadth moved the wrong way for a reason that had nothing
+        # to do with card duplication.
+        m = max(int(round(self.card_overlap)), 1)
+        base = max(self.n_entries // self.n_cards, 2)
+        participants = r.choice(
+            self.n_entries, size=min(base * self.n_cards, self.n_entries), replace=False
+        )
+        # Each participant appears in exactly m cards; card size grows with m so
+        # the participating set stays the same.
+        slots: list[list[int]] = [[] for _ in range(self.n_cards)]
+        for i, e in enumerate(participants):
+            for j in range(m):
+                slots[(i + j * 1) % self.n_cards].append(int(e))
+        self.card_sources = [sorted(set(s)) if s else [int(participants[0])] for s in slots]
+        self.entry_multiplicity = m
 
         # Each rollout carries a query. Which card conditions it is decided at
         # generation time by retrieval, not fixed in advance.
@@ -133,6 +152,37 @@ class InfluenceWorld:
         return int(np.sum(base != self.selected_cards(alive)))
 
     # -- what each provenance policy would invalidate -----------------------
+
+    def mean_card_cosine(self) -> float:
+        """Mean pairwise cosine between card values -- what admission control bounds.
+
+        SESA's rule is stated as a cosine cap on the card bank. This is the
+        observable side of `card_overlap`, so a cascade-breadth result can be
+        quoted against the threshold a practitioner would actually set.
+        """
+        alive = np.ones(self.n_entries, dtype=bool)
+        cv = self.card_values(alive)
+        n = np.linalg.norm(cv, axis=1, keepdims=True)
+        cvn = cv / np.maximum(n, 1e-12)
+        sims = cvn @ cvn.T
+        iu = np.triu_indices(self.n_cards, k=1)
+        return float(np.mean(sims[iu]))
+
+    def union_cascade(self, eids: list[int]) -> set[int]:
+        """Adapters truly moved by deleting a BATCH of entries together.
+
+        The eager policy pays cascade breadth once per tombstone. A batching
+        policy pays it once per window, over the union -- and when cascades
+        overlap heavily the union saturates after a handful of deletions, so the
+        two costs diverge sharply.
+        """
+        alive = np.ones(self.n_entries, dtype=bool)
+        before = self.adapter_weights(alive)
+        for e in eids:
+            alive[e] = False
+        after = self.adapter_weights(alive)
+        moved = np.linalg.norm(before - after, axis=1)
+        return {int(a) for a in np.where(moved > 1e-12)[0]}
 
     def policy_invalidates(self, eid: int, policy: str) -> set[int]:
         """Adapters the cascade fires on, given what the system recorded.

@@ -1,0 +1,199 @@
+{
+  "seed": 20260806,
+  "recompile_hours": 8.0,
+  "rows": [
+    {
+      "entry_multiplicity": 1,
+      "mean_card_cosine": 0.046,
+      "cascade_breadth": 5.05,
+      "cascade_fraction": 0.631,
+      "batches": [
+        {
+          "batch": 1,
+          "union_adapters": 4.75,
+          "adapter_hours_per_deletion": 38.0,
+          "deletions_per_day": 2.53
+        },
+        {
+          "batch": 2,
+          "union_adapters": 6.68,
+          "adapter_hours_per_deletion": 26.71,
+          "deletions_per_day": 3.59
+        },
+        {
+          "batch": 4,
+          "union_adapters": 7.71,
+          "adapter_hours_per_deletion": 15.42,
+          "deletions_per_day": 6.23
+        },
+        {
+          "batch": 8,
+          "union_adapters": 7.98,
+          "adapter_hours_per_deletion": 7.98,
+          "deletions_per_day": 12.03
+        },
+        {
+          "batch": 16,
+          "union_adapters": 8.0,
+          "adapter_hours_per_deletion": 4.0,
+          "deletions_per_day": 24.0
+        }
+      ]
+    },
+    {
+      "entry_multiplicity": 2,
+      "mean_card_cosine": 0.224,
+      "cascade_breadth": 6.82,
+      "cascade_fraction": 0.853,
+      "batches": [
+        {
+          "batch": 1,
+          "union_adapters": 6.5,
+          "adapter_hours_per_deletion": 52.0,
+          "deletions_per_day": 1.85
+        },
+        {
+          "batch": 2,
+          "union_adapters": 7.58,
+          "adapter_hours_per_deletion": 30.33,
+          "deletions_per_day": 3.16
+        },
+        {
+          "batch": 4,
+          "union_adapters": 7.97,
+          "adapter_hours_per_deletion": 15.94,
+          "deletions_per_day": 6.02
+        },
+        {
+          "batch": 8,
+          "union_adapters": 8.0,
+          "adapter_hours_per_deletion": 8.0,
+          "deletions_per_day": 12.0
+        },
+        {
+          "batch": 16,
+          "union_adapters": 8.0,
+          "adapter_hours_per_deletion": 4.0,
+          "deletions_per_day": 24.0
+        }
+      ]
+    },
+    {
+      "entry_multiplicity": 3,
+      "mean_card_cosine": 0.384,
+      "cascade_breadth": 7.66,
+      "cascade_fraction": 0.957,
+      "batches": [
+        {
+          "batch": 1,
+          "union_adapters": 7.3,
+          "adapter_hours_per_deletion": 58.42,
+          "deletions_per_day": 1.64
+        },
+        {
+          "batch": 2,
+          "union_adapters": 7.89,
+          "adapter_hours_per_deletion": 31.54,
+          "deletions_per_day": 3.04
+        },
+        {
+          "batch": 4,
+          "union_adapters": 7.99,
+          "adapter_hours_per_deletion": 15.98,
+          "deletions_per_day": 6.01
+        },
+        {
+          "batch": 8,
+          "union_adapters": 8.0,
+          "adapter_hours_per_deletion": 8.0,
+          "deletions_per_day": 12.0
+        },
+        {
+          "batch": 16,
+          "union_adapters": 8.0,
+          "adapter_hours_per_deletion": 4.0,
+          "deletions_per_day": 24.0
+        }
+      ]
+    },
+    {
+      "entry_multiplicity": 4,
+      "mean_card_cosine": 0.519,
+      "cascade_breadth": 7.89,
+      "cascade_fraction": 0.986,
+      "batches": [
+        {
+          "batch": 1,
+          "union_adapters": 7.6,
+          "adapter_hours_per_deletion": 60.83,
+          "deletions_per_day": 1.58
+        },
+        {
+          "batch": 2,
+          "union_adapters": 7.97,
+          "adapter_hours_per_deletion": 31.88,
+          "deletions_per_day": 3.01
+        },
+        {
+          "batch": 4,
+          "union_adapters": 8.0,
+          "adapter_hours_per_deletion": 16.0,
+          "deletions_per_day": 6.0
+        },
+        {
+          "batch": 8,
+          "union_adapters": 8.0,
+          "adapter_hours_per_deletion": 8.0,
+          "deletions_per_day": 12.0
+        },
+        {
+          "batch": 16,
+          "union_adapters": 8.0,
+          "adapter_hours_per_deletion": 4.0,
+          "deletions_per_day": 24.0
+        }
+      ]
+    },
+    {
+      "entry_multiplicity": 6,
+      "mean_card_cosine": 0.779,
+      "cascade_breadth": 7.9,
+      "cascade_fraction": 0.988,
+      "batches": [
+        {
+          "batch": 1,
+          "union_adapters": 7.62,
+          "adapter_hours_per_deletion": 61.0,
+          "deletions_per_day": 1.57
+        },
+        {
+          "batch": 2,
+          "union_adapters": 7.99,
+          "adapter_hours_per_deletion": 31.96,
+          "deletions_per_day": 3.0
+        },
+        {
+          "batch": 4,
+          "union_adapters": 8.0,
+          "adapter_hours_per_deletion": 16.0,
+          "deletions_per_day": 6.0
+        },
+        {
+          "batch": 8,
+          "union_adapters": 8.0,
+          "adapter_hours_per_deletion": 8.0,
+          "deletions_per_day": 12.0
+        },
+        {
+          "batch": 16,
+          "union_adapters": 8.0,
+          "adapter_hours_per_deletion": 4.0,
+          "deletions_per_day": 24.0
+        }
+      ]
+    }
+  ],
+  "D1_disable_decouples": true,
+  "D2_batching_amortises": true,
+  "D3_admission_is_a_lever": true
+}

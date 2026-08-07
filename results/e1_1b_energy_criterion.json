@@ -51,6 +51,11 @@
         0.99,
         0.999
       ],
+      "workable_under_original_K2": [
+        0.99,
+        0.999
+      ],
+      "verdict_under_original_K2": "PASS",
       "leak_blowup_at_95": 0.99,
       "G1_budget_workable": true,
       "G2_estimate_generalises": true,
@@ -104,6 +109,11 @@
         0.99,
         0.999
       ],
+      "workable_under_original_K2": [
+        0.99,
+        0.999
+      ],
+      "verdict_under_original_K2": "PASS",
       "leak_blowup_at_95": 0.99,
       "G1_budget_workable": true,
       "G2_estimate_generalises": true,
@@ -156,6 +166,8 @@
       "workable_retentions": [
         0.95
       ],
+      "workable_under_original_K2": [],
+      "verdict_under_original_K2": "FAIL",
       "leak_blowup_at_95": 0.99,
       "G1_budget_workable": true,
       "G2_estimate_generalises": true,
@@ -210,6 +222,11 @@
         0.99,
         0.999
       ],
+      "workable_under_original_K2": [
+        0.99,
+        0.999
+      ],
+      "verdict_under_original_K2": "PASS",
       "leak_blowup_at_95": 1.06,
       "G1_budget_workable": true,
       "G2_estimate_generalises": true,
@@ -336,6 +353,29 @@
       "fill_ratio": 1.25,
       "best_safe_free_rank": 228,
       "workable": true
+    }
+  ],
+  "workable_intersection": [],
+  "intersection_by_rank_request": [
+    {
+      "rank_request": 2,
+      "intersection": [
+        0.99
+      ]
+    },
+    {
+      "rank_request": 4,
+      "intersection": [
+        0.99
+      ]
+    },
+    {
+      "rank_request": 8,
+      "intersection": []
+    },
+    {
+      "rank_request": 16,
+      "intersection": []
     }
   ]
 }

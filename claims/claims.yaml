@@ -137,6 +137,51 @@ claims:
       scales linearly with both factors, and the design's own substrate table
       already fixes one of them at "hours-days".
 
+  - id: E0.2c
+    tier: L7 x L3
+    claim: "the E0.2b deletion ceiling holds under policies that are not the worst available"
+    source: "E0.2b promoted a ceiling to 'the one architectural finding'; this tests the policy it assumed"
+    rig: A
+    kill: "D1 disabling does not decouple compliance from recompile; D2 batching does not amortise at high cascade breadth; D3 cascade breadth is insensitive to card-bank duplication"
+    predicted: uncertain
+    status: PASS
+    result: results/e0_2c_deletion_policies.json
+    finding: >
+      All three pass, which DEMOTES E0.2b's ceiling. E0.2b assumed the most
+      expensive policy in the space - eager, per-tombstone, fully-recompiling,
+      parallelism as the only relief - and folded three separable things into
+      one number.
+      D1: disabling an affected adapter is ~28,800x cheaper than recompiling it.
+      Deletion CORRECTNESS is bought by disabling; recompilation restores
+      COMPETENCE. Only the second is rate-limited, so E0.2b reported a
+      service-quality limit as a correctness rate limit.
+      D2: batching amortises hard and the union saturates at fleet size. At
+      batch 16 throughput is 24 deletions/day at EVERY cascade breadth, versus
+      1.57-2.53/day at batch 1. Batching does not merely help - it makes
+      throughput independent of cascade breadth, because per-deletion cost is
+      |union|/b x recompile and |union| is bounded by the fleet.
+      D3: cascade breadth is a monotone function of card-bank duplication -
+      63.1% at 1 card per entry rising to 98.8% at 6. So L3 admission control is
+      a direct lever on L7 deletion cost.
+    new_finding: >
+      The first cross-tier design constraint in the programme, and it is a
+      coupling rather than a limit: L3's card-bank admission threshold sets L7's
+      deletion cost. Worth noting that SESA's stated cap of cosine <= 0.93 is
+      too loose to bind it - mean card cosine of 0.779 already yields 98.8%
+      cascade breadth, so the threshold as specified does not control deletion
+      cost at all.
+    corrects: >
+      E0.2b's C2 should not have been promoted to "the one genuinely
+      architectural finding". The identity capacity/(cascade x recompile) is
+      sound arithmetic about a policy, and the policy was the most pessimistic
+      one available.
+    parameterisation_bug: >
+      The first run of this experiment moved cascade breadth the WRONG WAY
+      (68.3% -> 45.3% as overlap rose) because the overlap knob shrank the pool
+      of entries feeding any card at all, rather than raising how many cards
+      each entry feeds. Re-parameterised as an explicit multiplicity with
+      participation held fixed. Rig bug B5.
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"
@@ -181,6 +226,20 @@ claims:
       one committed direction (4.2% of energy each) because eps is a hard cut,
       and the automatic knee-finder missed by two. Placing eps correctly
       requires already knowing the rank eps is being used to compute.
+    withdrawn_finding_verbatim: >
+      "Fails on 3 of 4 streams. Power-law: no plateau, 29x rank swing, 75%
+      leakage. Realistic domain mixture: budget well posed but empty - 6 free
+      directions of 128, so allocation deadlocks into permanent reclamation.
+      Even the design's own assumed bimodal shape fails, and the failure is
+      quantised in units of one committed direction (4.2% of energy each) -
+      the auto-placed eps missed by two. No safety margin at the cut."
+    withdrawn_status: FAIL
+    superseded_by: [E1.1b, bugs.B4]
+    why_kept: >
+      I6 applied to this ledger. A refuted conclusion is valuable precisely
+      because nothing references it any more, and the reversal is the single
+      most informative record in this file. Overwriting the original text would
+      leave a clean PASS with no visible sign that anything had moved.
     retracted: >
       The originally reported third failure - "realistic domain mixture leaves
       6 free directions of 128, so allocation deadlocks into permanent
@@ -195,6 +254,21 @@ claims:
     source: "Part II section A's own pointer to GPM: 'truncated SVD over a small activation buffer - what GPM actually does'"
     rig: A
     kill: "G1 no retention level yields free rank >= 8 at interference <= 5% on held-out traffic; G2 test leakage > 2x calibration leakage"
+    kill_criterion_changed: >
+      RE-REGISTERED. E1.1's K2 was `leakage <= 0.05 AND interference <= 0.05`.
+      Here the pass condition is interference only; the absolute leakage bar is
+      replaced by G2's calibration-vs-test blowup ratio. Reason: under the
+      energy criterion, choosing r to hold rho of a sample's energy forces
+      leakage on that sample to (1 - rho), so an absolute leakage bar collapses
+      into "is rho >= 0.95" - a restatement of the setting rather than a
+      measurement. What stays informative is whether leakage GENERALISES and
+      what it COSTS.
+    effect_of_the_change: >
+      MATERIAL, and reported in every run as G0. Under E1.1's original K2 the
+      POWER-LAW stream still FAILS: its only workable retention is rho = 0.95,
+      where leak_test is 0.0518 against a 0.05 bar. The reversal is therefore
+      partly a criterion change and not purely a measurement change, and the
+      run prints both verdicts so this is auditable rather than asserted.
     predicted: uncertain
     status: PASS
     result: results/e1_1b_energy_criterion.json
@@ -206,6 +280,22 @@ claims:
       generalises off its own sample. Capacity sweep across dim in {128,256,512}
       and 4-64 domains: the budget only goes empty at a fill ratio of 5.0, i.e.
       5x over-subscription. At every realistic ratio there is ample free rank.
+    unextracted_finding_now_extracted: >
+      The workable retention bands do NOT intersect. bimodal [0.99, 0.999],
+      exponential [0.99, 0.999], power law [0.95], mixture [0.95, 0.99, 0.999]
+      -> intersection EMPTY at a rank-8 request. Bimodal and exponential are
+      unsafe at 0.95 (interference 0.066, 0.068); power law is unusable at 0.99
+      (free rank 6). So rho cannot be a fleet-wide constant: it is either unsafe
+      somewhere or has nothing to allocate somewhere.
+      CONTINGENT on the requested rank - at rank 2 or 4 the intersection is
+      non-empty at {0.99}; at rank 8 and 16 it is empty. And these are four
+      synthetic shapes, not four measured regions.
+      CONSEQUENCE, and it strengthens R1: if no fixed rho serves every region,
+      rho must be searched per region against measured interference on fresh
+      traffic - which IS R1. R1 is therefore not an alternative sitting beside
+      the energy criterion, it is what makes the energy criterion operable. It
+      is also cheap: interference is a projection against an activation buffer,
+      not a counterfactual replay.
     consequence: >
       E1.1's failure does NOT survive the strongest faithful reading. The
       subspace budget is sound; Part II section A states it in a form
@@ -293,13 +383,26 @@ claims:
       H3 fails at high correlation: mean per-domain difficulty bias reaches
       0.095 at correlation 0.75 and 0.176 at 1.0, so the harvested suite tests
       each domain's easy corner while reporting coverage of the domain.
-    prediction_wrong: >
-      H2 PASSES, contradicting this plan's own pre-registered follow-up. A
-      strict T0/T1 filter yields 33-68% of traffic and covers 94-97% of traffic
-      mass - not the small fraction predicted. So the claim that "harvesting
-      supplements only domains that already have verifiers and does nothing for
-      the T3 domains" is NOT supported. Harvesting is viable as a suite source;
-      its problem is representativeness, not yield.
+    metric_corrected: >
+      H2 originally measured yield as a fraction of TRAFFIC, and coverage as
+      traffic volume in domains with enough probes (94-97%). That is the
+      flattering axis and close to unfalsifiable: traffic volume is dominated by
+      high-frequency domains, which are exactly the ones already checkable, and
+      the uncovered 3-6% is by definition the tail - which is where the gap set
+      lives. Checkability and gap-set membership are anti-correlated by
+      construction. As originally posed, H2 and E2.5 were the same question
+      answered twice, and the one that passed used the metric that could not
+      fail.
+      Re-weighted by gap-set membership, yield falls to 0.680 / 0.544 / 0.417 /
+      0.292 / 0.165 across the correlation sweep, versus 0.677 / 0.590 / 0.502 /
+      0.420 / 0.334 traffic-weighted. H2 now FAILS at correlation 1.0 (0.165
+      against a 0.20 bar) where the traffic axis passed at 0.334.
+    prediction_partly_wrong: >
+      The original prediction - that strict-filter yield would be too small to
+      matter - is still not supported at moderate correlation: gap-set yield is
+      0.29-0.68 for correlation <= 0.75. Harvesting remains viable there. But
+      the margin is roughly half what the traffic axis suggested, and it crosses
+      the bar at the high-correlation end.
     key_caveat: >
       The correlation between checkability and easiness is SWEPT, not measured,
       and the per-domain checkability profile is an assumption stated in the
@@ -563,6 +666,14 @@ bugs:
       PASS on the claim this plan most expected to fail, and was caught only
       because U1 and U2 contradicted each other.
 
+  - id: B5
+    where: influence.InfluenceWorld card construction
+    bug: "the card-overlap knob shrank the pool of participating entries instead of raising per-entry card multiplicity"
+    effect: >
+      cascade breadth moved the wrong way with overlap (68.3% -> 45.3%), which
+      would have reported the L3/L7 coupling with an inverted sign. Caught by
+      the direction being implausible, not by any check.
+
   - id: B4
     where: spectrum.stream_domain_mixture
     bug: "re-drew qr(normal(...)) domain subspaces on every call"
@@ -644,4 +755,46 @@ repairs:
       it has an interior optimum instead of a monotone drive to atomisation.
     evidence: "recovers the planted 4-cluster structure exactly in E3.3"
     open: "tested on nested partitions aligned with the truth; unaligned or non-nested candidate partitions are untested"
+    status: proposed
+
+  - id: R6
+    from: E2.1
+    proposal: >
+      Filter harvested probes by verification tier before sealing. One
+      predicate, and it removes the 29-63% of an unfiltered suite that is
+      laundered T3 judge opinion.
+    open: >
+      Does nothing for representativeness. Gap-set-weighted yield still falls
+      to 0.165 at high checkability/easiness correlation, and that is the part
+      with no repair.
+    status: proposed
+
+  - id: R7
+    from: E0.2b
+    proposal: >
+      Verify unlearning instead of inferring it. After a cascade, recompute the
+      affected adapters and compare against the held weights - the same
+      operation E0.2b uses as ground truth. Runs once per deletion, not once
+      per promotion.
+    rationale: >
+      Structurally the same move as R1: measure what actually happened instead
+      of counting what a bookkeeping rule predicts. Needed because no set-based
+      provenance closure can be complete - the residual dependency is on a
+      retrieval that was never run.
+    status: proposed
+
+  - id: R8
+    from: E0.2c
+    proposal: >
+      Split deletion into two service levels: DISABLE affected adapters
+      immediately, which is what makes deletion sound, then BATCH recompilation
+      over a window to restore competence. Set L3's admission threshold with
+      deletion cost in mind, since it is the lever that sets cascade breadth -
+      and set it tighter than cos <= 0.93, which does not bind.
+    evidence: >
+      E0.2c: disabling is ~28,800x cheaper than recompiling; batching at window
+      16 makes throughput independent of cascade breadth at 24 deletions/day.
+    open: >
+      Competence during the disabled window is unmeasured, and at 98.8% cascade
+      breadth that is nearly the whole adapter fleet off at once.
     status: proposed

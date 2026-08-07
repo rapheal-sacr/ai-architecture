@@ -40,6 +40,7 @@ or the model is small.
 | [E1.4](rig_a/experiments/e1_4_aleatoric_magnet.py) | posterior variance is an epistemic gap detector | **FAIL** — one coin-flip region in twelve captures 51% of the practice budget, because the frontier reward `4p(1−p)` peaks exactly where a coin flip lives. Switching to epistemic variance fixes the magnet and inverts the gate to ρ = −0.99 |
 | [E0.2](rig_a/experiments/e0_2_transitive_unlearning.py) | the tombstone cascade reaches the weights | **PARTIAL** — the `transitive` arm was a **tautology** and is withdrawn; the 95.9% figure for `direct` is a knob. The finding it owed and did not produce: cascade invalidates ~54% of adapters per tombstone, implying a tombstone-rate ceiling |
 | [E0.2b](rig_a/experiments/e0_2b_influence_and_ceiling.py) | *rebuild* — functional ground truth, third influence path | **FAIL** — `transitive` provenance recalls **0.913, not 1.0**, and no set-based closure can reach 1.0 because the residual dependency is on a retrieval that was never run. And the correct cascade touches 69% of the fleet, putting sustainable deletions **below 1/day** across much of the plausible cost space |
+| [E0.2c](rig_a/experiments/e0_2c_deletion_policies.py) | *does that ceiling hold under better policies?* | **PASS** — it does not. Disabling is 28,800× cheaper than recompiling and is what makes deletion sound; batching makes throughput independent of cascade breadth. E0.2b demoted. Replaced by a real finding: **cascade breadth rises 63%→99% with card-bank duplication, so L3 admission sets L7 deletion cost** |
 | [E4.2](rig_a/experiments/e4_2_blast_radius_seal.py) | the blast-radius fixed point seals the Assay | **FAIL** twice — all four Assay tiers execute through L9-editable code; and the rule bounds *which* thresholds are editable while placing no bound on their *values*, so the reachable set is unbounded and compliance is reported across all of it |
 | [E3.3](rig_a/experiments/e3_3_offdiagonal_degeneracy.py) | "maximize off-diagonal mass" is a partition objective | **FAIL** — monotone in fineness, so its argmax is total atomisation, and it ranks the planted true structure near the *bottom*. The replacement objective is validated only inside a family containing the answer |
 | [E2.1](rig_a/experiments/e2_1_tier_laundering.py) | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 — 29–63% of an unfiltered "T2" suite is laundered T3 judge opinion, and the harvested slice tests each domain's easy corner. But the strict-filter **yield is high** (33–68%), contradicting this plan's own prediction |
@@ -48,20 +49,29 @@ or the model is small.
 leaves 6 free directions", E0.2's "transitive closure fixes it completely").
 Both are recorded in `claims/claims.yaml` under `retracted:`.
 
-Almost every failure so far is a **specification defect**, repairable with
-machinery already in the design. The exception is E0.2b's deletion ceiling,
-which is arithmetic on the design's central move — derived weights + cascade +
-hours-to-days recompiles fix deletion throughput at
-`capacity / (cascade × recompile)`, and no rewording changes that. It is the
-first genuinely architectural cost found, and the only finding with no repair
-on the list.
+**Every failure found so far is a specification defect**, repairable with
+machinery already in the design. The one finding promoted to "architectural" —
+E0.2b's deletion ceiling — was demoted by E0.2c, which showed it assumed the
+most expensive deletion policy available. What replaced it is better: the first
+cross-tier constraint in the programme, **L3's card-bank admission threshold
+sets L7's deletion cost**, and the design's stated cos ≤ 0.93 is too loose to
+bind it.
 
-Nothing found so far threatens the ledger-first thesis. The counterweight:
-**both serious errors in Phase 1 were in the rig, not the architecture** — see
-`bugs:` in the claim ledger — and one manufactured a headline that survived a
-full write-up.
+Nothing found so far threatens the ledger-first thesis.
 
-Seven repairs proposed (R1–R7), **none adopted**. See PLAN.md §5.
+**The counterweight, and it is the number worth watching.** Six rig errors
+against zero confirmed architectural failures. That ratio is expected when new
+code tests prose that has already been through three review passes — the useful
+signal is whether *detection* is improving, and it is: bugs 1–2 by inspection,
+3 by contradiction between two measurements, 4 by asking whether a striking
+number was a parameter I chose, 5 by an implausible direction, 6 by counting
+what should have been there. Only the fourth mechanism scales.
+
+The strategic consequence: **generator error is now the dominant error source,
+and no Rig A work reduces it.** Rig B has moved ahead of the remaining 13
+claims — see PLAN.md §3.
+
+Eight repairs proposed (R1–R8), **none adopted**. See PLAN.md §5.
 
 ## Running
 

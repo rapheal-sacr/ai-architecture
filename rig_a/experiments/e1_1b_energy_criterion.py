@@ -33,12 +33,33 @@ any point on that curve is simultaneously usable and safe:
     usable  free rank >= RANK_REQUEST, or there is nothing to allocate
     safe    interference on fresh traffic <= INTERFERENCE_LIMIT
 
+RE-REGISTRATION -- THIS EXPERIMENT CHANGED E1.1's KILL CONDITION.
+E1.1's K2 was `leakage <= 0.05 AND interference <= 0.05`. Here the `safe` flag
+is interference only; the absolute leakage bar is gone, replaced by G2's
+calibration-vs-test blowup ratio.
+
+The reason is that under the energy criterion an absolute leakage threshold
+stops being an independent test. Choosing r to hold rho of a sample's energy
+forces leakage on that sample to (1 - rho), so "is leakage <= 0.05" collapses
+into "is rho >= 0.95" -- a restatement of the setting, not a measurement of the
+system. What remains informative is whether leakage GENERALISES (G2) and what it
+COSTS operationally (interference).
+
+That reasoning is sound but the change is material and must be visible, because
+E1.1 read FAIL and this reads PASS. Specifically: UNDER E1.1's ORIGINAL K2 THE
+POWER-LAW STREAM STILL FAILS. Its only workable retention is rho = 0.95, where
+leak_test is 0.0518 against a 0.05 bar. The verdict under both criteria is
+reported below so the reversal is auditable rather than asserted.
+
 KILL CRITERIA (pre-registered):
     G1 fails if NO retention level rho yields free rank >= RANK_REQUEST with
        interference <= 5% on held-out traffic. That is the budget being
        unusable under its best reading.
     G2 fails if test leakage exceeds calibration leakage by more than 2x at
        rho = 0.95 -- the spectrum estimate not generalising off its own sample.
+    G0 (retained from E1.1, reported not enforced) the original K2, leakage AND
+       interference both <= 0.05, so the effect of the criterion change is
+       visible in every run.
 
 Is there a world that produces the other verdict? Yes, and E1.1 already
 contains it: the bimodal stream has 105 free directions with a noise floor
@@ -108,6 +129,9 @@ def evaluate(name: str, feats, calib, test, rng) -> dict:
         )
 
     workable = [c for c in curve if c["usable"] and c["safe"]]
+    # G0: the original K2, retained for audit. Not enforced.
+    workable_k2 = [c for c in curve
+                   if c["usable"] and c["safe"] and c["leak_test"] <= 0.05]
     at95 = next(c for c in curve if c["retention"] == 0.95)
     blowup = at95["leak_test"] / max(at95["leak_calib"], 1e-9)
 
@@ -118,6 +142,8 @@ def evaluate(name: str, feats, calib, test, rng) -> dict:
         "stream": name,
         "curve": curve,
         "workable_retentions": [c["retention"] for c in workable],
+        "workable_under_original_K2": [c["retention"] for c in workable_k2],
+        "verdict_under_original_K2": "PASS" if workable_k2 else "FAIL",
         "leak_blowup_at_95": round(float(blowup), 2),
         "G1_budget_workable": bool(g1),
         "G2_estimate_generalises": bool(g2),
@@ -199,13 +225,42 @@ def main() -> int:
                 f"{'   yes' if c['usable'] else '    no':>9}"
                 f"{'  yes' if c['safe'] else '   no':>6}"
             )
-        print(f"    -> workable retentions: {r['workable_retentions'] or 'NONE'}"
-              f"   | leak blowup at 0.95: {r['leak_blowup_at_95']}x"
-              f"   | {r['verdict']}\n")
+        print(f"    -> workable: {r['workable_retentions'] or 'NONE'}"
+              f"   | blowup {r['leak_blowup_at_95']}x   | {r['verdict']}")
+        print(f"       under E1.1's original K2 (leakage <= 0.05 too):"
+              f" {r['workable_under_original_K2'] or 'NONE'}"
+              f"   | {r['verdict_under_original_K2']}\n")
 
     print("  G1 some retention gives free rank >= "
           f"{RANK_REQUEST} at interference <= {INTERFERENCE_LIMIT}")
     print(f"  G2 test leakage <= {LEAKAGE_BLOWUP}x calibration leakage at rho=0.95\n")
+
+    bands = [set(r["workable_retentions"]) for r in rows]
+    inter = set.intersection(*bands) if bands else set()
+    print("  Do the workable bands intersect? (can rho be a global constant?)\n")
+    for r in rows:
+        print(f"    {r['stream'][:42]:<44}{str(r['workable_retentions'] or 'NONE')}")
+    print(f"\n    intersection: {sorted(inter) if inter else 'EMPTY'}")
+    if not inter:
+        print("    No single retention serves every stream, so rho cannot be a"
+              "\n    fleet-wide constant: it is either unsafe somewhere or has"
+              "\n    nothing to allocate somewhere.")
+
+    print(f"\n  Contingency on the requested rank (currently {RANK_REQUEST}):\n")
+    print(f"    {'rank req':>10}   intersection")
+    rank_rows = []
+    for rr in (2, 4, 8, 16):
+        bs = []
+        for r in rows:
+            bs.append({c["retention"] for c in r["curve"]
+                       if c["free_rank"] >= rr and c["safe"]})
+        it = sorted(set.intersection(*bs)) if bs else []
+        rank_rows.append({"rank_request": rr, "intersection": it})
+        print(f"    {rr:>10}   {it if it else 'EMPTY'}")
+    print("\n    The workable band is a function of BOTH spectrum shape and"
+          "\n    requested rank, and the bands need not overlap. Four synthetic"
+          "\n    shapes, not four measured regions - what decides whether this"
+          "\n    bites is how much shape varies across real regions (Rig B).\n")
 
     sweep = capacity_sweep(np.random.default_rng(SEED))
     print("  Capacity sweep - where does the budget actually go empty?")
@@ -223,7 +278,9 @@ def main() -> int:
 
     out = pathlib.Path(__file__).resolve().parents[2] / "results" / "e1_1b_energy_criterion.json"
     out.write_text(json.dumps({"seed": SEED, "dim": DIM, "rank_request": RANK_REQUEST,
-                               "rows": rows, "capacity_sweep": sweep}, indent=2))
+                               "rows": rows, "capacity_sweep": sweep,
+                               "workable_intersection": sorted(inter),
+                               "intersection_by_rank_request": rank_rows}, indent=2))
     print(f"wrote {out}")
     return 0
 

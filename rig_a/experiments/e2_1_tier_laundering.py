@@ -42,8 +42,17 @@ work.
 KILL CRITERIA (pre-registered):
     H1 fails if an unfiltered harvest puts any T3-adjudicated outcome into the
        sealed suite. Absolute -- one laundered probe is a tier violation.
-    H2 fails if a strict T0/T1 filter yields less than 20% of traffic, i.e.
-       harvesting cannot supply a suite at all.
+    H2 fails if a strict T0/T1 filter yields less than 20% of the GAP SET --
+       not of traffic. Traffic-weighted yield is the flattering axis and cannot
+       really fail: it is dominated by high-volume domains, which are exactly
+       the ones already checkable. What a sealed suite has to cover is what the
+       system is about to practise, and gap-set membership is anti-correlated
+       with checkability by construction -- gaps are where the system fails,
+       failures are disproportionately hard, hard is disproportionately
+       un-checkable. An earlier version of this experiment reported 94-97%
+       "coverage" measured as traffic volume, which is compatible with covering
+       almost none of the gap set, and made H2 and E2.5 the same question
+       answered twice with the metric that could not fail.
     H3 fails if the harvested slice's mean difficulty differs from its domain's
        true mean by more than 0.10 at correlation >= 0.5 -- the suite testing a
        corner while reporting the domain.
@@ -90,6 +99,11 @@ def simulate(correlation: float, rng: np.random.Generator) -> dict:
 
     difficulty = rng.uniform(0.0, 1.0, size=N_INTERACTIONS)
 
+    # Gap-set weight. A gap is a region the system fails in, so weight rises
+    # with difficulty. This is the distribution L8 will actually draw practice
+    # from, and it is the distribution a sealed suite has to cover.
+    gap_weight = difficulty**2
+
     # An interaction is checkable with probability set by its domain, tilted by
     # difficulty in proportion to `correlation`. At correlation 0 the tilt is
     # absent and checkability is a coin flip independent of difficulty.
@@ -111,6 +125,9 @@ def simulate(correlation: float, rng: np.random.Generator) -> dict:
     harvested_strict = resolved & checkable
     n_strict = int(harvested_strict.sum())
     yield_strict = n_strict / N_INTERACTIONS
+    # The number that actually decides section 5: what fraction of the gap set,
+    # not of the traffic, survives a sound-tier filter.
+    yield_gap = float(gap_weight[harvested_strict].sum() / gap_weight.sum())
 
     # -- H3: is the strict suite representative of the domains it claims? ----
     biases, covered_mass, blind_mass = [], 0.0, 0.0
@@ -133,7 +150,8 @@ def simulate(correlation: float, rng: np.random.Generator) -> dict:
         "unfiltered_suite_size": n_all,
         "laundered_probes": laundered,
         "laundering_rate": round(laundered / max(n_all, 1), 4),
-        "strict_yield": round(yield_strict, 4),
+        "strict_yield_traffic": round(yield_strict, 4),
+        "strict_yield_gapset": round(yield_gap, 4),
         "mean_difficulty_bias": round(mean_bias, 4),
         "worst_difficulty_bias": round(worst_bias, 4),
         "traffic_mass_covered": round(covered_mass, 4),
@@ -146,13 +164,14 @@ def main() -> int:
             for i, c in enumerate(CORRELATIONS)]
 
     h1 = all(r["laundered_probes"] == 0 for r in rows)
-    h2 = all(r["strict_yield"] >= YIELD_MIN for r in rows)
+    h2 = all(r["strict_yield_gapset"] >= YIELD_MIN for r in rows)
+    h2_traffic = all(r["strict_yield_traffic"] >= YIELD_MIN for r in rows)
     h3 = all(r["mean_difficulty_bias"] <= BIAS_LIMIT
              for r in rows if r["correlation"] >= 0.5)
 
     hdr = (f"{'corr':>6}{'suite':>8}{'laundered':>11}{'rate':>8}"
-           f"{'strict yield':>14}{'mean bias':>11}{'worst':>8}"
-           f"{'covered':>9}{'blind':>8}")
+           f"{'yield:traffic':>15}{'yield:gapset':>14}{'mean bias':>11}"
+           f"{'worst':>8}{'blind':>8}")
     print(f"\nE2.1  Does probe harvesting widen the verifiable surface?"
           f"   ({N_INTERACTIONS} interactions, {N_DOMAINS} domains)\n")
     print(hdr)
@@ -161,20 +180,23 @@ def main() -> int:
         print(
             f"{r['correlation']:>6.2f}{r['unfiltered_suite_size']:>8}"
             f"{r['laundered_probes']:>11}{r['laundering_rate']:>8.3f}"
-            f"{r['strict_yield']:>14.3f}{r['mean_difficulty_bias']:>11.4f}"
-            f"{r['worst_difficulty_bias']:>8.4f}"
-            f"{r['traffic_mass_covered']:>9.3f}{r['traffic_mass_blind']:>8.3f}"
+            f"{r['strict_yield_traffic']:>15.3f}{r['strict_yield_gapset']:>14.3f}"
+            f"{r['mean_difficulty_bias']:>11.4f}"
+            f"{r['worst_difficulty_bias']:>8.4f}{r['traffic_mass_blind']:>8.3f}"
         )
     print(
         f"\n  corr          how strongly checkability tracks easiness (swept, not measured)"
         f"\n  laundered     T3-adjudicated outcomes sitting in an unfiltered 'T2' suite"
-        f"\n  strict yield  fraction of all traffic harvestable under a T0/T1-only filter"
+        f"\n  yield:traffic fraction of TRAFFIC harvestable under a T0/T1-only filter"
+        f"\n  yield:gapset  fraction of the GAP SET so harvestable -- the number that"
+        f" decides section 5"
         f"\n  mean/worst    difficulty gap between a domain's harvested slice and the domain"
         f"\n  covered/blind traffic mass in domains with enough probes to test / with too few"
     )
     print(
         f"\n  H1 no laundering under the policy as written:      {'ok' if h1 else 'NO'}"
-        f"\n  H2 strict yield >= {YIELD_MIN} at every correlation:      {'ok' if h2 else 'NO'}"
+        f"\n  H2 gap-set yield >= {YIELD_MIN} at every correlation:     {'ok' if h2 else 'NO'}"
+        f"\n     (traffic-weighted, the old flattering axis:          {'ok' if h2_traffic else 'NO'})"
         f"\n  H3 mean bias <= {BIAS_LIMIT} where corr >= 0.5:           {'ok' if h3 else 'NO'}"
         f"\n\n  VERDICT: {'PASS' if (h1 and h2 and h3) else 'FAIL'}\n"
     )
@@ -183,7 +205,7 @@ def main() -> int:
     out.write_text(json.dumps(
         {"seed": SEED, "domain_checkability": DOMAIN_CHECKABILITY.tolist(),
          "rows": rows, "H1_no_laundering": h1, "H2_yield_sufficient": h2,
-         "H3_representative": h3,
+         "H3_representative": h3, "H2_traffic_weighted": h2_traffic,
          "verdict": "PASS" if (h1 and h2 and h3) else "FAIL"}, indent=2))
     print(f"wrote {out}")
     return 0
