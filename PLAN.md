@@ -50,6 +50,7 @@ structural work first, which is the right order anyway.
 | E1.1d | tail-safe free rank vs subscription ratio | **the missing curve** — boundary sits at 1.0× |
 | E1.2 | three-λ unanimity makes rank release safe | **FAIL** on both criteria — architectural |
 | E1.4 | posterior variance is an epistemic gap detector | **FAIL** |
+| E0.1 | **I4** — competence regenerates from provenance | **FAIL** on K1, K4, KB — blindness **12.4×** |
 | E0.2 | the tombstone cascade reaches the weights | **PARTIAL** — one arm withdrawn |
 | E0.2b | *rebuild:* functional ground truth + a third influence path | **FAIL** on both criteria |
 | E4.2 | the blast-radius fixed point seals the Assay | **FAIL** |
@@ -587,6 +588,73 @@ That is a sanity check, not evidence the objective works when the true
 structure is non-nested, overlapping, hierarchical, or absent from the
 candidate family — which is the realistic case for a signature ontology.
 
+### E0.1 · I4 fails, and a pooled metric would have reported a pass
+
+The largest unmeasured claim in the design — Part II §G calls I4 "the invariant
+the entire design leans on" and "a design intention rather than a tested
+property." Tested against the rev-2 amendment: three support categories,
+per-region reporting, arms A4 and A6.
+
+```
+  arm                     ident  partial  over pool  over worst  blind   under
+  A0 control                yes    0.000     0.0000      0.0000   0.00  0.0000
+  A1a drift, uncapped        no    0.000     0.0674      0.7977  12.40  0.0000
+  A1b drift, usage cap      yes    0.000     0.0000      0.0000   0.00  0.0000
+  A2 tombstone               no    0.411     0.0000      0.0000   0.00  0.0000
+  A3 harness drift           no    0.000     0.2160      0.4672   2.18  0.0000
+  A4 ontology, usage draw    yes    0.000     0.0000      0.0000   0.00  0.0000
+  A4 ontology, strat draw     no    0.000     0.2167      0.4163   1.92  0.0000
+  A6 draw uniform            no    0.000     0.1649      0.6244   3.85  0.0000
+  A6 draw stratified         no    0.000     0.2455      0.5195   2.13  0.0000
+```
+
+**K1 and KB fail together, and the blindness factor is 12.4× — the largest in
+the programme.** Under ledger drift, pooled over-forgetting is **6.7%** while the
+worst region loses **79.8%** of the competence it had. A pooled-only E0.1 reports
+"6.7%, acceptable" while one region is essentially wiped. This is the predicted
+failure precisely: use-based decay evicts what is rarely referenced, so the
+provenance that decays is the sparse rare-region kind — **the arm most likely to
+show over-forgetting is the arm a pooled metric is blindest to.**
+
+**K4 fails, and it was flagged as the arm most likely to surprise.** A pure
+signature re-partition — ledger, weights and harness all held fixed — changes
+competence by **21.7% pooled, 41.6% worst**. The ontology *is* load-bearing for
+adapter competence, so Root 3 reaches into Root 1's problem exactly as the
+amendment warned.
+
+That only became visible after fixing a defect of the now-familiar class: `A4`
+originally ran under the usage draw, which never consults the partition, so it
+was **inert by construction** and K4 "passed." Same shape as unanimity reporting
+zero unsafe on a quantity its own rule excludes (B8).
+
+**I4 is a *relative* invariant, and nothing in Parts I–III says so.** A1b is
+inert: under a usage-capped draw, tail decay changes nothing because those
+entries were never in the draw — the competence was already absent at *compile*
+time, and I4 compares A against A′ with both equally impoverished. **I4 checks
+recompile fidelity, not compile adequacy.**
+
+**41.1% of items fall in the partially-tombstoned category**, about which the
+amended I4 asserts nothing. That is the honest size of what an item-level test
+cannot see.
+
+**A3 vindicates the component-granular stamp.** Changing one harness component
+produces 21.6% pooled over-forgetting, so without pinning components E0.1 would
+confound the property under test with harness drift.
+
+**A6 resolves the `|P|` question, then relocates it.** Capping the draw *does*
+bound cost (450 → 300), so provenance IDs can be retained in full and the
+cost/breadth tension **dissolves** rather than resolving. But *which* entries the
+cap admits is a protection decision, and a usage-weighted draw is exactly the
+forbidden weighting. Stratified drawing trades a higher pooled rate (0.246 vs
+0.165) for a lower worst (0.520 vs 0.624) and lower blindness (2.13 vs 3.85) —
+the weighting rule's tradeoff — and still does not reach 1.0×.
+
+*Scope limit:* this world has no retrieval-mediated card selection, so E0.2b's
+~8.7% irreducible under-forgetting cannot appear. K2 passing is a statement about
+this influence model, not a contradiction of E0.2b.
+
+---
+
 ### E0.2b · Rebuilt — and `transitive` provenance is provably incomplete
 
 E0.2's ground truth shared the mechanism's model. This rebuild removes that two
@@ -1016,11 +1084,12 @@ repair. Two have now run:
 - **E0.2d** (admission control bounds cascade breadth) — fails, and the repair
   is a mechanism that does not exist rather than a threshold that needs moving.
 
-**E1.2** has now run and **fails on both criteria**, in opposite directions —
-the second finding with no local repair. Two remain untested: **E0.1** (I4,
-competence regenerating from provenance — which Part II §G itself calls a design
-intention rather than a tested property) and **E2.3** (whether the cheap rung
-preserves the ranking the expensive rung would give).
+**E1.2** and **E0.1** have now both run and both fail. E0.1 is the heaviest:
+I4 fails on over-forgetting with a **12.4× blindness factor**, the ontology turns
+out to be load-bearing for adapter competence, and I4 is revealed as a *relative*
+invariant that cannot see competence never compiled in the first place. **One
+remains untested: E2.3** (whether the cheap rung preserves the ranking the
+expensive rung would give).
 
 So the accurate summary is: *most* failures found are specification defects,
 one is a missing control surface, one central claim holds conditionally, and

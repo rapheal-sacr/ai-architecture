@@ -27,9 +27,59 @@ claims:
     claim: "I4 - competence regenerates from provenance alone"
     source: "L7 card; Part II section G calls this untested"
     rig: A
-    kill: "any non-tombstoned competence not returning within delta; or recompile cost O(ledger) with unbounded ledger"
+    kill: "K0 A0 recompiler non-deterministic; K1 over-forgetting on surviving support; K2 under-forgetting on fully-tombstoned support; K4 ontology re-partition changes competence; KB worst-region rate >= 2x pooled"
     predicted: uncertain
-    status: untested
+    status: FAIL
+    result: results/e0_1_verified_recompilability.json
+    tested_against: docs/wam_amendment_I2_I4_rev2.md
+    finding: >
+      K0 passes - the recompiler is deterministic, so every other arm is
+      interpretable. K2 passes with a scope limit. K1, K4 and KB fail.
+      K1 AND KB, THE HEADLINE. Under uncapped ledger drift, over-forgetting on
+      surviving-support items is 6.7% POOLED and 79.8% in the WORST region - a
+      blindness factor of 12.4x, the largest in the programme. A pooled-only E0.1
+      reports "6.7% over-forgetting, acceptable" while one region is essentially
+      wiped. This is the predicted failure exactly: use-based decay evicts what is
+      rarely referenced, so the provenance that decays is the sparse rare-region
+      kind, and the arm most likely to show over-forgetting is the one a pooled
+      metric is blindest to.
+      K4 FAILS, and it was flagged as the arm most likely to surprise. A pure
+      signature re-partition - ledger, weights and harness all held fixed -
+      changes competence by 21.7% pooled and 41.6% worst-region. The ontology IS
+      load-bearing for adapter competence, so Root 3 reaches into Root 1's
+      problem exactly as the amendment warned it might.
+    i4_is_a_relative_invariant: >
+      A1b is inert and that is a finding, not a null. Under a usage-weighted
+      capped draw, use-based decay of the tail changes nothing, because those
+      entries were never in the draw - the competence they support was already
+      absent at COMPILE time. I4 compares A against A' and both are equally
+      impoverished. So I4 checks RECOMPILE FIDELITY, not COMPILE ADEQUACY, and
+      cannot see competence that was never compiled in the first place. Nothing
+      in Parts I-III distinguishes the two.
+    coverage_gap: >
+      41.1% of suite items fall in the partially-tombstoned category, about which
+      the amended I4 asserts nothing. That is the honest size of what the
+      item-level test cannot see, and it is large.
+    harness_granularity_vindicated: >
+      A3 - changing ONE harness component (the draw policy) - produces 21.6%
+      pooled over-forgetting. Without the component-granular I2 stamp, E0.1's
+      result would confound the property under test with harness drift, which is
+      why the amendment's B section is a prerequisite rather than a nicety.
+    a6_resolution: >
+      Capping the draw DOES bound cost - 450 uncapped against 300 capped - so the
+      resolution holds: retain |P| in full, bound the L3 draw, and cost is
+      bounded without distilling provenance. The cost/breadth tension dissolves
+      rather than resolving. But it relocates into the weighting rule: WHICH
+      entries the cap admits is a protection decision, and a usage-weighted draw
+      is exactly the forbidden weighting. Stratified drawing trades a higher
+      pooled rate (0.246 vs 0.165) for a lower worst-region rate (0.520 vs 0.624)
+      and lower blindness (2.13 vs 3.85) - the weighting rule's tradeoff - and
+      still does not reach 1.0x.
+    scope_limit: >
+      This world has no retrieval-mediated card selection, so E0.2b's ~8.7%
+      irreducible under-forgetting cannot appear. K2 passing is a statement about
+      THIS influence model, not a contradiction of E0.2b, whose whole point was a
+      path set-based provenance cannot see.
 
   - id: E0.2
     tier: L7
@@ -1050,6 +1100,18 @@ bugs:
       Cached weights are constants - stale, not sensitive. Produced a confident
       PASS on the claim this plan most expected to fail, and was caught only
       because U1 and U2 contradicted each other.
+
+  - id: B8
+    where: e0_1_verified_recompilability, arm A4
+    bug: "ontology_shift only feeds strata(), which only the stratified draw consults, while A4 ran under the usage draw"
+    effect: >
+      A4 reported "identical" and K4 passed - on the arm the amendment flagged as
+      most likely to surprise. Inert by construction, the same defect class as
+      unanimity reporting zero unsafe on a quantity its own free_mask excludes.
+      Scored on the stratified arm instead, K4 FAILS at 21.7% pooled competence
+      change. Caught before publication by asking whether the manipulation could
+      reach the measured quantity.
+    fix: "score A4 on a policy that consults the partition; assert the usage arm is inert as a control"
 
   - id: B7
     where: e1_2_lambda_unanimity.EPS

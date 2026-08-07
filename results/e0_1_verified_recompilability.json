@@ -1,0 +1,121 @@
+{
+  "seed": 20260806,
+  "n_seeds": 8,
+  "draw_cap": 300,
+  "rows": [
+    {
+      "arm": "A0 control",
+      "policy": "usage",
+      "cap": 300,
+      "identical": true,
+      "partial_share": 0.0,
+      "over_pooled": 0.0,
+      "over_worst": 0.0,
+      "over_blindness": 0.0,
+      "under_pooled": 0.0,
+      "cost_max": 300
+    },
+    {
+      "arm": "A1a drift, uncapped",
+      "policy": "usage",
+      "cap": null,
+      "identical": false,
+      "partial_share": 0.0,
+      "over_pooled": 0.0674,
+      "over_worst": 0.7977,
+      "over_blindness": 12.4,
+      "under_pooled": 0.0,
+      "cost_max": 450
+    },
+    {
+      "arm": "A1b drift, usage cap",
+      "policy": "usage",
+      "cap": 300,
+      "identical": true,
+      "partial_share": 0.0,
+      "over_pooled": 0.0,
+      "over_worst": 0.0,
+      "over_blindness": 0.0,
+      "under_pooled": 0.0,
+      "cost_max": 300
+    },
+    {
+      "arm": "A2 tombstone",
+      "policy": "usage",
+      "cap": 300,
+      "identical": false,
+      "partial_share": 0.411,
+      "over_pooled": 0.0,
+      "over_worst": 0.0,
+      "over_blindness": 0.0,
+      "under_pooled": 0.0,
+      "cost_max": 300
+    },
+    {
+      "arm": "A3 harness drift",
+      "policy": "uniform",
+      "cap": 300,
+      "identical": false,
+      "partial_share": 0.0,
+      "over_pooled": 0.216,
+      "over_worst": 0.4672,
+      "over_blindness": 2.18,
+      "under_pooled": 0.0,
+      "cost_max": 300
+    },
+    {
+      "arm": "A4 ontology, usage draw",
+      "policy": "usage",
+      "cap": 300,
+      "identical": true,
+      "partial_share": 0.0,
+      "over_pooled": 0.0,
+      "over_worst": 0.0,
+      "over_blindness": 0.0,
+      "under_pooled": 0.0,
+      "cost_max": 300
+    },
+    {
+      "arm": "A4 ontology, strat draw",
+      "policy": "stratified",
+      "cap": 300,
+      "identical": false,
+      "partial_share": 0.0,
+      "over_pooled": 0.2167,
+      "over_worst": 0.4163,
+      "over_blindness": 1.92,
+      "under_pooled": 0.0,
+      "cost_max": 300
+    },
+    {
+      "arm": "A6 draw uniform",
+      "policy": "uniform",
+      "cap": 300,
+      "identical": false,
+      "partial_share": 0.0,
+      "over_pooled": 0.1649,
+      "over_worst": 0.6244,
+      "over_blindness": 3.85,
+      "under_pooled": 0.0,
+      "cost_max": 300
+    },
+    {
+      "arm": "A6 draw stratified",
+      "policy": "stratified",
+      "cap": 300,
+      "identical": false,
+      "partial_share": 0.0,
+      "over_pooled": 0.2455,
+      "over_worst": 0.5195,
+      "over_blindness": 2.13,
+      "under_pooled": 0.0,
+      "cost_max": 284
+    }
+  ],
+  "K0_deterministic": true,
+  "K1_no_over_forgetting": false,
+  "K2_no_under_forgetting": true,
+  "K4_ontology_inert": false,
+  "KB_not_blind": false,
+  "verdict": "FAIL"
+}
