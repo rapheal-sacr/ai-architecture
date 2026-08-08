@@ -1,0 +1,98 @@
+# Amendment · the mechanism declaration
+
+**The meta-repair.** Every other amendment here fixes a mechanism. This one
+changes the rate at which the remaining gaps get found, and it is the only item
+in the record that does.
+
+---
+
+## The problem it solves
+
+Eleven repairs have been proposed. R9 — provenance-aware admission, the repair
+for the last architectural gap — arrived carrying **two unstated couplings** and
+could not be evaluated at all:
+
+- the breadth side assumes something about how the adapter fleet composes from
+  the card bank as the bank shrinks
+- the coverage side needs I7 stated as the rate it already is, not as a binary
+
+That is the same defect the repairs exist to fix. Generalise it:
+
+> **Every new mechanism carries its own unstated couplings, so repairs are
+> gap-productive.** If each repair introduces roughly one new unspecified
+> coupling, testing never converges — you run experiments to discover
+> specification gaps you created in the previous round.
+
+Item 1 of `wam_amendment_before_continuing.md` already caught the shape of this:
+adding a `requires_tier` column would have found three of the programme's
+findings by inspection, before any of them cost an experiment. This is that
+column, extended to the full set.
+
+---
+
+## The declaration
+
+Four columns, filled in **before a mechanism is written**, not in a review.
+
+| Column | Question | Why this one |
+|---|---|---|
+| **requires tier** | what verifier tier does it need to *function*, as distinct from what it may promote? | E1.4 → R2, E2.1, E3.1c: three findings were the same error — a mechanism described as free while silently requiring verification the domain may not have |
+| **consumes** | what resource, in the currency §0 says is binding? | Part III §0 says verification coverage and cost is the binding constraint. A mechanism that does not say what it spends cannot be priced against it |
+| **trades against** | what quantity does it make worse? | Every mechanism specified without stating its tension has been found out by an experiment: the subspace budget, the blast-radius rule, three-λ release, the staged ladder, and now R9 |
+| **assumes** | what couplings does it assume about parts of the system it does not own? | R9's blocking defect. It would have been caught on paper, in the time it takes to fill a row |
+
+---
+
+## Worked example — R9 as it should have been declared
+
+```
+mechanism      R9 · provenance-aware admission
+requires tier  T0 -- set overlap is computable, no judgement needed
+consumes       nothing at evaluation time; card-bank size at steady state
+trades against per-region card density (I7 coverage), and NOT content
+               redundancy, which is what cos <= 0.93 already governs
+assumes        (a) how many distinct cards an adapter's training draw uses
+               (b) whether that is an absolute count or a fraction of the bank
+               (c) whether fleet size tracks bank size
+               -- none of which this mechanism owns or Parts I-III state
+```
+
+The `assumes` row alone would have stopped R9 before an experiment was built.
+The `trades against` row would have forced I7's rate form, because a density
+tension cannot be stated against a binary.
+
+---
+
+## What it would have caught, retrospectively
+
+| Finding | Column that would have caught it | Cost saved |
+|---|---|---|
+| E1.4 → R2 relocating to Root 2 | requires tier | one experiment |
+| E2.1 tier laundering | requires tier | one experiment |
+| E3.1c compositional ceiling | requires tier | one experiment |
+| E1.1c traffic-weighted aggregation | trades against | one experiment |
+| E1.2 release rate vs allocation safety | trades against | one experiment |
+| E2.3 mean filter vs coverage objective | trades against | one experiment |
+| E0.2e R9's fleet coupling | assumes | one experiment, unresolved |
+| E5.1 `H`, `L`, support redundancy | consumes | three constants, one still open |
+
+Eight of the record's findings. Not all would have been *fully* resolved on
+paper — a declared tension still has to be measured — but each would have been
+**visible as a question before it cost a build**, which is the difference between
+a specification and a discovery.
+
+---
+
+## The rule
+
+> No mechanism enters Parts I–III without all four columns filled. A blank is
+> not a default — it is an admission that the mechanism is not yet specified,
+> and it blocks the mechanism rather than the reviewer.
+
+And the corollary that matters most, because it is the one this record keeps
+demonstrating:
+
+> **A quantity stated as a binary cannot carry a tension that is a rate.** I7
+> was written as a rate and measured as a binary, and the tension it names
+> disappeared from the instrument entirely. Declare the *shape* of every
+> quantity, not only its name.

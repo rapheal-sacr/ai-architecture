@@ -261,11 +261,18 @@ claims:
       3. whether fleet size tracks bank size at all
       Until those are stated, any number for R9 is a choice of coupling wearing
       the clothes of a measurement.
-    corrects_the_expected_tension: >
-      R9 was expected to trade against I7 - reject a card and its distinction is
-      never available. Coverage stays at 1.000 across every tau and every pool
-      structure swept, so that tension does NOT bind here. The blocking unknown
-      is the fleet coupling, not coverage.
+    coverage_side_also_unevaluable: >
+      An earlier version of this entry reported that R9's expected tension with
+      I7 "does not bind - coverage stays at 1.000 across every tau". WITHDRAWN.
+      That was an artifact of the metric: coverage was measured as at-least-one-
+      card-per-region, a binary, while I7 is written as a RATE. Re-measured as
+      per-region density, the tension is severe: tightening tau takes density
+      from 25.0 to 1.0 and puts 100% of regions below the floor, with the worst
+      region falling fastest.
+      The tension was INVISIBLE, not absent - and the quantity binarised was
+      per-region density on rare regions, which is what this entire record has
+      been about. So R9 is DOUBLY unevaluable: the breadth side needs three
+      specification decisions, the coverage side needs I7 stated as a rate.
     kill_criterion_changed: >
       G1 was registered as "no admission threshold achieves breadth <= 0.31 at
       acceptable coverage", which presumes the curve is drawable and would have
@@ -1358,6 +1365,22 @@ bugs:
       Cached weights are constants - stale, not sensitive. Produced a confident
       PASS on the claim this plan most expected to fail, and was caught only
       because U1 and U2 contradicted each other.
+
+  - id: B17
+    where: e0_2e_r9_breadth_coverage coverage_of
+    bug: "measured I7 coverage as at-least-one-card-per-region, a binary, when I7 is written as a RATE"
+    effect: >
+      reported coverage 1.000 at every tau and every pool structure, and could
+      not have reported otherwise - the bank only drops below one-card-per-region
+      once it falls under ~16 cards total, while the quantity actually moving is
+      a 25x change in per-region density. Led to the published claim that R9's
+      expected tension with I7 "does not bind", which is withdrawn. Re-measured
+      as a rate, 100% of regions fall below the density floor at tight tau.
+    the_pattern_at_its_most_pointed: >
+      The quantity that got binarised was per-region density on rare regions -
+      the exact quantity this entire record is about. A binary cannot carry a
+      tension that is a rate.
+    fix: "report per-region density, worst region and fraction below floor; declare the SHAPE of a quantity, not only its name"
 
   - id: B16
     where: e0_2e_r9_breadth_coverage, breadth definition

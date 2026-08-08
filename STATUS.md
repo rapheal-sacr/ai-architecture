@@ -25,7 +25,16 @@ Every failure found is a *stated mechanism being the wrong shape for its job*,
 and all but one has a named repair.
 
 **One gap has no repair yet**, and it is not that the repair failed — it is that
-R9 cannot be evaluated until three things about fleet composition are stated.
+R9 cannot be evaluated until three things about fleet composition are stated
+*and* I7 is expressed as the rate it already is.
+
+**The meta-repair matters more than any remaining experiment.** Repairs are
+gap-productive: R9 arrived carrying two unstated couplings, which is the defect
+the repairs exist to fix. `docs/wam_amendment_mechanism_declaration.md` makes
+every mechanism declare, before it is written, what tier it requires, what it
+consumes, what it trades against, and what it assumes about parts it does not
+own. Retrospectively that would have surfaced eight of this record's findings as
+questions before they cost a build.
 
 **Four numbers decide the rest.** One is measured. One has a procedure and a
 decision rule, waiting on data. One is a product requirement. One is the gap.
@@ -118,22 +127,45 @@ Three things must be stated before R9 can be designed:
 2. whether that is an absolute count or a fraction of the bank
 3. whether fleet size tracks bank size
 
-The tension R9 was *expected* to trade against — I7 coverage — does not bind:
-coverage stays at 1.000 throughout. The blocking unknown is the fleet coupling.
+**And the coverage side is unevaluable too.** I earlier reported that R9's
+expected tension with I7 "does not bind, coverage stays at 1.000." That was an
+artifact of the metric: coverage was measured as *at least one card per region*,
+a binary, while I7 is written as a **rate**. Re-measured as per-region density,
+the tension is severe — tightening `tau` takes density from 25 → 1 and pushes
+**100% of regions below the floor**, worst region falling fastest.
+
+The tension was invisible, not absent. And the quantity that got binarised was
+per-region density on rare regions, which is what this entire record has been
+about.
+
+So R9 is **doubly unevaluable**: the breadth side needs three specification
+decisions, the coverage side needs I7 stated as the rate it already is.
 
 ---
 
 ## How much to trust this
 
-**Sixteen rig bugs across twenty-one experiments**, four withdrawn conclusions,
-two reversals. That is not a converging error rate, and it is the main reason to
-read the retraction record (`claims/claims.yaml`, `bugs:`) alongside the results.
+**Seventeen rig bugs across twenty-two experiments.** The rate is flat, and
+that is the wrong statistic to worry about — each experiment is new code doing
+something not done before, so a *converging* bug rate would mean the experiments
+were becoming more similar to each other, which would mean they were exploring
+less. Flat rate against rising subtlety is the healthy signature.
 
-Both serious errors that *survived a write-up* were mine, not the architecture's,
-and one manufactured a headline. The mechanism that has caught the most is a
-single question — **"why is this number so extreme / why does it go the wrong
-way?"** — which found B7, B9, B11, B12, B13 and B16. Cross-checks between two
-measurements have never caught one.
+The statistic that matters is **bugs that reached a conclusion**, and those are
+four withdrawals clustered early:
+
+| | |
+|---|---|
+| **severity** | falling. B4 survived a full write-up and produced a published headline. B14/B15 were caught mid-sweep by the manipulation check. B16 was caught because the scale was two orders off a number already in the record |
+| **detection latency** | falling. Inspection → contradiction → *"is this a parameter I chose?"* → *"why is this so extreme / going the wrong way?"* → the record itself functioning as an error detector, which only works once the record exists |
+
+The single most productive check has been **"why is this number so extreme, or
+going the wrong way?"** — B7, B9, B11, B12, B13, B16. Cross-checks between two
+measurements have caught none; the manipulation check has caught three.
+
+Read the retraction record (`claims/claims.yaml`, `bugs:`) alongside the results
+— not because the rate is alarming, but because the *reversals* are the most
+informative entries in the file.
 
 The strongest single regularity: **every mechanism specified without stating its
 tension has been found out by an experiment.** That now includes R9, which was

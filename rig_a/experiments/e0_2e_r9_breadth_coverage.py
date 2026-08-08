@@ -87,7 +87,8 @@ POOL_CONCENTRATION = (0.2, 0.5, 0.9)   # how much candidate cards draw from a
                                        # shared hot pool -- the pool's own
                                        # overlap structure, swept
 BREADTH_TARGET = 0.31                  # E5.1's window condition
-COVERAGE_FLOOR = 0.80                  # I7: fraction of regions with a live card
+COVERAGE_FLOOR = 0.80                  # legacy min-1 form, retained for audit
+DENSITY_FLOOR = 3.0                    # I7 as a RATE: cards per region
 
 
 def make_candidates(concentration: float, rng):
@@ -162,17 +163,40 @@ def breadth_of(bank, rng) -> float:
     return float(np.mean(reach))
 
 
-def coverage_of(bank) -> float:
-    """I7's quantity: fraction of regions with at least one admitted card."""
-    return len({b["region"] for b in bank}) / N_REGIONS
+def coverage_of(bank) -> dict:
+    """I7's quantity -- as a RATE, not a min-1 test.
+
+    A previous version returned `len({b["region"] for b in bank}) / N_REGIONS`:
+    at least one card per region. That reported 1.000 at every tau and every pool
+    structure, and it could not have reported anything else -- the bank only
+    drops below one-card-per-region once it falls under ~16 cards total, while
+    the quantity actually moving is a 9x change in per-region DENSITY.
+
+    I7 as written is a rate: every region covered at a stated minimum per-region
+    sampling rate, with regions below the floor recorded as uncovered. A min-1
+    test discards the rate entirely. And the quantity that got binarised was
+    per-region density on rare regions, which is what this entire record has been
+    about -- so the tension may have been invisible rather than absent.
+
+    Reported per the weighting rule: worst region, not the mean.
+    """
+    counts = np.zeros(N_REGIONS)
+    for b in bank:
+        counts[b["region"]] += 1
+    return {"any": float((counts > 0).mean()),
+            "mean_density": float(counts.mean()),
+            "worst_density": float(counts.min()),
+            "below_floor": float((counts < DENSITY_FLOOR).mean())}
 
 
 def run(concentration: float, tau: float, seed: int) -> dict:
     rng = np.random.default_rng(seed)
     cards, _ = make_candidates(concentration, rng)
     bank = admit(cards, tau)
+    cov = coverage_of(bank)
     return {"bank_size": len(bank), "breadth": breadth_of(bank, rng),
-            "coverage": coverage_of(bank)}
+            "coverage": cov["any"], "mean_density": cov["mean_density"],
+            "worst_density": cov["worst_density"], "below_floor": cov["below_floor"]}
 
 
 def agg(concentration, tau):
@@ -206,7 +230,7 @@ def main() -> int:
         label = ("hostile" if conc >= 0.8 else "generous" if conc <= 0.3 else "middling")
         print(f"  candidate-pool provenance concentration {conc:.1f}  ({label})")
         hdr = (f"    {'tau':>6}{'bank':>8}{'cards/entry':>13}{'fleet reach':>13}"
-               f"{'coverage':>11}")
+               f"{'cov(any)':>10}{'density':>9}{'worst':>8}{'<floor':>8}")
         print(hdr); print("    " + "-" * (len(hdr) - 4))
         for tau in TAUS:
             rs = [run(conc, tau, SEED + i) for i in range(N_SEEDS)]
@@ -219,10 +243,15 @@ def main() -> int:
                  "bank_size": round(float(np.mean([x["bank_size"] for x in rs])), 1),
                  "cards_per_entry": round(float(np.mean(cpes)), 2),
                  "fleet_reach": round(float(np.mean([x["breadth"] for x in rs])), 3),
-                 "coverage": round(float(np.mean([x["coverage"] for x in rs])), 3)}
+                 "coverage": round(float(np.mean([x["coverage"] for x in rs])), 3),
+                 "mean_density": round(float(np.mean([x["mean_density"] for x in rs])), 2),
+                 "worst_density": round(float(np.mean([x["worst_density"] for x in rs])), 2),
+                 "below_floor": round(float(np.mean([x["below_floor"] for x in rs])), 3)}
             rows.append(r)
             print(f"    {tau:>6.2f}{r['bank_size']:>8.1f}{r['cards_per_entry']:>13.2f}"
-                  f"{r['fleet_reach']:>13.3f}{r['coverage']:>11.3f}")
+                  f"{r['fleet_reach']:>13.3f}{r['coverage']:>10.3f}"
+                  f"{r['mean_density']:>9.2f}{r['worst_density']:>8.2f}"
+                  f"{r['below_floor']:>8.3f}")
         print()
 
     # G2 -- does the direct mechanism respond at all?
@@ -261,9 +290,14 @@ def main() -> int:
         print("       1. how many distinct cards an adapter's training draw uses")
         print("       2. whether that is absolute or a fraction of the bank")
         print("       3. whether the fleet grows with the bank")
-        print("     Coverage stays at 1.000 throughout, so the I7 tension R9 was")
-        print("     expected to trade against does not bind in this pool -- the")
-        print("     binding unknown is the fleet coupling, not coverage.")
+        print("\n     AND THE COVERAGE SIDE IS ALSO UNEVALUABLE. Reported as a rate")
+        print("     rather than as at-least-one-card-per-region, per-region density")
+        print("     falls sharply with tau and the worst region falls fastest --")
+        print("     which is the I7 tension R9 was expected to trade against, and")
+        print("     which the earlier min-1 metric could not see. So R9 is DOUBLY")
+        print("     unevaluable: the breadth side needs three specification")
+        print("     decisions, and the coverage side needs I7 stated as the rate it")
+        print("     already is rather than as a binary.")
     print()
 
     out = pathlib.Path(__file__).resolve().parents[2] / "results" / "e0_2e_r9_breadth_coverage.json"

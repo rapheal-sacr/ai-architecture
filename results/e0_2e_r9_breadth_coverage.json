@@ -9,7 +9,10 @@
       "bank_size": 24.5,
       "cards_per_entry": 1.0,
       "fleet_reach": 0.246,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 1.53,
+      "worst_density": 1.0,
+      "below_floor": 0.938
     },
     {
       "concentration": 0.2,
@@ -17,7 +20,10 @@
       "bank_size": 24.5,
       "cards_per_entry": 1.0,
       "fleet_reach": 0.246,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 1.53,
+      "worst_density": 1.0,
+      "below_floor": 0.938
     },
     {
       "concentration": 0.2,
@@ -25,7 +31,10 @@
       "bank_size": 41.5,
       "cards_per_entry": 1.1,
       "fleet_reach": 0.158,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 2.59,
+      "worst_density": 1.5,
+      "below_floor": 0.469
     },
     {
       "concentration": 0.2,
@@ -33,7 +42,10 @@
       "bank_size": 89.0,
       "cards_per_entry": 1.56,
       "fleet_reach": 0.102,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 5.56,
+      "worst_density": 2.67,
+      "below_floor": 0.031
     },
     {
       "concentration": 0.2,
@@ -41,7 +53,10 @@
       "bank_size": 313.2,
       "cards_per_entry": 4.42,
       "fleet_reach": 0.079,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 19.57,
+      "worst_density": 5.33,
+      "below_floor": 0.0
     },
     {
       "concentration": 0.2,
@@ -49,7 +64,10 @@
       "bank_size": 389.0,
       "cards_per_entry": 5.44,
       "fleet_reach": 0.077,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 24.31,
+      "worst_density": 5.33,
+      "below_floor": 0.0
     },
     {
       "concentration": 0.2,
@@ -57,7 +75,10 @@
       "bank_size": 400.0,
       "cards_per_entry": 5.6,
       "fleet_reach": 0.077,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 25.0,
+      "worst_density": 5.33,
+      "below_floor": 0.0
     },
     {
       "concentration": 0.2,
@@ -65,7 +86,10 @@
       "bank_size": 400.0,
       "cards_per_entry": 5.6,
       "fleet_reach": 0.077,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 25.0,
+      "worst_density": 5.33,
+      "below_floor": 0.0
     },
     {
       "concentration": 0.5,
@@ -73,7 +97,10 @@
       "bank_size": 16.0,
       "cards_per_entry": 1.0,
       "fleet_reach": 0.375,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 1.0,
+      "worst_density": 1.0,
+      "below_floor": 1.0
     },
     {
       "concentration": 0.5,
@@ -81,7 +108,10 @@
       "bank_size": 16.0,
       "cards_per_entry": 1.0,
       "fleet_reach": 0.375,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 1.0,
+      "worst_density": 1.0,
+      "below_floor": 1.0
     },
     {
       "concentration": 0.5,
@@ -89,7 +119,10 @@
       "bank_size": 16.8,
       "cards_per_entry": 1.01,
       "fleet_reach": 0.359,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 1.05,
+      "worst_density": 1.0,
+      "below_floor": 1.0
     },
     {
       "concentration": 0.5,
@@ -97,7 +130,10 @@
       "bank_size": 23.8,
       "cards_per_entry": 1.09,
       "fleet_reach": 0.273,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 1.49,
+      "worst_density": 1.0,
+      "below_floor": 0.927
     },
     {
       "concentration": 0.5,
@@ -105,7 +141,10 @@
       "bank_size": 109.0,
       "cards_per_entry": 2.3,
       "fleet_reach": 0.118,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 6.81,
+      "worst_density": 2.33,
+      "below_floor": 0.042
     },
     {
       "concentration": 0.5,
@@ -113,7 +152,10 @@
       "bank_size": 230.5,
       "cards_per_entry": 4.1,
       "fleet_reach": 0.096,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 14.41,
+      "worst_density": 3.5,
+      "below_floor": 0.01
     },
     {
       "concentration": 0.5,
@@ -121,7 +163,10 @@
       "bank_size": 360.0,
       "cards_per_entry": 6.14,
       "fleet_reach": 0.089,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 22.5,
+      "worst_density": 4.33,
+      "below_floor": 0.01
     },
     {
       "concentration": 0.5,
@@ -129,7 +174,10 @@
       "bank_size": 400.0,
       "cards_per_entry": 6.8,
       "fleet_reach": 0.089,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 25.0,
+      "worst_density": 4.5,
+      "below_floor": 0.0
     },
     {
       "concentration": 0.9,
@@ -137,7 +185,10 @@
       "bank_size": 16.0,
       "cards_per_entry": 1.0,
       "fleet_reach": 0.375,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 1.0,
+      "worst_density": 1.0,
+      "below_floor": 1.0
     },
     {
       "concentration": 0.9,
@@ -145,7 +196,10 @@
       "bank_size": 16.0,
       "cards_per_entry": 1.0,
       "fleet_reach": 0.375,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 1.0,
+      "worst_density": 1.0,
+      "below_floor": 1.0
     },
     {
       "concentration": 0.9,
@@ -153,7 +207,10 @@
       "bank_size": 16.0,
       "cards_per_entry": 1.0,
       "fleet_reach": 0.375,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 1.0,
+      "worst_density": 1.0,
+      "below_floor": 1.0
     },
     {
       "concentration": 0.9,
@@ -161,7 +218,10 @@
       "bank_size": 16.0,
       "cards_per_entry": 1.0,
       "fleet_reach": 0.375,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 1.0,
+      "worst_density": 1.0,
+      "below_floor": 1.0
     },
     {
       "concentration": 0.9,
@@ -169,7 +229,10 @@
       "bank_size": 26.8,
       "cards_per_entry": 1.27,
       "fleet_reach": 0.27,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 1.68,
+      "worst_density": 1.0,
+      "below_floor": 0.875
     },
     {
       "concentration": 0.9,
@@ -177,7 +240,10 @@
       "bank_size": 69.5,
       "cards_per_entry": 2.2,
       "fleet_reach": 0.173,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 4.34,
+      "worst_density": 1.67,
+      "below_floor": 0.188
     },
     {
       "concentration": 0.9,
@@ -185,7 +251,10 @@
       "bank_size": 180.7,
       "cards_per_entry": 4.46,
       "fleet_reach": 0.129,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 11.29,
+      "worst_density": 3.67,
+      "below_floor": 0.01
     },
     {
       "concentration": 0.9,
@@ -193,7 +262,10 @@
       "bank_size": 400.0,
       "cards_per_entry": 9.18,
       "fleet_reach": 0.11,
-      "coverage": 1.0
+      "coverage": 1.0,
+      "mean_density": 25.0,
+      "worst_density": 5.33,
+      "below_floor": 0.0
     }
   ],
   "G1_curve_drawable": false,
