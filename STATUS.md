@@ -126,7 +126,7 @@ not.
 | **`H`** recompile wall-clock | the C3∧C4 window | **resolved.** EB.1: 18 min at the draw cap, not 8h. The window goes EMPTY → OPEN, so E5.1's infeasibility at the design's own profile was carried entirely by the assumption |
 | **support redundancy** `m of k` | C6 | **procedure + decision rule written.** ≥5 supporting entries and C6 stops binding. Awaiting an interaction corpus |
 | **per-region overlap + subscription** | whether any Root 1 number transfers | **open — Rig B.** E1.1d puts the boundary at subscription 1.0×, exactly where the whole record was measured. Nothing else can settle which side real traffic sits on |
-| **cascade breadth `β`** — or the fleet↔bank coupling that would let it be computed | whether an operating envelope exists | **open.** R9 is the only proposed repair and it is not yet evaluable |
+| **the real bank : fleet : rollouts-per-adapter ratio** | whether there is a breadth problem *at all* | **open, and it replaced `β`.** E0.2f: over a 400-card / 64-adapter bank the functional instrument reads **0.087** against E5.1's 0.31 target. E0.2d's 0.63–0.98 came from 8 adapters, 8 cards, 60 entries — a world where each draw covers most of the bank by construction. Breadth is a function of that ratio, and neither world is calibrated to reality |
 
 **DECIDE** — these need a sentence, not data, and they are the cheapest thing
 remaining:
@@ -140,35 +140,60 @@ remaining:
 between the last open gap and a drawable curve, and none of it needs an
 experiment.
 
-## The one open gap
+## The one open gap — and it may not be a gap
 
-**R9 · provenance-aware admission.** E0.2e: tightening the cap reduces
-cards-per-entry (9.18 → 1.00 — the mechanism works) *and* shrinks the bank, which
-raises how much of the adapter fleet each surviving card reaches. The directions
-are **opposed at every pool structure swept**, so the net depends on a coupling
-Parts I–III do not specify.
+**`R9` is suspended, not blocked.** E0.2f reconciled the two breadth numbers by
+running both instruments over the same admitted bank, and it dissolved the
+premise rather than the repair:
 
-Three things must be stated before R9 can be designed:
+```
+   tau   bank   synthetic draw   influence graph   ratio
+  0.00     16            0.375             0.082   0.22x
+  0.35    110            0.118             0.080   0.68x
+  1.00    400            0.088             0.087   0.99x
+```
 
-1. how many distinct cards an adapter's training draw uses
-2. whether that is an absolute count or a fraction of the bank
-3. whether fleet size tracks bank size
+**The two agree at the uncapped bank** (0.088 vs 0.087) and diverge only as the
+bank shrinks — exactly where the synthetic draw's fixed-count-from-a-shrinking-
+bank assumption bites. The influence graph spans **0.007** across τ where the
+synthetic draw spans 0.287. So E0.2e's opposition — the thing that made R9
+unevaluable and appeared to point it backwards — **was the instrument.**
 
-**And the coverage side is unevaluable too.** I earlier reported that R9's
-expected tension with I7 "does not bind, coverage stays at 1.000." That was an
-artifact of the metric: coverage was measured as *at least one card per region*,
-a binary, while I7 is written as a **rate**. Re-measured as per-region density,
-the tension is severe — tightening `tau` takes density from 25 → 1 and pushes
-**100% of regions below the floor**, worst region falling fastest.
+**And neither reproduces E0.2d.** Both read ~0.087 against E5.1's 0.31 target.
+E0.2d's 0.63–0.98 came from a world with 8 adapters, 8 cards and 60 entries,
+where each adapter's 6-rollout draw covers most of the bank by construction.
+E5.1 fitted `cascade_breadth = 0.60 + 0.45·po` to that point and made the result
+decide whether an operating envelope exists.
 
-The tension was invisible, not absent. And the quantity that got binarised was
-per-region density on rare regions, which is what this entire record has been
-about.
+So **breadth may not be a problem**, R9 may have no job, and the quantity that
+decides it is the real **bank : fleet : rollouts-per-adapter** ratio — a measure
+quantity for deployment, not something either simulation settles.
 
-So R9 is **doubly unevaluable**: the breadth side needs three specification
-decisions, the coverage side needs I7 stated as the rate it already is.
+### Three corrections still owed
 
----
+Raised in review, verified, not yet applied:
+
+1. **Two fleets, one number.** E5.1's C1 asks `free >= RANK_REQUEST` — whether
+   the budget fits *one* rank-8 adapter — while C3/C4 use `fleet = 64`. Same
+   symbol, 64× apart, and 64 basis-disjoint rank-8 adapters need 512 dimensions
+   in a 128-dimensional space. **Active fleet** (bounded by `free_rank /
+   RANK_REQUEST`, so ≈2 at E1.1c's tail-safe rank) and **stored fleet** (every
+   promoted adapter, grown by promotions) are different quantities. C1 governs
+   the first; C3, C4 and every breadth measurement govern the second.
+2. **This reverses the C1 attribution.** I reported C1 as least binding —
+   eliminating 108 of 97,200 — and drew a self-criticism from it. C1 is least
+   binding *because it was formulated against a fleet of one.* Stated as
+   `free_rank >= active_fleet × RANK_REQUEST` it eliminates nearly everything.
+   And C4's drain is linear in fleet, so its top ranking rests on the same
+   unexamined constant.
+3. **I7's floor is in the wrong units.** It counts *cards* per region; I7 claims
+   *ledger* coverage. Five cards drawing the same eight hot entries are worse
+   covered than two drawing sixteen distinct ones — and `concentration` is the
+   knob in that very experiment controlling exactly that. Correct form:
+   *distinct supporting entries reachable per region, as a fraction of the
+   region's entries, worst region* — which makes "derive from measured `k`" a
+   real derivation rather than a deferral, and inherits a Root 2 verifier
+   requirement, since `k` needs a corpus.
 
 ## How much to trust this
 

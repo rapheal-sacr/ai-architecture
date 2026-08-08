@@ -1,0 +1,52 @@
+{
+  "seed": 20260806,
+  "n_seeds": 3,
+  "n_rollouts": 384,
+  "rows": [
+    {
+      "tau": 0.0,
+      "bank": 16,
+      "synthetic": 0.375,
+      "influence": 0.082,
+      "ratio": 0.22
+    },
+    {
+      "tau": 0.1,
+      "bank": 16,
+      "synthetic": 0.362,
+      "influence": 0.083,
+      "ratio": 0.23
+    },
+    {
+      "tau": 0.2,
+      "bank": 23,
+      "synthetic": 0.279,
+      "influence": 0.086,
+      "ratio": 0.31
+    },
+    {
+      "tau": 0.35,
+      "bank": 110,
+      "synthetic": 0.118,
+      "influence": 0.08,
+      "ratio": 0.68
+    },
+    {
+      "tau": 0.5,
+      "bank": 233,
+      "synthetic": 0.094,
+      "influence": 0.087,
+      "ratio": 0.92
+    },
+    {
+      "tau": 1.0,
+      "bank": 400,
+      "synthetic": 0.088,
+      "influence": 0.087,
+      "ratio": 0.99
+    }
+  ],
+  "R1_agree_uncapped": true,
+  "R2_same_tau_dependence": false,
+  "R3_reproduces_e0_2d": false
+}

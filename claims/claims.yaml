@@ -303,6 +303,47 @@ claims:
       what this experiment establishes; the levels are not comparable across the
       two and are not quoted as if they were.
 
+  - id: E0.2f
+    tier: L3 x L7
+    rig: A
+    claim: "E0.2d's and E0.2e's cascade-breadth numbers measure the same quantity"
+    source: "0.627-0.978 against 0.077-0.375, same name, same 0.31 target, 8x apart -- and E5.1's whole breadth-conditional verdict hinges on which is right"
+    kill: "R1 instruments disagree >1.5x at the uncapped bank; R2 the influence graph does not show the synthetic draw's tau-dependence; R3 whether either reproduces E0.2d over a realistic bank"
+    predicted: uncertain
+    status: FAIL
+    result: results/e0_2f_breadth_reconciliation.json
+    method: "run BOTH instruments over THE SAME admitted bank, so a disagreement is the instrument rather than the world"
+    finding: >
+      R1 passes, R2 fails, R3 fails, and together they dissolve two things.
+      R1: at the uncapped bank the two instruments AGREE -- 0.088 synthetic
+      against 0.087 functional, a ratio of 0.99. They are measuring the same
+      quantity.
+      R2: they diverge only as the bank SHRINKS. The synthetic draw spans 0.287
+      across tau; the influence graph spans 0.007 and is essentially FLAT. So
+      E0.2e's opposition - tightening the cap raising fleet reach, the thing that
+      made R9 unevaluable and appeared to point it backwards - is an artifact of
+      the synthetic draw sampling a fixed NUMBER of cards from a shrinking bank.
+      Tightening the cap does not raise breadth.
+      R3: neither instrument reproduces E0.2d's 0.627-0.978 over a realistic
+      bank. Both read ~0.087 against E5.1's 0.31 target.
+    what_this_dissolves: >
+      E0.2d's 0.63-0.98 came from a world with 8 adapters, 8 cards and 60
+      entries, where each adapter's 6-rollout draw covers most of an 8-card bank
+      by construction. Breadth is a function of BANK SIZE RELATIVE TO FLEET SIZE
+      AND ROLLOUTS PER ADAPTER, and E0.2d measured it at one very small point.
+      E5.1 then fitted cascade_breadth(prov_overlap) = 0.60 + 0.45*po to that
+      point and made the resulting number decide whether an operating envelope
+      exists. Over a bank of 400 cards and 64 adapters the same functional
+      instrument gives 0.087 - comfortably inside the window.
+      So E5.1's breadth-conditional verdict, and R9's entire premise, rest on a
+      quantity that is a property of E0.2d's world size.
+    consequence: >
+      There may be no breadth problem to repair. Neither world is calibrated to
+      reality, so what decides it is the real bank-to-fleet-to-rollout ratio -
+      which is a MEASURE quantity for Rig B or deployment, not something either
+      simulation settles. R9 should not be designed until that ratio is known,
+      and it may then have no job.
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"
@@ -1379,6 +1420,17 @@ bugs:
       Cached weights are constants - stale, not sensitive. Produced a confident
       PASS on the claim this plan most expected to fail, and was caught only
       because U1 and U2 contradicted each other.
+
+  - id: B18
+    where: e0_2f breadth reconciliation, first run
+    bug: "used n_rollouts=48 against n_adapters=64, giving one rollout per adapter and sixteen adapters with none"
+    effect: >
+      the influence graph read ~0.013 flat -- an entry can reach at most one of
+      64 adapters by construction - which would have been reported as a THIRD
+      disagreeing number in a reconciliation whose entire purpose was to settle a
+      disagreement between two. Caught by checking the adapter structure before
+      reporting, because a third number was implausible.
+    fix: "n_rollouts = n_adapters * ROLLOUTS_PER_ADAPTER, matching E0.2d's 6 each"
 
   - id: B17
     where: e0_2e_r9_breadth_coverage coverage_of

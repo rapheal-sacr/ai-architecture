@@ -46,6 +46,7 @@ class InfluenceWorld:
     rng: field(default=None)
     card_overlap: float = 1.0
     content_rotation: float = 0.0
+    card_sources_override: list = None      # supply an externally-built bank
 
     def __post_init__(self) -> None:
         r = self.rng
@@ -74,6 +75,13 @@ class InfluenceWorld:
             for j in range(m):
                 slots[(i + j * 1) % self.n_cards].append(int(e))
         self.card_sources = [sorted(set(s)) if s else [int(participants[0])] for s in slots]
+        # Allow an externally-constructed bank so the SAME object can be measured
+        # by both this module's functional influence graph and another
+        # experiment's synthetic draw -- which is the only way to tell whether a
+        # disagreement between them is the world or the instrument.
+        if self.card_sources_override is not None:
+            self.card_sources = [sorted(s) for s in self.card_sources_override]
+            self.n_cards = len(self.card_sources)
         self.entry_multiplicity = m
 
         # Per-card distillation projection. A skill card is not the mean of its
