@@ -721,9 +721,50 @@ claims:
     claim: "the staged evaluation ladder makes an archive affordable"
     source: "Part I section 4; Part II section E"
     rig: A
-    kill: "low Spearman rho between SMALL-suite and FULL-suite scores - the cheap filter would be buying affordability with unmeasured false negatives"
+    kill: "L1 Spearman(cheap, full) < 0.7; L2 losses concentrated in rare regions (rare/generalist drop ratio > 2.0) under the coverage objective; L3 reports the cost/regret curve"
     predicted: uncertain
-    status: untested
+    status: FAIL
+    result: results/e2_3_staged_ladder.json
+    finding: >
+      Both criteria fail, and the mechanism is NOT the one predicted.
+      L1: the cheap rung does not preserve the ranking where it saves most.
+      Spearman(cheap, true) falls to 0.361 at a 5% cheap rung with 0.10 probe
+      noise, and degrades monotonically with both. It only clears 0.7 in the
+      expensive corner, where the ladder saves little.
+      L2: ~100% of good rare specialists are dropped at the cheap rung against
+      ~36% of generalists - a 2.81x concentration. And it is IDENTICAL in both
+      arms.
+    my_prediction_was_wrong_and_the_control_caught_it: >
+      This experiment predicted the concentration would come from a
+      traffic-weighted cheap rung - the weighting rule arriving at the Assay. It
+      does not. `ladder_random`, the unbiased control with uniform probe
+      allocation, concentrates at exactly the same 2.81x. The docstring
+      pre-registered this contingency ("if BOTH arms concentrate, the effect is
+      the ladder itself rather than the weighting, and the repair is different"),
+      which is the only reason the wrong prediction did not become the finding.
+    the_actual_mechanism: >
+      A cheap rung ranks candidates by a MEAN over the regions it covered. A
+      generalist at +0.04 across 16 regions scores 0.040; a rare specialist at
+      +0.30 in one region scores 0.019. The specialist loses by more than half on
+      ANY suite - uniformly sampled or traffic-weighted, noisy or exact - because
+      probe allocation never enters the comparison. Ranking by a mean discards
+      specialists structurally.
+      So this is NOT a weighting-rule site. It is the filter statistic being the
+      wrong shape for the objective the gate is meant to serve, and the weighting
+      rule does not reach it.
+    why_the_objective_had_to_be_named: >
+      Under the design's gate as written - unweighted mean of per-region deltas -
+      dropping a rare specialist is CORRECT, not a defect, since it is worth half
+      a generalist. The loss is only a defect under I7's coverage objective,
+      where a specialist lifting a region above the competence floor is exactly
+      what closes the gap. The design never says which objective promotion
+      serves, and until it does, "the ladder loses good candidates" is not even
+      well posed.
+    separate_finding_not_about_the_ladder: >
+      Regret under the coverage objective is near-constant across every ladder
+      setting, because the final pick is made on the full suite's MEAN score. That
+      regret is a property of the GATE's objective, not of the ladder. Reported
+      so it is not mistaken for one.
 
   - id: E2.4
     tier: Assay
@@ -1245,6 +1286,31 @@ bugs:
       PASS on the claim this plan most expected to fail, and was caught only
       because U1 and U2 contradicted each other.
 
+  - id: B15
+    where: e2_3_staged_ladder, L2 comparison baseline
+    bug: "compared rare-specialist drop rate against FREQUENT-specialist drop rate"
+    effect: >
+      under the coverage objective a frequent specialist lifts zero regions - its
+      region is already above the floor - so it is never in the "good" population
+      and the ratio was computed against an empty set, returning ~1.0 and a
+      spurious PASS. Fixed by comparing against generalists, which are good under
+      both objectives. Third instance in this experiment alone of a criterion
+      scoring an empty or wrong population.
+    fix: "compare against a population that is non-empty under the objective being used, and assert its size"
+
+  - id: B14
+    where: e2_3_staged_ladder, L2 objective
+    bug: >
+      scored "losses concentrated in rare regions" against the design's gate
+      objective (unweighted mean of per-region deltas), under which a rare
+      specialist is worth half a generalist and never enters the top decile.
+    effect: >
+      L2 examined an empty population and could not find a defect. A first repair
+      attempt - "gap closed below the floor, summed" - still favoured generalists
+      0.56 to 0.166 and failed the same way. Only counting regions LIFTED above
+      the floor discriminates. Caught by the manipulation check both times.
+    fix: "name the objective before scoring the criterion, and verify all compared populations are non-empty BEFORE running the sweep"
+
   - id: B13
     where: e5_2_support_decision_table, first version
     bug: >
@@ -1430,6 +1496,25 @@ repairs:
       it has an interior optimum instead of a monotone drive to atomisation.
     evidence: "recovers the planted 4-cluster structure exactly in E3.3"
     open: "tested on nested partitions aligned with the truth; unaligned or non-nested candidate partitions are untested"
+    status: proposed
+
+  - id: R11
+    from: E2.3
+    proposal: >
+      State which objective promotion serves - mean per-region value or I7
+      coverage - and make the cheap rung rank by THAT statistic. A mean-based
+      filter cannot serve a coverage objective at any probe allocation, because
+      a specialist's mean is low by construction. If the objective is coverage,
+      the cheap rung needs a coverage-aware score (regions lifted above floor,
+      or worst-region gain), not a cheaper version of the mean.
+    evidence: >
+      E2.3: ~100% of good rare specialists dropped at the cheap rung against ~36%
+      of generalists, identical in the unbiased control, so probe allocation is
+      not the lever.
+    open: >
+      A coverage-aware cheap rung may be more expensive than a mean, since it
+      needs per-region resolution rather than an aggregate. That cost is
+      unmeasured and it is the reason the ladder exists.
     status: proposed
 
   - id: R6

@@ -62,6 +62,7 @@ structural work first, which is the right order anyway.
 | E3.1c | does the transfer *matrix* beat a one-line breadth penalty? | **PARTIAL** — the statistic wins; the matrix is unevidenced |
 | E3.1d | is E3.1's comp-only figure real? | **FAIL** — tiebreak artifact, spread 0.775. Figure withdrawn |
 | E2.1 | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 criteria |
+| E2.3 | the staged ladder makes an archive affordable | **FAIL** on both — and not for the predicted reason |
 | E5.1 | **joint feasibility** — do the constraints intersect? | **~1%** of the space, and **0** at the design's own profile |
 
 **Two published conclusions have been withdrawn.** Both are recorded in
@@ -782,6 +783,56 @@ work, and it is what actually decides whether §5's optimism is warranted.
 
 ---
 
+### E2.3 · The ladder's filter is the wrong shape, and it isn't a weighting problem
+
+The last untested claim in the architecturally-consequential class. Its failure
+mode is structurally invisible: a candidate rejected at the cheap rung is never
+measured on the full one, so the archive reports what it promoted and never what
+it discarded.
+
+**L1 fails.** Spearman(cheap, true) falls to **0.361** at a 5% cheap rung with
+0.10 probe noise, degrading monotonically with both. It clears 0.7 only in the
+expensive corner — where the ladder saves little.
+
+**L2 fails: ~100% of good rare specialists are dropped at the cheap rung against
+~36% of generalists.** A 2.81× concentration.
+
+**And my prediction about *why* was wrong.** I expected the concentration to come
+from a traffic-weighted cheap rung — the weighting rule arriving at the Assay.
+It doesn't. `ladder_random`, the unbiased control with uniform probe allocation,
+concentrates at **exactly the same 2.81×**. The docstring pre-registered that
+contingency ("if BOTH arms concentrate, the effect is the ladder itself rather
+than the weighting, and the repair is different"), which is the only reason the
+wrong prediction didn't become the finding.
+
+The real mechanism is simpler and worse:
+
+```
+  generalist      +0.04 in 16 of 16  ->  cheap score 0.0400
+  rare specialist +0.30 in  1 of 16  ->  cheap score 0.0187
+```
+
+A cheap rung ranks by a **mean over covered regions**, so a specialist loses by
+more than half on *any* suite — uniformly sampled or traffic-weighted, noisy or
+exact. Probe allocation never enters the comparison. **Ranking by a mean discards
+specialists structurally**, so this is not a weighting-rule site and the
+weighting rule does not reach it.
+
+**Why the objective had to be named first.** Under the design's gate as written
+— unweighted mean of per-region deltas — dropping a rare specialist is *correct*,
+not a defect: it is worth half a generalist. The loss is only a defect under I7's
+coverage objective, where a specialist lifting a region above the competence
+floor is exactly what closes the gap. **The design never says which objective
+promotion serves**, and until it does, "the ladder loses good candidates" is not
+even well posed. That is the finding underneath the finding.
+
+*Separately, and not about the ladder:* regret under the coverage objective is
+near-constant across every ladder setting, because the final pick is made on the
+full suite's **mean** score. That regret is a property of the gate's objective,
+not of the ladder, and is reported so it is not mistaken for one.
+
+---
+
 ### E5.1 · 7.1% feasible, and the binding constraint is not the one I studied
 
 Every experiment before this moved one thing with everything else at defaults.
@@ -1198,6 +1249,15 @@ All are in `claims/claims.yaml` under `bugs:`, in the code, and in git history:
   denominator moved with `k` and **k=10 came out worse than k=3** — backwards for
   anything called redundancy, and unusable as the lookup it claimed to be. Caught
   by the table being non-monotone in the direction it informs.
+
+- **B14/B15** E2.3 scored its rare-region criterion against an empty population
+  **twice**, then against a wrong baseline a third time. First against the mean
+  objective, under which no rare specialist is ever "good"; then against a
+  gap-closing objective that still favoured generalists 0.56 to 0.166; then
+  against frequent specialists, which lift zero regions and are never good
+  either. The manipulation check caught all three. The rule that came out of it:
+  **name the objective before scoring a criterion, and verify every compared
+  population is non-empty before running the sweep** — not after.
 
 B3 is instructive for one reason and B4 for another.
 
