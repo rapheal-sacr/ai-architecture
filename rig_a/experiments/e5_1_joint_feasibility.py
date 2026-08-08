@@ -124,6 +124,14 @@ DELETION_ARRIVAL_PER_DAY = 2.0
 # of the 7-day budget. Reporting emptiness at one such point would have been a
 # statement about the constants, not the design, so the profile is now swept and
 # the closed-form window is reported alongside.
+# The concurrent : promoted ratio is a DEPLOYMENT POLICY, so it is swept rather
+# than chosen -- same class as L and the I7 density floor.
+CONCURRENT_RATIO = (0.05, 0.15, 0.35, 1.0)
+# Part II section A requires disjoint bases, which implies
+#     concurrent_fleet * RANK_REQUEST <= DIM
+# At rank 8 in 128 that is 16 adapters, hard. The design states neither this
+# bound nor its alternative (that adapters serving different regions share
+# basis, which section A's interference argument does not cover).
 PROFILES = (
     ("as specified",     64,  8.0,  4.0,  7.0),
     ("fast recompile",   64,  2.0,  4.0,  7.0),
@@ -239,12 +247,16 @@ def worst_over_forgetting(n_regions, draw_fraction, decay_policy, decay_rate,
 
 
 # ------------------------------------------------------- C2/C3/C4, computed
-def cascade_breadth(prov_overlap: float) -> float:
-    """E0.2d measured 63.1% at one card per entry rising to 98.8% at six."""
-    return float(np.clip(0.60 + 0.45 * prov_overlap, 0.0, 1.0))
+# E0.2f reconciled the two breadth instruments over the same admitted bank and
+# found they AGREE at 0.087, while E0.2d's 0.63-0.98 came from a world with 8
+# adapters, 8 cards and 60 entries. Fitting 0.60 + 0.45*po to that point and
+# making the result decide feasibility was fitting to one very small world.
+# Swept instead, spanning both measurements, because which holds depends on the
+# real bank : fleet : rollouts-per-adapter ratio and nobody has measured it.
+BREADTH_BETA = (0.087, 0.20, 0.31, 0.50, 0.65)
 
 
-def union_size(fleet, prov_overlap, batch):
+def union_size(fleet, beta, batch):
     """Adapters touched by a batch of `batch` tombstones.
 
     Each adapter is touched independently with probability beta per tombstone,
@@ -255,19 +267,18 @@ def union_size(fleet, prov_overlap, batch):
     cost most severely in the LOW-breadth regime, which is exactly where
     feasibility lives.
     """
-    beta = cascade_breadth(prov_overlap)
     return max(fleet * (1.0 - (1.0 - beta) ** batch), 1.0)
 
 
-def deletions_per_day(prof, prov_overlap: float, batch: int) -> float:
-    _, fleet, h, par, _ = prof
-    return (24.0 * par) * batch / (union_size(fleet, prov_overlap, batch) * h)
+def deletions_per_day(prof, beta: float, batch: int) -> float:
+    _, promoted, h, par, _ = prof
+    return (24.0 * par) * batch / (union_size(promoted, beta, batch) * h)
 
 
-def restore_latency_days(prof, batch: int, prov_overlap: float) -> float:
-    _, fleet, h, par, _ = prof
+def restore_latency_days(prof, batch: int, beta: float) -> float:
+    _, promoted, h, par, _ = prof
     fill = batch / DELETION_ARRIVAL_PER_DAY
-    drain = union_size(fleet, prov_overlap, batch) * h / (par * 24.0)
+    drain = union_size(promoted, beta, batch) * h / (par * 24.0)
     return fill + drain
 
 
@@ -327,27 +338,37 @@ def main() -> int:
             for i in range(2)]))
 
     rows, feasible = [], []
-    for prof, R, dr, so, po, f, b, dp, dc, sh in itertools.product(
-            PROFILES, REGIONS, DOMAIN_RANKS, SUBSPACE_OVERLAP, PROVENANCE_OVERLAP,
-            DRAW_FRACTION, BATCH, DECAY_POLICY, DECAY_RATE, SUPPORT_SHAPES):
+    for prof, R, dr, so, beta, cratio, f, b, dp, sh in itertools.product(
+            PROFILES, REGIONS, DOMAIN_RANKS, SUBSPACE_OVERLAP, BREADTH_BETA,
+            CONCURRENT_RATIO, DRAW_FRACTION, BATCH, DECAY_POLICY, SUPPORT_SHAPES):
+        dc = DECAY_RATE[1]
         sub = R * dr / DIM
         free = c1[(R, dr, so)]
         over = c6[(R, f, dp, dc, sh)]
-        dpd = deletions_per_day(prof, po, b)
-        lat = restore_latency_days(prof, b, po)
+        dpd = deletions_per_day(prof, beta, b)
+        lat = restore_latency_days(prof, b, beta)
         probes = probe_cost(R)
         # recompile cost is bounded by the draw cap -- E0.1 A6 -- so C5 holds
         # whenever f < 1.0; at f = 1.0 the draw is the whole provenance.
+        # C1 governs the CONCURRENT fleet; C3/C4 govern the PROMOTED fleet.
+        # E5.1 previously asked C1 as "free >= RANK_REQUEST" -- whether the
+        # budget fits ONE adapter -- while C3/C4 used fleet = 64. One symbol,
+        # two populations, 64x apart.
+        promoted = prof[1]
+        concurrent = max(1, min(int(round(cratio * promoted)),
+                                DIM // RANK_REQUEST))   # section A's bound
         checks = {
-            "C1 tail-safe free rank": free >= RANK_REQUEST,
+            "C1 tail-safe free rank": free >= concurrent * RANK_REQUEST,
             "C2 probe budget": probes <= PROBE_BUDGET,
             "C3 deletion throughput": dpd >= DELETIONS_PER_DAY_MIN,
             "C4 restoration latency": lat <= RESTORE_LATENCY_MAX_DAYS,
             "C5 recompile bounded": f < 1.0,
             "C6 over-forgetting": over <= OVER_FORGET_MAX,
         }
-        row = {"profile": prof[0], "regions": R, "domain_rank": dr, "subscription": round(sub, 2),
-               "subspace_overlap": so, "provenance_overlap": po,
+        row = {"profile": prof[0], "beta": beta, "concurrent_ratio": cratio,
+               "concurrent_fleet": concurrent, "promoted_fleet": promoted,
+               "regions": R, "domain_rank": dr, "subscription": round(sub, 2),
+               "subspace_overlap": so,
                "draw_fraction": f, "batch": b, "decay_policy": dp,
                "decay_rate": dc, "support_shape": sh,
                "free_rank": free, "over_forget_worst": round(over, 3),
@@ -438,7 +459,7 @@ def main() -> int:
     print("   measurement of density -- the true boundary may be outside the box)")
     axes = {"regions": REGIONS, "domain_rank": DOMAIN_RANKS,
             "subspace_overlap": SUBSPACE_OVERLAP,
-            "provenance_overlap": PROVENANCE_OVERLAP,
+            "beta": BREADTH_BETA, "concurrent_ratio": CONCURRENT_RATIO,
             "draw_fraction": DRAW_FRACTION, "batch": BATCH, "decay_rate": DECAY_RATE}
     interior = {}
     print(f"      {'axis':<20}{'swept':>22}{'feasible values':>26}{'interior?':>11}")
@@ -452,8 +473,11 @@ def main() -> int:
               f"{('yes' if inside else 'EDGE'):>11}")
 
     # the correlated diagonal: subspace and provenance overlap move together
-    diag = [r for r in rows
-            if abs(r["subspace_overlap"] - (r["provenance_overlap"] - 0.0)) < 0.15]
+    # The correlated diagonal: subspace overlap helps C1 while cascade breadth
+    # hurts C3/C4, and they are plausibly correlated -- regions sharing feature
+    # space plausibly share source material. If so the feasible region is this
+    # slice, not the product.
+    diag = [r for r in rows if abs(r["subspace_overlap"] - r["beta"]) < 0.25]
     diag_ok = [r for r in diag if r["feasible"]]
     print(f"\n  F2  correlated diagonal (subspace overlap ~ provenance overlap):"
           f" {len(diag_ok)}/{len(diag)} feasible")
@@ -466,7 +490,7 @@ def main() -> int:
     for prof in PROFILES:
         thr = breadth_threshold(prof)
         w30 = batch_window(prof, 0.30)
-        wmeas = batch_window(prof, cascade_breadth(0.1))   # E0.2d's LOWEST measured
+        wmeas = batch_window(prof, BREADTH_BETA[0])        # E0.2f's reconciled value
         windows.append({"profile": prof[0],
                         "max_breadth": round(thr, 3) if thr else None,
                         "window_at_0.30": [min(w30), max(w30)] if w30 else None,
@@ -474,8 +498,9 @@ def main() -> int:
         f30 = f"{min(w30)}..{max(w30)}" if w30 else "EMPTY"
         fm = f"{min(wmeas)}..{max(wmeas)}" if wmeas else "EMPTY"
         print(f"      {prof[0]:<20}{(f'{thr:.2f}' if thr else 'none'):>10}{f30:>19}{fm:>26}")
-    print(f"\n    E0.2d's LOWEST measured cascade breadth is"
-          f" {cascade_breadth(0.1):.2f}, at one card per entry -- the minimum")
+    print(f"\n    E0.2f's reconciled breadth is {BREADTH_BETA[0]:.3f}; E0.2d's world"
+          f" gave 0.63-0.98. Swept, not fitted.")
+    print("    (")
     print("    multiplicity achievable. So the binding question is not batch size:")
     print("    it is whether cascade breadth can be brought below the threshold at")
     print("    all, and no admission threshold reaches it. That is R9.")
@@ -510,14 +535,14 @@ def main() -> int:
                 best.append(r)
             if len(best) == 8:
                 break
-        h = (f"      {'profile':<18}{'reg':>4}{'sub':>6}{'so':>5}{'po':>5}{'draw':>6}"
-             f"{'batch':>7}{'rate':>6}{'free':>6}{'over':>7}{'del/day':>9}{'lat':>7}")
+        h = (f"      {'profile':<18}{'reg':>4}{'sub':>6}{'so':>5}{'beta':>6}{'draw':>6}"
+             f"{'batch':>7}{'conc':>6}{'free':>6}{'over':>7}{'del/day':>9}{'lat':>7}")
         print(h)
         for r in best:
             print(f"      {r['profile']:<18}{r['regions']:>4}{r['subscription']:>6.2f}"
-                  f"{r['subspace_overlap']:>5.1f}{r['provenance_overlap']:>5.1f}"
+                  f"{r['subspace_overlap']:>5.1f}{r['beta']:>6.3f}"
                   f"{r['draw_fraction']:>6.2f}{r['batch']:>7}"
-                  f"{r['decay_rate']:>6.2f}{r['free_rank']:>6}"
+                  f"{r['concurrent_fleet']:>6}{r['free_rank']:>6}"
                   f"{r['over_forget_worst']:>7.3f}{r['deletions_per_day']:>9.2f}"
                   f"{r['latency_days']:>7.2f}")
 

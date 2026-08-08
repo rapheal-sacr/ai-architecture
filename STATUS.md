@@ -173,20 +173,30 @@ quantity for deployment, not something either simulation settles.
 
 Raised in review, verified, not yet applied:
 
-1. **Two fleets, one number.** E5.1's C1 asks `free >= RANK_REQUEST` — whether
+1. **Applied.** Two fleets, one number — E5.1's C1 asks `free >= RANK_REQUEST` — whether
    the budget fits *one* rank-8 adapter — while C3/C4 use `fleet = 64`. Same
    symbol, 64× apart, and 64 basis-disjoint rank-8 adapters need 512 dimensions
    in a 128-dimensional space. **Active fleet** (bounded by `free_rank /
    RANK_REQUEST`, so ≈2 at E1.1c's tail-safe rank) and **stored fleet** (every
    promoted adapter, grown by promotions) are different quantities. C1 governs
    the first; C3, C4 and every breadth measurement govern the second.
-2. **This reverses the C1 attribution.** I reported C1 as least binding —
-   eliminating 108 of 97,200 — and drew a self-criticism from it. C1 is least
-   binding *because it was formulated against a fleet of one.* Stated as
-   `free_rank >= active_fleet × RANK_REQUEST` it eliminates nearly everything.
-   And C4's drain is linear in fleet, so its top ranking rests on the same
-   unexamined constant.
-3. **I7's floor is in the wrong units.** It counts *cards* per region; I7 claims
+2. **Applied — and the ranking inverted.** E5.1 re-run with the fleet split,
+   `β` swept rather than fitted, and the concurrent:promoted ratio on an axis:
+
+   ```
+     before                        after
+     C4 latency   58.3% / 13716    C1 free rank  66.0% / 50820   <- MOST
+     C6 forget    57.3% /  8262    C4 latency    51.7% / 48390
+     C1 free rank 11.1% /   108    C6 forget     43.3% / 27252
+                  ^ LEAST          C3 throughput 11.7% /  8388   <- least
+   ```
+
+   **C1 goes from 108 configurations eliminated alone to 50,820** — 470×, purely
+   from stating the constraint against the right population. The subspace work
+   was aimed at the *most* binding constraint, not the least. And every sampled
+   feasible configuration sits at **β = 0.087**, E0.2f's reconciled value; none
+   at E0.2d's 0.65.
+3. **Still owed.** I7's floor is in the wrong units — It counts *cards* per region; I7 claims
    *ledger* coverage. Five cards drawing the same eight hot entries are worse
    covered than two drawing sixteen distinct ones — and `concentration` is the
    knob in that very experiment controlling exactly that. Correct form:
@@ -212,8 +222,17 @@ four withdrawals clustered early:
 | **detection latency** | falling. Inspection → contradiction → *"is this a parameter I chose?"* → *"why is this so extreme / going the wrong way?"* → the record itself functioning as an error detector, which only works once the record exists |
 
 The single most productive check has been **"why is this number so extreme, or
-going the wrong way?"** — B7, B9, B11, B12, B13, B16. Cross-checks between two
-measurements have caught none; the manipulation check has caught three.
+going the wrong way?"** — **seven** found that way (B7, B9, B11, B12, B13, B16,
+B18) against **zero** from cross-checks between two measurements. The
+manipulation check has caught three. That ratio is the most transferable thing
+this programme produced.
+
+**And a claim can be wrong twice for unrelated reasons.** The C1 attribution
+failed first to B11's grid confound, was corrected, re-registered as curves and
+returned to the front page — then failed again to the fleet-of-one. *Surviving
+one correction does not confer credibility, because a correction only tests the
+support it touched.* A claim resting on two supports needs both audited before
+it goes back up.
 
 Read the retraction record (`claims/claims.yaml`, `bugs:`) alongside the results
 — not because the rate is alarming, but because the *reversals* are the most

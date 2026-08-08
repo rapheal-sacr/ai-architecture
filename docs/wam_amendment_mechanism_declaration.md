@@ -97,8 +97,16 @@ a specification and a discovery.
 And the corollary that matters most, because it is the one this record kept
 demonstrating — in a form mechanical enough to check on one line of a table:
 
-> **Declare whether each quantity is a scalar, a rate, or a distribution. Never
-> state a constraint against a coarser shape than the quantity it constrains.**
+> **Declare each quantity's name, its shape (scalar / rate / distribution), and
+> its scope — what population it ranges over. Never state a constraint against a
+> coarser shape than the quantity it constrains.**
+
+The **scope** term is the third one, added after `fleet` was found covering two
+populations through twenty-four experiments. Three instances now, all one name
+over two quantities: L7's "hours–days" (*disable* vs *recompile*, E0.2c), I7's
+coverage (scalar vs rate, B17), and `fleet` (concurrent vs promoted). `fleet`
+passes a prose review; **"promoted adapters, count, population-wide"** and
+**"resident adapters, count, per-inference"** cannot silently be the same row.
 
 B13 and B17 were the same error twice: a *distribution collapsed to a scalar*.
 B13 reported a rate conditional on passing, so the denominator moved with `k`.

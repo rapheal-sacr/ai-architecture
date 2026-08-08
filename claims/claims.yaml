@@ -1262,6 +1262,32 @@ claims:
       breadth, so joint feasibility promotes R9 (provenance-aware admission) from
       a missing mechanism to THE mechanism that decides whether an operating
       envelope exists.
+    RE_RUN_WITH_THREE_CORRECTIONS: >
+      Re-run with (a) the fleet split, (b) beta swept rather than fitted to
+      E0.2d, (c) the concurrent:promoted ratio on an axis. 648,000
+      configurations, 6.0% feasible. THE RANKING INVERTS.
+        before                          after
+        C4 latency   58.3% / 13716      C1 free rank  66.0% / 50820   <- MOST
+        C6 forget    57.3% /  8262      C4 latency    51.7% / 48390
+        C1 free rank 11.1% /   108      C6 forget     43.3% / 27252
+                     ^ LEAST            C3 throughput 11.7% /  8388   <- least
+      C1 goes from eliminating 108 configurations alone to 50,820 - a 470x
+      change - purely from stating the constraint against the right population.
+      E5.1 had asked C1 as "does the budget fit ONE rank-8 adapter" while C3/C4
+      used fleet = 64.
+      And every sampled feasible configuration sits at beta = 0.087, E0.2f's
+      reconciled value. None at E0.2d's 0.65. The "as specified" profile now
+      yields 2097 feasible where it yielded zero, entirely because beta is swept
+      rather than fitted.
+    the_C1_attribution_was_wrong_TWICE_independently: >
+      First from B11's grid confound - ranking constraints whose drivers were
+      swept at different resolutions. Corrected, re-registered as curves, and the
+      claim went back on the front page in corrected form. It was wrong a SECOND
+      time, for an unrelated reason: C1 was formulated against a fleet of one.
+      METHOD NOTE, and it is its own category: surviving one correction does not
+      confer credibility, because a correction only tests the support it touched.
+      A claim resting on two supports needs both audited before it returns to the
+      front page - and this one had already been withdrawn once and reinstated.
     attribution_ranking_WITHDRAWN: >
       An earlier version of this entry ranked the constraints by elimination
       fraction and concluded "C1 is the least binding of the six" and "most of
