@@ -8,8 +8,12 @@ derived, recompilable view of it.
 The design lives in `Architecture Design/` alongside this repo. This repo is
 the part that tries to break it.
 
-**[PLAN.md](PLAN.md)** is the entry point: the claim ledger, the rigs, the
-kill criteria, and the phase schedule.
+**[STATUS.md](STATUS.md)** is the entry point if you want the answer: every
+load-bearing claim ordered *by the design*, with its status, the constant it
+rests on, and what would change it.
+
+**[PLAN.md](PLAN.md)** is the entry point if you want the working: the claim
+ledger ordered by experiment, kill criteria, and the phase schedule.
 
 ---
 
@@ -54,6 +58,7 @@ or the model is small.
 | [E3.3](rig_a/experiments/e3_3_offdiagonal_degeneracy.py) | "maximize off-diagonal mass" is a partition objective | **FAIL** — monotone in fineness, so its argmax is total atomisation, and it ranks the planted true structure near the *bottom*. The replacement objective is validated only inside a family containing the answer |
 | [E2.1](rig_a/experiments/e2_1_tier_laundering.py) | probe harvesting widens the verifiable surface | **FAIL** on 2 of 3 — 29–63% of an unfiltered "T2" suite is laundered T3 judge opinion, and the harvested slice tests each domain's easy corner. But the strict-filter **yield is high** (33–68%), contradicting this plan's own prediction |
 
+| [E0.2e](rig_a/experiments/e0_2e_r9_breadth_coverage.py) | **R9** — provenance-aware admission has an acceptable point | **FAIL** — the curve cannot be drawn. Tightening the cap cuts cards-per-entry 9.18→1.00 (*the mechanism works*) **and** shrinks the bank, raising fleet reach. Opposed at every pool structure, and the net depends on a fleet coupling Parts I–III never specify. The expected I7 tension doesn't bind — coverage stays at 1.000 |
 | [E2.3](rig_a/experiments/e2_3_staged_ladder.py) | the staged ladder makes an archive affordable | **FAIL** on both. Rank correlation drops to **0.361** where the ladder saves most, and **~100% of good rare specialists are dropped** vs ~36% of generalists. Not a weighting problem — the *unbiased control concentrates identically*, because ranking by a **mean** discards specialists structurally. Underneath: the design never says whether promotion serves mean value or coverage, so the loss isn't even well posed |
 | [E5.1](rig_a/experiments/e5_1_joint_feasibility.py) | **joint feasibility** — do the coupled constraints intersect? | **9.1%** of 291,600 configurations, interior on every axis. At the design's own profile the window is empty *conditionally on cascade breadth* (needs ≤0.31 against ~0.65). Four routes out and only one isn't a hardware purchase, which promotes **R9**. The real output is that the design's uncertainty is now **four unmeasured numbers with named resolution paths** — see PLAN.md |
 
@@ -86,7 +91,7 @@ The strategic consequence: **generator error is now the dominant error source,
 and no Rig A work reduces it.** Rig B has moved ahead of the remaining 13
 claims — see PLAN.md §3.
 
-Eleven repairs proposed (R1–R11), **none adopted**. R8's admission-threshold
+Eleven repairs proposed (R1–R11), **none adopted**. **R9 cannot yet be evaluated** — see STATUS.md. R8's admission-threshold
 component is withdrawn by E0.2d; **R9 (provenance-aware admission) is promoted
 by E5.1** from a missing mechanism to the one that decides feasibility.
 

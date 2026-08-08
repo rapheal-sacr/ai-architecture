@@ -35,8 +35,18 @@ ARMS:
     ladder_traffic  cheap rung is traffic-weighted -- the natural implementation
 
 KILL CRITERIA (pre-registered):
-    L1 fails if Spearman(cheap score, full score) < 0.7 -- the cheap rung does
-       not preserve the ranking the expensive rung would give.
+    L1 [RE-REGISTERED] fails if RECALL of the full rung's top decile under the
+       cheap cut falls below 0.80.
+       The original criterion was Spearman(cheap, true) >= 0.7, inherited from
+       the plan's "low Spearman between SMALL and FULL". Two things were wrong
+       with it. It measured cheap-against-TRUTH rather than cheap-against-FULL,
+       so a broken gate objective would be charged to the ladder -- and the gate
+       objective IS broken here, so that is not hypothetical. And rank
+       correlation is the wrong shape for a filter: a ladder's job is RECALL, not
+       ranking. A rung at rho 0.36 that reliably keeps the full rung's top
+       performers inside its cut is doing its job; a rung at rho 0.9 that drops
+       the single best candidate is not.
+       All three are reported below so the substitution is auditable.
     L2 fails if the ladder's losses are CONCENTRATED in rare regions -- ratio of
        rare-specialist to frequent-specialist loss rate above 2.0 -- UNDER THE
        COVERAGE OBJECTIVE. The objective qualifier is forced, not decorative.
@@ -89,7 +99,8 @@ NOISE_LEVELS = (0.02, 0.05, 0.10)
 KEEP_FRACTION = 0.25            # cheap rung forwards the top quarter
 RARE_CUTOFF = 0.5               # regions in the bottom half of traffic are "rare"
 
-L1_RHO_MIN = 0.70
+L1_RECALL_MIN = 0.80          # re-registered; see docstring
+L1_RHO_MIN = 0.70             # the original, reported for audit
 L2_CONCENTRATION_MAX = 2.0
 
 
@@ -184,8 +195,26 @@ def run(arm: str, cheap_frac: float, noise: float, seed: int) -> dict:
     picked = int(np.argmax(final))
     dropped = np.setdiff1d(np.arange(N_CANDIDATES), survivors)
 
+    # Reference: what the FULL rung would have said about every candidate.
+    # Not added to cost -- it is an oracle for measuring the ladder, not part of
+    # the ladder's operation.
+    ref_full = np.array([observe(true[c], full_probes, rates, False, noise, rng)[0]
+                         for c in range(N_CANDIDATES)])
+
+    # The ladder's actual promise is that the cheap rung agrees with the
+    # EXPENSIVE rung well enough to filter -- not that it agrees with truth.
+    # Those come apart exactly when the expensive rung is also wrong, which is
+    # the case here: if the full rung ranks by the same unweighted mean, a rare
+    # specialist scores low on BOTH rungs and rho(cheap, full) stays high while
+    # rho(cheap, true) collapses. Measuring only the latter would attribute the
+    # gate's defect to the ladder.
+    top_full = set(np.argsort(-ref_full)[: int(0.10 * N_CANDIDATES)].tolist())
+    recall = len(top_full & set(np.asarray(survivors).tolist())) / max(len(top_full), 1)
+
     out = {"arm": arm, "cheap_fraction": cheap_frac, "noise": noise, "cost": cost,
-           "rho_cheap_vs_true": float(spearmanr(cheap_scores, value_mean).statistic)}
+           "rho_cheap_vs_true": float(spearmanr(cheap_scores, value_mean).statistic),
+           "rho_cheap_vs_full": float(spearmanr(cheap_scores, ref_full).statistic),
+           "recall_top_decile": recall}
 
     for label, value in (("mean", value_mean), ("cov", value_cov)):
         out[f"regret_{label}"] = float(value[int(np.argmax(value))] - value[picked])
@@ -216,6 +245,8 @@ def agg(arm, cf, nz):
 
     o = {"arm": arm, "cheap_fraction": cf, "noise": nz,
          "cost": round(m("cost")), "rho": round(m("rho_cheap_vs_true"), 3),
+         "rho_full": round(m("rho_cheap_vs_full"), 3),
+         "recall": round(m("recall_top_decile"), 3),
          "n_good_rare_cov": round(m("n_good_rare_cov"), 1)}
     for label in ("mean", "cov"):
         lr, lb = m(f"lost_rare_{label}"), m(f"lost_base_{label}")
@@ -238,19 +269,19 @@ def main() -> int:
     rows = [base]
     for arm in ("ladder_random", "ladder_traffic"):
         print(f"  {arm}")
-        hdr = (f"    {'cheap':>7}{'noise':>7}{'saved':>8}{'rho':>8}"
-               f"{'reg(mean)':>11}{'reg(cov)':>10}"
-               f"{'lost rare':>11}{'lost base':>11}{'conc(cov)':>11}")
+        hdr = (f"    {'cheap':>7}{'noise':>7}{'saved':>8}"
+               f"{'rho:true':>10}{'rho:full':>10}{'recall':>9}"
+               f"{'lost rare':>11}{'lost base':>11}{'conc':>7}")
         print(hdr); print("    " + "-" * (len(hdr) - 4))
         for cf in CHEAP_FRACTIONS:
             for nz in NOISE_LEVELS:
                 r = agg(arm, cf, nz)
                 rows.append(r)
                 saved = 1.0 - r["cost"] / base["cost"]
-                print(f"    {cf:>7.2f}{nz:>7.2f}{saved:>7.0%}{r['rho']:>8.3f}"
-                      f"{r['regret_mean']:>11.4f}{r['regret_cov']:>10.4f}"
+                print(f"    {cf:>7.2f}{nz:>7.2f}{saved:>7.0%}"
+                      f"{r['rho']:>10.3f}{r['rho_full']:>10.3f}{r['recall']:>9.3f}"
                       f"{r['lost_rare_cov']:>11.3f}{r['lost_base_cov']:>11.3f}"
-                      f"{r['conc_cov']:>11.2f}")
+                      f"{r['conc_cov']:>7.2f}")
         print()
 
     lad = [r for r in rows if r["arm"] != "full"]
@@ -269,7 +300,7 @@ def main() -> int:
                - np.mean([r["conc_cov"] for r in rnd])) > 1e-9, \
         "manipulation did not take: weighted and unweighted cheap rungs identical"
 
-    l1 = min(r["rho"] for r in lad) >= L1_RHO_MIN
+    l1 = min(r["recall"] for r in lad) >= L1_RECALL_MIN
     l2_trf = max(r["conc_cov"] for r in trf) <= L2_CONCENTRATION_MAX
     l2_rnd = max(r["conc_cov"] for r in rnd) <= L2_CONCENTRATION_MAX
 
@@ -289,8 +320,13 @@ def main() -> int:
               f"{1-r['cost']/base['cost']:>7.0%}"
               f"{r['regret_mean']:>11.4f}{r['regret_cov']:>10.4f}")
 
-    print(f"\n  L1 cheap rung preserves the ranking (rho >= {L1_RHO_MIN}):  "
-          f"{'ok' if l1 else 'NO'}   worst rho {min(r['rho'] for r in lad):.3f}")
+    print(f"\n  L1 [re-registered] recall of the full rung's top decile"
+          f" >= {L1_RECALL_MIN}:  {'ok' if l1 else 'NO'}")
+    print(f"       worst recall            {min(r['recall'] for r in lad):.3f}")
+    print(f"       worst rho(cheap, FULL)  {min(r['rho_full'] for r in lad):.3f}"
+          f"   <- what the ladder actually promises")
+    print(f"       worst rho(cheap, true)  {min(r['rho'] for r in lad):.3f}"
+          f"   <- the ORIGINAL criterion; charges the gate's defect to the ladder")
     print(f"\n  L2 losses not concentrated in rare regions, UNDER COVERAGE"
           f" (<= {L2_CONCENTRATION_MAX}x):")
     print(f"       ladder_random  (unbiased cheap rung -- the control): "

@@ -1,0 +1,206 @@
+{
+  "seed": 20260806,
+  "breadth_target": 0.31,
+  "coverage_floor": 0.8,
+  "rows": [
+    {
+      "concentration": 0.2,
+      "tau": 0.0,
+      "bank_size": 24.5,
+      "cards_per_entry": 1.0,
+      "fleet_reach": 0.246,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.2,
+      "tau": 0.05,
+      "bank_size": 24.5,
+      "cards_per_entry": 1.0,
+      "fleet_reach": 0.246,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.2,
+      "tau": 0.1,
+      "bank_size": 41.5,
+      "cards_per_entry": 1.1,
+      "fleet_reach": 0.158,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.2,
+      "tau": 0.2,
+      "bank_size": 89.0,
+      "cards_per_entry": 1.56,
+      "fleet_reach": 0.102,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.2,
+      "tau": 0.35,
+      "bank_size": 313.2,
+      "cards_per_entry": 4.42,
+      "fleet_reach": 0.079,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.2,
+      "tau": 0.5,
+      "bank_size": 389.0,
+      "cards_per_entry": 5.44,
+      "fleet_reach": 0.077,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.2,
+      "tau": 0.75,
+      "bank_size": 400.0,
+      "cards_per_entry": 5.6,
+      "fleet_reach": 0.077,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.2,
+      "tau": 1.0,
+      "bank_size": 400.0,
+      "cards_per_entry": 5.6,
+      "fleet_reach": 0.077,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.5,
+      "tau": 0.0,
+      "bank_size": 16.0,
+      "cards_per_entry": 1.0,
+      "fleet_reach": 0.375,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.5,
+      "tau": 0.05,
+      "bank_size": 16.0,
+      "cards_per_entry": 1.0,
+      "fleet_reach": 0.375,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.5,
+      "tau": 0.1,
+      "bank_size": 16.8,
+      "cards_per_entry": 1.01,
+      "fleet_reach": 0.359,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.5,
+      "tau": 0.2,
+      "bank_size": 23.8,
+      "cards_per_entry": 1.09,
+      "fleet_reach": 0.273,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.5,
+      "tau": 0.35,
+      "bank_size": 109.0,
+      "cards_per_entry": 2.3,
+      "fleet_reach": 0.118,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.5,
+      "tau": 0.5,
+      "bank_size": 230.5,
+      "cards_per_entry": 4.1,
+      "fleet_reach": 0.096,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.5,
+      "tau": 0.75,
+      "bank_size": 360.0,
+      "cards_per_entry": 6.14,
+      "fleet_reach": 0.089,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.5,
+      "tau": 1.0,
+      "bank_size": 400.0,
+      "cards_per_entry": 6.8,
+      "fleet_reach": 0.089,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.9,
+      "tau": 0.0,
+      "bank_size": 16.0,
+      "cards_per_entry": 1.0,
+      "fleet_reach": 0.375,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.9,
+      "tau": 0.05,
+      "bank_size": 16.0,
+      "cards_per_entry": 1.0,
+      "fleet_reach": 0.375,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.9,
+      "tau": 0.1,
+      "bank_size": 16.0,
+      "cards_per_entry": 1.0,
+      "fleet_reach": 0.375,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.9,
+      "tau": 0.2,
+      "bank_size": 16.0,
+      "cards_per_entry": 1.0,
+      "fleet_reach": 0.375,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.9,
+      "tau": 0.35,
+      "bank_size": 26.8,
+      "cards_per_entry": 1.27,
+      "fleet_reach": 0.27,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.9,
+      "tau": 0.5,
+      "bank_size": 69.5,
+      "cards_per_entry": 2.2,
+      "fleet_reach": 0.173,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.9,
+      "tau": 0.75,
+      "bank_size": 180.7,
+      "cards_per_entry": 4.46,
+      "fleet_reach": 0.129,
+      "coverage": 1.0
+    },
+    {
+      "concentration": 0.9,
+      "tau": 1.0,
+      "bank_size": 400.0,
+      "cards_per_entry": 9.18,
+      "fleet_reach": 0.11,
+      "coverage": 1.0
+    }
+  ],
+  "G1_curve_drawable": false,
+  "G2_direct_mechanism_responds": true,
+  "directions_opposed": [
+    true,
+    true,
+    true
+  ]
+}

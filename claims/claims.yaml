@@ -232,6 +232,56 @@ claims:
       each entry feeds. Re-parameterised as an explicit multiplicity with
       participation held fixed. Rig bug B5.
 
+  - id: E0.2e
+    tier: L3 x L7
+    rig: A
+    claim: "R9 (provenance-aware admission) has an acceptable point: breadth <= 0.31 at I7-acceptable coverage"
+    source: "the last architectural gap -- E0.2d found no lever on breadth, E5.1 made breadth decide whether an envelope exists"
+    kill: "G1 [re-registered] the curve cannot be drawn if breadth's net direction against tau depends on an unspecified coupling; G2 the direct mechanism does not respond to tau"
+    predicted: uncertain
+    status: FAIL
+    result: results/e0_2e_r9_breadth_coverage.json
+    finding: >
+      R9 CANNOT BE EVALUATED AS SPECIFIED. Tightening the provenance-overlap cap
+      does two things at once, and they push opposite ways at every swept pool
+      structure:
+        cards per entry FALLS  9.18 -> 1.00   the direct R9 mechanism, and G2
+                                              confirms it works
+        fleet reach     RISES  0.110 -> 0.375  because a tighter cap SHRINKS the
+                                              bank, and each adapter still draws
+                                              the same number of rollouts, so a
+                                              surviving card is used by more
+                                              adapters
+      Directions are OPPOSED at concentration 0.2, 0.5 and 0.9 alike. Which
+      dominates depends on how the adapter fleet composes from the card bank as
+      the bank shrinks, and Parts I-III specify none of it.
+    what_must_be_specified_first: >
+      1. how many distinct cards an adapter's training draw uses
+      2. whether that is an absolute count or a fraction of the bank
+      3. whether fleet size tracks bank size at all
+      Until those are stated, any number for R9 is a choice of coupling wearing
+      the clothes of a measurement.
+    corrects_the_expected_tension: >
+      R9 was expected to trade against I7 - reject a card and its distinction is
+      never available. Coverage stays at 1.000 across every tau and every pool
+      structure swept, so that tension does NOT bind here. The blocking unknown
+      is the fleet coupling, not coverage.
+    kill_criterion_changed: >
+      G1 was registered as "no admission threshold achieves breadth <= 0.31 at
+      acceptable coverage", which presumes the curve is drawable and would have
+      reported a net number produced by an uncalibrated modelling choice.
+      Re-registered as whether the curve can be drawn at all.
+    consistency_with_the_record: >
+      This is the same defect every other mechanism here was found to have -
+      proposed without stating the tension it trades against. R9 was the proposed
+      repair for the last architectural gap, and it arrives with the defect the
+      repairs were meant to fix.
+    scale_note: >
+      Fleet reach here spans 0.077-0.375 against E0.2d's 0.63-0.99, because the
+      two worlds differ in bank size and rollout structure. The DIRECTIONS are
+      what this experiment establishes; the levels are not comparable across the
+      two and are not quoted as if they were.
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"
@@ -726,14 +776,37 @@ claims:
     status: FAIL
     result: results/e2_3_staged_ladder.json
     finding: >
-      Both criteria fail, and the mechanism is NOT the one predicted.
-      L1: the cheap rung does not preserve the ranking where it saves most.
-      Spearman(cheap, true) falls to 0.361 at a 5% cheap rung with 0.10 probe
-      noise, and degrades monotonically with both. It only clears 0.7 in the
-      expensive corner, where the ladder saves little.
+      Both criteria fail, and neither mechanism is the one predicted.
+      L1 [RE-REGISTERED to recall; see kill_criterion_changed]: recall of the
+      full rung's top decile under the cheap cut falls to 0.349 - the ladder
+      discards two thirds of what the expensive rung would have ranked top. Mean
+      recall is 0.812 unbiased against 0.712 traffic-weighted, and the worst case
+      is 0.526 against 0.349, so probe weighting DOES cost recall even though it
+      does not drive L2.
       L2: ~100% of good rare specialists are dropped at the cheap rung against
       ~36% of generalists - a 2.81x concentration. And it is IDENTICAL in both
       arms.
+    kill_criterion_changed: >
+      L1 was pre-registered as Spearman(cheap, true) >= 0.7, inherited from the
+      plan's "low Spearman between SMALL and FULL". Two defects. It compared
+      cheap against TRUTH rather than against the FULL rung, so a broken gate
+      objective would be charged to the ladder - and the gate objective is broken
+      here, so that is not hypothetical. And rank correlation is the wrong shape
+      for a filter: a ladder's job is RECALL, not ranking. A rung at rho 0.36
+      that keeps the full rung's top performers inside its cut is working; a rung
+      at rho 0.9 that drops the single best candidate is not.
+      Re-registered as recall of the full rung's top decile >= 0.80. All three
+      quantities print every run so the substitution is auditable.
+    the_hypothesised_collapse_does_not_occur: >
+      The natural worry about the original L1 was that it would collapse E2.3's
+      two findings into one: if the full rung ranks by the same unweighted mean,
+      a rare specialist scores low on BOTH rungs, so rho(cheap, full) would stay
+      high while rho(cheap, true) fell - the ladder working as advertised and the
+      GATE being broken. Measured, they track: mean gap +0.026, max +0.061, and
+      rho(cheap, full) falls to 0.322 alongside rho(cheap, true) at 0.361. So the
+      ladder finding is NOT the gate objective in disguise and E2.3 retains an
+      independent result. Worth recording because the hypothesis was reasonable
+      and the data does not support it.
     my_prediction_was_wrong_and_the_control_caught_it: >
       This experiment predicted the concentration would come from a
       traffic-weighted cheap rung - the weighting rule arriving at the Assay. It
@@ -1286,30 +1359,42 @@ bugs:
       PASS on the claim this plan most expected to fail, and was caught only
       because U1 and U2 contradicted each other.
 
-  - id: B15
-    where: e2_3_staged_ladder, L2 comparison baseline
-    bug: "compared rare-specialist drop rate against FREQUENT-specialist drop rate"
+  - id: B16
+    where: e0_2e_r9_breadth_coverage, breadth definition
+    bug: "measured breadth as mean fraction of the CARD BANK an entry feeds, not fraction of the ADAPTER FLEET"
     effect: >
-      under the coverage objective a frequent specialist lifts zero regions - its
-      region is already above the floor - so it is never in the "good" population
-      and the ratio was computed against an empty set, returning ~1.0 and a
-      spurious PASS. Fixed by comparing against generalists, which are good under
-      both objectives. Third instance in this experiment alone of a criterion
-      scoring an empty or wrong population.
-    fix: "compare against a population that is non-empty under the objective being used, and assert its size"
+      gave 0.016-0.062 where E0.2d reports 0.63-0.99, so every configuration
+      passed the 0.31 target trivially and G1 would have reported R9 solved. The
+      chain is entry -> cards -> rollouts -> adapters; an entry feeding 2% of a
+      400-card bank can still reach most adapters. Caught by the scale being two
+      orders off a number already in the record.
+    also: >
+      the first candidate-pool parameterisation used a hard cutoff on a hot
+      slice, which at high concentration made every card's source set IDENTICAL -
+      the bank froze at one card per region and tau moved nothing. The
+      manipulation check caught that one.
+    fix: "propagate breadth to the fleet; draw sources Zipfian so overlap is graded rather than all-or-nothing"
 
   - id: B14
-    where: e2_3_staged_ladder, L2 objective
+    where: e2_3_staged_ladder, L2 population definition
     bug: >
-      scored "losses concentrated in rare regions" against the design's gate
-      objective (unweighted mean of per-region deltas), under which a rare
-      specialist is worth half a generalist and never enters the top decile.
+      ONE omission, not three. Every instance was the same thing: scoring a
+      criterion against a population that is empty under an objective that had
+      never been named. It surfaced three times - against the mean objective,
+      under which no rare specialist is ever "good"; against a gap-closing
+      objective that still favoured generalists 0.56 to 0.166; and against
+      frequent specialists, which lift zero regions and are never good either.
     effect: >
-      L2 examined an empty population and could not find a defect. A first repair
-      attempt - "gap closed below the floor, summed" - still favoured generalists
-      0.56 to 0.166 and failed the same way. Only counting regions LIFTED above
-      the floor discriminates. Caught by the manipulation check both times.
-    fix: "name the objective before scoring the criterion, and verify all compared populations are non-empty BEFORE running the sweep"
+      L2 returned a spurious PASS or a NaN each time. The manipulation check
+      caught all three.
+    what_it_actually_is: >
+      Not three independent instrument errors. It is R11 surfacing inside the
+      instrument. The design's failure to state what promotion optimises did not
+      merely leave a finding ill-posed - it made the experiment unable to define
+      its own populations. That upgrades R11 from a documentation fix to a
+      PRECONDITION FOR MEASURABILITY, and is a stronger argument for the
+      amendment than anything in the results.
+    fix: "name the objective before scoring a criterion; verify every compared population is non-empty BEFORE running the sweep"
 
   - id: B13
     where: e5_2_support_decision_table, first version
@@ -1515,6 +1600,12 @@ repairs:
       A coverage-aware cheap rung may be more expensive than a mean, since it
       needs per-region resolution rather than an aggregate. That cost is
       unmeasured and it is the reason the ladder exists.
+    upgraded_by: >
+      B14. Stating the objective is not a documentation fix - it is a
+      PRECONDITION FOR MEASURABILITY. E2.3 could not define its own comparison
+      populations without it, and failed to three times before naming it. An
+      unstated objective does not merely leave findings ill-posed; it makes
+      experiments unable to say what they are measuring.
     status: proposed
 
   - id: R6

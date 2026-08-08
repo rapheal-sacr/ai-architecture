@@ -44,6 +44,7 @@ structural work first, which is the right order anyway.
 
 | ID | Claim | Verdict |
 |---|---|---|
+| E0.2e | **R9** — provenance-aware admission has an acceptable point | **FAIL** — the curve cannot be drawn as specified |
 | E1.1 | `#{σ_k > ε}` is a computed budget | **PARTIAL** — fails on 2 of 4 streams |
 | E1.1b | the budget works under the energy/GPM criterion | **PASS** — but see E1.1c |
 | E1.1c | …does it hold *per domain*, not just on the traffic mean? | **FAIL** — partially reverses E1.1b |
@@ -90,6 +91,48 @@ ill-posed while pointing at a form that is not. That is a specification defect,
 not an architectural one — which means the earlier framing of *"four of five are
 spec defects, E1.1 is the exception"* was wrong in both halves. Nothing found
 so far threatens the ledger-first thesis.
+
+### E0.2e · R9 cannot be evaluated as specified
+
+The last architectural gap. E0.2d found no lever on cascade breadth; E5.1 made
+breadth the quantity deciding whether an operating envelope exists. R9 —
+provenance-aware admission — is the only proposed repair, and it does not exist
+yet. So it was specified here as a **curve** with an acceptable region marked,
+because every mechanism in this design specified without stating its tension has
+been found out by an experiment.
+
+Tightening the cap does two things at once, and they push **opposite ways at
+every pool structure swept**:
+
+```
+        conc   cards/entry   fleet reach   directions
+         0.2         +4.60        -0.169   OPPOSED
+         0.5         +5.80        -0.286   OPPOSED
+         0.9         +8.18        -0.265   OPPOSED
+```
+
+Cards-per-entry falls 9.18 → 1.00 — **the direct mechanism works**. But a tighter
+cap also *shrinks the bank*, and each adapter still draws the same number of
+rollouts, so a surviving card is used by more adapters and fleet reach *rises*.
+
+Which dominates depends on how the fleet composes from the bank as the bank
+shrinks, and **Parts I–III specify none of it.** Three things must be stated
+before R9 can be designed: how many distinct cards an adapter's draw uses,
+whether that is absolute or a fraction of the bank, and whether fleet size tracks
+bank size.
+
+**And the expected tension is not the binding one.** R9 was predicted to trade
+against I7 — reject a card and its distinction is never available. Coverage stays
+at **1.000** across every tau and pool structure swept, so that tension does not
+bind here. The blocking unknown is the fleet coupling.
+
+So the result is neither "R9 works" nor "R9 has no acceptable point." It is that
+**R9 arrives with the same defect the repairs were meant to fix** — proposed
+without stating the tension it trades against. Choosing a coupling to obtain a
+number would have been choosing the answer, which is why G1 was re-registered
+from "is there an acceptable point" to "can the curve be drawn at all."
+
+---
 
 ### E1.1 · The *literal* formulation `#{σ_k > ε}` is not well posed
 
@@ -790,9 +833,19 @@ mode is structurally invisible: a candidate rejected at the cheap rung is never
 measured on the full one, so the archive reports what it promoted and never what
 it discarded.
 
-**L1 fails.** Spearman(cheap, true) falls to **0.361** at a 5% cheap rung with
-0.10 probe noise, degrading monotonically with both. It clears 0.7 only in the
-expensive corner — where the ladder saves little.
+**L1 fails, on a re-registered criterion.** The original — Spearman(cheap, *true*)
+— compared the cheap rung against truth rather than against the **full rung**,
+so a broken gate objective would be charged to the ladder. And rank correlation
+is the wrong shape for a filter: a ladder's job is **recall**, not ranking.
+Re-registered as recall of the full rung's top decile, which falls to **0.349** —
+the ladder discards two thirds of what the expensive rung would have ranked top.
+
+*The obvious worry about the original criterion does not materialise.* If the
+full rung ranked by the same mean, ρ(cheap, full) would stay high while
+ρ(cheap, true) collapsed — the ladder working and the **gate** being broken,
+collapsing E2.3's two findings into one. Measured, they track: mean gap +0.026,
+and ρ(cheap, full) falls to 0.322 alongside ρ(cheap, true) at 0.361. So E2.3
+retains an independent result.
 
 **L2 fails: ~100% of good rare specialists are dropped at the cheap rung against
 ~36% of generalists.** A 2.81× concentration.
