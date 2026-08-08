@@ -89,10 +89,41 @@ a specification and a discovery.
 > not a default — it is an admission that the mechanism is not yet specified,
 > and it blocks the mechanism rather than the reviewer.
 
-And the corollary that matters most, because it is the one this record keeps
-demonstrating:
+And the corollary that matters most, because it is the one this record kept
+demonstrating — in a form mechanical enough to check on one line of a table:
 
-> **A quantity stated as a binary cannot carry a tension that is a rate.** I7
-> was written as a rate and measured as a binary, and the tension it names
-> disappeared from the instrument entirely. Declare the *shape* of every
-> quantity, not only its name.
+> **Declare whether each quantity is a scalar, a rate, or a distribution. Never
+> state a constraint against a coarser shape than the quantity it constrains.**
+
+B13 and B17 were the same error twice: a *distribution collapsed to a scalar*.
+B13 reported a rate conditional on passing, so the denominator moved with `k`.
+B17 reported a binary where the quantity was a density, and the tension vanished
+from the instrument. In both, a constraint was stated against something coarser
+than the thing it constrains.
+
+This form is checkable. A `trades against` cell reading **"coverage"** passes a
+prose review and cannot be verified; one reading **"per-region card density,
+distribution over regions, worst-case binding"** cannot be satisfied by a min-1
+test, and the mismatch is visible without running anything.
+
+---
+
+## Pre-registering this amendment
+
+Eight findings surfaced retrospectively is a **fit to the data it was designed
+from** — the columns were written by someone who had already found those eight,
+so they necessarily catch them. The real test is prospective, and it is
+registered here in the form the rest of the programme uses.
+
+> **Pre-registration.** The next mechanism specified under the four columns is
+> declared *before* build. The amendment **fails** if any subsequent experiment
+> finds a coupling, resource, or tier requirement the declaration omitted.
+
+**R9 is the first case**, since its declaration already exists in draft above.
+If the fleet coupling and the density floor turn out to be the complete set of
+its unstated assumptions, that is the first evidence the process converges. If a
+ninth thing shows up, the columns are incomplete and *which* one it is tells you
+what to add.
+
+This is the only claim in the record about the **method** rather than the design,
+and it is the one that determines whether the remaining work is finite.

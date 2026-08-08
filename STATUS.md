@@ -28,6 +28,11 @@ and all but one has a named repair.
 R9 cannot be evaluated until three things about fleet composition are stated
 *and* I7 is expressed as the rate it already is.
 
+**The meta-repair is registered prospectively, not claimed retrospectively.**
+Its eight retrospective catches are a fit to the data it was designed from. The
+real test: R9's declaration exists in draft, and the amendment fails if any later
+experiment finds a coupling, resource or tier requirement it omitted.
+
 **The meta-repair matters more than any remaining experiment.** Repairs are
 gap-productive: R9 arrived carrying two unstated couplings, which is the defect
 the repairs exist to fix. `docs/wam_amendment_mechanism_declaration.md` makes
@@ -36,8 +41,9 @@ consumes, what it trades against, and what it assumes about parts it does not
 own. Retrospectively that would have surfaced eight of this record's findings as
 questions before they cost a build.
 
-**Four numbers decide the rest.** One is measured. One has a procedure and a
-decision rule, waiting on data. One is a product requirement. One is the gap.
+**Five numbers decide the rest, and they are two different kinds** — a
+distinction worth making explicit, because one kind is cheap and the other is
+not.
 
 ---
 
@@ -102,16 +108,28 @@ decision rule, waiting on data. One is a product requirement. One is the gap.
 
 ---
 
-## The four numbers
+## The five numbers — measure these, decide those
+
+**MEASURE** — these need data, and no amount of writing settles them:
 
 | Quantity | Gates | Status |
 |---|---|---|
-| **`H`** recompile wall-clock | the C3∧C4 window | **resolved.** 18 min at the draw cap, not 8h. The window goes EMPTY → OPEN, so E5.1's infeasibility at the design's own profile was carried entirely by the assumption |
-| **support redundancy** `m of k` | C6 | **procedure + decision rule written.** If real probes rest on ≥5 entries, C6 stops binding. Awaiting an interaction corpus |
-| **latency tolerance `L`** | C4 | **not a measurement** — a product requirement to write down |
-| **cascade breadth `β`** | whether any window exists | **open.** R9 is the only proposed repair and it cannot yet be evaluated |
+| **`H`** recompile wall-clock | the C3∧C4 window | **resolved.** EB.1: 18 min at the draw cap, not 8h. The window goes EMPTY → OPEN, so E5.1's infeasibility at the design's own profile was carried entirely by the assumption |
+| **support redundancy** `m of k` | C6 | **procedure + decision rule written.** ≥5 supporting entries and C6 stops binding. Awaiting an interaction corpus |
+| **per-region overlap + subscription** | whether any Root 1 number transfers | **open — Rig B.** E1.1d puts the boundary at subscription 1.0×, exactly where the whole record was measured. Nothing else can settle which side real traffic sits on |
+| **cascade breadth `β`** — or the fleet↔bank coupling that would let it be computed | whether an operating envelope exists | **open.** R9 is the only proposed repair and it is not yet evaluable |
 
----
+**DECIDE** — these need a sentence, not data, and they are the cheapest thing
+remaining:
+
+| Quantity | Gates | Status |
+|---|---|---|
+| **restoration latency tolerance `L`** | C4 | a product requirement. Never written down |
+| **I7 per-region density floor** | R9's coverage side | a policy choice. E0.2e sweeps it: at a floor of **1** there is no tension at any τ; at **5** the tension is total even at the loosest. "100% of regions below floor" is a statement about the 3.0 I chose |
+
+**Two sentences and one coupling make R9 evaluable.** That is the whole distance
+between the last open gap and a drawable curve, and none of it needs an
+experiment.
 
 ## The one open gap
 

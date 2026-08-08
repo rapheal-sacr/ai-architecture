@@ -88,7 +88,10 @@ POOL_CONCENTRATION = (0.2, 0.5, 0.9)   # how much candidate cards draw from a
                                        # overlap structure, swept
 BREADTH_TARGET = 0.31                  # E5.1's window condition
 COVERAGE_FLOOR = 0.80                  # legacy min-1 form, retained for audit
-DENSITY_FLOOR = 3.0                    # I7 as a RATE: cards per region
+DENSITY_FLOOR = 3.0                    # I7 as a RATE: cards per region.
+                                       # CHOSEN, not measured -- swept below,
+                                       # because it is a fifth gating quantity
+DENSITY_FLOORS = (1.0, 2.0, 3.0, 5.0)  # and the finding's structure depends on it
 
 
 def make_candidates(concentration: float, rng):
@@ -300,12 +303,43 @@ def main() -> int:
         print("     already is rather than as a binary.")
     print()
 
+    # The density floor is CHOSEN, so sweep it -- "100% of regions below floor"
+    # is a statement about 3.0 in exactly the way "empty window" was a statement
+    # about H = 8h and "C6 binds" was a statement about 2-of-3.
+    print("  The density floor is a FIFTH gating quantity, not a constant.")
+    print("  Fraction of regions below floor, at concentration 0.5:\n")
+    hdr = f"      {'floor':>7}" + "".join(f"{'tau=' + format(t, '.2f'):>11}"
+                                          for t in (0.0, 0.20, 0.35, 1.0))
+    print(hdr); print("      " + "-" * (len(hdr) - 6))
+    floor_rows = []
+    for fl in DENSITY_FLOORS:
+        cells = []
+        for tau in (0.0, 0.20, 0.35, 1.0):
+            vals = []
+            for i in range(N_SEEDS):
+                rng = np.random.default_rng(SEED + i)
+                cards, _ = make_candidates(0.5, rng)
+                counts = np.zeros(N_REGIONS)
+                for b in admit(cards, tau):
+                    counts[b["region"]] += 1
+                vals.append(float((counts < fl).mean()))
+            v = float(np.mean(vals))
+            floor_rows.append({"floor": fl, "tau": tau, "below": round(v, 3)})
+            cells.append(f"{v:>11.3f}")
+        print(f"      {fl:>7.1f}" + "".join(cells))
+    print("\n      At a floor of 1 there is no tension at any tau; at 5 the tension")
+    print("      is total even at the loosest. So the R9 coverage finding is")
+    print("      conditional on a number nobody has committed to -- and unlike")
+    print("      breadth or support redundancy, this one is DECIDED, not measured.")
+    print("      It needs a sentence, not data.\n")
+
     out = pathlib.Path(__file__).resolve().parents[2] / "results" / "e0_2e_r9_breadth_coverage.json"
     out.write_text(json.dumps({"seed": SEED, "breadth_target": BREADTH_TARGET,
                                "coverage_floor": COVERAGE_FLOOR, "rows": rows,
                                "G1_curve_drawable": bool(g1),
                                "G2_direct_mechanism_responds": bool(g2),
-                               "directions_opposed": opposed}, indent=2))
+                               "directions_opposed": opposed,
+                               "density_floor_sweep": floor_rows}, indent=2))
     print(f"wrote {out}")
     return 0
 

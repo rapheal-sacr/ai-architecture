@@ -274,5 +274,87 @@
     true,
     true,
     true
+  ],
+  "density_floor_sweep": [
+    {
+      "floor": 1.0,
+      "tau": 0.0,
+      "below": 0.0
+    },
+    {
+      "floor": 1.0,
+      "tau": 0.2,
+      "below": 0.0
+    },
+    {
+      "floor": 1.0,
+      "tau": 0.35,
+      "below": 0.0
+    },
+    {
+      "floor": 1.0,
+      "tau": 1.0,
+      "below": 0.0
+    },
+    {
+      "floor": 2.0,
+      "tau": 0.0,
+      "below": 1.0
+    },
+    {
+      "floor": 2.0,
+      "tau": 0.2,
+      "below": 0.583
+    },
+    {
+      "floor": 2.0,
+      "tau": 0.35,
+      "below": 0.01
+    },
+    {
+      "floor": 2.0,
+      "tau": 1.0,
+      "below": 0.0
+    },
+    {
+      "floor": 3.0,
+      "tau": 0.0,
+      "below": 1.0
+    },
+    {
+      "floor": 3.0,
+      "tau": 0.2,
+      "below": 0.927
+    },
+    {
+      "floor": 3.0,
+      "tau": 0.35,
+      "below": 0.042
+    },
+    {
+      "floor": 3.0,
+      "tau": 1.0,
+      "below": 0.0
+    },
+    {
+      "floor": 5.0,
+      "tau": 0.0,
+      "below": 1.0
+    },
+    {
+      "floor": 5.0,
+      "tau": 0.2,
+      "below": 1.0
+    },
+    {
+      "floor": 5.0,
+      "tau": 0.35,
+      "below": 0.271
+    },
+    {
+      "floor": 5.0,
+      "tau": 1.0,
+      "below": 0.021
+    }
   ]
 }

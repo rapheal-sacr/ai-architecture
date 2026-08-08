@@ -273,6 +273,20 @@ claims:
       per-region density on rare regions, which is what this entire record has
       been about. So R9 is DOUBLY unevaluable: the breadth side needs three
       specification decisions, the coverage side needs I7 stated as a rate.
+    the_floor_is_a_fifth_gating_quantity: >
+      DENSITY_FLOOR = 3.0 is CHOSEN, so "100% of regions below floor" is a
+      statement about 3.0 in exactly the way "empty window" was a statement about
+      H = 8h and "C6 binds" was a statement about 2-of-3. Swept: fraction of
+      regions below floor at concentration 0.5 goes
+        floor 1.0 -> 0.000 at every tau      no tension at all
+        floor 2.0 -> 1.000 / 0.583 / 0.010 / 0.000
+        floor 3.0 -> 1.000 / 0.927 / 0.042 / 0.000
+        floor 5.0 -> 1.000 / 1.000 / 0.271 / 0.021   total even at loosest tau
+      But it is NOT the same kind of quantity as breadth or support redundancy.
+      Those must be MEASURED. This one is DECIDED - it needs a sentence, not
+      data, and so does the restoration latency tolerance L. Two requirements
+      written down plus one coupling specified is the whole distance between R9
+      and a drawable curve.
     kill_criterion_changed: >
       G1 was registered as "no admission threshold achieves breadth <= 0.31 at
       acceptable coverage", which presumes the curve is drawable and would have
