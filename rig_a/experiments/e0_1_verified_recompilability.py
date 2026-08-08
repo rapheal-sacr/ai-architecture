@@ -128,7 +128,57 @@ class World:
     # -- the recompiler ----------------------------------------------------
 
     def draw(self, policy: str, cap: int | None) -> set[int]:
-        """The L3 slice: what a recompile actually re-reads. Cost is O(|draw|)."""
+        """The L3 slice: what a recompile actually re-reads. Cost is O(|draw|).
+
+        DETERMINISM, PER PATH -- read this before interpreting any `identical`
+        column. Three arms in this experiment report `identical: yes` and they
+        have three different statuses, distinguishable ONLY by which draw path
+        they take. That was a fact about the code nobody had written down, so it
+        had to be re-derived by reading, and a clean result sat under a cloud in
+        the meantime.
+
+            uncapped (cap=None, or len(live) <= cap)
+                DETERMINISTIC. Returns the whole live set. No rng touched.
+
+            policy="usage"
+                DETERMINISTIC. `argsort(-usage)` is a total order on a fixed
+                array; no rng touched. Two compiles with the same live set return
+                the SAME draw, always.
+
+            policy="uniform"
+                STOCHASTIC. `rng.choice` over the live set.
+
+            policy="stratified"
+                STOCHASTIC. `rng.choice` within each region.
+
+        WHAT THAT MEANS FOR EACH ARM:
+
+            A0 control        usage, no drift.  `identical: yes` is TRUE BY
+                              CONSTRUCTION and that is its job -- A0 is a control,
+                              not a result. If it ever came out `no`, the
+                              recompiler would be non-deterministic and every
+                              other arm uninterpretable.
+
+            A1b usage cap     usage, with decay. `identical: yes` is a FINDING:
+                              use-based decay removes the least-used entries,
+                              which the usage-ordered cap had already excluded, so
+                              the draw cannot move. That is what "I4 is a relative
+                              invariant" rests on -- and it rests on the draw
+                              being deterministic AND usage-ordered, not on
+                              determinism alone.
+
+            A4 usage draw     usage, with an ontology shift. `identical: yes` was
+                              a BUG (B8): the usage path never reads `strata()`,
+                              so the manipulation could not reach the measured
+                              quantity. Scored on the stratified arm instead, K4
+                              FAILS. Retained as a control, asserted inert.
+
+            A3, A6            uniform / stratified. STOCHASTIC, so `identical` is
+                              informative rather than structural.
+
+        Same shape as `identical: yes` three times over: one construction, one
+        finding, one bug. The annotation is the difference.
+        """
         live = np.array(sorted(self.provenance & set(np.where(self.alive)[0].tolist())))
         if cap is None or len(live) <= cap:
             return set(live.tolist())

@@ -1219,6 +1219,16 @@ instrument is the per-constraint attribution table (E5.1 F3): eliminated, and
 eliminated *alone*. A constraint at 100% or 0% is a bug report about the sweep
 until proven otherwise.
 
+**Annotate what is true by construction, at the point it is constructed.** E0.1
+reports `identical: yes` in three arms with three different statuses — a
+*control* (A0, true by construction and that is its job), a *finding* (A1b, the
+relative-invariant result), and a *bug* (A4-usage, B8). Nothing distinguished
+them except which draw path each took, and determinism was a fact about the code
+that had never been written down — so it had to be re-derived by reading, and a
+clean result sat under a cloud in between. The annotation is now in `draw()`
+itself, not in a review. This is the record's own thesis applied to the
+programme: **recorded, not inferred.**
+
 **Verify the manipulation took before interpreting a comparison.** The lint below
 checks a criterion's logical *form*. B7 passed that check and still failed: U1
 *could* have returned the other answer in principle, but in that run no arm ever
