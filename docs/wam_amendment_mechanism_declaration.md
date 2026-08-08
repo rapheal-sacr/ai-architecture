@@ -38,7 +38,7 @@ Four columns, filled in **before a mechanism is written**, not in a review.
 |---|---|---|
 | **requires tier** | what verifier tier does it need to *function*, as distinct from what it may promote? | E1.4 → R2, E2.1, E3.1c: three findings were the same error — a mechanism described as free while silently requiring verification the domain may not have |
 | **consumes** | what resource, in the currency §0 says is binding? | Part III §0 says verification coverage and cost is the binding constraint. A mechanism that does not say what it spends cannot be priced against it |
-| **trades against** | what quantity does it make worse? | Every mechanism specified without stating its tension has been found out by an experiment: the subspace budget, the blast-radius rule, three-λ release, the staged ladder, and now R9 |
+| **trades against** | what quantity does it make worse — *and what is the status of the threshold on that quantity: measured, decided, or unset?* | Every mechanism specified without stating its tension has been found out by an experiment: the subspace budget, the blast-radius rule, three-λ release, the staged ladder, and now R9. The threshold clause is a correction — see below |
 | **assumes** | what couplings does it assume about parts of the system it does not own? | R9's blocking defect. It would have been caught on paper, in the time it takes to fill a row |
 
 ---
@@ -49,8 +49,13 @@ Four columns, filled in **before a mechanism is written**, not in a review.
 mechanism      R9 · provenance-aware admission
 requires tier  T0 -- set overlap is computable, no judgement needed
 consumes       nothing at evaluation time; card-bank size at steady state
-trades against per-region card density (I7 coverage), and NOT content
-               redundancy, which is what cos <= 0.93 already governs
+trades against per-region card density (I7 coverage) -- a DISTRIBUTION over
+               regions, worst-case binding -- and NOT content redundancy, which
+               is what cos <= 0.93 already governs.
+               THRESHOLD: the density floor. Status UNSET, and it is a DECIDE
+               quantity, not a measured one. E0.2e sweeps it: at a floor of 1
+               there is no tension at any tau; at 5 the tension is total even at
+               the loosest.
 assumes        (a) how many distinct cards an adapter's training draw uses
                (b) whether that is an absolute count or a fraction of the bank
                (c) whether fleet size tracks bank size
@@ -118,6 +123,25 @@ registered here in the form the rest of the programme uses.
 > **Pre-registration.** The next mechanism specified under the four columns is
 > declared *before* build. The amendment **fails** if any subsequent experiment
 > finds a coupling, resource, or tier requirement the declaration omitted.
+
+### One correction found before the test starts
+
+Auditing R9's own draft declaration against the five gating quantities turns up a
+gap **in the amendment**, not in R9. The `trades against` row named per-region
+card density — the right quantity, in the right shape — but said nothing about
+**the floor**, the threshold that decides whether the trade is acceptable. And
+the floor is a *decide* quantity: E0.2e shows the finding inverts completely
+between a floor of 1 and a floor of 5.
+
+So the four columns as first written name *what* a mechanism trades against and
+not *what would settle whether the trade is tolerable*. `trades against` now
+carries the threshold and its status — **measured, decided, or unset** — and an
+`unset` threshold is as blocking as a blank column.
+
+This was found by inspection rather than by an experiment, so it refines the
+amendment rather than failing the pre-registration below. But the prospective
+test should start from the corrected form, and it is worth recording that the
+meta-repair needed a repair on first contact with its own worked example.
 
 **R9 is the first case**, since its declaration already exists in draft above.
 If the fleet coupling and the density floor turn out to be the complete set of

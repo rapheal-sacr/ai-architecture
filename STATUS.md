@@ -28,6 +28,14 @@ and all but one has a named repair.
 R9 cannot be evaluated until three things about fleet composition are stated
 *and* I7 is expressed as the rate it already is.
 
+**The meta-repair needed a repair on first contact with its own example.**
+Auditing R9's draft declaration found that `trades against` named the right
+quantity in the right shape but omitted *the threshold* — and the threshold is a
+decide quantity that inverts the finding. The column now carries the threshold's
+status (measured / decided / **unset**), and `unset` blocks as hard as a blank.
+Found by inspection, so it refines the amendment rather than failing it — but it
+is the first evidence that four columns may not be four.
+
 **The meta-repair is registered prospectively, not claimed retrospectively.**
 Its eight retrospective catches are a fit to the data it was designed from. The
 real test: R9's declaration exists in draft, and the amendment fails if any later
