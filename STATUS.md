@@ -49,7 +49,8 @@ consumes, what it trades against, and what it assumes about parts it does not
 own. Retrospectively that would have surfaced eight of this record's findings as
 questions before they cost a build.
 
-**Five numbers decide the rest, and they are two different kinds** — a
+**Four numbers decide the rest** (a fifth, `L`, was dissolved by measuring
+`H`), **and they are two different kinds** — a
 distinction worth making explicit, because one kind is cheap and the other is
 not.
 
@@ -132,7 +133,7 @@ remaining:
 
 | Quantity | Gates | Status |
 |---|---|---|
-| **restoration latency tolerance `L`** | C4 | a product requirement. Never written down |
+| ~~**restoration latency tolerance `L`**~~ | C4 | **largely dissolved by EB.1.** At the measured `H` the drain term is 0.21 days, not 5.33, so the window is open even at a **one-day** tolerance — `L` has ~13 days of slack before it binds. It was a gating quantity only because `H` was assumed at 8h. Still worth writing down, but it no longer decides anything |
 | **I7 per-region density floor** | R9's coverage side | a policy choice. E0.2e sweeps it: at a floor of **1** there is no tension at any τ; at **5** the tension is total even at the loosest. "100% of regions below floor" is a statement about the 3.0 I chose |
 
 **Two sentences and one coupling make R9 evaluable.** That is the whole distance

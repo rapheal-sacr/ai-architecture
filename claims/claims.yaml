@@ -1003,7 +1003,7 @@ claims:
     kill: "N4 - comp_only spread across tiebreak rules exceeds 0.10"
     predicted: FAIL
     status: FAIL
-    result: results/e3_1b_tiebreak_audit.json
+    result: results/e3_1d_tiebreak_audit.json
     finding: >
       The figure is an artifact. Under net transfer a patch scores 0.000 (its
       only gain is at the target, which the statistic excludes), a
