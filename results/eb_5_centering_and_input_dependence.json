@@ -1,0 +1,34 @@
+{
+  "models": [
+    "Qwen2.5-0.5B-4bit",
+    "Qwen2.5-1.5B-4bit"
+  ],
+  "top_dims": 5,
+  "by_model": {
+    "Qwen2.5-0.5B-4bit": {
+      "dim": 896,
+      "n_vectors": 915,
+      "uncentered_top_share": 0.2221,
+      "centered_top_share": 0.0599,
+      "dims_shared": 1,
+      "mean_sq_over_var_top": 4.602,
+      "between_share_top": 0.0457,
+      "between_share_rest": 0.052
+    },
+    "Qwen2.5-1.5B-4bit": {
+      "dim": 1536,
+      "n_vectors": 915,
+      "uncentered_top_share": 0.7833,
+      "centered_top_share": 0.774,
+      "dims_shared": 4,
+      "mean_sq_over_var_top": 0.191,
+      "between_share_top": 0.0025,
+      "between_share_rest": 0.0198
+    }
+  },
+  "estimator_is_centered": false,
+  "eb2_measured_centered": true,
+  "KE1_centering_suffices": false,
+  "KE2_high_energy_discriminates": false,
+  "verdict": "FAIL"
+}

@@ -1618,6 +1618,69 @@ against register on the *same buffers*, so sampling noise moved both arms
 together — which is why the direction held across all twelve points. **A paired
 comparison survives a noisy estimate; absolute geometry figures do not.**
 
+### EB.5 · The centering hypothesis — right about the small model, wrong about the large one
+
+Worklist v2's item 1.1, posed as a hypothesis: massive activations are large and
+roughly *input-independent*, so enormous in an uncentered `E[aaᵀ]` and ~0 in a
+centered covariance — in which case EB.2's 71% is an artifact and the fix is one
+line.
+
+**The answer is in two places and they disagree**, which is why reading one wasn't
+enough. `rig_a/core/spectrum.py` accumulates `R = λR + outer(a, a)` — **uncentered**,
+and that is the estimator the *design* uses. EB.2 subtracted the mean before every
+SVD — **centered**, and that is what EB.2 *measured*. So the hypothesis is wrong
+about EB.2's number and right about the mechanism: the deployed estimator sees a
+worse version than EB.2 reported.
+
+| | uncentered | centered | mean²/var | dims shared |
+|---|---|---|---|---|
+| 0.5B | 22.2% | **6.0%** | 4.6 | 1/5 |
+| 1.5B | 78.3% | **77.4%** | 0.19 | 4/5 |
+
+**Right about the small model, wrong about the large one — the wrong way round for
+scaling.** At 0.5B the concentration is mostly a mean offset and centering removes
+it. At 1.5B it is real variance and centering does nothing. One model would have
+answered this confidently and wrongly in either direction: B12 and EB.2's own
+pooling defect, a third time.
+
+**And the filter is justified with a number.** On the 1.5B the top-5 directions
+hold **77.4% of centered variance and carry 0.2% between-domain share**, against
+2.0% for every other dimension — a ratio of 0.13×. They consume three quarters of
+the energy budget and discriminate essentially nothing, and `rank_for_energy`
+cannot see the difference because it ranks on *total* energy.
+
+**Two repairs, and the first is not sufficient.** Center `R_t` — one line with a
+running mean, buys 16 points at 0.5B and ~1 at 1.5B. Then **rank by between-owner
+variance rather than total energy**, which is the actual repair and is what the
+design means by *committed*. Under the register that is **free**: owners are the
+grouping, and per-owner buffers are what I8 already requires. The spectrum has no
+grouping to compute it over — **an argument for §1 that §1 does not make.**
+
+### R12 · Bound rank by data, not only by budget
+
+EB.4's floor is a **data** floor, not a compute floor. Entries are the unit of
+independence, so `n ≤ |provenance|` however long the texts and no budget buys more.
+It therefore binds hardest on exactly the rare, small-provenance owners the
+register exists to protect.
+
+`f` read off EB.4's fitted curves — largest `r` whose subspace is stable at 0.90:
+
+| n (entries) | dim 896 | dim 1536 |
+|---|---|---|
+| 40 / 100 / 250 | **none** | **none** |
+| 1000 | 8 | 4 |
+| 5000 | 16 | 16 |
+
+> **`rank_o ≤ f(|provenance_o|)`.** A rare owner gets a small basis because that is
+> all its data supports. If that is not enough competence, the answer is more
+> provenance, not more rank.
+
+It converts a silent failure into a refusal: without it a 40-entry owner requests
+rank 8, gets it, and its basis is fitted to noise — while every statistic computed
+against that basis is reported as an equal draw and satisfies I8. It is also the
+missing bound on allocation, which §1.2 leaves unspecified. Full derivation and
+the three things it does not settle: [docs/data_bounded_rank_rule.md](docs/data_bounded_rank_rule.md).
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a

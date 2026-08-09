@@ -794,6 +794,81 @@ claims:
       The format control generalises past this experiment: any transfer
       measurement between same-format domains needs one, or it measures form.
 
+  - id: EB.5
+    tier: L7
+    claim: "EB.2's massive-activation finding is an uncentered-second-moment artifact"
+    source: "worklist v2 item 1.1, posed as a hypothesis"
+    rig: B
+    kill: "KE1 centering removes the concentration at BOTH model sizes; KE2 the high-energy directions carry between-domain variance comparable to the rest"
+    predicted: "plausible - massive activations are large and roughly input-independent, so enormous uncentered and ~0 centered"
+    status: FAIL
+    result: results/eb_5_centering_and_input_dependence.json
+    finding: >
+      THE ANSWER IS IN TWO PLACES AND THEY DISAGREE, which is why reading one was
+      not enough. `rig_a/core/spectrum.py` accumulates R = lam*R + outer(a, a) --
+      UNCENTERED, and that is the estimator the DESIGN uses. EB.2 subtracted the
+      mean before every SVD -- CENTERED, and that is what EB.2 MEASURED. So the
+      hypothesis is wrong about EB.2's number and right about the mechanism: the
+      deployed estimator sees a worse version than EB.2 reported.
+      KE1 FAILS, and it fails asymmetrically:
+        0.5B  22.2% -> 6.0% centered, mean^2/var 4.6, 1/5 dims shared
+              -- mostly a MEAN OFFSET, and centering does fix it
+        1.5B  78.3% -> 77.4% centered, mean^2/var 0.19, 4/5 dims shared
+              -- REAL VARIANCE, and centering does not
+      Right about the small model, wrong about the large one, which is the wrong
+      way round for scaling. One model would have answered confidently and
+      wrongly in either direction - B12 and EB.2's own pooling defect, a third
+      time.
+    the_filter_is_justified_with_a_number: >
+      KE2 FAILS decisively. On the 1.5B the top-5 directions hold 77.4% of
+      CENTERED variance and carry 0.2% between-domain share, against 2.0% for
+      every other dimension - a ratio of 0.13x. They consume three quarters of
+      the energy budget and discriminate essentially nothing, and
+      `rank_for_energy` cannot see the difference because it ranks on total
+      energy.
+    two_repairs: >
+      1. CENTER R_t. One line, with a running mean. Buys 16 points of wasted
+         budget at 0.5B and ~1 at 1.5B. Worth doing and NOT sufficient.
+      2. RANK BY BETWEEN-OWNER VARIANCE rather than total energy. That is the
+         actual repair, it is what the design means by "committed", and under the
+         register it is FREE: owners are the grouping and per-owner buffers are
+         what I8 already requires. The spectrum has no grouping to compute it
+         over. That is an argument for section 1 that section 1 does not make.
+
+  - id: R12
+    from: EB.4, worklist v2 item 1.2
+    proposal: >
+      Bound rank by data, not only by budget: rank_o <= f(|provenance_o|), with f
+      read off EB.4's split-half stability curve. A rare owner gets a small basis
+      because that is all its data supports; if that is not enough competence the
+      answer is more provenance, not more rank.
+    procedure: docs/data_bounded_rank_rule.md
+    evidence: >
+      DERIVED, not chosen. Largest r whose top-r subspace is split-half stable at
+      0.90, fitted from EB.4's measured curves:
+        n=40, 100, 250   ->  NO rank is stable, at either dimension
+        n=1000           ->  r<=8 at dim 896, r<=4 at dim 1536
+        n=5000           ->  r<=16 at both
+      EB.4's floor is a DATA floor, not a compute floor: entries are the unit of
+      independence, so n <= |provenance| however long the texts, and no budget
+      buys more. It therefore binds hardest on exactly the rare, small-provenance
+      owners the register exists to protect.
+    why_it_matters: >
+      It converts a silent failure into a refusal. Without it a 40-entry owner
+      requests rank 8, gets it, and its basis is fitted to noise - while every
+      protection statistic computed against that basis is reported as an equal
+      draw and satisfies I8. It is also the missing bound on allocation: section
+      1.2 makes allocation set arithmetic over the complement of live bases and
+      never says how large a request may be.
+    open: >
+      f is measured on EB.2's eight short-text domains, so a more diverse buffer
+      would move the floor UP and these rows are optimistic. The independence
+      assumption (one entry, one draw) is conservative and unverified. And what a
+      sub-threshold owner should do INSTEAD is unstated - inheriting a
+      neighbour's basis reintroduces the clause E0.7 killed, and a pooled
+      estimate costs the owner its independent statistic.
+    status: proposed
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"
