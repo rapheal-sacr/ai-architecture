@@ -1457,6 +1457,72 @@ method commitment added one turn earlier: a structural relationship between two
 quantities is a measurement, not an argument. The separation §1.3 needs is real and
 small at this fleet size, and would widen with the merge rate, which is untested.
 
+### EB.2 · The hinge survives real geometry — and two of the generator's assumptions do not
+
+Phase 4.1, registered since PLAN was written as *"per-region activation spectra
+from a small MLX model (retires B4-class risk)"*. It mattered more than when it
+was registered, because E1.6 had just used the generator it calibrates. Every
+spectrum result in this record — E1.1, E1.1b, E1.1c, E1.1d, E1.6 — runs on
+`DomainMixture`, which asserts a `k^-0.5` within-domain decay and independent,
+near-orthogonal domain bases. Neither had been measured.
+
+`RealMixture` presents DomainMixture's interface backed by Qwen2.5 hidden states,
+so E1.6's instruments run **unchanged** on real vectors. Same instrument,
+different world.
+
+**KB3 holds at every point** — two models, three layers each, raw and
+outlier-removed: twelve independent points. The register reduces blindness and
+breaks the rarity monotone on measured geometry. §1's central claim survives
+calibration.
+
+**KB1 and KB2 both fail, and the models disagree about how.**
+
+| | decay `a` | effective rank | overlap | massive share |
+|---|---|---|---|---|
+| DomainMixture | 0.50 assumed | 8 by construction | ~0 assumed | — |
+| Qwen 0.5B | **0.237** — flatter | ~37 | **0.309** | 6.5% |
+| Qwen 1.5B | **1.070** — steeper | ~1.5 | **0.292** | **71.5%** |
+
+Cross-domain overlap is ~0.30 in both against an assumed ~0, so E1.1c's panel C
+concern is **confirmed rather than swept**, and free-rank numbers taken on
+independent bases are pessimistic.
+
+**The direction survives; the magnitude was inflated by the generator.**
+
+| register advantage (spectrum blindness ÷ register blindness) | |
+|---|---|
+| synthetic DomainMixture | **2.17×** |
+| real, Qwen 0.5B | 1.37× |
+| real, Qwen 1.5B | **1.09×** |
+
+The spectrum is far less blind on real geometry because real domains *overlap* — a
+rare domain's directions are partly retained for a common domain's sake, exactly
+the mechanism panel C predicted. And **the advantage shrinks with model size**
+across the only two sizes tested, so whether it survives at production scale is
+untested and must not be extrapolated from two points.
+
+**A finding about the criterion itself, independent of the register.** GPM's
+energy criterion commits directions in order of retained energy. On the 1.5B,
+**71% of that energy sits in five dimensions that are largely input-independent**
+and carry no domain information at all — documented massive-activation behaviour,
+confirmed by direct diagnosis (max |a| 227 against the 0.5B's 10.4). So the
+criterion spends its retention budget first on directions that distinguish
+nothing, and only the rank left over protects capabilities. **No synthetic
+generator would have produced this**, and it is unaddressed.
+
+**The level does not move.** Domains above the 0.05 interference bar at ρ = 0.95:
+spectrum 7.5, register 7.3 of 8. Both arms leave nearly every domain unsafe. The
+register wins the ratio and neither wins the level — a *different* unreadable from
+E1.1d's, set by the interference bar against the real spectrum rather than by
+subscription. Reporting the blindness improvement alone would have implied a
+safety gain that is absent.
+
+**Method, and it is B12 recurring.** The first run used one model and pooled
+across layers: KB1 read NO at 0.237. Adding the second model flipped KB1 to *ok*
+at a pooled 0.654 — a mean across two models that disagree by 5× on decay and 30×
+on effective rank. That is the pooled-hides-tail defect committed inside this
+experiment's own scoring. Now scored **per model, never pooled**.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a

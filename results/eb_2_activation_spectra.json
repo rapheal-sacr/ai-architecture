@@ -1,0 +1,1527 @@
+{
+  "models": [
+    "Qwen2.5-0.5B-4bit",
+    "Qwen2.5-1.5B-4bit"
+  ],
+  "domains": [
+    "code",
+    "medicine",
+    "law",
+    "cooking",
+    "mathematics",
+    "music",
+    "sailing",
+    "geology"
+  ],
+  "domain_rank": 8,
+  "retentions": [
+    0.9,
+    0.95,
+    0.99,
+    0.995,
+    0.999
+  ],
+  "by_model_layer": {
+    "Qwen2.5-0.5B-4bit:L6": {
+      "model": "Qwen2.5-0.5B-4bit",
+      "layer": 6,
+      "geometry": {
+        "decay_mean": 0.2766050355719317,
+        "decay_range": [
+          0.239,
+          0.304
+        ],
+        "effective_rank_mean": 39.052786350250244,
+        "overlap_mean": 0.32103508497987476,
+        "overlap_max": 0.38133636116981506
+      },
+      "geometry_no_massive": {
+        "decay_mean": 0.19069601335695296,
+        "decay_range": [
+          0.161,
+          0.224
+        ],
+        "effective_rank_mean": 45.88522386550903,
+        "overlap_mean": 0.24821162756000245,
+        "overlap_max": 0.2925952076911926
+      },
+      "massive_share": 0.0846,
+      "hinge": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 182,
+            "free_rank": 714,
+            "interf_traffic": 0.0842,
+            "interf_worst": 0.1081,
+            "blindness": 1.28,
+            "n_failing": 8,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 267,
+            "free_rank": 629,
+            "interf_traffic": 0.0565,
+            "interf_worst": 0.0833,
+            "blindness": 1.47,
+            "n_failing": 7,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 474,
+            "free_rank": 422,
+            "interf_traffic": 0.0243,
+            "interf_worst": 0.045,
+            "blindness": 1.85,
+            "n_failing": 0,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 555,
+            "free_rank": 341,
+            "interf_traffic": 0.0179,
+            "interf_worst": 0.0363,
+            "blindness": 2.03,
+            "n_failing": 0,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 720,
+            "free_rank": 176,
+            "interf_traffic": 0.0069,
+            "interf_worst": 0.0183,
+            "blindness": 2.64,
+            "n_failing": 0,
+            "spearman": -0.929
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 204,
+            "free_rank": 692,
+            "interf_traffic": 0.0802,
+            "interf_worst": 0.0945,
+            "blindness": 1.18,
+            "n_failing": 8,
+            "spearman": 0.262
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 298,
+            "free_rank": 598,
+            "interf_traffic": 0.0562,
+            "interf_worst": 0.0608,
+            "blindness": 1.08,
+            "n_failing": 8,
+            "spearman": 0.143
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 512,
+            "free_rank": 384,
+            "interf_traffic": 0.0277,
+            "interf_worst": 0.0288,
+            "blindness": 1.04,
+            "n_failing": 0,
+            "spearman": 0.19
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 588,
+            "free_rank": 308,
+            "interf_traffic": 0.0204,
+            "interf_worst": 0.0216,
+            "blindness": 1.06,
+            "n_failing": 0,
+            "spearman": 0.286
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 722,
+            "free_rank": 174,
+            "interf_traffic": 0.0102,
+            "interf_worst": 0.0118,
+            "blindness": 1.16,
+            "n_failing": 0,
+            "spearman": -0.024
+          }
+        ]
+      },
+      "hinge_no_massive": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 190,
+            "free_rank": 701,
+            "interf_traffic": 0.0802,
+            "interf_worst": 0.1085,
+            "blindness": 1.35,
+            "n_failing": 8,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 276,
+            "free_rank": 615,
+            "interf_traffic": 0.0558,
+            "interf_worst": 0.0777,
+            "blindness": 1.39,
+            "n_failing": 7,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 482,
+            "free_rank": 409,
+            "interf_traffic": 0.0242,
+            "interf_worst": 0.044,
+            "blindness": 1.82,
+            "n_failing": 0,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 562,
+            "free_rank": 329,
+            "interf_traffic": 0.017,
+            "interf_worst": 0.0333,
+            "blindness": 1.96,
+            "n_failing": 0,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 726,
+            "free_rank": 165,
+            "interf_traffic": 0.0068,
+            "interf_worst": 0.0174,
+            "blindness": 2.55,
+            "n_failing": 0,
+            "spearman": -0.976
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 220,
+            "free_rank": 671,
+            "interf_traffic": 0.0783,
+            "interf_worst": 0.0797,
+            "blindness": 1.02,
+            "n_failing": 8,
+            "spearman": 0.357
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 315,
+            "free_rank": 576,
+            "interf_traffic": 0.0544,
+            "interf_worst": 0.0575,
+            "blindness": 1.06,
+            "n_failing": 7,
+            "spearman": 0.357
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 527,
+            "free_rank": 364,
+            "interf_traffic": 0.026,
+            "interf_worst": 0.0282,
+            "blindness": 1.09,
+            "n_failing": 0,
+            "spearman": 0.905
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 603,
+            "free_rank": 288,
+            "interf_traffic": 0.0198,
+            "interf_worst": 0.0209,
+            "blindness": 1.06,
+            "n_failing": 0,
+            "spearman": 0.857
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 738,
+            "free_rank": 153,
+            "interf_traffic": 0.0097,
+            "interf_worst": 0.0106,
+            "blindness": 1.1,
+            "n_failing": 0,
+            "spearman": 0.833
+          }
+        ]
+      },
+      "dim": 896,
+      "tokens_per_domain": 118
+    },
+    "Qwen2.5-0.5B-4bit:L12": {
+      "model": "Qwen2.5-0.5B-4bit",
+      "layer": 12,
+      "geometry": {
+        "decay_mean": 0.23631769020017307,
+        "decay_range": [
+          0.189,
+          0.294
+        ],
+        "effective_rank_mean": 34.785202503204346,
+        "overlap_mean": 0.3567992278507778,
+        "overlap_max": 0.4007616937160492
+      },
+      "geometry_no_massive": {
+        "decay_mean": 0.24283524888004515,
+        "decay_range": [
+          0.179,
+          0.307
+        ],
+        "effective_rank_mean": 35.75922465324402,
+        "overlap_mean": 0.3039887398481369,
+        "overlap_max": 0.35087570548057556
+      },
+      "massive_share": 0.0599,
+      "hinge": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 183,
+            "free_rank": 713,
+            "interf_traffic": 0.0808,
+            "interf_worst": 0.1039,
+            "blindness": 1.29,
+            "n_failing": 8,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 268,
+            "free_rank": 628,
+            "interf_traffic": 0.0541,
+            "interf_worst": 0.0791,
+            "blindness": 1.46,
+            "n_failing": 7,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 472,
+            "free_rank": 424,
+            "interf_traffic": 0.0232,
+            "interf_worst": 0.0428,
+            "blindness": 1.84,
+            "n_failing": 0,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 551,
+            "free_rank": 345,
+            "interf_traffic": 0.0168,
+            "interf_worst": 0.0351,
+            "blindness": 2.09,
+            "n_failing": 0,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 712,
+            "free_rank": 184,
+            "interf_traffic": 0.0067,
+            "interf_worst": 0.0176,
+            "blindness": 2.64,
+            "n_failing": 0,
+            "spearman": -0.976
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 207,
+            "free_rank": 689,
+            "interf_traffic": 0.0782,
+            "interf_worst": 0.0829,
+            "blindness": 1.06,
+            "n_failing": 8,
+            "spearman": 0.0
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 299,
+            "free_rank": 597,
+            "interf_traffic": 0.0543,
+            "interf_worst": 0.0596,
+            "blindness": 1.1,
+            "n_failing": 5,
+            "spearman": 0.119
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 506,
+            "free_rank": 390,
+            "interf_traffic": 0.0259,
+            "interf_worst": 0.0283,
+            "blindness": 1.09,
+            "n_failing": 0,
+            "spearman": 0.048
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 581,
+            "free_rank": 315,
+            "interf_traffic": 0.0195,
+            "interf_worst": 0.0209,
+            "blindness": 1.07,
+            "n_failing": 0,
+            "spearman": 0.19
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 718,
+            "free_rank": 178,
+            "interf_traffic": 0.0099,
+            "interf_worst": 0.0103,
+            "blindness": 1.04,
+            "n_failing": 0,
+            "spearman": 0.119
+          }
+        ]
+      },
+      "hinge_no_massive": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 188,
+            "free_rank": 703,
+            "interf_traffic": 0.0836,
+            "interf_worst": 0.1099,
+            "blindness": 1.31,
+            "n_failing": 8,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 273,
+            "free_rank": 618,
+            "interf_traffic": 0.0578,
+            "interf_worst": 0.0836,
+            "blindness": 1.45,
+            "n_failing": 7,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 477,
+            "free_rank": 414,
+            "interf_traffic": 0.0251,
+            "interf_worst": 0.0434,
+            "blindness": 1.73,
+            "n_failing": 0,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 556,
+            "free_rank": 335,
+            "interf_traffic": 0.0178,
+            "interf_worst": 0.0355,
+            "blindness": 2.0,
+            "n_failing": 0,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 715,
+            "free_rank": 176,
+            "interf_traffic": 0.0073,
+            "interf_worst": 0.0195,
+            "blindness": 2.67,
+            "n_failing": 0,
+            "spearman": -0.976
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 217,
+            "free_rank": 674,
+            "interf_traffic": 0.0815,
+            "interf_worst": 0.0849,
+            "blindness": 1.04,
+            "n_failing": 8,
+            "spearman": 0.31
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 310,
+            "free_rank": 581,
+            "interf_traffic": 0.0568,
+            "interf_worst": 0.0593,
+            "blindness": 1.04,
+            "n_failing": 8,
+            "spearman": 0.405
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 519,
+            "free_rank": 372,
+            "interf_traffic": 0.027,
+            "interf_worst": 0.0296,
+            "blindness": 1.09,
+            "n_failing": 0,
+            "spearman": 0.738
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 594,
+            "free_rank": 297,
+            "interf_traffic": 0.0202,
+            "interf_worst": 0.0221,
+            "blindness": 1.09,
+            "n_failing": 0,
+            "spearman": 0.762
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 726,
+            "free_rank": 165,
+            "interf_traffic": 0.0107,
+            "interf_worst": 0.0111,
+            "blindness": 1.04,
+            "n_failing": 0,
+            "spearman": 0.81
+          }
+        ]
+      },
+      "dim": 896,
+      "tokens_per_domain": 118
+    },
+    "Qwen2.5-0.5B-4bit:L18": {
+      "model": "Qwen2.5-0.5B-4bit",
+      "layer": 18,
+      "geometry": {
+        "decay_mean": 0.19906831894240942,
+        "decay_range": [
+          0.166,
+          0.257
+        ],
+        "effective_rank_mean": 37.39894151687622,
+        "overlap_mean": 0.24834340810775757,
+        "overlap_max": 0.2865634262561798
+      },
+      "geometry_no_massive": {
+        "decay_mean": 0.18948002080354098,
+        "decay_range": [
+          0.152,
+          0.263
+        ],
+        "effective_rank_mean": 39.25835132598877,
+        "overlap_mean": 0.19363632266010558,
+        "overlap_max": 0.22497722506523132
+      },
+      "massive_share": 0.0509,
+      "hinge": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 211,
+            "free_rank": 685,
+            "interf_traffic": 0.0808,
+            "interf_worst": 0.1001,
+            "blindness": 1.24,
+            "n_failing": 8,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 304,
+            "free_rank": 592,
+            "interf_traffic": 0.0551,
+            "interf_worst": 0.0801,
+            "blindness": 1.46,
+            "n_failing": 7,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 514,
+            "free_rank": 382,
+            "interf_traffic": 0.0241,
+            "interf_worst": 0.043,
+            "blindness": 1.79,
+            "n_failing": 0,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 594,
+            "free_rank": 302,
+            "interf_traffic": 0.0167,
+            "interf_worst": 0.035,
+            "blindness": 2.1,
+            "n_failing": 0,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 747,
+            "free_rank": 149,
+            "interf_traffic": 0.0066,
+            "interf_worst": 0.0172,
+            "blindness": 2.62,
+            "n_failing": 0,
+            "spearman": -0.976
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 241,
+            "free_rank": 655,
+            "interf_traffic": 0.0766,
+            "interf_worst": 0.0795,
+            "blindness": 1.04,
+            "n_failing": 8,
+            "spearman": 0.214
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 339,
+            "free_rank": 557,
+            "interf_traffic": 0.0547,
+            "interf_worst": 0.0558,
+            "blindness": 1.02,
+            "n_failing": 7,
+            "spearman": 0.19
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 550,
+            "free_rank": 346,
+            "interf_traffic": 0.0275,
+            "interf_worst": 0.0287,
+            "blindness": 1.04,
+            "n_failing": 0,
+            "spearman": 0.5
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 623,
+            "free_rank": 273,
+            "interf_traffic": 0.0206,
+            "interf_worst": 0.0211,
+            "blindness": 1.03,
+            "n_failing": 0,
+            "spearman": 0.333
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 749,
+            "free_rank": 147,
+            "interf_traffic": 0.0104,
+            "interf_worst": 0.0105,
+            "blindness": 1.01,
+            "n_failing": 0,
+            "spearman": 0.119
+          }
+        ]
+      },
+      "hinge_no_massive": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 217,
+            "free_rank": 674,
+            "interf_traffic": 0.0799,
+            "interf_worst": 0.1139,
+            "blindness": 1.42,
+            "n_failing": 8,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 309,
+            "free_rank": 582,
+            "interf_traffic": 0.0529,
+            "interf_worst": 0.0815,
+            "blindness": 1.54,
+            "n_failing": 7,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 517,
+            "free_rank": 374,
+            "interf_traffic": 0.0246,
+            "interf_worst": 0.0451,
+            "blindness": 1.83,
+            "n_failing": 0,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 596,
+            "free_rank": 295,
+            "interf_traffic": 0.017,
+            "interf_worst": 0.0351,
+            "blindness": 2.07,
+            "n_failing": 0,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 749,
+            "free_rank": 142,
+            "interf_traffic": 0.0067,
+            "interf_worst": 0.0189,
+            "blindness": 2.8,
+            "n_failing": 0,
+            "spearman": -0.976
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 249,
+            "free_rank": 642,
+            "interf_traffic": 0.0784,
+            "interf_worst": 0.0799,
+            "blindness": 1.02,
+            "n_failing": 8,
+            "spearman": 0.762
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 349,
+            "free_rank": 542,
+            "interf_traffic": 0.0543,
+            "interf_worst": 0.0578,
+            "blindness": 1.06,
+            "n_failing": 8,
+            "spearman": 0.857
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 559,
+            "free_rank": 332,
+            "interf_traffic": 0.0273,
+            "interf_worst": 0.0287,
+            "blindness": 1.05,
+            "n_failing": 0,
+            "spearman": 0.929
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 630,
+            "free_rank": 261,
+            "interf_traffic": 0.0205,
+            "interf_worst": 0.0209,
+            "blindness": 1.02,
+            "n_failing": 0,
+            "spearman": 0.952
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 753,
+            "free_rank": 138,
+            "interf_traffic": 0.0102,
+            "interf_worst": 0.0106,
+            "blindness": 1.04,
+            "n_failing": 0,
+            "spearman": 0.857
+          }
+        ]
+      },
+      "dim": 896,
+      "tokens_per_domain": 118
+    },
+    "Qwen2.5-1.5B-4bit:L7": {
+      "model": "Qwen2.5-1.5B-4bit",
+      "layer": 7,
+      "geometry": {
+        "decay_mean": 1.196627914152382,
+        "decay_range": [
+          1.13,
+          1.238
+        ],
+        "effective_rank_mean": 1.1964570432901382,
+        "overlap_mean": 0.25605470846806255,
+        "overlap_max": 0.2846280336380005
+      },
+      "geometry_no_massive": {
+        "decay_mean": 0.8250090205643148,
+        "decay_range": [
+          0.762,
+          0.863
+        ],
+        "effective_rank_mean": 2.7228748500347137,
+        "overlap_mean": 0.24911884271672793,
+        "overlap_max": 0.28200191259384155
+      },
+      "massive_share": 0.7851,
+      "hinge": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 1,
+            "free_rank": 1535,
+            "interf_traffic": 0.3905,
+            "interf_worst": 0.4501,
+            "blindness": 1.15,
+            "n_failing": 8,
+            "spearman": 0.405
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 41,
+            "free_rank": 1495,
+            "interf_traffic": 0.199,
+            "interf_worst": 0.214,
+            "blindness": 1.08,
+            "n_failing": 8,
+            "spearman": -0.476
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 271,
+            "free_rank": 1265,
+            "interf_traffic": 0.0625,
+            "interf_worst": 0.0846,
+            "blindness": 1.35,
+            "n_failing": 7,
+            "spearman": -0.857
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 398,
+            "free_rank": 1138,
+            "interf_traffic": 0.0425,
+            "interf_worst": 0.0659,
+            "blindness": 1.55,
+            "n_failing": 5,
+            "spearman": -0.929
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 687,
+            "free_rank": 849,
+            "interf_traffic": 0.0172,
+            "interf_worst": 0.0354,
+            "blindness": 2.06,
+            "n_failing": 0,
+            "spearman": -0.952
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 1,
+            "free_rank": 1535,
+            "interf_traffic": 0.389,
+            "interf_worst": 0.4684,
+            "blindness": 1.2,
+            "n_failing": 8,
+            "spearman": 0.405
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 61,
+            "free_rank": 1475,
+            "interf_traffic": 0.1733,
+            "interf_worst": 0.1856,
+            "blindness": 1.07,
+            "n_failing": 8,
+            "spearman": 0.405
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 345,
+            "free_rank": 1191,
+            "interf_traffic": 0.0605,
+            "interf_worst": 0.0643,
+            "blindness": 1.06,
+            "n_failing": 8,
+            "spearman": 0.214
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 482,
+            "free_rank": 1054,
+            "interf_traffic": 0.0427,
+            "interf_worst": 0.0453,
+            "blindness": 1.06,
+            "n_failing": 0,
+            "spearman": 0.143
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 735,
+            "free_rank": 801,
+            "interf_traffic": 0.0217,
+            "interf_worst": 0.0242,
+            "blindness": 1.11,
+            "n_failing": 0,
+            "spearman": -0.19
+          }
+        ]
+      },
+      "hinge_no_massive": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 142,
+            "free_rank": 1389,
+            "interf_traffic": 0.1305,
+            "interf_worst": 0.1686,
+            "blindness": 1.29,
+            "n_failing": 8,
+            "spearman": -0.952
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 255,
+            "free_rank": 1276,
+            "interf_traffic": 0.0791,
+            "interf_worst": 0.1066,
+            "blindness": 1.35,
+            "n_failing": 8,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 551,
+            "free_rank": 980,
+            "interf_traffic": 0.0322,
+            "interf_worst": 0.0652,
+            "blindness": 2.02,
+            "n_failing": 5,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 671,
+            "free_rank": 860,
+            "interf_traffic": 0.0228,
+            "interf_worst": 0.0482,
+            "blindness": 2.12,
+            "n_failing": 0,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 1128,
+            "free_rank": 403,
+            "interf_traffic": 0.0016,
+            "interf_worst": 0.0095,
+            "blindness": 5.97,
+            "n_failing": 0,
+            "spearman": -0.976
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 165,
+            "free_rank": 1366,
+            "interf_traffic": 0.1217,
+            "interf_worst": 0.1295,
+            "blindness": 1.06,
+            "n_failing": 8,
+            "spearman": 0.167
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 297,
+            "free_rank": 1234,
+            "interf_traffic": 0.0815,
+            "interf_worst": 0.0938,
+            "blindness": 1.15,
+            "n_failing": 8,
+            "spearman": 0.119
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 598,
+            "free_rank": 933,
+            "interf_traffic": 0.0383,
+            "interf_worst": 0.0449,
+            "blindness": 1.17,
+            "n_failing": 0,
+            "spearman": 0.286
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 698,
+            "free_rank": 833,
+            "interf_traffic": 0.0285,
+            "interf_worst": 0.0348,
+            "blindness": 1.22,
+            "n_failing": 0,
+            "spearman": 0.095
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 861,
+            "free_rank": 670,
+            "interf_traffic": 0.0141,
+            "interf_worst": 0.0171,
+            "blindness": 1.21,
+            "n_failing": 0,
+            "spearman": 0.071
+          }
+        ]
+      },
+      "dim": 1536,
+      "tokens_per_domain": 118
+    },
+    "Qwen2.5-1.5B-4bit:L14": {
+      "model": "Qwen2.5-1.5B-4bit",
+      "layer": 14,
+      "geometry": {
+        "decay_mean": 1.127445162470308,
+        "decay_range": [
+          1.045,
+          1.179
+        ],
+        "effective_rank_mean": 1.281820148229599,
+        "overlap_mean": 0.36308363186461584,
+        "overlap_max": 0.39599716663360596
+      },
+      "geometry_no_massive": {
+        "decay_mean": 0.7325270161696092,
+        "decay_range": [
+          0.654,
+          0.789
+        ],
+        "effective_rank_mean": 4.022945463657379,
+        "overlap_mean": 0.34063541889190674,
+        "overlap_max": 0.3753400146961212
+      },
+      "massive_share": 0.774,
+      "hinge": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 8,
+            "free_rank": 1528,
+            "interf_traffic": 0.3333,
+            "interf_worst": 0.4207,
+            "blindness": 1.26,
+            "n_failing": 8,
+            "spearman": 0.095
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 63,
+            "free_rank": 1473,
+            "interf_traffic": 0.1843,
+            "interf_worst": 0.204,
+            "blindness": 1.11,
+            "n_failing": 8,
+            "spearman": -0.5
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 286,
+            "free_rank": 1250,
+            "interf_traffic": 0.0632,
+            "interf_worst": 0.0874,
+            "blindness": 1.38,
+            "n_failing": 7,
+            "spearman": -0.881
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 402,
+            "free_rank": 1134,
+            "interf_traffic": 0.0428,
+            "interf_worst": 0.0676,
+            "blindness": 1.58,
+            "n_failing": 5,
+            "spearman": -0.905
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 669,
+            "free_rank": 867,
+            "interf_traffic": 0.0172,
+            "interf_worst": 0.0385,
+            "blindness": 2.24,
+            "n_failing": 0,
+            "spearman": -0.976
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 14,
+            "free_rank": 1522,
+            "interf_traffic": 0.2819,
+            "interf_worst": 0.3245,
+            "blindness": 1.15,
+            "n_failing": 8,
+            "spearman": 0.405
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 88,
+            "free_rank": 1448,
+            "interf_traffic": 0.1605,
+            "interf_worst": 0.1771,
+            "blindness": 1.1,
+            "n_failing": 8,
+            "spearman": 0.405
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 352,
+            "free_rank": 1184,
+            "interf_traffic": 0.0594,
+            "interf_worst": 0.0654,
+            "blindness": 1.1,
+            "n_failing": 8,
+            "spearman": 0.31
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 479,
+            "free_rank": 1057,
+            "interf_traffic": 0.0409,
+            "interf_worst": 0.0453,
+            "blindness": 1.11,
+            "n_failing": 0,
+            "spearman": 0.143
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 725,
+            "free_rank": 811,
+            "interf_traffic": 0.0213,
+            "interf_worst": 0.0243,
+            "blindness": 1.14,
+            "n_failing": 0,
+            "spearman": -0.429
+          }
+        ]
+      },
+      "hinge_no_massive": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 158,
+            "free_rank": 1373,
+            "interf_traffic": 0.1288,
+            "interf_worst": 0.1559,
+            "blindness": 1.21,
+            "n_failing": 8,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 262,
+            "free_rank": 1269,
+            "interf_traffic": 0.084,
+            "interf_worst": 0.1144,
+            "blindness": 1.36,
+            "n_failing": 8,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 533,
+            "free_rank": 998,
+            "interf_traffic": 0.0329,
+            "interf_worst": 0.0612,
+            "blindness": 1.86,
+            "n_failing": 5,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 646,
+            "free_rank": 885,
+            "interf_traffic": 0.0234,
+            "interf_worst": 0.0516,
+            "blindness": 2.21,
+            "n_failing": 1,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 994,
+            "free_rank": 537,
+            "interf_traffic": 0.0015,
+            "interf_worst": 0.008,
+            "blindness": 5.45,
+            "n_failing": 0,
+            "spearman": -0.952
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 186,
+            "free_rank": 1345,
+            "interf_traffic": 0.1236,
+            "interf_worst": 0.1254,
+            "blindness": 1.01,
+            "n_failing": 8,
+            "spearman": 0.31
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 303,
+            "free_rank": 1228,
+            "interf_traffic": 0.0818,
+            "interf_worst": 0.0869,
+            "blindness": 1.06,
+            "n_failing": 8,
+            "spearman": 0.262
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 582,
+            "free_rank": 949,
+            "interf_traffic": 0.0371,
+            "interf_worst": 0.0435,
+            "blindness": 1.17,
+            "n_failing": 0,
+            "spearman": 0.262
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 683,
+            "free_rank": 848,
+            "interf_traffic": 0.0267,
+            "interf_worst": 0.0326,
+            "blindness": 1.22,
+            "n_failing": 0,
+            "spearman": 0.095
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 856,
+            "free_rank": 675,
+            "interf_traffic": 0.0131,
+            "interf_worst": 0.0163,
+            "blindness": 1.25,
+            "n_failing": 0,
+            "spearman": -0.19
+          }
+        ]
+      },
+      "dim": 1536,
+      "tokens_per_domain": 118
+    },
+    "Qwen2.5-1.5B-4bit:L21": {
+      "model": "Qwen2.5-1.5B-4bit",
+      "layer": 21,
+      "geometry": {
+        "decay_mean": 0.8865770145962653,
+        "decay_range": [
+          0.802,
+          0.936
+        ],
+        "effective_rank_mean": 2.076762229204178,
+        "overlap_mean": 0.2579291122300284,
+        "overlap_max": 0.3019832968711853
+      },
+      "geometry_no_massive": {
+        "decay_mean": 0.5422887596596818,
+        "decay_range": [
+          0.487,
+          0.58
+        ],
+        "effective_rank_mean": 11.35272479057312,
+        "overlap_mean": 0.22367597903524125,
+        "overlap_max": 0.2568737268447876
+      },
+      "massive_share": 0.5849,
+      "hinge": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 99,
+            "free_rank": 1437,
+            "interf_traffic": 0.1705,
+            "interf_worst": 0.1964,
+            "blindness": 1.15,
+            "n_failing": 8,
+            "spearman": -0.905
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 191,
+            "free_rank": 1345,
+            "interf_traffic": 0.1094,
+            "interf_worst": 0.1462,
+            "blindness": 1.34,
+            "n_failing": 8,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 451,
+            "free_rank": 1085,
+            "interf_traffic": 0.0432,
+            "interf_worst": 0.0742,
+            "blindness": 1.72,
+            "n_failing": 5,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 568,
+            "free_rank": 968,
+            "interf_traffic": 0.0298,
+            "interf_worst": 0.0568,
+            "blindness": 1.91,
+            "n_failing": 2,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 827,
+            "free_rank": 709,
+            "interf_traffic": 0.0072,
+            "interf_worst": 0.0261,
+            "blindness": 3.61,
+            "n_failing": 0,
+            "spearman": -0.976
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 129,
+            "free_rank": 1407,
+            "interf_traffic": 0.1559,
+            "interf_worst": 0.1711,
+            "blindness": 1.1,
+            "n_failing": 8,
+            "spearman": 0.333
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 236,
+            "free_rank": 1300,
+            "interf_traffic": 0.1005,
+            "interf_worst": 0.1084,
+            "blindness": 1.08,
+            "n_failing": 8,
+            "spearman": 0.31
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 526,
+            "free_rank": 1010,
+            "interf_traffic": 0.0428,
+            "interf_worst": 0.0487,
+            "blindness": 1.14,
+            "n_failing": 0,
+            "spearman": -0.167
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 636,
+            "free_rank": 900,
+            "interf_traffic": 0.0322,
+            "interf_worst": 0.0377,
+            "blindness": 1.17,
+            "n_failing": 0,
+            "spearman": -0.405
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 817,
+            "free_rank": 719,
+            "interf_traffic": 0.0158,
+            "interf_worst": 0.0198,
+            "blindness": 1.25,
+            "n_failing": 0,
+            "spearman": -0.643
+          }
+        ]
+      },
+      "hinge_no_massive": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "committed_rank": 214,
+            "free_rank": 1317,
+            "interf_traffic": 0.1058,
+            "interf_worst": 0.139,
+            "blindness": 1.31,
+            "n_failing": 8,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 323,
+            "free_rank": 1208,
+            "interf_traffic": 0.0689,
+            "interf_worst": 0.1022,
+            "blindness": 1.48,
+            "n_failing": 7,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 595,
+            "free_rank": 936,
+            "interf_traffic": 0.0291,
+            "interf_worst": 0.0574,
+            "blindness": 1.97,
+            "n_failing": 3,
+            "spearman": -1.0
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 707,
+            "free_rank": 824,
+            "interf_traffic": 0.0192,
+            "interf_worst": 0.0472,
+            "blindness": 2.46,
+            "n_failing": 0,
+            "spearman": -0.976
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 1187,
+            "free_rank": 344,
+            "interf_traffic": 0.0014,
+            "interf_worst": 0.0091,
+            "blindness": 6.34,
+            "n_failing": 0,
+            "spearman": -0.976
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "committed_rank": 249,
+            "free_rank": 1282,
+            "interf_traffic": 0.1022,
+            "interf_worst": 0.1152,
+            "blindness": 1.13,
+            "n_failing": 8,
+            "spearman": 0.167
+          },
+          {
+            "retention": 0.95,
+            "committed_rank": 373,
+            "free_rank": 1158,
+            "interf_traffic": 0.0682,
+            "interf_worst": 0.0732,
+            "blindness": 1.07,
+            "n_failing": 8,
+            "spearman": 0.167
+          },
+          {
+            "retention": 0.99,
+            "committed_rank": 645,
+            "free_rank": 886,
+            "interf_traffic": 0.0333,
+            "interf_worst": 0.0376,
+            "blindness": 1.13,
+            "n_failing": 0,
+            "spearman": -0.143
+          },
+          {
+            "retention": 0.995,
+            "committed_rank": 734,
+            "free_rank": 797,
+            "interf_traffic": 0.0242,
+            "interf_worst": 0.0286,
+            "blindness": 1.18,
+            "n_failing": 0,
+            "spearman": -0.238
+          },
+          {
+            "retention": 0.999,
+            "committed_rank": 877,
+            "free_rank": 654,
+            "interf_traffic": 0.011,
+            "interf_worst": 0.0139,
+            "blindness": 1.27,
+            "n_failing": 0,
+            "spearman": -0.429
+          }
+        ]
+      },
+      "dim": 1536,
+      "tokens_per_domain": 118
+    }
+  },
+  "per_model": {
+    "Qwen2.5-0.5B-4bit": {
+      "decay": 0.237,
+      "decay_no_massive": 0.208,
+      "overlap": 0.309,
+      "massive_share": 0.0651,
+      "blindness": {
+        "spectrum": 1.46,
+        "register": 1.07
+      },
+      "spearman": {
+        "spectrum": -0.992,
+        "register": 0.151
+      },
+      "blindness_no_massive": {
+        "spectrum": 1.46,
+        "register": 1.05
+      },
+      "spearman_no_massive": {
+        "spectrum": -1.0,
+        "register": 0.54
+      },
+      "n_failing": {
+        "spectrum": 7.0,
+        "register": 6.7
+      },
+      "KB1_decay_as_assumed": false,
+      "KB2_near_orthogonal": false,
+      "KB3_hinge_survives": true,
+      "KB3_no_massive": true
+    },
+    "Qwen2.5-1.5B-4bit": {
+      "decay": 1.07,
+      "decay_no_massive": 0.7,
+      "overlap": 0.292,
+      "massive_share": 0.7147,
+      "blindness": {
+        "spectrum": 1.18,
+        "register": 1.08
+      },
+      "spearman": {
+        "spectrum": -0.651,
+        "register": 0.373
+      },
+      "blindness_no_massive": {
+        "spectrum": 1.4,
+        "register": 1.09
+      },
+      "spearman_no_massive": {
+        "spectrum": -0.992,
+        "register": 0.183
+      },
+      "n_failing": {
+        "spectrum": 8.0,
+        "register": 8.0
+      },
+      "KB1_decay_as_assumed": false,
+      "KB2_near_orthogonal": false,
+      "KB3_hinge_survives": true,
+      "KB3_no_massive": true
+    }
+  },
+  "n_massive_dims": 5,
+  "KB3_all_models": true,
+  "KB3_no_massive_all": true,
+  "rates_still_assumed": true,
+  "verdict": "PASS"
+}
