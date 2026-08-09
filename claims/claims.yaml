@@ -1039,6 +1039,60 @@ claims:
       with a separate failure mode, already specified by EB.3.
     status: proposed
 
+  - id: EB.7
+    tier: L7
+    claim: "EB.5's two repairs, built: center R_t, and rank committed directions by BETWEEN-OWNER variance rather than total energy"
+    source: "worklist v3 item 1.1; EB.5 diagnosed and did not build"
+    rig: B
+    kill: "KG1 the discrimination ratio does not move off 0.13x -- the repair is wrong and the criterion needs a different one"
+    predicted: "between-group ranking raises discrimination; centering does not"
+    status: PASS
+    result: results/eb_7_between_group_ranking.json
+    finding: >
+      KG1 PASSES and the two repairs separate cleanly. Discrimination of the
+      top-5 directions, measured on DIRECTIONS rather than axes as
+      discrimination(u) = u'Bu / u'Tu:
+        0.5B   uncentered 0.0650 -> centered 0.0914 -> between-group 0.4292
+        1.5B   uncentered 0.0355 -> centered 0.0380 -> between-group 0.1579
+      CENTERING IS NOT THE REPAIR. It moves discrimination barely at either size.
+      Ranking by between-owner variance is what moves it - 4.7x at 0.5B and 4.2x
+      at 1.5B against the centered baseline - and it is the repair that needs a
+      GROUPING, which under the register is recorded and, under I8, already paid
+      for.
+    what_it_costs: >
+      The between-group basis captures LESS total energy at the same rank,
+      because it selects for discrimination rather than magnitude: at r=5, 10.5%
+      against 21.3% (0.5B) and 67.9% against 89.8% (1.5B). A committed subspace
+      chosen this way protects what distinguishes owners and leaves more of the
+      shared bulk in the free pool. Reported beside the gain rather than after it.
+    a_ceiling_nobody_has_stated: >
+      THE GAIN DECAYS WITH RANK AND INVERTS, AND IT IS STRUCTURAL.
+        0.5B   r=5 4.7x   r=8 4.7x   r=16 2.5x   r=32 1.4x
+        1.5B   r=5 4.2x   r=8 2.3x   r=16 1.0x   r=32 0.5x
+      B is a sum of n_groups outer products of deviations that sum to zero, so
+      rank(B) <= n_groups - 1 - measured at exactly 7 with 8 groups. Past that
+      the "between-group" eigenvectors lie in B's NULL SPACE, carry no
+      between-group variance at all, and the ranking selects arbitrary
+      directions. At r=32 it is WORSE than ranking by energy.
+      SO COMMITTED RANK CHOSEN BY BETWEEN-OWNER VARIANCE IS BOUNDED BY OWNER
+      COUNT, not by dimension. A 64-owner fleet can commit at most 63 directions
+      this way. That is a third data-shaped bound on the same budget beside R12's
+      per-owner provenance floor and E1.1d's subscription cliff - and it is the
+      only one that gets LOOSER as the fleet grows, which is the opposite
+      direction from R12's.
+    what_it_does_not_settle: >
+      Discrimination is not tail safety. The next step is E1.6's instruments run
+      with the committed basis chosen by B rather than by T - whether the
+      BLINDNESS RATIO improves, not just whether the directions discriminate.
+      Separate run, not claimed here.
+    method: >
+      EB.5 reported the between-domain share of the top-5 DIMENSIONS, which is
+      axis-aligned. The criterion selects eigen-DIRECTIONS, so this ranks
+      directions. `RtEstimator(centered=...)` defaults to False so every prior
+      result in the record reproduces unchanged - verified against E1.1c and
+      E1.6 - and centering is exact at lam=1.0, with the lam<1 approximation
+      stated in the docstring rather than hidden.
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"

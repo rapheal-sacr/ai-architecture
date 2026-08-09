@@ -1817,6 +1817,51 @@ silent failure) and **P4 two independent sources** (representativeness can't be
 checked within one log, but heterogeneity across logs can — bounding it rather than
 closing it).
 
+### EB.7 · EB.5's repairs built — and only one of them is the repair
+
+EB.5 diagnosed and did not build. Both are now in `spectrum.py`, and measured on
+*directions* rather than axes — `discrimination(u) = u'Bu / u'Tu`, the fraction of
+what a direction moves that distinguishes one owner from another.
+
+| top-5 directions | uncentered | centered | between-group |
+|---|---|---|---|
+| Qwen 0.5B | 0.0650 | 0.0914 | **0.4292** |
+| Qwen 1.5B | 0.0355 | 0.0380 | **0.1579** |
+
+**Centering is not the repair.** It moves discrimination barely at either size.
+Ranking by between-owner variance is what moves it — **4.7× and 4.2×** against the
+centered baseline — and it is the repair that needs a *grouping*, which under the
+register is recorded and, under I8, already paid for.
+
+**What it costs, beside what it buys.** The between-group basis captures less total
+energy at the same rank — 10.5% against 21.3% (0.5B), 67.9% against 89.8% (1.5B).
+It protects what distinguishes owners and leaves more of the shared bulk in the
+free pool.
+
+**And a ceiling nobody has stated.** The gain decays with rank and *inverts*:
+
+| | r=5 | r=8 | r=16 | r=32 |
+|---|---|---|---|---|
+| 0.5B | 4.7× | 4.7× | 2.5× | 1.4× |
+| 1.5B | 4.2× | 2.3× | 1.0× | **0.5×** |
+
+`B` is a sum of `n_groups` outer products of deviations that sum to zero, so
+`rank(B) ≤ n_groups − 1` — measured at exactly 7 with 8 groups. Past that the
+"between-group" eigenvectors lie in **B's null space**, carry no between-group
+variance at all, and the ranking selects arbitrary directions. At r=32 it is
+*worse* than ranking by energy.
+
+> **Committed rank chosen by between-owner variance is bounded by owner count, not
+> by dimension.** A 64-owner fleet can commit at most 63 directions this way.
+
+That is a third data-shaped bound on the same budget, beside R12's per-owner
+provenance floor and E1.1d's subscription cliff — and it is the only one that gets
+**looser** as the fleet grows, which is the opposite direction from R12's.
+
+**What it does not settle:** discrimination is not tail safety. The next step is
+E1.6's instruments with the committed basis chosen by `B` rather than `T` — whether
+the *blindness ratio* improves, not just whether the directions discriminate.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a

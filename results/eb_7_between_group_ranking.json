@@ -1,0 +1,98 @@
+{
+  "models": [
+    "Qwen2.5-0.5B-4bit",
+    "Qwen2.5-1.5B-4bit"
+  ],
+  "ranks": [
+    5,
+    8,
+    16,
+    32
+  ],
+  "by_model": {
+    "Qwen2.5-0.5B-4bit": {
+      "dim": 896,
+      "baseline": 0.0496,
+      "n_groups": 8,
+      "rank_B": 7,
+      "rows": [
+        {
+          "rank": 5,
+          "disc_uncentered": 0.065,
+          "disc_centered": 0.0914,
+          "disc_between": 0.4292,
+          "energy_centered": 0.2131,
+          "energy_between": 0.1047
+        },
+        {
+          "rank": 8,
+          "disc_uncentered": 0.0725,
+          "disc_centered": 0.0761,
+          "disc_between": 0.3563,
+          "energy_centered": 0.2829,
+          "energy_between": 0.1247
+        },
+        {
+          "rank": 16,
+          "disc_uncentered": 0.0722,
+          "disc_centered": 0.0726,
+          "disc_between": 0.1782,
+          "energy_centered": 0.3936,
+          "energy_between": 0.1366
+        },
+        {
+          "rank": 32,
+          "disc_uncentered": 0.0605,
+          "disc_centered": 0.0617,
+          "disc_between": 0.0891,
+          "energy_centered": 0.5295,
+          "energy_between": 0.1569
+        }
+      ]
+    },
+    "Qwen2.5-1.5B-4bit": {
+      "dim": 1536,
+      "baseline": 0.006,
+      "n_groups": 8,
+      "rank_B": 7,
+      "rows": [
+        {
+          "rank": 5,
+          "disc_uncentered": 0.0355,
+          "disc_centered": 0.038,
+          "disc_between": 0.1579,
+          "energy_centered": 0.8978,
+          "energy_between": 0.6792
+        },
+        {
+          "rank": 8,
+          "disc_uncentered": 0.0488,
+          "disc_centered": 0.0626,
+          "disc_between": 0.1452,
+          "energy_centered": 0.9041,
+          "energy_between": 0.6889
+        },
+        {
+          "rank": 16,
+          "disc_uncentered": 0.0699,
+          "disc_centered": 0.0754,
+          "disc_between": 0.0726,
+          "energy_centered": 0.9151,
+          "energy_between": 0.6984
+        },
+        {
+          "rank": 32,
+          "disc_uncentered": 0.0717,
+          "disc_centered": 0.0746,
+          "disc_between": 0.0363,
+          "energy_centered": 0.9295,
+          "energy_between": 0.7337
+        }
+      ]
+    }
+  },
+  "gain_at_r5_1_5B": 4.16,
+  "rank_ceiling": "committed rank by between-owner variance <= n_owners - 1",
+  "KG1_ratio_moves": true,
+  "verdict": "PASS"
+}

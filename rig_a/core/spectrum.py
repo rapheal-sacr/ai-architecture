@@ -38,22 +38,45 @@ class RtEstimator:
     dim: int
     lam: float = 1.0
     delta: float = 1e-6
+    centered: bool = False        # EB.5's first repair. Default False so every
+                                  # prior result in this record reproduces.
     R: np.ndarray = field(init=False)
+    S1: np.ndarray = field(init=False)
     n_updates: int = field(default=0, init=False)
 
     def __post_init__(self) -> None:
         self.R = self.delta * np.eye(self.dim)
+        self.S1 = np.zeros(self.dim)
 
     def update(self, phi: np.ndarray) -> None:
         """Absorb one feature vector (or a batch, one row per observation)."""
         phi = np.atleast_2d(phi)
         for row in phi:
             self.R = self.lam * self.R + np.outer(row, row)
+            self.S1 = self.lam * self.S1 + row
             self.n_updates += 1
 
+    def scatter(self) -> np.ndarray:
+        """The matrix the readings below actually use.
+
+        EB.5's FIRST REPAIR. The design accumulates the UNCENTERED second moment
+        `E[aa^T]`, and on a 1.5B that puts 78.3% of energy in five dimensions
+        against 6.0% centered on a 0.5B -- because massive activations are large
+        and, at the smaller size, largely a MEAN OFFSET. Centering is one line and
+        it is exact for lam = 1.0, where the running mean is S1/n. For lam < 1 the
+        decayed mean is an approximation and the deviation is stated rather than
+        hidden: the weights sum to (1-lam^n)/(1-lam) rather than n.
+        """
+        if not self.centered or self.n_updates == 0:
+            return self.R
+        w = (self.n_updates if self.lam == 1.0
+             else (1.0 - self.lam ** self.n_updates) / (1.0 - self.lam))
+        mu = self.S1 / max(w, 1e-12)
+        return self.R - w * np.outer(mu, mu)
+
     def eig(self) -> tuple[np.ndarray, np.ndarray]:
-        """Descending eigendecomposition. Returns (sigma, U) with R = U diag(sigma) U^T."""
-        sigma, U = np.linalg.eigh(self.R)
+        """Descending eigendecomposition of the scatter actually in use."""
+        sigma, U = np.linalg.eigh(self.scatter())
         order = np.argsort(sigma)[::-1]
         return sigma[order], U[:, order]
 
@@ -300,3 +323,59 @@ def rank_for_energy(est: RtEstimator, queries: np.ndarray, frac: float) -> int:
         return 0
     cum = np.cumsum(energy) / total
     return int(np.searchsorted(cum, frac) + 1)
+
+
+# ---------------------------------------------------------------------------
+# EB.5's SECOND REPAIR -- rank by between-group variance, not total energy.
+# ---------------------------------------------------------------------------
+
+
+def between_group_scatter(groups: list) -> tuple:
+    """Between- and total-group scatter over per-owner buffers.
+
+    EB.5 measured the defect: on a 1.5B the top-5 directions by TOTAL energy hold
+    77.4% of centered variance and carry 0.2% between-domain share against 2.0%
+    elsewhere -- a 0.13x discrimination ratio. `rank_for_energy` cannot see the
+    difference, because energy is not discrimination.
+
+    The repair needs a GROUPING. Under the register there is one, it is recorded,
+    and I8 already requires per-owner buffers, so it is a byproduct rather than a
+    new cost -- and it is computed over the unit protection is defined over. Other
+    recorded groupings exist (sessions; the card that surfaced, once the journal
+    runs), so the claim is not that only the register can do this. It is that
+    elsewhere the grouping is a new cost over a proxy unit.
+
+    Returns (B, T): between-group scatter and total scatter, both unnormalised.
+    """
+    all_rows = np.vstack(groups)
+    mu = all_rows.mean(axis=0)
+    dim = all_rows.shape[1]
+    B = np.zeros((dim, dim))
+    for g in groups:
+        d = g.mean(axis=0) - mu
+        B += len(g) * np.outer(d, d)
+    Xc = all_rows - mu
+    return B, Xc.T @ Xc
+
+
+def rank_by_between_group(groups: list, r: int) -> np.ndarray:
+    """Top-r directions by BETWEEN-group energy. The committed basis, repaired."""
+    B, _ = between_group_scatter(groups)
+    sigma, U = np.linalg.eigh(B)
+    return U[:, np.argsort(sigma)[::-1][:r]]
+
+
+def discrimination(directions: np.ndarray, B: np.ndarray, T: np.ndarray) -> float:
+    """Mean between-group share of the variance these directions carry.
+
+    For a direction u this is u'Bu / u'Tu -- the fraction of what it moves that
+    distinguishes one group from another. A direction that merely moves a lot
+    scores near zero however much energy it holds.
+    """
+    vals = []
+    for i in range(directions.shape[1]):
+        u = directions[:, i]
+        t = float(u @ T @ u)
+        if t > 1e-12:
+            vals.append(float(u @ B @ u) / t)
+    return float(np.mean(vals)) if vals else 0.0
