@@ -2059,6 +2059,48 @@ breaking it.
 P2a, P2b, P2c, P3a, P3b and P3c are all still mine. **B1's hard half was never the
 corpus** — it is a build.
 
+### R16 · B1 built and screened — and one of its two measurements withdrawn
+
+Worklist v3 reclassified B1 as *"a public corpus + your own instrumented pipeline,
+buildable now"*. Built: BEIR SciFact + NFCorpus, **800 selections, 4,144 cards,
+43,332 entries**. Entries = document sentences, cards = documents, card vector =
+**the mean over its source entries** — not an arbitrary mapping, but exactly the
+model E0.5's certificate assumes, so the certificate can run on this log rather
+than needing adaptation.
+
+**12 of 15 predicates pass.** P1a/P1b/P1c fire, correctly: BEIR carries no
+structural difficulty, so M1 is blocked and always was B2's measurement.
+
+**M3 is not unblocked, and the worklist said it was.** Entry degree is **1 for
+every entry** — distribution `{1: 43332}`, max 1. With doc = card and sentence =
+entry, provenance is **disjoint by construction**, so §3's fan-out kill cannot be
+evaluated on this bank at all. The kill asks whether the top 1% of entries carry
+citing-degree an order of magnitude above a workable `F_max`; here nothing is
+cited twice.
+
+That is **E0.2e's shape** — a mechanism unevaluable because of a structural
+property of the setup rather than because of a result. M3 needs a **card-compilation
+step in which cards share entries**, and that is a design decision about how cards
+are compiled, not something BEIR supplies. **B1 as built unblocks M2 and not M3.**
+
+**Two defects the build found that the specification did not.**
+
+**Entry ids collided across datasets.** The first build numbered entries from zero
+*per dataset*, so `e0` existed in both and every provenance measurement silently
+merged unrelated entries — inflating the distinct-entry count to 33,952 and
+manufacturing a **degree-2 tail that was entirely id collision**. Every predicate
+passed. Now **P3d**, with a break case; ids namespaced, true count 43,332.
+
+**P1b passed vacuously.** With no difficulty recorded at all, *"difficulty is
+independent of outcome"* was trivially true — the predicate reporting `ok` on a
+quantity that did not exist. It now requires difficulty to be present.
+
+Both are the defect class this record has found six times, and both surfaced by
+**building** the asset rather than inspecting the spec — the third time an
+instrument's defect appeared only under use. The synthetic generator inside the
+validator had the same id-collision flaw, which is how it announced itself: the
+*adequate* asset failed the new predicate.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a

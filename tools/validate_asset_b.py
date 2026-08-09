@@ -61,7 +61,7 @@ import json
 import math
 import pathlib
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 
 INDEPENDENT = {"executable", "replay", "human"}   # not the model under test
 DECOMPOSABLE = {"lexical", "embedding_sum", "embedding", "bm25"}
@@ -131,7 +131,8 @@ def predicates(rows: list) -> list:
         "M1 has no x-axis."))
     out.append((
         "P1b difficulty independent of outcome",
-        all(r.get("difficulty_source") not in (None, "outcome") for r in rows),
+        have > 0                      # vacuously true with no difficulty at all
+        and all(r.get("difficulty_source") not in (None, "outcome") for r in rows),
         f"{sum(1 for r in rows if r.get('difficulty_source') in (None, 'outcome'))}"
         " rows derive difficulty from the outcome or do not say",
         "THE E0.2 TRAP FOR THIS ASSET, and it CANNOT BE RETROFITTED. If difficulty "
@@ -227,6 +228,27 @@ def predicates(rows: list) -> list:
         "and could not fail on any usable asset -- an operation that cannot "
         "report failure, which the method commitments tabulate three times."))
 
+    # ---- P3d: entry ids must not collide across sources ---------------------
+    by_src = defaultdict(set)
+    for r in rows:
+        for srcs in (r.get("cards") or {}).values():
+            by_src[r.get("source")].update(srcs)
+    collide = set()
+    seen_src = list(by_src)
+    for i in range(len(seen_src)):
+        for j in range(i + 1, len(seen_src)):
+            collide |= by_src[seen_src[i]] & by_src[seen_src[j]]
+    out.append((
+        "P3d entry ids unique across sources", not collide,
+        f"{len(collide)} entry id(s) appear in more than one source"
+        + (f", e.g. {sorted(collide)[:3]}" if collide else ""),
+        "FOUND BY BUILDING THE ASSET, not by inspecting the spec. The first B1 "
+        "build numbered entries from zero PER DATASET, so `e0` existed in both "
+        "and every provenance measurement silently merged unrelated entries. It "
+        "inflated the distinct-entry count and manufactured a degree-2 tail that "
+        "was entirely id collision. Every predicate passed. An id namespace is a "
+        "capture-time decision like the others."))
+
     # ---- P4: representativeness, bounded rather than closed -----------------
     srcs = {r.get("source") for r in rows if r.get("source")}
     out.append((
@@ -255,19 +277,23 @@ def report(rows: list, label: str) -> bool:
 
 
 BREAKS = ("P0", "P0a", "P1a", "P1b", "P1c", "P1d",
-          "P2a", "P2b", "P2c", "P2d", "P3a", "P3b", "P3c", "P4")
+          "P2a", "P2b", "P2c", "P2d", "P3a", "P3b", "P3c", "P3d", "P4")
 
 
 def _synthetic(break_: str = "") -> list:
     rows = []
     n = MIN_ENTRIES + 400
     for i in range(n):
-        cid, rid = f"c{i%200}", f"c{(i+1)%200}"
-        cards = {cid: [f"e{(i*7+j) % (MIN_ENTRIES+200)}" for j in range(4)],
-                 rid: [f"e{(i*11+j) % (MIN_ENTRIES+200)}" for j in range(4)]}
+        src = "corpusA" if i % 2 else "corpusB"
+        cid, rid = f"{src}:c{i%200}", f"{src}:c{(i+1)%200}"
+        # entry ids NAMESPACED BY SOURCE -- see P3d. The first version of this
+        # generator did not, so the "adequate" asset failed its own new predicate,
+        # which is how the omission surfaced.
+        cards = {cid: [f"{src}:e{(i*7+j) % (MIN_ENTRIES+200)}" for j in range(4)],
+                 rid: [f"{src}:e{(i*11+j) % (MIN_ENTRIES+200)}" for j in range(4)]}
         r = {
             "query_id": f"q{i}", "domain": f"d{i%8}", "domain_source": "capture",
-            "source": "corpusA" if i % 2 else "corpusB",
+            "source": src,
             "candidates": [{"card_id": cid, "score": 0.9 - (i % 7) * 0.05},
                            {"card_id": rid, "score": 0.4 + (i % 5) * 0.03}],
             "chosen": cid, "scorer": "embedding_sum",
@@ -289,14 +315,15 @@ def _synthetic(break_: str = "") -> list:
         if b == "P2b":
             r["next_score"] = None
             r["candidates"] = r["candidates"] + [{"card_id": "cX", "score": 0.1}]
-            r["cards"]["cX"] = ["e1"]          # keep P2c satisfied
+            r["cards"]["cX"] = [f"{src}:e1"]   # keep P2c and P3d satisfied
         if b == "P2c":  r["cards"] = {cid: cards[cid]}
         if b == "P2d":  r["candidates"] = [{"card_id": cid, "score": 0.9},
                                            {"card_id": rid, "score": 0.4}]
         if b == "P3a":  r["bank_admission"] = "cosine<=0.93"
-        if b == "P3b":  r["cards"] = {cid: [f"e{j}" for j in range(4)],
-                                     rid: [f"e{j}" for j in range(4, 8)]}
+        if b == "P3b":  r["cards"] = {cid: [f"{src}:e{j}" for j in range(4)],
+                                     rid: [f"{src}:e{j}" for j in range(4, 8)]}
         if b == "P3c":  r.pop("bank_size")
+        if b == "P3d":  r["cards"] = {k: ["shared_e0"] + v for k, v in cards.items()}
         if b == "P4":   r["source"] = "corpusA"
         rows.append(r)
     return rows

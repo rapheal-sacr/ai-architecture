@@ -1316,6 +1316,52 @@ claims:
       port this number. The hybrid itself is unbuilt - EB.7 measured the two
       rankings separately and did not run the composite.
 
+  - id: R16
+    from: "worklist v3 section 2 -- B1 built, screened, and one of its two claimed measurements withdrawn"
+    proposal: >
+      Build asset B1 as specified: a public corpus plus an OWN instrumented
+      pipeline. BEIR SciFact + NFCorpus, entries = document sentences, cards =
+      documents, tf-idf card vectors as the mean over their entries, top-10
+      logged with the 11th score, outcomes from human qrels.
+    procedure: tools/build_asset_b1.py
+    validator: tools/validate_asset_b.py
+    finding: >
+      BUILT AND SCREENED. 800 selections over two datasets, 4,144 cards, 43,332
+      entries. 12 of 15 predicates pass. P1a/P1b/P1c fire, correctly: BEIR
+      carries no structural difficulty, so M1 is blocked and always was B2's
+      measurement rather than B1's.
+      The mapping is not arbitrary - a card vector is the MEAN OVER ITS SOURCE
+      ENTRIES, which is exactly the model E0.5's margin certificate assumes, so
+      the certificate can run on this log rather than needing adaptation.
+    m3_is_not_unblocked_and_the_worklist_said_it_was: >
+      ENTRY DEGREE IS 1 FOR EVERY ENTRY - distribution {1: 43332}, max 1. With
+      doc = card and sentence = entry, provenance is DISJOINT BY CONSTRUCTION,
+      so section 3's fan-out kill cannot be evaluated on this bank at all. The
+      kill asks whether the top 1% of entries carry citing-degree an order of
+      magnitude above a workable F_max; here no entry is cited twice.
+      That is E0.2e's shape - a mechanism that cannot be evaluated because of a
+      structural property of the setup rather than because of a result. M3 needs
+      a CARD-COMPILATION step in which cards share entries, and that is a design
+      decision about how cards are compiled, not something BEIR supplies.
+      So B1 as built unblocks M2 and NOT M3. The worklist's "B1 yields M2, M3, a
+      real cascade, and compiled-vs-retrieval" is corrected to M2 only, until a
+      compilation step exists.
+    two_defects_the_build_found_that_the_spec_did_not: >
+      1. ENTRY IDS COLLIDED ACROSS DATASETS. The first build numbered entries
+         from zero per dataset, so `e0` existed in both and every provenance
+         measurement silently merged unrelated entries - inflating the
+         distinct-entry count to 33,952 and manufacturing a degree-2 tail that
+         was ENTIRELY id collision. EVERY PREDICATE PASSED. Now P3d, with a
+         break case; ids are namespaced by dataset and the true count is 43,332.
+      2. P1b PASSED VACUOUSLY. With no difficulty recorded at all, "difficulty is
+         independent of outcome" was trivially true, so the predicate reported ok
+         on a quantity that did not exist. It now requires difficulty to be
+         present as well.
+      Both are the same defect class the record has now found six times, and both
+      were found by BUILDING the asset rather than by inspecting the spec - which
+      is the third time an instrument's defect surfaced only under use.
+    status: proposed
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"
