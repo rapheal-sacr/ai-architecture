@@ -916,6 +916,58 @@ claims:
       And the 0.5B's conditional figure rests on the 9 candidates that reached
       the design screens, which is a small and self-selected subset.
 
+  - id: R13
+    from: "worklist v2 section 4; EB.3's deliverable generalised"
+    proposal: >
+      Specify each acquisition as EXECUTABLE PREDICATES OVER THE ASSET, evaluated
+      before the acquisition is spent, rather than as a description of what is
+      wanted. Asset B's specification and validator are the first instance.
+    procedure: docs/asset_b_specification.md
+    validator: tools/validate_asset_b.py
+    why: >
+      EB.3 ran, its manipulation check fired twice, and the deliverable turned
+      out to be a specification for what the run needed. That specification cost
+      a run. A predicate over the asset costs nothing and is checkable before
+      anything is acquired. The constraint has moved from sequencing to
+      specification, and this is the form the specification takes.
+    what_b_unblocks: >
+      THREE measurements, not four - EB.6 took `r` off the blocked list by
+      measuring it with a generator and predicates, neither corpus-shaped.
+      M1 checkability-difficulty correlation (locates E2.1, and therefore harvest
+      yield, which section 1.3's oracle line now turns on entirely);
+      M2 certified fraction on real traffic; M3 entry-degree distribution.
+    the_predicates_are_named_after_this_record: >
+      P0 independent resolution - E2.1's laundering, the only one that
+         contaminates every measurement at once, and it fails SILENTLY.
+      P1b difficulty independent of outcome - E0.2's trap for this asset: if
+         difficulty is read off success, the correlation is between a variable
+         and itself and no world returns anything else.
+      P2a decomposable scorer - section 2's stated tension, better as an
+         admission check: a cross-encoder means M2 cannot be run at all.
+      P2b rival tail bounded - E0.5's 75.9% rival rise. A rival outside top-k
+         cannot be bounded, so without the (k+1)-th score M2 measures the best
+         case and omits its own dominant failure mode.
+      P3a bank unconstrained - E0.2e's precedent: a pre-filtered bank's degree
+         distribution is the FILTER'S, not the structure's.
+    self_tested: >
+      Every predicate is checked against an asset built to violate exactly it,
+      and all six fire. A validator whose checks cannot fire is the defect this
+      record found four times (B7, B8, B20, A4-usage), and here it would fail
+      silently AFTER an acquisition, which is the most expensive place for it.
+    hardest_to_retrofit: >
+      P1b and P3a, because both require a decision at CAPTURE time. Difficulty
+      stamped after the fact is not independent, and a bank filtered before
+      capture cannot be unfiltered. Those are the two to get right first and the
+      reason the specification precedes the acquisition.
+    open: >
+      It checks COMPUTABILITY, not representativeness. A log passing every
+      predicate can still be one deployment's traffic, and M1 would then locate
+      that deployment on E2.1's sweep rather than reality. Section 10 already
+      concedes representativeness has no repair in the design.
+      Asset A (form-diverse expository text, for 4.2) is a separate acquisition
+      with a separate failure mode, already specified by EB.3.
+    status: proposed
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"

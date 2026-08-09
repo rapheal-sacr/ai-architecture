@@ -108,6 +108,7 @@ recordings, and both returned something the design document does not say.
 
 | Mechanism | Status | Rests on | What would change it |
 |---|---|---|---|
+| **the acquisitions** | **B specified, C spent, A specified by EB.3** | was "one corpus" | R13: asset B's spec is **executable predicates over the asset** ([validator](tools/validate_asset_b.py), self-tested — all six fire on an asset built to violate them). P1b and P3a are the two that cannot be retrofitted, because both need a decision at *capture* time |
 | **`r` and whether `A` decays** | **measurable now; decay is partial** | was listed corpus-blocked | EB.6: needs a generator + predicates, not a corpus. `r_generic` **0.78 → 0.00** across 0.5B→1.5B; `r_specific\|reached` **1.00 → 0.72**. `fan_out` fires on **68%** of 1.5B candidates — a cap stated in the prompt. `r_specific` is also a **design variable** |
 | **L10 amplification `A`** (§4.2) | **ceiling computable — "categorical" withdrawn** | assumed synthesis reaches the value judgment | E2.2 by hand: checks decompose **soundness only**, so `A = 1/(1−r)` with `r` the sound-screen rejection rate, itself bounded by the *unsound* fraction. **`A` degrades as the generator improves.** Measure `r` — needs no labels and no L10 |
 | **§4 vs §6 on what an instrument is** | **unadjudicated** | never connected | E2.2: screens give bounded self-limiting `A`; estimates give E2.3's recall problem (0.349) one level up. A synthesised instrument *is* a cheap rung under another name |

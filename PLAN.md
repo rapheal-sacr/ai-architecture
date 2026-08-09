@@ -1719,6 +1719,46 @@ generator, so the *level* of `r` is worthless as a design figure. The *direction
 across the pair is what transfers — the same split as EB.2. And the 0.5B's
 conditional figure rests on the **9** candidates that reached the design screens.
 
+### R13 · Specify the acquisition as predicates over the asset
+
+EB.3 ran, its manipulation check fired twice, and the deliverable turned out to be
+a specification for what the run needed. **That specification cost a run.** A
+predicate over the asset costs nothing and is checkable before anything is
+acquired — so asset B's spec is written as executable predicates, self-tested,
+before the acquisition rather than after it.
+
+**B carries three measurements, not four.** EB.6 took `r` off the blocked list, so
+asset C is already spent: M1 checkability–difficulty (which locates E2.1 and
+therefore harvest yield, which §1.3's oracle line now turns on entirely), M2
+certified fraction, M3 entry-degree distribution.
+
+**Every predicate is named after a failure in this record**, not an imagined one:
+
+| | Named after | Blocks |
+|---|---|---|
+| **P0** independent resolution | E2.1's laundering — the only one that contaminates every measurement at once, and it **fails silently** | all three |
+| **P1b** difficulty independent of outcome | E0.2's trap: if difficulty is read off success, the correlation is between a variable and itself | M1 |
+| **P2a** decomposable scorer | §2's stated tension, better as an admission check — a cross-encoder means M2 **cannot be run at all** | M2 |
+| **P2b** rival tail bounded | E0.5's **75.9% rival rise** — a rival outside top-k cannot be bounded, so without the (k+1)-th score M2 omits its own dominant failure mode | M2 |
+| **P3a** bank unconstrained | E0.2e: a pre-filtered bank's degree distribution is the **filter's**, not the structure's | M3 |
+
+**Self-tested, and that is not optional.** Each predicate is checked against an
+asset built to violate exactly it, and all six fire. A validator whose checks
+cannot fire is the defect this record found four times — and here it would fail
+silently *after* an acquisition, which is the most expensive place for it.
+
+**The two that cannot be retrofitted are P1b and P3a**, because both need a
+decision at *capture* time: difficulty stamped after the fact is not independent,
+and a bank filtered before capture cannot be unfiltered. Those are the ones to get
+right first, and they are why the spec precedes the acquisition.
+
+**What it does not do:** it checks *computability*, not representativeness. A log
+passing every predicate can still be one deployment's traffic, and M1 would then
+locate that deployment on E2.1's sweep rather than reality — which §10 already
+concedes has no repair. And asset A (form-diverse expository text, for 4.2) is a
+separate acquisition already specified by EB.3; A and B do not overlap and should
+not be reconflated into "a corpus".
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
