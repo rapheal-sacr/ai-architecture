@@ -78,6 +78,15 @@ found by two documents being read side by side, which is a weaker detector.
 Renumbering this one rather than the design's block, because a falsification
 record is downstream of the thing it falsifies.
 
+**Attribution, since it belongs with the finding.** The collision was minted on
+the design side — I7–I10 were added without checking whether the record already
+had an I7 — which is the same failure to check the artifact that produced B19 on
+this side. Two instances, opposite directions, one week apart. And the
+renumbering turned out to be substantive rather than clerical: **I8 and I11 are
+complements.** I8 is a within-owner property and I11 is compile adequacy, and
+E0.6's unowned-provenance fraction is the instrument for I11 that E0.1 said did
+not exist — you cannot protect what was never compiled, but the count is free.
+
 ### Proposed in rev 2, not yet in this record
 
 None of these has been tested here. They are listed so that a reader can tell
@@ -103,8 +112,9 @@ recordings, and both returned something the design document does not say.
 | **"uncertified ⊂ closure edges"** (§2) | **broken — better than claimed** | assumed influence runs through the chosen card | E0.5: 24,598 uncertified selections outside the closure, **2,178 of which really flipped** — a rival rose while the chosen card was untouched. The journal enlarges the cascade and part of the enlargement is influence no closure can see |
 | **R-c total residual set** (§1.2b) | **load-bearing, and understated** | a cover is not a partition | E0.6: never-owned exceeds retirement-orphaned **3.3–5.5×** at every traffic level. R-c is not a refinement of R-b, it is most of the job |
 | **the cover's reach** | **traffic-shaped** | I8 is a within-owner property | E0.6: unowned provenance 0.483 at 16 rollouts → 0.027 at 512. Equal draws inside an owner say nothing about how far the owners collectively reach |
-| **§1.3 granularity pricing** | **verdict stands, mechanism broken** | assumed overlap drives probe sharing | E0.7: oracle line 77% sublinear at 256 owners — but distinct probes sit on the birthday curve at all 21 points (max departure 4.1%), and overlap 0.106→0.397 moves nothing. Saturation is at the **ledger**, not a provenance neighbourhood |
-| **R-d probe dedup** | **works, on an unstated precondition** | probes keyed on provenance alone | E0.7: at `(entry, owner)` keying the saving is **0%** everywhere. The design says what a probe is keyed on and never says what a probe is |
+| **§1.3 granularity pricing** | **holds only below the crossover** | a saving statistic that was measuring its denominator | E0.7: the 77% is withdrawn — pool backs out at ~480 against 2048 draws, so 98.5% was consumed and the count was pinned. On `distinct/\|pool\|`: at pool 4102, **97.1% of draws are distinct** — every owner pays. A real ledger sits in that regime. What rescues the verdict is E2.1's harvest yield (0.68→0.33, ~2×), not overlap |
+| **R-d probe dedup** | **works, on a stated and falsifiable precondition** | a probe is a stimulus + an expectation | E0.7: the stimulus is entry-keyed and shares (oracle line); the expectation is bookkeeping and free (compute line). Condition: **the expectation must be derivable from the stimulus** — false for owner-specific target behaviour, where distinct probes equal draws at every pool size. The cost of restricting to ground-truth-keyed stimuli is **coverage**, unmeasured |
+| **inert-arm detection** | **mechanical, was inspection** | B7, B8, B20, A4-usage are one defect | [rig_a/core/trace.py](rig_a/core/trace.py): an arm is inert when nothing it mutated is read on the path to the measurement **and** both calls took the same arguments. E0.1 asserts it over every arm before any metric is read |
 | **`unowned fraction` as reported** | **wrong grain** | pooled over the ledger | E0.6: worst card 1.000 against pooled 0.483, blindness peaking at 4.2. The same defect as E0.1 KB, E1.1c and E2.3 — and the first time it appears inside a statistic proposed to fix it |
 
 **A tension neither document states.** E0.2c's deletion economics need batching —

@@ -431,8 +431,9 @@ That is not four findings, it is one finding four times — so amendment item 10
 "two weightings of one estimator" is too narrow. The rule is: **any statistic
 used for protection or allocation must be computed per region on equal-sized
 samples; only statistics used for routing may be traffic-weighted.** Enumerating
-Parts I–III against it finds **eleven protection sites**, three measured and
-eight inferred — written up in
+Parts I–III against it finds **twelve protection sites**, four measured and
+eight inferred — the count is derived from the table by
+[tools/check_record.py](tools/check_record.py), not typed beside it — written up in
 [docs/wam_amendment_weighting_rule.md](docs/wam_amendment_weighting_rule.md).
 The pattern is that every statistic in the stack defaults to traffic-weighted,
 because traffic is what the system sees: frequency weighting is not a choice
@@ -1137,59 +1138,62 @@ at high traffic while 6.7% of entries are in no card at all — and those are th
 hardest case, since no card cites them and no owner's probe draw reaches them by
 any route. It gets its own column.
 
-### E0.7 · §1.3's conclusion survives; its mechanism does not
+### E0.7 · The oracle line, and a statistic that was measuring its denominator
 
-Worklist 1.2 and 2.3 in one run, because they are the same quantity from two
-sides: overlap is what decides whether the probe pool shares. §1.3 was already
-repriced once in 2.1, after the review caught it contradicting §4.3 — "prefer
-many small owners" against "oracle is the binding currency". The repriced claim
-is **conditional on provenance overlap**, and the document says so explicitly:
-*if real fleet overlap is low, §1.3 is wrong as stated rather than mispriced.*
+**The number this experiment first reported is withdrawn.** Run 1 gave a "77%
+oracle saving" as `1 − distinct/(fleet × probes)`. Back the pool out of its own
+two numbers — `N(1 − e^{−2048/N}) = 473` solves at **N ≈ 480** — and 98.5% of the
+eligible pool was already consumed. The numerator was pinned at its ceiling while
+the denominator grew with fleet, so the saving rises monotonically forever and its
+argmax is unbounded granularity. That is E3.3's degeneracy exactly: monotone in
+the wrong direction, with an argmax nobody would accept if it were stated as a
+recommendation.
 
-**Both lines, never one.** Distinct probes are the oracle line, paid once at
-creation, scarce. Probe-evaluations per cycle are the compute line, paid forever,
-abundant. Reporting a single "verification cost" is what let the contradiction
-hide in 2.0.
+| | | |
+|---|---|---|
+| `1 − distinct/(fleet × probes)` | **withdrawn** | monotone in fleet; best where the pool is most exhausted |
+| `distinct / \|pool\|` | consumption | saturates at 1, cannot be gamed by adding owners |
+| `distinct × (1 − yield)` | the scarce line | what is actually authored rather than harvested |
 
-**The oracle line is strongly sublinear — §1.3's verdict stands.** At 256 owners
-the saving is **77%**: 473 distinct probes against 2,048 draws. Granularity
-genuinely is cheap in the scarce currency at fleet scale.
+**The governing quantity is `fleet × probes` against `|pool|`, and the crossover
+is now in range.**
 
-**But it is not the saving the document describes.** Distinct probes sit *on* the
-birthday-collision curve at every one of 21 (fleet, multiplicity) points — largest
-departure **4.1%**, typically under 1.5%. Tripling owner provenance overlap,
-**0.106 → 0.397**, moves the count by a handful of probes out of hundreds. The
-saving is arithmetic, not architectural: `fleet × probes` runs out of distinct
-ledger entries to probe. **The oracle line saturates at the ledger, not at a
-provenance neighbourhood.**
+| pool | distinct | of draws | pool consumed |
+|---|---|---|---|
+| 240 | 209 | 40.8% | 86.9% |
+| 4102 | 497 | **97.1%** | 12.1% |
 
-That changes the design advice while leaving the verdict intact. *"Prefer many
-small owners within a provenance neighbourhood"* asks an architect to cluster
-owners by shared sources; this says clustering buys nothing measurable. The
-quantity that sets the oracle bill is `fleet × probes-per-owner` against ledger
-size — arithmetic available before any clustering, and which no neighbourhood
-discipline improves.
+Below the crossover the line is flat and a new owner authors almost nothing.
+Above it, **essentially every owner pays**. Run 1 sat above the crossover at every
+point it sampled, which is why every point looked like a win — and a real ledger
+sits far above it, in the regime where granularity is oracle-*expensive*.
 
-**The unstated variable decides the scarce currency outright.** R-d shares a probe
-only if a probe is a function of *provenance alone*. If it is keyed
-`(entry, owner)` it can never be reused, and at that setting the saving is **0% at
-every fleet size and every overlap tested**. The design says what a probe is
-*keyed on* and never says what a probe *is*. That is an `assumes` row with a
-measured price attached.
+**KN still fails.** The distinct count sits on the birthday curve at every pool
+size, largest departure 3.2%. The mechanism §1.3 gives — a new owner pays only for
+provenance not already covered — is unsupported at any pool size. Overlap was
+never going to be the governing variable.
 
-**Method.** The first run had no null, reported reuse 0.39 as though it were
-sharing, and would have credited §1.3 with a saving unrelated to provenance. It
-was caught by the standing question — *why is this number going the wrong way?* —
-because reuse fell slightly as overlap tripled. The null is now a built-in column,
-not a post-hoc check. Rollouts scale with fleet, per B18: a fixed rollout budget
-would have given a 256-owner fleet one rollout each, shrinking provenance with
-fleet, and the oracle curve would have measured that instead.
+**What rescues the verdict is harvest yield, and E2.1 already measured it.** A
+harvested T0/T1 probe carries a verified outcome that came free with the
+interaction; only the adjudicated remainder is scarce. So the oracle line is
+`distinct × (1 − yield)`, and E2.1's strict filter yields **0.68 falling to 0.33**
+as checkability–difficulty correlation rises — a ~2× move in the oracle bill,
+larger than pool size does over most of this sweep and far larger than provenance
+overlap does at all. If probe sets are harvest-first, §1.3 survives for a reason
+neither the document nor this record had tested, and worklist 2.3 needs no new
+curve.
 
-**And worklist 2.3 returns a different answer than it asked for.** Its kill
-criterion was *low overlap → granularity is genuinely oracle-expensive*. Overlap
-turns out not to be the governing variable at all, so the criterion cannot fire
-either way. What replaces it is a test rather than a value: whatever real overlap
-proves to be, it has to beat birthday collision before it can be credited.
+**And what a probe *is* resolves as a pair, not a key.** A probe is a stimulus
+plus an expectation. The stimulus is oracle-priced and entry-keyed, so it shares;
+the expectation is *whose floor does this count against*, which is bookkeeping and
+free. That reconciles the two measurements rather than choosing between them —
+sharing is real on the oracle line and absent on the compute line, and both are
+correct. The falsifiable condition: **the expectation must be derivable from the
+stimulus.** True for ground-truth-correct outcomes, false where a probe tests an
+owner-specific target behaviour, because then the expectation is itself
+oracle-priced — and at `owner_specific = 1.0` distinct probes equal draws at every
+pool size. What restricting to ground-truth-keyed stimuli costs is **coverage**,
+and that is unmeasured.
 
 ### E0.1 revisited · K4 is withdrawn, and A3 varied nothing
 
@@ -1445,6 +1449,35 @@ one anyway put E0.1's 12.4× blindness factor under a cloud for two rounds for
 nothing. This is the exact mirror of B7, where a control was registered on a
 quantity the run never exercised: **both are the same failure to ask what the
 code can do before asking what the world did.**
+
+**One null per arm, differing in exactly one respect — and "one respect" has to
+include the parameters the treatment perturbs downstream.** This rule has now
+been found too coarse twice, by its own runs. Per-table failed when A4-stratified
+confounded relabelling with resampling. Per-policy failed when both A6 arms
+carried decay, which shrinks provenance 600 → 450 against a fixed 300-entry cap,
+moving the draw fraction 0.50 → 0.67 — so the null measured the draw fraction
+rather than the policy, and A6-uniform landed *below* its own null. The stable
+form is one null per arm. These runs take seconds; the coarser forms were
+economising against nothing.
+
+**An incoming correction is a claim and gets the same check as an internal one.**
+Verify it against the artifact it names before recording it. B19 entered this
+record because a reviewer's sentence conflated a true statement with a figure it
+did not apply to, and I recorded the conflation without opening the results file
+that was already to hand. Accepting a correction feels like humility, which is
+exactly why it draws less scrutiny than making one — and a wrongly-accepted
+correction is worse than a wrongly-made claim, because it also discredits a sound
+number. Second wrong attribution here, after B11.
+
+**Ask whether an arm COULD have moved its own measurement, before reading what it
+did.** B7, B8, B20 and A4-usage are one defect at four sites, and inspection found
+all four — after three of them had produced a published number. The question is
+not *did the number move* but *could it have*, and that is answerable statically:
+an arm is inert when nothing it mutated is read on the path to the measurement
+**and** both calls took the same arguments. `rig_a/core/trace.py` is that check in
+about forty lines, and E0.1 now asserts it over every arm before any metric is
+read. Arms that are supposed to be inert are declared; anything else is a bug
+report. Four instances is enough to stop finding these by inspection.
 
 **Verify the manipulation took before interpreting a comparison.** The lint below
 checks a criterion's logical *form*. B7 passed that check and still failed: U1

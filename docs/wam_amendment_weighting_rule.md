@@ -53,11 +53,11 @@ it routes and may stay traffic-weighted.
 | L2 LRU — "hot and recent history stays encoded, cold history exists only as text" | L2 card | recency + frequency | **P** | inferred |
 | sealed-suite drift | Part I §10 | traffic, via the harvested suite | **P** | inferred |
 | I4's `S(A)` pass/fail counts | E0.1's own instrument | pooled over items, hence traffic | **P** | inferred, and the most dangerous |
-| A5's recompile cost over `|P|` | E0.1 | mean over adapters, `|P|` heavy-tailed | **P** | inferred |
+| A5's recompile cost over `\|P\|` | E0.1 | mean over adapters, `\|P\|` heavy-tailed | **P** | inferred |
 | router arm value / cost-per-promotion | Part III §10 | traffic | **R** | correct as-is |
 | improvement-rate-per-tier | Part I §10 | traffic | **R** | correct as-is |
 
-**Thirteen protection sites, three of them measured and ten inferred from the
+**Twelve protection sites, four of them measured and eight inferred from the
 design text.** More than the four item 10 anticipated, and the pattern is that
 *every* statistic in the stack defaults to traffic-weighted because traffic is
 what the system sees. Frequency weighting is not a choice anyone made; it is what

@@ -78,6 +78,8 @@ import numpy as np
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
 
+from rig_a.core.trace import ArmTrace                    # noqa: E402
+
 N_REGIONS = 12
 ENTRIES_PER_REGION = 50
 N_ENTRIES = N_REGIONS * ENTRIES_PER_REGION
@@ -283,7 +285,13 @@ def arm(name: str, seed: int, policy="usage", cap=DRAW_CAP,
     """
     rng = np.random.default_rng(seed)
     w = World(rng)
+    # CALL-LEVEL INERT CHECK, before any metric exists. Four bugs in this record
+    # -- B7, B8, B20 and A4-usage -- are one defect: an arm that could not have
+    # moved its own measurement. Output-level checks caught some of them, after a
+    # number had been published. This asks the prior question: could it have?
+    tr = ArmTrace(w, state=("provenance", "alive", "ontology_shift", "usage"))
     before = w.compile(policy, cap)
+    tr.snapshot()
 
     # ---- what varies between compile and recompile ----------------------
     if decay > 0:
@@ -297,7 +305,10 @@ def arm(name: str, seed: int, policy="usage", cap=DRAW_CAP,
         w.alive[rng.choice(N_ENTRIES, size=n, replace=False)] = False
     w.ontology_shift = ontology_shift
 
-    after = w.compile(recompile_policy or policy, cap)
+    with tr.recording():
+        after = w.compile(recompile_policy or policy, cap)
+    inert = tr.verdict(compile_args=(policy, cap),
+                       recompile_args=(recompile_policy or policy, cap))
     cls = w.support_class()
 
     surviving = cls == "surviving"
@@ -315,6 +326,9 @@ def arm(name: str, seed: int, policy="usage", cap=DRAW_CAP,
     return {
         "arm": name, "policy": policy, "cap": cap,
         "recompile_policy": recompile_policy or policy,
+        "inert": inert["inert"], "inert_reason": inert["reason"],
+        "args_differ": inert["args_differ"],
+        "mutated": inert["mutated"], "unreachable": inert["unreachable"],
         "identical": bool(np.array_equal(before["passes"], after["passes"])),
         "cost_before": before["cost"], "cost_after": after["cost"],
         "n_surviving": int(surviving.sum()), "n_fully": int(fully.sum()),
@@ -337,6 +351,10 @@ def many(name, **kw) -> dict:
 
     return {"arm": name, "policy": rs[0]["policy"], "cap": rs[0]["cap"],
             "recompile_policy": rs[0]["recompile_policy"],
+            "inert": all(r["inert"] for r in rs),
+            "inert_reason": rs[0]["inert_reason"],
+            "args_differ": rs[0]["args_differ"],
+            "mutated": rs[0]["mutated"], "unreachable": rs[0]["unreachable"],
             "identical": all(r["identical"] for r in rs),
             "over_pooled_sd": round(sd("over_pooled"), 4),
             "over_worst_sd": round(sd("over_worst"), 4),
@@ -393,6 +411,31 @@ def main() -> int:
     print("  of E0.2b, whose whole point was a path set-based provenance cannot see.")
 
     a0, a1a, a1b, a2, nuni, nstrat, a3, a4u, a4s, a6u, a6s = rows
+
+    # CALL-LEVEL INERT CHECK, before any metric is read. Arms that are SUPPOSED
+    # to be inert are declared; anything else reporting inert is a B20 or a B8.
+    DECLARED_INERT = {"A0 control", "N-uniform null", "N-strat null",
+                      "A4 ontology, usage draw"}
+    surprises = [r["arm"] for r in rows
+                 if r["inert"] and r["arm"] not in DECLARED_INERT]
+    assert not surprises, (
+        f"undeclared inert arm(s): {surprises} -- these could not have moved "
+        "their own measurement, so whatever they report is a floor, not a result")
+    print("\n  CALL-LEVEL INERT CHECK (rig_a/core/trace.py) -- asked before any")
+    print("  metric is read, because the question is not `did the number move`")
+    print("  but `could it have`.")
+    print(f"    {'arm':<24}{'inert':>7}   why")
+    for r in rows:
+        mark = "YES" if r["inert"] else "-"
+        note = r["inert_reason"] or ("args differ" if r["args_differ"]
+                                     else f"mutated {','.join(r['mutated'])} and read it")
+        print(f"    {r['arm']:<24}{mark:>7}   {note}")
+    print("    A1b is NOT inert here, and that is the distinction that took two")
+    print("    rounds to establish by reading: its provenance really changed and")
+    print("    really was read. A1b's inertness is at the OUTPUT -- a finding")
+    print("    about the world -- not at the call level. The detector separates")
+    print("    `inert by construction` from `inert as a result`, which is exactly")
+    print("    what `identical: yes` could not.")
 
     # MANIPULATION CHECKS -- verify each arm varied what it claims to vary.
     # A1a is the arm that must move; A1b's inertness is a FINDING, not an error,

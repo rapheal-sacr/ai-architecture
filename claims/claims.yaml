@@ -452,53 +452,59 @@ claims:
     claim: "section 1.3 - granularity is compute-expensive and oracle-cheap, CONDITIONAL ON PROVENANCE OVERLAP"
     source: "rev 2.2 sections 1.3 and 1.2b R-d"
     rig: A
-    kill: "KO oracle multiplier grows ~linearly in fleet size (rev 2's own second kill criterion for 1.4); KV the pool barely shares even at context-free probes; KN the sharing is not attributable to provenance overlap"
+    kill: "KX no crossover in range; KP the line is not linear above it; KN sharing does not beat the birthday null"
     predicted: uncertain
     status: PARTIAL
     result: results/e0_7_probe_registry.json
-    serves: "worklist 1.2 (probe registry) and worklist 2.3 (fleet provenance overlap) -- the same quantity from two sides"
+    serves: "worklist 1.2 (probe registry) and worklist 2.3 (fleet provenance overlap)"
+    withdrawn_statistic: >
+      Run 1 reported "77% oracle saving" as 1 - distinct/(fleet x probes). That
+      is degenerate in E3.3's exact way. Backing the pool out of its own two
+      numbers - N(1 - e^-2048/N) = 473 solves at N ~ 480 - shows 98.5% of the
+      ELIGIBLE POOL was already consumed: the numerator was pinned at its ceiling
+      while the denominator grew with fleet, so the "saving" rises monotonically
+      forever and its argmax is unbounded granularity. A statistic that improves
+      as the cost saturates is measuring the denominator. Withdrawn.
     finding: >
-      THE CONCLUSION SURVIVES AND THE MECHANISM DOES NOT.
-      KO PASSES: the oracle line is strongly sublinear. At 256 owners the saving
-      is 77% - distinct probes 473 against 2048 draws - so granularity really is
-      cheap in the scarce currency at fleet scale.
-      KV PASSES: the pool shares.
-      KN FAILS, and it is the finding. Distinct probes sit ON the birthday
-      collision curve at every one of 21 (fleet, multiplicity) points, largest
-      departure 4.1% and typically under 1.5%. Tripling owner provenance overlap,
-      0.106 -> 0.397, moves the count by a handful of probes out of hundreds.
-      The saving is arithmetic, not architectural: fleet x probes-per-owner runs
-      out of distinct ledger entries to probe. The oracle line saturates at the
-      LEDGER, not at a provenance neighbourhood.
-    design_consequence: >
-      "Prefer many small owners WITHIN A PROVENANCE NEIGHBOURHOOD" asks an
-      architect to cluster owners by shared sources, and this says clustering
-      buys nothing measurable. The quantity that decides the oracle bill is
-      fleet x probes-per-owner against ledger size - arithmetic available before
-      any clustering, and which no neighbourhood discipline improves. Section
-      1.3's ADVICE should be restated even though its verdict stands.
-    the_unstated_variable: >
-      Context-boundedness decides the scarce currency outright, and the design
-      never sets it. R-d shares a probe only if a probe is a function of
-      PROVENANCE ALONE; if it is keyed (entry, owner) it can never be reused. At
-      context_bound = 1.0 the saving is 0% at every fleet size and every overlap
-      tested. The design says what a probe is KEYED on and never says what a
-      probe IS. That is an `assumes` row with a measured price on it.
-    method: >
-      The first run had no null, reported reuse 0.39 as if it were sharing, and
-      would have credited section 1.3 with a saving that has nothing to do with
-      provenance. Caught by the standing question - why is this number going the
-      WRONG way - since reuse fell slightly as overlap tripled. The null is now
-      a built-in column rather than a post-hoc check.
-      Rollouts scale with fleet (B18's lesson): a fixed rollout budget would have
-      given a 256-owner fleet one rollout each, shrinking provenance with fleet,
-      and the oracle curve would have measured that instead.
-    scope: >
-      Owner overlap here is a property of a simulated card bank and E0.2f showed
-      this rig's overlap-derived quantities are sensitive to bank-to-fleet ratio.
-      What does not depend on that is the null result: whatever the real overlap
-      turns out to be, it must beat birthday collision before it can be credited.
-      This rig supplies the test, not the value.
+      RESTATED ON distinct/|pool| AND ON AN AXIS THAT CONTAINS THE CROSSOVER.
+      The governing quantity is fleet x probes against |pool|, not overlap.
+      At pool 240 against 512 draws: distinct 209, 40.8% of draws, 86.9% of the
+      pool consumed - the flat regime, where a new owner authors almost nothing.
+      At pool 4102: distinct 497, 97.1% OF DRAWS, 12.1% of the pool consumed -
+      the linear regime, where essentially every owner pays for its own probes.
+      Crossover at ledger ~3840 for this fleet.
+      So section 1.3's VERDICT holds only below the crossover, where the pool is
+      exhausted. Run 1 sat above it at every point, which is why every point
+      looked like a win. A REAL LEDGER SITS FAR ABOVE IT, in the regime where
+      granularity is oracle-expensive.
+      KN still FAILS: the distinct count sits on the birthday curve at every pool
+      size, largest departure 3.2%. The mechanism section 1.3 gives - a new owner
+      pays only for provenance not already covered - is unsupported at any pool
+      size.
+    what_rescues_the_verdict: >
+      Harvest yield, and E2.1 already measured it. A harvested T0/T1 probe
+      carries a verified outcome that came free with the interaction, so its
+      oracle price is ~0; only the adjudicated remainder is scarce. The oracle
+      line is distinct x (1 - yield), and E2.1's strict filter yields 0.68 at
+      checkability-difficulty correlation 0 falling to 0.33 at correlation 1.
+      That is a ~2x move in the oracle bill - larger than pool size does over
+      most of this sweep and far larger than provenance overlap does at all.
+      If probe sets are harvest-first, section 1.3 survives for a reason neither
+      the document nor this record had tested, and worklist 2.3 does not need to
+      produce a new curve.
+    what_a_probe_is: >
+      Resolved as a PAIR rather than a key: a probe is a stimulus plus an
+      expectation. The stimulus is oracle-priced and entry-keyed, so it shares;
+      the expectation is "whose floor does this count against", which is
+      bookkeeping and free. That reconciles the two measurements instead of
+      choosing between them - sharing is real on the oracle line and absent on
+      the compute line, and both are correct. The falsifiable condition is that
+      THE EXPECTATION BE DERIVABLE FROM THE STIMULUS: true for
+      ground-truth-correct outcomes, false where a probe tests an owner-specific
+      target behaviour, because the expectation is then itself oracle-priced.
+      At owner_specific = 1.0 distinct probes equal draws at every pool size and
+      the sharing vanishes entirely. What the restriction to ground-truth-keyed
+      stimuli costs is COVERAGE, and that is unmeasured.
 
   - id: E0.3
     tier: L8
@@ -1605,32 +1611,44 @@ bugs:
 
   - id: B19
     where: e0_1_verified_recompilability, arm table
-    bug: "WITHDRAWN -- the confound I recorded does not exist"
-    status: withdrawn
-    what_i_claimed: >
-      That the stratified-vs-usage tradeoff - pooled 0.246 / worst 0.520 against
-      0.165 / 0.624 - is measured across a decay difference, and is therefore an
-      uninterpretable comparison.
-    why_it_is_wrong: >
-      Those two numbers are A6-stratified and A6-UNIFORM. Both carry decay=0.25
-      and differ only in draw policy, so the comparison is matched and citable.
-      It is also stratified-vs-UNIFORM, not stratified-vs-usage.
-    what_is_actually_true: >
-      A6 is not a matched control for A4, because A4 carries no decay. That bears
-      on K4's differencing - which is why worklist 2.4 needed a null row under
-      the same policy - and not on the tradeoff figure at all.
-    how_it_happened: >
-      I took the review's sentence, which conflated "A6 is not a matched control
-      for A4" with the tradeoff number, and recorded it as a bug in my own rig
-      without checking which arms produced those numbers. The results file and
-      the code were both to hand. A caveat was printed next to a sound number for
-      two commits.
+    bug: "one label, two claims -- minted for a confound that does not exist, retained for a regime-dependence that does"
+    status: reframed
+    what_was_minted: >
+      "A6 carries decay=0.25 and A4 carries none, so the stratified-vs-usage
+      tradeoff is measured across a decay difference." FALSE. The tradeoff
+      figures - 0.246/0.520 against 0.165/0.624 - are A6-stratified and
+      A6-UNIFORM, both at decay=0.25, differing only in draw policy. Matched,
+      citable, and stratified-vs-uniform rather than stratified-vs-usage.
+    what_is_true_and_keeps_the_label: >
+      There is no single value in this record for what stratified drawing costs,
+      and the disagreement IS a decay interaction. Now that null rows exist the
+      three estimates can be stated on a common baseline:
+        stratified vs uniform, NO decay   (N-strat - N-uniform)  +0.0125
+        stratified vs uniform, WITH decay (A6s - A6u)            +0.0806   6.4x
+        stratified vs usage,   NO decay   (N-strat - A0)         +0.2285
+      So any sentence of the form "the weighting rule costs X" is regime-specific
+      and must name both the baseline policy and the decay setting. The A4 pair
+      (0.0000 usage vs 0.2167 stratified) and the A6 pair are estimates of the
+      same quantity that disagree 2.7x, and they differ in decay.
+    the_defect_the_label_itself_carries: >
+      B19 was minted for the first claim, the first claim was withdrawn, and a
+      narrower true claim was written under the same identifier. That is
+      one-name-two-quantities - the FIFTH instance in this record, after L7's
+      "hours-days", I11's scalar-vs-rate shape, `fleet`, and the I7 collision.
+      Second one found by reading rather than by a number going the wrong way.
+      A withdrawn claim should retire its identifier rather than bequeath it.
+    how_the_false_version_got_in: >
+      I took a reviewer's sentence, which conflated "A6 is not a matched control
+      for A4" (true, and it bears on K4's differencing) with the tradeoff figure
+      (within-A6 and matched), and recorded it as a bug in my own rig without
+      checking which arms produced those numbers. The results file and the code
+      were both to hand. A caveat printed next to a sound number for two commits.
     lesson: >
-      An incoming correction is a hypothesis about the record, not an
-      observation of it. Check which arm produced a number before accepting a
-      claim about that number - the same discipline the record applies to its own
-      results, applied to criticism of them. This is the second time an
-      attribution has been wrong in this record; the first was B11.
+      An incoming correction is a CLAIM and gets the same check as an internal
+      one - verify it against the artifact it names before recording it.
+      Accepting a correction feels like humility, which is exactly why it draws
+      less scrutiny than making one. Now a method commitment in PLAN.md section 4.
+      Second wrong attribution in this record, after B11.
 
   - id: B20
     where: e0_1_verified_recompilability, arm A3

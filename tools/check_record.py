@@ -13,6 +13,7 @@ Checks, in order of how badly a failure would mislead a reader:
   4. every claim status is from the allowed set
   5. every doc a claim points at exists
   6. constants quoted in the docs match their definitions in code
+  7. the weighting rule's site count is DERIVED from its table, not typed
 
 Run with no arguments. Exits non-zero on any failure, so it can be a CI gate.
 """
@@ -58,6 +59,31 @@ def load_claims() -> list[dict]:
     return blocks
 
 
+WORDS = {"eleven": 11, "twelve": 12, "thirteen": 13, "fourteen": 14,
+         "three": 3, "four": 4, "five": 5, "eight": 8, "nine": 9, "ten": 10}
+
+
+def weighting_sites() -> tuple[int, int, int]:
+    """Count P rows, measured and inferred, from the amendment's own table.
+
+    The amendment's deliverable IS the enumeration, and E4.2's finding is that
+    enumerations are the shape that fails. A count typed beside a table drifts
+    from it silently -- this one was stated as thirteen in the amendment and
+    eleven in PLAN.md while the table held twelve, with one row mangled by
+    unescaped pipes in |P| so it did not render as a row at all. Deriving it is
+    the on-thesis fix: recorded, not inferred, applied to the record's own prose.
+    """
+    doc = ROOT / "docs" / "wam_amendment_weighting_rule.md"
+    rows = [l for l in doc.read_text().splitlines()
+            if l.startswith("| ") and l.count("|") >= 6
+            and ("**P**" in l or "**R**" in l)]
+    p_rows = [l for l in rows if "**P**" in l]
+    status = lambda l: l.rsplit("|", 2)[1]
+    return (len(p_rows),
+            sum(1 for l in p_rows if "measured" in status(l)),
+            sum(1 for l in p_rows if "inferred" in status(l)))
+
+
 def main() -> int:
     fails: list[str] = []
     warns: list[str] = []
@@ -99,6 +125,23 @@ def main() -> int:
         st = c.get("status")
         if c["id"].startswith("E") and st and st not in VALID_STATUS:
             fails.append(f"{c['id']}: status '{st}' not in {sorted(VALID_STATUS)}")
+
+    # 7 -- the weighting-rule count is derived from the table it summarises
+    n_p, n_meas, n_inf = weighting_sites()
+    if n_meas + n_inf != n_p:
+        fails.append(f"weighting rule: {n_p} P rows but {n_meas}+{n_inf} classified"
+                     " -- a row's status is neither measured nor inferred")
+    wr = (ROOT / "docs" / "wam_amendment_weighting_rule.md").read_text()
+    plan = (ROOT / "PLAN.md").read_text()
+    for label, text in (("amendment", wr), ("PLAN.md", plan)):
+        m = re.search(r"(\w+) protection sites\*{0,2},? (\w+) (?:of them )?measured and\s+(\w+) inferred", text)
+        if not m:
+            fails.append(f"weighting rule: no site-count sentence found in {label}")
+            continue
+        got = tuple(WORDS.get(g.lower().strip('*')) for g in m.groups())
+        if got != (n_p, n_meas, n_inf):
+            fails.append(f"weighting rule: {label} says {m.groups()}, table has"
+                         f" ({n_p}, {n_meas}, {n_inf})")
 
     # 6 -- quoted constants match their definitions
     docs = " ".join((ROOT / d).read_text() for d in ("STATUS.md", "PLAN.md")
