@@ -1093,6 +1093,65 @@ claims:
       E1.6 - and centering is exact at lam=1.0, with the lam<1 approximation
       stated in the docstring rather than hidden.
 
+  - id: R14
+    from: "worklist v3 item 1.2 -- the section 0 re-audit"
+    proposal: >
+      Re-run section 0's estimate-where-a-record-exists audit against the four
+      records that did not exist when the original table was written: the
+      selection journal, the commitment register, the fleet residual set, and the
+      coverage cascade.
+    procedure: docs/section_0_reaudit.md
+    why_it_is_different_from_the_other_free_items: >
+      It is the only one that tests a PREDICTION rather than checking a
+      mechanism. The thesis says new records should reveal new estimates to
+      delete. That had never been tested against new records, so it could have
+      returned nothing.
+    finding: >
+      CONFIRMED, AND WEAKLY. Four candidates, each required to clear two checks -
+      is the estimate real, and is the record SUFFICIENT (same referent, same
+      grain, available at the same time).
+        merge prior     CLEAN. Basis overlap is estimated today; the register
+                        records basis as direction ids, so overlap is a set
+                        intersection. Conditional on the id form - under the
+                        schema's `sketch` alternative it is estimated again, so
+                        this is an argument for recording ids that did not exist
+                        before the register did.
+        deletion risk   CLEAN, AND NOT ON THE PROPOSED LIST. Section 3 prices
+                        F_max by entry CATEGORY - personal data, user-corrected -
+                        which is a taxonomy standing in for a rate that the
+                        ledger already records as tombstone events. Found by
+                        asking section 0's question of section 3 rather than of
+                        the four new records.
+        gap set         PARTIAL. The coverage cascade records the NEVER-COMPILED
+                        half (I11's quantity, 0.483 at thin traffic in E0.6) and
+                        says nothing about owned-but-weak. It DECOMPOSES the
+                        estimator rather than deleting it, and the two halves
+                        have different repairs.
+        routing         PARTIAL, and it fails on TIME rather than on referent.
+                        Routing decides whether to use weights or retrieve, which
+                        is BEFORE retrieval; the winning card is known AFTER. A
+                        record that postdates the decision cannot replace the
+                        estimate for it. What survives: offline policy fitting on
+                        recorded outcomes, and any decision taken post-retrieval.
+    the_criterion_the_audit_produced: >
+      A RECORD SUBSTITUTES FOR AN ESTIMATE ONLY IF IT IS AVAILABLE WHEN THE
+      DECISION IS MADE. All eight of section 0's original sites satisfied that
+      silently, so nobody had to state it. Routing is the first site where it
+      binds, and it is why routing is partial rather than clean.
+    what_it_says_about_the_thesis: >
+      The prediction has content - two clean deletions, one of them off-list - so
+      the thesis is not merely a description of eight findings already in hand.
+      But the YIELD HAS CHANGED SHAPE. All eight original sites were immediate
+      and total. Of four here, two are clean (one only EVENTUALLY, once tombstone
+      history accumulates) and two are partial. Consistent with the easy sites
+      having been found first, and it means the remaining yield per site is
+      smaller than section 0's table implies.
+    what_would_have_falsified_it: >
+      All four candidates failing either check. Two did fail sufficiency, which
+      is why the result is "confirmed, weakly" rather than "confirmed" - and the
+      weaker answer is the more useful one.
+    status: proposed
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"

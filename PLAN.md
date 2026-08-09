@@ -1862,6 +1862,64 @@ provenance floor and E1.1d's subscription cliff — and it is the only one that 
 E1.6's instruments with the committed basis chosen by `B` rather than `T` — whether
 the *blindness ratio* improves, not just whether the directions discriminate.
 
+### R14 · The §0 re-audit — the thesis predicts, weakly, and gains a criterion
+
+The only free item that tests a **prediction** rather than checking a mechanism.
+§0's table found eight *estimate-where-a-record-exists* sites against the records
+of the time. Four records exist now that did not — the selection journal, the
+commitment register, the residual set, the coverage cascade — and the thesis says
+new records should reveal new deletions. That had never been tested, so it could
+have returned nothing.
+
+Each candidate had to clear two checks, and **both are places the audit can fail**:
+is the estimate real, and is the record *sufficient* — same referent, same grain,
+**available at the same time**.
+
+| Site | Estimate today | Record | Verdict |
+|---|---|---|---|
+| merge prior | basis overlap between owners | the register's `basis: [direction_id]` | **clean** |
+| deletion risk | `F_max` by entry *category* | tombstone events in L1 | **clean, and off-list** |
+| gap set | posterior variance per signature | coverage cascade's unowned fraction | **partial** |
+| routing | which region a query is in | the journal's winning card | **partial** |
+
+**Merge prior** is the cleanest: overlap becomes a set intersection. Conditional on
+the id form — the schema also allows `sketch`, under which overlap is estimated
+again, so this is an argument for recording ids that did not exist before the
+register did.
+
+**Deletion risk was not among the three proposed candidates.** §3 prices `F_max` by
+entry category — *personal data, user-corrected facts* — which is a taxonomy
+standing in for a rate the ledger already records as tombstone events. Found by
+asking §0's question of §3 rather than of the four new records. It substitutes
+*eventually* rather than immediately: a cold ledger has no history, so the category
+judgment is still needed as a prior — a different shape from all eight originals.
+
+**Gap set decomposes rather than deletes.** The cascade records the never-compiled
+half — I11's quantity, 0.483 at thin traffic in E0.6 — and says nothing about
+owned-but-weak. The two halves have different repairs: one is closed by promoting
+something, the other by improving what is there.
+
+**Routing fails on *time*, not on referent.** Routing decides whether to use weights
+or retrieve — *before* retrieval. The winning card is known *after*. What survives
+is offline policy fitting on recorded outcomes, and any decision taken
+post-retrieval.
+
+> **The criterion the audit produced: a record substitutes for an estimate only if
+> it is available when the decision is made.** All eight of §0's original sites
+> satisfied that silently, so nobody had to state it. Routing is the first site
+> where it binds.
+
+**What it says about the thesis.** The prediction has content — two clean
+deletions, one of them off-list — so §0 is not merely a description of eight
+findings already in hand. But the yield has changed shape: all eight originals were
+immediate and total; of four here, two are clean (one only *eventually*) and two
+are partial. Consistent with the easy sites having been found first, and the
+remaining yield per site is smaller than §0's table implies.
+
+**What would have falsified it:** all four failing either check. Two did fail
+sufficiency, which is why the answer is *confirmed, weakly* — and that is the more
+useful answer.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
