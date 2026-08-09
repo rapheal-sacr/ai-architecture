@@ -893,6 +893,41 @@ claims:
       A's ceiling at the 1.5B is 3.64. At the 0.5B r = 1.00 exactly:
       nothing survives, so no candidate consumes a label and A is undefined
       rather than large - reported as `inf` rather than a huge number.
+    A_WAS_NEVER_THE_BINDING_QUANTITY: >
+      THIS EXPERIMENT READS AS A RESCUE AND IT IS NOT. The accounting, worked
+      through, with v = P(valuable | sound):
+        unsound candidates cannot be promoted, so promotions = v x sound EITHER WAY
+        with screens     labels = sound            -> labels/promotion = 1/v
+        without screens  labels = sound/(1-r)      -> labels/promotion = 1/(v(1-r))
+      Sound screens recover EXACTLY the factor the generator's unsoundness cost
+      and nothing more. As r -> 0, A -> 1, but 1/v never moves: the generator
+      converts wasted candidates into sound ones at the same oracle cost per
+      promotion.
+      SO SCREENS DO NOT AMPLIFY THE ORACLE BUDGET. They stop generator
+      unsoundness from consuming it. The constraint was always v, and v moves
+      only under an instrument that scores VALUE - which is what E2.2 found no
+      constraint-wise check reaches, what section 6 forbids as a cheap rung, and
+      what E2.3 priced at recall 0.349.
+      My pessimistic reading and the r_specific refinement were both arguing
+      about a factor that sits BESIDE the constraint rather than on it.
+    the_one_number_that_decides_section_4: >
+      The correlation between soundness and value. The invariance above assumes
+      value is independent of soundness. If they correlate, screening genuinely
+      raises v and section 4 has a real if smaller claim; if independent, screens
+      are hygiene and L10's only path to amplification is a validated
+      value-estimator with all the exposure that implies.
+      REGISTER P(valuable | sound) against P(valuable) on the first labelled set.
+      Same acquisition as M1, one column.
+    two_things_that_survive_the_restatement: >
+      1. r_specific is ONE SCREEN DEEP. At the 1.5B, fan-out fires on 0.68 of
+         candidates against a specific-rejection union of 0.72, so only 0.05
+         is rejected by a specific screen WITHOUT fan-out firing - fan-out
+         accounts for 93% of it. "Design constraints do not come free with
+         scale" rests on a single constraint.
+      2. There is no perverse incentive to withhold the checker from the
+         generator. Under the invariance a self-checking generator produces more
+         sound candidates at the same 1/v, so handicapping it to keep r high
+         buys nothing.
     what_it_does_to_section_4: >
       The pessimistic reading - r falls to 0 on the industry's clock, so A -> 1 -
       is not what the size axis shows. The component that collapses is the one
@@ -951,9 +986,45 @@ claims:
          distribution is the FILTER'S, not the structure's.
     self_tested: >
       Every predicate is checked against an asset built to violate exactly it,
-      and all six fire. A validator whose checks cannot fire is the defect this
-      record found four times (B7, B8, B20, A4-usage), and here it would fail
-      silently AFTER an acquisition, which is the most expensive place for it.
+      and the PASS direction is checked too. A validator whose checks cannot fire
+      is the defect this record found four times (B7, B8, B20, A4-usage), and
+      here it would fail silently AFTER an acquisition.
+    six_defects_found_by_reading_the_code_i_wrote: >
+      The first version had two instances of that same defect CONCEALING EACH
+      OTHER, plus four more:
+        1a.1 no `domain` field, so M1 yields only a POOLED correlation - and
+             E2.1's quantity is per-domain bias (0.095 mean, 0.176 worst). Worse,
+             a domain label applied after capture is an INFERRED partition, which
+             is E0.1-K4 and E3.3's territory. Joins P1b and P3a in the
+             cannot-be-retrofitted set, and it is the highest-cost item.
+        1a.2 P3c evaluated `"cards" in rows[0]` while its stated job was E0.2f's
+             ratio recoverability. Bank size, fleet size and rollouts-per-adapter
+             were not in the schema AT ALL, so stripping all three left it
+             passing. An operation that cannot report failure.
+        1a.3 the self-test covered 6 of 11 predicates while the docstring said
+             every one - and the unfireable predicate sat inside the untested
+             set, so 1a.2 and 1a.3 hid each other.
+        1a.4 self_test() failed OPEN on the pass direction: `ok = report(base)`
+             was printed and never read, so a compliant asset failing a predicate
+             printed "validator is wrong" and exited 0.
+        1a.5 P3b's floor of 500 sat exactly on the cliff its own consequence
+             string named. Now derived: separating a 10x tail from a 3x one needs
+             the top 1% to hold >= 16 entries at 25% relative precision, so
+             n >= 1600.
+        1a.6 P0's 20% was hardcoded with nothing tying it to M1's precision. Now
+             derived: reading E2.1's sweep at steps of 0.25 at 2 SE of a
+             correlation needs n >= 259 independently-resolved interactions.
+      Now 14 predicates, all covered, and `check_record.py` derives the count
+      from `predicates()` and asserts the break set covers every one - verified
+      by deleting a break case and watching the gate fire.
+    added_from_the_review: >
+      P0a OUTCOME PROVENANCE - the log records HOW each outcome was resolved and
+      the predicate checks the resolver is disjoint from the scorer, because a
+      predicate over the asset cannot otherwise catch P0's silent failure.
+      P4 AT LEAST TWO INDEPENDENT SOURCES - representativeness cannot be checked
+      within one log but heterogeneity across logs can, which converts unknown
+      representativeness into measured spread. It bounds the problem rather than
+      closing it.
     hardest_to_retrofit: >
       P1b and P3a, because both require a decision at CAPTURE time. Difficulty
       stamped after the fact is not independent, and a bank filtered before

@@ -1759,6 +1759,64 @@ concedes has no repair. And asset A (form-diverse expository text, for 4.2) is a
 separate acquisition already specified by EB.3; A and B do not overlap and should
 not be reconflated into "a corpus".
 
+### §4 restated · `A` was never the binding quantity, and EB.6 is not a rescue
+
+EB.6 measured `r_generic → 0.00` and `r_specific → 0.72`, which reads as a rescue
+of §4. Working the accounting through says it is not. With `v = P(valuable | sound)`:
+
+- unsound candidates cannot be promoted, so **promotions = `v × sound` either way**;
+- with screens, labels = sound, so **labels per promotion = `1/v`**;
+- without screens, labels = `sound/(1−r)`, so labels per promotion = `1/(v(1−r))`.
+
+**Sound screens recover exactly the factor the generator's unsoundness cost, and
+nothing more.** As `r → 0`, `A → 1` — but `1/v` never moved. The generator converts
+wasted candidates into sound ones at the same oracle cost per promotion.
+
+> **Screens do not amplify the oracle budget. They stop generator unsoundness from
+> consuming it.**
+
+So the constraint was always `v`, and `v` moves only under an instrument that scores
+**value** — the thing E2.2 found no constraint-wise check reaches, §6 forbids as a
+cheap rung, and E2.3 priced at recall 0.349. My pessimistic reading (`A → 1`) and the
+`r_specific` refinement were both arguing about a factor that sits *beside* the
+constraint rather than on it.
+
+**The one number that decides §4** is the correlation between soundness and value.
+The invariance assumes they are independent; if they correlate, screening genuinely
+raises `v`. Register `P(valuable | sound)` against `P(valuable)` on the first
+labelled set — same acquisition as M1, one column.
+
+**Two things from EB.6 survive it.** `r_specific` is **one screen deep**: fan-out
+fires on 0.68 against a specific-rejection union of 0.72, so only **0.05** is
+rejected without fan-out firing — fan-out is **93%** of it, and "design constraints
+don't come free with scale" rests on a single constraint. And there is **no perverse
+incentive to withhold the checker from the generator**: under the invariance a
+self-checking generator produces more sound candidates at the same `1/v`.
+
+### R13 revisited · six defects in my own validator, two concealing each other
+
+Found by reading the code at HEAD. The first version had **two instances of
+"an operation that cannot report failure" hiding each other**, plus four more:
+
+| | Defect |
+|---|---|
+| **1a.1** | no `domain` field — M1 yields only a *pooled* correlation, while E2.1's quantity is per-domain bias (0.095 mean, 0.176 worst). And a domain label applied after capture is an **inferred partition** — E0.1-K4 and E3.3's territory. Joins the cannot-retrofit set |
+| **1a.2** | `P3c` evaluated `"cards" in rows[0]` while its stated job was E0.2f's ratio recoverability — the three ratio fields were **not in the schema at all**, so stripping them left it passing |
+| **1a.3** | the self-test covered **6 of 11** while the docstring claimed every one — and the unfireable predicate sat *inside* the untested set |
+| **1a.4** | `self_test()` failed **open** on the pass direction: `ok` was printed and never read, so a compliant asset failing a predicate printed *"validator is wrong"* and exited 0 |
+| **1a.5** | `P3b`'s floor of 500 sat exactly on the cliff its own consequence string named. Now derived: separating a 10× tail from a 3× one needs ≥16 entries in the top 1%, so **n ≥ 1600** |
+| **1a.6** | `P0`'s 20% was hardcoded. Now derived: reading E2.1's sweep at steps of 0.25 at 2 SE of a correlation needs **n ≥ 259** independent resolutions |
+
+Now **14 predicates, all covered**, and `check_record.py` derives the count from
+`predicates()` and asserts the break set covers every one — verified by deleting a
+break case and watching the gate fire.
+
+Two added from the review: **P0a outcome provenance** (the resolver must be disjoint
+from the scorer, because a predicate over the asset cannot otherwise catch P0's
+silent failure) and **P4 two independent sources** (representativeness can't be
+checked within one log, but heterogeneity across logs can — bounding it rather than
+closing it).
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a

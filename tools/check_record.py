@@ -14,6 +14,7 @@ Checks, in order of how badly a failure would mislead a reader:
   5. every doc a claim points at exists
   6. constants quoted in the docs match their definitions in code
   7. the weighting rule's site count is DERIVED from its table, not typed
+  8. asset B's validator self-test covers every predicate it defines
 
 Run with no arguments. Exits non-zero on any failure, so it can be a CI gate.
 """
@@ -148,6 +149,25 @@ def main() -> int:
         if got != (n_p, n_meas, n_inf):
             fails.append(f"weighting rule: {label} says {m.groups()}, table has"
                          f" ({n_p}, {n_meas}, {n_inf})")
+
+    # 8 -- the asset-B validator cannot claim coverage it does not have.
+    # Two defects were concealing each other in that file: a predicate that could
+    # not fail, sitting inside the set the self-test did not cover. Deriving the
+    # count from `predicates()` and asserting the break set covers it turns both
+    # into a failing check rather than something a reader has to notice.
+    try:
+        sys.path.insert(0, str(ROOT / "tools"))
+        import validate_asset_b as vb
+        defined = [p for p, _, _, _ in vb.predicates(vb._synthetic())]
+        uncovered = [p for p in defined
+                     if not any(p.startswith(b + " ") for b in vb.BREAKS)]
+        if uncovered:
+            fails.append(f"validate_asset_b: {len(uncovered)} predicate(s) have no "
+                         f"break case in the self-test: {uncovered}")
+        if vb.self_test.__doc__ is None and vb.main(["x", "--self-test"]) != 0:
+            fails.append("validate_asset_b: self-test does not pass")
+    except Exception as e:                                    # noqa: BLE001
+        warns.append(f"validate_asset_b: could not be checked ({e})")
 
     # 6 -- quoted constants match their definitions
     docs = " ".join((ROOT / d).read_text() for d in ("STATUS.md", "PLAN.md")
