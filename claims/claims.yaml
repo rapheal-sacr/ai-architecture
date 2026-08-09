@@ -1362,6 +1362,74 @@ claims:
       is the third time an instrument's defect surfaced only under use.
     status: proposed
 
+  - id: E0.9
+    tier: L3
+    claim: "what M3's degree number is a property of - the ledger, the compiler, or citation volume"
+    source: "the compilation decision raised by R16's build; docs/wam_compilation_decision_e0_9.md"
+    rig: A
+    kill: "demand compilation ALSO yields degree = 1 -- BEIR cannot support M3 at any compilation"
+    predicted: uncertain
+    status: PASS
+    result: results/e0_9_compilation_control.json
+    the_compiler_was_not_decided_by_this: >
+      I1 settles it. L1 is the single authoritative store, so an entry cannot be
+      copied; two capabilities resting on the same fact must both cite it because
+      there is no second copy. SHARING IS ARCHITECTURAL - a compiler decides how
+      much, not whether. Degree = 1 across 43,332 entries is therefore the
+      signature of a RELABELLING rather than a derived view: doc = card partitions
+      entries along a boundary the corpus already had. Running an experiment to
+      choose the compiler would have asked a question the architecture answers.
+    finding: >
+      KILL DOES NOT FIRE. Demand compilation gives max degree 5 on SciFact and 49
+      on NFCorpus, so BEIR supports M3 once cards are query-support sets.
+      REAL EXCEEDS THE REWIRED NULL IN BOTH LEDGERS - 2.12x on SciFact and 3.34x
+      on NFCorpus - so there is structure beyond citation volume and section 3's
+      kill is about structure, as registered.
+      AND SCHEMATIC SITS BELOW ITS OWN NULL: real ratio 1.00 against nulls of 4.68
+      and 4.72. A partition is not merely uninformative about reuse, it is
+      ANTI-concentrated relative to chance, because every entry has degree exactly
+      1 by construction. That is the quantitative form of "doc = card is a
+      relabelling".
+    the_null_specification_was_wrong: >
+      E0.9 as proposed said "rewire entry->card citations at random while holding
+      EACH ENTRY'S citation count fixed". That null CANNOT FAIL: entry citation
+      count IS entry degree, so holding it fixed preserves the degree distribution
+      exactly and real-versus-null is identically zero.
+      The informative null holds CARD SIZES fixed - each card cites as many
+      entries as it really does, drawn uniformly - so total volume is controlled
+      and degree is free to vary. Seventh instance of an operation that cannot
+      report failure, and the first one caught in a null before it ran.
+    the_between_ledger_reading_is_not_usable: >
+      The pre-registered reading fired on "degree differs between ledgers", 2.08x.
+      IT IS NOT READABLE. Qrels density is 1.1 relevant docs per query on SciFact
+      against 41.5 on NFCorpus - 37x apart - so a demand card in one is ~38x the
+      size of a demand card in the other. That is a comparison across arms
+      differing in more than the manipulation: B19's defect and EB.2's, arriving
+      in a reading I pre-registered myself.
+      The null comparison survives it, because the null preserves card sizes
+      WITHIN each ledger, which is exactly what it was built to control. So the
+      conclusion rests on real-vs-null and not on between-ledger.
+    m2a_and_it_is_not_monotone: >
+      Certified fraction, single tombstone, run in both compiler arms because it
+      is a property of the BANK - margins depend on card vectors and card vectors
+      are means over source entries:
+        SciFact   schematic 0.691 -> demand 0.442   FALLS
+        NFCorpus  schematic 0.619 -> demand 0.783   RISES
+      OPPOSITE DIRECTIONS. So the certified fraction is compiler-sensitive AND
+      ledger-sensitive, and the sign of the compiler effect is not stable across
+      ledgers. Section 2's number cannot be quoted without naming both. Running
+      it in both arms rather than deferring it is what made that visible.
+    min_entries_did_not_bind: >
+      The stated tension - query-support compilation trades entry count for degree
+      - did not bite. Demand yields 3,496 entries on SciFact and 34,901 on
+      NFCorpus, both clearing R13's derived floor of 1,600.
+    method_commitment_added: >
+      THE NULL-TREATMENT RULE IS WRITTEN FOR ARMS, AND THIS IS A CONTROL ON A
+      CONSTRUCTION CHOICE made before any arm runs. Anything that determines what
+      a measurement can SEE needs the same treatment as a treatment. Without the
+      rewired null, "max degree 49" would have read as a finding when it might
+      have been "there are a lot of citations".
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"

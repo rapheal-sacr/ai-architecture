@@ -2101,6 +2101,69 @@ instrument's defect appeared only under use. The synthetic generator inside the
 validator had the same id-collision flaw, which is how it announced itself: the
 *adequate* asset failed the new predicate.
 
+### E0.9 · The compilation control — and the compiler was never the question
+
+**I1 settles the compiler.** L1 is the single authoritative store, so an entry
+cannot be copied; two capabilities resting on the same fact must both cite it,
+because there is no second copy. **Sharing is architectural** — a compiler decides
+*how much*, not *whether*. So degree ≡ 1 across 43,332 entries is the signature of a
+**relabelling**: `doc = card` partitions entries along a boundary the corpus already
+had. Running an experiment to choose the compiler would have asked a question the
+architecture answers. What E0.9 decides is what the resulting number *means*.
+
+| ledger | compiler | arm | cards | entries | max | top1%/med | deg=1 | cert |
+|---|---|---|---|---|---|---|---|---|
+| SciFact | schematic | real | 5183 | 51309 | 1 | 1.00 | 1.00 | 0.691 |
+| | | null | 5183 | 32352 | 9 | 4.68 | 0.58 | |
+| | demand | real | 400 | 3496 | 5 | **4.35** | 0.77 | 0.442 |
+| | | null | 400 | 4302 | 3 | 2.05 | 0.96 | |
+| NFCorpus | schematic | real | 3633 | 39587 | 1 | 1.00 | 1.00 | 0.619 |
+| | | null | 3633 | 24917 | 7 | 4.72 | 0.58 | |
+| | demand | real | 400 | 34901 | **49** | **9.04** | 0.08 | 0.783 |
+| | | null | 400 | 39205 | 15 | 2.71 | 0.05 | |
+
+**The kill does not fire.** Demand gives max degree 5 and 49 — BEIR supports M3 once
+cards are query-support sets.
+
+**Real exceeds the rewired null in both ledgers** — **2.12×** and **3.34×** — so
+there is structure beyond citation volume, and §3's kill is about structure as
+registered.
+
+**And schematic sits *below* its own null**: real ratio 1.00 against 4.68 and 4.72.
+A partition is not merely uninformative about reuse — it is **anti-concentrated
+relative to chance**, because every entry has degree exactly 1 by construction.
+That is the quantitative form of *"doc = card is a relabelling"*.
+
+**The null specification was wrong, and it could not have failed.** As proposed it
+held *each entry's* citation count fixed — but entry citation count **is** entry
+degree, so the degree distribution is preserved exactly and real-vs-null is
+identically zero. The informative null holds **card sizes** fixed. Seventh instance
+of an operation that cannot report failure, and the first caught in a null *before*
+it ran.
+
+**The between-ledger reading fired and is not usable.** Qrels density is **1.1
+relevant docs per query on SciFact against 41.5 on NFCorpus** — 37× apart — so a
+demand card in one is ~38× the size of a demand card in the other. A comparison
+across arms differing in more than the manipulation: B19's defect and EB.2's,
+arriving this time in a reading I pre-registered myself. **The null comparison
+survives it**, because the null preserves card sizes *within* each ledger.
+
+**M2a, and the sign is not stable.** Certified fraction run in both arms because it
+is a property of the bank:
+
+| | schematic | demand | |
+|---|---|---|---|
+| SciFact | 0.691 | **0.442** | falls |
+| NFCorpus | 0.619 | **0.783** | rises |
+
+**Opposite directions.** So certified fraction is compiler- *and* ledger-sensitive,
+and the sign of the compiler effect is not stable. §2's number cannot be quoted
+without naming both — which running it in both arms rather than deferring is what
+made visible.
+
+**And the stated tension did not bind:** demand yields 3,496 and 34,901 entries,
+both clearing R13's derived floor of 1,600.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
@@ -2316,6 +2379,14 @@ that was already to hand. Accepting a correction feels like humility, which is
 exactly why it draws less scrutiny than making one — and a wrongly-accepted
 correction is worse than a wrongly-made claim, because it also discredits a sound
 number. Second wrong attribution here, after B11.
+
+**A control on a construction choice needs the same treatment as a control on a
+treatment.** The null-treatment rule above is written for *arms* — things varied
+after the world exists. E0.9 is a control on how the world is *built*: the card
+compiler determines what the degree distribution can even show, before any arm
+runs. Without a rewired null, `max degree 49` reads as a finding when it might be
+*"there are a lot of citations"*. **Anything that determines what a measurement can
+see needs the same treatment as a treatment.**
 
 **"Inert" is three different things, and only one of them is a finding.** The word
 was itself an overloaded identifier, which is why `identical: yes` could conflate a

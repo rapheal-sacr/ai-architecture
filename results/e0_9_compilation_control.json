@@ -1,0 +1,97 @@
+{
+  "seed": 20260806,
+  "min_entries": 1600,
+  "by_ledger": {
+    "scifact": {
+      "schematic": {
+        "real": {
+          "n_entries": 51309,
+          "n_cards": 5183,
+          "max": 1,
+          "median": 1.0,
+          "top1pct": 1.0,
+          "ratio": 1.0,
+          "share_deg1": 1.0
+        },
+        "null": {
+          "n_entries": 32352,
+          "n_cards": 5183,
+          "max": 9,
+          "median": 1.0,
+          "top1pct": 4.678,
+          "ratio": 4.68,
+          "share_deg1": 0.581
+        },
+        "certified": 0.6906
+      },
+      "demand": {
+        "real": {
+          "n_entries": 3496,
+          "n_cards": 400,
+          "max": 5,
+          "median": 1.0,
+          "top1pct": 4.353,
+          "ratio": 4.35,
+          "share_deg1": 0.767
+        },
+        "null": {
+          "n_entries": 4302,
+          "n_cards": 400,
+          "max": 3,
+          "median": 1.0,
+          "top1pct": 2.047,
+          "ratio": 2.05,
+          "share_deg1": 0.959
+        },
+        "certified": 0.4422
+      },
+      "qrels_density": 1.13
+    },
+    "nfcorpus": {
+      "schematic": {
+        "real": {
+          "n_entries": 39587,
+          "n_cards": 3633,
+          "max": 1,
+          "median": 1.0,
+          "top1pct": 1.0,
+          "ratio": 1.0,
+          "share_deg1": 1.0
+        },
+        "null": {
+          "n_entries": 24917,
+          "n_cards": 3633,
+          "max": 7,
+          "median": 1.0,
+          "top1pct": 4.719,
+          "ratio": 4.72,
+          "share_deg1": 0.578
+        },
+        "certified": 0.6188
+      },
+      "demand": {
+        "real": {
+          "n_entries": 34901,
+          "n_cards": 400,
+          "max": 49,
+          "median": 4.0,
+          "top1pct": 36.169,
+          "ratio": 9.04,
+          "share_deg1": 0.078
+        },
+        "null": {
+          "n_entries": 39205,
+          "n_cards": 400,
+          "max": 15,
+          "median": 4.0,
+          "top1pct": 10.824,
+          "ratio": 2.71,
+          "share_deg1": 0.047
+        },
+        "certified": 0.7833
+      },
+      "qrels_density": 41.49
+    }
+  },
+  "kill_degree_one": false
+}
