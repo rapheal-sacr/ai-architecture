@@ -271,7 +271,16 @@ def rates_by_region(w: World, num: np.ndarray, den: np.ndarray
 
 
 def arm(name: str, seed: int, policy="usage", cap=DRAW_CAP,
-        decay=0.0, tombstone=0.0, ontology_shift=0) -> dict:
+        decay=0.0, tombstone=0.0, ontology_shift=0,
+        recompile_policy=None) -> dict:
+    """`recompile_policy` is what makes a HARNESS-DRIFT arm possible at all.
+
+    Without it, compile and recompile both run under `policy`, so an arm that
+    varies nothing else varies NOTHING between the two compiles -- the rng
+    advances and a stochastic draw comes out different, and that difference is
+    the resampling floor, not a treatment. B20: the original A3 was exactly that
+    and was labelled `harness drift`.
+    """
     rng = np.random.default_rng(seed)
     w = World(rng)
     before = w.compile(policy, cap)
@@ -288,7 +297,7 @@ def arm(name: str, seed: int, policy="usage", cap=DRAW_CAP,
         w.alive[rng.choice(N_ENTRIES, size=n, replace=False)] = False
     w.ontology_shift = ontology_shift
 
-    after = w.compile(policy, cap)
+    after = w.compile(recompile_policy or policy, cap)
     cls = w.support_class()
 
     surviving = cls == "surviving"
@@ -305,6 +314,7 @@ def arm(name: str, seed: int, policy="usage", cap=DRAW_CAP,
 
     return {
         "arm": name, "policy": policy, "cap": cap,
+        "recompile_policy": recompile_policy or policy,
         "identical": bool(np.array_equal(before["passes"], after["passes"])),
         "cost_before": before["cost"], "cost_after": after["cost"],
         "n_surviving": int(surviving.sum()), "n_fully": int(fully.sum()),
@@ -322,8 +332,14 @@ def many(name, **kw) -> dict:
     def m(k):
         return float(np.mean([r[k] for r in rs]))
 
+    def sd(k):
+        return float(np.std([r[k] for r in rs]))
+
     return {"arm": name, "policy": rs[0]["policy"], "cap": rs[0]["cap"],
+            "recompile_policy": rs[0]["recompile_policy"],
             "identical": all(r["identical"] for r in rs),
+            "over_pooled_sd": round(sd("over_pooled"), 4),
+            "over_worst_sd": round(sd("over_worst"), 4),
             "partial_share": round(m("partial_share"), 3),
             "over_pooled": round(m("over_pooled"), 4),
             "over_worst": round(m("over_worst"), 4),
@@ -341,7 +357,18 @@ def main() -> int:
         many("A1a drift, uncapped", decay=0.25, cap=None),
         many("A1b drift, usage cap", decay=0.25),
         many("A2 tombstone", tombstone=0.15),
-        many("A3 harness drift", policy="uniform"),
+        # NULL-TREATMENT ROWS, one per policy that reaches rng.choice
+        # (worklist 2.4). Nothing varies between compile and recompile; whatever
+        # these report is the resampling floor of that draw policy, and every
+        # stochastic arm below has to be read against its own row.
+        many("N-uniform null", policy="uniform"),
+        many("N-strat null", policy="stratified"),
+        # A3 REBUILT (B20). The old A3 was `policy="uniform"` and nothing else,
+        # so it recompiled under the SAME policy it compiled under and varied
+        # nothing at all -- it was the uniform null wearing a treatment's name.
+        # A harness component changing between compile and recompile is a draw
+        # policy that DIFFERS across the two, which is what this is.
+        many("A3 harness drift", policy="usage", recompile_policy="uniform"),
         many("A4 ontology, usage draw", ontology_shift=5),
         many("A4 ontology, strat draw", ontology_shift=5, policy="stratified"),
         many("A6 draw uniform", policy="uniform", decay=0.25),
@@ -365,7 +392,7 @@ def main() -> int:
     print("  passing is a statement about THIS influence model, not a contradiction")
     print("  of E0.2b, whose whole point was a path set-based provenance cannot see.")
 
-    a0, a1a, a1b, a2, a3, a4u, a4s, a6u, a6s = rows
+    a0, a1a, a1b, a2, nuni, nstrat, a3, a4u, a4s, a6u, a6s = rows
 
     # MANIPULATION CHECKS -- verify each arm varied what it claims to vary.
     # A1a is the arm that must move; A1b's inertness is a FINDING, not an error,
@@ -384,7 +411,14 @@ def main() -> int:
     k0 = a0["identical"]
     k1 = a1a["over_pooled"] == 0.0
     k2 = a2["under_pooled"] == 0.0
-    k4 = a4s["identical"]
+    # K4 DIFFERENCED (worklist 2.4). `identical` cannot be differenced and is
+    # False for any stochastic arm by construction, so scoring K4 on it scored
+    # the draw policy rather than the ontology. The ontology's effect is A4-strat
+    # MINUS the stratified null, and it counts as real only if it clears the
+    # null's own seed spread.
+    k4_effect = a4s["over_pooled"] - nstrat["over_pooled"]
+    k4_worst_effect = a4s["over_worst"] - nstrat["over_worst"]
+    k4 = abs(k4_effect) <= nstrat["over_pooled_sd"]
     kb = max(r["over_blindness"] for r in rows) < BLINDNESS_LIMIT
 
     print("\n  A4 must be scored on the stratified arm. Under a usage draw the")
@@ -404,7 +438,7 @@ def main() -> int:
     print("\n  A5/A6 -- capping the draw bounds cost; the question is what it costs.")
     print(f"    uncapped |P|=600 draw cost   : {a1a['cost_max']}")
     print(f"    capped at DRAW_CAP={DRAW_CAP}       : max observed"
-          f" {max(r['cost_max'] for r in rows[2:])}")
+          f" {max(r['cost_max'] for r in rows if r['cap'] is not None)}")
     print(f"    uniform draw    : over pooled {a6u['over_pooled']:.4f}"
           f"  worst {a6u['over_worst']:.4f}  blindness {a6u['over_blindness']:.2f}")
     print(f"    stratified draw : over pooled {a6s['over_pooled']:.4f}"
@@ -412,12 +446,46 @@ def main() -> int:
     print("    Stratified trades a HIGHER pooled rate for a lower worst-region")
     print("    rate -- exactly the weighting rule's tradeoff, and it does not")
     print("    reach 1.0x blindness.")
-    print("    CONFOUNDED (B19). Both A6 arms carry decay=0.25 and A4 carries")
-    print("    none, so the stratified-vs-usage comparison ALSO crosses a decay")
-    print("    difference. This is the one number quantifying what equal-draw")
-    print("    protection costs, and it is not citable until A6 is re-run")
-    print("    against A4 with matched decay. The direction is unsurprising;")
-    print("    the magnitude is not established.")
+    print("    B19 WITHDRAWN. It claimed this comparison crossed a decay")
+    print("    difference. It does not: both A6 arms carry decay=0.25 and differ")
+    print("    only in draw policy, so the tradeoff is matched and citable. What")
+    print("    is true is narrower -- A6 is not a matched control for A4, which")
+    print("    bears on K4's differencing and not on this number.")
+    print("    And the nulls are NOT the right comparator for A6. Both A6 arms")
+    print("    carry decay, which shrinks provenance 600 -> 450 against a fixed")
+    print("    300-entry cap, so the recompile draw covers a LARGER fraction of a")
+    print("    smaller live set than the null's does. A6-uniform lands"
+          f" {a6u['over_pooled'] - nuni['over_pooled']:+.4f} against its")
+    print(f"    null and A6-stratified {a6s['over_pooled'] - nstrat['over_pooled']:+.4f}"
+          " -- differences that measure the draw")
+    print("    fraction, not the policy. The within-A6 comparison is the valid one")
+    print("    because decay is held equal across it.")
+
+    print("\n  NULL-TREATMENT ROWS AND WHAT THEY MOVE (worklist 2.4).")
+    print("  Nothing varies between compile and recompile in a null row, so its")
+    print("  number is the RESAMPLING FLOOR of that draw policy. Every stochastic")
+    print("  arm is read against its own row, never against A0.")
+    print(f"    {'':<22}{'pooled':>10}{'+-sd':>8}{'worst':>10}{'+-sd':>8}")
+    for r in (nuni, nstrat, a3, a4s, a6u, a6s):
+        print(f"    {r['arm']:<22}{r['over_pooled']:>10.4f}"
+              f"{r['over_pooled_sd']:>8.4f}{r['over_worst']:>10.4f}"
+              f"{r['over_worst_sd']:>8.4f}")
+    print(f"\n    A4-strat MINUS its null : pooled {k4_effect:+.4f}"
+          f"   worst {k4_worst_effect:+.4f}")
+    print(f"    the null's own seed sd  : pooled {nstrat['over_pooled_sd']:.4f}")
+    print("    K4 is scored on that difference, not on `identical`, which is")
+    print("    False for any stochastic arm whatever the ontology does.")
+
+    print("\n  B20 -- A3 IS REBUILT AND THE OLD NUMBER IS WITHDRAWN.")
+    print("    The old A3 was `policy=\"uniform\"` and nothing else, so it")
+    print("    recompiled under the SAME policy it compiled under. Nothing about")
+    print("    the harness differed between the two compiles; the rng advanced and")
+    print("    a stochastic draw came out different. Its 0.216 was the uniform")
+    print("    resampling floor wearing a treatment's name, and it is now the")
+    print("    N-uniform row. A3 proper compiles under usage and recompiles under")
+    print("    uniform, which is a harness component actually changing.")
+    print(f"    A3 rebuilt : pooled {a3['over_pooled']:.4f}"
+          f"  worst {a3['over_worst']:.4f}")
 
     print(f"\n  K0 A0 recompiler deterministic:                {'ok' if k0 else 'NO'}")
     print(f"  K1 A1 no over-forgetting on surviving support: {'ok' if k1 else 'NO'}")
@@ -434,6 +502,9 @@ def main() -> int:
          "K0_deterministic": bool(k0), "K1_no_over_forgetting": bool(k1),
          "K2_no_under_forgetting": bool(k2), "K4_ontology_inert": bool(k4),
          "KB_not_blind": bool(kb),
+         "k4_effect_pooled": round(k4_effect, 4),
+         "k4_effect_worst": round(k4_worst_effect, 4),
+         "null_seed_sd_pooled": nstrat["over_pooled_sd"],
          "verdict": "PASS" if (k0 and k1 and k2 and k4 and kb) else "FAIL"}, indent=2))
     print(f"wrote {out}")
     return 0

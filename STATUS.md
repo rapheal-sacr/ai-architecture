@@ -61,7 +61,7 @@ not.
 | Invariant | Status | Rests on | What would change it |
 |---|---|---|---|
 | **I1** grounding | assumed | never tested directly | E0.4, unrun |
-| **I2** derivability | **broken → repair** | stamp was a pair, not a four-tuple | amendment rev 2 §B: component-granular stamp. Vindicated by E0.1 A3 — one harness component moves competence 21.6% |
+| **I2** derivability | **broken → repair** | stamp was a pair, not a four-tuple | amendment rev 2 §B: component-granular stamp. E0.1 A3 **rebuilt** (B20): a draw policy that differs between compile and recompile moves competence **8.1 points above the resampling floor**, ~4.5σ. The old 21.6% varied nothing and is withdrawn |
 | **I3** no-compounding | assumed | untested under synthetic experience | E0.3, unrun |
 | **I4** recompilability | **broken → repair** | was a bookkeeping claim wearing a competence claim's name | E0.1: 6.7% pooled over-forgetting hiding **79.8% worst-region**, 12.4× blind. Amended to a two-sided verified property with three support categories |
 | **I5** anchored improvement | **broken → repair** | blast-radius rule bounds *which* thresholds, not their *values* | E4.2. R4: bound the values; pin derived views; seal only harness code a verifier executes through |
@@ -120,7 +120,7 @@ their stated settings.
 |---|---|---|---|
 | tombstone cascade reaches the weights | **broken → repair** | provenance recorded at compile time | E0.2b: `transitive` recalls **0.913, not 1.0**; no set-based closure reaches 1.0, because the residual dependency is a retrieval never run. R7: verify, don't infer |
 | L3 admission (cos ≤ 0.93) controls cascade breadth | **broken → no repair yet** | conflated content with provenance | E0.2d: content cosine moves 0.498, breadth moves 0.009. The design has **no lever on breadth**. R9 proposed — see *open* below |
-| signature ontology is not load-bearing for competence | **broken → repair** | never tested | E0.1 A4: a pure re-partition moves competence **21.7% pooled, 41.6% worst**. Root 3 reaches into Root 1 |
+| signature ontology is not load-bearing for competence | **restored — K4 withdrawn** | K4 was scored on `identical`, False for any stochastic arm | E0.1 A4 differenced against a same-policy null (worklist 2.4): effect **−0.0118 pooled** against a null seed spread of 0.0218 — indistinguishable from resampling. The 21.7%/41.6% was the stratified draw's floor. Root 3 does **not** reach into Root 1 by this path, and rev 2 §1.2 may keep the ontology for routing |
 | "maximise off-diagonal mass" is a partition objective | **broken → repair** | monotone in fineness | E3.3: argmax is total atomisation. R5: score by held-out predictive error — *validated only on nested partitions* |
 | Consolidator decay is safe | **broken → repair** | "decay unused entries" is frequency-keyed | E5.1: a global use-based cut removes **60–70% of the rarest regions**. Weighting rule, site 9 |
 

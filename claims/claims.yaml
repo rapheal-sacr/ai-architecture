@@ -43,11 +43,17 @@ claims:
       rarely referenced, so the provenance that decays is the sparse rare-region
       kind, and the arm most likely to show over-forgetting is the one a pooled
       metric is blindest to.
-      K4 FAILS, and it was flagged as the arm most likely to surprise. A pure
-      signature re-partition - ledger, weights and harness all held fixed -
-      changes competence by 21.7% pooled and 41.6% worst-region. The ontology IS
-      load-bearing for adapter competence, so Root 3 reaches into Root 1's
-      problem exactly as the amendment warned it might.
+      K4 NOW PASSES, AND ITS EARLIER FAILURE IS WITHDRAWN. It was scored on
+      `identical`, which is False for ANY stochastic arm whatever the ontology
+      does, so it scored the draw policy rather than the re-partition. Against a
+      null-treatment row under the same policy (worklist 2.4), the ontology's
+      effect is -0.0118 pooled and -0.0069 worst against a null seed spread of
+      0.0218 - indistinguishable from resampling, and negative besides. The
+      21.7%/41.6% was the stratified draw's resampling floor.
+      SO THE ONTOLOGY IS NOT LOAD-BEARING FOR COMPETENCE, Root 3 does not reach
+      into Root 1 by this path, and rev 2 section 1.2's conditional retention of
+      the ontology for routing and curriculum has its condition satisfied: "a
+      wrong partition costs efficiency rather than competence" survives.
     i4_is_a_relative_invariant: >
       A1b is inert and that is a finding, not a null. Under a usage-weighted
       capped draw, use-based decay of the tail changes nothing, because those
@@ -61,10 +67,17 @@ claims:
       the amended I4 asserts nothing. That is the honest size of what the
       item-level test cannot see, and it is large.
     harness_granularity_vindicated: >
-      A3 - changing ONE harness component (the draw policy) - produces 21.6%
-      pooled over-forgetting. Without the component-granular I2 stamp, E0.1's
-      result would confound the property under test with harness drift, which is
-      why the amendment's B section is a prerequisite rather than a nicety.
+      RESTATED AFTER B20, and the number is smaller. The old A3 was
+      `policy="uniform"` and nothing else, so it recompiled under the SAME policy
+      it compiled under - nothing about the harness differed between the two
+      compiles and its 21.6% was the uniform resampling floor. It is now the
+      N-uniform null row.
+      A3 rebuilt compiles under `usage` and recompiles under `uniform`, which is
+      a harness component that actually changes. It gives 29.7% pooled against
+      the uniform null's 21.6%, so the harness-drift effect is 8.1 points at a
+      null seed spread of 0.018 - roughly 4.5 sd, real but a third of the size
+      once claimed. Component-granular stamping keeps measured support; it just
+      does not get 21.6 points of it.
     a6_resolution: >
       Capping the draw DOES bound cost - 450 uncapped against 300 capped - so the
       resolution holds: retain |P| in full, bound the L3 draw, and cost is
@@ -1592,17 +1605,54 @@ bugs:
 
   - id: B19
     where: e0_1_verified_recompilability, arm table
-    bug: "A6 carries decay=0.25 and A4 carries none, so A6 is not a matched control for A4"
+    bug: "WITHDRAWN -- the confound I recorded does not exist"
+    status: withdrawn
+    what_i_claimed: >
+      That the stratified-vs-usage tradeoff - pooled 0.246 / worst 0.520 against
+      0.165 / 0.624 - is measured across a decay difference, and is therefore an
+      uninterpretable comparison.
+    why_it_is_wrong: >
+      Those two numbers are A6-stratified and A6-UNIFORM. Both carry decay=0.25
+      and differ only in draw policy, so the comparison is matched and citable.
+      It is also stratified-vs-UNIFORM, not stratified-vs-usage.
+    what_is_actually_true: >
+      A6 is not a matched control for A4, because A4 carries no decay. That bears
+      on K4's differencing - which is why worklist 2.4 needed a null row under
+      the same policy - and not on the tradeoff figure at all.
+    how_it_happened: >
+      I took the review's sentence, which conflated "A6 is not a matched control
+      for A4" with the tradeoff number, and recorded it as a bug in my own rig
+      without checking which arms produced those numbers. The results file and
+      the code were both to hand. A caveat was printed next to a sound number for
+      two commits.
+    lesson: >
+      An incoming correction is a hypothesis about the record, not an
+      observation of it. Check which arm produced a number before accepting a
+      claim about that number - the same discipline the record applies to its own
+      results, applied to criticism of them. This is the second time an
+      attribution has been wrong in this record; the first was B11.
+
+  - id: B20
+    where: e0_1_verified_recompilability, arm A3
+    bug: "A3 recompiled under the SAME draw policy it compiled under, so nothing about the harness varied between compile and recompile"
     effect: >
-      The stratified-vs-usage tradeoff - pooled 0.246 / worst 0.520 against
-      0.165 / 0.624 - is measured ACROSS A DECAY DIFFERENCE. That tradeoff is
-      the empirical demonstration of the weighting rule's own cost, so the one
-      number quantifying what equal-draw protection costs is confounded. Not a
-      wrong number: an uninterpretable comparison. Found by review, not by the
-      rig, because no manipulation check asks whether two arms differ ONLY in
-      the manipulated quantity.
-    status: open
-    fix: "re-run A6 against A4 with matched decay (worklist 2.5); until then the cost figure is not citable"
+      `arm()` passed one `policy` to both `w.compile()` calls, so A3 -
+      policy="uniform" and no other treatment - varied NOTHING. The rng advanced,
+      the second stochastic draw came out different, and the resulting 21.6% was
+      the uniform RESAMPLING FLOOR reported as a harness-drift treatment. It was
+      cited as the measured support for component-granular stamping in the I2
+      repair, in STATUS.md and in PLAN.md.
+      Stronger than the review's "A3 may be resampling": it is resampling by
+      construction, because no harness component could differ across two calls
+      that receive the same argument.
+    fix: >
+      `recompile_policy` lets the two compiles differ. The old arm is now the
+      N-uniform null row; A3 compiles under usage and recompiles under uniform,
+      giving 29.7% against the null's 21.6% -- an 8.1-point effect at ~4.5 sd.
+      Component-granular stamping keeps measured support at a third the size.
+    found_by: >
+      Reading arm() to implement worklist 2.4's null rows, having gone to check
+      whether B19's claim was true. A false bug report led to a real one.
 
   - id: B18
     where: e0_2f breadth reconciliation, first run

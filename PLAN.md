@@ -663,7 +663,7 @@ show over-forgetting is the arm a pooled metric is blindest to.**
 
 **K4 fails, and it was flagged as the arm most likely to surprise.** A pure
 signature re-partition — ledger, weights and harness all held fixed — changes
-competence by **21.7% pooled, 41.6% worst**. The ontology *is* load-bearing for
+competence by 21.7% pooled, 41.6% worst. **[WITHDRAWN — see the K4 differencing below.]** The ontology *is* load-bearing for
 adapter competence, so Root 3 reaches into Root 1's problem exactly as the
 amendment warned.
 
@@ -683,7 +683,7 @@ amended I4 asserts nothing. That is the honest size of what an item-level test
 cannot see.
 
 **A3 vindicates the component-granular stamp.** Changing one harness component
-produces 21.6% pooled over-forgetting, so without pinning components E0.1 would
+produces 21.6% pooled over-forgetting **[WITHDRAWN — B20; rebuilt at 8.1 points over the floor]**, so without pinning components E0.1 would
 confound the property under test with harness drift.
 
 **A6 resolves the `|P|` question, then relocates it.** Capping the draw *does*
@@ -1190,6 +1190,64 @@ criterion was *low overlap → granularity is genuinely oracle-expensive*. Overl
 turns out not to be the governing variable at all, so the criterion cannot fire
 either way. What replaces it is a test rather than a value: whatever real overlap
 proves to be, it has to beat birthday collision before it can be credited.
+
+### E0.1 revisited · K4 is withdrawn, and A3 varied nothing
+
+Worklist 2.4 and 2.5. Two of this record's published numbers do not survive their
+own null rows, and one incoming correction did not survive being checked.
+
+**K4 passes. The 21.7% was the draw policy.** K4 was scored on `identical`, which
+is `False` for *any* stochastic arm regardless of what the ontology does — so it
+scored the stratified draw, not the re-partition. Against a null-treatment row
+under the same policy, the ontology's effect is **−0.0118 pooled and −0.0069
+worst, against a null seed spread of 0.0218**: indistinguishable from resampling,
+and negative besides.
+
+So *"the signature ontology is not load-bearing for adapter competence"* is
+**restored**, Root 3 does not reach into Root 1 by this path, and rev 2 §1.2's
+conditional retention of the ontology for routing and curriculum has its
+condition satisfied — *"a wrong partition costs efficiency rather than
+competence"* survives. Worklist 2.4's kill criterion was written to fire if K4
+survived differencing. It did not.
+
+**A3 varied nothing at all (B20).** `arm()` passed one `policy` to both
+`w.compile()` calls, so A3 — `policy="uniform"` and no other treatment —
+recompiled under the same policy it compiled under. Nothing about the harness
+differed; the rng advanced, the second stochastic draw came out different, and
+the 21.6% was the uniform **resampling floor** wearing a treatment's name. That is
+stronger than the review's *"A3 may be resampling"*: it is resampling by
+construction, because no harness component can differ across two calls receiving
+the same argument.
+
+Rebuilt with a `recompile_policy` lever — compile under `usage`, recompile under
+`uniform` — A3 gives **0.2969 against the uniform null's 0.2160**: an 8.1-point
+effect at a null spread of 0.018, roughly 4.5σ. Component-granular stamping keeps
+measured support, at about a third of the size once claimed.
+
+**B19 is withdrawn, and how it got in matters more than the number.** I recorded
+that the stratified-vs-usage tradeoff crossed a decay difference. Those two
+numbers are A6-stratified and A6-**uniform**; both carry `decay=0.25` and differ
+only in draw policy, so the comparison is matched and citable. What is true is
+narrower — A6 is not a matched control for *A4*, which bears on K4's differencing
+and not on the tradeoff at all.
+
+I took the review's sentence, which conflated the two, and recorded it as a bug in
+my own rig without checking which arms produced the numbers. The results file and
+the code were both to hand, and a caveat sat next to a sound number for two
+commits. **An incoming correction is a hypothesis about the record, not an
+observation of it** — the same discipline the record applies to its own results,
+applied to criticism of them. Second wrong attribution in this record, after B11.
+
+Going to check whether B19 was true is what surfaced B20. A false bug report led
+to a real one.
+
+**And the nulls are not a universal comparator.** Both A6 arms carry decay, which
+shrinks provenance 600 → 450 against a fixed 300-entry cap, so their recompile
+draw covers a *larger* fraction of a smaller live set than the null's does.
+A6-uniform lands **−0.0511** against its null and A6-stratified **+0.0170** —
+differences that measure the draw fraction, not the policy. The within-A6
+comparison is the valid one, because decay is held equal across it. A null row is
+matched to a policy, not to every arm that uses that policy.
 
 ## 2 · The claim ledger
 
