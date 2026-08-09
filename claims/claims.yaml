@@ -633,6 +633,47 @@ claims:
       drawing was +0.0125 without decay and +0.0806 with - 6.4x - so a
       protection-cost number without its baseline and regime is unreadable.
 
+  - id: E1.7
+    tier: L7
+    claim: "R-a..R-d hold under churn, and the growth they cause is affordable"
+    source: "rev 2.2 section 1.2b; worklist 3.2"
+    rig: A
+    kill: "KM coverage not monotone at some cycle; KG evaluation budget crossed inside the horizon; KR the residual is a minority of the defended set"
+    predicted: uncertain
+    status: PASS
+    result: results/e1_7_churn_monotonicity.json
+    finding: >
+      KM PASSES with 0 violations across 600 cycles, and that is the LEAST
+      interesting result here: R-b holds by construction under these operations -
+      merge unions, retire moves, promotion adds - so zero violations confirms
+      the implementation matches the rules rather than confirming the rules.
+      Worth checking because this record has been wrong three times about what
+      holds by construction (B7, B8, B20).
+      KR FAILS, consistent with E0.6: the residual is 52.5% of everything
+      defended at the end. R-c is not a refinement of R-b, it is the larger half,
+      which is what E0.6 measured at 3.3-5.5x from the other direction.
+    the_bill: >
+      Section 1.2b calls the growth "a brake on merge chains, which is probably
+      correct, and a real bill" and does not price it. Priced: growth is LINEAR,
+      not accelerating - 4.17 evals/cycle over the first half against 3.58 over
+      the second, ratio 0.86. Unions and the residual each add a bounded amount
+      per operation and the operation rate is fixed, so the bill accumulates
+      rather than compounds. The brake is real and MILD in this regime.
+      Cycles to reach a budget, extrapolated linearly from the measured slope and
+      marked as extrapolation: 1000 at ~223, 2000 at ~481, 4000 at ~997,
+      16000 at ~4094. Nothing past cycle 120 was simulated.
+      The budget is a DECIDE quantity, so a range is swept rather than a single
+      figure passed or failed - the same lesson as the I11 density floor, where
+      "100% of regions below floor" was a statement about the 3.0 chosen.
+    a_claim_i_asserted_and_had_to_withdraw: >
+      The first version of the output said the oracle and compute lines "diverge
+      by roughly an order of magnitude". They sit at 480 against 598 - a ratio of
+      1.25. Caught by the method commitment added one turn earlier: a structural
+      relationship between two quantities is a measurement, not an argument. The
+      separation section 1.3 needs is real and SMALL at this fleet size, because
+      most owners still hold their original 8 probes and only merged ones hold
+      unions; it would widen with the merge rate, which is untested.
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"
@@ -1114,8 +1155,64 @@ claims:
     rig: manual then B
     kill: "synthesized verifier disagrees with held-out human labels, or fails to reject known-bad cases the base judge accepted"
     predicted: uncertain
-    note: "Part III's own roadmap item 6 says do this by hand on one domain before building machinery. Follow that."
-    status: untested
+    status: PARTIAL
+    procedure: docs/e2_2_verifier_synthesis_by_hand.md
+    domain: "L3 skill-card admission - is this card a faithful, useful distillation of its sources? T3 by the design's own tier definitions"
+    finding: >
+      THE DECOMPOSITION EXISTS AND IT DECOMPOSES SOUNDNESS ONLY.
+      Eight constraint-wise checks, each executable, deterministic and
+      individually falsifiable, all of them the design's own invariants restated
+      as predicates: provenance grounding, no contradiction, citation validity,
+      content-cosine admission, fan-out compliance, I4 recompilability, schema
+      validity, I6 refutation consistency.
+      What no check reaches: usefulness, salience, abstraction-vs-average, and
+      calibration. Every reachable check answers "is this card true, grounded,
+      well-formed, permitted"; every unreachable one answers "is it worth
+      having". That is E2.3's boundary from the other side - the decomposable
+      half is the constraint half and the non-decomposable half is the OBJECTIVE,
+      which E2.3 already found the design never states.
+    consequence_for_A: >
+      A HAS A COMPUTABLE CEILING, AND SECTION 4.2 ASSUMED IT DID NOT.
+      If synthesized checks decompose soundness only, a candidate failing a
+      screen costs zero labels and a candidate passing one still needs a label
+      for the value judgment. With r the sound-screen rejection rate,
+      A = 1/(1 - r): r = 0.5 gives A <= 2, r = 0.9 gives A <= 10.
+      And r is bounded by the fraction of candidates that are UNSOUND, not the
+      fraction that are bad - a sound screen cannot reject something true,
+      grounded, well-formed and worthless.
+      SO A DEGRADES AS THE SYSTEM IMPROVES. A better generator emits fewer
+      unsound candidates, r falls, A tends to 1. L10's amplification is largest
+      when the system is worst. Section 4.2's "categorical gain" is withdrawn:
+      L10 does not change the exponent, it applies a factor that shrinks as it
+      succeeds.
+    section_4_vs_section_6: >
+      The escape would be for an instrument to score QUALITY rather than
+      soundness, which reaches the value half. Section 6 forbids exactly that for
+      a cheap rung - "every cheap rung must be a sound necessary condition" - and
+      E2.3 measured the cost of estimating instead: recall of the expensive
+      rung's top decile 0.349, rho(cheap, full) 0.322.
+      So either L10's instruments are screens (A bounded, self-limiting) or
+      estimates (E2.3's recall problem one level up, tail discarded, false
+      negatives the archive never sees). The design does not adjudicate, and
+      neither document connects them - section 6 was written about the promotion
+      ladder and applies verbatim to the verifier field, because a synthesised
+      instrument IS a cheap rung under another name.
+    what_this_makes_runnable: >
+      The registered kill criterion needs a labelled corpus and stays blocked.
+      But section 4's viability now turns on a quantity needing NO labels and no
+      L10: measure r, the fraction of generated candidates failing a sound
+      screen. Every check above is executable against any generator's output
+      today. If r is small on a real generator, L10 cannot pay for itself
+      whatever the synthesis recipe turns out to be. Same move the record has
+      made repeatedly - replace a quantity needing an expensive new measurement
+      with one already implied by what is recorded.
+    what_is_blocked_and_what_is_discounted: >
+      D4 (agreement with held-out human labels) is blocked on a corpus.
+      D3 (rejecting known-bad cases) was performed - eight constructed bads, one
+      per check, each rejected by its intended check and no other - and is NOT
+      counted as evidence: a decomposition tested against cases its own author
+      constructed is generator and evaluator sharing weights, one level up, which
+      is the failure mode section 4.1 exists to prevent.
 
   - id: E2.3
     tier: L9

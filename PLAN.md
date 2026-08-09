@@ -1380,6 +1380,83 @@ having had its equal draw. **I8 is satisfied and the tail inside an owner is not
 protected.** Between-region is fixed by I8, between-owner was found by E0.6,
 within-owner is this and it is open.
 
+### E2.2 · Verifier synthesis by hand — soundness decomposes, value does not
+
+The design's own declared highest-leverage item, done as Part III §9 and rev 2 §11
+both specify: by hand, one T3 domain, no machinery. **L3 skill-card admission** —
+*is this card a faithful, useful distillation of its sources?*
+
+**The decomposition exists.** Eight constraint-wise checks, each executable,
+deterministic and individually falsifiable, and all of them the design's own
+invariants restated as predicates: provenance grounding, no contradiction,
+citation validity, content-cosine admission, fan-out compliance, I4
+recompilability, schema validity, I6 refutation consistency.
+
+**What no check reaches:** usefulness, salience, abstraction-vs-average,
+calibration. Every reachable check answers *is this card true, grounded,
+well-formed, permitted*; every unreachable one answers *is it worth having*. That
+is E2.3's boundary arriving from the other side — the decomposable half is the
+constraint half, and the non-decomposable half is **the objective E2.3 already
+found the design never states.**
+
+**So `A` has a computable ceiling, and §4.2 assumed it did not.** A candidate
+failing a screen costs zero labels; one passing still needs a label for the value
+judgment. With `r` the sound-screen rejection rate, `A = 1/(1−r)` — and `r` is
+bounded by the fraction of candidates that are *unsound*, not the fraction that are
+*bad*, because a sound screen cannot reject something true, grounded, well-formed
+and worthless.
+
+**Which gives an uncomfortable dynamic.** A better generator emits fewer unsound
+candidates, so `r` falls and `A → 1`. **L10's amplification is largest when the
+system is worst.** §4.2's "categorical gain" is withdrawn: L10 does not change the
+exponent, it applies a factor that shrinks as it succeeds.
+
+**And §4 and §6 disagree about what an instrument may be.** The escape is for an
+instrument to score *quality*, which reaches the value half — but §6 forbids
+exactly that for a cheap rung, and E2.3 measured the cost of estimating instead
+(recall 0.349, ρ 0.322). Either L10's instruments are screens (`A` bounded,
+self-limiting) or estimates (E2.3's recall problem one level up). Neither document
+connects them, because §6 was written about the promotion ladder and applies
+verbatim to the verifier field — a synthesised instrument *is* a cheap rung under
+another name.
+
+**What this makes runnable:** the registered kill criterion needs labels and stays
+blocked, but §4's viability now turns on `r`, which needs **no labels and no L10**.
+Every check above is executable against any generator's output today.
+
+D3 was performed — eight constructed bads, each rejected by its intended check and
+no other — and is **not counted as evidence**: a decomposition tested against cases
+its own author constructed is generator and evaluator sharing weights, one level
+up, which is the failure mode §4.1 exists to prevent.
+
+### E1.7 · Churn under R-a…R-d — the rules hold, and the bill is mild
+
+**KM passes with 0 violations across 600 cycles, and it is the least interesting
+result here.** R-b holds by construction under these operations — merge unions,
+retire moves, promotion adds — so zero violations confirms the implementation
+matches the rules rather than confirming the rules. Worth the four lines because
+this record has been wrong three times about what holds by construction.
+
+**KR fails, consistent with E0.6.** The residual is **52.5%** of everything defended
+at the end. R-c is not a refinement of R-b, it is the larger half — which is what
+E0.6 measured at 3.3–5.5× from the other direction.
+
+**The bill, which §1.2b names and does not price.** Growth is **linear, not
+accelerating**: 4.17 evals/cycle over the first half against 3.58 over the second,
+ratio 0.86. Unions and the residual each add a bounded amount per operation and the
+operation rate is fixed, so the bill accumulates rather than compounds. Cycles to
+reach a budget, extrapolated linearly and marked as extrapolation: 1000 at ~223,
+4000 at ~997, 16000 at ~4094. **The brake on merge chains is real and mild in this
+regime.** The budget is a *decide* quantity, so a range is swept rather than one
+figure passed or failed.
+
+**And a claim I asserted and had to withdraw in the same run.** The first version
+of the output said the oracle and compute lines *"diverge by roughly an order of
+magnitude"*. They sit at 480 against 598 — a ratio of **1.25**. Caught by the
+method commitment added one turn earlier: a structural relationship between two
+quantities is a measurement, not an argument. The separation §1.3 needs is real and
+small at this fleet size, and would widen with the merge rate, which is untested.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a

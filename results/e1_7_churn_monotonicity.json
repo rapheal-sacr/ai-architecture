@@ -1,0 +1,74 @@
+{
+  "seed": 20260806,
+  "n_worlds": 5,
+  "cycles": 120,
+  "p_promote": 0.5,
+  "p_merge": 0.2,
+  "p_retire": 0.15,
+  "eval_budget": 4000,
+  "monotonicity_violations": 0,
+  "budget_crossed_at": [],
+  "residual_share_final": 0.5247,
+  "trace": [
+    {
+      "owners": 16.0,
+      "defended": 122.6,
+      "residual": 3.8,
+      "distinct": 122.6,
+      "evals": 133.2,
+      "cycle": 0
+    },
+    {
+      "owners": 17.4,
+      "defended": 188.8,
+      "residual": 32.2,
+      "distinct": 188.8,
+      "evals": 210.4,
+      "cycle": 20
+    },
+    {
+      "owners": 20.6,
+      "defended": 260.6,
+      "residual": 66.8,
+      "distinct": 260.6,
+      "evals": 297.0,
+      "cycle": 40
+    },
+    {
+      "owners": 23.8,
+      "defended": 325.8,
+      "residual": 105.0,
+      "distinct": 325.8,
+      "evals": 383.2,
+      "cycle": 60
+    },
+    {
+      "owners": 25.6,
+      "defended": 380.6,
+      "residual": 159.8,
+      "distinct": 380.6,
+      "evals": 453.8,
+      "cycle": 80
+    },
+    {
+      "owners": 26.8,
+      "defended": 430.2,
+      "residual": 198.4,
+      "distinct": 430.2,
+      "evals": 525.6,
+      "cycle": 100
+    },
+    {
+      "owners": 28.6,
+      "defended": 479.8,
+      "residual": 256.6,
+      "distinct": 479.8,
+      "evals": 598.2,
+      "cycle": 119
+    }
+  ],
+  "KM_monotone": true,
+  "KG_budget_safe": true,
+  "KR_residual_minority": false,
+  "verdict": "PASS"
+}
