@@ -2007,6 +2007,58 @@ quantity the design has never counted.
 port this number. The hybrid itself is unbuilt — EB.7 measured the two rankings
 separately and did not run the composite.
 
+### Asset B2 · candidates checked, and P1d was wrong
+
+B2 was the scarce half — items carrying difficulty *independent of outcome*.
+Checked against the predicates rather than read from papers, which is R13's own
+model, and it produced a rejection and a correction.
+
+**HotpotQA is rejected, and it is the field everyone reaches for first.** It
+carries `level ∈ {easy, medium, hard}` — exactly M1's axis — and the medium/hard
+split is *"determined by training multiple baselines and testing the answerability
+of the questions"*. **Difficulty read off model outcomes.** P1b by construction,
+E0.2's shape, and invisible without checking how the label was made.
+
+**Two survive.** MuSiQue encodes hop count in the id (`2hop__482757_12019`), spans
+2–4 hops, carries `question_decomposition`, and is *composed from* single-hop
+questions — so hop count is structural by construction. Licence isn't stated on the
+mirror checked, and it composes from five upstream sets, so the effective licence is
+their union. **2WikiMultihopQA is the better fit**: `evidences` as reasoning-path
+triples, a template-generated `type`, `entity_ids` to Wikidata, Apache-2.0, 192,606
+rows.
+
+**P0 and P0a hold by the shape of the task, not by luck.** A gold answer resolves by
+string match — executable, and *disjoint from any retrieval scorer*.
+QA-with-gold-answers **is** "outcomes that resolve independently of the judge",
+which is the predicate that fails silently everywhere else.
+
+### P1d was wrong, and applying it is what found that
+
+P1d required the domain label to be **capture-time**, because a label applied
+afterwards is an inferred partition. 2Wiki's `entity_ids` joined against Wikidata
+`instance of` gives a subject domain *after* the dataset was built — failing by the
+letter. It should not: Wikidata's types are authored by an authority that predates
+the questions and depends on no model here.
+
+> **The requirement is independence from the system being measured, not literal
+> capture time.** Capture-time was a proxy. A partition is **inferred** when the
+> system derives it from its own traffic and **recorded** when it comes from an
+> authority independent of that traffic.
+
+`domain_source` now takes `capture | independent_authority | inferred`. A defect in
+my own predicate, found by trying to apply it — the same way EB.3's specification
+was produced by a run rather than by thought.
+
+**And a fourth operation that could not report failure.** Breaking the validator's
+syntax while editing revealed that `check_record.py`'s coverage gate downgraded an
+*unimportable* validator to a **warning** — so a syntax error in the instrument
+everything downstream trusts printed *"all checks pass"*. Now a failure, verified by
+breaking it.
+
+**What this does not unblock.** None of these datasets carries retrieval logs, so
+P2a, P2b, P2c, P3a, P3b and P3c are all still mine. **B1's hard half was never the
+corpus** — it is a build.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a

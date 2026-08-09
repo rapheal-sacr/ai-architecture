@@ -167,7 +167,12 @@ def main() -> int:
         if vb.self_test.__doc__ is None and vb.main(["x", "--self-test"]) != 0:
             fails.append("validate_asset_b: self-test does not pass")
     except Exception as e:                                    # noqa: BLE001
-        warns.append(f"validate_asset_b: could not be checked ({e})")
+        # FAILS, not warns. A validator that cannot be imported cannot be run,
+        # and the previous version downgraded that to a warning -- so a syntax
+        # error in the instrument everything downstream trusts printed "all
+        # checks pass". Found by breaking it, which is the only way this class
+        # ever surfaces.
+        fails.append(f"validate_asset_b: could not be checked ({e})")
 
     # 6 -- quoted constants match their definitions
     docs = " ".join((ROOT / d).read_text() for d in ("STATUS.md", "PLAN.md")

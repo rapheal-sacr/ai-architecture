@@ -28,7 +28,7 @@ SCHEMA. One JSON object per interaction, JSONL:
     {
       "query_id":     str,
       "domain":       str,        # REQUIRED. See P1d -- capture-time, never inferred
-      "domain_source":str,        # "capture" | "inferred"
+      "domain_source":str,        # "capture" | "independent_authority" | "inferred"
       "source":       str,        # which corpus/deployment this came from. See P4
       "candidates":   [{"card_id": str, "score": float}],
       "chosen":       str,
@@ -65,6 +65,8 @@ from collections import Counter
 
 INDEPENDENT = {"executable", "replay", "human"}   # not the model under test
 DECOMPOSABLE = {"lexical", "embedding_sum", "embedding", "bm25"}
+# P1d. Capture-time was a PROXY for the property that matters -- see the predicate.
+DOMAIN_OK = {"capture", "independent_authority"}
 
 # ---------------------------------------------------------------------------
 # Thresholds, DERIVED from the precision the measurement needs rather than
@@ -140,16 +142,24 @@ def predicates(rows: list) -> list:
         f"difficulty range {'varies' if _spread(diff) else 'CONSTANT'}",
         "A constant axis gives an unestimable correlation."))
     out.append((
-        "P1d domain recorded at capture",
+        "P1d domain independent of the system",
         all(r.get("domain") for r in rows)
-        and all(r.get("domain_source") == "capture" for r in rows),
+        and all(r.get("domain_source") in DOMAIN_OK for r in rows),
         f"{sum(1 for r in rows if not r.get('domain'))} rows lack a domain; "
-        f"{sum(1 for r in rows if r.get('domain_source') != 'capture')} not capture-time",
+        f"{sum(1 for r in rows if r.get('domain_source') not in DOMAIN_OK)} not from "
+        f"{sorted(DOMAIN_OK)}",
         "E2.1's quantity is PER-DOMAIN difficulty bias -- mean 0.095, worst 0.176 "
         "at correlation 1.0 -- so a log without a domain label yields only a "
         "pooled correlation and M1 cannot produce its own statistic. "
-        "AND IT CANNOT BE RETROFITTED: a domain label applied after capture is an "
-        "INFERRED partition, which is E0.1-K4 and E3.3's territory exactly."))
+        "CORRECTED: the requirement is INDEPENDENCE FROM THE SYSTEM BEING "
+        "MEASURED, not literal capture time -- capture-time was a proxy for it. "
+        "A partition is INFERRED when the system derives it from its own traffic; "
+        "it is RECORDED when it comes from an authority that predates and does "
+        "not depend on the questions or any model. Wikidata `instance of` joined "
+        "on a recorded entity id is the second kind, and it satisfies the "
+        "rationale even though it is applied after the dataset was built. "
+        "WHAT STILL CANNOT BE RETROFITTED is a partition the SYSTEM derives from "
+        "its own traffic, which is E0.1-K4 and E3.3's territory exactly."))
 
     # ---- M2 -----------------------------------------------------------------
     sc = Counter(r.get("scorer") for r in rows)
@@ -274,7 +284,7 @@ def _synthetic(break_: str = "") -> list:
         if b == "P1a":  r["difficulty"] = None
         if b == "P1b":  r["difficulty_source"] = "outcome"
         if b == "P1c":  r["difficulty"] = 0.5
-        if b == "P1d":  r["domain_source"] = "inferred"
+        if b == "P1d":  r["domain_source"] = "inferred"   # the failing kind
         if b == "P2a":  r["scorer"] = "cross_encoder"
         if b == "P2b":
             r["next_score"] = None
