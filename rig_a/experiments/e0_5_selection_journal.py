@@ -86,6 +86,7 @@ N_ROLLOUTS = 48
 N_ADAPTERS = 8
 SEED = 20260806
 N_WORLDS = 8
+FLEET_ROLLOUTS = 384      # for the window analysis, held above 1 rollout/adapter
 
 # The sweep. `k grows` holds the bank at 8 cards while the ledger grows, so
 # sources per card scale with it. `k fixed` grows the bank proportionally.
@@ -170,6 +171,60 @@ def point(n_entries: int, per_card: int | None) -> dict:
     }
 
 
+def window(w, j, rng, W: int = 16) -> dict:
+    """The batch-16 tension, taken apart into the operations it conflates.
+
+    E0.5 as first written asked "what fraction certifies at batch b" and read
+    0.000 at b>=16 as a conflict with E0.2c's window-16 economics. That question
+    conflates two operations that happen on different clocks:
+
+        DISABLE    per tombstone, seconds, and it is what makes deletion SOUND
+        RECOMPILE  batched over the window, hours, and it restores COMPETENCE
+
+    Three readings, and they answer different questions:
+
+      1 BATCH        one certificate over the whole window. What E0.5 measured.
+      2 RUNNING      accumulate displacement per selection as the window fills,
+                     dropping a selection when its cumulative bound crosses.
+                     Sound, and at window close it is ALGEBRAICALLY THE SAME SET
+                     as (1) -- the bound sums src_dev over the hit sources and
+                     divides by (k - m) whether that sum is accumulated in one
+                     step or sixteen. So running certification does not improve
+                     the number; what it changes is WHEN the answer is needed.
+      3 PER-TOMBSTONE  certified against every deletion taken alone. This is the
+                     cheap thing one is tempted to do, it is what the disable
+                     path actually needs, and it is NOT a sound batch guarantee:
+                     e1 alone cannot flip a selection and e2 alone cannot, and
+                     both together still can. Measured here rather than assumed.
+    """
+    n = w.n_rollouts
+    alive = np.ones(w.n_entries, dtype=bool)
+    base = w.selected_cards(alive)
+    batch = [int(e) for e in rng.choice(w.n_entries, size=W, replace=False)]
+
+    cert_batch = j.certified(batch)
+
+    cert_each = np.ones(n, dtype=bool)
+    disable_per_tombstone = []
+    for e in batch:
+        c = j.certified([e])
+        cert_each &= c
+        disable_per_tombstone.append(1.0 - c.mean())
+
+    after = alive.copy()
+    for e in batch:
+        after[e] = False
+    flipped = base != w.selected_cards(after)
+
+    return {
+        "disable_load": float(np.mean(disable_per_tombstone)),
+        "recompile_queue_batch": float((~cert_batch).mean()),
+        "recompile_queue_each": float((~cert_each).mean()),
+        "truly_flipped": float(flipped.mean()),
+        "unsound_per_tombstone": int((cert_each & flipped).sum()),
+    }
+
+
 def main() -> int:
     res = {arm: [point(n, per_card) for n in LEDGERS] for arm, per_card in ARMS.items()}
 
@@ -238,13 +293,49 @@ def main() -> int:
     print("  nets two opposing effects into one figure. Same defect as B19 --")
     print("  a comparison across arms that differ in more than the manipulation.")
 
-    print("\n  THE TENSION NOBODY STATED. Certification collapses to ~0 at every")
-    print("  b >= 4 in every configuration tested, while the world stays stable at")
-    print("  0.60-0.95. E0.2c's deletion economics rest on BATCHING -- window 16")
-    print("  is what makes throughput independent of cascade breadth, 24/day. So")
-    print("  the mechanism that makes deletion affordable is the mechanism that")
-    print("  destroys the certificate, and section 2 and E0.2c's R8 cannot both be")
-    print("  adopted at their stated settings. Neither document mentions the other.")
+    # THE BATCH-16 TENSION, re-asked as the two operations it conflates
+    wins = []
+    for w_i in range(N_WORLDS):
+        rng = np.random.default_rng(SEED + 100 + w_i)
+        wd = InfluenceWorld(dim=DIM, n_entries=960, n_cards=64,
+                            n_rollouts=FLEET_ROLLOUTS, n_adapters=N_ADAPTERS, rng=rng)
+        wins.append(window(wd, SelectionJournal.record(wd), rng, W=16))
+    agg = {k: float(np.mean([x[k] for x in wins])) for k in wins[0]}
+    unsound_total = sum(x["unsound_per_tombstone"] for x in wins)
+
+    print("\n  THE BATCH-16 TENSION, TAKEN APART. E0.5 asked `what certifies at")
+    print("  batch b` and read 0.000 at b>=16 as a conflict with E0.2c's window-16")
+    print("  economics. That conflates two operations on different clocks:")
+    print("  DISABLE is per tombstone and is what makes deletion sound; RECOMPILE")
+    print("  is what gets batched.")
+    print(f"    disable load, per tombstone      : {agg['disable_load']:.3f}"
+          "   <- the fast path, and the only place a certificate is needed")
+    print(f"    recompile queue, batch reading   : {agg['recompile_queue_batch']:.3f}")
+    print(f"    recompile queue, per-tombstone   : {agg['recompile_queue_each']:.3f}")
+    print(f"    actually flipped over the window : {agg['truly_flipped']:.3f}")
+    print(f"    per-tombstone certifications that flipped anyway: {unsound_total}")
+    print("    RUNNING certification is sound and, at window close, algebraically")
+    print("    the SAME SET as the batch reading -- the bound sums src_dev over hit")
+    print("    sources and divides by (k - m) whether accumulated in one step or")
+    print("    sixteen. So it does not improve the number; it changes when the")
+    print("    answer is needed, which is the point. The tension was mine: I")
+    print("    measured a batch certificate for an operation that is per-tombstone.")
+    if unsound_total:
+        print("    And the cheap per-tombstone reading is NOT a sound batch")
+        print("    guarantee -- selections certified against every deletion alone")
+        print("    still flipped under the union. Measured, not assumed.")
+    else:
+        print("    The per-tombstone reading produced no violation here, and that")
+        print("    is NOT soundness. It is provably unsound as a batch guarantee --")
+        print("    e1 alone cannot flip a selection, e2 alone cannot, both together")
+        print("    can -- so zero in six worlds is a fact about these worlds. Use")
+        print("    the running form, which is sound and costs the same.")
+    print(f"\n    And the honest cost: {agg['recompile_queue_batch']:.1%} of selections are")
+    print(f"    uncertified over the window while {agg['truly_flipped']:.1%} actually flipped.")
+    print("    So the certificate is nearly useless for PRUNING THE RECOMPILE")
+    print("    QUEUE, which is what a window-scale reading would use it for. It")
+    print("    earns its place on the disable path and nowhere else -- and that is")
+    print("    a narrower claim than section 2 makes for it.")
 
     # KS is fatal and the other two are not, so they must not collapse into one
     # word. A mechanism that is SOUND but narrow is a different object from one

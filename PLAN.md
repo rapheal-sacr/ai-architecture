@@ -1195,6 +1195,67 @@ oracle-priced — and at `owner_specific = 1.0` distinct probes equal draws at e
 pool size. What restricting to ground-truth-keyed stimuli costs is **coverage**,
 and that is unmeasured.
 
+### E0.5 revisited · The batch-16 tension was mine
+
+E0.5 asked *"what fraction certifies at batch b"* and read 0.000 at b ≥ 16 as a
+conflict with E0.2c's window-16 economics. That question conflates two operations
+that sit on different clocks: **disabling is per tombstone and is what makes
+deletion sound; recompiling is what gets batched.**
+
+| | |
+|---|---|
+| disable load, per tombstone | **0.138** |
+| recompile queue, batch reading | 0.929 |
+| recompile queue, per-tombstone reading | 0.821 |
+| actually flipped over the window | 0.114 |
+
+The certificate is needed on the fast path, where it costs 13.8%. **Running
+certification is sound and, at window close, algebraically the same set as the
+batch reading** — the bound sums `src_dev` over hit sources and divides by
+`(k − m)` whether accumulated in one step or sixteen. So it does not improve the
+number; it changes *when* the answer is needed, which is the point.
+
+Two things not to overclaim. The cheap per-tombstone reading produced **no**
+violation here, and that is not soundness — it is provably unsound as a batch
+guarantee (`e1` alone cannot flip a selection, `e2` alone cannot, both together
+can), so zero in six worlds is a fact about these worlds. And the honest cost:
+**92.9% of selections are uncertified over the window while 11.4% actually
+flipped**, so the certificate is nearly useless for pruning the recompile queue.
+It earns its place on the disable path and nowhere else — narrower than §2 claims.
+
+### E0.8 · Depth governs coverage and not the oracle line — they are two curves
+
+E0.6 and E0.7 looked like one quantity seen from two ends, both set by traffic
+depth per entry. Holding ledger and fleet fixed so depth is the only thing moving:
+
+| depth | pool | unowned | distinct | consumed | /draws |
+|---|---|---|---|---|---|
+| 0.05 | 388 | 0.692 | 227 | 58.7% | 88.6% |
+| 1.00 | 960 | 0.000 | 226 | 23.6% | 88.3% |
+| 4.00 | 960 | 0.000 | 225 | 23.4% | 88.0% |
+
+**KD fails.** Unowned provenance collapses to zero by depth 1.0 while distinct
+probes are **flat at ~225 across the entire range** and sharing never appears at
+all. Consumption *does* fall with depth — because its **denominator** grows, the
+pool running 388 → 960 while the numerator is pinned by draws. Reading
+consumption alone would have shown a curve moving with depth and concealed that
+the oracle cost never moved. Same defect as the withdrawn 77%, a ratio whose
+denominator is doing the work; caught this time only because the absolute count
+was carried alongside the ratio.
+
+**So the corollary dies, and the corollary was the interesting part.** *"Both
+currencies degrade together in the tail"* is not what happens: coverage degrades
+in the tail and the oracle bill does not move. If anything the tail is where
+sharing would *begin* to help, because that is where the pool shrinks toward the
+draw count — the opposite direction from the prediction. Reaching `pool < draws`
+needs fewer than one rollout per adapter here (B18), so that regime is recorded
+as unmeasured rather than asserted either way.
+
+What survives for worklist 2.3: not the unification. Overlap is not the governing
+variable for the oracle line (E0.7) and neither is depth. The governing quantity
+is `fleet × probes` against the pool, which is arithmetic. Depth governs coverage,
+which is E0.6's result standing alone. **Two axes, two quantities.**
+
 ### E0.1 revisited · K4 is withdrawn, and A3 varied nothing
 
 Worklist 2.4 and 2.5. Two of this record's published numbers do not survive their

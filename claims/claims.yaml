@@ -506,6 +506,47 @@ claims:
       the sharing vanishes entirely. What the restriction to ground-truth-keyed
       stimuli costs is COVERAGE, and that is unmeasured.
 
+  - id: E0.8
+    tier: L7
+    claim: "unowned provenance and the oracle line are one curve, both set by traffic depth per entry"
+    source: "review synthesis of E0.6 and E0.7"
+    rig: A
+    kill: "KD the two do not co-move in depth; KT no regime exists where both are bad"
+    predicted: "co-movement -- thin traffic gives a sparse pool AND a large coverage hole"
+    status: FAIL
+    result: results/e0_8_traffic_depth.json
+    finding: >
+      KD FAILS. The hypothesis is refuted and it was mine and the reviewer's
+      jointly. Holding ledger and fleet fixed so DEPTH is the only thing moving:
+        unowned provenance   0.692 -> 0.000, collapsing to zero by depth 1.0
+        distinct probes      227 -> 225, FLAT across the entire range
+        distinct / draws     88.6% -> 88.0%, flat -- sharing never appears at all
+      Pool consumption does fall with depth, but it falls because its DENOMINATOR
+      grows: the pool runs 388 -> 960 while the numerator is pinned by draws.
+      Reading consumption alone would have shown a curve moving with depth and
+      concealed that the oracle cost never moved. That is the same defect as the
+      withdrawn 77% -- a ratio whose denominator is doing the work - caught this
+      time by carrying the absolute count alongside the ratio.
+    consequence: >
+      Depth governs COVERAGE and does not govern the ORACLE LINE. They share one
+      driver, pool size, but the oracle line also depends on fleet x probes,
+      which depth does not touch. In this configuration draws (256) stayed below
+      the pool at every depth, so it never left the linear regime and the oracle
+      bill was constant while coverage went from 69% unowned to zero.
+      SO THE COROLLARY DIES, and the corollary was the interesting part. "Both
+      currencies degrade together in the tail" is not what happens. If anything
+      the tail is where sharing would begin to help, because that is where the
+      pool shrinks toward the draw count - the opposite direction from the
+      prediction. Reaching pool < draws needs fewer than one rollout per adapter
+      in this configuration (B18), so that regime is recorded as unmeasured
+      rather than asserted either way.
+    what_survives_for_2_3: >
+      Not the unification. E0.7 shows overlap is not the governing variable for
+      the oracle line; this shows depth is not either. The governing quantity is
+      fleet x probes against the pool, and it is arithmetic available before any
+      measurement. Depth is the governing variable for coverage, which is E0.6's
+      result standing alone. Two axes, two quantities.
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"

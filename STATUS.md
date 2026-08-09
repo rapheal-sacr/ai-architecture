@@ -117,10 +117,21 @@ recordings, and both returned something the design document does not say.
 | **inert-arm detection** | **mechanical, was inspection** | B7, B8, B20, A4-usage are one defect | [rig_a/core/trace.py](rig_a/core/trace.py): an arm is inert when nothing it mutated is read on the path to the measurement **and** both calls took the same arguments. E0.1 asserts it over every arm before any metric is read |
 | **`unowned fraction` as reported** | **wrong grain** | pooled over the ledger | E0.6: worst card 1.000 against pooled 0.483, blindness peaking at 4.2. The same defect as E0.1 KB, E1.1c and E2.3 — and the first time it appears inside a statistic proposed to fix it |
 
-**A tension neither document states.** E0.2c's deletion economics need batching —
-window 16 is what makes throughput independent of cascade breadth. Batch 16 is
-where the certificate is 0.000 everywhere tested. §2 and R8 cannot both ship at
-their stated settings.
+**That tension was mine, and E0.5's window analysis dissolves it.** §2 and R8 act
+on different operations — disabling is per tombstone (load **0.138**, and the only
+place a certificate is needed); recompiling is what gets batched. Running
+certification is sound and at window close is *algebraically the same set* as the
+batch reading, so it changes when the answer is needed, not the number. The
+narrower true claim: 92.9% of selections are uncertified over a window while
+11.4% flipped, so the certificate is nearly useless for pruning the recompile
+queue and earns its place on the disable path only.
+
+**And the two currencies are not one curve.** E0.8 holds ledger and fleet fixed so
+depth alone moves: unowned provenance collapses 0.692 → 0.000 while distinct
+probes stay **flat at ~225**. Depth governs coverage; the oracle line is governed
+by `fleet × probes` against the pool and never moved. Pool consumption falls with
+depth only because its denominator grows — the same defect as the withdrawn 77%,
+caught because the absolute count was carried beside the ratio.
 
 ---
 
