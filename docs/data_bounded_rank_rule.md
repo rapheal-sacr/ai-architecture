@@ -84,9 +84,30 @@ themselves correlated, the effective `n` is lower still; if a single long entry
 contains genuinely independent content, it is higher. Measuring the effective
 sample size per entry is a corpus question and joins asset A.
 
-**What a sub-threshold owner should do instead is unstated.** The rule refuses the
-request; it does not say what replaces it. Two candidates, neither tested: inherit
-a basis from a provenance-adjacent owner (which reintroduces the neighbourhood
-clause E0.7 killed, in a different currency), or allocate from a pooled estimate
-and accept that the owner's protection statistic is not independent. Both are
-worse than a basis of its own, and that is the honest cost of the floor.
+**~~What a sub-threshold owner should do instead is unstated.~~ [CLOSED — there is
+a third answer, and it is better than both candidates.]** The two I had were
+inheriting a basis from a provenance-adjacent owner — which reintroduces the
+neighbourhood clause E0.7 killed, in a different currency — and allocating from a
+pooled estimate, which costs the owner its independent statistic. Both are worse
+than a basis of its own.
+
+> **A sub-threshold owner does not become an owner.** It stays an L3 skill card
+> and is served by retrieval.
+
+No similarity judgment, so the neighbourhood clause stays dead. No pooling, so
+nothing loses an independent statistic. And `|provenance| ≥ threshold` becomes a
+**promotion criterion** — a recorded quantity checkable *before* promotion, which
+makes it a **sound screen** in §6's sense: one more hoisted conjunct of the
+promotion conjunction, free, and it synthesises nothing.
+
+**The cost is honest and it lands on the tail.** Rare capabilities stay
+retrieval-served rather than compiled. That is not a new regime — it is the one
+L4's gate `g` already handles, routing to retrieval where weights should not be
+trusted. Whether it is *acceptable* is measurable rather than arguable: compiled
+against retrieval-served on the same probes.
+
+**One coupling to state, because the two mechanisms pull against each other.** R12
+pushes a sub-threshold owner to broaden its provenance in order to qualify, and
+§3's fan-out cap constrains which entries it may broaden *into*. A thin owner
+seeking promotion and a saturated entry are in direct conflict, and neither
+mechanism knows about the other.

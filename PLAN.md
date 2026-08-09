@@ -1920,6 +1920,46 @@ remaining yield per site is smaller than §0's table implies.
 sufficiency, which is why the answer is *confirmed, weakly* — and that is the more
 useful answer.
 
+### The last three free items — 1.3, 1.4, 1.7
+
+None carries a kill criterion. All three are recording or record-correction, and
+they close the free list.
+
+**1.3 · R12's open question has a third answer, and it beats both I had.** I had
+inheriting a neighbour's basis (which reintroduces the clause E0.7 killed) and
+pooling (which costs the owner its independent statistic).
+
+> **A sub-threshold owner does not become an owner.** It stays an L3 skill card and
+> is served by retrieval.
+
+No similarity judgment, so the neighbourhood clause stays dead; no pooling, so
+nothing loses an independent statistic. And `|provenance| ≥ threshold` becomes a
+**promotion criterion** — recorded, checkable *before* promotion, hence a **sound
+screen** in §6's sense: one more hoisted conjunct, free.
+
+The cost is honest and lands on the tail — rare capabilities stay retrieval-served,
+which is the regime L4's gate `g` already handles — and it is **measurable rather
+than arguable**: compiled against retrieval-served on the same probes.
+
+**And a coupling neither mechanism knows about.** R12 pushes a thin owner to
+broaden its provenance to qualify; §3's fan-out cap constrains which entries it may
+broaden *into*. A thin owner seeking promotion and a saturated entry are in direct
+conflict.
+
+**1.4 · Within-owner coverage is now reported.** `ProbeRegistry.coverage()` gives
+worst/best/spread per owner beside the count. I8 checks the count; coverage is what
+protection depends on, and nothing reported it. On Zipfian provenance it reads
+**40× spread** — matching E0.8's 38×, from a different code path.
+
+**1.7 · Record sync — the format control reaches §8.** The abstraction test is
+*"a merged owner must beat both parents on a third region neither targeted"*,
+offered as the only definition of generalised a non-regression gate cannot fake.
+If all three regions share a form, **the merged owner wins by learning form** and
+the test certifies an average as an abstraction. The third region must differ in
+**form as well as topic** — which makes its corpus requirement the same one asset A
+already carries. First mechanism the EB.3 generalisation was *pointed at* rather
+than derived from.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a

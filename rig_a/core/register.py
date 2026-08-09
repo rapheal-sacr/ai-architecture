@@ -338,6 +338,30 @@ class ProbeRegistry:
         self.owner_sets.append(ids)
         return ids
 
+    def coverage(self, provenances: list) -> dict:
+        """Worklist v3 1.4 -- coverage per owner, beside count per owner.
+
+        I8 requires EQUAL-SIZED draws and is silent on what they cover. E0.8
+        measured the consequence: with Zipfian experience the spread between the
+        best- and worst-covered owner reaches 38x while every owner is still
+        reported as having had its equal draw. Count is what I8 checks; coverage
+        is what protection actually depends on, and nothing reported it.
+
+        coverage_o = |probes drawn for o| / |provenance_o|
+        """
+        vals = []
+        for ids, prov in zip(self.owner_sets, provenances):
+            n = len(prov)
+            if n:
+                vals.append(len(ids) / n)
+        if not vals:
+            return {"worst": 0.0, "best": 0.0, "spread": 0.0, "n_owners": 0}
+        w, b_ = min(vals), max(vals)
+        return {"worst": round(w, 5), "best": round(b_, 5),
+                "spread": round(b_ / max(w, 1e-12), 2),
+                "median": round(float(sorted(vals)[len(vals) // 2]), 5),
+                "n_owners": len(vals)}
+
     @property
     def distinct(self) -> int:
         """The ORACLE line: probes that had to be authored or harvested."""

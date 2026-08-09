@@ -793,6 +793,18 @@ claims:
     reusable: >
       The format control generalises past this experiment: any transfer
       measurement between same-format domains needs one, or it measures form.
+    it_reaches_section_8: >
+      SECTION 8'S ABSTRACTION TEST IS CONFOUNDED THE SAME WAY, and this is the
+      first mechanism the generalisation was pointed at rather than derived from.
+      The test is "a merged owner must beat BOTH parents on a third region
+      NEITHER targeted", offered as the only definition of generalised that a
+      non-regression gate cannot fake. If all three regions share a form - short
+      declarative prose, as every domain in this record does - the merged owner
+      wins the third region by learning FORM, and the test certifies an average
+      as an abstraction. 78% of raw spillover was form here.
+      So the third region must differ in FORM AS WELL AS TOPIC, or the abstraction
+      test measures format transfer. Cheap to state, and it makes the test's
+      corpus requirement the same one asset A already carries.
 
   - id: EB.5
     tier: L7
@@ -860,13 +872,27 @@ claims:
       draw and satisfies I8. It is also the missing bound on allocation: section
       1.2 makes allocation set arithmetic over the complement of live bases and
       never says how large a request may be.
+    the_open_question_is_closed: >
+      A SUB-THRESHOLD OWNER DOES NOT BECOME AN OWNER. It stays an L3 skill card
+      and is retrieval-served. That is better than both candidates I had:
+      no similarity judgment, so the neighbourhood clause E0.7 killed stays dead;
+      no pooling, so nothing loses an independent statistic.
+      And |provenance| >= threshold becomes a PROMOTION CRITERION - a recorded
+      quantity checkable before promotion, hence a SOUND SCREEN in section 6's
+      sense. One more hoisted conjunct, free, synthesising nothing.
+      The cost is honest and lands on the tail: rare capabilities stay
+      retrieval-served, which is the regime L4's gate g already handles. Whether
+      that is acceptable is MEASURABLE rather than arguable - compiled against
+      retrieval-served on the same probes.
+      COUPLING, because the two mechanisms pull against each other: R12 pushes a
+      thin owner to broaden its provenance to qualify, and section 3's fan-out
+      cap constrains which entries it may broaden INTO. A thin owner seeking
+      promotion and a saturated entry are in direct conflict, and neither
+      mechanism knows about the other.
     open: >
       f is measured on EB.2's eight short-text domains, so a more diverse buffer
       would move the floor UP and these rows are optimistic. The independence
-      assumption (one entry, one draw) is conservative and unverified. And what a
-      sub-threshold owner should do INSTEAD is unstated - inheriting a
-      neighbour's basis reintroduces the clause E0.7 killed, and a pooled
-      estimate costs the owner its independent statistic.
+      assumption (one entry, one draw) is conservative and unverified.
     status: proposed
 
   - id: EB.6
