@@ -1046,12 +1046,25 @@ claims:
     b2_candidates_checked: >
       B2's scarce half is RESOLVED, and checking produced a rejection and a
       correction. Full assessment in docs/asset_b2_candidates.md.
-      HOTPOTQA IS REJECTED, and it is the field everyone reaches for first. Its
-      `level` in {easy, medium, hard} is exactly M1's difficulty axis, and the
-      medium/hard split is "determined by training multiple baselines and testing
-      the answerability of the questions" - difficulty read off MODEL OUTCOMES.
-      That is P1b's violation by construction, E0.2's shape, and invisible
-      without checking how the label was made.
+      HOTPOTQA - CORRECTED AGAINST THE PAPER, and the finding is sharper than
+      either "rejected" or "the native label is structural". Its `level` has TWO
+      BOUNDARIES AND THEY ARE NOT THE SAME KIND OF THING. From section 4:
+      train-easy is "18,089 mostly single-hop examples" - STRUCTURAL. Then "we
+      implemented a question answering model based on the current
+      state-of-the-art architectures... the models were able to correctly answer
+      60% of the questions with high confidence (determined by thresholding the
+      model loss). These correctly-answered questions are split out and marked as
+      the train-medium subset", and hard is the residual - so the medium/hard
+      boundary is MODEL-DERIVED. The paper confirms it carries no structural
+      signal: multi-hop ratio 93.3% in train-medium against 92.0% in hard.
+      SO IT IS NOT FIXABLE BY CHOOSING WHICH LABEL TO TAKE. The usable form is
+      narrower: the BINARY reading, easy vs medium-union-hard, is single-hop vs
+      multi-hop and satisfies P1b. The three-way reading does not, at any level of
+      care. And the percentile-on-retriever-score classes common in the literature
+      are a THIRD quantity called difficulty, also outcome-derived - so
+      difficulty_source must record which BOUNDARY, not merely which label.
+      Sixth instance of one name covering two quantities, and the first found in
+      someone else's artifact rather than in this record.
       MUSIQUE AND 2WIKIMULTIHOPQA SURVIVE. MuSiQue encodes hop count in the id
       (2hop__482757_12019), spans 2-4 hops, carries `question_decomposition`, and
       is COMPOSED from single-hop questions so hop count is structural by
@@ -1080,6 +1093,34 @@ claims:
       `domain_source` now takes capture | independent_authority | inferred.
       A defect in my own predicate, found by trying to apply it - the same way
       EB.3's specification was produced by a run rather than by thought.
+    the_caveat_became_testable: >
+      R12 pre-registered "structural difficulty may not be the difficulty that
+      matters" and it was not checkable with one proxy. FRAMES supplies a second:
+      824 multi-hop questions needing 2-15 Wikipedia articles each, ~36% spanning
+      multiple constraints, with a reasoning-type label per question. ARTICLE
+      COUNT IS A STRUCTURAL DIFFICULTY PROXY INDEPENDENT OF HOP COUNT, so if the
+      two disagree about which items are hard, M1's answer is proxy-dependent and
+      the choice has to be reported beside it. 824 is too small to be primary and
+      right for that check. 2Wiki's four reasoning types give a third axis.
+      First time a pre-registered caveat in this record became measurable rather
+      than staying a caveat.
+    asset_b1_and_a: >
+      B1 - BEIR supplies the field that cannot be retrofitted. 18 retrieval
+      datasets in one corpus/queries/qrels format, and THE DATASET IDENTITY IS
+      THE RECORDED DOMAIN LABEL - P1d by construction rather than by classifying
+      queries afterwards, and `independent_authority` under the corrected P1d.
+      P0 holds at 100% via human relevance judgments (resolved_by: human,
+      disjoint from any scorer), which is P0a for free. First pass: SciFact
+      (5K/300), NFCorpus (3.6K/323), FiQA (57K/648); CQADupStack adds twelve
+      StackExchange sub-forums as a within-dataset axis. Caution: HotpotQA is
+      inside BEIR, so the `level` problem arrives with it.
+      A - form diversity is the requirement and most "multi-domain" corpora fail
+      it, because they vary topic while holding form constant, which is EB.3's
+      confound exactly. Source-labelled pretraining corpora are the right shape:
+      Dolma (peS2o, Gutenberg, Wikipedia/Wikibooks, C4) or Pile subsets (PubMed
+      Central, FreeLaw, USPTO, StackExchange, GitHub, Ubuntu IRC, arXiv LaTeX).
+      AVOID BOOKS3 - DMCA takedown August 2023, copies persisted, RedPajama
+      removed it over copyright. Gutenberg/PG19 is the clean substitute.
     what_it_does_not_unblock: >
       B1's hard half was never the corpus. None of these datasets carries
       retrieval logs at all, so P2a, P2b, P2c, P3a, P3b and P3c are all still

@@ -9,17 +9,48 @@ Checked against the predicates rather than read from papers, per R13's own model
 
 ---
 
-## The rejection first, because it is the field everyone reaches for
+## HotpotQA first — one label, two boundaries of different kinds
 
-**HotpotQA's `level` fails P1b by construction.** The dataset carries an explicit
-`level ∈ {easy, medium, hard}`, which is exactly the difficulty axis M1 needs — and
-the distinction between medium and hard is *"determined by training multiple
-baselines and testing the answerability of the questions."*
+Not "rejected" and not "fine". Checked against the paper rather than either
+summary, and it is worse than a two-labels-under-one-name problem.
 
-That is **difficulty read off model outcomes**. Using it makes
-checkability-vs-difficulty a correlation between a variable and a function of the
-thing it is being correlated with, and no world returns anything else. It is E0.2's
-shape, and it would have been invisible without checking how the label was made.
+From HotpotQA §4 (arXiv 1809.09600), on how the split was made:
+
+> *"This train-easy set contains 18,089 mostly single-hop examples. We implemented
+> a question answering model based on the current state-of-the-art architectures…
+> Based on this model, we performed a three-fold cross validation on the remaining
+> multi-hop examples. Among these examples, the models were able to correctly
+> answer 60% of the questions with high confidence (determined by thresholding the
+> model loss). These correctly-answered questions … are split out and marked as the
+> train-medium subset… After splitting out train-easy and train-medium, we are left
+> with hard examples."*
+
+So `level` has **two boundaries and they are not the same kind of thing**:
+
+| boundary | how it is drawn | P1b |
+|---|---|---|
+| easy \| rest | single-hop vs multi-hop — **structural** | **passes** |
+| medium \| hard | a SOTA model answered it correctly at high confidence, by thresholding model loss | **fails** |
+
+And the paper confirms the second boundary carries no structural signal: the
+multi-hop ratio is **93.3% in train-medium against 92.0% in hard**. The two
+subsets are structurally indistinguishable; only model performance separates them.
+
+**This is not fixable by choosing which label to take**, which is what a
+two-labels-under-one-name problem would allow. The consequence is narrower and
+usable:
+
+> **HotpotQA's binary reading survives — `easy` vs `medium ∪ hard` is single-hop vs
+> multi-hop, and satisfies P1b. Its three-way reading does not, at any level of
+> care.**
+
+**And there is a third quantity called difficulty on top of this.** The percentile
+thresholds on retriever scores widely used in the literature are a *different*
+label again, and outcome-derived. So `difficulty_source` must record not merely
+*which* difficulty was taken but **which boundary** — and a dataset that ships one
+field with two boundaries of different kinds is the sixth instance of one name
+covering two quantities in this record, and the first found in someone else's
+artifact rather than in this one.
 
 HotpotQA's `type ∈ {comparison, bridge}` is capture-time and fine — but it is two
 values and a question *kind*, not a difficulty.
@@ -107,6 +138,73 @@ has no repair in the design.
 
 ---
 
+## A second difficulty axis, which makes the pre-registered caveat testable
+
+R12's caveat was *"structural difficulty may not be the difficulty that matters"* —
+recorded, and not checkable with one proxy.
+
+**FRAMES supplies a second one.** 824 multi-hop questions requiring **2–15
+Wikipedia articles** each, ~36% involving reasoning across multiple constraints,
+each carrying a reasoning-type label (numerical, tabular, multiple constraints,
+temporal, post-processing). **Article count is a structural difficulty proxy
+independent of hop count.**
+
+That converts the caveat into a check: **if hop count and source count disagree
+about which items are hard, M1's answer is proxy-dependent and the choice of proxy
+has to be reported alongside it.** 824 is too small to be primary and exactly right
+for that. 2WikiMultihopQA's four reasoning types give a third axis.
+
+This is the first time a pre-registered caveat in this record has become
+measurable rather than staying a caveat.
+
+---
+
+## Asset B1 · BEIR supplies the field that cannot be retrofitted
+
+18 retrieval datasets in one corpus/queries/qrels format, spanning scientific,
+news, biomedical and finance collections.
+
+**The dataset identity *is* the recorded domain label.** That is P1d, satisfied by
+construction rather than by classifying queries afterwards — which would be exactly
+the inferred partition E0.1-K4 is about. Under the corrected P1d it is
+`independent_authority`: the partition predates any question I ask of it.
+
+**P0 is satisfied at 100%** by human relevance judgments — `resolved_by: human`,
+disjoint from any scorer I build, which is P0a for free.
+
+Everything else remains a build, which is the point: **P2a** (a decomposable scorer
+I choose), **P2b** (the (k+1)-th score I log), **P3a** (an unfiltered bank I
+compile), **P3c** (my own ratios).
+
+First pass, three that fit on a laptop and differ genuinely: **SciFact** (5K docs /
+300 queries), **NFCorpus** (3.6K / 323), **FiQA** (57K / 648). **CQADupStack** adds
+a finer second axis — twelve StackExchange sub-forums, so within-dataset domain
+structure as well as between-dataset.
+
+**One caution that arrives with it:** HotpotQA is inside BEIR, so the `level`
+problem above comes along. Under the binary reading it is usable; under the
+three-way reading it is not.
+
+---
+
+## Asset A · form diversity is the requirement, and most corpora fail it
+
+EB.3's finding was that **78% of raw spillover was shared form**. Nearly every
+"multi-domain" corpus varies topic while holding form constant — which is precisely
+the confound, so "multi-domain" is the wrong search term.
+
+**Source-labelled pretraining corpora are the right shape**, because their sources
+differ in form by construction: **Dolma** (peS2o academic papers, Project Gutenberg
+books, Wikipedia/Wikibooks, C4 web text), or **Pile** subsets (PubMed Central prose,
+FreeLaw opinions, USPTO patents, StackExchange Q&A, GitHub code, Ubuntu IRC
+transcripts, arXiv LaTeX).
+
+**Avoid Books3.** A DMCA takedown in August 2023 was followed by copies persisting
+anyway, and RedPajama removed it from its own corpus over copyright.
+**Gutenberg/PG19 is the clean substitute.**
+
+---
+
 **Sources**
 
 - [HotpotQA dataset fields and level construction](https://deepwiki.com/hotpotqa/hotpot/1.2-hotpotqa-dataset)
@@ -115,3 +213,6 @@ has no repair in the design.
 - [MuSiQue fields and id format](https://huggingface.co/datasets/dgslibisey/MuSiQue)
 - [2WikiMultihopQA repository](https://github.com/Alab-NII/2wikimultihop)
 - [2WikiMultihopQA on HuggingFace](https://huggingface.co/datasets/framolfese/2WikiMultihopQA)
+- [FRAMES dataset](https://hyper.ai/en/datasets/34835)
+- [BEIR benchmark](https://github.com/beir-cellar/beir)
+- [Dolma](https://arxiv.org/pdf/2402.00159) · [Pile subsets and Books3 removal](https://www.unfragile.ai/the-pile)
