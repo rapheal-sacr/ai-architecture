@@ -26,7 +26,7 @@ and all but one has a named repair.
 
 **One gap has no repair yet**, and it is not that the repair failed — it is that
 R9 cannot be evaluated until three things about fleet composition are stated
-*and* I7 is expressed as the rate it already is.
+*and* I11 is expressed as the rate it already is.
 
 **The meta-repair needed a repair on first contact with its own example.**
 Auditing R9's draft declaration found that `trades against` named the right
@@ -66,7 +66,29 @@ not.
 | **I4** recompilability | **broken → repair** | was a bookkeeping claim wearing a competence claim's name | E0.1: 6.7% pooled over-forgetting hiding **79.8% worst-region**, 12.4× blind. Amended to a two-sided verified property with three support categories |
 | **I5** anchored improvement | **broken → repair** | blast-radius rule bounds *which* thresholds, not their *values* | E4.2. R4: bound the values; pin derived views; seal only harness code a verifier executes through |
 | **I6** refutation permanence | assumed | untested | E4.3/E4.4, unrun |
-| **I7** compile adequacy | **new — proposed** | did not exist | E0.1 A1b: I4 checks recompile fidelity and says nothing about compile adequacy. A system that bounds cost by never learning the tail satisfies I2 and I4 completely |
+| **I11** compile adequacy | **new — proposed** | did not exist | E0.1 A1b: I4 checks recompile fidelity and says nothing about compile adequacy. A system that bounds cost by never learning the tail satisfies I2 and I4 completely |
+
+**Renumbered, and the collision is the point.** This invariant was **I7** in every
+prior version of this record. Rev 2 of the design independently adds a block
+I7–I10, so the number carried two different invariants — compile adequacy here,
+recorded commitment there. That is the *fourth* instance of one name covering two
+quantities, after L7's "hours–days", I11's own scalar-vs-rate shape, and `fleet`.
+The other three were found by a measurement going the wrong way; this one was
+found by two documents being read side by side, which is a weaker detector.
+Renumbering this one rather than the design's block, because a falsification
+record is downstream of the thing it falsifies.
+
+### Proposed in rev 2, not yet in this record
+
+None of these has been tested here. They are listed so that a reader can tell
+which invariants the record has an opinion about and which it does not.
+
+| Invariant | Status | Would retire | What would test it |
+|---|---|---|---|
+| **I7** recorded commitment | proposed — untested | ε thresholds, ρ retention, three-λ unanimity, release-as-inference | worklist 3.1, the hinge: register vs spectrum on E1.1c's per-domain bar and E1.2's blindness ratio |
+| **I8** equal audit | proposed — untested | the weighting-rule amendment's 13-site enumeration, and pooled protection numbers | subsumes the amendment as a design property rather than a rule applied at enumerated sites. E4.2 is the standing evidence that enumerations are the shape that fails |
+| **I9** instrument separation | proposed — untested | the artifact-list form of the blast-radius rule | worklist 5.3: rank-correlate reference reader against production reader before adopting |
+| **I10** oracle conservation | proposed — untested | the assumption that the Assay is hand-maintained at the rate the system improves | worklist 5.4 (E2.2 by hand) decides whether L10 is real at all |
 
 ---
 
@@ -134,7 +156,7 @@ remaining:
 | Quantity | Gates | Status |
 |---|---|---|
 | ~~**restoration latency tolerance `L`**~~ | C4 | **largely dissolved by EB.1.** At the measured `H` the drain term is 0.21 days, not 5.33, so the window is open even at a **one-day** tolerance — `L` has ~13 days of slack before it binds. It was a gating quantity only because `H` was assumed at 8h. Still worth writing down, but it no longer decides anything |
-| **I7 per-region density floor** | R9's coverage side | a policy choice. E0.2e sweeps it: at a floor of **1** there is no tension at any τ; at **5** the tension is total even at the loosest. "100% of regions below floor" is a statement about the 3.0 I chose |
+| **I11 per-region density floor** | R9's coverage side | a policy choice. E0.2e sweeps it: at a floor of **1** there is no tension at any τ; at **5** the tension is total even at the loosest. "100% of regions below floor" is a statement about the 3.0 I chose |
 
 **Two sentences and one coupling make R9 evaluable.** That is the whole distance
 between the last open gap and a drawable curve, and none of it needs an
@@ -196,7 +218,7 @@ Raised in review, verified, not yet applied:
    was aimed at the *most* binding constraint, not the least. And every sampled
    feasible configuration sits at **β = 0.087**, E0.2f's reconciled value; none
    at E0.2d's 0.65.
-3. **Still owed.** I7's floor is in the wrong units — It counts *cards* per region; I7 claims
+3. **Still owed.** I11's floor is in the wrong units — It counts *cards* per region; I11 claims
    *ledger* coverage. Five cards drawing the same eight hot entries are worse
    covered than two drawing sixteen distinct ones — and `concentration` is the
    knob in that very experiment controlling exactly that. Correct form:

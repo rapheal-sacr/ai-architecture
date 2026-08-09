@@ -235,7 +235,7 @@ claims:
   - id: E0.2e
     tier: L3 x L7
     rig: A
-    claim: "R9 (provenance-aware admission) has an acceptable point: breadth <= 0.31 at I7-acceptable coverage"
+    claim: "R9 (provenance-aware admission) has an acceptable point: breadth <= 0.31 at I11-acceptable coverage"
     source: "the last architectural gap -- E0.2d found no lever on breadth, E5.1 made breadth decide whether an envelope exists"
     kill: "G1 [re-registered] the curve cannot be drawn if breadth's net direction against tau depends on an unspecified coupling; G2 the direct mechanism does not respond to tau"
     predicted: uncertain
@@ -263,16 +263,16 @@ claims:
       the clothes of a measurement.
     coverage_side_also_unevaluable: >
       An earlier version of this entry reported that R9's expected tension with
-      I7 "does not bind - coverage stays at 1.000 across every tau". WITHDRAWN.
+      I11 "does not bind - coverage stays at 1.000 across every tau". WITHDRAWN.
       That was an artifact of the metric: coverage was measured as at-least-one-
-      card-per-region, a binary, while I7 is written as a RATE. Re-measured as
+      card-per-region, a binary, while I11 is written as a RATE. Re-measured as
       per-region density, the tension is severe: tightening tau takes density
       from 25.0 to 1.0 and puts 100% of regions below the floor, with the worst
       region falling fastest.
       The tension was INVISIBLE, not absent - and the quantity binarised was
       per-region density on rare regions, which is what this entire record has
       been about. So R9 is DOUBLY unevaluable: the breadth side needs three
-      specification decisions, the coverage side needs I7 stated as a rate.
+      specification decisions, the coverage side needs I11 stated as a rate.
     the_floor_is_a_fifth_gating_quantity: >
       DENSITY_FLOOR = 3.0 is CHOSEN, so "100% of regions below floor" is a
       statement about 3.0 in exactly the way "empty window" was a statement about
@@ -890,7 +890,7 @@ claims:
     why_the_objective_had_to_be_named: >
       Under the design's gate as written - unweighted mean of per-region deltas -
       dropping a rare specialist is CORRECT, not a defect, since it is worth half
-      a generalist. The loss is only a defect under I7's coverage objective,
+      a generalist. The loss is only a defect under I11's coverage objective,
       where a specialist lifting a region above the competence floor is exactly
       what closes the gap. The design never says which objective promotion
       serves, and until it does, "the ladder loses good candidates" is not even
@@ -1412,15 +1412,15 @@ claims:
       so the constant carrying the constraint was the pessimistic end of its
       range - the same shape of problem as H, and resolvable the same way.
     second_table_matters_more: >
-      Compile adequacy (I7) binds harder than C6 at aggressive draw caps. No
+      Compile adequacy (I11) binds harder than C6 at aggressive draw caps. No
       support shape clears an 0.80 coverage floor at a 25% draw; 2-of-8 needs
       f >= 0.50 and 2-of-3 needs f >= 0.75. So the draw cap and support
       redundancy trade against each other, and at low caps the binding constraint
       is whether the compile covered the region at all rather than whether decay
-      broke it. That is I7's whole point and why it needed to be an invariant.
+      broke it. That is I11's whole point and why it needed to be an invariant.
     watch_for: >
       k correlating with region frequency. If rare regions have systematically
-      smaller support sets, C6, I7 and the whole weighting-rule enumeration all
+      smaller support sets, C6, I11 and the whole weighting-rule enumeration all
       bind hardest in the same place and the anisotropy gains a fifth symptom.
 
 # -- rig bugs found so far, all of which changed a reported result ---------
@@ -1447,6 +1447,20 @@ bugs:
       PASS on the claim this plan most expected to fail, and was caught only
       because U1 and U2 contradicted each other.
 
+  - id: B19
+    where: e0_1_verified_recompilability, arm table
+    bug: "A6 carries decay=0.25 and A4 carries none, so A6 is not a matched control for A4"
+    effect: >
+      The stratified-vs-usage tradeoff - pooled 0.246 / worst 0.520 against
+      0.165 / 0.624 - is measured ACROSS A DECAY DIFFERENCE. That tradeoff is
+      the empirical demonstration of the weighting rule's own cost, so the one
+      number quantifying what equal-draw protection costs is confounded. Not a
+      wrong number: an uninterpretable comparison. Found by review, not by the
+      rig, because no manipulation check asks whether two arms differ ONLY in
+      the manipulated quantity.
+    status: open
+    fix: "re-run A6 against A4 with matched decay (worklist 2.5); until then the cost figure is not citable"
+
   - id: B18
     where: e0_2f breadth reconciliation, first run
     bug: "used n_rollouts=48 against n_adapters=64, giving one rollout per adapter and sixteen adapters with none"
@@ -1460,13 +1474,13 @@ bugs:
 
   - id: B17
     where: e0_2e_r9_breadth_coverage coverage_of
-    bug: "measured I7 coverage as at-least-one-card-per-region, a binary, when I7 is written as a RATE"
+    bug: "measured I11 coverage as at-least-one-card-per-region, a binary, when I11 is written as a RATE"
     effect: >
       reported coverage 1.000 at every tau and every pool structure, and could
       not have reported otherwise - the bank only drops below one-card-per-region
       once it falls under ~16 cards total, while the quantity actually moving is
       a 25x change in per-region density. Led to the published claim that R9's
-      expected tension with I7 "does not bind", which is withdrawn. Re-measured
+      expected tension with I11 "does not bind", which is withdrawn. Re-measured
       as a rate, 100% of regions fall below the density floor at tight tau.
     the_pattern_at_its_most_pointed: >
       The quantity that got binarised was per-region density on rare regions -
@@ -1701,7 +1715,7 @@ repairs:
   - id: R11
     from: E2.3
     proposal: >
-      State which objective promotion serves - mean per-region value or I7
+      State which objective promotion serves - mean per-region value or I11
       coverage - and make the cheap rung rank by THAT statistic. A mean-based
       filter cannot serve a coverage objective at any probe allocation, because
       a specialist's mean is low by construction. If the objective is coverage,
@@ -1797,3 +1811,101 @@ repairs:
       inverts to -0.008 and both arms collapse, because the ranking signal
       saturates and stops discriminating.
     status: proposed
+
+  # -- rev 2 rules, recorded as proposed and NOT adopted --------------------
+  # From `Recorded, Not Inferred` rev 2.2 section 1.2b. These govern the
+  # commitment register, which does not exist in this rig yet. They are here so
+  # that when Phase 1/3 builds it, the rules are pre-registered rather than
+  # written after the numbers land -- and so that a reader can tell design prose
+  # from tested mechanism at a glance.
+
+  - id: R-a
+    from: "rev 2.2 section 1.2b"
+    proposal: >
+      Probe sets are write-once. An owner's probe set is drawn at compile time
+      from its own provenance and is immutable for the owner's lifetime - never
+      re-derived, never resampled. I1 applied to the draw itself.
+    why: >
+      Half of what makes K4 damaging. K4's 21.7% needs items REASSIGNED between
+      strata and the draw REDRAWN. R-a removes the second.
+    open: "untested. The register does not exist in Rig A yet; worklist 3.2 is the churn simulation that would test it"
+    status: proposed-not-adopted
+
+  - id: R-b
+    from: "rev 2.2 section 1.2b"
+    proposal: >
+      Probe coverage is monotone under churn. No churn operation reduces the set
+      of probes the fleet is evaluated against. Merge takes the union with a
+      PER-PROBE floor, not a mean over the set. There is no split operator - a
+      split is two promotions citing the parent's provenance plus one verified
+      retirement. On retirement the retiree's probe set moves to the fleet
+      residual set rather than being discarded.
+    why: >
+      The per-probe floor is E2.3's mean-ranking failure caught one level up: a
+      mean over a union dilutes any single regression exactly as a mean over
+      regions discarded rare specialists at 2.81x.
+    open: >
+      Costs are stated but unmeasured. Unions grow and the residual set grows,
+      so evaluation cost rises monotonically against a bounded budget - E4.4's
+      shape with a different denominator, and the crossover is unmeasured.
+    status: proposed-not-adopted
+
+  - id: R-c
+    from: "rev 2.2 section 1.2b"
+    proposal: >
+      The cover is TOTAL. The fleet residual set holds probes for all provenance
+      no live owner covers - not only probes orphaned by retirement. Emit
+      `unowned provenance fraction` as a standing metric.
+    why: >
+      A cover is not a partition. Competence in a region where nothing was ever
+      promoted has no owner, therefore no probe set, therefore no protection
+      statistic - it is ABSENT rather than under-weighted, and nothing reports
+      its loss. Without R-c the register trades a statistic that under-protects
+      the tail for a record that does not cover it, and the substitution is
+      invisible by construction.
+    open: "the unowned fraction on real provenance is unmeasured. Worklist 1.3 emits it; 3.1 kill criterion 3 scores it"
+    status: proposed-not-adopted
+
+  - id: R-d
+    from: "rev 2.2 section 1.2b"
+    proposal: >
+      Probes are deduplicated at draw time, keyed on provenance. Draw from the
+      existing pool first; create only what is missing.
+    why: >
+      Section 1.3's whole pricing argument - granularity is compute-expensive
+      and oracle-cheap - depends on overlapping owners SHARING probes. Without a
+      dedup rule at draw time that sharing is aspirational and the oracle
+      multiplier returns at roughly fleet size.
+    open: "conditional on fleet provenance overlap, which is unmeasured. Worklist 2.3 measures it and decides whether 1.3 survives at all"
+    status: proposed-not-adopted
+
+# Challenges raised against a published result and then withdrawn. Recorded
+# rather than dropped: a result that spent two rounds under a cloud should show
+# that it did, and the reason the cloud lifted is itself a method finding.
+
+retractions:
+  - id: X1
+    against: "E0.1 arm A1a -- and therefore the K1/KB headline, 6.7% pooled vs 79.8% worst, blindness 12.4x"
+    challenge: >
+      Review rev 2.0 extended K4's missing null-treatment control to A1a: if the
+      stratified arm confounds relabelling with resampling, A1a's drift result
+      might likewise be resampling noise measured against a usage-draw baseline.
+    withdrawn_because: >
+      DERIVABLE FROM THE CODE PATH, not from a run. A1a is cap=None, and draw()
+      returns the whole live set before the policy branch is reached, so its
+      draw is deterministic and policy-independent. The only thing decay varies
+      is which entries are alive. alive unchanged => equal draws => equal passes
+      => over-forgetting exactly 0. The matched null needs no arm.
+    scope: >
+      Exactly four arms reach rng.choice and are affected: A3, A4-stratified,
+      A6-uniform, A6-stratified. A0, A1a, A1b, A2 and A4-usage are deterministic.
+      Leg 1 of the no-inferred-partition argument stands, E0.1's headline stands,
+      and the weighting rule stands twice over - on A1a, and independently on
+      E1.1c's Spearman -0.95, which has no draw policy in it at all.
+    method_finding: >
+      A control registered on a deterministic path is dead weight AND it casts
+      doubt where none exists. This is the mirror of B7, where a control was
+      registered on a quantity the run never exercised. Both are the same
+      failure: not asking what the code CAN do before asking what the world did.
+      Now a standing method commitment in PLAN.md section 4.
+    source: "Part II, section 0 (rev 2.2)"

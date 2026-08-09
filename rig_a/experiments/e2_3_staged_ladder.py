@@ -55,7 +55,7 @@ KILL CRITERIA (pre-registered):
        scores 0.019 against a generalist's 0.040. It is worth half a generalist
        and never enters the top decile, so dropping it is CORRECT and L2 as first
        written examined an empty population and could not find a defect. B14.
-       Under I7's coverage objective -- how many regions a candidate lifts from
+       Under I11's coverage objective -- how many regions a candidate lifts from
        below the competence floor to at or above it -- a rare specialist lifts
        one region, a frequent specialist lifts none (already above), and a
        generalist lifts the marginal one. All three populations are non-empty,
@@ -104,7 +104,7 @@ L1_RHO_MIN = 0.70             # the original, reported for audit
 L2_CONCENTRATION_MAX = 2.0
 
 
-COMPETENCE_FLOOR = 0.55         # I7: a region below this is under-covered
+COMPETENCE_FLOOR = 0.55         # I11: a region below this is under-covered
 
 
 def make_world(rng):
@@ -132,14 +132,14 @@ def make_world(rng):
     # OBJECTIVE 1 -- the gate as written: unweighted mean of per-region deltas.
     value_mean = true.mean(axis=1)
 
-    # OBJECTIVE 2 -- I7 coverage: how many regions the candidate lifts from BELOW
+    # OBJECTIVE 2 -- I11 coverage: how many regions the candidate lifts from BELOW
     # the competence floor to at or above it.
     #
     # A first attempt used "gap closed below the floor, summed" and still favoured
     # generalists 0.56 to 0.166, because closing a little gap in fourteen regions
     # beats closing a lot in one -- so it discriminated no better than the mean
     # objective and L2 again had nothing to score. Counting regions LIFTED is the
-    # quantity I7 actually asserts: a region below the floor is a defect, and what
+    # quantity I11 actually asserts: a region below the floor is a defect, and what
     # matters is whether it is still one afterwards.
     below = current < COMPETENCE_FLOOR
     value_cov = ((below[None, :]) &

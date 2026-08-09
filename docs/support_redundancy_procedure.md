@@ -87,7 +87,7 @@ same shape of problem as `H`, and resolved the same way: measure the thing.
 
 ### And the second table matters more than it looks
 
-Compile adequacy (**I7**) — the fraction of probes with enough support actually
+Compile adequacy (**I11**) — the fraction of probes with enough support actually
 *drawn* to pass at all — binds harder than C6 at low draw fractions:
 
 ```
@@ -100,7 +100,7 @@ Compile adequacy (**I7**) — the fraction of probes with enough support actuall
 **No shape clears the 0.80 floor at a 25% draw.** So the draw cap and support
 redundancy trade against each other, and at aggressive caps the binding
 constraint is not over-forgetting but whether the compile covered the region at
-all — which is I7's whole point, and why it needed to be an invariant rather than
+all — which is I11's whole point, and why it needed to be an invariant rather than
 a test note.
 
 ---
@@ -115,6 +115,6 @@ architectural gap (R9). Nor latency tolerance `L`, which is a product
 requirement to be written down rather than measured.
 
 **Watch for:** `k` correlating with region frequency. If rare regions have
-systematically smaller support sets, then C6, I7 and every finding in the
+systematically smaller support sets, then C6, I11 and every finding in the
 weighting-rule enumeration all bind hardest in the same place, and the four
 symptoms of the anisotropy become five.

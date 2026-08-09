@@ -25,7 +25,7 @@ TWO MECHANISMS, REPORTED SEPARATELY -- and conflating them was the first
 version's real defect. It produced a table where k = 10 looked WORSE than k = 3,
 which is backwards for anything called redundancy:
 
-    COMPILE ADEQUACY (I7). At draw fraction f, an item needs m of its k entries
+    COMPILE ADEQUACY (I11). At draw fraction f, an item needs m of its k entries
         actually DRAWN before decay is even relevant. At f = 0.25 only 16% of
         3-of-3 items clear that bar against 47% of 3-of-10 items. Redundancy
         helps.
@@ -62,7 +62,7 @@ ITEMS_PER_REGION = 40
 N_SEEDS = 4
 SEED = 20260806
 C6_TOLERANCE = 0.20
-I7_FLOOR = 0.80          # a compile that covers under 80% of a region's probes
+I11_FLOOR = 0.80          # a compile that covers under 80% of a region's probes
                          # has not adequately covered it
 
 
@@ -127,8 +127,8 @@ def main() -> int:
 
     rows = []
 
-    print("  TABLE A -- COMPILE ADEQUACY (I7): worst-region fraction of probes with")
-    print(f"  enough support DRAWN to pass at all. Floor {I7_FLOOR:.2f}.\n")
+    print("  TABLE A -- COMPILE ADEQUACY (I11): worst-region fraction of probes with")
+    print(f"  enough support DRAWN to pass at all. Floor {I11_FLOOR:.2f}.\n")
     hdr = f"    {'k':>4}{'m':>4}" + "".join(f"{'f=' + format(f, '.2f'):>12}"
                                             for f in DRAW_FRACTIONS)
     print(hdr); print("    " + "-" * (len(hdr) - 4))
@@ -136,11 +136,11 @@ def main() -> int:
         cells = []
         for f in DRAW_FRACTIONS:
             pr, _ = agg(k, m, f, 0.15)
-            cells.append(f"{pr:>9.3f}{'  ok' if pr >= I7_FLOOR else '  --'}")
+            cells.append(f"{pr:>9.3f}{'  ok' if pr >= I11_FLOOR else '  --'}")
         print(f"    {k:>4}{m:>4}" + "".join(cells))
 
     print(f"\n  TABLE B -- DECAY ROBUSTNESS (C6): worst-region over-forgetting GIVEN")
-    print(f"  the probe passed. Full draw, so I7 is not confounding."
+    print(f"  the probe passed. Full draw, so I11 is not confounding."
           f" Tolerance {C6_TOLERANCE:.2f}.\n")
     hdr2 = f"    {'k':>4}{'m':>4}" + "".join(f"{'d=' + format(d, '.2f'):>12}"
                                              for d in DECAY_RATES)
@@ -174,7 +174,7 @@ def main() -> int:
     out = ROOT / "results" / "e5_2_support_decision_table.json"
     out.write_text(json.dumps(
         {"seed": SEED, "regions": REGIONS, "c6_tolerance": C6_TOLERANCE,
-         "i7_floor": I7_FLOOR, "shapes_clearing_C6": ok_shapes, "rows": rows},
+         "i7_floor": I11_FLOOR, "shapes_clearing_C6": ok_shapes, "rows": rows},
         indent=2))
     print(f"wrote {out}")
     return 0

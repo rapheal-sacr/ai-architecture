@@ -125,7 +125,7 @@ DELETION_ARRIVAL_PER_DAY = 2.0
 # statement about the constants, not the design, so the profile is now swept and
 # the closed-form window is reported alongside.
 # The concurrent : promoted ratio is a DEPLOYMENT POLICY, so it is swept rather
-# than chosen -- same class as L and the I7 density floor.
+# than chosen -- same class as L and the I11 density floor.
 CONCURRENT_RATIO = (0.05, 0.15, 0.35, 1.0)
 # Part II section A requires disjoint bases, which implies
 #     concurrent_fleet * RANK_REQUEST <= DIM

@@ -122,7 +122,7 @@ whether that is absolute or a fraction of the bank, and whether fleet size track
 bank size.
 
 **And the expected tension is not the binding one.** R9 was predicted to trade
-against I7 — reject a card and its distinction is never available. Coverage stays
+against I11 — reject a card and its distinction is never available. Coverage stays
 at **1.000** across every tau and pool structure swept, so that tension does not
 bind here. The blocking unknown is the fleet coupling.
 
@@ -873,7 +873,7 @@ weighting rule does not reach it.
 
 **Why the objective had to be named first.** Under the design's gate as written
 — unweighted mean of per-region deltas — dropping a rare specialist is *correct*,
-not a defect: it is worth half a generalist. The loss is only a defect under I7's
+not a defect: it is worth half a generalist. The loss is only a defect under I11's
 coverage objective, where a specialist lifting a region above the competence
 floor is exactly what closes the gap. **The design never says which objective
 promotion serves**, and until it does, "the ladder loses good candidates" is not
@@ -1228,6 +1228,26 @@ that had never been written down — so it had to be re-derived by reading, and 
 clean result sat under a cloud in between. The annotation is now in `draw()`
 itself, not in a review. This is the record's own thesis applied to the
 programme: **recorded, not inferred.**
+
+**One null-treatment row per draw policy, not one control per arm table.** A
+single control stands for a table only if every arm shares its nuisance
+parameters. E0.1's do not: draw policy and decay both vary while A0 alone stands
+for nine arms. So A4-stratified confounds relabelling with resampling — the
+manipulation and the redraw arrive together — and there is no row that isolates
+either. The rule is a null row *per policy that reaches the stochastic branch*,
+plus an RNG-seed nuisance sweep on those arms reported beside the treatment
+effect. Had that sweep run on A4, B8 would have been the experiment's own output
+rather than something found by reading the code two rounds later.
+
+**Before registering a control, check whether the null is derivable from the code
+path.** A control on a deterministic path is dead weight, and worse: it casts
+doubt on a clean result. A1a is `cap=None`, which exits `draw()` before the
+policy branch, so its null is *derivable* — alive unchanged ⇒ equal draws ⇒
+over-forgetting exactly 0 — and no run was needed to establish it. Registering
+one anyway put E0.1's 12.4× blindness factor under a cloud for two rounds for
+nothing. This is the exact mirror of B7, where a control was registered on a
+quantity the run never exercised: **both are the same failure to ask what the
+code can do before asking what the world did.**
 
 **Verify the manipulation took before interpreting a comparison.** The lint below
 checks a criterion's logical *form*. B7 passed that check and still failed: U1

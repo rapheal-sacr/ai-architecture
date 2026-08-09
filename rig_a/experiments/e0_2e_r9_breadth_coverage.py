@@ -14,7 +14,7 @@ admitted cards -- is the only proposed repair, and it does not exist yet.
 STATE THE TENSION BEFORE BUILDING THE MECHANISM. Rejecting a card because it
 shares provenance with an existing one means that card never exists, so the
 distinction it would have drawn is never available. That is a COVERAGE cost, and
-I7 is now the invariant that names exactly what it costs. R9 and I7 pull against
+I11 is now the invariant that names exactly what it costs. R9 and I11 pull against
 each other.
 
 Every mechanism in this design that was specified without stating its tension has
@@ -23,11 +23,11 @@ the three-lambda release rule, the staged ladder. So R9 is specified here as a
 CURVE with an acceptable region marked, not as a threshold.
 
 Both axes use machinery that already exists: breadth as E0.2d defines it,
-coverage as E0.1/I7 define it.
+coverage as E0.1/I11 define it.
 
 KILL CRITERIA (pre-registered, then re-registered -- see below):
     G1 [ORIGINAL] fails if no admission threshold achieves breadth <= 0.31 while
-       holding coverage at or above the I7 floor.
+       holding coverage at or above the I11 floor.
     G1 [RE-REGISTERED] fails if the curve CANNOT BE DRAWN -- if the net direction
        of breadth against tau depends on a coupling the design does not specify.
        Registering the original as if the curve were drawable assumed the answer.
@@ -88,7 +88,7 @@ POOL_CONCENTRATION = (0.2, 0.5, 0.9)   # how much candidate cards draw from a
                                        # overlap structure, swept
 BREADTH_TARGET = 0.31                  # E5.1's window condition
 COVERAGE_FLOOR = 0.80                  # legacy min-1 form, retained for audit
-DENSITY_FLOOR = 3.0                    # I7 as a RATE: cards per region.
+DENSITY_FLOOR = 3.0                    # I11 as a RATE: cards per region.
                                        # CHOSEN, not measured -- swept below,
                                        # because it is a fifth gating quantity
 DENSITY_FLOORS = (1.0, 2.0, 3.0, 5.0)  # and the finding's structure depends on it
@@ -167,7 +167,7 @@ def breadth_of(bank, rng) -> float:
 
 
 def coverage_of(bank) -> dict:
-    """I7's quantity -- as a RATE, not a min-1 test.
+    """I11's quantity -- as a RATE, not a min-1 test.
 
     A previous version returned `len({b["region"] for b in bank}) / N_REGIONS`:
     at least one card per region. That reported 1.000 at every tau and every pool
@@ -175,7 +175,7 @@ def coverage_of(bank) -> dict:
     drops below one-card-per-region once it falls under ~16 cards total, while
     the quantity actually moving is a 9x change in per-region DENSITY.
 
-    I7 as written is a rate: every region covered at a stated minimum per-region
+    I11 as written is a rate: every region covered at a stated minimum per-region
     sampling rate, with regions below the floor recorded as uncovered. A min-1
     test discards the rate entirely. And the quantity that got binarised was
     per-region density on rare regions, which is what this entire record has been
@@ -296,10 +296,10 @@ def main() -> int:
         print("\n     AND THE COVERAGE SIDE IS ALSO UNEVALUABLE. Reported as a rate")
         print("     rather than as at-least-one-card-per-region, per-region density")
         print("     falls sharply with tau and the worst region falls fastest --")
-        print("     which is the I7 tension R9 was expected to trade against, and")
+        print("     which is the I11 tension R9 was expected to trade against, and")
         print("     which the earlier min-1 metric could not see. So R9 is DOUBLY")
         print("     unevaluable: the breadth side needs three specification")
-        print("     decisions, and the coverage side needs I7 stated as the rate it")
+        print("     decisions, and the coverage side needs I11 stated as the rate it")
         print("     already is rather than as a binary.")
     print()
 

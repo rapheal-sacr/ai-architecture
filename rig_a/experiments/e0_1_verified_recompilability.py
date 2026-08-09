@@ -151,13 +151,27 @@ class World:
             policy="stratified"
                 STOCHASTIC. `rng.choice` within each region.
 
-        WHAT THAT MEANS FOR EACH ARM:
+        EVERY ARM, AND WHICH PATH IT TAKES. Five of the nine are deterministic
+        and therefore NEED NO NULL-TREATMENT ROW; four reach `rng.choice` and do.
+        Listing only the interesting ones is what left A1a under a cloud it did
+        not deserve, so the table is complete rather than illustrative.
+
+            DETERMINISTIC -- no rng, null derivable from the code path
 
             A0 control        usage, no drift.  `identical: yes` is TRUE BY
                               CONSTRUCTION and that is its job -- A0 is a control,
                               not a result. If it ever came out `no`, the
                               recompiler would be non-deterministic and every
                               other arm uninterpretable.
+
+            A1a uncapped      cap=None, so the EARLY RETURN below fires before the
+                              policy branch is ever reached. The draw is the whole
+                              live set; the only thing decay varies is which
+                              entries are alive. The matched null is DERIVABLE,
+                              not empirical: alive unchanged => equal draws =>
+                              equal passes => over-forgetting exactly 0. A control
+                              here would have been dead weight. Its 12.4x blindness
+                              factor has no draw policy in it and stands.
 
             A1b usage cap     usage, with decay. `identical: yes` is a FINDING:
                               use-based decay removes the least-used entries,
@@ -167,19 +181,35 @@ class World:
                               being deterministic AND usage-ordered, not on
                               determinism alone.
 
+            A2 tombstone      usage. Deletion changes `alive`, not the ordering
+                              rule, so the draw moves only through the live set.
+
             A4 usage draw     usage, with an ontology shift. `identical: yes` was
                               a BUG (B8): the usage path never reads `strata()`,
                               so the manipulation could not reach the measured
                               quantity. Scored on the stratified arm instead, K4
                               FAILS. Retained as a control, asserted inert.
 
-            A3, A6            uniform / stratified. STOCHASTIC, so `identical` is
-                              informative rather than structural.
+            STOCHASTIC -- reaches rng.choice, so a null-treatment row is required
+
+            A3 harness        uniform. Its 0.216 is measured against a USAGE-draw
+                              baseline, so it confounds harness drift with
+                              resampling. Component-granular stamping loses its
+                              measured support until the matched null runs (2.4).
+            A4 strat          stratified. The arm K4 is scored on.
+            A6 uniform        uniform, with decay.
+            A6 stratified     stratified, with decay. NOT matched to A4: A6 carries
+                              decay=0.25 and A4 carries none, so the
+                              stratified-vs-usage tradeoff is measured across a
+                              decay difference. Open control defect (2.5).
 
         Same shape as `identical: yes` three times over: one construction, one
         finding, one bug. The annotation is the difference.
         """
         live = np.array(sorted(self.provenance & set(np.where(self.alive)[0].tolist())))
+        # THE EARLY RETURN. `cap is None` exits before the policy branch, so an
+        # uncapped arm is deterministic and policy-independent no matter what
+        # `policy` says. A1a is that arm.
         if cap is None or len(live) <= cap:
             return set(live.tolist())
         if policy == "usage":
@@ -382,6 +412,12 @@ def main() -> int:
     print("    Stratified trades a HIGHER pooled rate for a lower worst-region")
     print("    rate -- exactly the weighting rule's tradeoff, and it does not")
     print("    reach 1.0x blindness.")
+    print("    CONFOUNDED (B19). Both A6 arms carry decay=0.25 and A4 carries")
+    print("    none, so the stratified-vs-usage comparison ALSO crosses a decay")
+    print("    difference. This is the one number quantifying what equal-draw")
+    print("    protection costs, and it is not citable until A6 is re-run")
+    print("    against A4 with matched decay. The direction is unsurprising;")
+    print("    the magnitude is not established.")
 
     print(f"\n  K0 A0 recompiler deterministic:                {'ok' if k0 else 'NO'}")
     print(f"  K1 A1 no over-forgetting on surviving support: {'ok' if k1 else 'NO'}")

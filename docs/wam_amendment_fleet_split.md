@@ -26,7 +26,7 @@ C3/C4   drain and union computed over  promoted_fleet
 E5.1 asked C1 as `free >= RANK_REQUEST` — whether the budget fits **one**
 rank-8 adapter — while C3 and C4 used `fleet = 64`. Same symbol, 64× apart.
 
-**Their ratio is a deployment policy**, so it joins `L` and the I7 density floor
+**Their ratio is a deployment policy**, so it joins `L` and the I11 density floor
 on the *decide* list — or goes on a swept axis until someone commits. It is
 swept in the E5.1 re-run rather than chosen, for the same reason the floor was.
 
@@ -82,7 +82,7 @@ This is the **third** instance of one name covering two quantities:
 | Name | Two quantities | Found by |
 |---|---|---|
 | L7's "hours–days" | *disable* (soundness) vs *recompile* (competence) | E0.2c |
-| I7's coverage | scalar (binary) vs rate (density) | B17 |
+| I11's coverage | scalar (binary) vs rate (density) | B17 |
 | `fleet` | concurrent vs promoted | this amendment |
 
 So `wam_amendment_mechanism_declaration.md`'s corollary takes one more term:

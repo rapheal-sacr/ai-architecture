@@ -14,7 +14,7 @@ could not be evaluated at all:
 
 - the breadth side assumes something about how the adapter fleet composes from
   the card bank as the bank shrinks
-- the coverage side needs I7 stated as the rate it already is, not as a binary
+- the coverage side needs I11 stated as the rate it already is, not as a binary
 
 That is the same defect the repairs exist to fix. Generalise it:
 
@@ -49,7 +49,7 @@ Four columns, filled in **before a mechanism is written**, not in a review.
 mechanism      R9 · provenance-aware admission
 requires tier  T0 -- set overlap is computable, no judgement needed
 consumes       nothing at evaluation time; card-bank size at steady state
-trades against per-region card density (I7 coverage) -- a DISTRIBUTION over
+trades against per-region card density (I11 coverage) -- a DISTRIBUTION over
                regions, worst-case binding -- and NOT content redundancy, which
                is what cos <= 0.93 already governs.
                THRESHOLD: the density floor. Status UNSET, and it is a DECIDE
@@ -63,7 +63,7 @@ assumes        (a) how many distinct cards an adapter's training draw uses
 ```
 
 The `assumes` row alone would have stopped R9 before an experiment was built.
-The `trades against` row would have forced I7's rate form, because a density
+The `trades against` row would have forced I11's rate form, because a density
 tension cannot be stated against a binary.
 
 ---
@@ -103,7 +103,7 @@ demonstrating — in a form mechanical enough to check on one line of a table:
 
 The **scope** term is the third one, added after `fleet` was found covering two
 populations through twenty-four experiments. Three instances now, all one name
-over two quantities: L7's "hours–days" (*disable* vs *recompile*, E0.2c), I7's
+over two quantities: L7's "hours–days" (*disable* vs *recompile*, E0.2c), I11's
 coverage (scalar vs rate, B17), and `fleet` (concurrent vs promoted). `fleet`
 passes a prose review; **"promoted adapters, count, population-wide"** and
 **"resident adapters, count, per-inference"** cannot silently be the same row.
