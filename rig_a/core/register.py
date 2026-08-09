@@ -239,6 +239,72 @@ class SelectionJournal:
 # ---------------------------------------------------------------------------
 
 
+@dataclass
+class ProbeRegistry:
+    """R-a and R-d: probes are write-once, and deduplicated at draw time.
+
+    R-d is one line -- "draw from the existing pool first, create only what is
+    missing" -- and section 1.3's entire pricing argument rests on it. Without a
+    provenance-keyed pool, two overlapping owners each author their own probes
+    and the oracle cost multiplies by fleet size, which is exactly the second
+    kill criterion rev 2 pre-registers against its own register.
+
+    THE ASSUMPTION R-d MAKES, WHICH THE DOCUMENT DOES NOT STATE. Sharing works
+    only if a probe is a function of PROVENANCE ALONE. If a probe tests entry e
+    the way owner A uses it, it may test nothing meaningful for owner B, and then
+    the key is (entry, owner) rather than (entry,) and the pool never shares.
+    `context_bound` is that fraction, swept rather than assumed -- because "the
+    sharing is structural" is a claim about probe semantics, and the design has
+    not said what a probe is.
+
+    Two prices, two accounts, and they must never be reported as one number:
+
+        distinct probes         ORACLE.  Paid once, at creation. Scarce.
+        probe-evaluations/cycle COMPUTE. Paid every cycle, forever. Abundant.
+    """
+
+    pool: dict = field(default_factory=dict)        # key -> probe id
+    owner_sets: list = field(default_factory=list)  # owner -> list of probe ids
+    created: int = 0
+    reused: int = 0
+
+    def draw_for(self, owner: int, provenance, n: int, rng,
+                 context_bound: float = 0.0) -> list:
+        """Equal-N draw from this owner's own provenance. I8 by construction.
+
+        Write-once (R-a): an owner's set is drawn here and never redrawn. The
+        pool is consulted first (R-d), so an entry already carrying a probe
+        contributes no new oracle cost.
+        """
+        src = sorted(provenance)
+        if not src:
+            self.owner_sets.append([])
+            return []
+        take = rng.choice(src, size=min(n, len(src)), replace=False)
+        ids = []
+        for e in take:
+            bound = rng.random() < context_bound
+            key = (int(e), owner) if bound else (int(e),)
+            if key in self.pool:
+                self.reused += 1
+            else:
+                self.pool[key] = len(self.pool)
+                self.created += 1
+            ids.append(self.pool[key])
+        self.owner_sets.append(ids)
+        return ids
+
+    @property
+    def distinct(self) -> int:
+        """The ORACLE line: probes that had to be authored or harvested."""
+        return len(self.pool)
+
+    @property
+    def evaluations(self) -> int:
+        """The COMPUTE line: probe-evaluations for one full fleet cycle."""
+        return sum(len(s) for s in self.owner_sets)
+
+
 def owner_provenance(world, alive=None, policy: str = "transitive") -> list:
     """What each owner records as its provenance -- the cover's building block.
 

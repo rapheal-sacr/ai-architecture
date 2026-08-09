@@ -434,6 +434,59 @@ claims:
       Those are the hardest case - no card cites them, so no owner's probe draw
       reaches them by any route. Reported as its own column.
 
+  - id: E0.7
+    tier: L7
+    claim: "section 1.3 - granularity is compute-expensive and oracle-cheap, CONDITIONAL ON PROVENANCE OVERLAP"
+    source: "rev 2.2 sections 1.3 and 1.2b R-d"
+    rig: A
+    kill: "KO oracle multiplier grows ~linearly in fleet size (rev 2's own second kill criterion for 1.4); KV the pool barely shares even at context-free probes; KN the sharing is not attributable to provenance overlap"
+    predicted: uncertain
+    status: PARTIAL
+    result: results/e0_7_probe_registry.json
+    serves: "worklist 1.2 (probe registry) and worklist 2.3 (fleet provenance overlap) -- the same quantity from two sides"
+    finding: >
+      THE CONCLUSION SURVIVES AND THE MECHANISM DOES NOT.
+      KO PASSES: the oracle line is strongly sublinear. At 256 owners the saving
+      is 77% - distinct probes 473 against 2048 draws - so granularity really is
+      cheap in the scarce currency at fleet scale.
+      KV PASSES: the pool shares.
+      KN FAILS, and it is the finding. Distinct probes sit ON the birthday
+      collision curve at every one of 21 (fleet, multiplicity) points, largest
+      departure 4.1% and typically under 1.5%. Tripling owner provenance overlap,
+      0.106 -> 0.397, moves the count by a handful of probes out of hundreds.
+      The saving is arithmetic, not architectural: fleet x probes-per-owner runs
+      out of distinct ledger entries to probe. The oracle line saturates at the
+      LEDGER, not at a provenance neighbourhood.
+    design_consequence: >
+      "Prefer many small owners WITHIN A PROVENANCE NEIGHBOURHOOD" asks an
+      architect to cluster owners by shared sources, and this says clustering
+      buys nothing measurable. The quantity that decides the oracle bill is
+      fleet x probes-per-owner against ledger size - arithmetic available before
+      any clustering, and which no neighbourhood discipline improves. Section
+      1.3's ADVICE should be restated even though its verdict stands.
+    the_unstated_variable: >
+      Context-boundedness decides the scarce currency outright, and the design
+      never sets it. R-d shares a probe only if a probe is a function of
+      PROVENANCE ALONE; if it is keyed (entry, owner) it can never be reused. At
+      context_bound = 1.0 the saving is 0% at every fleet size and every overlap
+      tested. The design says what a probe is KEYED on and never says what a
+      probe IS. That is an `assumes` row with a measured price on it.
+    method: >
+      The first run had no null, reported reuse 0.39 as if it were sharing, and
+      would have credited section 1.3 with a saving that has nothing to do with
+      provenance. Caught by the standing question - why is this number going the
+      WRONG way - since reuse fell slightly as overlap tripled. The null is now
+      a built-in column rather than a post-hoc check.
+      Rollouts scale with fleet (B18's lesson): a fixed rollout budget would have
+      given a 256-owner fleet one rollout each, shrinking provenance with fleet,
+      and the oracle curve would have measured that instead.
+    scope: >
+      Owner overlap here is a property of a simulated card bank and E0.2f showed
+      this rig's overlap-derived quantities are sensitive to bank-to-fleet ratio.
+      What does not depend on that is the null result: whatever the real overlap
+      turns out to be, it must beat birthday collision before it can be credited.
+      This rig supplies the test, not the value.
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"
