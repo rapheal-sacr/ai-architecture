@@ -103,7 +103,7 @@ recordings, and both returned something the design document does not say.
 | **"uncertified ⊂ closure edges"** (§2) | **broken — better than claimed** | assumed influence runs through the chosen card | E0.5: 24,598 uncertified selections outside the closure, **2,178 of which really flipped** — a rival rose while the chosen card was untouched. The journal enlarges the cascade and part of the enlargement is influence no closure can see |
 | **R-c total residual set** (§1.2b) | **load-bearing, and understated** | a cover is not a partition | E0.6: never-owned exceeds retirement-orphaned **3.3–5.5×** at every traffic level. R-c is not a refinement of R-b, it is most of the job |
 | **the cover's reach** | **traffic-shaped** | I8 is a within-owner property | E0.6: unowned provenance 0.483 at 16 rollouts → 0.027 at 512. Equal draws inside an owner say nothing about how far the owners collectively reach |
-| **`unowned fraction` as reported** | **wrong grain** | pooled over the ledger | E0.6: worst card 1.000 against pooled 0.483, blindness peaking at 4.2. The fifth instance of this defect, and the first inside a statistic proposed to fix it |
+| **`unowned fraction` as reported** | **wrong grain** | pooled over the ledger | E0.6: worst card 1.000 against pooled 0.483, blindness peaking at 4.2. The same defect as E0.1 KB, E1.1c and E2.3 — and the first time it appears inside a statistic proposed to fix it |
 
 **A tension neither document states.** E0.2c's deletion economics need batching —
 window 16 is what makes throughput independent of cascade breadth. Batch 16 is

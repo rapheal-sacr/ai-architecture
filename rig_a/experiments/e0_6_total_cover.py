@@ -119,8 +119,8 @@ def one_point(n_rollouts: int) -> dict:
         prov = owner_provenance(w)
         covered = set().union(*[prov[a] for a in live]) if live else set()
 
-        # Q4 -- POOLED IS THE WRONG GRAIN, and this record has found that four
-        # times already. `unowned fraction` over the whole ledger is a pooled
+        # Q4 -- POOLED IS THE WRONG GRAIN, which this record has found at E0.1
+        # KB, E1.1c and E2.3. `unowned fraction` over the whole ledger is a pooled
         # rate, so it hides a concentrated hole exactly as E0.1's 6.7% hid 79.8%.
         # The natural cell here is the card: a card no query ever selects has
         # every one of its sources unowned, and that is the tail the register

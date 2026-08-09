@@ -1127,9 +1127,9 @@ fraction` belongs on the dashboard beside the win.
 
 **And the new metric has the old defect.** At card grain the worst cell runs to
 **1.000 against a pooled 0.483** — blindness 2.1, peaking at 4.2 — with 37.5% of
-cards having every source unowned at low traffic. The fifth instance of a pooled
-protection number hiding a concentrated hole, this time in the statistic proposed
-to fix the problem. Reported worst-cell alongside pooled, in E0.1 KB's form.
+cards having every source unowned at low traffic. A pooled protection number
+hiding a concentrated hole — the same defect as E0.1 KB, E1.1c and E2.3, and the
+first time it appears inside the statistic proposed to fix the problem. Reported worst-cell alongside pooled, in E0.1 KB's form.
 
 **The tail statistic has its own blind spot, stated rather than discovered.** An
 entry in no card's source list has no cell to sit in, so `worst card` reads 0.000
