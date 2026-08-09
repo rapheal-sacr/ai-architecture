@@ -87,10 +87,17 @@ RETIRE_FRACTION = 0.25
 DEPTHS = (0.05, 0.1, 0.25, 0.5, 1.0, 2.0, 4.0)
 
 
-def at_depth(depth: float) -> dict:
+def at_depth(depth: float, zipf_owners: bool = False) -> dict:
+    """`zipf_owners` gives owners UNEQUAL experience, which is what exposes the
+    between-owner form of the coverage anisotropy. With uniform rollouts every
+    owner's provenance is the same size, so a fixed probe count lands equally on
+    all of them and the spread is ~1.3x -- that is a property of the world's
+    construction, not a finding about equal-count draws. A real fleet is promoted
+    from wildly unequal experience."""
     n_rollouts = max(int(round(depth * N_ENTRIES)), FLEET)
     n_cards = max(N_ENTRIES // ENTRIES_PER_CARD, 2)
     unowned, never, consumed, distinct, pools, vs_draws, worst = [], [], [], [], [], [], []
+    cov_worst, cov_best, prov_mean = [], [], []
 
     for w_i in range(N_WORLDS):
         rng = np.random.default_rng(SEED + w_i)
@@ -98,6 +105,14 @@ def at_depth(depth: float) -> dict:
             dim=DIM, n_entries=N_ENTRIES, n_cards=n_cards,
             n_rollouts=n_rollouts, n_adapters=FLEET, rng=rng,
         )
+        if zipf_owners:
+            # Zipfian experience per owner, same total rollouts. Nothing else moves.
+            share = 1.0 / np.arange(1, FLEET + 1, dtype=float)
+            share /= share.sum()
+            order = rng.permutation(n_rollouts)
+            cuts = np.cumsum(np.maximum((share * n_rollouts).astype(int), 1))[:-1]
+            w.adapter_rollouts = [list(map(int, part))
+                                  for part in np.split(order, cuts)]
         n_ret = max(int(round(FLEET * RETIRE_FRACTION)), 1)
         retired = set(int(a) for a in rng.choice(FLEET, size=n_ret, replace=False))
         live = set(range(FLEET)) - retired
@@ -116,13 +131,24 @@ def at_depth(depth: float) -> dict:
         reg = ProbeRegistry()
         for a in range(FLEET):
             reg.draw_for(a, prov[a], PROBES_PER_OWNER, rng)
+        # EQUAL COUNT IS NOT EQUAL COVERAGE. probes_per_owner is a fixed count
+        # while owner provenance grows with depth, so an owner with 10x the
+        # provenance is probed 10x more thinly. That is the THIRD level of one
+        # anisotropy: between-region (I8 fixes it), between-owner (E0.6 found
+        # it), within-owner (this, and it is the qR^-1q symptom exactly).
+        cov = [min(PROBES_PER_OWNER, len(p_)) / max(len(p_), 1) for p_ in prov if p_]
+        if cov:
+            cov_worst.append(min(cov))
+            cov_best.append(max(cov))
+        prov_mean.append(float(np.mean([len(p_) for p_ in prov])) if prov else 0.0)
+
         pools.append(len(pool))
         distinct.append(reg.distinct)
         consumed.append(reg.distinct / max(len(pool), 1))
         vs_draws.append(reg.distinct / (FLEET * PROBES_PER_OWNER))
 
     return {
-        "depth": depth, "n_rollouts": n_rollouts,
+        "depth": depth, "n_rollouts": n_rollouts, "zipf_owners": zipf_owners,
         "unowned_fraction": round(float(np.mean(unowned)), 4),
         "never_owned_fraction": round(float(np.mean(never)), 4),
         "worst_card_unowned": round(float(np.mean(worst)), 4),
@@ -130,6 +156,12 @@ def at_depth(depth: float) -> dict:
         "distinct_probes": round(float(np.mean(distinct)), 1),
         "pool_consumed": round(float(np.mean(consumed)), 4),
         "distinct_over_draws": round(float(np.mean(vs_draws)), 4),
+        "mean_provenance": round(float(np.mean(prov_mean)), 1),
+        "coverage_worst": round(float(np.mean(cov_worst)), 4) if cov_worst else 0.0,
+        "coverage_best": round(float(np.mean(cov_best)), 4) if cov_best else 0.0,
+        "coverage_spread": round(
+            float(np.mean(cov_best)) / max(float(np.mean(cov_worst)), 1e-9), 2)
+            if cov_worst else 0.0,
     }
 
 
@@ -201,6 +233,39 @@ def main() -> int:
     print("  fleet x probes against the pool, and it is arithmetic. Depth is the")
     print("  governing variable for COVERAGE, which is E0.6's result standing")
     print("  alone. Two axes, two quantities, and one run fewer than assuming so.")
+
+    print("\n  EQUAL COUNT IS NOT EQUAL COVERAGE -- the third level of the same")
+    print("  anisotropy, and depth is the axis that shows it. I8 fixes the")
+    print("  between-region level and E0.6 found the between-owner level; this is")
+    print("  WITHIN an owner, and it is open.")
+    print(f"    {'depth':>7}{'mean prov':>11}{'cov worst':>11}{'cov best':>10}{'spread':>9}")
+    for p in pts:
+        print(f"    {p['depth']:>7.2f}{p['mean_provenance']:>11.0f}"
+              f"{p['coverage_worst']:>11.3f}{p['coverage_best']:>10.3f}"
+              f"{p['coverage_spread']:>9.2f}x")
+    print("    cov = probes drawn / that owner's provenance size. A fixed count")
+    print("    against a growing provenance is a FALLING coverage rate, and the")
+    print("    spread is how unequally the `equal` draw actually lands.")
+
+    print("\n  BUT THE SPREAD ABOVE IS A PROPERTY OF THIS WORLD, NOT A FINDING.")
+    print("  Uniform rollouts give every owner the same provenance size, so a")
+    print("  fixed probe count lands equally on all of them. The between-owner")
+    print("  form needs UNEQUAL experience, which a real fleet has. Same worlds,")
+    print("  same totals, Zipfian rollouts per owner:")
+    zpts = [at_depth(d, zipf_owners=True) for d in DEPTHS]
+    print(f"    {'depth':>7}{'mean prov':>11}{'cov worst':>11}{'cov best':>10}{'spread':>9}")
+    for p in zpts:
+        print(f"    {p['depth']:>7.2f}{p['mean_provenance']:>11.0f}"
+              f"{p['coverage_worst']:>11.3f}{p['coverage_best']:>10.3f}"
+              f"{p['coverage_spread']:>9.1f}x")
+    zmax = max(p["coverage_spread"] for p in zpts)
+    umax = max(p["coverage_spread"] for p in pts)
+    print(f"    worst spread: {umax:.1f}x uniform against {zmax:.1f}x Zipfian.")
+    print("    So `equal-N per owner` is equal in COUNT and unequal in COVERAGE by")
+    print(f"    up to {zmax:.0f}x once owners differ in experience -- and every owner")
+    print("    is still reported as having had its equal draw. I8 is satisfied and")
+    print("    the tail inside an owner is not protected. Third level of the same")
+    print("    anisotropy: between-region (I8), between-owner (E0.6), within-owner.")
 
     verdict = "FAIL" if not kd else "PASS"
     print(f"\n  ONE CURVE, TWO CURRENCIES: {verdict} -- they are two curves\n")

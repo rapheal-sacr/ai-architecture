@@ -177,6 +177,50 @@ class SelectionJournal:
         return (qn * np.cos(min(theta + phi, np.pi)),
                 qn * np.cos(max(theta - phi, 0.0)))
 
+    def why_uncertified(self, deleted) -> dict:
+        """Decompose the uncertified set by WHICH SIDE of the comparison moved.
+
+        A selection fails certification when some competitor's upper bound reaches
+        the chosen card's lower bound. Two entirely different things cause that,
+        and they have different levers:
+
+            chosen-card magnitude  the chosen card lost sources, so its own bound
+                                   dropped far enough for an untouched rival to
+                                   reach it. The journal records signed
+                                   contributions, so this side can be made EXACT
+                                   rather than bounded.
+            rival rise             the chosen card was untouched and a rival's
+                                   upper bound rose to meet it. No tightening
+                                   helps; the lever is recording a wider candidate
+                                   set, since a rival outside top-k is invisible.
+
+        Reported because "92.9% uncertified" is not actionable and its two
+        components point at different mechanisms.
+        """
+        deleted = set(int(e) for e in deleted)
+        out = {"chosen_only": 0, "rival_only": 0, "both": 0, "certified": 0}
+        for i, sel in enumerate(self.log):
+            lo_ch, _ = self._score_interval(sel.chosen, deleted, sel)
+            chosen_touched = bool(deleted & set(self.bounds[sel.chosen].src_dev))
+            blocker_touched = False
+            blocked = False
+            for c in range(len(self.bounds)):
+                if c == sel.chosen:
+                    continue
+                _, hi_c = self._score_interval(c, deleted, sel)
+                if hi_c >= lo_ch:
+                    blocked = True
+                    blocker_touched |= bool(deleted & set(self.bounds[c].src_dev))
+            if not blocked:
+                out["certified"] += 1
+            elif chosen_touched and blocker_touched:
+                out["both"] += 1
+            elif chosen_touched:
+                out["chosen_only"] += 1
+            else:
+                out["rival_only"] += 1
+        return out
+
     def certified(self, deleted) -> np.ndarray:
         """Boolean per selection: provably could not have flipped under this deletion."""
         deleted = set(int(e) for e in deleted)

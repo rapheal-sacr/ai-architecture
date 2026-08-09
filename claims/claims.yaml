@@ -400,6 +400,34 @@ claims:
       makes deletion affordable is the mechanism that destroys the certificate,
       and section 2 and R8 cannot both be adopted at their stated settings.
       Neither document mentions the other.
+    why_uncertified: >
+      DECOMPOSED, and it is decisive for which lever. Of the uncertified set over
+      a 16-tombstone window: 75.9% is RIVAL RISE ONLY - the chosen card was not
+      even touched and a rival's upper bound rose to meet it - 24.1% is both, and
+      0.0% is chosen-card magnitude alone. So tightening the chosen side with the
+      journal's recorded signed contributions buys ~nothing; the lever is
+      recording a wider candidate set past top-k. Consistent with KC, since rival
+      rise is exactly what a closure over selected artifacts cannot see.
+      AND THIS RIG FLATTERS THE MECHANISM: retrieval here is argmax over ALL
+      cards, so every candidate's score is recorded. A real top-k journal cannot
+      bound a rival that sits outside k, so it needs the (k+1)-th score as an
+      entry threshold and these numbers are the best case.
+    the_batch_16_tension_was_mine: >
+      E0.5 asked "what certifies at batch b" and read 0.000 at b >= 16 as a
+      conflict with E0.2c's window-16 economics. That conflates two operations on
+      different clocks: disabling is per tombstone and is what makes deletion
+      SOUND; recompiling is what gets batched. Disable load is 0.138 per
+      tombstone - the fast path, and the only place a certificate is needed.
+      Running certification is sound and at window close is ALGEBRAICALLY the
+      same set as the batch reading, since the bound sums src_dev over hit
+      sources and divides by (k - m) whether accumulated in one step or sixteen;
+      it changes when the answer is available, not what it is.
+      The honest cost: 92.9% uncertified over a window against 11.4% actually
+      flipped, so the certificate is nearly useless for pruning the RECOMPILE
+      queue and earns its place on the disable path only.
+      The cheap per-tombstone reading produced zero violations here and that is
+      NOT soundness - it is provably unsound as a batch guarantee, so zero in six
+      worlds is a fact about these worlds.
     scope: >
       The 0.70 kill criterion is written against REAL TRAFFIC and this is a
       simulator, so the certified FRACTION does not transfer - worklist 2.2 is
@@ -540,12 +568,70 @@ claims:
       prediction. Reaching pool < draws needs fewer than one rollout per adapter
       in this configuration (B18), so that regime is recorded as unmeasured
       rather than asserted either way.
+    within_owner_anisotropy: >
+      THE THIRD LEVEL OF ONE ANISOTROPY, and it is large. probes_per_owner is a
+      fixed COUNT while owner provenance grows with depth, so equal-count draws
+      are not equal-coverage draws. Coverage - probes drawn over that owner's
+      provenance - falls 0.500 to 0.009 across the depth sweep, a 55x fall.
+      The between-owner spread is only 1.7x under uniform rollouts, and that is a
+      property of the world rather than a finding: equal rollouts give every
+      owner the same provenance size. Under ZIPFIAN experience per owner, same
+      totals and nothing else changed, the spread reaches 37.6x - so an "equal-N
+      per owner" draw is equal in count and unequal in coverage by up to 38x once
+      owners differ in experience, while every owner is still reported as having
+      had its equal draw. I8 is satisfied and the tail INSIDE an owner is not
+      protected. Between-region is fixed by I8, between-owner was found by E0.6,
+      within-owner is this and it is open.
     what_survives_for_2_3: >
       Not the unification. E0.7 shows overlap is not the governing variable for
       the oracle line; this shows depth is not either. The governing quantity is
       fleet x probes against the pool, and it is arithmetic available before any
       measurement. Depth is the governing variable for coverage, which is E0.6's
       result standing alone. Two axes, two quantities.
+
+  - id: E1.6
+    tier: L7
+    claim: "THE HINGE, ratio half - the commitment register is a better protection instrument than the traffic-weighted spectrum"
+    source: "rev 2.2 section 1.2 and 1.4; split from 3.1 because the ratio and the level have different sensitivities"
+    rig: A
+    kill: "H1 register does not reduce the blindness ratio; H2 register's Spearman(rate, leakage) still <= -0.5; H3 exposure ORDERING still tracks the spectrum's (>= 0.9), i.e. the change is cosmetic"
+    predicted: uncertain
+    status: PASS
+    result: results/e1_6_register_vs_spectrum.json
+    finding: >
+      ALL THREE PASS, at rho = 0.95, averaged over 3 configurations x 4 seeds.
+        blindness (worst-domain / traffic-weighted):  spectrum 2.88 -> register 1.33
+        Spearman(rate, leakage):                      spectrum -0.971 -> register -0.056
+        exposure ordering, spectrum vs register:      +0.045
+      The rarity monotone is broken, not merely shifted: Spearman moves from
+      essentially perfect anti-correlation to zero, and the ordering correlation
+      of +0.045 says the register protects a DIFFERENT set of domains rather than
+      the same set with nicer numbers. At rho = 0.99 the spectrum leaves 12.8
+      domains above the interference limit and the register leaves 0.0.
+      So section 1's central claim survives the half of the hinge that can be
+      read today, and rev 2 keeps its motivation.
+    the_architectural_point: >
+      R-b freq-balanced lands close to the register (blindness 1.45 against 1.33)
+      and the AGREEMENT is the finding rather than a redundancy. R-b must
+      ESTIMATE the rate vector it corrects for - the traffic distribution the
+      weighting rule says protection must not depend on - while the register
+      needs only each owner's own provenance, which I1/I4 already require it to
+      carry. Same protection, no estimate. Recorded-not-inferred in its narrowest
+      testable form, and the register is slightly the better of the two.
+    what_is_not_scored: >
+      FREE RANK AND THE TAIL-SAFE LEVEL. Printed and deliberately unscored.
+      E1.1d established that every free-rank number in this record was taken at
+      subscription 1.0, which is exactly the feasibility cliff, so the level is
+      unreadable until Rig B supplies the real subscription ratio. This decides
+      whether the register is a better protection INSTRUMENT, not whether it
+      FITS. Splitting the two is what made the ratio half runnable now - rev 2
+      registered them as one criterion and gated the decisive comparison behind
+      a measurement it does not need.
+    baseline_and_regime: >
+      Every figure is measured against the SPECTRUM arm at the same retention,
+      no decay, equal-N probe sets. Named per B19, where the cost of stratified
+      drawing was +0.0125 without decay and +0.0806 with - 6.4x - so a
+      protection-cost number without its baseline and regime is unreadable.
 
   - id: E0.3
     tier: L8

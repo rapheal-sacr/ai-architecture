@@ -1314,6 +1314,72 @@ differences that measure the draw fraction, not the policy. The within-A6
 comparison is the valid one, because decay is held equal across it. A null row is
 matched to a policy, not to every arm that uses that policy.
 
+### E1.6 · The hinge, ratio half — §1's central claim survives
+
+Rev 2 registered the hinge as one experiment with one kill criterion, and it
+bundles two quantities with different sensitivities. **The ratio** — blindness,
+and the ordering of per-domain exposure — comes from *traffic weighting*, so it
+is readable at any subscription. **The level** — free rank, and whether the
+register starves — is exactly the subscription-sensitive number E1.1d showed
+cannot be read at 1.0×. The half that decides whether §1's thesis is right runs
+today; only the half that decides whether it *fits* waits on Rig B. Precedent is
+this record's own: E1.2's finding was the ratio, not the level.
+
+At ρ = 0.95, over 3 configurations × 4 seeds:
+
+| | spectrum | register | R-b freq-balanced |
+|---|---|---|---|
+| blindness (worst / traffic-weighted) | 2.88 | **1.33** | 1.45 |
+| Spearman(rate, leakage) | **−0.971** | **−0.056** | −0.243 |
+
+**The rarity monotone is broken, not shifted.** Spearman moves from essentially
+perfect anti-correlation to zero, and the exposure *ordering* correlation between
+the two arms is **+0.045** — the register protects a different set of domains, not
+the same set with nicer numbers, which is what H3 was there to rule out. At
+ρ = 0.99 the spectrum leaves 12.8 domains above the interference limit and the
+register leaves **0.0**.
+
+**The architectural point is not the number.** R-b lands close to the register
+(1.45 against 1.33), and that agreement *is* the finding rather than a redundancy:
+**R-b must estimate the rate vector it corrects for** — the traffic distribution
+the weighting rule says protection must not depend on — while the register needs
+only each owner's own provenance, which I1/I4 already require it to carry. Same
+protection, no estimate, and the register is slightly the better of the two.
+
+Free rank is printed and **deliberately not scored**. This decides whether the
+register is a better protection *instrument*, not whether it *fits*.
+
+### E0.5 · Why the uncertified set is uncertified — and it names one lever
+
+Decomposing the 92.9% over a 16-tombstone window: **75.9% is rival rise alone** —
+the chosen card was not even touched and a rival's upper bound rose to meet it —
+24.1% is both, and **0.0% is chosen-card magnitude alone**. So tightening the
+chosen side with the journal's recorded signed contributions buys ~nothing; the
+lever is recording a wider candidate set past top-k. Consistent with KC, since
+rival rise is exactly what a closure over selected artifacts cannot see.
+
+**And this rig flatters the mechanism.** Retrieval here is argmax over *all* cards,
+so every candidate's score is recorded. A real top-k journal cannot bound a rival
+sitting outside k — it needs the (k+1)-th score as an entry threshold — so these
+are the best-case numbers.
+
+### E0.8 · Equal count is not equal coverage — the third level of one anisotropy
+
+`probes_per_owner` is a fixed **count** while owner provenance grows with depth,
+so coverage — probes drawn over that owner's provenance — falls **0.500 → 0.009**
+across the sweep, a 55× fall.
+
+The between-owner spread is only **1.7×** under uniform rollouts, and that is a
+property of the world rather than a finding: equal rollouts give every owner the
+same provenance size. Under **Zipfian experience per owner**, same totals and
+nothing else changed, the spread reaches **37.6×**.
+
+So an "equal-N per owner" draw is equal in count and unequal in coverage by up to
+38× once owners differ in experience — while every owner is still reported as
+having had its equal draw. **I8 is satisfied and the tail inside an owner is not
+protected.** Between-region is fixed by I8, between-owner was found by E0.6,
+within-owner is this and it is open.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
@@ -1529,6 +1595,38 @@ that was already to hand. Accepting a correction feels like humility, which is
 exactly why it draws less scrutiny than making one — and a wrongly-accepted
 correction is worse than a wrongly-made claim, because it also discredits a sound
 number. Second wrong attribution here, after B11.
+
+**"Inert" is three different things, and only one of them is a finding.** The word
+was itself an overloaded identifier, which is why `identical: yes` could conflate a
+control, a finding and a bug — and why K4 was scored on the wrong statistic for
+two rounds. The taxonomy:
+
+| mode | what happened | status |
+|---|---|---|
+| **not mutated** | the treatment changed no state, and both calls took the same arguments | **bug** — B20, and A0 by design |
+| **mutated but never read** | state changed; nothing on the path to the measurement reads it | **bug** — B8, and A4-usage by design |
+| **read but output-invariant** | state changed, was read, and the metric still did not move | **finding** — A1b |
+
+Only the third says anything about the world. The first two say something about the
+code, and they are answerable *statically, before any data exists*. Declare which
+arms are expected inert; anything else reporting inert is a bug report.
+
+**Worth noting how this one was found: by building an instrument.** That is a third
+detection mechanism alongside *a measurement going the wrong way* (7 bugs) and
+*reading the code* (B20, the I7 collision). It is the only one that forces
+definitional precision **before** any data exists — the taxonomy above did not
+exist until something had to decide `inert: yes/no` in a column.
+
+**"X and Y are the same quantity" and "A is a subset of B" are measurements, not
+arguments.** A structural relationship between two quantities is exactly as
+checkable as a number, and it is the kind of claim that reads as insight and gets
+waved through. This programme has now falsified four of them by measuring:
+§2's *uncertified ⊆ closure edges* (false, and 8.9% of the excess really flipped),
+§1.3's *sharing follows provenance neighbourhoods* (false at every pool size, the
+count is on the birthday curve), the *E0.6/E0.7 unification* (false — depth governs
+coverage and not the oracle line), and *B19's confound* (false — the two figures
+were within-arm and matched). Every one was checkable from data already collected
+before it was asserted.
 
 **Ask whether an arm COULD have moved its own measurement, before reading what it
 did.** B7, B8, B20 and A4-usage are one defect at four sites, and inspection found

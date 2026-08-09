@@ -1,0 +1,487 @@
+{
+  "seed": 20260806,
+  "n_seeds": 4,
+  "dim": 128,
+  "configs": [
+    [
+      8,
+      8
+    ],
+    [
+      16,
+      8
+    ],
+    [
+      32,
+      4
+    ]
+  ],
+  "retentions": [
+    0.9,
+    0.95,
+    0.99,
+    0.995,
+    0.999
+  ],
+  "by_config": [
+    {
+      "n_domains": 8,
+      "domain_rank": 8,
+      "arms": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "interf_traffic": 0.0815,
+            "interf_worst": 0.1556,
+            "blindness": 1.91,
+            "n_failing": 7.0,
+            "spearman": -0.994,
+            "free_rank": 95.8
+          },
+          {
+            "retention": 0.95,
+            "interf_traffic": 0.0559,
+            "interf_worst": 0.144,
+            "blindness": 2.58,
+            "n_failing": 5.75,
+            "spearman": -1.0,
+            "free_rank": 86.5
+          },
+          {
+            "retention": 0.99,
+            "interf_traffic": 0.0294,
+            "interf_worst": 0.0974,
+            "blindness": 3.31,
+            "n_failing": 3.0,
+            "spearman": -0.994,
+            "free_rank": 72.2
+          },
+          {
+            "retention": 0.995,
+            "interf_traffic": 0.021,
+            "interf_worst": 0.0746,
+            "blindness": 3.56,
+            "n_failing": 2.0,
+            "spearman": -0.988,
+            "free_rank": 69.0
+          },
+          {
+            "retention": 0.999,
+            "interf_traffic": 0.0057,
+            "interf_worst": 0.0272,
+            "blindness": 4.95,
+            "n_failing": 0.0,
+            "spearman": -0.964,
+            "free_rank": 65.0
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "interf_traffic": 0.0926,
+            "interf_worst": 0.1114,
+            "blindness": 1.21,
+            "n_failing": 8.0,
+            "spearman": 0.071,
+            "free_rank": 89.5
+          },
+          {
+            "retention": 0.95,
+            "interf_traffic": 0.0726,
+            "interf_worst": 0.0899,
+            "blindness": 1.24,
+            "n_failing": 8.0,
+            "spearman": -0.298,
+            "free_rank": 81.0
+          },
+          {
+            "retention": 0.99,
+            "interf_traffic": 0.0413,
+            "interf_worst": 0.0507,
+            "blindness": 1.23,
+            "n_failing": 0.75,
+            "spearman": -0.244,
+            "free_rank": 70.0
+          },
+          {
+            "retention": 0.995,
+            "interf_traffic": 0.0224,
+            "interf_worst": 0.0349,
+            "blindness": 1.58,
+            "n_failing": 0.0,
+            "spearman": -0.22,
+            "free_rank": 67.0
+          },
+          {
+            "retention": 0.999,
+            "interf_traffic": 0.009,
+            "interf_worst": 0.0138,
+            "blindness": 1.21,
+            "n_failing": 0.0,
+            "spearman": -0.25,
+            "free_rank": 64.8
+          }
+        ],
+        "R-b freq-balanced": [
+          {
+            "retention": 0.9,
+            "interf_traffic": 0.0888,
+            "interf_worst": 0.1172,
+            "blindness": 1.32,
+            "n_failing": 8.0,
+            "spearman": -0.345,
+            "free_rank": 89.0
+          },
+          {
+            "retention": 0.95,
+            "interf_traffic": 0.0728,
+            "interf_worst": 0.0861,
+            "blindness": 1.19,
+            "n_failing": 8.0,
+            "spearman": -0.268,
+            "free_rank": 81.2
+          },
+          {
+            "retention": 0.99,
+            "interf_traffic": 0.0385,
+            "interf_worst": 0.0499,
+            "blindness": 1.3,
+            "n_failing": 0.75,
+            "spearman": -0.107,
+            "free_rank": 69.5
+          },
+          {
+            "retention": 0.995,
+            "interf_traffic": 0.024,
+            "interf_worst": 0.035,
+            "blindness": 1.47,
+            "n_failing": 0.0,
+            "spearman": -0.25,
+            "free_rank": 67.0
+          },
+          {
+            "retention": 0.999,
+            "interf_traffic": 0.0057,
+            "interf_worst": 0.0077,
+            "blindness": 0.78,
+            "n_failing": 0.0,
+            "spearman": -0.268,
+            "free_rank": 64.5
+          }
+        ]
+      },
+      "exposure_order_spearman": 0.186
+    },
+    {
+      "n_domains": 16,
+      "domain_rank": 8,
+      "arms": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "interf_traffic": 0.0639,
+            "interf_worst": 0.1311,
+            "blindness": 2.05,
+            "n_failing": 14.25,
+            "spearman": -0.971,
+            "free_rank": 79.0
+          },
+          {
+            "retention": 0.95,
+            "interf_traffic": 0.0448,
+            "interf_worst": 0.1156,
+            "blindness": 2.58,
+            "n_failing": 11.75,
+            "spearman": -0.974,
+            "free_rank": 64.2
+          },
+          {
+            "retention": 0.99,
+            "interf_traffic": 0.0231,
+            "interf_worst": 0.0764,
+            "blindness": 3.31,
+            "n_failing": 4.5,
+            "spearman": -0.974,
+            "free_rank": 38.5
+          },
+          {
+            "retention": 0.995,
+            "interf_traffic": 0.0173,
+            "interf_worst": 0.057,
+            "blindness": 3.29,
+            "n_failing": 2.0,
+            "spearman": -0.975,
+            "free_rank": 30.2
+          },
+          {
+            "retention": 0.999,
+            "interf_traffic": 0.009,
+            "interf_worst": 0.0343,
+            "blindness": 3.82,
+            "n_failing": 0.0,
+            "spearman": -0.977,
+            "free_rank": 18.0
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "interf_traffic": 0.0749,
+            "interf_worst": 0.0934,
+            "blindness": 1.25,
+            "n_failing": 16.0,
+            "spearman": 0.259,
+            "free_rank": 68.5
+          },
+          {
+            "retention": 0.95,
+            "interf_traffic": 0.0581,
+            "interf_worst": 0.073,
+            "blindness": 1.26,
+            "n_failing": 12.75,
+            "spearman": 0.206,
+            "free_rank": 54.2
+          },
+          {
+            "retention": 0.99,
+            "interf_traffic": 0.0318,
+            "interf_worst": 0.0388,
+            "blindness": 1.22,
+            "n_failing": 0.0,
+            "spearman": 0.049,
+            "free_rank": 32.0
+          },
+          {
+            "retention": 0.995,
+            "interf_traffic": 0.0241,
+            "interf_worst": 0.03,
+            "blindness": 1.25,
+            "n_failing": 0.0,
+            "spearman": 0.1,
+            "free_rank": 25.0
+          },
+          {
+            "retention": 0.999,
+            "interf_traffic": 0.0118,
+            "interf_worst": 0.0154,
+            "blindness": 1.3,
+            "n_failing": 0.0,
+            "spearman": -0.129,
+            "free_rank": 14.5
+          }
+        ],
+        "R-b freq-balanced": [
+          {
+            "retention": 0.9,
+            "interf_traffic": 0.0736,
+            "interf_worst": 0.0939,
+            "blindness": 1.27,
+            "n_failing": 15.75,
+            "spearman": -0.325,
+            "free_rank": 67.8
+          },
+          {
+            "retention": 0.95,
+            "interf_traffic": 0.0558,
+            "interf_worst": 0.0751,
+            "blindness": 1.35,
+            "n_failing": 11.75,
+            "spearman": -0.343,
+            "free_rank": 54.0
+          },
+          {
+            "retention": 0.99,
+            "interf_traffic": 0.0308,
+            "interf_worst": 0.0419,
+            "blindness": 1.36,
+            "n_failing": 0.0,
+            "spearman": -0.563,
+            "free_rank": 31.5
+          },
+          {
+            "retention": 0.995,
+            "interf_traffic": 0.0225,
+            "interf_worst": 0.0333,
+            "blindness": 1.48,
+            "n_failing": 0.0,
+            "spearman": -0.593,
+            "free_rank": 24.8
+          },
+          {
+            "retention": 0.999,
+            "interf_traffic": 0.011,
+            "interf_worst": 0.0197,
+            "blindness": 1.78,
+            "n_failing": 0.0,
+            "spearman": -0.498,
+            "free_rank": 14.5
+          }
+        ]
+      },
+      "exposure_order_spearman": -0.098
+    },
+    {
+      "n_domains": 32,
+      "domain_rank": 4,
+      "arms": {
+        "spectrum": [
+          {
+            "retention": 0.9,
+            "interf_traffic": 0.0592,
+            "interf_worst": 0.1618,
+            "blindness": 2.74,
+            "n_failing": 27.75,
+            "spearman": -0.935,
+            "free_rank": 80.8
+          },
+          {
+            "retention": 0.95,
+            "interf_traffic": 0.0415,
+            "interf_worst": 0.1443,
+            "blindness": 3.49,
+            "n_failing": 24.75,
+            "spearman": -0.938,
+            "free_rank": 65.5
+          },
+          {
+            "retention": 0.99,
+            "interf_traffic": 0.0207,
+            "interf_worst": 0.087,
+            "blindness": 4.21,
+            "n_failing": 12.75,
+            "spearman": -0.939,
+            "free_rank": 39.5
+          },
+          {
+            "retention": 0.995,
+            "interf_traffic": 0.0152,
+            "interf_worst": 0.0839,
+            "blindness": 5.54,
+            "n_failing": 7.25,
+            "spearman": -0.946,
+            "free_rank": 31.2
+          },
+          {
+            "retention": 0.999,
+            "interf_traffic": 0.0078,
+            "interf_worst": 0.0458,
+            "blindness": 5.88,
+            "n_failing": 0.5,
+            "spearman": -0.94,
+            "free_rank": 18.0
+          }
+        ],
+        "register": [
+          {
+            "retention": 0.9,
+            "interf_traffic": 0.0788,
+            "interf_worst": 0.113,
+            "blindness": 1.44,
+            "n_failing": 31.75,
+            "spearman": -0.107,
+            "free_rank": 65.8
+          },
+          {
+            "retention": 0.95,
+            "interf_traffic": 0.0596,
+            "interf_worst": 0.0879,
+            "blindness": 1.48,
+            "n_failing": 25.25,
+            "spearman": -0.075,
+            "free_rank": 53.0
+          },
+          {
+            "retention": 0.99,
+            "interf_traffic": 0.0319,
+            "interf_worst": 0.0439,
+            "blindness": 1.38,
+            "n_failing": 0.0,
+            "spearman": -0.066,
+            "free_rank": 31.2
+          },
+          {
+            "retention": 0.995,
+            "interf_traffic": 0.0255,
+            "interf_worst": 0.0377,
+            "blindness": 1.47,
+            "n_failing": 0.0,
+            "spearman": 0.048,
+            "free_rank": 24.8
+          },
+          {
+            "retention": 0.999,
+            "interf_traffic": 0.0126,
+            "interf_worst": 0.0179,
+            "blindness": 1.43,
+            "n_failing": 0.0,
+            "spearman": 0.087,
+            "free_rank": 14.2
+          }
+        ],
+        "R-b freq-balanced": [
+          {
+            "retention": 0.9,
+            "interf_traffic": 0.075,
+            "interf_worst": 0.127,
+            "blindness": 1.7,
+            "n_failing": 30.75,
+            "spearman": -0.199,
+            "free_rank": 64.5
+          },
+          {
+            "retention": 0.95,
+            "interf_traffic": 0.0575,
+            "interf_worst": 0.1039,
+            "blindness": 1.81,
+            "n_failing": 23.25,
+            "spearman": -0.243,
+            "free_rank": 51.8
+          },
+          {
+            "retention": 0.99,
+            "interf_traffic": 0.0311,
+            "interf_worst": 0.0512,
+            "blindness": 1.64,
+            "n_failing": 0.75,
+            "spearman": -0.196,
+            "free_rank": 30.2
+          },
+          {
+            "retention": 0.995,
+            "interf_traffic": 0.0236,
+            "interf_worst": 0.0421,
+            "blindness": 1.79,
+            "n_failing": 0.0,
+            "spearman": -0.227,
+            "free_rank": 24.2
+          },
+          {
+            "retention": 0.999,
+            "interf_traffic": 0.0115,
+            "interf_worst": 0.0209,
+            "blindness": 1.85,
+            "n_failing": 0.0,
+            "spearman": -0.223,
+            "free_rank": 13.5
+          }
+        ]
+      },
+      "exposure_order_spearman": 0.048
+    }
+  ],
+  "blindness_at_095": {
+    "spectrum": 2.88,
+    "register": 1.33,
+    "R-b": 1.45
+  },
+  "spearman_at_095": {
+    "spectrum": -0.971,
+    "register": -0.056
+  },
+  "exposure_order_spearman": 0.045,
+  "H1_blindness_reduced": true,
+  "H2_monotone_broken": true,
+  "H3_not_cosmetic": true,
+  "not_scored": "free rank and tail-safe level -- subscription-sensitive, E1.1d",
+  "verdict": "PASS"
+}

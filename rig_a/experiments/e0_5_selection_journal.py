@@ -216,7 +216,12 @@ def window(w, j, rng, W: int = 16) -> dict:
         after[e] = False
     flipped = base != w.selected_cards(after)
 
+    decomp = j.why_uncertified(batch)
+    tot = max(sum(decomp.values()) - decomp["certified"], 1)
     return {
+        "chosen_only": decomp["chosen_only"] / tot,
+        "rival_only": decomp["rival_only"] / tot,
+        "both": decomp["both"] / tot,
         "disable_load": float(np.mean(disable_per_tombstone)),
         "recompile_queue_batch": float((~cert_batch).mean()),
         "recompile_queue_each": float((~cert_each).mean()),
@@ -314,6 +319,25 @@ def main() -> int:
     print(f"    recompile queue, per-tombstone   : {agg['recompile_queue_each']:.3f}")
     print(f"    actually flipped over the window : {agg['truly_flipped']:.3f}")
     print(f"    per-tombstone certifications that flipped anyway: {unsound_total}")
+    print("\n    WHY THE UNCERTIFIED SET IS UNCERTIFIED -- the decomposition, since")
+    print("    the aggregate is not actionable and its parts have different levers:")
+    print(f"      chosen-card magnitude only : {agg['chosen_only']:>6.1%}"
+          "   lever: recorded signed contributions make this side EXACT")
+    print(f"      rival rise only            : {agg['rival_only']:>6.1%}"
+          "   lever: record a wider candidate set past top-k")
+    print(f"      both                       : {agg['both']:>6.1%}")
+    print("    DECISIVE FOR THE LEVER. The chosen-card side contributes nothing")
+    print("    alone -- tightening it with recorded signed contributions would buy")
+    print("    ~0. The failure is a rival's upper bound rising to meet an often")
+    print("    UNTOUCHED chosen card, which no tightening of the chosen side can")
+    print("    reach. Consistent with KC: rival rise is exactly what a closure")
+    print("    over selected artifacts cannot see.")
+    print("    AND THIS RIG FLATTERS THE MECHANISM. Retrieval here is argmax over")
+    print("    ALL cards, so the journal records every candidate's score. A real")
+    print("    top-k journal does not: the rival that rises may sit outside k and")
+    print("    be unrecorded, so it cannot be bounded at all. The certificate then")
+    print("    needs the (k+1)-th score as an entry threshold for anything")
+    print("    unrecorded, and these numbers are the BEST case for it.")
     print("    RUNNING certification is sound and, at window close, algebraically")
     print("    the SAME SET as the batch reading -- the bound sums src_dev over hit")
     print("    sources and divides by (k - m) whether accumulated in one step or")
