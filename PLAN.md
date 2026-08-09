@@ -1571,6 +1571,53 @@ measurement it was registered as.
 The format control generalises: any transfer measurement between same-format
 domains needs one, or it measures form.
 
+### EB.4 · `R_t` is not cheap, and the buffer floor scales with dimension
+
+E1.5, registered as *"measures wall-clock/memory, and the buffer size below which
+the spectrum is too noisy to threshold"*. Both halves come back against the
+design, and the second reaches backwards into EB.2.
+
+**Cost — and the memory is not the expensive part.**
+
+| | dim | layers | `R_t` all layers | weights | ratio | eig / layer |
+|---|---|---|---|---|---|---|
+| Qwen 0.5B | 896 | 24 | 154 MB | 278 MB | **0.55** | 69 ms |
+| Qwen 1.5B | 1536 | 28 | 528 MB | 868 MB | **0.61** | 300 ms |
+
+In the float64 the estimator holds; float32 halves it to ~28–30% and leaves the
+conclusion. The rank-one update is microseconds, but the **eigendecomposition —
+which every threshold read needs — is per layer**, so a full budget read costs
+**~1.7 s at 0.5B and ~8.4 s at 1.5B**. Part II §A never states that number, and it
+is the one that binds a budget read often enough to matter.
+
+**The noise floor, and it is the half that reaches further.** Split-half agreement
+of the top-r subspace never reaches 0.90 in the measurable range — at n = 256 it
+is 0.71 (dim 896) and 0.65 (dim 1536) for r = 8. Stability rises ~linearly in
+log₂(n), so the crossing is estimable, and marked as extrapolation:
+
+> **r = 8 floor ≈ 586 at dim 896, ≈ 1026 at dim 1536** — that is **0.65× and 0.67×
+> the dimension**. The floor tracks dim. KC3's good outcome, a constant floor,
+> does not occur.
+
+**What that does to I8.** I8 requires protection statistics on equal-sized
+per-owner draws and never says how large. This answers it: below the floor a
+per-owner spectrum is sampling noise, and any committed rank read off it is a
+property of the draw. So **I8's equal N has a minimum set by the estimator, not by
+policy — it is ~0.65 × dim, and it grows with the model.** At dim 1536 with a
+64-owner fleet that is ~66,000 activation vectors before any protection statistic
+is readable. Neither document connects the register's audit cost to model
+dimension.
+
+**And it reaches backwards into EB.2.** That experiment estimated per-domain bases
+from ~118 vectors against an estimated floor of ~586, so its top-8 subspaces sat
+at split-half stability around 0.5. Its decay and overlap *magnitudes* are noisier
+than the caveat it carried, and this replaces the caveat with a number.
+
+**KB3 is unaffected**, and the reason is worth stating: it compared spectrum
+against register on the *same buffers*, so sampling noise moved both arms
+together — which is why the direction held across all twelve points. **A paired
+comparison survives a noisy estimate; absolute geometry figures do not.**
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a

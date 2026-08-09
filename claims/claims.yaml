@@ -1210,9 +1210,54 @@ claims:
     claim: "per-layer R_t is cheap-but-not-free at depth"
     source: "Part II section A"
     rig: B
-    kill: "not a kill - measures wall-clock/memory, and the buffer size below which the spectrum is too noisy to threshold (feeds E1.1)"
+    kill: "KC1 R_t memory above ~25% of model weights; KC2 the noise floor is beyond reachable buffers; KC3 the floor scales with dim"
     predicted: uncertain
-    status: untested
+    status: FAIL
+    result: results/eb_4_rt_cost_and_noise_floor.json
+    superseded_by: "run as EB.4"
+    finding: >
+      "CHEAP BUT NOT FREE" IS THE WRONG DESCRIPTION, on both halves.
+      KC1 FAILS. Per-layer R_t is 55% of the model's own weight memory at 0.5B
+      (154 MB against 278 MB) and 61% at 1.5B (528 MB against 868 MB), in the
+      float64 the estimator actually holds. float32 halves it to ~28-30% and
+      leaves the conclusion: this is a first-order cost on an 8 GB envelope, not
+      a rounding one.
+      And the memory is not the expensive part. The rank-one update is
+      microseconds; the EIGENDECOMPOSITION, which every threshold read needs, is
+      69 ms per layer at 0.5B and 300 ms at 1.5B - so a full budget read across
+      all layers costs ~1.7 s and ~8.4 s. Part II section A never states that
+      number and it is the one that binds a read-often budget.
+    the_noise_floor: >
+      KC2 AND KC3 BOTH FAIL, and this is the half that reaches further.
+      Split-half agreement of the top-r subspace does not reach 0.90 anywhere in
+      the measurable range: at n = 256 it is 0.71 (dim 896) and 0.65 (dim 1536)
+      for r = 8. Stability rises about linearly in log2(n), so the crossing is
+      estimable and is marked as extrapolation:
+        r=8 floor  ~586 at dim 896     ~1026 at dim 1536
+      That is 0.65x and 0.67x the dimension - THE FLOOR TRACKS DIM. KC3's good
+      outcome, a constant floor, does not occur.
+    what_it_does_to_I8: >
+      I8 requires every protection statistic to be computed per owner on
+      EQUAL-SIZED draws and never says how large. This answers it: below the
+      floor a per-owner spectrum is sampling noise and any committed rank read
+      off it is a property of the draw. So I8's equal N has a MINIMUM set by the
+      estimator rather than by policy, it is ~0.65 x dim, and it GROWS WITH THE
+      MODEL. At dim 1536 and a 64-owner fleet that is ~66,000 activation vectors
+      before any protection statistic is readable. Neither document connects the
+      register's audit cost to model dimension.
+    it_reaches_backwards_into_eb_2: >
+      EB.2 estimated per-domain bases from ~118 vectors against an estimated
+      floor of ~586, so its top-8 subspaces sat at split-half stability around
+      0.5. Its decay and overlap MAGNITUDES are noisier than the caveat it
+      carried, and this replaces that caveat with a number.
+      KB3 IS UNAFFECTED. It compared spectrum against register on the SAME
+      buffers, so sampling noise moved both arms together - which is why the
+      direction held across all twelve points. A paired comparison survives a
+      noisy estimate; absolute geometry figures do not.
+    scope: >
+      Buffers are EB.2's eight short-text domains, so the floor is measured on
+      that corpus. A more diverse buffer spans more directions and would move the
+      floor UP, so these are optimistic. The dimension axis is real.
 
   # -- Root 2 - verification coverage and cost (binding) -------------------
   - id: E2.1

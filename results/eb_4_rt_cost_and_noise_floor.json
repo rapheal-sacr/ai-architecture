@@ -1,0 +1,126 @@
+{
+  "models": [
+    "Qwen2.5-0.5B-4bit",
+    "Qwen2.5-1.5B-4bit"
+  ],
+  "ranks": [
+    4,
+    8,
+    16
+  ],
+  "buffers": [
+    32,
+    64,
+    128,
+    256,
+    512,
+    900
+  ],
+  "stable_at": 0.9,
+  "by_model": {
+    "Qwen2.5-0.5B-4bit": {
+      "cost": {
+        "dim": 896,
+        "n_layers": 24,
+        "per_layer_mb": 6.42,
+        "all_layers_mb": 154.1,
+        "weight_mb": 278.0,
+        "ratio_to_weights": 0.554,
+        "update_us": 708.7,
+        "eig_ms": 71.1,
+        "solve_ms": 5.2,
+        "eig_per_layer_all_s": 1.71
+      },
+      "n_vectors": 915,
+      "stability": {
+        "4": {
+          "32": 0.2328,
+          "64": 0.3888,
+          "128": 0.5124,
+          "256": 0.6867,
+          "512": null,
+          "900": null
+        },
+        "8": {
+          "32": 0.2263,
+          "64": 0.3805,
+          "128": 0.543,
+          "256": 0.71,
+          "512": null,
+          "900": null
+        },
+        "16": {
+          "32": 0.2107,
+          "64": 0.3157,
+          "128": 0.4518,
+          "256": 0.5934,
+          "512": null,
+          "900": null
+        }
+      },
+      "floors": {
+        "4": null,
+        "8": null,
+        "16": null
+      }
+    },
+    "Qwen2.5-1.5B-4bit": {
+      "cost": {
+        "dim": 1536,
+        "n_layers": 28,
+        "per_layer_mb": 18.87,
+        "all_layers_mb": 528.5,
+        "weight_mb": 868.5,
+        "ratio_to_weights": 0.608,
+        "update_us": 2736.7,
+        "eig_ms": 303.9,
+        "solve_ms": 30.17,
+        "eig_per_layer_all_s": 8.51
+      },
+      "n_vectors": 915,
+      "stability": {
+        "4": {
+          "32": 0.3189,
+          "64": 0.4748,
+          "128": 0.6322,
+          "256": 0.8123,
+          "512": null,
+          "900": null
+        },
+        "8": {
+          "32": 0.2486,
+          "64": 0.3554,
+          "128": 0.4931,
+          "256": 0.6447,
+          "512": null,
+          "900": null
+        },
+        "16": {
+          "32": 0.1823,
+          "64": 0.2554,
+          "128": 0.3617,
+          "256": 0.4916,
+          "512": null,
+          "900": null
+        }
+      },
+      "floors": {
+        "4": null,
+        "8": null,
+        "16": null
+      }
+    }
+  },
+  "estimated_floors": {
+    "Qwen2.5-0.5B-4bit:r4": 721,
+    "Qwen2.5-0.5B-4bit:r8": 586,
+    "Qwen2.5-0.5B-4bit:r16": 1397,
+    "Qwen2.5-1.5B-4bit:r4": 382,
+    "Qwen2.5-1.5B-4bit:r8": 1026,
+    "Qwen2.5-1.5B-4bit:r16": 4334
+  },
+  "KC1_minor_cost": false,
+  "KC2_floor_reached": false,
+  "KC3_floor_flat_in_dim": null,
+  "verdict": "PARTIAL"
+}
