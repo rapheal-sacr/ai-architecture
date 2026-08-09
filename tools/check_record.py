@@ -27,7 +27,13 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 CLAIMS = ROOT / "claims" / "claims.yaml"
 RESULTS = ROOT / "results"
-VALID_STATUS = {"untested", "running", "PASS", "FAIL", "PARTIAL", "reference"}
+# `blocked` is a distinct state and worth its own word: the experiment RAN, and
+# the result is that the measurement cannot be made with what is available. That
+# is not `untested` (never run) and not `FAIL` (the claim was falsified) -- it is
+# a finding about the instrument, and collapsing it into either would lose the
+# specification of what the measurement needs, which is often the deliverable.
+VALID_STATUS = {"untested", "running", "PASS", "FAIL", "PARTIAL", "reference",
+                "blocked"}
 
 # Constants that appear in prose and must match the code that defines them.
 # (doc phrase pattern, source file, symbol) -- the value is parsed from source.

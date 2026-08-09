@@ -745,6 +745,55 @@ claims:
       and three layers each; the magnitudes do not have the sample behind them to
       be quoted as design constants.
 
+  - id: EB.3
+    tier: L7
+    claim: "R10 - net-transfer ranking separates abstractions from patches only while narrow adapters have near-zero REAL off-target effect"
+    source: "R10 from E3.1; PLAN Phase 4.2, the spillover differential"
+    rig: B
+    kill: "KS1 narrow (sum-max)/max above ~0.25; KS2 the broad arm does not separate from narrow; KS3 off-target effects systematically negative"
+    predicted: uncertain
+    status: blocked
+    result: results/eb_3_spillover_differential.json
+    finding: >
+      THE MANIPULATION CHECK FIRED AND THE NUMBER WAS NOT REPORTED.
+      First run: every delta negative, on-target -1.54, and argmax landed on the
+      trained domain in 0 of 3 arms. That is not huge spillover, it is broken
+      training - and it was caught before publication by the check that asks
+      whether a narrow adapter most improves the domain it was trained on.
+      Diagnosis: EB.1's hyperparameters were inherited without validation. EB.1
+      used scale 20 / lr 1e-4 to TIME steps and never checked that training
+      converged. Swept: every configuration that FITS seven sentences drives
+      train loss to ~0.1 and makes held-out loss RISE. Only a barely-trained
+      setting improves held-out loss at all.
+    the_format_control_is_the_contribution: >
+      All eight domains are short declarative factual prose - they differ in
+      TOPIC and not in FORM. So an adapter trained on any one improves all of
+      them by learning the shared form, and that registers as spillover while
+      having nothing to do with domain transfer. A control arm trained on the
+      same form and a topic no probe touches measures exactly that.
+        raw        on-target +0.5495   off-target +0.3408   ratio  0.62
+        adjusted   on-target +0.1230   off-target -0.0315   ratio -0.26
+      78% OF THE RAW SPILLOVER WAS FORMAT. Without the control this would have
+      been published as "narrow adapters leak 62% of their gain", which is false.
+      The correlated-error trap in a new place: train and probe sets sharing a
+      property that is not the property under test, which is E0.2's shape.
+    what_it_suggests_and_must_not_be_quoted_as: >
+      Format-adjusted, off-target effect is slightly NEGATIVE against a positive
+      on-target gain - directionally consistent with section B's condition. It is
+      not readable as a result: argmax landed on the trained domain in only 1 of
+      3 arms, so the signal is too weak to call. Reported as a direction, not a
+      number.
+    what_it_specifies: >
+      R10 is not answered and is now precisely specified. Measuring real adapter
+      spillover needs per-domain text in enough volume to learn domain CONTENT
+      rather than form, and domains differing in FORM as well as topic. That is
+      the corpus the Rig B trip collects anyway, so Phase 4.2 joins 2.1, 2.2 and
+      the checkability sweep on ONE acquisition rather than being the model-only
+      measurement it was registered as.
+    reusable: >
+      The format control generalises past this experiment: any transfer
+      measurement between same-format domains needs one, or it measures form.
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"

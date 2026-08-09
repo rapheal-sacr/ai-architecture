@@ -1,0 +1,129 @@
+{
+  "model": "mlx-community/Qwen2.5-0.5B-Instruct-4bit",
+  "rank": 8,
+  "lora_layers": 8,
+  "epochs": 12,
+  "domains": [
+    "code",
+    "medicine",
+    "law",
+    "cooking",
+    "mathematics",
+    "music",
+    "sailing",
+    "geology"
+  ],
+  "targets": [
+    0,
+    3,
+    5
+  ],
+  "baseline_loss": [
+    4.73049,
+    3.59571,
+    5.07887,
+    6.28097,
+    4.22872,
+    6.41767,
+    5.13097,
+    4.8249
+  ],
+  "rows": [
+    {
+      "target": 0,
+      "argmax": 4,
+      "argmax_is_target": false,
+      "on_target": 0.68601,
+      "max": 0.72036,
+      "sum": 3.12762,
+      "sum_minus_max": 2.40726,
+      "ratio": 3.3417,
+      "off_mean": 0.3488,
+      "off_abs_mean": 0.3488,
+      "off_negative_frac": 0.0,
+      "arm": "narrow:code",
+      "train_loss": 1.0311,
+      "adj_on_target": 0.19068,
+      "adj_off_mean": -0.01363
+    },
+    {
+      "target": 3,
+      "argmax": 7,
+      "argmax_is_target": false,
+      "on_target": 0.23594,
+      "max": 0.50312,
+      "sum": 2.485,
+      "sum_minus_max": 1.98189,
+      "ratio": 3.9392,
+      "off_mean": 0.32129,
+      "off_abs_mean": 0.32129,
+      "off_negative_frac": 0.0,
+      "arm": "narrow:cooking",
+      "train_loss": 0.7001,
+      "adj_on_target": -0.05708,
+      "adj_off_mean": -0.07004
+    },
+    {
+      "target": 5,
+      "argmax": 5,
+      "argmax_is_target": true,
+      "on_target": 0.72656,
+      "max": 0.72656,
+      "sum": 3.19246,
+      "sum_minus_max": 2.46591,
+      "ratio": 3.394,
+      "off_mean": 0.35227,
+      "off_abs_mean": 0.35227,
+      "off_negative_frac": 0.0,
+      "arm": "narrow:music",
+      "train_loss": 0.732,
+      "adj_on_target": 0.23528,
+      "adj_off_mean": -0.01074
+    },
+    {
+      "target": 0,
+      "argmax": 7,
+      "argmax_is_target": false,
+      "on_target": -0.11097,
+      "max": 0.6348,
+      "sum": 1.27084,
+      "sum_minus_max": 0.63604,
+      "ratio": 1.0019,
+      "off_mean": 0.1974,
+      "off_abs_mean": 0.32998,
+      "off_negative_frac": 0.286,
+      "arm": "broad",
+      "train_loss": 0.659
+    }
+  ],
+  "broad": {
+    "target": 0,
+    "argmax": 7,
+    "argmax_is_target": false,
+    "on_target": -0.11097,
+    "max": 0.6348,
+    "sum": 1.27084,
+    "sum_minus_max": 0.63604,
+    "ratio": 1.0019,
+    "off_mean": 0.1974,
+    "off_abs_mean": 0.32998,
+    "off_negative_frac": 0.286,
+    "arm": "broad",
+    "train_loss": 0.659
+  },
+  "control_lift_mean": 0.37904,
+  "control_train_loss": 1.5284,
+  "raw": {
+    "on_target": 0.5495,
+    "off_target": 0.34079
+  },
+  "format_adjusted": {
+    "on_target": 0.12296,
+    "off_target": -0.03147,
+    "ratio": -0.256
+  },
+  "argmax_on_target": "1/3",
+  "instrument_readable": false,
+  "blocked_on": "per-domain text in volume, and domains differing in form not only topic",
+  "verdict": "INSTRUMENT-BLOCKED"
+}
