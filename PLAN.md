@@ -1960,6 +1960,53 @@ the test certifies an average as an abstraction. The third region must differ in
 already carries. First mechanism the EB.3 generalisation was *pointed at* rather
 than derived from.
 
+### R15 · EB.7's ceiling contradicts §1.3, and the resolution is in the curve
+
+A consequence of EB.7 rather than a new measurement, recorded because it bites at
+implementation.
+
+**The contradiction is arithmetic.** `rank(B) ≤ n_owners − 1` gives at most **63
+discriminative directions across a 64-owner fleet in total**. §1.3 wants many small
+owners each holding meaningful rank, and 64 owners at rank 8 needs **512**. Under a
+pure between-owner ranking, per-owner rank collapses toward 1. So granularity and
+ranking-by-discrimination — two mechanisms this record has been assembling
+separately — are in direct conflict at fleet scale, and neither document says so.
+
+**The resolution is already in EB.7's inversion curve.** Gain 4.2× at r=5, 2.3× at
+r=8, **parity at r=16**, 0.5× at r=32.
+
+> **R15 · Rank by between-owner variance up to a measured crossover, then fall back
+> to total energy.** Discriminative directions first, owner-specific ones after.
+
+**And measuring beats assuming, for a concrete reason.** The obvious assumption is
+to switch at `rank(B) = G − 1 = 7`. The measured crossover sits at **~16, roughly
+2(G−1)** — because past `rank(B)` the between-ranking degrades *gracefully* while
+the energy ranking's own discrimination is also low, so between-ranking stays the
+better choice well past the point where it has any between-group variance left to
+rank by. Switching at `G − 1` would switch too early. Same discipline R1 applied to
+ρ and R12 applied to the rank floor.
+
+### The fourth reading of the subspace budget
+
+**Its denominator was never `dim`.** Under between-owner ranking it is the number of
+**distinguishable capability regions the ledger supports** — a property of the
+*ledger*, not of the model.
+
+| | Reading | What made it scarce |
+|---|---|---|
+| 1 | ε thresholding | E1.1 — not well posed |
+| 2 | ρ energy retention | E1.1b — traffic-weighted, broken by E1.1c |
+| 3 | ownership set-arithmetic | §1.2 |
+| 4 | **distinguishable capability regions** | EB.7 / R15 |
+
+Each reading changed what the budget is scarce *in*. This one makes it scarce in a
+quantity the design has never counted.
+
+**Open:** the crossover is measured at G = 8 on one corpus; whether it sits at
+~2(G−1) in general is untested, and the rule says measure it per fleet rather than
+port this number. The hybrid itself is unbuilt — EB.7 measured the two rankings
+separately and did not run the composite.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
