@@ -92,6 +92,26 @@ which invariants the record has an opinion about and which it does not.
 
 ---
 
+## Rev 2 mechanisms · what the recording layer now measures
+
+Phases 0–2 of the rev 2 worklist change no behaviour. These are the two Phase 1
+recordings, and both returned something the design document does not say.
+
+| Mechanism | Status | Rests on | What would change it |
+|---|---|---|---|
+| **selection journal** (§2) | **sound, narrow** | scores the system already computes | E0.5: no certified selection ever flipped, anywhere in the sweep — but certification collapses to ~0.00 at every batch ≥ 4 while the world stays 0.60–0.95 stable. Worklist 2.2 on real traffic decides whether it pays |
+| **"uncertified ⊂ closure edges"** (§2) | **broken — better than claimed** | assumed influence runs through the chosen card | E0.5: 24,598 uncertified selections outside the closure, **2,178 of which really flipped** — a rival rose while the chosen card was untouched. The journal enlarges the cascade and part of the enlargement is influence no closure can see |
+| **R-c total residual set** (§1.2b) | **load-bearing, and understated** | a cover is not a partition | E0.6: never-owned exceeds retirement-orphaned **3.3–5.5×** at every traffic level. R-c is not a refinement of R-b, it is most of the job |
+| **the cover's reach** | **traffic-shaped** | I8 is a within-owner property | E0.6: unowned provenance 0.483 at 16 rollouts → 0.027 at 512. Equal draws inside an owner say nothing about how far the owners collectively reach |
+| **`unowned fraction` as reported** | **wrong grain** | pooled over the ledger | E0.6: worst card 1.000 against pooled 0.483, blindness peaking at 4.2. The fifth instance of this defect, and the first inside a statistic proposed to fix it |
+
+**A tension neither document states.** E0.2c's deletion economics need batching —
+window 16 is what makes throughput independent of cascade breadth. Batch 16 is
+where the certificate is 0.000 everywhere tested. §2 and R8 cannot both ship at
+their stated settings.
+
+---
+
 ## L1–L3 · ledger, index, compiled views
 
 | Claim | Status | Rests on | What would change it |

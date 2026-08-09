@@ -344,6 +344,96 @@ claims:
       simulation settles. R9 should not be designed until that ratio is known,
       and it may then have no job.
 
+  - id: E0.5
+    tier: L2/L3
+    claim: "margin certificates close E0.2b's residual without running the counterfactual"
+    source: "rev 2.2 section 2 - the selection journal"
+    rig: A
+    kill: "KS any certified selection that flips (fatal); KU certified < 0.70 where the world is stable above 0.70, scored PER POINT; KC uncertified selections not a subset of transitive-closure edges"
+    predicted: uncertain
+    status: PARTIAL
+    result: results/e0_5_selection_journal.json
+    finding: >
+      SOUND, NARROW, AND NOT A SUBSET - three separate answers that must not be
+      collapsed into one word.
+      KS PASSES at every point in the sweep: no certified selection ever flipped,
+      across 2 arms x 5 ledger sizes x 3 batch sizes x 8 worlds x 6 draws. That
+      is the load-bearing half, and it is a property of the algebra rather than
+      of the traffic, so it carries out of the rig.
+      KU FAILS at 22 of 30 points. Certification is 0.81 at single tombstones
+      with well-supported cards and collapses to ~0.00 at EVERY batch size >= 4,
+      while the world stays stable at 0.60-0.95. The gap is bound slack, not
+      fragility.
+      KC FAILS, and in the safe direction. 24,598 uncertified selections lie
+      OUTSIDE what transitive provenance would flag, and 2,178 of them - 8.9% -
+      actually flipped. Those are selections that moved because a RIVAL card
+      rose while the chosen card was untouched. Provenance records the card that
+      was selected and cannot record that a competitor gained, so this is
+      E0.2b's missing recall seen from the other side. The journal does not
+      shrink the cascade as section 2 claims; it enlarges it, and part of the
+      enlargement is real influence nothing else can see.
+    two_drivers: >
+      The pre-registration named support-per-card k, because k is the bound's
+      denominator. The control arm shows a second driver of comparable size. At
+      b=1, holding touched-fraction pinned at 0.12, k from 3 to 60 buys +0.457;
+      holding k pinned at ~8, touched-fraction from 0.33 to 0.02 buys +0.419.
+      Both govern it. Only one was predicted, and the cross-arm comparison
+      (+0.102) is the wrong number to quote because it nets two opposing effects
+      - the same defect as B19.
+    unstated_tension: >
+      E0.2c's deletion economics rest on BATCHING: window 16 is what makes
+      throughput independent of cascade breadth at 24 deletions/day. Batch 16 is
+      also where certification is 0.000 everywhere tested. The mechanism that
+      makes deletion affordable is the mechanism that destroys the certificate,
+      and section 2 and R8 cannot both be adopted at their stated settings.
+      Neither document mentions the other.
+    scope: >
+      The 0.70 kill criterion is written against REAL TRAFFIC and this is a
+      simulator, so the certified FRACTION does not transfer - worklist 2.2 is
+      the real measurement. What transfers is KS, the two-driver decomposition,
+      and the batching tension, none of which depend on this world's numbers.
+
+  - id: E0.6
+    tier: L7
+    claim: "R-c - the fleet residual set must be total, not only orphans of retirement"
+    source: "rev 2.2 section 1.2b"
+    rig: A
+    kill: "KR1 unowned fraction ~0 everywhere (R-c defends a gap that does not exist); KR2 never-owned is a minority of unowned (R-c is a refinement of R-b); KR3 unowned entries have no true influence (the gap is paperwork, not competence)"
+    predicted: uncertain
+    status: PASS
+    result: results/e0_6_total_cover.json
+    finding: >
+      R-c IS LOAD-BEARING, AND REV 2 UNDERSTATES IT.
+      KR2 FAILS in rev 2's favour: never-owned provenance exceeds
+      retirement-orphaned provenance by 3.3x to 5.5x at every traffic level.
+      R-c is not a refinement of R-b - it is doing most of the work, and R-b
+      alone would ship a cover with a hole in it.
+      KR3 PASSES: unowned entries do move adapter weights. 12-41% of them move
+      at least one. But THINLY - 0.12 adapters each against 7.71 for covered
+      entries at high traffic, so the honest claim is not "a third of competence
+      is undefended". It is that a real, small, and structurally invisible
+      surface exists.
+    traffic_dependence: >
+      THE FINDING UNDER THE FINDING. Unowned provenance runs 0.483 at 16
+      rollouts to 0.027 at 512. The cover's REACH is set by traffic, even though
+      every statistic computed inside it is an equal draw. I8 holds within an
+      owner and says nothing about how far the owners collectively reach, so a
+      register that wins on tail safety wins over whatever surface traffic
+      happened to buy. The gap is largest exactly where traffic is thin, which
+      is the tail the register exists to protect.
+    grain: >
+      And the pooled unowned fraction has the defect this record has now found
+      four times. At card grain the worst cell runs to 1.000 while the pooled
+      rate is 0.483 - blindness 2.1, peaking at 4.2 - and 37.5% of cards have
+      EVERY source unowned at low traffic. `unowned fraction` must be reported
+      worst-cell alongside pooled or it will hide a concentrated hole.
+    instrument_limit: >
+      The per-card grain has its own blind spot, stated rather than discovered:
+      an entry in NO card's source list has no cell to sit in, so `worst card`
+      reads 0.000 at high traffic while 6.7% of entries are in no card at all.
+      Those are the hardest case - no card cites them, so no owner's probe draw
+      reaches them by any route. Reported as its own column.
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"

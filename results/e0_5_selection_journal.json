@@ -1,0 +1,507 @@
+{
+  "seed": 20260806,
+  "n_worlds": 8,
+  "n_rollouts": 48,
+  "ledgers": [
+    30,
+    60,
+    120,
+    240,
+    480
+  ],
+  "batch_sizes": [
+    1,
+    4,
+    16
+  ],
+  "arms": {
+    "k grows": [
+      {
+        "n_entries": 30,
+        "n_cards": 8,
+        "mean_k": 3.0,
+        "violations": 0,
+        "outside_closure": 2865,
+        "outside_and_flipped": 338,
+        "batches": {
+          "1": {
+            "certified": 0.3494,
+            "stable": 0.9297,
+            "flipped": 0.0703,
+            "bank_touched": 0.0885
+          },
+          "4": {
+            "certified": 0.0043,
+            "stable": 0.7617,
+            "flipped": 0.2383,
+            "bank_touched": 0.362
+          },
+          "16": {
+            "certified": 0.0,
+            "stable": 0.4258,
+            "flipped": 0.5742,
+            "bank_touched": 0.8932
+          }
+        }
+      },
+      {
+        "n_entries": 60,
+        "n_cards": 8,
+        "mean_k": 7.0,
+        "violations": 0,
+        "outside_closure": 2611,
+        "outside_and_flipped": 272,
+        "batches": {
+          "1": {
+            "certified": 0.4774,
+            "stable": 0.9484,
+            "flipped": 0.0516,
+            "bank_touched": 0.1146
+          },
+          "4": {
+            "certified": 0.0095,
+            "stable": 0.826,
+            "flipped": 0.174,
+            "bank_touched": 0.3698
+          },
+          "16": {
+            "certified": 0.0,
+            "stable": 0.6085,
+            "flipped": 0.3915,
+            "bank_touched": 0.8698
+          }
+        }
+      },
+      {
+        "n_entries": 120,
+        "n_cards": 8,
+        "mean_k": 15.0,
+        "violations": 0,
+        "outside_closure": 2022,
+        "outside_and_flipped": 174,
+        "batches": {
+          "1": {
+            "certified": 0.5985,
+            "stable": 0.9609,
+            "flipped": 0.0391,
+            "bank_touched": 0.125
+          },
+          "4": {
+            "certified": 0.0981,
+            "stable": 0.8841,
+            "flipped": 0.1159,
+            "bank_touched": 0.4297
+          },
+          "16": {
+            "certified": 0.0,
+            "stable": 0.7027,
+            "flipped": 0.2973,
+            "bank_touched": 0.888
+          }
+        }
+      },
+      {
+        "n_entries": 240,
+        "n_cards": 8,
+        "mean_k": 30.0,
+        "violations": 0,
+        "outside_closure": 1481,
+        "outside_and_flipped": 116,
+        "batches": {
+          "1": {
+            "certified": 0.7344,
+            "stable": 0.98,
+            "flipped": 0.02,
+            "bank_touched": 0.125
+          },
+          "4": {
+            "certified": 0.2804,
+            "stable": 0.9271,
+            "flipped": 0.0729,
+            "bank_touched": 0.4271
+          },
+          "16": {
+            "certified": 0.0004,
+            "stable": 0.8194,
+            "flipped": 0.1806,
+            "bank_touched": 0.9062
+          }
+        }
+      },
+      {
+        "n_entries": 480,
+        "n_cards": 8,
+        "mean_k": 60.0,
+        "violations": 0,
+        "outside_closure": 1133,
+        "outside_and_flipped": 102,
+        "batches": {
+          "1": {
+            "certified": 0.8069,
+            "stable": 0.9805,
+            "flipped": 0.0195,
+            "bank_touched": 0.125
+          },
+          "4": {
+            "certified": 0.4214,
+            "stable": 0.934,
+            "flipped": 0.066,
+            "bank_touched": 0.4375
+          },
+          "16": {
+            "certified": 0.0061,
+            "stable": 0.8698,
+            "flipped": 0.1302,
+            "bank_touched": 0.8776
+          }
+        }
+      }
+    ],
+    "k fixed": [
+      {
+        "n_entries": 30,
+        "n_cards": 3,
+        "mean_k": 10.0,
+        "violations": 0,
+        "outside_closure": 1457,
+        "outside_and_flipped": 171,
+        "batches": {
+          "1": {
+            "certified": 0.2856,
+            "stable": 0.9132,
+            "flipped": 0.0868,
+            "bank_touched": 0.3333
+          },
+          "4": {
+            "certified": 0.0026,
+            "stable": 0.803,
+            "flipped": 0.197,
+            "bank_touched": 0.7986
+          },
+          "16": {
+            "certified": 0.0,
+            "stable": 0.5894,
+            "flipped": 0.4106,
+            "bank_touched": 1.0
+          }
+        }
+      },
+      {
+        "n_entries": 60,
+        "n_cards": 7,
+        "mean_k": 8.0,
+        "violations": 0,
+        "outside_closure": 2352,
+        "outside_and_flipped": 239,
+        "batches": {
+          "1": {
+            "certified": 0.4197,
+            "stable": 0.9423,
+            "flipped": 0.0577,
+            "bank_touched": 0.1339
+          },
+          "4": {
+            "certified": 0.0265,
+            "stable": 0.8234,
+            "flipped": 0.1766,
+            "bank_touched": 0.4643
+          },
+          "16": {
+            "certified": 0.0,
+            "stable": 0.6033,
+            "flipped": 0.3967,
+            "bank_touched": 0.9137
+          }
+        }
+      },
+      {
+        "n_entries": 120,
+        "n_cards": 15,
+        "mean_k": 8.0,
+        "violations": 0,
+        "outside_closure": 3097,
+        "outside_and_flipped": 297,
+        "batches": {
+          "1": {
+            "certified": 0.5382,
+            "stable": 0.9627,
+            "flipped": 0.0373,
+            "bank_touched": 0.0667
+          },
+          "4": {
+            "certified": 0.0803,
+            "stable": 0.8615,
+            "flipped": 0.1385,
+            "bank_touched": 0.2472
+          },
+          "16": {
+            "certified": 0.0,
+            "stable": 0.6732,
+            "flipped": 0.3268,
+            "bank_touched": 0.6778
+          }
+        }
+      },
+      {
+        "n_entries": 240,
+        "n_cards": 30,
+        "mean_k": 8.0,
+        "violations": 0,
+        "outside_closure": 3714,
+        "outside_and_flipped": 257,
+        "batches": {
+          "1": {
+            "certified": 0.6506,
+            "stable": 0.9783,
+            "flipped": 0.0217,
+            "bank_touched": 0.0333
+          },
+          "4": {
+            "certified": 0.168,
+            "stable": 0.9319,
+            "flipped": 0.0681,
+            "bank_touched": 0.1271
+          },
+          "16": {
+            "certified": 0.0,
+            "stable": 0.7752,
+            "flipped": 0.2248,
+            "bank_touched": 0.4222
+          }
+        }
+      },
+      {
+        "n_entries": 480,
+        "n_cards": 60,
+        "mean_k": 8.0,
+        "violations": 0,
+        "outside_closure": 3866,
+        "outside_and_flipped": 212,
+        "batches": {
+          "1": {
+            "certified": 0.7044,
+            "stable": 0.9896,
+            "flipped": 0.0104,
+            "bank_touched": 0.0167
+          },
+          "4": {
+            "certified": 0.2743,
+            "stable": 0.954,
+            "flipped": 0.046,
+            "bank_touched": 0.0663
+          },
+          "16": {
+            "certified": 0.0069,
+            "stable": 0.8433,
+            "flipped": 0.1567,
+            "bank_touched": 0.2372
+          }
+        }
+      }
+    ]
+  },
+  "KS_sound": true,
+  "KU_failing_points": [
+    {
+      "arm": "k grows",
+      "entries": 30,
+      "batch": 1,
+      "certified": 0.3494,
+      "stable": 0.9297,
+      "flipped": 0.0703,
+      "bank_touched": 0.0885
+    },
+    {
+      "arm": "k grows",
+      "entries": 30,
+      "batch": 4,
+      "certified": 0.0043,
+      "stable": 0.7617,
+      "flipped": 0.2383,
+      "bank_touched": 0.362
+    },
+    {
+      "arm": "k grows",
+      "entries": 60,
+      "batch": 1,
+      "certified": 0.4774,
+      "stable": 0.9484,
+      "flipped": 0.0516,
+      "bank_touched": 0.1146
+    },
+    {
+      "arm": "k grows",
+      "entries": 60,
+      "batch": 4,
+      "certified": 0.0095,
+      "stable": 0.826,
+      "flipped": 0.174,
+      "bank_touched": 0.3698
+    },
+    {
+      "arm": "k grows",
+      "entries": 120,
+      "batch": 1,
+      "certified": 0.5985,
+      "stable": 0.9609,
+      "flipped": 0.0391,
+      "bank_touched": 0.125
+    },
+    {
+      "arm": "k grows",
+      "entries": 120,
+      "batch": 4,
+      "certified": 0.0981,
+      "stable": 0.8841,
+      "flipped": 0.1159,
+      "bank_touched": 0.4297
+    },
+    {
+      "arm": "k grows",
+      "entries": 120,
+      "batch": 16,
+      "certified": 0.0,
+      "stable": 0.7027,
+      "flipped": 0.2973,
+      "bank_touched": 0.888
+    },
+    {
+      "arm": "k grows",
+      "entries": 240,
+      "batch": 4,
+      "certified": 0.2804,
+      "stable": 0.9271,
+      "flipped": 0.0729,
+      "bank_touched": 0.4271
+    },
+    {
+      "arm": "k grows",
+      "entries": 240,
+      "batch": 16,
+      "certified": 0.0004,
+      "stable": 0.8194,
+      "flipped": 0.1806,
+      "bank_touched": 0.9062
+    },
+    {
+      "arm": "k grows",
+      "entries": 480,
+      "batch": 4,
+      "certified": 0.4214,
+      "stable": 0.934,
+      "flipped": 0.066,
+      "bank_touched": 0.4375
+    },
+    {
+      "arm": "k grows",
+      "entries": 480,
+      "batch": 16,
+      "certified": 0.0061,
+      "stable": 0.8698,
+      "flipped": 0.1302,
+      "bank_touched": 0.8776
+    },
+    {
+      "arm": "k fixed",
+      "entries": 30,
+      "batch": 1,
+      "certified": 0.2856,
+      "stable": 0.9132,
+      "flipped": 0.0868,
+      "bank_touched": 0.3333
+    },
+    {
+      "arm": "k fixed",
+      "entries": 30,
+      "batch": 4,
+      "certified": 0.0026,
+      "stable": 0.803,
+      "flipped": 0.197,
+      "bank_touched": 0.7986
+    },
+    {
+      "arm": "k fixed",
+      "entries": 60,
+      "batch": 1,
+      "certified": 0.4197,
+      "stable": 0.9423,
+      "flipped": 0.0577,
+      "bank_touched": 0.1339
+    },
+    {
+      "arm": "k fixed",
+      "entries": 60,
+      "batch": 4,
+      "certified": 0.0265,
+      "stable": 0.8234,
+      "flipped": 0.1766,
+      "bank_touched": 0.4643
+    },
+    {
+      "arm": "k fixed",
+      "entries": 120,
+      "batch": 1,
+      "certified": 0.5382,
+      "stable": 0.9627,
+      "flipped": 0.0373,
+      "bank_touched": 0.0667
+    },
+    {
+      "arm": "k fixed",
+      "entries": 120,
+      "batch": 4,
+      "certified": 0.0803,
+      "stable": 0.8615,
+      "flipped": 0.1385,
+      "bank_touched": 0.2472
+    },
+    {
+      "arm": "k fixed",
+      "entries": 240,
+      "batch": 1,
+      "certified": 0.6506,
+      "stable": 0.9783,
+      "flipped": 0.0217,
+      "bank_touched": 0.0333
+    },
+    {
+      "arm": "k fixed",
+      "entries": 240,
+      "batch": 4,
+      "certified": 0.168,
+      "stable": 0.9319,
+      "flipped": 0.0681,
+      "bank_touched": 0.1271
+    },
+    {
+      "arm": "k fixed",
+      "entries": 240,
+      "batch": 16,
+      "certified": 0.0,
+      "stable": 0.7752,
+      "flipped": 0.2248,
+      "bank_touched": 0.4222
+    },
+    {
+      "arm": "k fixed",
+      "entries": 480,
+      "batch": 4,
+      "certified": 0.2743,
+      "stable": 0.954,
+      "flipped": 0.046,
+      "bank_touched": 0.0663
+    },
+    {
+      "arm": "k fixed",
+      "entries": 480,
+      "batch": 16,
+      "certified": 0.0069,
+      "stable": 0.8433,
+      "flipped": 0.1567,
+      "bank_touched": 0.2372
+    }
+  ],
+  "KC_outside_closure": 24598,
+  "KC_outside_and_flipped": 2178,
+  "verdict": "PARTIAL"
+}

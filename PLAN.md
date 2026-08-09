@@ -1052,6 +1052,91 @@ measure here.
 
 ---
 
+### E0.5 · The margin certificate is sound, narrow, and not a subset
+
+Rev 2 §2's answer to E0.2b's residual is that you never need the counterfactual —
+whether a selection *would have flipped* is decidable from scores the system
+already computed. Three claims, three different answers, and collapsing them into
+one verdict would destroy the distinction a reader needs.
+
+**Sound, and that is the half that carries.** No certified selection ever flipped,
+across 2 arms × 5 ledger sizes × 3 batch sizes × 8 worlds × 6 draws. Soundness is
+a property of the algebra and the implementation, not of the traffic, so unlike
+the certified *fraction* it transfers out of the rig. The audit performs the
+deletion for real rather than trusting the derivation, because a bound that is
+sound on paper and mis-implemented in code is exactly B3's shape.
+
+**Narrow.** Certification reaches 0.81 at single tombstones with well-supported
+cards and collapses to ~0.00 at **every batch size ≥ 4**, while the world stays
+stable at 0.60–0.95. The gap is bound slack, not fragility — which matters,
+because slack is an instrument problem and fragility is a world problem, and they
+call for opposite responses.
+
+**Two drivers, one predicted.** `k` is the bound's denominator, so support per
+card was pre-registered as the governing variable. It is — and so is a second one
+of comparable size. Holding touched-fraction pinned, k from 3 → 60 buys **+0.457**;
+holding k pinned, touched-fraction from 0.33 → 0.02 buys **+0.419**. The control
+arm is the only reason the second one is visible. The cross-arm comparison at
+fixed ledger reads +0.102 and is the wrong number to quote, because k rises 7.5×
+while touched-fraction rises 6× and the figure nets two opposing effects — the
+same defect as B19, caught this time before it was published.
+
+**Not a subset, and this is the finding.** §2 claims uncertified selections are a
+strict subset of transitive-closure edges, so the journal shrinks the cascade.
+False: 24,598 uncertified selections lie outside the closure and **2,178 of them —
+8.9% — actually flipped.** Those moved because a *rival* card rose while the
+chosen card was untouched. Provenance records the card that was selected; it
+cannot record that a competitor gained. So the journal **enlarges** the cascade,
+and part of the enlargement is real influence no set-based closure can see. That
+is E0.2b's missing recall approached from the other side, and it is a better
+result than the one claimed — just not the one claimed.
+
+**A tension neither document states.** E0.2c's deletion economics rest on
+batching: window 16 is what makes throughput independent of cascade breadth at 24
+deletions/day. Batch 16 is also where certification is 0.000 in every
+configuration tested. **The mechanism that makes deletion affordable is the
+mechanism that destroys the certificate.** §2 and R8 cannot both be adopted at
+their stated settings.
+
+### E0.6 · The cover is not total, and rev 2 understates its own repair
+
+R-c says the fleet residual set must hold probes for *all* provenance no live
+owner covers, not only what retirement orphaned. This is in Phase 1 rather than
+Phase 3 for a reason that is structural: every other gap in this record announced
+itself with a number going the wrong way, and this one cannot. An unowned surface
+produces **no statistic at all**, so a register shipping without R-c would report
+only its wins.
+
+**R-c is not a refinement of R-b — it is most of the job.** Never-owned provenance
+exceeds retirement-orphaned provenance by **3.3× to 5.5×** at every traffic level.
+R-b alone ships a cover with a hole in it.
+
+**The surface is load-bearing, and thinly.** Unowned entries do move adapter
+weights — 12–41% move at least one — but at 0.12 adapters each against 7.71 for
+covered entries. The honest claim is not "a third of competence is undefended"; it
+is that a real, small, structurally invisible surface exists.
+
+**The finding under the finding.** Unowned provenance runs **0.483 at 16 rollouts
+to 0.027 at 512**. The cover's *reach* is set by traffic even though every
+statistic computed inside it is an equal draw. I8 holds within an owner and says
+nothing about how far the owners collectively reach — so a register that wins on
+tail safety wins over whatever surface traffic happened to buy, and the gap is
+largest exactly where traffic is thin, which is the tail the register exists to
+protect. That is not an argument against the register. It is why `unowned
+fraction` belongs on the dashboard beside the win.
+
+**And the new metric has the old defect.** At card grain the worst cell runs to
+**1.000 against a pooled 0.483** — blindness 2.1, peaking at 4.2 — with 37.5% of
+cards having every source unowned at low traffic. The fifth instance of a pooled
+protection number hiding a concentrated hole, this time in the statistic proposed
+to fix the problem. Reported worst-cell alongside pooled, in E0.1 KB's form.
+
+**The tail statistic has its own blind spot, stated rather than discovered.** An
+entry in no card's source list has no cell to sit in, so `worst card` reads 0.000
+at high traffic while 6.7% of entries are in no card at all — and those are the
+hardest case, since no card cites them and no owner's probe draw reaches them by
+any route. It gets its own column.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
