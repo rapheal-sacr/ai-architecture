@@ -1681,6 +1681,44 @@ against that basis is reported as an equal draw and satisfies I8. It is also the
 missing bound on allocation, which §1.2 leaves unspecified. Full derivation and
 the three things it does not settle: [docs/data_bounded_rank_rule.md](docs/data_bounded_rank_rule.md).
 
+### EB.6 · `r` was not blocked, and it does not decay the way the pessimistic reading says
+
+Worklist v2 §2 asked whether `r` is really corpus-blocked. **It is not**, and this
+confirms it by measuring it: `r` needs a **generator and predicates**, not a corpus
+and not traffic. E2.2 wrote the predicates; the models were already local. One of
+five blocked measurements comes off the list without an acquisition.
+
+| | r | r_generic | reached | r_specific \| reached | A ceiling |
+|---|---|---|---|---|---|
+| Qwen 0.5B | 1.00 | 0.78 | 9 | 1.00 | *inf* |
+| Qwen 1.5B | 0.72 | **0.00** | 40 | **0.72** | 3.64 |
+
+**The decomposition holds directionally.** Format compliance is *solved* between
+these two sizes — `r_generic` goes to zero. The design screens do not: conditioned
+on reaching them, rejection falls 1.00 → 0.72, nowhere near zero.
+
+**And the residual concentrates in one screen.** `fan_out` fires on **68% of 1.5B
+candidates** — a cap *stated in the prompt* and still violated two times in three.
+That is the clearest instance of a design constraint no generator is trained on,
+and stating it does not fix it.
+
+So §4's pessimistic reading is not what the size axis shows. The component that
+collapses is the one generators are trained on; the component encoding design
+constraints does not — and it is additionally a **design variable**, since every
+further invariant expressed as an executable necessary condition raises
+`r_specific` soundly by construction.
+
+**A conditioning defect I had to fix.** The first run reported `r_specific_only`
+unconditionally — 0.23 at 0.5B against 0.72 at 1.5B — which reads as specific
+rejection *rising* with model quality. Artifact: only 22% of 0.5B candidates
+passed the format screens at all, so its unconditional specific rate is capped by
+its generic rate. Two rates with different denominators in one column.
+
+**Scope.** A 0.5B and a 1.5B are a short axis and neither is a production
+generator, so the *level* of `r` is worthless as a design figure. The *direction*
+across the pair is what transfers — the same split as EB.2. And the 0.5B's
+conditional figure rests on the **9** candidates that reached the design screens.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a

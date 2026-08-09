@@ -869,6 +869,53 @@ claims:
       estimate costs the owner its independent statistic.
     status: proposed
 
+  - id: EB.6
+    tier: Assay
+    claim: "`r`, the screen rejection rate, is corpus-blocked - and it decays to 0 as generators improve, so A -> 1"
+    source: "worklist v2 section 2 and section 3; E2.2's A = 1/(1-r)"
+    rig: B
+    kill: "KR1 r cannot be obtained from generator + predicates alone; KR2 r_specific decays as fast as r_generic; KR3 the design predicates never fire"
+    predicted: "r is measurable without a corpus; r_generic decays with model quality and r_specific does not"
+    status: PASS
+    result: results/eb_6_screen_rejection_rate.json
+    finding: >
+      KR1 IS CONFIRMED BY MEASURING IT. `r` sat on the blocked list behind "a
+      corpus". It needs a GENERATOR and PREDICATES, both of which existed - E2.2
+      wrote the predicates and the models were already local. One of five blocked
+      measurements comes off the list without an acquisition.
+      THE DECOMPOSITION HOLDS DIRECTIONALLY. Across the 0.5B -> 1.5B axis:
+        r_generic          0.78 -> 0.00   format compliance is SOLVED
+        r_specific|reached 1.00 -> 0.72   falls by 0.28, nowhere near zero
+      And the residual concentrates in one screen: FAN-OUT fires on 68% of 1.5B
+      candidates - a cap STATED IN THE PROMPT and still violated two times in
+      three. That is the clearest case of a design constraint no generator is
+      trained on, and stating it does not fix it.
+      A's ceiling at the 1.5B is 3.64. At the 0.5B r = 1.00 exactly:
+      nothing survives, so no candidate consumes a label and A is undefined
+      rather than large - reported as `inf` rather than a huge number.
+    what_it_does_to_section_4: >
+      The pessimistic reading - r falls to 0 on the industry's clock, so A -> 1 -
+      is not what the size axis shows. The component that collapses is the one
+      generators are trained on. The component encoding design constraints does
+      not, and it is additionally a DESIGN VARIABLE: every further invariant
+      expressed as an executable necessary condition raises r_specific soundly by
+      construction. That is a lever section 4 did not have.
+    the_conditioning_defect_i_had_to_fix: >
+      The first run reported r_specific_only unconditionally - 0.23 at 0.5B
+      against 0.72 at 1.5B - which reads as specific rejection RISING with model
+      quality. It is an artifact: only 22% of 0.5B candidates passed the format
+      screens at all, so its unconditional specific rate is capped by its generic
+      rate. Conditioned on reaching the design screens the numbers are 1.00 ->
+      0.72. Two rates with different denominators reported in one column.
+    scope: >
+      A 0.5B and a 1.5B are a real but SHORT generator-quality axis and neither
+      is a production generator, so the LEVEL of r is worthless as a design
+      figure - a frontier model would clear the format screens almost always.
+      What transfers is the DIRECTION across the pair, the same direction-not-
+      magnitude split as EB.2.
+      And the 0.5B's conditional figure rests on the 9 candidates that reached
+      the design screens, which is a small and self-selected subset.
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"

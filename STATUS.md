@@ -108,6 +108,7 @@ recordings, and both returned something the design document does not say.
 
 | Mechanism | Status | Rests on | What would change it |
 |---|---|---|---|
+| **`r` and whether `A` decays** | **measurable now; decay is partial** | was listed corpus-blocked | EB.6: needs a generator + predicates, not a corpus. `r_generic` **0.78 → 0.00** across 0.5B→1.5B; `r_specific\|reached` **1.00 → 0.72**. `fan_out` fires on **68%** of 1.5B candidates — a cap stated in the prompt. `r_specific` is also a **design variable** |
 | **L10 amplification `A`** (§4.2) | **ceiling computable — "categorical" withdrawn** | assumed synthesis reaches the value judgment | E2.2 by hand: checks decompose **soundness only**, so `A = 1/(1−r)` with `r` the sound-screen rejection rate, itself bounded by the *unsound* fraction. **`A` degrades as the generator improves.** Measure `r` — needs no labels and no L10 |
 | **§4 vs §6 on what an instrument is** | **unadjudicated** | never connected | E2.2: screens give bounded self-limiting `A`; estimates give E2.3's recall problem (0.349) one level up. A synthesised instrument *is* a cheap rung under another name |
 | **R-a…R-d under churn** | **hold; bill is mild** | §1.2b priced nothing | E1.7: 0 monotonicity violations in 600 cycles; growth **linear not accelerating** (4.17→3.58 evals/cycle); residual **52.5%** of defended, so R-c is the larger half as E0.6 said |

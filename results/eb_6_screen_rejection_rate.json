@@ -1,0 +1,58 @@
+{
+  "models": [
+    "Qwen2.5-0.5B-4bit",
+    "Qwen2.5-1.5B-4bit"
+  ],
+  "n_candidates": 40,
+  "f_max": 3,
+  "generic": [
+    "parse",
+    "schema"
+  ],
+  "specific": [
+    "cites_valid",
+    "fan_out",
+    "grounded",
+    "distinct"
+  ],
+  "by_model": {
+    "Qwen2.5-0.5B-4bit": {
+      "r": 1.0,
+      "r_generic": 0.775,
+      "r_specific_only": 0.225,
+      "reached_specific": 9,
+      "r_specific_given_reached": 1.0,
+      "per_screen": {
+        "parse": 0.0,
+        "schema": 0.775,
+        "cites_valid": 0.775,
+        "fan_out": 1.0,
+        "grounded": 0.8,
+        "distinct": 0.775
+      },
+      "A_ceiling": null
+    },
+    "Qwen2.5-1.5B-4bit": {
+      "r": 0.725,
+      "r_generic": 0.0,
+      "r_specific_only": 0.725,
+      "reached_specific": 40,
+      "r_specific_given_reached": 0.725,
+      "per_screen": {
+        "parse": 0.0,
+        "schema": 0.0,
+        "cites_valid": 0.0,
+        "fan_out": 0.675,
+        "grounded": 0.275,
+        "distinct": 0.025
+      },
+      "A_ceiling": 3.64
+    }
+  },
+  "delta_generic": 0.775,
+  "delta_specific_given_reached": 0.275,
+  "KR1_not_corpus_blocked": true,
+  "KR2_specific_holds": true,
+  "KR3_predicates_fire": true,
+  "verdict": "PASS"
+}
