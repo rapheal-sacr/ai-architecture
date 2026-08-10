@@ -136,6 +136,12 @@ and executable trace/compute schemas. All 12 checks and eight manipulations pass
 but the model comparison is explicitly `NOT_RUN`; this is assay readiness, not
 evidence for recurrence.
 
+The optional MLX model implementation is now present, with exact registered
+parameter counts, shared byte-level prelude/coda, fixed/flat/hierarchical cores,
+random-depth training helpers, adaptive external-residual execution, and trace
+accounting. It has passed only a two-update runtime smoke test; the five-seed
+registered comparison remains `NOT_RUN`.
+
 ## Running
 
 ```bash
@@ -156,6 +162,15 @@ python3 rig_a/experiments/e0_10_wamrx_memory_kernel.py
 python3 rig_a/experiments/e0_11_multiview_memory.py
 python3 rig_a/experiments/e0_12_recurrent_reasoner_assay.py
 python3 tools/check_record.py
+```
+
+The optional Milestone 3 model smoke test uses Apple Silicon and MLX:
+
+```bash
+python3 -m venv .venv-m3
+.venv-m3/bin/pip install -r requirements-m3.txt
+.venv-m3/bin/python -m unittest tests.test_recurrent_model_mlx -v
+.venv-m3/bin/python rig_a/smoke_recurrent_models.py
 ```
 
 Every experiment is seeded and writes a JSON record to `results/`. Kill

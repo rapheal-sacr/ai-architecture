@@ -90,6 +90,14 @@ All twelve assay checks and eight manipulations fire. This authorizes the next
 small-model implementation slice under the frozen contract; it does not support
 any claim that recurrence or hierarchy improves reasoning.
 
+That small-model slice is now implemented in MLX and passes its runtime smoke
+test. The three arms hit their exact 8,388,608 / 8,372,224 / 8,404,992 parameter
+targets, train through the same scheduled batches, respect fail-closed compute
+accounting, and emit evidence-bound traces through the external residual gate.
+Only two optimizer updates per arm were run; smoke accuracy is 0/2 for all arms
+and is not a registered result. The five-seed, 2,000-update comparison remains
+**NOT_RUN**.
+
 ---
 
 ## Invariants

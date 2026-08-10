@@ -2254,6 +2254,15 @@ The next implementation slice may build the small fixed, flat, and hierarchical
 reasoners, but it may not change the registered splits, thresholds, schemas, or
 comparison budgets without a new contract version.
 
+**Implementation follow-through:** the optional MLX slice now builds all three
+8.37-8.40M-parameter arms at their exact registered counts. It includes the
+shared byte-level prelude/coda, randomized-depth training schedule, evidence
+reinjection, learned halt head, executable residual gate, fail-closed executor,
+and trace/compute accounting. A two-update shared-schedule smoke test passes;
+its 0/2 sample accuracy in every arm is explicitly non-evidentiary. The actual
+five-seed, 2,000-update comparison and every promotion statistic remain
+**NOT_RUN**.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a

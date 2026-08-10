@@ -1,0 +1,71 @@
+{
+  "training_config_schema_version": 1,
+  "config_id": "recurrent-optimizer-budget-v1",
+  "depends_on_contract": "contracts/wamrx_recurrent_reasoner.json",
+  "depends_on_split_registry": "wamrx-recurrent-splits-v1",
+  "runtime": {
+    "framework": "mlx",
+    "tested_framework_version": "0.32.0",
+    "numeric_dtype": "float32",
+    "device": "default Metal device"
+  },
+  "model": {
+    "vocabulary_size": 260,
+    "hidden_dimensions": 472,
+    "feedforward_dimensions": 1888,
+    "maximum_input_tokens": 1536,
+    "maximum_output_tokens": 64,
+    "fixed_reasoning_blocks": 4,
+    "flat_core_blocks": 4,
+    "hierarchical_high_blocks": 3,
+    "hierarchical_low_blocks": 1,
+    "parameter_targets": {
+      "fixed-depth-v1": 8388608,
+      "flat-recurrent-v1": 8372224,
+      "hierarchical-recurrent-v1": 8404992
+    }
+  },
+  "optimizer": {
+    "type": "AdamW",
+    "learning_rate": 0.0003,
+    "betas": [0.9, 0.999],
+    "epsilon": 1e-08,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "batch_size": 16,
+    "optimizer_updates": 2000,
+    "warmup_updates": 100,
+    "minimum_learning_rate_ratio": 0.1,
+    "shuffle_each_epoch": true
+  },
+  "loss": {
+    "answer_token_cross_entropy_weight": 1.0,
+    "intermediate_state_loss_weight": 0.25,
+    "halt_binary_cross_entropy_weight": 0.1,
+    "halt_target": "continue before the task generator's registered required_reasoning_steps and stop at or after it; an unroll shorter than the requirement contains no stop target",
+    "padding_token_ignored": true
+  },
+  "depth_sampling": {
+    "train_macro_depths": [1, 2, 3, 4],
+    "train_micro_depths": [1, 2, 3, 4],
+    "fixed_depth_baseline_depth": 4,
+    "fixed_loop_control_depth": 4,
+    "evaluation_macro_depths": [1, 2, 3, 4, 6, 8, 12]
+  },
+  "initial_state": {
+    "zero_probability": 0.5,
+    "gaussian_probability": 0.5,
+    "gaussian_standard_deviation": 0.02,
+    "seeded_per_example": true
+  },
+  "paired_seeds": [41001, 41002, 41003, 41004, 41005],
+  "evaluation": {
+    "decode": "non-autoregressive byte sequence with first-EOS truncation",
+    "primary_metric": "exact canonical-JSON answer match",
+    "report_by": ["arm", "seed", "family", "split", "depth", "protected_region"],
+    "maximum_inference_flops_per_example": 200000000,
+    "maximum_retrieval_calls": 4,
+    "maximum_tool_calls": 4
+  },
+  "scope": "small-model recurrence comparison only; no native memory, MoE, adapters, or self-improvement"
+}
