@@ -79,6 +79,17 @@ rebuilds. All seven requested negative-control classes fire as expected.
 These are small single-process representation results, not evidence for
 recurrence, expert routing, continual weight updates, self-improvement, or AGI.
 
+**Milestone 3's pre-model gate passes; recurrence itself is untested.** E0.12
+freezes a three-arm fixed/flat/hierarchical comparison with a 0.00390 parameter
+spread and identical 200M-FLOP, data, encoder/decoder, optimizer, and
+evidence-operation budgets. It also freezes 960 deterministic tasks, randomized
+training depths 1-4, unseen evaluation depths 6/8/12, the external residual
+gate, trace/compute schemas, and numeric promotion tolerances.
+
+All twelve assay checks and eight manipulations fire. This authorizes the next
+small-model implementation slice under the frozen contract; it does not support
+any claim that recurrence or hierarchy improves reasoning.
+
 ---
 
 ## Invariants

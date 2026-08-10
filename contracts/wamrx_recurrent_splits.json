@@ -1,0 +1,89 @@
+{
+  "split_registry_schema_version": 1,
+  "registry_id": "wamrx-recurrent-splits-v1",
+  "generator_version": "wamrx-recurrent-tasks-v1",
+  "registered_at": "2026-08-10T00:00:00-04:00",
+  "splits": {
+    "train": {
+      "count_per_family": 192,
+      "family_seeds": {
+        "algorithmic": 31001,
+        "structured": 31002,
+        "multiview": 31003
+      },
+      "family_parameters": {
+        "algorithmic": {
+          "lengths": [4, 6, 8]
+        },
+        "structured": {
+          "node_counts": [6, 8],
+          "structures": ["chain", "binary_tree"]
+        },
+        "multiview": {
+          "compositions": ["aggregate", "contradiction", "constraint"]
+        }
+      },
+      "expected_hashes": {
+        "algorithmic": "24d8d6c18d1daec6d251c5cfed9a119ce2b48cb12bc50784c96736987de7e2c6",
+        "structured": "d305644256878547cf252dfe79e00a41502683a8f8a35572c43306815f133cea",
+        "multiview": "92c8cc80df9f824c585ef40c3c0a97642fa847f2da6a4a401e242a77a74d5c65",
+        "aggregate": "165f4b07438da55a6e80945c0d902d8ce9cb1af0ea68b17bc2e6c5775f7455dd"
+      }
+    },
+    "id": {
+      "count_per_family": 64,
+      "family_seeds": {
+        "algorithmic": 32001,
+        "structured": 32002,
+        "multiview": 32003
+      },
+      "family_parameters": {
+        "algorithmic": {
+          "lengths": [4, 6, 8]
+        },
+        "structured": {
+          "node_counts": [6, 8],
+          "structures": ["chain", "binary_tree"]
+        },
+        "multiview": {
+          "compositions": ["aggregate", "contradiction", "constraint"]
+        }
+      },
+      "expected_hashes": {
+        "algorithmic": "093f4842cad4353a2f0c2e8581f9643e38d298b965956e441689d8fbff6eb39f",
+        "structured": "07a128437a80fbaca3e52beeeb40e24a605e23b5e1ee3e76d52b6cfb96c1cbed",
+        "multiview": "a3397f35ddb427091dc80052b21caf9d5b3acbec482d97a88a8ba2727b8bf477",
+        "aggregate": "7e59c797c73532bdfb0625f8524c73e6b4e35c6b358a6ec58b91b2bbce11128e"
+      }
+    },
+    "ood": {
+      "count_per_family": 64,
+      "family_seeds": {
+        "algorithmic": 33001,
+        "structured": 33002,
+        "multiview": 33003
+      },
+      "family_parameters": {
+        "algorithmic": {
+          "lengths": [12, 16, 24]
+        },
+        "structured": {
+          "node_counts": [12, 16],
+          "structures": ["ladder", "two_cluster_bridge"]
+        },
+        "multiview": {
+          "compositions": [
+            "aggregate_then_constraint",
+            "contradiction_then_aggregate"
+          ]
+        }
+      },
+      "expected_hashes": {
+        "algorithmic": "34967470382d137303e6952dff28697dd64a13a28721d2f7700cf3efcb9c4b65",
+        "structured": "29f5b17cc2847de25928c3386cf58624d0f2e440e758137ad7b25494a2376dcb",
+        "multiview": "e203b28c89776f70fdbb6185042d8e08f536d3eed08bcdbf4027672e9646c4a9",
+        "aggregate": "f4507943580a0bc3cc5b5a393677c9dfdc17e761e8f5ef97269db7900b85b72f"
+      }
+    }
+  }
+}

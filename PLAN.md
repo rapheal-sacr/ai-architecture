@@ -2224,6 +2224,36 @@ small single-process Milestone 2 representation gate. Neural recurrence remains
 deferred; neither the four-task assay nor its retrieval-only baseline is a model
 quality or scale result.
 
+### E0.12 · WAM-RX milestone 3 — recurrent-reasoner pre-model gate
+
+Milestone 3 isolates recurrence from memory and model scale. Its six mechanism
+contracts fix the three-arm comparison, recurrent interface, randomized depth
+protocol, learned-plus-external halting gate, three-family assay, and promotion
+decision before any neural code or training run.
+
+The registered arms share encoder, decoder, examples, evidence interface,
+optimizer budget, retrieval/tool limits, and an exact 200M-FLOP maximum.
+Parameter spread is **0.00390**, below the frozen 0.01 ceiling. A deliberate data
+mismatch and a one-FLOP mismatch both invalidate the comparison before training.
+
+The deterministic generator freezes **960 tasks** by content hash: 576 train,
+192 ID, and 192 OOD. OOD is structural, not a new draw: sequence lengths
+12/16/24, ladder and two-cluster-bridge graphs, and multiview
+aggregate-then-constraint / contradiction-then-aggregate compositions never
+occur in training. Every task fits the common 12-macro-step budget.
+
+**E0.12 passes all K1-K12 checks and M1-M8 manipulations.** Traces fail on
+missing reinjection, broken high-state continuity, halt-gate bypass, budget
+escape, unjournaled evidence operations, incompatible memory, and missing
+protected-region evidence. Fixed-loop training is distinguishable from the
+registered randomized-depth protocol, and contradictory evidence forces the
+external residual path to remain active.
+
+This is an assay-readiness result only. Model comparison remains **NOT_RUN**.
+The next implementation slice may build the small fixed, flat, and hierarchical
+reasoners, but it may not change the registered splits, thresholds, schemas, or
+comparison budgets without a new contract version.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
@@ -2240,6 +2270,7 @@ experiment's docstring; `claims/claims.yaml` is the machine-readable version.
 | E0.4 | **I1 grounding / claim-level auditability.** | A | Fraction of promoted capabilities whose provenance resolves to `observed` < 1.0. **DONE — PASS at the registered two-promotion scope.** |
 | E0.10 | **WAM-RX milestone-1 memory kernel.** Reconstruct, correct, audit, and delete from one append-only authority. | A | Any nondeterministic replay, partial batch recovery, accepted missing lineage, protected-region adequacy failure, tombstoned retrieval, survivor loss, clean-rebuild mismatch, or incomplete selection journal. **DONE — PASS.** |
 | E0.11 | **WAM-RX milestone-2 multiview memory.** Add typed temporal analytics and an explicit belief/constraint graph without creating a second authority. | A | Any unsupported result, wrong temporal operation, erased contradiction, satisfied missing/conflicting constraint, stale support, rebuild mismatch, version ambiguity, unjournaled analytic query, structural task miss, or protected-region lineage gap. **DONE — PASS.** |
+| E0.12 | **WAM-RX milestone-3 recurrent-reasoner pre-model gate.** Freeze a matched three-arm comparison, randomized-depth protocol, double halting gate, task splits, trace/compute schemas, and promotion thresholds. | A | Any comparison confound, split-hash drift, OOD-axis overlap, evidence-frontier substitution, halt bypass, budget escape, unjournaled operation, incomplete schema, or unfired manipulation. **DONE — PASS; model comparison NOT_RUN.** |
 
 ### Root 1 · Estimator quality
 

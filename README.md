@@ -128,6 +128,14 @@ malformed-schema, rare-region, evidence-laundering, stale-ontology,
 contradiction, tombstone, and unjournaled-query controls. Neural recurrence and
 expert routing remain deferred.
 
+Milestone 3 is frozen at the pre-model boundary in
+[`contracts/wamrx_recurrent_reasoner.json`](contracts/wamrx_recurrent_reasoner.json).
+E0.12 validates the matched fixed/flat/hierarchical comparison, randomized-depth
+protocol, external residual halt gate, 960 content-hashed deterministic tasks,
+and executable trace/compute schemas. All 12 checks and eight manipulations pass,
+but the model comparison is explicitly `NOT_RUN`; this is assay readiness, not
+evidence for recurrence.
+
 ## Running
 
 ```bash
@@ -146,6 +154,7 @@ python3 rig_a/experiments/e0_3_no_compounding.py
 python3 rig_a/experiments/e0_4_grounding_audit.py
 python3 rig_a/experiments/e0_10_wamrx_memory_kernel.py
 python3 rig_a/experiments/e0_11_multiview_memory.py
+python3 rig_a/experiments/e0_12_recurrent_reasoner_assay.py
 python3 tools/check_record.py
 ```
 
@@ -160,10 +169,11 @@ PLAN.md              the plan: claim ledger, rigs, kill criteria, phases
 claims/claims.yaml   machine-readable claim ledger with pre-registered predictions
 docs/                design amendments and reviews
 contracts/           frozen WAM-RX mechanism declarations and kill criteria
-wamrx/               authority, grounding, retrieval, analytics, and belief graph
+wamrx/               authority, multiview memory, recurrent contracts, and tasks
 rig_a/core/          spectrum.py (R_t, three readings) · world.py (practice world)
                      ledger.py (typed entries, cards, adapters) · influence.py (functional ground truth)
 rig_a/experiments/   one file per experiment
 results/             seeded JSON records
 tests/               stdlib unit and end-to-end checks for the milestone kernel
+schemas/             executable recurrent trace and compute-accounting schemas
 ```

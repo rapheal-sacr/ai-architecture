@@ -1,0 +1,397 @@
+{
+  "contract_schema_version": 1,
+  "registered_at": "2026-08-10T00:00:00-04:00",
+  "depends_on": "WAM-RX milestone 2 / commit 25b392a",
+  "milestone": "Milestone 3: recurrent reasoner",
+  "phase": "pre-model assay freeze",
+  "model_implementation_gate": "No neural model implementation or training may begin until E0.12 validates this contract, the frozen splits, the trace schemas, and all eight manipulation paths.",
+  "frozen_split_registry": {
+    "path": "contracts/wamrx_recurrent_splits.json",
+    "registry_id": "wamrx-recurrent-splits-v1",
+    "content_hash": "887f6cfe80c316c3faed13910b192813cd9ecdbb4ea74f89817a5b2ba8618507"
+  },
+  "executable_schemas": {
+    "trace": "schemas/wamrx_recurrent_trace.schema.json",
+    "compute_accounting": "schemas/wamrx_compute_accounting.schema.json"
+  },
+  "excluded_scope": [
+    "native neural memory",
+    "mixture-of-experts routing",
+    "LoRA or adapter consolidation",
+    "self-improvement or autonomous promotion",
+    "models above 30 million trainable parameters"
+  ],
+  "comparison_arms": [
+    {
+      "arm_id": "fixed-depth-v1",
+      "architecture": "shared encoder, four non-recurrent reasoning blocks, shared decoder",
+      "registered_parameter_count": 8388608,
+      "maximum_inference_flops_per_example": 200000000,
+      "encoder_id": "recurrent-shared-encoder-v1",
+      "decoder_id": "recurrent-shared-decoder-v1",
+      "training_data_id": "wamrx-recurrent-splits-v1",
+      "evidence_interface_id": "wamrx-evidence-bundle-v1",
+      "optimizer_budget_id": "recurrent-optimizer-budget-v1",
+      "maximum_retrieval_calls": 4,
+      "maximum_tool_calls": 4
+    },
+    {
+      "arm_id": "flat-recurrent-v1",
+      "architecture": "shared encoder, one weight-tied recurrent core, shared decoder",
+      "registered_parameter_count": 8372224,
+      "maximum_inference_flops_per_example": 200000000,
+      "encoder_id": "recurrent-shared-encoder-v1",
+      "decoder_id": "recurrent-shared-decoder-v1",
+      "training_data_id": "wamrx-recurrent-splits-v1",
+      "evidence_interface_id": "wamrx-evidence-bundle-v1",
+      "optimizer_budget_id": "recurrent-optimizer-budget-v1",
+      "maximum_retrieval_calls": 4,
+      "maximum_tool_calls": 4
+    },
+    {
+      "arm_id": "hierarchical-recurrent-v1",
+      "architecture": "shared encoder, high-level macro core plus weight-tied low-level micro core, shared decoder",
+      "registered_parameter_count": 8404992,
+      "maximum_inference_flops_per_example": 200000000,
+      "encoder_id": "recurrent-shared-encoder-v1",
+      "decoder_id": "recurrent-shared-decoder-v1",
+      "training_data_id": "wamrx-recurrent-splits-v1",
+      "evidence_interface_id": "wamrx-evidence-bundle-v1",
+      "optimizer_budget_id": "recurrent-optimizer-budget-v1",
+      "maximum_retrieval_calls": 4,
+      "maximum_tool_calls": 4
+    }
+  ],
+  "depth_protocol": {
+    "training_macro_depth_distribution": {
+      "type": "discrete_uniform",
+      "support": [1, 2, 3, 4]
+    },
+    "training_micro_depth_distribution": {
+      "type": "discrete_uniform",
+      "support": [1, 2, 3, 4]
+    },
+    "evaluation_macro_depths": [1, 2, 3, 4, 6, 8, 12],
+    "unseen_evaluation_macro_depths": [6, 8, 12],
+    "maximum_macro_steps": 12,
+    "maximum_micro_steps_per_macro": 4,
+    "maximum_total_micro_steps": 48,
+    "initial_state_distribution": {
+      "zero_probability": 0.5,
+      "gaussian_probability": 0.5,
+      "gaussian_standard_deviation": 0.02,
+      "seeded_per_example": true
+    },
+    "intermediate_state_loss_weight": 0.25,
+    "input_recall": "reinject the immutable problem hash and complete validated evidence bundle before every macro and micro recurrence",
+    "gradient_truncation": "full backpropagation through every sampled training unroll; detach only between examples",
+    "fixed_loop_training_control": 4,
+    "fixed_depth_inference_control": 4
+  },
+  "promotion_thresholds": {
+    "maximum_parameter_count_relative_spread": 0.01,
+    "maximum_inference_flop_budget_relative_spread": 0.0,
+    "maximum_training_example_count_difference": 0,
+    "maximum_retrieval_call_budget_difference": 0,
+    "minimum_paired_training_seeds": 5,
+    "confidence_level": 0.95,
+    "minimum_ood_improvement_confidence_lower_bound": 0.0,
+    "maximum_in_distribution_accuracy_regression": 0.02,
+    "maximum_protected_region_accuracy_regression": 0.02,
+    "maximum_accuracy_decline_with_additional_loops": 0.01,
+    "minimum_adaptive_halting_median_compute_saving": 0.20,
+    "maximum_adaptive_halting_accuracy_loss": 0.01,
+    "maximum_high_low_regression_on_nonwinning_family": 0.02,
+    "minimum_high_low_winning_families": 1,
+    "maximum_unjournaled_evidence_or_tool_operations": 0,
+    "maximum_incompatible_or_tombstoned_artifacts_used": 0,
+    "maximum_answer_instability_for_resolved_halt": 0.02
+  },
+  "protected_regions": [
+    "algorithmic",
+    "structured",
+    "finance",
+    "operations"
+  ],
+  "registered_task_families": [
+    "algorithmic length extrapolation",
+    "structured graph reasoning",
+    "multiview memory composition"
+  ],
+  "registered_negative_controls": [
+    "disable problem and evidence reinjection",
+    "train at one fixed loop count",
+    "corrupt high-level recurrent state",
+    "remove the executable external halting gate",
+    "add irrelevant or contradictory evidence",
+    "evaluate beyond the common training depth",
+    "provide a stale or incompatible memory artifact",
+    "remove one protected evidence region"
+  ],
+  "decision_tree": {
+    "hierarchical_wins": "adopt the hierarchical core and proceed to a separately contracted native-working-memory milestone",
+    "flat_wins": "adopt the flat recurrent core and reject hierarchy as unevidenced complexity",
+    "fixed_depth_wins": "stop recurrent development and retain fixed depth",
+    "recurrence_requires_more_flops": "classify the result as test-time scaling rather than architectural efficiency",
+    "one_family_only": "retain recurrence only as a specialized reasoner",
+    "memory_contract_failure": "block promotion regardless of task accuracy",
+    "manipulation_failure": "invalidate the experiment and repair the assay"
+  },
+  "mechanisms": [
+    {
+      "mechanism_id": "M3-comparison-v1",
+      "name": "compute-, parameter-, data-, and interface-matched three-arm comparison",
+      "authoritative_inputs": [
+        "the three registered arm configurations",
+        "one frozen training/evaluation split registry",
+        "one optimizer and training-step budget",
+        "one maximum inference FLOP and evidence-operation budget"
+      ],
+      "outputs": [
+        "pre-training comparison validity verdict",
+        "per-arm parameter, data exposure, FLOP, retrieval, and tool accounting"
+      ],
+      "assumptions": [
+        "the encoder and decoder are byte-identical across arms",
+        "a parameter spread below one percent is materially matched at this prototype scale",
+        "unused inference budget is recorded rather than silently reallocated"
+      ],
+      "scope": "fixed-depth, flat recurrent, and high/low recurrent reasoners only",
+      "cost": "constant-time configuration audit plus per-run compute accounting",
+      "tradeoff": "strict matching may leave a small amount of capacity unused in one arm",
+      "failure_response": "invalidate the comparison before training and repair the mismatched configuration",
+      "verifier_tier": "executable",
+      "permitted_mutations": [
+        "write a new versioned arm configuration before the first training run"
+      ],
+      "registered_thresholds": {
+        "maximum_parameter_count_relative_spread": 0.01,
+        "maximum_inference_flop_budget_relative_spread": 0.0,
+        "maximum_training_example_count_difference": 0,
+        "maximum_retrieval_call_budget_difference": 0
+      },
+      "kill_criteria": [
+        "C1: parameter counts differ by more than one percent",
+        "C2: maximum inference FLOPs differ at all",
+        "C3: encoder, decoder, data, evidence interface, or optimizer budget identifiers differ",
+        "C4: retrieval or tool-call budgets differ",
+        "C5: one arm sees a different example, split, seed, or update count"
+      ]
+    },
+    {
+      "mechanism_id": "M3-interface-v1",
+      "name": "frontier-bound recurrent input, high/low state, and output interface",
+      "authoritative_inputs": [
+        "immutable problem representation and hash",
+        "validated stamped retrieval, analytic, and graph evidence references",
+        "unresolved constraint state",
+        "hard compute budget"
+      ],
+      "outputs": [
+        "answer or action",
+        "support manifest",
+        "unresolved residuals",
+        "halt reason",
+        "executed macro/micro counts and immutable trace"
+      ],
+      "assumptions": [
+        "recurrent state is working state and never evidence authority",
+        "the original problem and complete evidence bundle are reinjected and revalidated at every recurrence",
+        "every durable answer names its input and evidence frontier"
+      ],
+      "scope": "single-example recurrent execution; no native neural memory writes",
+      "cost": "one problem/evidence hash check and compatibility validation per recurrent step",
+      "tradeoff": "revalidation adds fixed per-step overhead",
+      "failure_response": "mark the trace invalid and block the output",
+      "verifier_tier": "executable",
+      "permitted_mutations": [
+        "append immutable reasoning and evidence-operation journal records"
+      ],
+      "registered_thresholds": {
+        "steps_without_problem_reinjection": 0,
+        "steps_without_complete_evidence_revalidation": 0,
+        "outputs_without_support_manifest": 0,
+        "outputs_without_frontier_or_budget_identity": 0
+      },
+      "kill_criteria": [
+        "I1: a trace step changes the immutable problem representation",
+        "I2: a step omits or substitutes a stamped evidence view",
+        "I3: recurrent state is cited as independent evidence",
+        "I4: an output lacks unresolved residuals, halt reason, or exact step counts",
+        "I5: an evidence/tool operation returns without an immutable journal identifier"
+      ]
+    },
+    {
+      "mechanism_id": "M3-depth-v1",
+      "name": "randomized training depth and unseen-depth evaluation protocol",
+      "authoritative_inputs": [
+        "registered macro/micro depth distributions",
+        "seeded zero/Gaussian initial-state mixture",
+        "intermediate-state targets",
+        "frozen in-distribution and unseen-depth splits"
+      ],
+      "outputs": [
+        "per-depth accuracy and compute curves",
+        "iteration-counter and additional-loop failure verdicts"
+      ],
+      "assumptions": [
+        "all sampled training unrolls use full backpropagation",
+        "unseen evaluation depths are never sampled during training",
+        "fixed-depth and fixed-loop-count controls share the same data"
+      ],
+      "scope": "training macro depths one through four; evaluation through twelve",
+      "cost": "up to twelve macro steps and forty-eight micro steps per evaluation example",
+      "tradeoff": "random depth increases gradient variance but tests depth extrapolation directly",
+      "failure_response": "strengthen randomization and early exit once; reject recurrence if the registered repair still fails",
+      "verifier_tier": "executable",
+      "permitted_mutations": [
+        "register one repaired depth protocol before a rematch"
+      ],
+      "registered_thresholds": {
+        "maximum_training_macro_depth": 4,
+        "maximum_evaluation_macro_depth": 12,
+        "maximum_accuracy_decline_with_additional_loops": 0.01,
+        "intermediate_state_loss_weight": 0.25,
+        "initial_state_gaussian_standard_deviation": 0.02
+      },
+      "kill_criteria": [
+        "D1: training uses only one loop count outside the fixed-loop manipulation arm",
+        "D2: unseen-depth examples leak into training",
+        "D3: performance peaks at the training depth and falls beyond the one-point tolerance",
+        "D4: extra allowed loops reduce accuracy by more than one point",
+        "D5: the input/evidence recall path is absent at any recurrence"
+      ]
+    },
+    {
+      "mechanism_id": "M3-halting-v1",
+      "name": "learned decision gated by executable external residual",
+      "authoritative_inputs": [
+        "learned continue/stop decision",
+        "unanswered, missing, conflicting, and postcondition residuals",
+        "answer-instability score",
+        "remaining hard budget"
+      ],
+      "outputs": [
+        "continue, resolved halt, or unresolved-budget halt",
+        "residual and decision trace"
+      ],
+      "assumptions": [
+        "a learned stop cannot override a non-empty executable residual",
+        "a learned continue remains active even when the residual is empty",
+        "the hard budget always terminates execution"
+      ],
+      "scope": "reasoner control flow; no task-answer scoring inside the learned halt head",
+      "cost": "constant-time residual evaluation per recurrent step",
+      "tradeoff": "conservative residuals may spend more compute than the learned policy requests",
+      "failure_response": "force another cycle while budget remains; otherwise return unresolved",
+      "verifier_tier": "executable",
+      "permitted_mutations": [
+        "append one halt decision to the immutable trace"
+      ],
+      "registered_thresholds": {
+        "maximum_answer_instability_for_resolved_halt": 0.02,
+        "minimum_adaptive_halting_median_compute_saving": 0.2,
+        "maximum_adaptive_halting_accuracy_loss": 0.01,
+        "maximum_unresolved_residuals_at_resolved_halt": 0
+      },
+      "kill_criteria": [
+        "H1: learned stop halts while an external residual remains",
+        "H2: execution exceeds the hard macro, micro, FLOP, retrieval, or tool budget",
+        "H3: adaptive halting saves less than twenty percent median compute",
+        "H4: adaptive halting loses more than one point of accuracy",
+        "H5: learned and external decisions cannot be forced to disagree in manipulation checks"
+      ]
+    },
+    {
+      "mechanism_id": "M3-assay-v1",
+      "name": "frozen three-family recurrence assay",
+      "authoritative_inputs": [
+        "deterministic task generator version and split seeds",
+        "frozen train, in-distribution, and out-of-distribution content hashes",
+        "held-out lengths, graph structures, and multiview compositions",
+        "eight registered manipulation controls"
+      ],
+      "outputs": [
+        "per-family, per-split, per-depth, per-region metrics",
+        "manipulation-path activity verdicts",
+        "paired-seed confidence intervals"
+      ],
+      "assumptions": [
+        "OOD means unseen length, structure, or composition rather than a new draw from the training generator",
+        "the task generator is deterministic under its registered seed",
+        "a headline result is invalid if any manipulation path fails to fire"
+      ],
+      "scope": "algorithmic checksum, graph shortest-path, and multiview memory composition tasks",
+      "cost": "full three-arm runs over five paired seeds plus all ablations",
+      "tradeoff": "small synthetic families isolate mechanism behavior but do not establish general reasoning",
+      "failure_response": "repair and re-freeze the assay before interpreting model performance",
+      "verifier_tier": "executable",
+      "permitted_mutations": [
+        "write a new versioned split registry before any model sees it"
+      ],
+      "registered_thresholds": {
+        "minimum_task_families": 3,
+        "minimum_paired_training_seeds": 5,
+        "minimum_manipulation_controls_firing": 8,
+        "minimum_protected_region_coverage": 1.0,
+        "split_hash_mismatches": 0
+      },
+      "kill_criteria": [
+        "A1: a frozen split content hash changes",
+        "A2: OOD lengths, structures, or compositions overlap their training axis",
+        "A3: any manipulation fails to change its intended gate or input",
+        "A4: a protected region is absent from task evidence or scoring",
+        "A5: a stale, incompatible, or tombstoned evidence reference reaches a reasoner",
+        "A6: metrics are pooled without per-family, per-depth, and per-region readings"
+      ]
+    },
+    {
+      "mechanism_id": "M3-promotion-v1",
+      "name": "falsifiable recurrent-core promotion gate",
+      "authoritative_inputs": [
+        "paired-seed ID/OOD accuracy and compute metrics",
+        "protected-region metrics",
+        "additional-loop and adaptive-halting curves",
+        "complete trace and evidence-operation journals"
+      ],
+      "outputs": [
+        "adopt hierarchy, adopt flat recurrence, retain fixed depth, or specialize",
+        "blocked promotion on any memory-contract or assay failure"
+      ],
+      "assumptions": [
+        "paired confidence intervals use the same seeds and examples across arms",
+        "accuracy and compute promotion criteria are conjunctive",
+        "memory-contract failures override task accuracy"
+      ],
+      "scope": "promotion of a recurrent reasoner architecture only; no autonomous deployment",
+      "cost": "one deterministic promotion audit over recorded metrics",
+      "tradeoff": "strict non-inferiority can reject a narrow but useful recurrent specialist",
+      "failure_response": "follow the registered decision tree and preserve the losing runs",
+      "verifier_tier": "executable",
+      "permitted_mutations": [
+        "record a human-approved architecture decision after the executable gate"
+      ],
+      "registered_thresholds": {
+        "confidence_level": 0.95,
+        "minimum_ood_improvement_confidence_lower_bound": 0.0,
+        "maximum_in_distribution_accuracy_regression": 0.02,
+        "maximum_protected_region_accuracy_regression": 0.02,
+        "maximum_accuracy_decline_with_additional_loops": 0.01,
+        "minimum_adaptive_halting_median_compute_saving": 0.2,
+        "maximum_adaptive_halting_accuracy_loss": 0.01,
+        "minimum_high_low_winning_families": 1,
+        "maximum_high_low_regression_on_nonwinning_family": 0.02,
+        "maximum_memory_contract_failures": 0
+      },
+      "kill_criteria": [
+        "P1: recurrent OOD improvement has a non-positive 95 percent lower confidence bound",
+        "P2: recurrence regresses ID or any protected region by more than two points",
+        "P3: additional allowed loops reduce accuracy by more than one point",
+        "P4: adaptive halting misses either its twenty-percent saving or one-point accuracy tolerance",
+        "P5: any evidence/tool operation is unjournaled or uses invalid memory",
+        "P6: hierarchy wins no family or regresses another by more than two points",
+        "P7: the comparison or any manipulation control is invalid"
+      ]
+    }
+  ]
+}

@@ -1552,6 +1552,44 @@ claims:
       not retrieval plus a language model. It is not evidence for scale, neural
       recurrence, expert routing, or continual weight updates.
 
+  - id: E0.12
+    tier: recurrent reasoner / pre-model
+    claim: "the recurrent-reasoner comparison and assay are frozen and manipulation-complete before model implementation"
+    source: "WAM-RX architecture specification milestone 3; recurrent-reasoner contract"
+    rig: A
+    kill: "K1-K12 and M1-M8 in the experiment; any comparison confound, mutable split, overlapping OOD axis, unbound evidence frontier, halt bypass, budget escape, unjournaled operation, incomplete schema, or unfired manipulation invalidates the pre-model assay"
+    predicted: uncertain
+    status: PASS
+    result: results/e0_12_recurrent_reasoner_assay.json
+    procedure: rig_a/experiments/e0_12_recurrent_reasoner_assay.py
+    tested_against: contracts/wamrx_recurrent_reasoner.json
+    finding: >
+      All twelve structural checks and all eight registered manipulation paths
+      pass before neural model implementation. The nominal fixed-depth, flat
+      recurrent, and hierarchical recurrent configurations have identical
+      encoder, decoder, data, evidence-interface, optimizer, retrieval/tool,
+      and 200M-FLOP budgets; registered parameter spread is 0.00390, below the
+      0.01 ceiling. Deliberate data and one-FLOP mismatches invalidate the
+      comparison before training.
+    frozen_assay: >
+      Versioned generators produce 576 train, 192 ID, and 192 OOD examples with
+      exact per-family and aggregate content hashes. OOD axes are held-out
+      sequence lengths 12/16/24, graph structures ladder/two-cluster-bridge,
+      and multiview compositions aggregate-then-constraint and
+      contradiction-then-aggregate. Every task fits the common twelve-macro
+      budget and every protected region is explicit.
+    interface_and_controls: >
+      Trace validation binds every recurrent step to the immutable problem,
+      complete revalidated evidence bundle, high-state chain, hard compute
+      budget, and journaled evidence/tool operations. Missing reinjection,
+      fixed-loop training, corrupted high state, external-halt bypass,
+      contradictory evidence, unseen depth, incompatible memory, and a missing
+      protected region all fire their intended controls.
+    scope_limit: >
+      Model comparison status is NOT_RUN. This PASS freezes and validates the
+      assay; it provides no evidence that recurrence, hierarchy, adaptive
+      halting, or any neural architecture improves accuracy.
+
   # -- Root 1 - estimator quality ------------------------------------------
   - id: E1.1
     tier: L7

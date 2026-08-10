@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "wamrx://schemas/compute-accounting/v1",
+  "title": "WAM-RX recurrent compute accounting v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "arm_id",
+    "task_id",
+    "parameter_count",
+    "inference_flops",
+    "macro_steps",
+    "micro_steps",
+    "retrieval_calls",
+    "tool_calls",
+    "training_examples_seen",
+    "optimizer_updates"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "arm_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "parameter_count": {"type": "integer", "minimum": 0},
+    "inference_flops": {"type": "integer", "minimum": 0},
+    "macro_steps": {"type": "integer", "minimum": 0},
+    "micro_steps": {"type": "integer", "minimum": 0},
+    "retrieval_calls": {"type": "integer", "minimum": 0},
+    "tool_calls": {"type": "integer", "minimum": 0},
+    "training_examples_seen": {"type": "integer", "minimum": 0},
+    "optimizer_updates": {"type": "integer", "minimum": 0}
+  }
+}
