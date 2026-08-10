@@ -1590,6 +1590,58 @@ claims:
       assay; it provides no evidence that recurrence, hierarchy, adaptive
       halting, or any neural architecture improves accuracy.
 
+  - id: E0.13
+    tier: recurrent reasoner / operational preflight
+    claim: "registered recurrent training resumes bitwise from a hash-verified model and AdamW checkpoint"
+    source: "WAM-RX milestone 3 registered-run contract"
+    rig: B
+    kill: "R1-R7 in the experiment; any schedule, loss, model/optimizer state, checkpoint byte, compute, example, or update mismatch; any ID/OOD metric read"
+    predicted: uncertain
+    status: PASS
+    result: results/e0_13_recurrent_run_preflight.json
+    procedure: rig_a/experiments/e0_13_recurrent_run_preflight.py
+    tested_against: contracts/wamrx_recurrent_run_v1.json
+    finding: >
+      The 20-update flat-recurrent prefix at seed 41001 and batch size 16 is
+      bitwise identical between uninterrupted execution and interruption after
+      update 10 followed by checkpoint restore. Schedule and per-update losses,
+      model parameters, AdamW moments and counters, final checkpoint bytes,
+      examples, updates, and the 73,961,927,680 analytical training-FLOP total
+      all match exactly. The run reads no ID, OOD, or protected-region metric.
+    defect_found_and_repaired: >
+      Repair runs failed as intended on two distinct paths. Loading lexically
+      sorted optimizer keys changed the nested parameter-tree insertion order;
+      after that repair, repeated-index token-embedding backward still used
+      checkpoint-sensitive atomic accumulation. Preserving model tree order,
+      pooling deterministic token histograms through the same weights, and
+      canonicalizing state layout after every update makes two consecutive
+      reruns bitwise exact. An identity-mismatched seed is rejected before
+      restore.
+    operational_estimate: >
+      One checkpoint is 100,479,866 bytes. Fifteen final checkpoints require
+      about 1.51 GB; retaining every 50-update learning-curve checkpoint for all
+      arms and seeds requires about 60.29 GB before evaluation journals.
+    scope_limit: >
+      This is train-only operational evidence, not an accuracy or architecture
+      result. The five-seed comparison remains NOT_RUN.
+
+  - id: E0.14
+    tier: recurrent reasoner / model comparison
+    claim: "the high/low, flat recurrent, or fixed-depth core satisfies the frozen Milestone 3 promotion gate"
+    source: "WAM-RX milestone 3 registered-run contract"
+    rig: B
+    kill: "any incomplete arm/seed/stratum, invalid trace or journal, failed manipulation, promotion-threshold failure, or primary gain attributable only to unmatched realized compute"
+    predicted: uncertain
+    status: untested
+    result: results/e0_14_recurrent_model_comparison.json
+    procedure: rig_a/experiments/e0_14_recurrent_model_comparison.py
+    tested_against: contracts/wamrx_recurrent_run_v1.json
+    scope_limit: >
+      Status is NOT_RUN. The runner is inert without an explicit
+      --execute-registered flag. No recurrence, hierarchy, or adaptive-halting
+      performance claim exists yet, and neural memory or MoE work remains
+      blocked.
+
   # -- Root 1 - estimator quality ------------------------------------------
   - id: E1.1
     tier: L7

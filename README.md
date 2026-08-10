@@ -142,6 +142,14 @@ random-depth training helpers, adaptive external-residual execution, and trace
 accounting. It has passed only a two-update runtime smoke test; the five-seed
 registered comparison remains `NOT_RUN`.
 
+The additive registered-run contract now distinguishes estimated from realized
+training and inference FLOPs and labels the primary result as equal-update /
+equal-data under a common cap. It freezes one-sided paired Student-t inference,
+Holm correction families, a compute-normalized secondary, exact interruption
+semantics, and the complete inert-by-default E0.14 runner. E0.13's 20-update
+train-only checkpoint/resume preflight passes bitwise; no ID/OOD metric was
+read, and E0.14 remains `NOT_RUN`.
+
 ## Running
 
 ```bash
@@ -171,7 +179,13 @@ python3 -m venv .venv-m3
 .venv-m3/bin/pip install -r requirements-m3.txt
 .venv-m3/bin/python -m unittest tests.test_recurrent_model_mlx -v
 .venv-m3/bin/python rig_a/smoke_recurrent_models.py
+.venv-m3/bin/python rig_a/experiments/e0_13_recurrent_run_preflight.py
+.venv-m3/bin/python rig_a/experiments/e0_14_recurrent_model_comparison.py
 ```
+
+The last command only prints the checked-in `NOT_RUN` record. Consuming the
+registered 30,000-update budget requires the explicit `--execute-registered`
+flag; use `--resume` only with its hash-verified checkpoints.
 
 Every experiment is seeded and writes a JSON record to `results/`. Kill
 criteria are stated in each experiment's module docstring, before the first

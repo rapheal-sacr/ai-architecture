@@ -62,7 +62,13 @@ depth schedules, compute accounting, and fail-closed trace emission. The smoke
 sample scores 0/2 for every arm, as expected after only two updates; that number
 is deliberately not a result artifact and has no bearing on promotion.
 
-The next run is the expensive registered comparison: five paired seeds, 2,000
-updates per arm, full ID/OOD/depth/region reporting, manipulation ablations, and
-promotion auditing. Until that run exists, recurrence and hierarchy remain
-unevidenced.
+The registered run protocol now labels this primary comparison precisely as
+equal-update/equal-data under a common inference cap, not equal realized
+compute. Estimated and realized training/inference FLOPs are separate fields,
+and a compute-normalized secondary is frozen. E0.13 also verifies bitwise
+checkpoint/resume equivalence over a train-only 20-update prefix.
+
+The next run is still the expensive registered comparison: five paired seeds,
+2,000 updates per arm, full ID/OOD/depth/region reporting, manipulation
+ablations, and promotion auditing. Until E0.14 completes, recurrence and
+hierarchy remain unevidenced.

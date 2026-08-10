@@ -2263,6 +2263,42 @@ its 0/2 sample accuracy in every arm is explicitly non-evidentiary. The actual
 five-seed, 2,000-update comparison and every promotion statistic remain
 **NOT_RUN**.
 
+### E0.13 / E0.14 · registered recurrent run boundary
+
+The pre-run amendment preserves the update-matched primary and states its actual
+scope: equal examples and optimizer updates under one 200M cap, with unequal
+realized training and inference FLOPs recorded rather than hidden. A secondary
+control compares the latest 50-update checkpoints and deepest inference
+positions that remain within the smallest common realized-compute total. Gains
+that disappear there are compute scaling, not architectural efficiency.
+
+Inference is frozen as a one-sided paired Student-t lower bound over five
+seed-level deltas. Family claims use Holm step-down correction; ID and protected
+regions use registered -0.02 non-inferiority margins. Final-depth inference is
+primary. Maximum-depth and adaptive policies both pay for every intermediate
+readout and form the separate halting analysis.
+
+Checkpoint identity includes model, optimizer, seed, schedule, config, split,
+update, examples, and cumulative FLOPs. A same-seed hash-exact resume is valid;
+seed substitution is forbidden. NaNs and code/hash drift are `INVALID`, while
+interruption or incomplete evaluation is `INCOMPLETE`; neither can become an
+implicit zero or omitted pair.
+
+**E0.13 passes the train-only operational preflight.** Repair runs exposed two
+real resume defects: lexical AdamW-tree reconstruction perturbed reduction
+order, and repeated-index embedding backward used checkpoint-sensitive atomic
+accumulation. Preserving parameter-tree order, pooling deterministic token
+histograms, and canonicalizing state layout repair both. Two consecutive
+20-update reruns are bitwise exact for schedules, losses, model/optimizer state,
+final checkpoint bytes, examples, updates, and 73,961,927,680 analytical
+training FLOPs. One checkpoint is 100,479,866 bytes; all 50-update learning-curve
+checkpoints project to about 60.29 GB.
+
+E0.14 implements the complete five-seed runner, evaluation journal, eight
+manipulations, compute-normalized secondary, and deterministic promotion audit.
+It is inert without `--execute-registered` and remains **NOT_RUN**. Neural
+memory, MoE, consolidation, and self-improvement stay blocked.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
@@ -2280,6 +2316,8 @@ experiment's docstring; `claims/claims.yaml` is the machine-readable version.
 | E0.10 | **WAM-RX milestone-1 memory kernel.** Reconstruct, correct, audit, and delete from one append-only authority. | A | Any nondeterministic replay, partial batch recovery, accepted missing lineage, protected-region adequacy failure, tombstoned retrieval, survivor loss, clean-rebuild mismatch, or incomplete selection journal. **DONE — PASS.** |
 | E0.11 | **WAM-RX milestone-2 multiview memory.** Add typed temporal analytics and an explicit belief/constraint graph without creating a second authority. | A | Any unsupported result, wrong temporal operation, erased contradiction, satisfied missing/conflicting constraint, stale support, rebuild mismatch, version ambiguity, unjournaled analytic query, structural task miss, or protected-region lineage gap. **DONE — PASS.** |
 | E0.12 | **WAM-RX milestone-3 recurrent-reasoner pre-model gate.** Freeze a matched three-arm comparison, randomized-depth protocol, double halting gate, task splits, trace/compute schemas, and promotion thresholds. | A | Any comparison confound, split-hash drift, OOD-axis overlap, evidence-frontier substitution, halt bypass, budget escape, unjournaled operation, incomplete schema, or unfired manipulation. **DONE — PASS; model comparison NOT_RUN.** |
+| E0.13 | **Registered-run train-only preflight.** | B | Any schedule/loss/model/optimizer/checkpoint/compute mismatch across update-10 resume; any evaluation metric read. **DONE — PASS; model comparison NOT_RUN.** |
+| E0.14 | **Five-seed recurrent model comparison.** | B | Apply the frozen statistical, compute, evidence, manipulation, and failure gates. **NOT_RUN.** |
 
 ### Root 1 · Estimator quality
 

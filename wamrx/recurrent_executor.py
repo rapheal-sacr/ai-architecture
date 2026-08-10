@@ -111,23 +111,28 @@ def _consumed_flops(
     macro_step: int,
     micro_step: int,
     configured_micro_steps: int,
+    readout_count: int,
 ) -> int:
     config = model.config
     d = config.hidden_dimensions
     ff = config.feedforward_dimensions
-    constant = config.maximum_input_tokens * d * 2 + 2 * d * d
+    constant = (
+        config.maximum_input_tokens * d * 2
+        + config.vocabulary_size * d * 2
+        + 2 * d * d
+    )
     block = 4 * d * ff
     injection = model.capacity_match.estimated_flops() + d
     coda = 2 * config.maximum_output_tokens * d * config.vocabulary_size
     halt = 2 * d
+    if readout_count < 0:
+        raise RecurrentExecutionError("readout count cannot be negative")
     if model.arm_id == "fixed-depth-v1":
         block_calls = macro_step
         injection_calls = macro_step
-        readouts = macro_step
     elif model.arm_id == "flat-recurrent-v1":
         block_calls = config.flat_core_blocks * macro_step
         injection_calls = macro_step
-        readouts = macro_step
     else:
         completed_macros = macro_step - 1
         block_calls = (
@@ -142,13 +147,14 @@ def _consumed_flops(
         injection_calls = (
             completed_macros * (1 + configured_micro_steps) + 1 + micro_step
         )
-        readouts = completed_macros * configured_micro_steps + micro_step
     return int(
         constant
         + block * block_calls
         + injection * injection_calls
-        + (coda + halt) * readouts
+        + (coda + halt) * readout_count
     )
+
+
 def execute_task(
     model: RecurrentReasoner,
     codec: ByteCodec,
@@ -158,9 +164,14 @@ def execute_task(
     maximum_answer_instability: float,
     maximum_macro_steps: int,
     micro_steps: int = 1,
+    execution_policy: str = "adaptive",
 ) -> tuple[ReasonerOutput, ReasoningTrace, ComputeRecord]:
     if maximum_macro_steps < 1 or micro_steps < 1:
         raise RecurrentExecutionError("execution step counts must be positive")
+    if execution_policy not in {"adaptive", "maximum_depth", "final_depth"}:
+        raise RecurrentExecutionError(
+            "execution policy must be adaptive, maximum_depth, or final_depth"
+        )
     bundle = task_evidence_bundle(task)
     problem_tokens, _ = codec.encode_problem(task.problem)
     tokens = mx.array([problem_tokens], dtype=mx.int32)
@@ -204,25 +215,47 @@ def execute_task(
     total_positions = len(states_by_macro)
     for index, (macro, micro, neural_state) in enumerate(states_by_macro):
         bundle.validate(required_regions=task.protected_regions)
-        logits, halt_logit = model.state_outputs(neural_state)
-        prediction = _prediction(logits, codec)
-        final_residual = _residual(task, prediction, previous_prediction)
-        previous_prediction = prediction
+        last_registered_position = index == total_positions - 1
+        performs_readout = execution_policy != "final_depth" or last_registered_position
+        if performs_readout:
+            logits, halt_logit = model.state_outputs(neural_state)
+            prediction = _prediction(logits, codec)
+            final_residual = _residual(task, prediction, previous_prediction)
+            previous_prediction = prediction
+        else:
+            halt_logit = None
+            prediction = None
+            final_residual = UnresolvedConstraintState(
+                unanswered_constraints=("final_depth_readout_pending",),
+                answer_instability=1.0,
+            )
         is_fixed = model.arm_id == "fixed-depth-v1"
-        learned_decision = (
-            "continue"
-            if is_fixed and index < total_positions - 1
-            else "stop"
-            if is_fixed
-            else "stop"
-            if float(halt_logit[0, 0]) >= 0.0
-            else "continue"
-        )
+        if execution_policy in {"maximum_depth", "final_depth"}:
+            learned_decision = (
+                "continue" if index < total_positions - 1 else "stop"
+            )
+        else:
+            learned_decision = (
+                "continue"
+                if is_fixed and index < total_positions - 1
+                else "stop"
+                if is_fixed
+                else "stop"
+                if float(halt_logit[0, 0]) >= 0.0
+                else "continue"
+            )
         consumed_flops = _consumed_flops(
             model,
             macro_step=macro,
             micro_step=micro,
             configured_micro_steps=(1 if is_fixed else micro_steps),
+            readout_count=(
+                index + 1
+                if execution_policy != "final_depth"
+                else 1
+                if last_registered_position
+                else 0
+            ),
         )
         if consumed_flops > budget.maximum_inference_flops:
             raise RecurrentExecutionError(
@@ -230,7 +263,6 @@ def execute_task(
             )
         remaining_flops = budget.maximum_inference_flops - consumed_flops
         remaining_macro = max(0, maximum_macro_steps - macro)
-        last_registered_position = index == total_positions - 1
         budget_exhausted = (
             remaining_flops == 0 or remaining_macro == 0 or last_registered_position
         )

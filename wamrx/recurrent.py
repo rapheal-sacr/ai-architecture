@@ -560,6 +560,21 @@ class ReasonerOutput:
         ):
             raise RecurrentContractError("resolved output retains external residuals")
 
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "output_id": self.output_id,
+            "answer": self.answer,
+            "action": self.action,
+            "support": self.support.to_dict(),
+            "unresolved_residuals": self.unresolved_residuals.to_dict(),
+            "halt_reason": self.halt_reason,
+            "executed_macro_steps": self.executed_macro_steps,
+            "executed_micro_steps": self.executed_micro_steps,
+            "problem_hash": self.problem_hash,
+            "evidence_bundle_hash": self.evidence_bundle_hash,
+            "trace_hash": self.trace_hash,
+        }
+
 
 def audit_comparison(
     arm_values: list[dict[str, Any]],

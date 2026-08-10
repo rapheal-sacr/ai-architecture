@@ -21,6 +21,7 @@ from wamrx.recurrent_model import (  # noqa: E402
     RecurrentModelConfig,
     RecurrentReasoner,
 )
+from wamrx.recurrent_run import RunComputeRecord  # noqa: E402
 from wamrx.recurrent_tasks import load_split_registry  # noqa: E402
 from wamrx.recurrent_training import (  # noqa: E402
     OptimizerConfig,
@@ -75,13 +76,31 @@ def run() -> dict:
             macro_steps=2,
             micro_steps=1,
         )
-        accounting[arm_id] = compute_record_for_batch(
+        inference = compute_record_for_batch(
             model,
             sample,
             macro_steps=2,
             micro_steps=1,
             training_examples_seen=report["examples_seen"],
             optimizer_updates=report["updates"],
+        )
+        accounting[arm_id] = RunComputeRecord(
+            run_id="unregistered-two-update-smoke",
+            arm_id=arm_id,
+            seed=optimizer_config.paired_seeds[0],
+            status="COMPLETE",
+            parameter_count=inference.parameter_count,
+            schedule_hash=report["schedule_hash"],
+            estimated_training_flops=report["realized_training_flops"],
+            realized_training_flops=report["realized_training_flops"],
+            estimated_inference_flops=inference.inference_flops,
+            realized_inference_flops=inference.inference_flops,
+            training_examples_planned=report["examples_seen"],
+            training_examples_seen=report["examples_seen"],
+            optimizer_updates_planned=report["updates"],
+            optimizer_updates_completed=report["updates"],
+            evaluation_examples_planned=len(sample),
+            evaluation_examples_completed=len(sample),
         ).to_dict()
     validate_shared_schedule(reports)
     return {

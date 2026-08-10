@@ -98,6 +98,17 @@ Only two optimizer updates per arm were run; smoke accuracy is 0/2 for all arms
 and is not a registered result. The five-seed, 2,000-update comparison remains
 **NOT_RUN**.
 
+The pre-run layer is now frozen separately. The primary comparison is labelled
+equal-update/equal-data under a common capped inference budget—not equal
+realized compute. Run accounting records estimated and realized training and
+inference FLOPs; the statistical procedure is one-sided paired Student-t with
+registered Holm families; compute-normalized, interruption, resume, and failure
+semantics are explicit. E0.13's 20-update train-only run reproduces schedules,
+losses, model/optimizer state, checkpoint bytes, and compute exactly across an
+update-10 interruption. It reads no ID/OOD metrics. The complete E0.14 runner is
+implemented but inert by default, so model comparison status remains
+**NOT_RUN**.
+
 ---
 
 ## Invariants

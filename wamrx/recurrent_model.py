@@ -16,13 +16,12 @@ import mlx.nn as nn
 from mlx.utils import tree_flatten
 
 from .canonical import canonical_json
+from .recurrent_model_constants import RECURRENT_ARM_IDS
 
 MODEL_IMPLEMENTATION_VERSION = "wamrx-recurrent-mlx-v1"
-ARM_IDS = (
-    "fixed-depth-v1",
-    "flat-recurrent-v1",
-    "hierarchical-recurrent-v1",
-)
+ARM_IDS = RECURRENT_ARM_IDS
+TRAINING_BACKWARD_MULTIPLIER = 2
+ADAMW_CLIPPING_AND_CANONICALIZATION_FLOPS_PER_PARAMETER = 17
 
 
 class RecurrentModelError(ValueError):
@@ -202,11 +201,17 @@ class SharedPrelude(nn.Module):
 
     def __call__(self, tokens: mx.array) -> mx.array:
         length = tokens.shape[1]
-        positions = mx.arange(length)
-        embedded = self.token_embedding(tokens) + self.position_embedding(positions)
-        mask = (tokens != ByteCodec.PAD)[..., None]
-        denominator = mx.maximum(mx.sum(mask, axis=1), 1)
-        pooled = mx.sum(embedded * mask, axis=1) / denominator
+        mask = (tokens != ByteCodec.PAD).astype(mx.float32)
+        vocabulary = mx.arange(self.token_embedding.weight.shape[0])
+        token_counts = mx.sum(
+            (tokens[..., None] == vocabulary).astype(mx.float32)
+            * mask[..., None],
+            axis=1,
+        )
+        token_sum = token_counts @ self.token_embedding.weight
+        position_sum = mask @ self.position_embedding.weight[:length]
+        denominator = mx.maximum(mx.sum(mask, axis=1, keepdims=True), 1.0)
+        pooled = (token_sum + position_sum) / denominator
         return self.projection(self.norm(pooled))
 
 
@@ -374,7 +379,9 @@ class RecurrentReasoner(nn.Module):
     ) -> int:
         d = self.config.hidden_dimensions
         ff = self.config.feedforward_dimensions
-        embedding_and_pool = input_tokens * d * 2
+        embedding_and_pool = (
+            input_tokens * d * 2 + self.config.vocabulary_size * d * 2
+        )
         projection = 2 * d * d
         block = 4 * d * ff
         injection = self.capacity_match.estimated_flops() + d
@@ -405,6 +412,71 @@ class RecurrentReasoner(nn.Module):
             + coda
             + halt
         )
+
+    def recurrent_state_count(self, *, macro_steps: int, micro_steps: int) -> int:
+        if macro_steps < 1 or micro_steps < 1:
+            raise RecurrentModelError("macro and micro step counts must be positive")
+        if self.arm_id == "fixed-depth-v1":
+            return self.config.fixed_reasoning_blocks
+        if self.arm_id == "flat-recurrent-v1":
+            return macro_steps
+        return macro_steps * micro_steps
+
+    def estimated_training_forward_flops(
+        self,
+        *,
+        input_tokens: int,
+        macro_steps: int,
+        micro_steps: int,
+    ) -> int:
+        """Count the differentiable forward graph used by the registered loss.
+
+        Inference reads only the final answer. Training reads every recurrent
+        state for intermediate supervision and every halt logit, so its forward
+        count is deliberately larger than ``estimated_inference_flops``.
+        """
+
+        inference = self.estimated_inference_flops(
+            input_tokens=input_tokens,
+            macro_steps=macro_steps,
+            micro_steps=micro_steps,
+        )
+        states = self.recurrent_state_count(
+            macro_steps=macro_steps,
+            micro_steps=micro_steps,
+        )
+        dimensions = self.config.hidden_dimensions
+        coda = (
+            2
+            * self.config.maximum_output_tokens
+            * dimensions
+            * self.config.vocabulary_size
+        )
+        # The inference estimate already contains one coda and a conservative
+        # halt allowance. Add the remaining state readouts used by the loss.
+        return int(inference + max(0, states - 1) * (coda + 2 * dimensions))
+
+    def estimated_training_update_flops(
+        self,
+        *,
+        batch_size: int,
+        input_tokens: int,
+        macro_steps: int,
+        micro_steps: int,
+    ) -> int:
+        if batch_size < 1:
+            raise RecurrentModelError("training batch size must be positive")
+        forward = self.estimated_training_forward_flops(
+            input_tokens=input_tokens,
+            macro_steps=macro_steps,
+            micro_steps=micro_steps,
+        )
+        differentiable = batch_size * forward * (1 + TRAINING_BACKWARD_MULTIPLIER)
+        optimizer = (
+            ADAMW_CLIPPING_AND_CANONICALIZATION_FLOPS_PER_PARAMETER
+            * parameter_count(self)
+        )
+        return int(differentiable + optimizer)
 
 
 def token_loss(

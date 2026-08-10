@@ -1,0 +1,103 @@
+{
+  "run_contract_schema_version": 1,
+  "registered_at": "2026-08-10T00:00:00-04:00",
+  "contract_id": "wamrx-recurrent-run-v1",
+  "depends_on": {
+    "reasoner_contract": "contracts/wamrx_recurrent_reasoner.json",
+    "training_contract": "contracts/wamrx_recurrent_training_v1.json",
+    "split_registry": "contracts/wamrx_recurrent_splits.json",
+    "pre_model_commit": "ad09b2d",
+    "model_implementation_commit": "2c758a6"
+  },
+  "comparison_label": "equal-update/equal-data primary comparison under a common capped inference budget; realized training and inference FLOPs are measured and are not assumed equal",
+  "status_vocabulary": ["NOT_RUN", "INCOMPLETE", "INVALID", "COMPLETE_RETAIN_FIXED", "COMPLETE_ADOPT_FLAT", "COMPLETE_ADOPT_HIERARCHY", "COMPLETE_SPECIALIST_ONLY", "COMPLETE_COMPUTE_SCALING_ONLY"],
+  "primary_analysis": {
+    "checkpoint_selection": "the checkpoint after exactly 2000 optimizer updates; no validation-based selection",
+    "paired_unit": "one seed-level accuracy delta after deterministic within-seed aggregation",
+    "training_seeds": [41001, 41002, 41003, 41004, 41005],
+    "evaluation_policy": "final-depth inference at the maximum registered macro depth that remains within the common 200000000-FLOP cap; fixed depth remains four blocks; hierarchical micro depth is one",
+    "primary_mode": "final_depth",
+    "family_aggregation": "compute accuracy within each family first; pooled accuracy is the unweighted arithmetic mean of the three family accuracies within each seed",
+    "depth_aggregation": "no aggregation across depths for the primary claim; final-depth inference at the maximum feasible registered depth is primary and every other registered depth is a separately reported robustness curve",
+    "interval": {
+      "estimator": "paired Student-t",
+      "sidedness": "one-sided lower confidence bound",
+      "confidence_level": 0.95,
+      "minimum_pairs": 5
+    },
+    "multiple_comparisons": {
+      "procedure": "Holm step-down",
+      "family_superiority_family": "six OOD hypotheses: flat-minus-fixed and hierarchy-minus-fixed in each of three task families",
+      "hierarchy_vs_flat_family": "three OOD family hypotheses",
+      "id_noninferiority_family": "two pooled ID hypotheses, one per recurrent arm versus fixed",
+      "protected_region_family": "eight hypotheses: two recurrent arms by four protected regions; within each seed and region, ID and OOD correct/example counts are micro-aggregated before the paired delta",
+      "alpha": 0.05
+    },
+    "noninferiority": {
+      "id_margin": -0.02,
+      "protected_region_margin": -0.02,
+      "hierarchy_vs_flat_nonwinning_family_margin": -0.02,
+      "rule": "the Holm-adjusted one-sided lower bound on candidate-minus-reference accuracy must be at least the registered negative margin"
+    }
+  },
+  "secondary_compute_normalized_control": {
+    "status": "REGISTERED_BEFORE_PRIMARY_RUN",
+    "training": "compare deterministic learning-curve checkpoints at the greatest cumulative realized training FLOPs not exceeding the smallest final-arm training FLOP total; never interpolate accuracy and never substitute examples or seeds",
+    "training_checkpoint_frequency_updates": 50,
+    "inference": "for every seed/family/split, compare the deepest recorded arm position whose cumulative realized inference FLOPs do not exceed the fixed-depth primary realized FLOPs; unused FLOPs remain recorded",
+    "tie_break": "choose the shallower checkpoint or depth when realized FLOPs tie",
+    "interpretation": "a primary gain absent from this control is classified as training-compute scaling, test-time scaling, or both; it is not architectural efficiency"
+  },
+  "adaptive_halting_analysis": {
+    "reference_mode": "maximum_depth",
+    "adaptive_mode": "adaptive",
+    "readout_accounting": "both modes execute and account for a decoder/residual readout at every recurrent position",
+    "maximum_depth": "largest registered depth whose per-position readouts remain within the common FLOP cap",
+    "separation_from_primary": "adaptive halting is a registered control analysis; it is not the primary final-depth accuracy policy"
+  },
+  "compute_accounting": {
+    "schema": "schemas/wamrx_recurrent_run.schema.json",
+    "counting_method": "wamrx-analytical-flops-v2",
+    "estimated_training_flops": "pre-run sum over the complete frozen schedule",
+    "realized_training_flops": "sum only over optimizer updates that completed successfully",
+    "estimated_inference_flops": "pre-execution analytical count for the requested policy",
+    "realized_inference_flops": "sum only over recurrent positions and readouts actually executed",
+    "training_formula": "batch_size * 3 * differentiable_forward_flops + 17 * trainable_parameters per completed AdamW update; the parameter term includes AdamW, clipping, and deterministic state-layout canonicalization",
+    "caveat": "analytical operation counts are deterministic architecture-level FLOPs, not device-profiler or wall-clock measurements"
+  },
+  "checkpoint_and_failure_semantics": {
+    "checkpoint_frequency_updates": 50,
+    "checkpoint_contents": ["model parameters", "AdamW first and second moments", "optimizer step and learning rate", "completed update", "schedule hash", "seed", "config and split hashes", "cumulative realized training FLOPs", "examples seen"],
+    "resume_validity": "valid only from a hash-verified checkpoint with identical run, arm, seed, model, config, split, schedule, and next-update identities",
+    "random_state": "model initialization is reset from the paired seed; schedules and recurrent initial states use recorded deterministic seeds; no unrecorded stochastic operation is permitted",
+    "failed_seed": "retry only the same seed from its latest valid checkpoint; never substitute a seed",
+    "nan_or_nonfinite": "mark INVALID and preserve the checkpoint and failure journal",
+    "memory_exhaustion_or_process_interruption": "mark INCOMPLETE; resume is allowed only under the resume-validity rule",
+    "incomplete_evaluation": "mark INCOMPLETE; never impute zero and never omit the seed from an aggregate",
+    "code_or_contract_hash_change": "mark INVALID and require a new versioned run",
+    "status_precedence": ["INVALID", "INCOMPLETE", "final COMPLETE_* decision", "NOT_RUN"]
+  },
+  "runner_requirements": {
+    "identical_seed_schedule_across_arms": true,
+    "final_checkpoint_only": true,
+    "evaluate_every_family_split_depth_region": true,
+    "evaluate_maximum_and_adaptive_modes": true,
+    "record_hashes": ["model implementation", "run contract", "training config", "split registry", "checkpoint"],
+    "validate_every_emitted_trace": true,
+    "validate_every_evidence_operation_journal": true,
+    "post_training_manipulations": ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8"],
+    "explicit_terminal_status_required": true
+  },
+  "operational_preflight": {
+    "seed": 41001,
+    "arm": "flat-recurrent-v1",
+    "updates": 20,
+    "interruption_after_update": 10,
+    "batch_size": 16,
+    "training_only": true,
+    "prohibited_reads": ["ID accuracy", "OOD accuracy", "protected-region accuracy"],
+    "required_equalities": ["schedule hash", "per-update loss sequence", "final model hash", "final optimizer hash", "final checkpoint hash", "cumulative compute accounting"],
+    "required_estimates": ["wall-clock seconds", "checkpoint bytes"]
+  },
+  "scope": "Milestone 3 recurrent comparison only; neural memory, MoE, adapters, consolidation, and self-improvement remain prohibited"
+}

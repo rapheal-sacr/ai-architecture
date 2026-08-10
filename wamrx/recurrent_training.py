@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import math
 from pathlib import Path
 import random
 from typing import Any
@@ -11,6 +12,7 @@ from typing import Any
 import mlx.core as mx
 import mlx.nn as nn
 import mlx.optimizers as optim
+from mlx.utils import tree_flatten, tree_unflatten
 
 from .canonical import sha256_json
 from .recurrent import ComputeBudget, ComputeRecord
@@ -192,6 +194,48 @@ def _learning_rate_schedule(config: OptimizerConfig, updates: int):
     )
 
 
+def create_optimizer(config: OptimizerConfig, *, total_updates: int):
+    if total_updates < 1:
+        raise RecurrentTrainingError("optimizer schedule must contain an update")
+    return optim.AdamW(
+        learning_rate=_learning_rate_schedule(config, total_updates),
+        betas=list(config.betas),
+        eps=config.epsilon,
+        weight_decay=config.weight_decay,
+    )
+
+
+def effective_depths(
+    model: RecurrentReasoner,
+    batch: ScheduledBatch,
+) -> tuple[int, int]:
+    if model.arm_id == "fixed-depth-v1":
+        return model.config.fixed_reasoning_blocks, 1
+    if model.arm_id == "flat-recurrent-v1":
+        return batch.macro_steps, 1
+    return batch.macro_steps, batch.micro_steps
+
+
+def scheduled_batch_flops(
+    model: RecurrentReasoner,
+    batch: ScheduledBatch,
+) -> int:
+    macro_steps, micro_steps = effective_depths(model, batch)
+    return model.estimated_training_update_flops(
+        batch_size=len(batch.task_ids),
+        input_tokens=model.config.maximum_input_tokens,
+        macro_steps=macro_steps,
+        micro_steps=micro_steps,
+    )
+
+
+def estimated_schedule_training_flops(
+    model: RecurrentReasoner,
+    schedule: tuple[ScheduledBatch, ...],
+) -> int:
+    return sum(scheduled_batch_flops(model, batch) for batch in schedule)
+
+
 def _initial_state(
     model: RecurrentReasoner,
     batch_size: int,
@@ -264,26 +308,30 @@ def _halt_targets(
     )
 
 
-def train_updates(
+def train_schedule_segment(
     model: RecurrentReasoner,
     codec: ByteCodec,
     tasks: tuple[RecurrentTask, ...],
     schedule: tuple[ScheduledBatch, ...],
     config: OptimizerConfig,
+    *,
+    optimizer,
+    start_update: int,
+    stop_update: int,
 ) -> dict[str, Any]:
+    if not 0 <= start_update <= stop_update <= len(schedule):
+        raise RecurrentTrainingError("training segment is outside the frozen schedule")
     by_id = {task.task_id: task for task in tasks}
-    learning_rate = _learning_rate_schedule(config, len(schedule))
-    optimizer = optim.AdamW(
-        learning_rate=learning_rate,
-        betas=list(config.betas),
-        eps=config.epsilon,
-        weight_decay=config.weight_decay,
-    )
     loss_and_grad = nn.value_and_grad(model, _loss_function)
     losses = []
     gradient_norms = []
     examples_seen = 0
-    for batch in schedule:
+    realized_training_flops = 0
+    for expected_update, batch in enumerate(
+        schedule[start_update:stop_update], start=start_update
+    ):
+        if batch.update != expected_update:
+            raise RecurrentTrainingError("schedule update identities are not contiguous")
         batch_tasks = [by_id[task_id] for task_id in batch.task_ids]
         tokens, targets, target_mask = batch_arrays(codec, batch_tasks)
         initial_state = _initial_state(
@@ -315,23 +363,70 @@ def train_updates(
             gradients, config.gradient_clip_norm
         )
         optimizer.update(model, gradients)
+        # Canonicalize moment storage after every update. A safetensor-restored
+        # float32 moment can be numerically identical yet have a different
+        # internal layout; allowing the next fused update to depend on that
+        # layout breaks bitwise checkpoint/resume equivalence.
+        optimizer.state = tree_unflatten(
+            [
+                (name, value + mx.zeros_like(value))
+                for name, value in tree_flatten(optimizer.state)
+            ]
+        )
+        model.load_weights(
+            [
+                (name, value + mx.zeros_like(value))
+                for name, value in tree_flatten(model.trainable_parameters())
+            ],
+            strict=True,
+        )
         mx.eval(loss, gradient_norm, model.parameters(), optimizer.state)
-        losses.append(float(loss))
-        gradient_norms.append(float(gradient_norm))
+        loss_value = float(loss)
+        gradient_norm_value = float(gradient_norm)
+        if not math.isfinite(loss_value) or not math.isfinite(gradient_norm_value):
+            raise RecurrentTrainingError("training produced a non-finite value")
+        losses.append(loss_value)
+        gradient_norms.append(gradient_norm_value)
         examples_seen += len(batch_tasks)
+        realized_training_flops += scheduled_batch_flops(model, batch)
     if not losses or any(not (loss >= 0.0) for loss in losses):
         raise RecurrentTrainingError("training produced an invalid loss sequence")
     return {
         "arm_id": model.arm_id,
-        "updates": len(schedule),
+        "start_update": start_update,
+        "stop_update": stop_update,
+        "updates": stop_update - start_update,
         "examples_seen": examples_seen,
         "initial_loss": losses[0],
         "final_loss": losses[-1],
         "minimum_loss": min(losses),
         "maximum_gradient_norm": max(gradient_norms),
+        "losses": losses,
+        "gradient_norms": gradient_norms,
+        "realized_training_flops": realized_training_flops,
         "schedule_hash": schedule_hash(schedule),
         "parameter_count": parameter_count(model),
     }
+
+
+def train_updates(
+    model: RecurrentReasoner,
+    codec: ByteCodec,
+    tasks: tuple[RecurrentTask, ...],
+    schedule: tuple[ScheduledBatch, ...],
+    config: OptimizerConfig,
+) -> dict[str, Any]:
+    optimizer = create_optimizer(config, total_updates=len(schedule))
+    return train_schedule_segment(
+        model,
+        codec,
+        tasks,
+        schedule,
+        config,
+        optimizer=optimizer,
+        start_update=0,
+        stop_update=len(schedule),
+    )
 
 
 def evaluate_exact(

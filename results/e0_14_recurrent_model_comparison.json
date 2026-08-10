@@ -1,0 +1,7 @@
+{
+  "comparison_label": "equal-update/equal-data primary comparison under a common capped inference budget; realized training and inference FLOPs are measured and are not assumed equal",
+  "experiment": "E0.14",
+  "run_contract": "contracts/wamrx_recurrent_run_v1.json",
+  "scope": "five paired seeds, three model arms, 2000 updates per arm; no neural memory, MoE, adapters, consolidation, or self-improvement",
+  "status": "NOT_RUN"
+}
