@@ -100,6 +100,21 @@ here has been rare-region blindness and no invariant asserts that the training
 draw covers what the ledger supports. A system that bounds its costs by never
 learning the tail satisfies I2 and I4 completely. See PLAN.md §5.
 
+## WAM-RX milestone 1
+
+The repository now also contains the first implementation slice of WAM-RX: a
+small, stdlib-only authoritative memory kernel. It includes a hash-chained,
+append-only SQLite event store; deterministic replay; explicit correction and
+tombstone events; artifact stamps and support manifests; a non-neural hybrid
+retrieval baseline; complete selection journaling; and regional adequacy and
+two-sided deletion checks.
+
+Its contracts and kill criteria are frozen in
+[`contracts/wamrx_milestone1.json`](contracts/wamrx_milestone1.json). E0.10 is
+the falsification experiment. It includes a deliberately biased compiler that
+passes pooled coverage (0.923) while failing rare-region coverage (0.0), so the
+worst-region gate is demonstrated rather than merely asserted.
+
 ## Running
 
 ```bash
@@ -108,6 +123,14 @@ python3 -m venv .venv && .venv/bin/pip install numpy scipy
 
 ```bash
 .venv/bin/python rig_a/experiments/e1_1_spectrum_knee.py
+```
+
+Milestone 1 itself needs only Python's standard library:
+
+```bash
+python3 -m unittest discover -v
+python3 rig_a/experiments/e0_10_wamrx_memory_kernel.py
+python3 tools/check_record.py
 ```
 
 Every experiment is seeded and writes a JSON record to `results/`. Kill
@@ -120,8 +143,11 @@ run — a result can always be narrated into a pass otherwise.
 PLAN.md              the plan: claim ledger, rigs, kill criteria, phases
 claims/claims.yaml   machine-readable claim ledger with pre-registered predictions
 docs/                design amendments and reviews
+contracts/           frozen WAM-RX mechanism declarations and kill criteria
+wamrx/               milestone-1 ledger, resolver, lineage, retrieval, evaluation
 rig_a/core/          spectrum.py (R_t, three readings) · world.py (practice world)
                      ledger.py (typed entries, cards, adapters) · influence.py (functional ground truth)
 rig_a/experiments/   one file per experiment
 results/             seeded JSON records
+tests/               stdlib unit and end-to-end checks for the milestone kernel
 ```

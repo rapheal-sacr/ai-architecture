@@ -1,0 +1,118 @@
+{
+  "contract_schema_version": 1,
+  "registered_at": "2026-08-09T00:00:00-04:00",
+  "authority": {
+    "authoritative": ["version-1 events in the append-only SQLite ledger"],
+    "derived": [
+      "resolved snapshots",
+      "retrieval indexes",
+      "selection journals",
+      "analytic views",
+      "graphs",
+      "summaries",
+      "skill cards",
+      "adapters and router state"
+    ]
+  },
+  "protected_regions": ["common", "rare"],
+  "promotion_rule": "All executable milestone-1 criteria pass; any worst-region failure rejects the candidate even when pooled metrics pass.",
+  "rollback_rule": "Append a disabling control event immediately, stop reads of invalid artifacts, and rebuild from the surviving ledger image.",
+  "self_modification_scope": "none",
+  "mechanisms": [
+    {
+      "mechanism_id": "M1-ledger-v1",
+      "name": "append-only authoritative ledger",
+      "authoritative_inputs": ["caller-supplied, schema-valid Event v1 batches"],
+      "outputs": ["hash-chained ledger frontier", "deterministically replayable event stream"],
+      "assumptions": ["single process", "SQLite atomic transactions", "timezone-qualified event times"],
+      "scope": "one SQLite database; no distributed consensus",
+      "cost": "O(batch size) writes and O(event count) integrity replay",
+      "tradeoff": "full event retention uses more storage than in-place mutation",
+      "failure_response": "reject the batch, preserve the prior frontier, and stop derived compilation if integrity verification fails",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["append events", "append retrieval journal records"],
+      "registered_thresholds": {
+        "snapshot_hash_variance": 0,
+        "partial_batch_rows_after_interruption": 0,
+        "unresolved_reference_count": 0
+      },
+      "kill_criteria": [
+        "K1: repeated replay produces more than one resolved snapshot hash",
+        "K2: interruption at any insert boundary exposes a partial batch",
+        "K3: an update or delete against an event row succeeds"
+      ]
+    },
+    {
+      "mechanism_id": "M1-lineage-v1",
+      "name": "artifact stamp and support manifest",
+      "authoritative_inputs": ["ledger frontier", "artifact content", "recorded candidate and evidence event IDs"],
+      "outputs": ["read-time-validatable ArtifactEnvelope"],
+      "assumptions": ["artifact content is canonically serializable", "component versions are immutable identifiers"],
+      "scope": "all derived artifacts, including indexes and future model adapters",
+      "cost": "O(candidate lineage size) frontier and support validation",
+      "tradeoff": "conservative support invalidation may temporarily disable useful derived state",
+      "failure_response": "make the artifact unusable; do not downgrade missing lineage to a warning",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["create a new immutable artifact version"],
+      "registered_thresholds": {
+        "unstamped_artifacts_accepted": 0,
+        "missing_candidate_lineage_accepted": 0,
+        "content_hash_mismatches_accepted": 0
+      },
+      "kill_criteria": [
+        "K4: an artifact with incomplete required stamp fields is readable",
+        "K5: an artifact cites evidence absent from its recorded frontier",
+        "K6: an all-support artifact remains usable after one support event is invalidated"
+      ]
+    },
+    {
+      "mechanism_id": "M1-adequacy-v1",
+      "name": "regional compile adequacy and two-sided deletion",
+      "authoritative_inputs": ["resolved ledger image", "protected region registry", "pre-registered query probes"],
+      "outputs": ["pooled and regional coverage", "query distortion", "contradiction preservation", "clean-rebuild comparison"],
+      "assumptions": ["synthetic probes have known evidence IDs", "region membership is versioned by ontology"],
+      "scope": "milestone-1 hybrid retrieval artifacts",
+      "cost": "O(events plus protected probes) per compiler candidate",
+      "tradeoff": "tail coverage may increase artifact size and retrieval cost",
+      "failure_response": "reject the compiler candidate and retain the full ledger representation",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["compile a new derived index"],
+      "registered_thresholds": {
+        "minimum_regional_coverage": 1.0,
+        "maximum_regional_query_distortion": 0.0,
+        "minimum_contradiction_preservation": 1.0,
+        "tombstoned_hits": 0,
+        "clean_rebuild_hash_mismatches": 0
+      },
+      "kill_criteria": [
+        "K7: any protected region falls below the coverage floor even if pooled coverage passes",
+        "K8: any fully invalidated evidence remains retrievable after single or batched deletion",
+        "K9: any surviving evidence becomes unavailable after repair",
+        "K10: repaired and clean-from-scratch indexes have different content hashes"
+      ]
+    },
+    {
+      "mechanism_id": "M1-retrieval-v1",
+      "name": "hybrid retrieval with selection journal",
+      "authoritative_inputs": ["usable ledger events", "query", "metadata and validity filters"],
+      "outputs": ["ranked evidence hits", "complete candidate journal", "answer support manifest"],
+      "assumptions": ["hashed character features are a small non-neural semantic baseline", "scores are not epistemic authority"],
+      "scope": "document and episode text fields in Event v1 payloads",
+      "cost": "O(indexed documents) per query in the milestone prototype",
+      "tradeoff": "complete candidate logging consumes audit storage",
+      "failure_response": "block durable outputs when a journal cannot be appended or selected support is invalid",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["append one immutable retrieval journal record per query"],
+      "registered_thresholds": {
+        "unjournaled_queries": 0,
+        "candidate_coverage": 1.0,
+        "inactive_selected_items": 0
+      },
+      "kill_criteria": [
+        "K11: a retrieval omits an indexed rival from its candidate journal",
+        "K12: a journal omits scores, filters, versions, selections, or the top-k margin",
+        "K13: a previously selected tombstoned item remains selectable before rebuild"
+      ]
+    }
+  ]
+}

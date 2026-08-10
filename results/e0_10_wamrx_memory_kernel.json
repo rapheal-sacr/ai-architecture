@@ -1,0 +1,66 @@
+{
+  "atomic_recovery": {
+    "passed": true,
+    "rows_after_interruption": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0
+    }
+  },
+  "biased_compiler": {
+    "contradiction_preservation": 1.0,
+    "passed": false,
+    "pooled_coverage": 0.923076923077,
+    "pooled_query_distortion": 0.5,
+    "regional_coverage": {
+      "common": 1.0,
+      "rare": 0.0
+    },
+    "regional_query_distortion": {
+      "common": 0.0,
+      "rare": 1.0
+    },
+    "worst_region_coverage": 0.0,
+    "worst_region_query_distortion": 1.0
+  },
+  "checks": {
+    "K10_clean_rebuild_equivalent": true,
+    "K11_complete_candidate_set": true,
+    "K12_selection_journal_complete_and_immutable": true,
+    "K13_tombstone_immediate_disable": true,
+    "K1_deterministic_replay": true,
+    "K2_atomic_recovery": true,
+    "K3_append_only_enforced": true,
+    "K4_artifact_stamp_fail_closed": true,
+    "K5_missing_lineage_and_frontier_rejected": true,
+    "K6_invalidated_support_rejected": true,
+    "K7_regional_compiler_and_corrections_pass": true,
+    "K8_retired_evidence_absent_from_repair": true,
+    "K9_survivor_available": true
+  },
+  "claim": "milestone-1 memory is reconstructable, correctable, auditable, and deletable",
+  "complete_compiler": {
+    "contradiction_preservation": 1.0,
+    "passed": true,
+    "pooled_coverage": 1.0,
+    "pooled_query_distortion": 0.0,
+    "regional_coverage": {
+      "common": 1.0,
+      "rare": 1.0
+    },
+    "regional_query_distortion": {
+      "common": 0.0,
+      "rare": 0.0
+    },
+    "worst_region_coverage": 1.0,
+    "worst_region_query_distortion": 0.0
+  },
+  "contract_count": 4,
+  "event_count_after_delete": 18,
+  "event_count_before_delete": 16,
+  "experiment": "E0.10",
+  "replay_hash": "ae3cf4ab118aad026b17e8c9707580e9dd4c08bc825eb87d696440dcddc9cb28",
+  "retrieval_journal_count": 10,
+  "verdict": "PASS"
+}

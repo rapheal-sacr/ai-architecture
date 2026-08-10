@@ -1430,6 +1430,52 @@ claims:
       rewired null, "max degree 49" would have read as a finding when it might
       have been "there are a lot of citations".
 
+  - id: E0.10
+    tier: L1 x L3
+    claim: "WAM-RX milestone 1 memory is reconstructable, correctable, auditable, and deletable"
+    source: "WAM-RX architecture specification milestone 1; frozen contract registry"
+    rig: A
+    kill: "K1-K13 in the experiment and M1-ledger/lineage/adequacy/retrieval contracts; any worst-region failure overrides pooled success"
+    predicted: uncertain
+    status: PASS
+    result: results/e0_10_wamrx_memory_kernel.json
+    procedure: rig_a/experiments/e0_10_wamrx_memory_kernel.py
+    tested_against: contracts/wamrx_milestone1.json
+    finding: >
+      All thirteen registered checks pass in the small stdlib-only implementation.
+      Five repeated live replays and a reversed-order functional replay produce
+      one resolved snapshot hash. Simulated interruption before insertion and
+      after each of three insert boundaries leaves zero visible rows. SQLite
+      triggers reject in-place event mutation.
+      Artifact reads fail closed on content-hash mismatch and lineage absent
+      from the recorded frontier. A support manifest that validates before a
+      deletion becomes unusable immediately after its evidence is tombstoned.
+      The complete hybrid compiler has coverage 1.0 and query distortion 0.0 in
+      both protected regions and preserves all typed contradictions.
+    regional_control: >
+      The deliberately biased compiler is the manipulation check the pooled
+      statistic needs. It excludes the one rare event while retaining every
+      common event: pooled coverage is 0.923 and appears acceptable at a 0.90
+      bar, but rare-region coverage is 0.0 and rare query distortion is 1.0.
+      The regional gate rejects it. This demonstrates, in executable form, the
+      distinction E0.1 exposed between recompilation fidelity and compile
+      adequacy.
+    deletion_and_repair: >
+      Queries first select two temporary events. After their tombstones are
+      appended as one atomic batch, the OLD index immediately filters both by
+      live support without a global rebuild, while a protected rare survivor
+      remains retrievable. The
+      repaired index content hash exactly matches a separate clean-from-scratch
+      build over the surviving ledger image. Every retrieval journals the full
+      candidate set, component scores, filters, versions, selected IDs, and
+      top-k boundary margin.
+    scope_limit: >
+      This is a structural milestone, not a scale result. Retrieval uses lexical
+      overlap plus deterministic hashed character features and scans all
+      documents. There is no neural memory, recurrence, MoE, weight update,
+      distributed consensus, or sealed external service. Those remain gated on
+      this foundation rather than being implied by its PASS.
+
   - id: E0.3
     tier: L8
     claim: "I3 no-compounding holds for synthetic experience without new machinery"

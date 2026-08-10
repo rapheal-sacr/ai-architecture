@@ -2164,6 +2164,38 @@ made visible.
 **And the stated tension did not bind:** demand yields 3,496 and 34,901 entries,
 both clearing R13's derived floor of 1,600.
 
+### E0.10 · WAM-RX milestone 1 — authoritative memory kernel
+
+The first WAM-RX implementation slice is deliberately non-neural. Its four
+mechanism declarations and K1–K13 kill criteria were frozen in
+`contracts/wamrx_milestone1.json` before the registered run. The implementation
+is in `wamrx/`; it uses SQLite and the Python standard library only.
+
+**All thirteen experiment checks pass.** Replaying the same mixed update and
+contradiction stream repeatedly, and replaying it from reversed input order,
+produces one resolved snapshot hash. Simulated interruption before insertion and
+after every insert boundary in a three-event batch exposes zero partial rows.
+Artifact content, frontier, component versions, and evidence/candidate lineage
+are enforced at read time.
+
+**The tail-blind control fires.** A compiler retaining all common events but
+excluding the one rare event reports pooled coverage **0.923**, while rare-region
+coverage is **0.0** and rare query distortion is **1.0**. The regional gate
+rejects it. The compliant compiler reports 1.0 coverage, 0.0 distortion, and 1.0
+contradiction preservation in every protected region.
+
+**Deletion is split correctly.** Two events in one atomic tombstone batch
+disappear immediately from reads through the old index by item-level support
+validation; surviving rare
+evidence remains available. The repaired index has the same content hash as a
+separate clean-from-scratch build. The answer manifest that validated before the
+tombstone becomes unusable after it. Complete candidate sets, scores, filters,
+versions, selections, and top-k boundary margins are append-journaled.
+
+This PASS is structural and intentionally narrow. It does not establish scale,
+distributed operation, neural memory, recurrence, MoE, continual learning, or a
+sealed assay. Those layers remain gated on this foundation.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
@@ -2178,6 +2210,7 @@ experiment's docstring; `claims/claims.yaml` is the machine-readable version.
 | E0.2 ★ | **Tombstone cascade is transitive.** "A tombstone cascades to every adapter whose provenance contains the entry." | A→B | Any residual influence after cascade. **Predicted break:** the real path is entry → skill card → card-conditioned rollouts → adapter, and §7 says explicitly that the card *generates the adapter's training set*. If provenance is recorded entry→adapter, the cascade never reaches the parametric carryover. Unlearning is then approximate, which is the exact property L7 claims to have eliminated. |
 | E0.3 | **I3 no-compounding under synthetic experience.** L8 needs no new containment because synthetic entries reuse the untrusted-content quarantine. | A | Any promotion whose provenance closure contains only `synthetic` + `inferred`. Tests whether Part III §6.1's "chain to an `observed` entry" is enforceable when the task derives from a *gap* — itself a statistic over many entries. Is that a chain? |
 | E0.4 | **I1 grounding / claim-level auditability.** | A | Fraction of promoted capabilities whose provenance resolves to `observed` < 1.0. |
+| E0.10 | **WAM-RX milestone-1 memory kernel.** Reconstruct, correct, audit, and delete from one append-only authority. | A | Any nondeterministic replay, partial batch recovery, accepted missing lineage, protected-region adequacy failure, tombstoned retrieval, survivor loss, clean-rebuild mismatch, or incomplete selection journal. **DONE — PASS.** |
 
 ### Root 1 · Estimator quality
 

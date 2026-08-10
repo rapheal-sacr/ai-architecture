@@ -54,6 +54,21 @@ questions before they cost a build.
 distinction worth making explicit, because one kind is cheap and the other is
 not.
 
+## WAM-RX implementation status
+
+**Milestone 1 passes its registered synthetic gate.** E0.10 adds the actual
+single-process authority layer: immutable version-1 events in SQLite,
+deterministic replay, atomic batches, corrections and tombstones, enforced
+artifact lineage, item-level deletion disabling, a hybrid retrieval baseline,
+complete selection journals, and regional compile-adequacy measurement.
+
+The negative control matters: pooled coverage is **0.923** while rare-region
+coverage is **0.0**, and the regional gate rejects the compiler. The compliant
+arm reaches 1.0 regional coverage, 0.0 distortion, immediate tombstone disable,
+and exact clean-rebuild equivalence. This is evidence for the implementation
+contract at small scale, not evidence for recurrence, expert routing, continual
+weight updates, self-improvement, or AGI.
+
 ---
 
 ## Invariants
