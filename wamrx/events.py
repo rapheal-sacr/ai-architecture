@@ -8,7 +8,7 @@ observed/asserted event in one atomic batch.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Any
 
@@ -48,6 +48,12 @@ def _parse_timestamp(value: str, field: str) -> datetime:
     if parsed.tzinfo is None:
         raise ValueError(f"{field} must include a timezone")
     return parsed
+
+
+def canonical_timestamp(value: str, field: str) -> str:
+    """Normalize an admitted timestamp to UTC before event hashing."""
+
+    return _parse_timestamp(value, field).astimezone(timezone.utc).isoformat()
 
 
 @dataclass(frozen=True)
@@ -105,9 +111,13 @@ class Event:
         event = cls(
             event_id=event_id,
             parent_ids=tuple(sorted(set(parent_ids))),
-            transaction_time=transaction_time,
-            valid_from=valid_from,
-            valid_to=valid_to,
+            transaction_time=canonical_timestamp(transaction_time, "transaction_time"),
+            valid_from=canonical_timestamp(valid_from, "valid_from"),
+            valid_to=(
+                canonical_timestamp(valid_to, "valid_to")
+                if valid_to is not None
+                else None
+            ),
             actor=actor,
             source_id=source_id,
             verifier_id=verifier_id,
@@ -149,10 +159,27 @@ class Event:
             raise ValueError(
                 "verified/grounded events require an explicit verifier_id"
             )
+        if self.verifier_class != "unverified" and not self.provenance_witnesses:
+            raise ValueError(
+                "verified/grounded events require at least one typed provenance witness"
+            )
+        for witness in self.provenance_witnesses:
+            if not witness.startswith(("event:", "external:")):
+                raise ValueError(
+                    "provenance witnesses must use event:<id> or external:<authority>:<id>"
+                )
         transaction = _parse_timestamp(self.transaction_time, "transaction_time")
         valid_from = _parse_timestamp(self.valid_from, "valid_from")
+        if self.transaction_time != canonical_timestamp(
+            self.transaction_time, "transaction_time"
+        ):
+            raise ValueError("transaction_time must be canonical UTC")
+        if self.valid_from != canonical_timestamp(self.valid_from, "valid_from"):
+            raise ValueError("valid_from must be canonical UTC")
         if self.valid_to is not None:
             valid_to = _parse_timestamp(self.valid_to, "valid_to")
+            if self.valid_to != canonical_timestamp(self.valid_to, "valid_to"):
+                raise ValueError("valid_to must be canonical UTC")
             if valid_to <= valid_from:
                 raise ValueError("valid_to must be later than valid_from")
         if self.confidence is not None and not 0.0 <= self.confidence <= 1.0:

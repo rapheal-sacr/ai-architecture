@@ -56,7 +56,7 @@ not.
 
 ## WAM-RX implementation status
 
-**Milestone 1 passes its registered synthetic gate.** E0.10 adds the actual
+**Milestones 1 and 2 pass their registered synthetic gates.** E0.10 adds the actual
 single-process authority layer: immutable version-1 events in SQLite,
 deterministic replay, atomic batches, corrections and tombstones, enforced
 artifact lineage, item-level deletion disabling, a hybrid retrieval baseline,
@@ -65,9 +65,19 @@ complete selection journals, and regional compile-adequacy measurement.
 The negative control matters: pooled coverage is **0.923** while rare-region
 coverage is **0.0**, and the regional gate rejects the compiler. The compliant
 arm reaches 1.0 regional coverage, 0.0 distortion, immediate tombstone disable,
-and exact clean-rebuild equivalence. This is evidence for the implementation
-contract at small scale, not evidence for recurrence, expert routing, continual
-weight updates, self-improvement, or AGI.
+and exact clean-rebuild equivalence.
+
+The Milestone 2 foundation then fixes typed witness closure, observed-root-only
+promotion, ledger-sequence transaction order with canonical UTC timestamps, and
+fail-closed runtime compatibility. E0.3 and E0.4 pass at their registered
+structural scope. E0.11 adds provenance-linked temporal analytics, immutable
+analytic query journals, and an explicit belief/constraint graph. It answers all
+four registered structural tasks, preserves contradiction history, blocks
+missing/conflicting constraints, disables tombstoned support, and matches clean
+rebuilds. All seven requested negative-control classes fire as expected.
+
+These are small single-process representation results, not evidence for
+recurrence, expert routing, continual weight updates, self-improvement, or AGI.
 
 ---
 
@@ -75,9 +85,9 @@ weight updates, self-improvement, or AGI.
 
 | Invariant | Status | Rests on | What would change it |
 |---|---|---|---|
-| **I1** grounding | assumed | never tested directly | E0.4, unrun |
+| **I1** grounding | **verified at registered structural scope** | E0.4: both promoted capabilities resolve to observed roots; coverage 1.0 | broader and adversarial grounding populations |
 | **I2** derivability | **broken → repair** | stamp was a pair, not a four-tuple | amendment rev 2 §B: component-granular stamp. E0.1 A3 **rebuilt** (B20): a draw policy that differs between compile and recompile moves competence **8.1 points above the resampling floor**, ~4.5σ. The old 21.6% varied nothing and is withdrawn |
-| **I3** no-compounding | assumed | untested under synthetic experience | E0.3, unrun |
+| **I3** no-compounding | **verified at registered structural scope** | E0.3: synthetic/inferred-only promotion rejected atomically; grounded multi-hop accepted | broader gap-derived and externally mediated chains |
 | **I4** recompilability | **broken → repair** | was a bookkeeping claim wearing a competence claim's name | E0.1: 6.7% pooled over-forgetting hiding **79.8% worst-region**, 12.4× blind. Amended to a two-sided verified property with three support categories |
 | **I5** anchored improvement | **broken → repair** | blast-radius rule bounds *which* thresholds, not their *values* | E4.2. R4: bound the values; pin derived views; seal only harness code a verifier executes through |
 | **I6** refutation permanence | assumed | untested | E4.3/E4.4, unrun |

@@ -8,7 +8,12 @@ from collections import Counter
 from dataclasses import dataclass
 from typing import Any
 
-from .artifacts import ArtifactEnvelope, ArtifactStamp, SupportManifest
+from .artifacts import (
+    ArtifactCompatibilityPolicy,
+    ArtifactEnvelope,
+    ArtifactStamp,
+    SupportManifest,
+)
 from .canonical import sha256_json
 from .resolver import ResolvedRecord, resolve
 from .store import AppendOnlyEventStore
@@ -80,11 +85,13 @@ class HybridRetrievalIndex:
         envelope: ArtifactEnvelope,
         documents: tuple[IndexedDocument, ...],
         disabled_records: dict[str, str],
+        compatibility_policy: ArtifactCompatibilityPolicy,
     ) -> None:
         self.store = store
         self.envelope = envelope
         self.documents = documents
         self.disabled_records = disabled_records
+        self.compatibility_policy = compatibility_policy
 
     @classmethod
     def build(
@@ -183,6 +190,7 @@ class HybridRetrievalIndex:
             envelope=ArtifactEnvelope(content=content, stamp=stamp, support=manifest),
             documents=tuple(documents),
             disabled_records=disabled,
+            compatibility_policy=ArtifactCompatibilityPolicy.exact_for_stamp(stamp),
         )
 
     @property
@@ -206,7 +214,12 @@ class HybridRetrievalIndex:
         # The global stamp is checked, while per-document support is evaluated
         # below.  That lets a tombstone disable its document immediately without
         # making an unrelated part of a large index unavailable.
-        self.envelope.validate(self.store, valid_at=valid_at, check_support=False)
+        self.envelope.validate(
+            self.store,
+            compatibility_policy=self.compatibility_policy,
+            valid_at=valid_at,
+            check_support=False,
+        )
         snapshot = resolve(self.store, valid_at=valid_at)
         usable = snapshot.usable_event_ids()
         resolved_by_id = {record.event_id: record for record in snapshot.records}

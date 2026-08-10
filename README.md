@@ -100,9 +100,9 @@ here has been rare-region blindness and no invariant asserts that the training
 draw covers what the ledger supports. A system that bounds its costs by never
 learning the tail satisfies I2 and I4 completely. See PLAN.md §5.
 
-## WAM-RX milestone 1
+## WAM-RX milestones 1 and 2
 
-The repository now also contains the first implementation slice of WAM-RX: a
+The repository now also contains the first two implementation slices of WAM-RX: a
 small, stdlib-only authoritative memory kernel. It includes a hash-chained,
 append-only SQLite event store; deterministic replay; explicit correction and
 tombstone events; artifact stamps and support manifests; a non-neural hybrid
@@ -115,6 +115,19 @@ the falsification experiment. It includes a deliberately biased compiler that
 passes pooled coverage (0.923) while failing rare-region coverage (0.0), so the
 worst-region gate is demonstrated rather than merely asserted.
 
+Milestone 2 adds typed grounding and no-compounding gates, ledger-sequence
+transaction semantics with normalized UTC timestamps, explicit artifact-runtime
+compatibility, provenance-linked temporal analytics with immutable query
+journals, and a belief/constraint graph that preserves rejected claims and
+unresolved constraints. Its contracts are
+[`contracts/wamrx_milestone2_foundation.json`](contracts/wamrx_milestone2_foundation.json)
+and
+[`contracts/wamrx_multiview_memory.json`](contracts/wamrx_multiview_memory.json).
+E0.3, E0.4, and E0.11 pass at their registered small synthetic scope, including
+malformed-schema, rare-region, evidence-laundering, stale-ontology,
+contradiction, tombstone, and unjournaled-query controls. Neural recurrence and
+expert routing remain deferred.
+
 ## Running
 
 ```bash
@@ -125,11 +138,14 @@ python3 -m venv .venv && .venv/bin/pip install numpy scipy
 .venv/bin/python rig_a/experiments/e1_1_spectrum_knee.py
 ```
 
-Milestone 1 itself needs only Python's standard library:
+The WAM-RX milestones need only Python's standard library:
 
 ```bash
 python3 -m unittest discover -v
+python3 rig_a/experiments/e0_3_no_compounding.py
+python3 rig_a/experiments/e0_4_grounding_audit.py
 python3 rig_a/experiments/e0_10_wamrx_memory_kernel.py
+python3 rig_a/experiments/e0_11_multiview_memory.py
 python3 tools/check_record.py
 ```
 
@@ -144,7 +160,7 @@ PLAN.md              the plan: claim ledger, rigs, kill criteria, phases
 claims/claims.yaml   machine-readable claim ledger with pre-registered predictions
 docs/                design amendments and reviews
 contracts/           frozen WAM-RX mechanism declarations and kill criteria
-wamrx/               milestone-1 ledger, resolver, lineage, retrieval, evaluation
+wamrx/               authority, grounding, retrieval, analytics, and belief graph
 rig_a/core/          spectrum.py (R_t, three readings) · world.py (practice world)
                      ledger.py (typed entries, cards, adapters) · influence.py (functional ground truth)
 rig_a/experiments/   one file per experiment

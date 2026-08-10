@@ -12,6 +12,12 @@ from typing import Any, Iterable
 
 from .canonical import canonical_json, sha256_json
 from .events import Event
+from .grounding import (
+    GroundingAuditor,
+    is_promotion,
+    ledger_witness_id,
+    validate_typed_witnesses,
+)
 
 GENESIS_HASH = "0" * 64
 
@@ -72,6 +78,12 @@ class AppendOnlyEventStore:
                     record_hash TEXT NOT NULL,
                     record_json TEXT NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS analytic_query_journal (
+                    sequence INTEGER PRIMARY KEY AUTOINCREMENT,
+                    query_id TEXT NOT NULL UNIQUE,
+                    record_hash TEXT NOT NULL,
+                    record_json TEXT NOT NULL
+                );
                 CREATE TRIGGER IF NOT EXISTS events_no_update
                 BEFORE UPDATE ON events BEGIN
                     SELECT RAISE(ABORT, 'events are append-only');
@@ -87,6 +99,14 @@ class AppendOnlyEventStore:
                 CREATE TRIGGER IF NOT EXISTS journal_no_delete
                 BEFORE DELETE ON retrieval_journal BEGIN
                     SELECT RAISE(ABORT, 'retrieval journal is append-only');
+                END;
+                CREATE TRIGGER IF NOT EXISTS analytic_journal_no_update
+                BEFORE UPDATE ON analytic_query_journal BEGIN
+                    SELECT RAISE(ABORT, 'analytic query journal is append-only');
+                END;
+                CREATE TRIGGER IF NOT EXISTS analytic_journal_no_delete
+                BEFORE DELETE ON analytic_query_journal BEGIN
+                    SELECT RAISE(ABORT, 'analytic query journal is append-only');
                 END;
                 """
             )
@@ -110,6 +130,7 @@ class AppendOnlyEventStore:
             return self.frontier()
         for event in batch:
             event.validate()
+        validate_typed_witnesses(batch)
         ids = [event.event_id for event in batch]
         if len(ids) != len(set(ids)):
             raise EventConflictError("a batch cannot contain duplicate event IDs")
@@ -130,12 +151,21 @@ class AppendOnlyEventStore:
                         f"event ID {event.event_id!r} already has different content"
                     )
 
-            references = {
-                reference
+            witness_references = {
+                witness_id
                 for event in batch
-                for reference in (*event.parent_ids, *event.target_event_ids)
-                if reference not in batch_ids
+                for witness in event.provenance_witnesses
+                for witness_id in (ledger_witness_id(witness),)
+                if witness_id is not None
             }
+            references = (
+                {
+                    reference
+                    for event in batch
+                    for reference in (*event.parent_ids, *event.target_event_ids)
+                }
+                | witness_references
+            ) - batch_ids
             if references:
                 placeholders = ",".join("?" for _ in references)
                 found = {
@@ -148,6 +178,16 @@ class AppendOnlyEventStore:
                 missing = sorted(references - found)
                 if missing:
                     raise ValueError(f"event references are missing: {missing}")
+
+            if any(is_promotion(event) for event in batch):
+                prior_rows = connection.execute(
+                    "SELECT event_json FROM events ORDER BY sequence"
+                ).fetchall()
+                prior_events = [
+                    Event.from_dict(json.loads(row[0])) for row in prior_rows
+                ]
+                auditor = GroundingAuditor([*prior_events, *batch])
+                auditor.assert_promotions_grounded(event.event_id for event in batch)
 
             if interrupt_after == 0:
                 raise SimulatedWriteInterruption("interrupted before first insert")
@@ -277,5 +317,37 @@ class AppendOnlyEventStore:
         with self._connection() as connection:
             rows = connection.execute(
                 "SELECT record_json FROM retrieval_journal ORDER BY sequence"
+            ).fetchall()
+        return [json.loads(row[0]) for row in rows]
+
+    def append_analytic_query_record(self, record: dict[str, Any]) -> str:
+        query_id = str(record.get("query_id", ""))
+        if not query_id:
+            raise ValueError("analytic query record requires query_id")
+        canonical = canonical_json(record)
+        record_hash = sha256_json(record)
+        with self._connection() as connection:
+            existing = connection.execute(
+                "SELECT record_json FROM analytic_query_journal WHERE query_id = ?",
+                (query_id,),
+            ).fetchone()
+            if existing:
+                if existing[0] != canonical:
+                    raise EventConflictError(
+                        f"analytic query ID {query_id!r} already has a different record"
+                    )
+                return record_hash
+            connection.execute(
+                "INSERT INTO analytic_query_journal"
+                "(query_id, record_hash, record_json) VALUES (?, ?, ?)",
+                (query_id, record_hash, canonical),
+            )
+            connection.commit()
+        return record_hash
+
+    def analytic_query_records(self) -> list[dict[str, Any]]:
+        with self._connection() as connection:
+            rows = connection.execute(
+                "SELECT record_json FROM analytic_query_journal ORDER BY sequence"
             ).fetchall()
         return [json.loads(row[0]) for row in rows]

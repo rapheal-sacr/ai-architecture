@@ -1,0 +1,23 @@
+{
+  "checks": {
+    "G1_missing_ledger_witness_rejected": true,
+    "G2_synthetic_only_promotion_rejected": true,
+    "G3_grounded_multihop_promotion_accepted": true,
+    "G4_external_inference_not_observed": true,
+    "G5_rejected_batch_is_atomic": true,
+    "G6_oracle_roots_conserved": true
+  },
+  "claim": "synthetic and inferred chains cannot compound into ungrounded promotion",
+  "contract_count": 3,
+  "experiment": "E0.3",
+  "grounded_promotion_closure": [
+    "grounded-promotion",
+    "inferred-gap",
+    "observation-root",
+    "synthetic-task"
+  ],
+  "observed_roots": [
+    "observation-root"
+  ],
+  "verdict": "PASS"
+}

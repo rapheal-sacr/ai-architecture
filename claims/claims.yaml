@@ -1443,8 +1443,8 @@ claims:
     tested_against: contracts/wamrx_milestone1.json
     finding: >
       All thirteen registered checks pass in the small stdlib-only implementation.
-      Five repeated live replays and a reversed-order functional replay produce
-      one resolved snapshot hash. Simulated interruption before insertion and
+      Five repeated live replays and a functional replay of the same ledger
+      sequence produce one resolved snapshot hash. Simulated interruption before insertion and
       after each of three insert boundaries leaves zero visible rows. SQLite
       triggers reject in-place event mutation.
       Artifact reads fail closed on content-hash mismatch and lineage absent
@@ -1487,7 +1487,16 @@ claims:
       Part III section 6.1 requires every L8 task to chain to an `observed`
       entry. Unclear whether that is enforceable when a task derives from a gap,
       which is a statistic over many entries rather than a pointer to one.
-    status: untested
+    status: PASS
+    result: results/e0_3_no_compounding.json
+    procedure: rig_a/experiments/e0_3_no_compounding.py
+    tested_against: contracts/wamrx_milestone2_foundation.json
+    finding: >
+      All six registered checks pass. Missing ledger witnesses and synthetic- or
+      inferred-only promotions are rejected atomically. A grounded multi-hop
+      chain is accepted only because its transitive closure reaches the earlier
+      observed root. Attaching an external witness to an inferred event does not
+      manufacture an observation, and the failed batch exposes no partial rows.
 
   - id: E0.4
     tier: cross
@@ -1496,7 +1505,52 @@ claims:
     rig: A
     kill: "resolution fraction < 1.0"
     predicted: uncertain
-    status: untested
+    status: PASS
+    result: results/e0_4_grounding_audit.json
+    procedure: rig_a/experiments/e0_4_grounding_audit.py
+    tested_against: contracts/wamrx_milestone2_foundation.json
+    finding: >
+      Both promoted capabilities resolve through typed provenance to their
+      expected observed roots, for grounding coverage 1.0. Untyped witnesses
+      and ungrounded promotion fail closed, verifier identity is explicit, and
+      rejection remains atomic. This is a structural two-promotion assay, not a
+      population estimate of grounding quality.
+
+  - id: E0.11
+    tier: L1 x L3
+    claim: "typed analytic and belief-graph views add exact multiview memory operations without becoming authorities"
+    source: "WAM-RX architecture specification milestone 2; frozen foundation and multiview contracts"
+    rig: A
+    kill: "K1-K14 in the experiment; any unsupported row/edge, incorrect temporal result, lost contradiction, satisfied missing/conflicting constraint, stale support, rebuild mismatch, version ambiguity, incomplete journal, task miss, or protected-region lineage gap"
+    predicted: uncertain
+    status: PASS
+    result: results/e0_11_multiview_memory.json
+    procedure: rig_a/experiments/e0_11_multiview_memory.py
+    tested_against: contracts/wamrx_multiview_memory.json
+    finding: >
+      All fourteen registered checks and all eight manipulation checks pass.
+      Typed analytics answer aggregation and temporal comparison exactly; the
+      graph preserves a refuted competing location, keeps missing and live
+      conflicting constraints unresolved, and never counts a generated plan as
+      evidence. Multiview memory answers all four structural tasks versus one
+      for the deliberately narrow answer-in-hit retrieval baseline. Both
+      protected regions have lineage coverage 1.0.
+    deletion_and_rebuild: >
+      Tombstoning one analytic source changes the stale-view total from 360 to
+      220 immediately; tombstoning one constraint edge makes the candidate
+      unresolved and invalidates both prior answer manifests. Repaired and
+      clean-from-scratch analytic and graph content hashes match exactly.
+    negative_controls: >
+      The assay detects malformed analytic schema, tail-region omission,
+      generated-plan evidence laundering, an unregistered stale ontology, live
+      contradictory claims, tombstoned support, and a deliberately registered
+      but unjournaled analytic query. Three real analytic reads commit complete,
+      immutable query records.
+    scope_limit: >
+      This proves deterministic single-process representation and lineage
+      behavior in a synthetic world. The baseline is retrieval-answer-in-hit,
+      not retrieval plus a language model. It is not evidence for scale, neural
+      recurrence, expert routing, or continual weight updates.
 
   # -- Root 1 - estimator quality ------------------------------------------
   - id: E1.1

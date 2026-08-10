@@ -30,6 +30,7 @@ def fact(event_id: str, text: str = "a fact", *, valid_to: str | None = None) ->
         payload={"text": text, "region": "test"},
         verifier_class="executable",
         verifier_id="test-verifier",
+        provenance_witnesses=(f"external:test:{event_id}",),
     )
 
 
@@ -47,6 +48,7 @@ def control(event_id: str, act: SpeechAct, target: str) -> Event:
         parent_ids=(target,),
         verifier_class="executable",
         verifier_id="test-verifier",
+        provenance_witnesses=("external:test:control",),
     )
 
 

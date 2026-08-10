@@ -97,15 +97,17 @@ class ResolvedSnapshot:
 def _resolve_events(
     events: Iterable[Event], valid_at: str, frontier: LedgerFrontier
 ) -> ResolvedSnapshot:
-    ordered = sorted(events, key=lambda event: (event.transaction_time, event.event_id))
-    controls: dict[str, list[Event]] = {}
+    # The iterable order is the ledger transaction sequence. Caller-supplied
+    # timestamps are canonical metadata and never reorder an append.
+    ordered = list(events)
+    controls: dict[str, list[tuple[int, Event]]] = {}
     content = []
-    for event in ordered:
+    for sequence, event in enumerate(ordered, start=1):
         if event.speech_act in CONTENT_ACTS:
             content.append(event)
         elif event.is_valid_at(valid_at):
             for target in event.target_event_ids:
-                controls.setdefault(target, []).append(event)
+                controls.setdefault(target, []).append((sequence, event))
 
     records = []
     for event in content:
@@ -115,12 +117,11 @@ def _resolve_events(
         else:
             applicable = controls.get(event.event_id, [])
             if applicable:
-                strongest = max(
+                _, strongest = max(
                     applicable,
-                    key=lambda control: (
-                        _PRECEDENCE[control.speech_act],
-                        control.transaction_time,
-                        control.event_id,
+                    key=lambda item: (
+                        _PRECEDENCE[item[1].speech_act],
+                        item[0],
                     ),
                 )
                 status = strongest.speech_act.value
@@ -142,10 +143,7 @@ def _resolve_events(
                 valid_from=event.valid_from,
                 valid_to=event.valid_to,
                 control_event_ids=tuple(
-                    control.event_id
-                    for control in sorted(
-                        applicable, key=lambda item: (item.transaction_time, item.event_id)
-                    )
+                    control.event_id for _, control in applicable
                 ),
             )
         )

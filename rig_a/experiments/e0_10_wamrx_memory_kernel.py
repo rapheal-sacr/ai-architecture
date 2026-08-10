@@ -44,6 +44,7 @@ import tempfile
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
 
 from wamrx.artifacts import (  # noqa: E402
+    ArtifactCompatibilityPolicy,
     ArtifactEnvelope,
     ArtifactStamp,
     InvalidArtifactError,
@@ -84,7 +85,7 @@ def memory_event(
         confidence=1.0,
         verifier_class="executable",
         verifier_id="verifier:synthetic-world",
-        provenance_witnesses=(f"world:{event_id}",),
+        provenance_witnesses=(f"external:world:{event_id}",),
     )
 
 
@@ -105,7 +106,7 @@ def control_event(
         parent_ids=(target,),
         verifier_class="executable",
         verifier_id="verifier:ground-truth",
-        provenance_witnesses=("synthetic-world-manifest",),
+        provenance_witnesses=("external:world:control-manifest",),
     )
 
 
@@ -234,7 +235,7 @@ def run() -> dict:
         replay_hashes = {
             resolve(store, valid_at=VALID_AT).snapshot_hash for _ in range(5)
         }
-        replay_hashes.add(replay(reversed(events), valid_at=VALID_AT).snapshot_hash)
+        replay_hashes.add(replay(store.events(), valid_at=VALID_AT).snapshot_hash)
         atomic = check_atomic_recovery(temp)
         append_only = check_append_only(store)
 
@@ -319,7 +320,12 @@ def run() -> dict:
             stamp=answer_stamp,
             support=answer_manifest,
         )
-        answer_envelope.validate(store, valid_at=VALID_AT)
+        answer_policy = ArtifactCompatibilityPolicy.exact_for_stamp(answer_stamp)
+        answer_envelope.validate(
+            store,
+            compatibility_policy=answer_policy,
+            valid_at=VALID_AT,
+        )
         tombstone = control_event(
             "tombstone-delete-me", SpeechAct.TOMBSTONE, "delete-me", 2
         )
@@ -348,7 +354,11 @@ def run() -> dict:
 
         answer_after_delete_rejected = False
         try:
-            answer_envelope.validate(store, valid_at=VALID_AT)
+            answer_envelope.validate(
+                store,
+                compatibility_policy=answer_policy,
+                valid_at=VALID_AT,
+            )
         except InvalidArtifactError:
             answer_after_delete_rejected = True
 
@@ -358,7 +368,12 @@ def run() -> dict:
                 content={"corrupt": True},
                 stamp=complete.envelope.stamp,
                 support=complete.envelope.support,
-            ).validate(store, valid_at=VALID_AT, check_support=False)
+            ).validate(
+                store,
+                compatibility_policy=complete.compatibility_policy,
+                valid_at=VALID_AT,
+                check_support=False,
+            )
         except InvalidArtifactError:
             corrupted_content_rejected = True
 
@@ -371,7 +386,11 @@ def run() -> dict:
                     supporting_event_ids=["missing-event"],
                     candidate_event_ids=["missing-event"],
                 ),
-            ).validate(store, valid_at=VALID_AT)
+            ).validate(
+                store,
+                compatibility_policy=answer_policy,
+                valid_at=VALID_AT,
+            )
         except InvalidArtifactError:
             missing_lineage_rejected = True
 
@@ -381,7 +400,11 @@ def run() -> dict:
                 content=answer_content,
                 stamp=dataclasses.replace(answer_stamp, verifier_version=""),
                 support=answer_manifest,
-            ).validate(store, valid_at=VALID_AT)
+            ).validate(
+                store,
+                compatibility_policy=answer_policy,
+                valid_at=VALID_AT,
+            )
         except InvalidArtifactError:
             incomplete_stamp_rejected = True
 
@@ -393,7 +416,11 @@ def run() -> dict:
                     answer_stamp, ledger_frontier_hash="f" * 64
                 ),
                 support=answer_manifest,
-            ).validate(store, valid_at=VALID_AT)
+            ).validate(
+                store,
+                compatibility_policy=answer_policy,
+                valid_at=VALID_AT,
+            )
         except InvalidArtifactError:
             missing_frontier_rejected = True
 

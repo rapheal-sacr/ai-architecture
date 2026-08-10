@@ -2172,8 +2172,8 @@ mechanism declarations and K1–K13 kill criteria were frozen in
 is in `wamrx/`; it uses SQLite and the Python standard library only.
 
 **All thirteen experiment checks pass.** Replaying the same mixed update and
-contradiction stream repeatedly, and replaying it from reversed input order,
-produces one resolved snapshot hash. Simulated interruption before insertion and
+contradiction stream repeatedly, and replaying the same ledger sequence through
+the pure functional resolver, produces one resolved snapshot hash. Simulated interruption before insertion and
 after every insert boundary in a three-event batch exposes zero partial rows.
 Artifact content, frontier, component versions, and evidence/candidate lineage
 are enforced at read time.
@@ -2196,21 +2196,50 @@ This PASS is structural and intentionally narrow. It does not establish scale,
 distributed operation, neural memory, recurrence, MoE, continual learning, or a
 sealed assay. Those layers remain gated on this foundation.
 
+### E0.3, E0.4, E0.11 · WAM-RX milestone 2 — grounded multiview memory
+
+The Milestone 2 foundation contract fixes three semantics before adding new
+views: witnesses are typed and promotions require an observed provenance root;
+ledger sequence is authoritative transaction order while timestamps normalize
+to UTC; and artifact reads fail closed unless the active runtime explicitly
+accepts every stamped component, verifier, base-weight, and ontology version.
+
+**E0.3 and E0.4 pass.** Synthetic/inferred-only chains, missing or untyped
+witnesses, and externally witnessed inference cannot create a promoted
+observation. Grounded multi-hop promotion succeeds, failed batches remain
+atomic, and both registered promoted capabilities resolve to observed roots for
+coverage 1.0.
+
+**E0.11 passes all K1–K14 checks and all eight manipulation checks.** Typed
+analytics and the belief/constraint graph answer all four registered structural
+tasks exactly; the narrow answer-in-hit retrieval baseline answers one. Both
+protected regions have lineage coverage 1.0. Tombstones disable stale rows and
+edges immediately, invalidate durable answers, and repaired views match clean
+rebuilds exactly. Immutable analytic query journals cover every real query.
+
+The registered controls reject malformed schemas, rare-region omission,
+derived-evidence laundering, an unregistered stale ontology, contradictory live
+claims, tombstoned support, and an unjournaled analytic query. This closes the
+small single-process Milestone 2 representation gate. Neural recurrence remains
+deferred; neither the four-task assay nor its retrieval-only baseline is a model
+quality or scale result.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
 pre-registered prediction that it breaks. Full kill criteria live in each
 experiment's docstring; `claims/claims.yaml` is the machine-readable version.
 
-### Root 0 · The invariants (I1–I6 are asserted and have never been tested)
+### Root 0 · The invariants
 
 | ID | Claim | Rig | Kill criterion |
 |---|---|---|---|
 | E0.1 | **I4 recompilability.** Competence regenerates from provenance alone. The design calls this "a design intention rather than a tested property." | A→B | Any non-tombstoned competence not returning within δ. Also: recompile cost vs ledger length — I4 is worthless if it is O(ledger) and ledger is unbounded. |
 | E0.2 ★ | **Tombstone cascade is transitive.** "A tombstone cascades to every adapter whose provenance contains the entry." | A→B | Any residual influence after cascade. **Predicted break:** the real path is entry → skill card → card-conditioned rollouts → adapter, and §7 says explicitly that the card *generates the adapter's training set*. If provenance is recorded entry→adapter, the cascade never reaches the parametric carryover. Unlearning is then approximate, which is the exact property L7 claims to have eliminated. |
-| E0.3 | **I3 no-compounding under synthetic experience.** L8 needs no new containment because synthetic entries reuse the untrusted-content quarantine. | A | Any promotion whose provenance closure contains only `synthetic` + `inferred`. Tests whether Part III §6.1's "chain to an `observed` entry" is enforceable when the task derives from a *gap* — itself a statistic over many entries. Is that a chain? |
-| E0.4 | **I1 grounding / claim-level auditability.** | A | Fraction of promoted capabilities whose provenance resolves to `observed` < 1.0. |
+| E0.3 | **I3 no-compounding under synthetic experience.** L8 needs no new containment because synthetic entries reuse the untrusted-content quarantine. | A | Any promotion whose provenance closure contains only `synthetic` + `inferred`. **DONE — PASS at the registered structural scope.** |
+| E0.4 | **I1 grounding / claim-level auditability.** | A | Fraction of promoted capabilities whose provenance resolves to `observed` < 1.0. **DONE — PASS at the registered two-promotion scope.** |
 | E0.10 | **WAM-RX milestone-1 memory kernel.** Reconstruct, correct, audit, and delete from one append-only authority. | A | Any nondeterministic replay, partial batch recovery, accepted missing lineage, protected-region adequacy failure, tombstoned retrieval, survivor loss, clean-rebuild mismatch, or incomplete selection journal. **DONE — PASS.** |
+| E0.11 | **WAM-RX milestone-2 multiview memory.** Add typed temporal analytics and an explicit belief/constraint graph without creating a second authority. | A | Any unsupported result, wrong temporal operation, erased contradiction, satisfied missing/conflicting constraint, stale support, rebuild mismatch, version ambiguity, unjournaled analytic query, structural task miss, or protected-region lineage gap. **DONE — PASS.** |
 
 ### Root 1 · Estimator quality
 
@@ -2320,7 +2349,7 @@ class — *after* those two, not before.
 
 **Phase 3 — remaining Rig A claims**, re-run against whatever Phase 2 says the
 generators should look like: E1.2, E3.1, E3.2, E3.4, E4.1, E4.3, E4.4, E4.5,
-E0.1, E0.3, E0.4, E2.3, E2.4, E2.5.
+E0.1, E2.3, E2.4, E2.5.
 
 **Phase 4 — adversarial repair validation.** Not rematches — worlds built to
 kill each repair, from outside the model class it assumes (see §5).

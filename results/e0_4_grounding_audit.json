@@ -1,0 +1,39 @@
+{
+  "checks": {
+    "I1_expected_observed_roots": true,
+    "I1_promoted_grounding_coverage": true,
+    "I1_rejection_is_atomic": true,
+    "I1_typed_witnesses_and_verifier_identity": true,
+    "I1_ungrounded_promotion_rejected": true,
+    "I1_untyped_witness_rejected": true
+  },
+  "claim": "promoted capabilities have complete typed grounding to observations",
+  "contract_count": 3,
+  "experiment": "E0.4",
+  "grounding_coverage": 1.0,
+  "promoted_capability_count": 2,
+  "reports": [
+    {
+      "closure": [
+        "asserted-a",
+        "observed-a",
+        "promotion-a"
+      ],
+      "event_id": "promotion-a",
+      "observed_roots": [
+        "observed-a"
+      ]
+    },
+    {
+      "closure": [
+        "observed-b",
+        "promotion-b"
+      ],
+      "event_id": "promotion-b",
+      "observed_roots": [
+        "observed-b"
+      ]
+    }
+  ],
+  "verdict": "PASS"
+}

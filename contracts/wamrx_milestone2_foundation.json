@@ -1,0 +1,117 @@
+{
+  "contract_schema_version": 1,
+  "registered_at": "2026-08-10T00:00:00-04:00",
+  "depends_on": "WAM-RX milestone 1 / commit b2cd1b0",
+  "transaction_order_semantics": "SQLite ledger sequence is authoritative transaction order. Caller timestamps are normalized to UTC at admission and remain metadata. Valid-time intervals determine real-world applicability.",
+  "witness_semantics": "Witnesses are typed as event:<event_id> or external:<authority>:<id>. Ledger witnesses must exist by atomic batch commit. A promotion must have at least one observed event in its transitive parent/witness closure.",
+  "compatibility_semantics": "Artifact reads require an active runtime policy. Base-weight, component, ontology, and verifier versions are exact by default. Older versions are accepted only by an explicit registered compatibility or ontology-migration rule.",
+  "mechanisms": [
+    {
+      "mechanism_id": "M2-grounding-v1",
+      "name": "typed witness closure and promotion grounding gate",
+      "authoritative_inputs": [
+        "event parent links",
+        "typed event or external provenance witnesses",
+        "speech acts",
+        "promotion marker"
+      ],
+      "outputs": [
+        "transitive provenance closure",
+        "observed roots",
+        "promotion admission or rejection",
+        "claim-level grounding coverage"
+      ],
+      "assumptions": [
+        "observed is the only speech act that creates an empirical root",
+        "external witnesses do not automatically convert inferred or synthetic events into observations",
+        "atomic batches may contain forward witness references resolved within that batch"
+      ],
+      "scope": "durable promotion events marked by payload.promotion",
+      "cost": "O(events plus parent/witness edges) per promotion batch",
+      "tradeoff": "strict grounding rejects potentially useful synthetic capabilities until an observed root is linked",
+      "failure_response": "roll back the entire event batch and retain the candidate as non-promoted working state",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["append a grounded event batch", "reject an ungrounded batch"],
+      "registered_thresholds": {
+        "missing_ledger_witnesses_accepted": 0,
+        "promotions_without_observed_root": 0,
+        "promoted_claim_grounding_coverage": 1.0,
+        "new_external_roots_from_synthetic_events": 0
+      },
+      "kill_criteria": [
+        "G1: an event:<id> witness absent from the atomic batch and ledger is accepted",
+        "G2: a synthetic/inferred-only promotion is accepted",
+        "G3: a grounded multi-hop promotion is rejected",
+        "G4: an external witness attached to an inferred event is counted as an observed root",
+        "G5: promotion rejection exposes a partial batch"
+      ]
+    },
+    {
+      "mechanism_id": "M2-temporal-order-v1",
+      "name": "ledger-sequence transaction order with normalized timestamps",
+      "authoritative_inputs": [
+        "append sequence",
+        "timezone-qualified caller transaction time",
+        "valid_from and valid_to"
+      ],
+      "outputs": [
+        "canonical UTC timestamps",
+        "deterministic sequence-ordered replay",
+        "valid-time-filtered belief state"
+      ],
+      "assumptions": [
+        "one SQLite authority assigns append sequence",
+        "backdated metadata cannot rewrite append order"
+      ],
+      "scope": "version-1 event admission and resolver",
+      "cost": "constant-time timestamp normalization and O(events) replay",
+      "tradeoff": "late-arriving historical events preserve their old valid time but are still later transactions",
+      "failure_response": "reject naive or invalid timestamps; use sequence rather than lexical timestamp comparison",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["canonicalize timestamp fields before event hashing"],
+      "registered_thresholds": {
+        "mixed_offset_canonical_mismatches": 0,
+        "backdated_transaction_reorders": 0,
+        "replay_hash_variance": 0
+      },
+      "kill_criteria": [
+        "T1: equal instants with different offsets serialize differently",
+        "T2: a backdated later append appears before an earlier ledger sequence",
+        "T3: valid-time filtering reads transaction order as world validity",
+        "T4: replay of one ledger frontier is nondeterministic"
+      ]
+    },
+    {
+      "mechanism_id": "M2-artifact-compatibility-v1",
+      "name": "fail-closed artifact runtime compatibility",
+      "authoritative_inputs": [
+        "artifact stamp",
+        "active runtime version tuple",
+        "registered component compatibility and ontology migration rules"
+      ],
+      "outputs": ["compatible artifact read or typed incompatibility failure"],
+      "assumptions": [
+        "compatibility is directional from stored artifact version to active runtime",
+        "absence of a rule means incompatible"
+      ],
+      "scope": "base-weight, component, ontology, and verifier versions on every ArtifactEnvelope read",
+      "cost": "O(number of stamped components) per read",
+      "tradeoff": "fail-closed defaults cause rebuilds until compatibility is explicitly registered",
+      "failure_response": "reject the artifact and rebuild; never silently treat a stale ontology as current",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["register a reviewed directional compatibility rule", "build a new artifact"],
+      "registered_thresholds": {
+        "incompatible_artifacts_accepted": 0,
+        "unregistered_ontology_migrations_accepted": 0,
+        "registered_compatible_artifacts_rejected": 0
+      },
+      "kill_criteria": [
+        "C1: an artifact reads without an active runtime policy",
+        "C2: a component mismatch reads without a registered rule",
+        "C3: an ontology mismatch reads without a registered migration",
+        "C4: a registered compatible predecessor is rejected",
+        "C5: verifier incompatibility is downgraded to a warning"
+      ]
+    }
+  ]
+}

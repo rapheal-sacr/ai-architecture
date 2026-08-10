@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from wamrx.artifacts import (
+    ArtifactCompatibilityPolicy,
     ArtifactEnvelope,
     ArtifactStamp,
     InvalidArtifactError,
@@ -33,6 +34,7 @@ def fact(event_id: str, text: str, region: str, kind: str) -> Event:
         },
         verifier_class="grounded",
         verifier_id="test-verifier",
+        provenance_witnesses=(f"external:test:{event_id}",),
     )
 
 
@@ -49,6 +51,7 @@ def tombstone(target: str) -> Event:
         parent_ids=(target,),
         verifier_class="executable",
         verifier_id="test-verifier",
+        provenance_witnesses=("external:test:tombstone",),
     )
 
 
@@ -119,7 +122,10 @@ class ArtifactAndRetrievalTests(unittest.TestCase):
             stamp=stamp,
             support=index.selection_manifest("before"),
         )
-        envelope.validate(self.store, valid_at=VALID_AT)
+        policy = ArtifactCompatibilityPolicy.exact_for_stamp(stamp)
+        envelope.validate(
+            self.store, compatibility_policy=policy, valid_at=VALID_AT
+        )
         self.store.append(tombstone("alpha"))
         after = index.search("alpha cobalt", query_id="after", valid_at=VALID_AT, top_k=3)
         self.assertNotIn("alpha", [hit.event_id for hit in after.hits])
@@ -130,7 +136,9 @@ class ArtifactAndRetrievalTests(unittest.TestCase):
         self.assertEqual(alpha_candidate["resolved_status"], "tombstone")
         self.assertEqual(alpha_candidate["control_event_ids"], ["tombstone-alpha"])
         with self.assertRaises(InvalidArtifactError):
-            envelope.validate(self.store, valid_at=VALID_AT)
+            envelope.validate(
+                self.store, compatibility_policy=policy, valid_at=VALID_AT
+            )
 
     def test_missing_lineage_and_content_tamper_fail_closed(self) -> None:
         content = {"summary": "alpha"}
@@ -148,17 +156,20 @@ class ArtifactAndRetrievalTests(unittest.TestCase):
         good = SupportManifest.create(
             supporting_event_ids=["alpha"], candidate_event_ids=["alpha", "beta"]
         )
-        ArtifactEnvelope(content, stamp, good).validate(self.store, valid_at=VALID_AT)
+        policy = ArtifactCompatibilityPolicy.exact_for_stamp(stamp)
+        ArtifactEnvelope(content, stamp, good).validate(
+            self.store, compatibility_policy=policy, valid_at=VALID_AT
+        )
         with self.assertRaises(InvalidArtifactError):
             ArtifactEnvelope({"summary": "tampered"}, stamp, good).validate(
-                self.store, valid_at=VALID_AT
+                self.store, compatibility_policy=policy, valid_at=VALID_AT
             )
         missing = SupportManifest.create(
             supporting_event_ids=["ghost"], candidate_event_ids=["ghost"]
         )
         with self.assertRaises(InvalidArtifactError):
             ArtifactEnvelope(content, stamp, missing).validate(
-                self.store, valid_at=VALID_AT
+                self.store, compatibility_policy=policy, valid_at=VALID_AT
             )
 
 

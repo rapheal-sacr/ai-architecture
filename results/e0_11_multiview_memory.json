@@ -1,0 +1,57 @@
+{
+  "analytic_query_journal_count": 3,
+  "baseline_score": 1,
+  "checks": {
+    "K10_immediate_support_disable": true,
+    "K11_durable_answers_invalidated": true,
+    "K12_clean_rebuild_equivalent": true,
+    "K13_ontology_identity_stamped": true,
+    "K14_analytic_query_journals_complete": true,
+    "K1_structured_schema_and_lineage_enforced": true,
+    "K2_corrections_and_temporal_math_exact": true,
+    "K3_candidate_field_witness_preserved": true,
+    "K4_contradiction_history_preserved": true,
+    "K5_missing_evidence_not_satisfied": true,
+    "K6_generated_plan_not_evidence": true,
+    "K7_all_multiview_tasks_exact": true,
+    "K8_gain_over_named_baseline": true,
+    "K9_worst_region_lineage_complete": true
+  },
+  "claim": "analytic and belief-graph views add exact multiview memory operations",
+  "contract_count": 3,
+  "exact_tasks": {
+    "aggregation": true,
+    "contradiction": true,
+    "multi_constraint": true,
+    "temporal_comparison": true
+  },
+  "experiment": "E0.11",
+  "manipulation_checks": {
+    "M1_raw_payload_sum_is_wrong": true,
+    "M2_active_only_drops_history": true,
+    "M3_tail_blind_lineage_fails": true,
+    "M4_unjournaled_query_detected": true,
+    "M5_malformed_schema_rejected": true,
+    "M6_unregistered_stale_ontology_rejected": true,
+    "M7_live_contradiction_blocks_satisfaction": true,
+    "M8_derived_evidence_laundering_rejected": true
+  },
+  "multiview_score": 4,
+  "post_delete_stale_view_total": 220.0,
+  "pre_delete_total": 360.0,
+  "regional_lineage_coverage": {
+    "finance": 1.0,
+    "operations": 1.0
+  },
+  "retrieval_answer_in_hit_baseline": {
+    "aggregation": false,
+    "contradiction": true,
+    "multi_constraint": false,
+    "temporal_comparison": false
+  },
+  "tail_blind_control_coverage": {
+    "finance": 1.0,
+    "operations": 0.0
+  },
+  "verdict": "PASS"
+}

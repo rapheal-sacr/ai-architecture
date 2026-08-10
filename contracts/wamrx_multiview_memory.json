@@ -1,0 +1,131 @@
+{
+  "contract_schema_version": 1,
+  "registered_at": "2026-08-10T00:00:00-04:00",
+  "depends_on": "WAM-RX milestone 1 / commit b2cd1b0",
+  "protected_regions": ["finance", "operations"],
+  "comparison_scope": "A structural answer-in-retrieved-hit baseline versus executable analytic and graph operations; not a language-model benchmark.",
+  "registered_negative_controls": [
+    "malformed analytic schema is rejected at compilation",
+    "operations-region lineage removal is detected by the regional gate",
+    "a generated next-step string cannot be laundered into artifact evidence",
+    "a version-1 artifact is rejected by a version-2 ontology runtime without a registered migration",
+    "live contradictory claim edges keep a constraint unresolved",
+    "tombstoned analytic and graph support is disabled and prior answers fail validation",
+    "a registered analytic query with no committed journal entry is detected"
+  ],
+  "mechanisms": [
+    {
+      "mechanism_id": "M2-analytic-v1",
+      "name": "typed temporal analytic compiler",
+      "authoritative_inputs": [
+        "usable version-1 ledger events carrying analytic payloads",
+        "explicit validity time",
+        "ontology version"
+      ],
+      "outputs": [
+        "typed provenance-linked temporal rows",
+        "filter, aggregation, comparison, ranking, and trend results",
+        "disabled-row audit record",
+        "immutable analytic query journal with candidates, filters, operation, versions, support, and result hash"
+      ],
+      "assumptions": [
+        "measures are numeric and dimensions are typed strings",
+        "analytic effective times normalize to UTC before ordering and filtering",
+        "uncertain extraction is represented as a candidate field with witnesses",
+        "one analytic payload produces one row in version 1"
+      ],
+      "scope": "single-process derived view over structured event payloads",
+      "cost": "O(number of analytic events) compile and scan-based queries",
+      "tradeoff": "strict typing rejects malformed rows and duplicates some ledger data in a query-optimized view",
+      "failure_response": "reject malformed compilation; immediately filter rows with inactive support; rebuild asynchronously",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["create a new immutable analytic artifact version"],
+      "registered_thresholds": {
+        "aggregation_absolute_error": 0.0,
+        "temporal_comparison_absolute_error": 0.0,
+        "unsupported_rows": 0,
+        "tombstoned_rows_returned": 0,
+        "clean_rebuild_hash_mismatches": 0,
+        "unjournaled_analytic_queries": 0,
+        "analytic_query_candidate_coverage": 1.0
+      },
+      "kill_criteria": [
+        "A1: corrected or retracted rows contribute to an aggregate",
+        "A2: any query result lacks exact supporting event IDs",
+        "A3: a stale view returns a tombstoned row",
+        "A4: repaired and clean-from-scratch analytic artifacts differ",
+        "A5: an uncertain field loses its confidence or witness set",
+        "A6: an analytic query returns before its immutable journal record commits",
+        "A7: a query journal omits considered rows, filters, operation, versions, support, or result hash"
+      ]
+    },
+    {
+      "mechanism_id": "M2-belief-graph-v1",
+      "name": "belief and constraint graph compiler",
+      "authoritative_inputs": [
+        "ledger events carrying subject-relation-object claims",
+        "verification, refutation, retraction, and tombstone controls",
+        "query-time constraint requirements"
+      ],
+      "outputs": [
+        "active and retired claim edges",
+        "resolved and unresolved contradiction sets",
+        "constraint satisfaction, missing evidence, and next-step plans"
+      ],
+      "assumptions": [
+        "relation semantics are ontology-versioned",
+        "query-time constraints do not become evidence",
+        "competing objects under the same subject, relation, and conditions are candidate contradictions"
+      ],
+      "scope": "explicit claims and constraints; no probabilistic entity resolution",
+      "cost": "O(number of claim edges) compile and scan-based constraint evaluation",
+      "tradeoff": "preserving rejected candidates costs storage but prevents contradiction erasure",
+      "failure_response": "mark conflicts unresolved, expose missing evidence, and never promote a generated plan as corroboration",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["create a new immutable graph artifact version"],
+      "registered_thresholds": {
+        "claim_edges_without_evidence": 0,
+        "known_contradictions_preserved": 1.0,
+        "constraint_classification_accuracy": 1.0,
+        "generated_plans_counted_as_evidence": 0
+      },
+      "kill_criteria": [
+        "G1: a refuted competing claim disappears from the contradiction audit",
+        "G2: a subject with missing evidence is marked satisfied or rejected",
+        "G3: conflicting live values are treated as satisfying a constraint",
+        "G4: a next-step plan enters a support manifest as independent evidence",
+        "G5: a control event changes an unrelated edge"
+      ]
+    },
+    {
+      "mechanism_id": "M2-multiview-gate-v1",
+      "name": "retrieval versus multiview structural assay",
+      "authoritative_inputs": [
+        "four tasks with registered exact answers",
+        "the same ledger frontier for all memory views",
+        "answer-in-hit retrieval baseline"
+      ],
+      "outputs": ["per-task exact correctness and evidence manifests"],
+      "assumptions": [
+        "the baseline measures the retrieval API alone, not an LLM augmented by arbitrary computation",
+        "all exact answers and scoring rules are registered before the run"
+      ],
+      "scope": "aggregation, temporal comparison, contradiction, and multi-constraint tasks in the synthetic world",
+      "cost": "four deterministic tasks per candidate view",
+      "tradeoff": "the assay demonstrates representation value but does not estimate model-level task quality",
+      "failure_response": "retain retrieval only if structured views do not improve exact task coverage",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["record a result artifact"],
+      "registered_thresholds": {
+        "multiview_exact_tasks": 4,
+        "minimum_task_gain_over_baseline": 2,
+        "worst_region_lineage_coverage": 1.0
+      },
+      "kill_criteria": [
+        "V1: multiview memory misses any registered exact answer",
+        "V2: multiview improves fewer than two tasks over the answer-in-hit baseline",
+        "V3: any protected region has evidence-lineage coverage below 1.0"
+      ]
+    }
+  ]
+}

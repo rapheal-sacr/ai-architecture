@@ -17,6 +17,65 @@ class InvalidArtifactError(RuntimeError):
 
 
 @dataclass(frozen=True)
+class ArtifactCompatibilityPolicy:
+    """Directional compatibility from a stored artifact into an active runtime."""
+
+    active_base_weight_version: str
+    active_component_versions: dict[str, str]
+    active_ontology_version: str
+    active_verifier_version: str
+    compatible_base_weight_predecessors: tuple[str, ...] = ()
+    compatible_component_predecessors: dict[str, tuple[str, ...]] | None = None
+    compatible_ontology_predecessors: tuple[str, ...] = ()
+    compatible_verifier_predecessors: tuple[str, ...] = ()
+
+    @classmethod
+    def exact_for_stamp(cls, stamp: "ArtifactStamp") -> "ArtifactCompatibilityPolicy":
+        return cls(
+            active_base_weight_version=stamp.base_weight_version,
+            active_component_versions=dict(stamp.component_versions),
+            active_ontology_version=stamp.ontology_version,
+            active_verifier_version=stamp.verifier_version,
+        )
+
+    def validate(self, stamp: "ArtifactStamp") -> None:
+        if stamp.base_weight_version not in {
+            self.active_base_weight_version,
+            *self.compatible_base_weight_predecessors,
+        }:
+            raise InvalidArtifactError(
+                "artifact base-weight version is incompatible with the active runtime"
+            )
+        if set(stamp.component_versions) != set(self.active_component_versions):
+            raise InvalidArtifactError(
+                "artifact component set is incompatible with the active runtime"
+            )
+        predecessors = self.compatible_component_predecessors or {}
+        for component, active_version in self.active_component_versions.items():
+            allowed = {active_version, *predecessors.get(component, ())}
+            if stamp.component_versions[component] not in allowed:
+                raise InvalidArtifactError(
+                    f"artifact component {component!r} is incompatible: "
+                    f"stored={stamp.component_versions[component]!r}, "
+                    f"active={active_version!r}"
+                )
+        if stamp.ontology_version not in {
+            self.active_ontology_version,
+            *self.compatible_ontology_predecessors,
+        }:
+            raise InvalidArtifactError(
+                "artifact ontology version has no registered migration into the active runtime"
+            )
+        if stamp.verifier_version not in {
+            self.active_verifier_version,
+            *self.compatible_verifier_predecessors,
+        }:
+            raise InvalidArtifactError(
+                "artifact verifier version is incompatible with the active runtime"
+            )
+
+
+@dataclass(frozen=True)
 class SupportManifest:
     supporting_event_ids: tuple[str, ...]
     contradicting_event_ids: tuple[str, ...]
@@ -167,10 +226,16 @@ class ArtifactEnvelope:
         self,
         store: AppendOnlyEventStore,
         *,
+        compatibility_policy: ArtifactCompatibilityPolicy | None,
         valid_at: str,
         check_support: bool = True,
     ) -> None:
         self.stamp.validate_shape()
+        if compatibility_policy is None:
+            raise InvalidArtifactError(
+                "artifact reads require an explicit active runtime compatibility policy"
+            )
+        compatibility_policy.validate(self.stamp)
         self.support.validate_shape()
         if sha256_json(self.content) != self.stamp.content_hash:
             raise InvalidArtifactError("artifact content hash mismatch")
