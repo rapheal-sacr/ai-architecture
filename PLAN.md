@@ -2309,6 +2309,47 @@ This is the registered stop condition for recurrent development; neural memory,
 MoE, consolidation, and self-improvement remain blocked pending separate
 contracts.
 
+### E0.15 · authority-limited native working memory — structural gate
+
+Milestone 4 is anchored to the selected four-block `fixed-depth-v1` core at
+commit `0bb80a8` and the exact E0.14 result hash. The local annotated tag
+`wamrx-m3-fixed-depth-v1` is the stable architecture reference. Neither core
+weights nor macro depth are reopened by the memory experiment.
+
+The frozen comparison has three arms: explicit multiview memory, a deterministic
+fixed-capacity session cache, and one minimal learned gate choosing remember,
+update, merge, or forget over sixteen slots. A deterministic registry freezes
+nine families and 144 cases: 72 train, 36 ID, and 36 OOD. Every OOD axis is
+disjoint from training. Five terminal statuses and both structural and future
+statistical thresholds are explicit before neural implementation.
+
+**E0.15 passes all eleven checks and eleven manipulations without reading an
+accuracy metric.** The boundary is fixed-slot and fixed-byte; owner, session,
+task, epoch, expiry, model, component, and ontology bound; and exactly accounted.
+Every model call requires a fresh current-frontier evidence bundle containing
+all active slot support. Tombstoned support disables its slot before the read,
+and an earlier read cannot produce a durable proposal after frontier change.
+Reset produces the canonical empty payload and rejects the old epoch and other
+owners.
+
+The memory object has no authoritative append path. It emits only candidate
+objects whose manifests name ledger evidence reaching an observed root; memory
+and slot IDs are rejected as independent evidence. Controls also fire on key
+collision, slot overflow, stale checkpoints, poisoned unverified observations,
+protected rare-state decay, and interrupted checkpoint creation.
+
+The smallest neural-memory comparison remains **`NOT_RUN`**. This gate
+authorizes only that later comparison under the frozen contract. It supplies no
+evidence that learned memory beats the deterministic cache or explicit views,
+and it does not authorize MoE, LoRA, continual consolidation, or
+self-improvement.
+
+The exact five E0.14 fixed-depth checkpoints are registered by seed, byte
+count, file SHA-256, metadata hash, and state hash. Their source paths point to
+the Linux run volume and none is present at the macOS relocation paths. That is
+an operational gate, not a failed memory result: E0.16 remains `NOT_RUN`, and
+new initialization or core retraining is explicitly forbidden as a substitute.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
@@ -2328,6 +2369,7 @@ experiment's docstring; `claims/claims.yaml` is the machine-readable version.
 | E0.12 | **WAM-RX milestone-3 recurrent-reasoner pre-model gate.** Freeze a matched three-arm comparison, randomized-depth protocol, double halting gate, task splits, trace/compute schemas, and promotion thresholds. | A | Any comparison confound, split-hash drift, OOD-axis overlap, evidence-frontier substitution, halt bypass, budget escape, unjournaled operation, incomplete schema, or unfired manipulation. **DONE — PASS; E0.14 later consumed the frozen comparison.** |
 | E0.13 | **Registered-run train-only preflight.** | B | Any schedule/loss/model/optimizer/checkpoint/compute mismatch across update-10 resume; any evaluation metric read. **DONE — PASS.** |
 | E0.14 | **Five-seed recurrent model comparison.** | B | Apply the frozen statistical, compute, evidence, manipulation, and failure gates. **DONE — `COMPLETE_RETAIN_FIXED`; recurrence retired as a general core.** |
+| E0.15 | **Authority-limited native-working-memory structural gate.** | A | Any ledger write, memory-derived evidence root, incomplete reinjection, stale support, reset/cross-user leak, capacity escape, incompatible checkpoint, unaccounted operation, changed split hash, or unfired manipulation. **DONE — PASS; neural comparison `NOT_RUN`.** |
 
 ### Root 1 · Estimator quality
 

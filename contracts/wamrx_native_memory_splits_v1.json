@@ -1,0 +1,119 @@
+{
+  "split_registry_schema_version": 1,
+  "registry_id": "wamrx-native-memory-splits-v1",
+  "generator_version": "wamrx-native-memory-tasks-v1",
+  "registered_at": "2026-08-11T17:50:00-04:00",
+  "splits": {
+    "train": {
+      "count_per_family": 8,
+      "family_seeds": {
+        "delayed_recall": 51001,
+        "correction": 51002,
+        "temporal_update": 51003,
+        "distractor_session": 51004,
+        "similar_fact_interference": 51005,
+        "context_overflow": 51006,
+        "reset_task_switch": 51007,
+        "rare_region_retention": 51008,
+        "poison_contradiction": 51009
+      },
+      "family_axes": {
+        "delayed_recall": ["delay:2", "delay:4"],
+        "correction": ["correction:direct", "correction:same-modality"],
+        "temporal_update": ["updates:2", "updates:3"],
+        "distractor_session": ["distractors:4", "distractors:8"],
+        "similar_fact_interference": ["similar:2", "similar:3"],
+        "context_overflow": ["context:8", "context:12"],
+        "reset_task_switch": ["boundary:same-domain", "boundary:same-owner"],
+        "rare_region_retention": ["pressure:4", "pressure:8"],
+        "poison_contradiction": ["poison:unverified", "poison:contradicted"]
+      },
+      "expected_hashes": {
+        "delayed_recall": "fc0b550bc4a2a187e2adc72f825c5a2b14db613ba4bd8bdbc556014cf7f07ed0",
+        "correction": "dea3bd37353b49853da53f882abaa77d3de494ac2e6ac894db1533b80e6224fa",
+        "temporal_update": "b254e782704bf45e587421b3645660155bef17a2d7b4219bb88f2384b7bc4694",
+        "distractor_session": "cdeecf1130e8ff39a214452d49205a1f150a7db43a0c2d80187103b0a945ecf8",
+        "similar_fact_interference": "e3e3e6deb9b716d97a793a6942b0cf449c62e65c6298a9a3b94cb93c8048209c",
+        "context_overflow": "403a70ded822d89f061bde3861272ccb8e5477c1b50bc2dbee74d943428c5513",
+        "reset_task_switch": "7396559c3b8217dff207eb61b9db435bb28d800ad27072667148fa76bebaf58a",
+        "rare_region_retention": "c0a76f2fd5d4896ef0a35f1002f00072c8eaa91fc73f01b430b61f3c1a67d671",
+        "poison_contradiction": "c4c5fb694896c998ebe0b9b390f3aa0f78ab333fbaf7a1fcb314d4a8470e8e4d",
+        "aggregate": "1c438e9c1201e954187a19251a487a72ecbeea7e7a12f58930a54eb5859bd92f"
+      }
+    },
+    "id": {
+      "count_per_family": 4,
+      "family_seeds": {
+        "delayed_recall": 52001,
+        "correction": 52002,
+        "temporal_update": 52003,
+        "distractor_session": 52004,
+        "similar_fact_interference": 52005,
+        "context_overflow": 52006,
+        "reset_task_switch": 52007,
+        "rare_region_retention": 52008,
+        "poison_contradiction": 52009
+      },
+      "family_axes": {
+        "delayed_recall": ["delay:2", "delay:4"],
+        "correction": ["correction:direct", "correction:same-modality"],
+        "temporal_update": ["updates:2", "updates:3"],
+        "distractor_session": ["distractors:4", "distractors:8"],
+        "similar_fact_interference": ["similar:2", "similar:3"],
+        "context_overflow": ["context:8", "context:12"],
+        "reset_task_switch": ["boundary:same-domain", "boundary:same-owner"],
+        "rare_region_retention": ["pressure:4", "pressure:8"],
+        "poison_contradiction": ["poison:unverified", "poison:contradicted"]
+      },
+      "expected_hashes": {
+        "delayed_recall": "94ca11a3776aa1cf3ca7a6e0a96471f8715b9a8bd12842c0efc7cdc05be732a8",
+        "correction": "cefb1dc97d4acdc4865f28c5cd7d71afdcaa7144277b9a185d4d5f0b16702e4b",
+        "temporal_update": "f2791d1c320393cf5d848969239b16555e1ec3500ad392b418eb78132ae20c16",
+        "distractor_session": "e6a67f1b135e7263ad25ca9ff30fb2023a7a68f0a294d0039cbadee6e244c047",
+        "similar_fact_interference": "42d5c718e0136e8d7d202121afdd0ef76dc033c991b7e6fd3e260503fce3e297",
+        "context_overflow": "3a97aa107222966ed47e4f8c8adfb3991c9b4e960714b29c5b091a893bee1f95",
+        "reset_task_switch": "9e79791a2476b3ccb4057dbd6a2add7fd4533e5ed51e910288517381f815ea90",
+        "rare_region_retention": "4817a5a83c3a3750b743a5524593fa8bc99c1f0e18ef320ecaeab9e4bf3f17f3",
+        "poison_contradiction": "024bf6da5cb0878f3355daebe0286a6a9f452707930aae9cca6d9e6c5757d438",
+        "aggregate": "e68b2012256a1c5483e511a78ccf1d14b17aac9623cc2eba8228245b591badcc"
+      }
+    },
+    "ood": {
+      "count_per_family": 4,
+      "family_seeds": {
+        "delayed_recall": 53001,
+        "correction": 53002,
+        "temporal_update": 53003,
+        "distractor_session": 53004,
+        "similar_fact_interference": 53005,
+        "context_overflow": 53006,
+        "reset_task_switch": 53007,
+        "rare_region_retention": 53008,
+        "poison_contradiction": 53009
+      },
+      "family_axes": {
+        "delayed_recall": ["delay:8", "delay:12"],
+        "correction": ["correction:cross-modal", "correction:backdated"],
+        "temporal_update": ["updates:5", "updates:7"],
+        "distractor_session": ["distractors:16", "distractors:24"],
+        "similar_fact_interference": ["similar:6", "similar:8"],
+        "context_overflow": ["context:32", "context:48"],
+        "reset_task_switch": ["boundary:cross-domain", "boundary:cross-user"],
+        "rare_region_retention": ["pressure:16", "pressure:24"],
+        "poison_contradiction": ["poison:temporal", "poison:multi-source"]
+      },
+      "expected_hashes": {
+        "delayed_recall": "225e51110f59928fa5a5b084527fd6e96e84a7f3758fe4ed053378923eccf194",
+        "correction": "a1bd9f27980555aaba8e30f9f11f96bf2ef57d53ee03a1c49241d811286cc469",
+        "temporal_update": "c37504e406c0b4bee1e0722bb04558f05f1f19128f9f4e72f7528d83fb1eea4a",
+        "distractor_session": "0cb34768b9ba99d266982c2d33a0a47229e80129141eff4dc9b21903a7277ee9",
+        "similar_fact_interference": "9d577dd0f05d5b7a36b8bbf9901a8d17f47d55efcb76bdeaba1fa75925fdba15",
+        "context_overflow": "f4579641d9eb427ce5c04d790ee52bf6abfd581975d4854262a9f59dcbbc53a1",
+        "reset_task_switch": "825d24c30195425ac776dcf784e8721aa17553d4df1008a8674545628b944dd1",
+        "rare_region_retention": "673bdf60060c084fda918b41d542a9f56da6aa45eede4cff2d9437c3c316313a",
+        "poison_contradiction": "a3c6e468e6f7fd6f13d8eaba5ba10dc9ca0e10b50871db9cf3a47a6f6f72186d",
+        "aggregate": "252075f23dd71448b6e02cb75ee39d96015d8748332ec5a48802ef4b1b03e826"
+      }
+    }
+  }
+}

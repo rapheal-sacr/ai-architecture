@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "wamrx-native-memory-candidate-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["proposal_id", "session_id", "task_id", "owner_id", "payload", "support", "ledger_frontier_sequence", "ledger_frontier_hash", "authority", "direct_ledger_write_authorized"],
+  "properties": {
+    "proposal_id": {"type": "string", "minLength": 1},
+    "session_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "owner_id": {"type": "string", "minLength": 1},
+    "payload": {"type": "object"},
+    "support": {
+      "type": "object",
+      "required": ["supporting_event_ids", "contradicting_event_ids", "candidate_event_ids", "require_all_support", "minimum_live_support"]
+    },
+    "ledger_frontier_sequence": {"type": "integer", "minimum": 1},
+    "ledger_frontier_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "authority": {"const": "candidate-only"},
+    "direct_ledger_write_authorized": {"const": false}
+  }
+}

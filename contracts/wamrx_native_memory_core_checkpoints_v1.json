@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "manifest_id": "wamrx-native-memory-fixed-core-checkpoints-v1",
+  "source_experiment": "E0.14",
+  "source_result_sha256": "274bee04023d44a1d1cc361715204dd62e18f3b3c7944825f58f31c9d16d85a6",
+  "arm_id": "fixed-depth-v1",
+  "macro_depth": 4,
+  "update": 2000,
+  "parameter_count": 8388608,
+  "checkpoints": [
+    {
+      "seed": 41001,
+      "bytes": 100676493,
+      "file_sha256": "2b85f4676d12cbde5c6e68dad4b8687c7115e569933c944b10ec7a7e2cabebd0",
+      "metadata_hash": "fe052fa2b843a4ae6fd4d8945f9644891ada58474613c14079b8176b1828efe7",
+      "state_hash": "9eebe7e9c28e295136b1f3f7507f66c9f3d5779cbf96adcd57e1d862b0667e11",
+      "source_path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture/e0_14_registered_v1/checkpoints/seed-41001/fixed-depth-v1/update-2000.safetensors",
+      "relocation_path": "artifacts/m3-fixed-depth-v1/seed-41001/update-2000.safetensors"
+    },
+    {
+      "seed": 41002,
+      "bytes": 100676493,
+      "file_sha256": "3e784bebbb2019677892c8875139057da3c0543a26d799465c2388c8c0f54dee",
+      "metadata_hash": "70fd66e9f7b14574666cbe9cf7d7561c1721cc06a294266b782577f7c8fef13a",
+      "state_hash": "400be00c9fa23f11e7dc1fead37e44875ddc6cc136ae681d81d9886f8950e2ba",
+      "source_path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture/e0_14_registered_v1/checkpoints/seed-41002/fixed-depth-v1/update-2000.safetensors",
+      "relocation_path": "artifacts/m3-fixed-depth-v1/seed-41002/update-2000.safetensors"
+    },
+    {
+      "seed": 41003,
+      "bytes": 100676493,
+      "file_sha256": "65b5f7498beafc8251f8c00c4556538ebc2ec1e9c825217ea2874a125a7bb0ec",
+      "metadata_hash": "5f27862edeb2851f908590f2e1561de3e8d8692f46c26ea1fad9b225a3fd9652",
+      "state_hash": "15b7146f2b03282a42632e4684e489e5e24c92e6e4347e62cde39e96cda944f2",
+      "source_path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture/e0_14_registered_v1/checkpoints/seed-41003/fixed-depth-v1/update-2000.safetensors",
+      "relocation_path": "artifacts/m3-fixed-depth-v1/seed-41003/update-2000.safetensors"
+    },
+    {
+      "seed": 41004,
+      "bytes": 100676493,
+      "file_sha256": "61e2af2a6657fcc30752b0b501fa654471e54f9b0bdb6023b40f08707a085ed9",
+      "metadata_hash": "61039f38121e4dc6e259ae0a42d7ce90db1552437b7a60c61b8b317a9d87c489",
+      "state_hash": "6a40fe8cb9b0061921b18249dabd6ba77bf602b3db9837307b9215b078fe25d0",
+      "source_path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture/e0_14_registered_v1/checkpoints/seed-41004/fixed-depth-v1/update-2000.safetensors",
+      "relocation_path": "artifacts/m3-fixed-depth-v1/seed-41004/update-2000.safetensors"
+    },
+    {
+      "seed": 41005,
+      "bytes": 100676493,
+      "file_sha256": "a0be599eaf1b5dc304c5cf68d8c7624f34ec1d50c8a849e7382c6b923d47a1c2",
+      "metadata_hash": "a2fef03a92a4cbc2de534b122fc96000c1ad66b997ff32c0918240957cf9f50e",
+      "state_hash": "890f2373a29550dcab333602d80711be759aeb38490afa0cfac954f3f1481390",
+      "source_path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture/e0_14_registered_v1/checkpoints/seed-41005/fixed-depth-v1/update-2000.safetensors",
+      "relocation_path": "artifacts/m3-fixed-depth-v1/seed-41005/update-2000.safetensors"
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "accuracy_metrics_read": 0,
+  "checks": {
+    "K10_all_eleven_negative_controls_fire": true,
+    "K11_neural_comparison_remains_not_run": true,
+    "K1_contract_status_threshold_and_selection_anchor_complete": true,
+    "K2_frozen_splits_exact_and_ood_disjoint": true,
+    "K3_checkpoint_and_candidate_schemas_complete": true,
+    "K4_compliant_operations_and_exact_accounting_pass": true,
+    "K5_candidate_only_boundary_and_observed_support_hold": true,
+    "K6_tombstone_immediately_disables_slot_answer_and_old_read": true,
+    "K7_reset_expiry_epoch_and_cross_user_leave_no_residual": true,
+    "K8_fixed_slot_and_byte_capacity_enforced": true,
+    "K9_checkpoint_roundtrip_exact_and_identity_bound": true
+  },
+  "compliant_fixture": {
+    "candidate": {
+      "authority": "candidate-only",
+      "direct_ledger_write_authorized": false,
+      "ledger_frontier_hash": "2320ec324c8a7d82bcd3623479f759ba00ce63eb2291d58683912daa31c71c08",
+      "ledger_frontier_sequence": 4,
+      "owner_id": "owner-a",
+      "payload": {
+        "claim": "rare fact is tail"
+      },
+      "proposal_id": "candidate-rare-v1",
+      "session_id": "session-a",
+      "support": {
+        "candidate_event_ids": [
+          "fact-rare"
+        ],
+        "contradicting_event_ids": [],
+        "minimum_live_support": 1,
+        "require_all_support": true,
+        "supporting_event_ids": [
+          "fact-rare"
+        ]
+      },
+      "task_id": "task-a"
+    },
+    "checkpoint_bytes": 1213,
+    "checkpoint_sha256": "fe162437efa02523e9ff174eaac5f85b825156459cce6e42e979b5b6fd3c380e",
+    "compute": {
+      "active_slots": 0,
+      "maximum_serialized_bytes": 65536,
+      "maximum_slots": 4,
+      "occupied_slots": 1,
+      "operation_counts": {
+        "checkpoint": 1,
+        "durable_candidate": 1,
+        "forget": 1,
+        "merge": 1,
+        "model_call": 2,
+        "remember": 3,
+        "update": 1
+      },
+      "realized_memory_flops": 7562,
+      "serialized_slot_bytes": 371
+    },
+    "ledger_count_after_candidate": 4,
+    "ledger_count_before_memory": 4,
+    "operation_counts": {
+      "forget": 1,
+      "merge": 1,
+      "remember": 3,
+      "update": 1
+    },
+    "registered_operations": [
+      "remember",
+      "update",
+      "merge",
+      "forget"
+    ]
+  },
+  "contract": {
+    "comparison_arms": [
+      "explicit-multiview-v1",
+      "deterministic-session-cache-v1",
+      "minimal-gated-native-memory-v1"
+    ],
+    "failure_statuses": [
+      "NOT_RUN",
+      "INCOMPLETE",
+      "INVALID",
+      "PASS",
+      "FAIL"
+    ],
+    "hash": "9bea97bce6109df0b1fcb3c0c288dc90ac27a59fc0519034048650adad671bc0",
+    "mechanism_ids": [
+      "M4-authority-v1",
+      "M4-session-v1",
+      "M4-fixed-store-v1",
+      "M4-evidence-v1",
+      "M4-comparison-v1"
+    ],
+    "path": "contracts/wamrx_native_memory_v1.json"
+  },
+  "experiment": "E0.15",
+  "frozen_core_weights": {
+    "artifact_availability": [
+      {
+        "available": false,
+        "hash_matches": false,
+        "located_path": null,
+        "seed": 41001
+      },
+      {
+        "available": false,
+        "hash_matches": false,
+        "located_path": null,
+        "seed": 41002
+      },
+      {
+        "available": false,
+        "hash_matches": false,
+        "located_path": null,
+        "seed": 41003
+      },
+      {
+        "available": false,
+        "hash_matches": false,
+        "located_path": null,
+        "seed": 41004
+      },
+      {
+        "available": false,
+        "hash_matches": false,
+        "located_path": null,
+        "seed": 41005
+      }
+    ],
+    "availability_status": "NOT_AVAILABLE",
+    "checkpoints_match_e0_14": true,
+    "manifest_hash": "b329ee406c11d9ab974f417d2855853c7afc503c7f698b1f43640ed288908875",
+    "manifest_id": "wamrx-native-memory-fixed-core-checkpoints-v1"
+  },
+  "frozen_splits": {
+    "family_count": 9,
+    "hash_mismatches": {},
+    "ood_axis_disjoint": {
+      "context_overflow": true,
+      "correction": true,
+      "delayed_recall": true,
+      "distractor_session": true,
+      "poison_contradiction": true,
+      "rare_region_retention": true,
+      "reset_task_switch": true,
+      "similar_fact_interference": true,
+      "temporal_update": true
+    },
+    "registry_hash": "7dc42a679754dd2d63e96a97798fbb3c29e2ab9060c89c904974602815df5aa2",
+    "registry_id": "wamrx-native-memory-splits-v1",
+    "task_counts": {
+      "id": 36,
+      "ood": 36,
+      "train": 72
+    }
+  },
+  "manipulations": {
+    "M10_interrupted_checkpoint_rejected": true,
+    "M11_memory_as_independent_evidence_rejected": true,
+    "M1_unsupported_latent_durable_write_rejected": true,
+    "M2_omitted_reinjected_evidence_rejected": true,
+    "M3_tombstoned_old_state_and_read_disabled": true,
+    "M4_reset_old_epoch_and_cross_user_rejected": true,
+    "M5_similar_fact_key_collision_detected": true,
+    "M6_fixed_capacity_overflow_rejected": true,
+    "M7_stale_model_and_ontology_checkpoint_rejected": true,
+    "M8_poisoned_unverified_observation_rejected": true,
+    "M9_protected_rare_decay_rejected": true
+  },
+  "neural_comparison_status": "NOT_RUN",
+  "scope_limit": "Non-neural structural boundary only. E0.16 remains NOT_RUN; no learned memory, model-weight, depth, accuracy, MoE, consolidation, or promotion claim is made.",
+  "selected_core": {
+    "arm_id": "fixed-depth-v1",
+    "e0_14_result_sha256": "274bee04023d44a1d1cc361715204dd62e18f3b3c7944825f58f31c9d16d85a6",
+    "macro_depth": 4,
+    "selection_commit": "0bb80a8c9c83e06542d18bf36ac754418aa48752",
+    "selection_tag": "wamrx-m3-fixed-depth-v1"
+  },
+  "status": "PASS",
+  "verdict": "PASS"
+}

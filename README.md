@@ -193,6 +193,23 @@ passed `--execute-registered`. The registered budget has already been consumed;
 against the exact result hash. Do not re-run or resume E0.14 as architecture
 development; its terminal decision is final for contract version 1.
 
+Milestone 4 now freezes an authority-limited native-working-memory boundary on
+that selected core. E0.15 is deliberately non-neural: it validates fixed slot
+and byte capacity, owner/session/task/epoch reset and expiry, exact checkpoint
+compatibility, current-frontier evidence reinjection, immediate tombstone
+disabling, candidate-only durable output, and exact compute/storage accounting.
+All eleven checks and eleven negative controls pass. The deterministic task
+registry freezes 72 train, 36 ID, and 36 OOD cases across nine memory families,
+but the learned comparison remains `NOT_RUN`; no accuracy result or neural
+memory authorization is implied. The five selected E0.14 checkpoint identities
+are frozen separately; their files are not present at the registered macOS
+relocation paths, so substituting or retraining the core is not allowed.
+
+```bash
+python3 rig_a/experiments/e0_15_native_memory_boundary.py
+python3 tools/check_native_memory_core_artifacts.py
+```
+
 Every experiment is seeded and writes a JSON record to `results/`. Kill
 criteria are stated in each experiment's module docstring, before the first
 run — a result can always be narrated into a pass otherwise.

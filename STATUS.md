@@ -112,6 +112,30 @@ the four-block `fixed-depth-v1` arm. Recurrent development stops here. Native
 neural memory, MoE, adapter consolidation, and self-improvement are not
 authorized by this outcome.
 
+**Milestone 4 is structurally ready, and its neural comparison is not run.**
+The local `wamrx-m3-fixed-depth-v1` tag anchors commit `0bb80a8` and the exact
+E0.14 result hash. The new native-memory contract fixes three arms around the
+selected four-block core: explicit multiview memory, a deterministic session
+cache, and one minimal learned gated memory. It freezes nine task families, 72
+train / 36 ID / 36 OOD cases, five explicit result statuses, and numerical
+structural and future promotion thresholds before neural code.
+
+E0.15 passes eleven boundary checks and eleven manipulations. Native memory has
+fixed slot and byte capacity; every operation is owner/session/task/epoch and
+expiry bound; every model call revalidates and reinjects current-frontier ledger
+evidence; tombstones disable affected slots before a read; reset leaves the
+canonical empty state; and checkpoints fail across model, ontology, or session
+identity. Durable output is candidate-only and names observed ledger support,
+so the compliant fixture changes no authoritative rows. MLX training, accuracy,
+MoE, consolidation, and self-improvement remain blocked pending the separately
+registered smallest native-memory comparison.
+
+That comparison is also operationally gated on the five exact E0.14
+fixed-depth checkpoints. Their hashes and relocation paths are frozen, but the
+files are not available in this checkout. Substituting or retraining the core
+is prohibited, so E0.16 remains `NOT_RUN` rather than silently using different
+weights.
+
 ---
 
 ## Invariants

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "wamrx-native-memory-checkpoint-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["checkpoint", "checkpoint_sha256"],
+  "properties": {
+    "checkpoint_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "format", "config", "session_epoch", "turn", "next_slot", "slots", "operation_counts", "realized_memory_flops", "payload_state_hash"],
+      "properties": {
+        "schema_version": {"const": 1},
+        "format": {"const": "wamrx-native-memory-checkpoint-v1"},
+        "config": {
+          "type": "object",
+          "required": ["session_id", "task_id", "owner_id", "maximum_slots", "maximum_serialized_bytes", "expires_at", "base_weight_version", "ontology_version", "selected_core_id", "selected_macro_depth", "component_version", "protected_regions"]
+        },
+        "session_epoch": {"type": "integer", "minimum": 0},
+        "turn": {"type": "integer", "minimum": 0},
+        "next_slot": {"type": "integer", "minimum": 0},
+        "slots": {"type": "array"},
+        "operation_counts": {"type": "object"},
+        "realized_memory_flops": {"type": "integer", "minimum": 0},
+        "payload_state_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

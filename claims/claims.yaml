@@ -1658,6 +1658,52 @@ claims:
       autonomous promotion, or self-improvement; those require separate frozen
       contracts.
 
+  - id: E0.15
+    tier: native working memory / pre-model boundary
+    claim: "ephemeral native working memory can expose learned operations without gaining evidence or ledger authority"
+    source: "WAM-RX Milestone 4 authority-limited native-memory contract"
+    rig: A
+    kill: "K1-K11 and M1-M11 in the experiment; any authoritative write, memory evidence root, omitted reinjection, stale support, reset/cross-user leak, capacity escape, incompatible checkpoint, poisoned input admission, protected-state decay, unaccounted operation, split drift, or unfired manipulation"
+    predicted: uncertain
+    status: PASS
+    result: results/e0_15_native_memory_boundary.json
+    procedure: rig_a/experiments/e0_15_native_memory_boundary.py
+    tested_against: contracts/wamrx_native_memory_v1.json
+    finding: >
+      All eleven structural checks and all eleven registered manipulations pass
+      without neural code or accuracy reads. The compliant fixture exercises
+      remember, update, merge, and forget under exact FLOP and canonical-byte
+      accounting; remains within fixed slot and byte caps; round-trips a
+      hash-bound checkpoint; and emits a witnessed candidate while the
+      authoritative ledger count remains unchanged.
+    authority_and_deletion: >
+      Every model call rebuilds and revalidates a current-frontier evidence
+      bundle containing all active slot support. Tombstoning the rare fact
+      disables its slot before the next read and makes the earlier read stale.
+      Durable output is candidate-only, names ledger event IDs reaching an
+      observed root, and cannot cite memory or slot identifiers as evidence.
+    lifecycle_and_controls: >
+      Reset clears every slot, produces the canonical empty payload hash,
+      rotates the epoch, and rejects both the old token and a different owner.
+      Expiry also clears and rejects. Controls detect exact-key collision, slot
+      overflow, stale model and ontology checkpoints, unverified poison,
+      protected rare-state decay, interrupted checkpoint creation, omitted
+      evidence reinjection, unsupported latent durable writes, and memory
+      laundering.
+    frozen_next_test: >
+      The contract registers explicit multiview, deterministic session-cache,
+      and one minimal learned gated-memory arm on the unchanged four-block
+      fixed-depth-v1 core. It freezes 72 train, 36 ID, and 36 OOD tasks across
+      nine families with disjoint OOD axes. The neural comparison remains
+      NOT_RUN; no accuracy, persistence, MoE, consolidation, or self-improvement
+      claim follows from E0.15.
+    artifact_gate: >
+      The five selected E0.14 checkpoints are frozen by seed, byte count, file
+      SHA-256, metadata hash, and state hash. Their original Linux-volume paths
+      and macOS relocation paths are recorded, but the files are not available
+      in this checkout. E0.16 therefore remains NOT_RUN; substituting freshly
+      initialized or retrained core weights is prohibited.
+
   # -- Root 1 - estimator quality ------------------------------------------
   - id: E1.1
     tier: L7

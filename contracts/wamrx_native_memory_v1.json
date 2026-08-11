@@ -1,0 +1,216 @@
+{
+  "contract_schema_version": 1,
+  "registered_at": "2026-08-11T17:50:00-04:00",
+  "milestone": "Milestone 4: authority-limited native working memory",
+  "phase": "contract freeze and non-neural structural falsification",
+  "depends_on": {
+    "selection_commit": "0bb80a8c9c83e06542d18bf36ac754418aa48752",
+    "selection_tag": "wamrx-m3-fixed-depth-v1",
+    "selection_id": "wamrx-reasoner-selection-v1",
+    "selected_core_id": "fixed-depth-v1",
+    "selected_macro_depth": 4,
+    "e0_14_result_sha256": "274bee04023d44a1d1cc361715204dd62e18f3b3c7944825f58f31c9d16d85a6"
+  },
+  "frozen_core_weights": {
+    "path": "contracts/wamrx_native_memory_core_checkpoints_v1.json",
+    "manifest_id": "wamrx-native-memory-fixed-core-checkpoints-v1",
+    "content_hash": "b329ee406c11d9ab974f417d2855853c7afc503c7f698b1f43640ed288908875",
+    "required_seed_count": 5,
+    "substitution_or_retraining_allowed": false,
+    "availability_gate": "E0.16 remains NOT_RUN until all five files exist at their relocation paths and match byte count and SHA-256."
+  },
+  "neural_implementation_gate": "No learned native-memory module or accuracy-bearing comparison may begin until E0.15 passes this contract, both executable schemas, every frozen split hash, every invariant, and all eleven negative controls.",
+  "frozen_split_registry": {
+    "path": "contracts/wamrx_native_memory_splits_v1.json",
+    "registry_id": "wamrx-native-memory-splits-v1",
+    "content_hash": "7dc42a679754dd2d63e96a97798fbb3c29e2ab9060c89c904974602815df5aa2"
+  },
+  "executable_schemas": {
+    "checkpoint": "schemas/wamrx_native_memory_checkpoint.schema.json",
+    "durable_candidate": "schemas/wamrx_native_memory_candidate.schema.json"
+  },
+  "failure_statuses": {
+    "NOT_RUN": "registered comparison or assay has not consumed its budget",
+    "INCOMPLETE": "execution stopped before every registered case completed",
+    "INVALID": "contract, evidence, identity, version, accounting, checkpoint, or manipulation integrity failed",
+    "PASS": "every structural invariant and registered negative control fired with no violation",
+    "FAIL": "a compliant completed run violates a registered threshold"
+  },
+  "comparison_arms": [
+    {
+      "arm_id": "explicit-multiview-v1",
+      "reasoner_core_id": "fixed-depth-v1",
+      "macro_depth": 4,
+      "memory": "ledger-derived retrieval, analytic, and graph views only; no session-native state",
+      "maximum_slots": 0,
+      "learned_parameters": 0
+    },
+    {
+      "arm_id": "deterministic-session-cache-v1",
+      "reasoner_core_id": "fixed-depth-v1",
+      "macro_depth": 4,
+      "memory": "fixed-capacity exact-key session cache under the native-memory authority boundary",
+      "maximum_slots": 16,
+      "learned_parameters": 0
+    },
+    {
+      "arm_id": "minimal-gated-native-memory-v1",
+      "reasoner_core_id": "fixed-depth-v1",
+      "macro_depth": 4,
+      "memory": "one minimal learned gate selecting remember, update, merge, or forget over 16 fixed slots",
+      "maximum_slots": 16,
+      "learned_parameters": "freeze before E0.16; no competing neural-memory designs in version 1"
+    }
+  ],
+  "registered_operations": ["remember", "update", "merge", "forget"],
+  "session_semantics": {
+    "identity": ["owner_id", "session_id", "task_id", "session_epoch"],
+    "reset": "atomically clear every slot, rotate session_epoch, and invalidate all earlier access tokens and reads",
+    "expiry": "clear every slot at the registered UTC deadline and reject every later access",
+    "cross_identity": "fail closed before any state is returned",
+    "checkpoint": "canonical, hash-bound, exact-version, exact-capacity, owner/session/task/epoch-bound"
+  },
+  "authority_semantics": {
+    "memory_role": "ephemeral working state only; never an empirical root or independent source",
+    "model_call": "rebuild and revalidate an immutable current-frontier evidence bundle and reinject all active slot support on every call",
+    "ledger_write": "native memory has no authoritative append capability",
+    "durable_output": "emit only a candidate object with an exact ledger support manifest and observed provenance root",
+    "deletion": "disable every affected slot before the next read; a stale read cannot produce a candidate"
+  },
+  "accounting": {
+    "slot_capacity": 16,
+    "maximum_serialized_bytes": 65536,
+    "memory_flop_method": "registered operation base FLOPs plus two FLOPs per canonical input byte plus eight FLOPs per occupied slot scanned",
+    "model_flops": "record separately during E0.16; never combine estimated and realized values",
+    "storage": "exact canonical UTF-8 bytes for every occupied or disabled slot plus checkpoint byte length"
+  },
+  "structural_thresholds": {
+    "maximum_authoritative_ledger_writes": 0,
+    "maximum_memory_identifiers_in_evidence": 0,
+    "maximum_reset_residual_slots": 0,
+    "maximum_cross_identity_reads": 0,
+    "maximum_usable_slots_with_invalid_support": 0,
+    "maximum_slots": 16,
+    "maximum_serialized_bytes": 65536,
+    "maximum_unaccounted_operations": 0,
+    "maximum_checkpoint_identity_mismatches_accepted": 0,
+    "minimum_negative_controls_fired": 11,
+    "minimum_frozen_split_hash_coverage": 1.0
+  },
+  "future_promotion_thresholds": {
+    "minimum_paired_training_seeds": 5,
+    "confidence_level": 0.95,
+    "minimum_ood_improvement_confidence_lower_bound": 0.0,
+    "maximum_id_accuracy_regression": 0.02,
+    "maximum_protected_region_accuracy_regression": 0.0,
+    "maximum_authority_deletion_or_reset_violations": 0,
+    "minimum_compute_normalized_improvement_confidence_lower_bound": 0.0,
+    "maximum_unsupported_durable_writes": 0
+  },
+  "registered_negative_controls": [
+    "unsupported latent state attempts a durable write",
+    "evidence is omitted after being encoded into memory",
+    "tombstoned evidence remains referenced by an old slot and read",
+    "session reset is followed by an old-token and cross-user read",
+    "two semantically similar facts are forced onto the same exact key",
+    "a remember operation exceeds fixed slot capacity",
+    "a checkpoint is restored under a stale model or ontology version",
+    "an unverified poisoned observation is offered as memory evidence",
+    "automatic decay attempts to delete rare protected state",
+    "checkpoint creation is interrupted before commit",
+    "memory state is cited as independent evidence"
+  ],
+  "decision_tree": {
+    "learned_memory_wins": "adopt only if compute-normalized gain is positive and authority, deletion, reset, and protected-region violations remain zero",
+    "deterministic_cache_wins": "retain deterministic session cache and reject learned native memory",
+    "explicit_multiview_wins": "proceed without native memory",
+    "compute_only_gain": "classify learned memory as a costly optional accelerator",
+    "correction_or_deletion_failure": "reject learned memory for persistent use",
+    "one_family_only": "retain as a narrow specialized session module",
+    "structural_failure": "repair the boundary and repeat E0.15 before any training"
+  },
+  "excluded_scope": [
+    "changes to selected fixed-depth reasoner weights or macro depth",
+    "multiple learned memory architectures in the first comparison",
+    "mixture-of-experts or LoRA routing",
+    "continual weight updates or consolidation",
+    "autonomous promotion or self-improvement"
+  ],
+  "mechanisms": [
+    {
+      "mechanism_id": "M4-authority-v1",
+      "name": "candidate-only durable boundary",
+      "authoritative_inputs": ["usable versioned ledger events", "current ledger frontier", "exact memory support manifests"],
+      "outputs": ["ephemeral memory state", "non-authoritative durable candidate objects"],
+      "assumptions": ["only the Milestone 1 event store is authoritative", "memory identifiers never name empirical evidence"],
+      "scope": "all native-memory reads, answers, and durable proposals",
+      "cost": "one support and observed-root validation per durable proposal",
+      "tradeoff": "durable writes require an external witness/admission path",
+      "failure_response": "remove the durable-output path and invalidate the run",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["return a candidate object without appending it"],
+      "registered_thresholds": {"authoritative_writes": 0, "memory_evidence_roots": 0},
+      "kill_criteria": ["A1: native memory appends or mutates a ledger event", "A2: a candidate omits ledger evidence", "A3: a memory or slot ID appears in an evidence manifest", "A4: candidate support has no observed root"]
+    },
+    {
+      "mechanism_id": "M4-session-v1",
+      "name": "owner/session/task/epoch lifecycle boundary",
+      "authoritative_inputs": ["registered session identity", "UTC expiry", "explicit reset"],
+      "outputs": ["identity-bound reads", "zero-state reset receipt", "identity-bound checkpoints"],
+      "assumptions": ["access identity is supplied on every operation", "reset and expiry rotate the epoch"],
+      "scope": "one process and explicit serialized checkpoints",
+      "cost": "constant-time identity and expiry checks per operation",
+      "tradeoff": "checkpoints cannot migrate across owners, sessions, tasks, epochs, models, or ontologies",
+      "failure_response": "prohibit serialization if any reset or identity control fails",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["clear the session", "rotate the session epoch", "serialize an exact-bound checkpoint"],
+      "registered_thresholds": {"reset_residual_slots": 0, "cross_identity_reads": 0, "stale_checkpoints_accepted": 0},
+      "kill_criteria": ["S1: reset leaves task payload", "S2: an old epoch or different owner reads state", "S3: expiry leaves readable state", "S4: an incompatible checkpoint restores"]
+    },
+    {
+      "mechanism_id": "M4-fixed-store-v1",
+      "name": "fixed-slot remembered state and exact accounting",
+      "authoritative_inputs": ["registered remember/update/merge/forget decisions", "reinjected evidence bundle", "fixed slot and byte caps"],
+      "outputs": ["collision-preserving slots", "exact operation/FLOP/storage record", "disabled-slot audit"],
+      "assumptions": ["the learned gate is advisory to this boundary", "disabled slots remain auditable until explicit forget or reset"],
+      "scope": "one minimal fixed-capacity memory interface; no neural gate in E0.15",
+      "cost": "linear scan over at most sixteen slots",
+      "tradeoff": "overflow fails closed instead of allocating hidden capacity",
+      "failure_response": "replace allocation with fixed slots or reject the learned policy",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["remember", "update", "merge", "forget", "disable invalid slots"],
+      "registered_thresholds": {"maximum_slots": 16, "maximum_serialized_bytes": 65536, "unaccounted_operations": 0},
+      "kill_criteria": ["C1: occupied slots exceed the cap", "C2: serialized bytes exceed the cap", "C3: a collision silently overwrites a fact", "C4: an operation has no exact FLOP/storage record", "C5: automatic decay deletes protected state"]
+    },
+    {
+      "mechanism_id": "M4-evidence-v1",
+      "name": "current-frontier evidence reinjection and immediate invalidation",
+      "authoritative_inputs": ["current resolved ledger snapshot", "active slot support", "active ontology version"],
+      "outputs": ["frontier-bound model-call input", "immediately disabled invalid slots", "ledger-only answer manifest"],
+      "assumptions": ["every model call revalidates the complete evidence bundle", "unverified observations are not admissible roots"],
+      "scope": "session-memory model calls and answers",
+      "cost": "one ledger resolution and bounded slot scan per call",
+      "tradeoff": "unrelated ledger appends require a fresh evidence bundle",
+      "failure_response": "invalidate the affected slot; conservatively reset the session if selective deletion cannot be proved",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["disable a slot whose support is no longer usable"],
+      "registered_thresholds": {"calls_without_complete_reinjection": 0, "usable_slots_with_invalid_support": 0, "unverified_evidence_admitted": 0},
+      "kill_criteria": ["E1: a call omits active support", "E2: tombstoned support remains readable", "E3: a stale frontier is accepted", "E4: unverified poison enters memory", "E5: an answer cites memory as evidence"]
+    },
+    {
+      "mechanism_id": "M4-comparison-v1",
+      "name": "three-arm native-memory comparison boundary",
+      "authoritative_inputs": ["frozen fixed-depth-v1 core at macro depth four", "frozen native-memory split registry", "matched seed/data/update and measured compute records"],
+      "outputs": ["paired ID/OOD and protected-region metrics", "compute/storage normalized comparison", "explicit terminal decision"],
+      "assumptions": ["reasoner weights and depth remain fixed across memory arms", "only one minimal learned gated memory is tested"],
+      "scope": "E0.16 after E0.15 passes; no training or accuracy claim in E0.15",
+      "cost": "five paired seeds plus all registered families and negative controls",
+      "tradeoff": "the first comparison is narrow and may retain explicit memory",
+      "failure_response": "retain the winning simpler arm or classify a compute-only gain as acceleration",
+      "verifier_tier": "executable",
+      "permitted_mutations": ["write a versioned E0.16 result after the structural gate"],
+      "registered_thresholds": {"paired_seeds": 5, "confidence_level": 0.95, "authority_violations": 0, "protected_region_regression": 0.0},
+      "kill_criteria": ["P1: core weights or depth differ", "P2: a split hash changes", "P3: learned memory wins only with unreported compute or storage", "P4: any authority, deletion, reset, or protected-region violation occurs", "P5: an incomplete or invalid run produces a promotion decision"]
+    }
+  ]
+}
