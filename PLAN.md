@@ -2249,19 +2249,17 @@ protected-region evidence. Fixed-loop training is distinguishable from the
 registered randomized-depth protocol, and contradictory evidence forces the
 external residual path to remain active.
 
-This is an assay-readiness result only. Model comparison remains **NOT_RUN**.
-The next implementation slice may build the small fixed, flat, and hierarchical
-reasoners, but it may not change the registered splits, thresholds, schemas, or
-comparison budgets without a new contract version.
+This is an assay-readiness result only. At the E0.12 boundary the model
+comparison was **NOT_RUN**. The later E0.14 result below consumes the frozen
+comparison without changing its splits, thresholds, schemas, or budgets.
 
 **Implementation follow-through:** the optional MLX slice now builds all three
 8.37-8.40M-parameter arms at their exact registered counts. It includes the
 shared byte-level prelude/coda, randomized-depth training schedule, evidence
 reinjection, learned halt head, executable residual gate, fail-closed executor,
 and trace/compute accounting. A two-update shared-schedule smoke test passes;
-its 0/2 sample accuracy in every arm is explicitly non-evidentiary. The actual
-five-seed, 2,000-update comparison and every promotion statistic remain
-**NOT_RUN**.
+its 0/2 sample accuracy in every arm is explicitly non-evidentiary. The later
+five-seed, 2,000-update E0.14 result is the accuracy-bearing evidence.
 
 ### E0.13 / E0.14 · registered recurrent run boundary
 
@@ -2294,10 +2292,22 @@ final checkpoint bytes, examples, updates, and 73,961,927,680 analytical
 training FLOPs. One checkpoint is 100,479,866 bytes; all 50-update learning-curve
 checkpoints project to about 60.29 GB.
 
-E0.14 implements the complete five-seed runner, evaluation journal, eight
-manipulations, compute-normalized secondary, and deterministic promotion audit.
-It is inert without `--execute-registered` and remains **NOT_RUN**. Neural
-memory, MoE, consolidation, and self-improvement stay blocked.
+**E0.14 completes with `COMPLETE_RETAIN_FIXED`.** All 15 arm/seed combinations,
+600 periodic checkpoints, evaluation strata, journals, and eight manipulations
+complete without invalid or incomplete reasons. Neither recurrent arm is
+promotion-eligible. Against fixed depth, pooled OOD mean deltas are -0.1698 for
+flat and -0.1729 for hierarchy; pooled ID deltas are -0.1552 and -0.2115, so
+both also fail the registered -0.02 non-inferiority margin. The
+compute-normalized controls do not reverse the decision, extra recurrent depth
+declines by 0.5, and adaptive halting saves no median compute.
+
+The post-run selection record
+`contracts/wamrx_reasoner_selection_v1.json` binds the exact result and frozen
+manifest to the four-block `fixed-depth-v1` core. Flat and hierarchical
+recurrence are preserved as negative evidence, not promoted architecture.
+This is the registered stop condition for recurrent development; neural memory,
+MoE, consolidation, and self-improvement remain blocked pending separate
+contracts.
 
 ## 2 · The claim ledger
 
@@ -2315,9 +2325,9 @@ experiment's docstring; `claims/claims.yaml` is the machine-readable version.
 | E0.4 | **I1 grounding / claim-level auditability.** | A | Fraction of promoted capabilities whose provenance resolves to `observed` < 1.0. **DONE — PASS at the registered two-promotion scope.** |
 | E0.10 | **WAM-RX milestone-1 memory kernel.** Reconstruct, correct, audit, and delete from one append-only authority. | A | Any nondeterministic replay, partial batch recovery, accepted missing lineage, protected-region adequacy failure, tombstoned retrieval, survivor loss, clean-rebuild mismatch, or incomplete selection journal. **DONE — PASS.** |
 | E0.11 | **WAM-RX milestone-2 multiview memory.** Add typed temporal analytics and an explicit belief/constraint graph without creating a second authority. | A | Any unsupported result, wrong temporal operation, erased contradiction, satisfied missing/conflicting constraint, stale support, rebuild mismatch, version ambiguity, unjournaled analytic query, structural task miss, or protected-region lineage gap. **DONE — PASS.** |
-| E0.12 | **WAM-RX milestone-3 recurrent-reasoner pre-model gate.** Freeze a matched three-arm comparison, randomized-depth protocol, double halting gate, task splits, trace/compute schemas, and promotion thresholds. | A | Any comparison confound, split-hash drift, OOD-axis overlap, evidence-frontier substitution, halt bypass, budget escape, unjournaled operation, incomplete schema, or unfired manipulation. **DONE — PASS; model comparison NOT_RUN.** |
-| E0.13 | **Registered-run train-only preflight.** | B | Any schedule/loss/model/optimizer/checkpoint/compute mismatch across update-10 resume; any evaluation metric read. **DONE — PASS; model comparison NOT_RUN.** |
-| E0.14 | **Five-seed recurrent model comparison.** | B | Apply the frozen statistical, compute, evidence, manipulation, and failure gates. **NOT_RUN.** |
+| E0.12 | **WAM-RX milestone-3 recurrent-reasoner pre-model gate.** Freeze a matched three-arm comparison, randomized-depth protocol, double halting gate, task splits, trace/compute schemas, and promotion thresholds. | A | Any comparison confound, split-hash drift, OOD-axis overlap, evidence-frontier substitution, halt bypass, budget escape, unjournaled operation, incomplete schema, or unfired manipulation. **DONE — PASS; E0.14 later consumed the frozen comparison.** |
+| E0.13 | **Registered-run train-only preflight.** | B | Any schedule/loss/model/optimizer/checkpoint/compute mismatch across update-10 resume; any evaluation metric read. **DONE — PASS.** |
+| E0.14 | **Five-seed recurrent model comparison.** | B | Apply the frozen statistical, compute, evidence, manipulation, and failure gates. **DONE — `COMPLETE_RETAIN_FIXED`; recurrence retired as a general core.** |
 
 ### Root 1 · Estimator quality
 

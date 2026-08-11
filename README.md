@@ -132,23 +132,26 @@ Milestone 3 is frozen at the pre-model boundary in
 [`contracts/wamrx_recurrent_reasoner.json`](contracts/wamrx_recurrent_reasoner.json).
 E0.12 validates the matched fixed/flat/hierarchical comparison, randomized-depth
 protocol, external residual halt gate, 960 content-hashed deterministic tasks,
-and executable trace/compute schemas. All 12 checks and eight manipulations pass,
-but the model comparison is explicitly `NOT_RUN`; this is assay readiness, not
-evidence for recurrence.
+and executable trace/compute schemas. All 12 checks and eight manipulations pass.
 
 The optional MLX model implementation is now present, with exact registered
 parameter counts, shared byte-level prelude/coda, fixed/flat/hierarchical cores,
 random-depth training helpers, adaptive external-residual execution, and trace
-accounting. It has passed only a two-update runtime smoke test; the five-seed
-registered comparison remains `NOT_RUN`.
+accounting. E0.13 verifies bitwise checkpoint/resume equivalence before any
+evaluation metric is read.
 
 The additive registered-run contract now distinguishes estimated from realized
 training and inference FLOPs and labels the primary result as equal-update /
 equal-data under a common cap. It freezes one-sided paired Student-t inference,
 Holm correction families, a compute-normalized secondary, exact interruption
-semantics, and the complete inert-by-default E0.14 runner. E0.13's 20-update
-train-only checkpoint/resume preflight passes bitwise; no ID/OOD metric was
-read, and E0.14 remains `NOT_RUN`.
+semantics, and the complete inert-by-default E0.14 runner. The registered run is
+now complete: all 15 arm/seed pairs and all eight manipulations pass operational
+validation, and the terminal decision is `COMPLETE_RETAIN_FIXED`. Neither
+recurrent arm passes promotion. The exact result is bound to the retained
+four-block core by
+[`contracts/wamrx_reasoner_selection_v1.json`](contracts/wamrx_reasoner_selection_v1.json).
+This outcome stops recurrent development and does not authorize native neural
+memory, MoE, consolidation, or self-improvement.
 
 ## Running
 
@@ -169,6 +172,7 @@ python3 rig_a/experiments/e0_4_grounding_audit.py
 python3 rig_a/experiments/e0_10_wamrx_memory_kernel.py
 python3 rig_a/experiments/e0_11_multiview_memory.py
 python3 rig_a/experiments/e0_12_recurrent_reasoner_assay.py
+python3 tools/check_recurrent_selection.py
 python3 tools/check_record.py
 ```
 
@@ -183,9 +187,11 @@ python3 -m venv .venv-m3
 .venv-m3/bin/python rig_a/experiments/e0_14_recurrent_model_comparison.py
 ```
 
-The last command only prints the checked-in `NOT_RUN` record. Consuming the
-registered 30,000-update budget requires the explicit `--execute-registered`
-flag; use `--resume` only with its hash-verified checkpoints.
+The last experiment command prints the checked-in terminal E0.14 record unless
+passed `--execute-registered`. The registered budget has already been consumed;
+`tools/check_recurrent_selection.py` verifies the retained fixed-depth core
+against the exact result hash. Do not re-run or resume E0.14 as architecture
+development; its terminal decision is final for contract version 1.
 
 Every experiment is seeded and writes a JSON record to `results/`. Kill
 criteria are stated in each experiment's module docstring, before the first

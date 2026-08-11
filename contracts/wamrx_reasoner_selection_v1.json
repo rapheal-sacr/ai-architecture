@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "selection_id": "wamrx-reasoner-selection-v1",
+  "selected_from": {
+    "experiment": "E0.14",
+    "result_path": "results/e0_14_recurrent_model_comparison.json",
+    "result_sha256": "274bee04023d44a1d1cc361715204dd62e18f3b3c7944825f58f31c9d16d85a6",
+    "terminal_status": "COMPLETE_RETAIN_FIXED",
+    "manifest": {
+      "model_implementation_hash": "f829c68d48f3cf1a69a7e447ecf85c7f684d137713fa9abba408227f727149d6",
+      "reasoner_contract_hash": "030a4ca3e3b2f4a125196f014acc966a0f73aec3f6d9d36a811cc07693a6f6cb",
+      "run_contract_hash": "5e997f148552b8d97c99c28b74fd513f14d57fb0438daa69ea6a875e25e02fa4",
+      "runner_version": "wamrx-recurrent-comparison-v1",
+      "split_registry_hash": "887f6cfe80c316c3faed13910b192813cd9ecdbb4ea74f89817a5b2ba8618507",
+      "training_config_hash": "fc086c721cc5016a08c431506cbe3c7fa9403ec2b5473ae29add38f9c8bfa0d8"
+    }
+  },
+  "registered_seeds": [41001, 41002, 41003, 41004, 41005],
+  "selected_core": {
+    "arm_id": "fixed-depth-v1",
+    "macro_depth": 4,
+    "policy": "retain-as-general-reasoner-core"
+  },
+  "retired_general_core_candidates": [
+    {
+      "arm_id": "flat-recurrent-v1",
+      "policy": "preserve-as-negative-evidence-only"
+    },
+    {
+      "arm_id": "hierarchical-recurrent-v1",
+      "policy": "preserve-as-negative-evidence-only"
+    }
+  ],
+  "required_manipulations": [
+    "M1_disable_reinjection_changes_state",
+    "M2_fixed_loop_counterfactual_changes_schedule",
+    "M3_corrupt_state_changes_recurrence",
+    "M4_external_halt_blocks_premature_stop",
+    "M5_contradiction_keeps_residual_active",
+    "M6_unseen_depth_changes_state",
+    "M7_stale_artifact_fails_closed",
+    "M8_missing_protected_region_fails_closed"
+  ],
+  "authorization": {
+    "fixed_depth_general_core": true,
+    "recurrent_general_core": false,
+    "native_neural_memory": false,
+    "mixture_of_experts": false,
+    "adapter_consolidation": false,
+    "self_improvement": false
+  },
+  "interpretation": "E0.14 selects the registered four-block fixed-depth arm. Recurrent candidates remain reproducible negative evidence and are not eligible for general-core promotion. This post-run selection record does not create a new architecture experiment or authorize any capability prohibited by the frozen Milestone 3 contracts."
+}

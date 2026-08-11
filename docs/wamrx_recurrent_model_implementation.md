@@ -68,7 +68,9 @@ compute. Estimated and realized training/inference FLOPs are separate fields,
 and a compute-normalized secondary is frozen. E0.13 also verifies bitwise
 checkpoint/resume equivalence over a train-only 20-update prefix.
 
-The next run is still the expensive registered comparison: five paired seeds,
-2,000 updates per arm, full ID/OOD/depth/region reporting, manipulation
-ablations, and promotion auditing. Until E0.14 completes, recurrence and
-hierarchy remain unevidenced.
+E0.14 has now completed the five paired seeds, 2,000 updates per arm, full
+ID/OOD/depth/region reporting, manipulation ablations, and promotion audit. Its
+terminal decision is `COMPLETE_RETAIN_FIXED`. The four-block fixed-depth arm is
+the selected general core; flat and hierarchical recurrence are retained only
+as negative experimental evidence. The selection does not authorize native
+memory, MoE, adapters, consolidation, or self-improvement.

@@ -1586,9 +1586,9 @@ claims:
       contradictory evidence, unseen depth, incompatible memory, and a missing
       protected region all fire their intended controls.
     scope_limit: >
-      Model comparison status is NOT_RUN. This PASS freezes and validates the
-      assay; it provides no evidence that recurrence, hierarchy, adaptive
-      halting, or any neural architecture improves accuracy.
+      At the E0.12 boundary model comparison status was NOT_RUN. This PASS
+      freezes and validates the assay; the later E0.14 result supplies the
+      neural comparison evidence but does not broaden E0.12's claim.
 
   - id: E0.13
     tier: recurrent reasoner / operational preflight
@@ -1623,7 +1623,8 @@ claims:
       arms and seeds requires about 60.29 GB before evaluation journals.
     scope_limit: >
       This is train-only operational evidence, not an accuracy or architecture
-      result. The five-seed comparison remains NOT_RUN.
+      result. At the E0.13 boundary the five-seed comparison was NOT_RUN; E0.14
+      later consumed the frozen protocol.
 
   - id: E0.14
     tier: recurrent reasoner / model comparison
@@ -1632,15 +1633,30 @@ claims:
     rig: B
     kill: "any incomplete arm/seed/stratum, invalid trace or journal, failed manipulation, promotion-threshold failure, or primary gain attributable only to unmatched realized compute"
     predicted: uncertain
-    status: untested
+    status: PASS
     result: results/e0_14_recurrent_model_comparison.json
     procedure: rig_a/experiments/e0_14_recurrent_model_comparison.py
     tested_against: contracts/wamrx_recurrent_run_v1.json
+    finding: >
+      All 15 arm/seed combinations, 600 periodic checkpoints, registered
+      evaluation strata, evidence journals, and eight manipulations complete
+      without invalid or incomplete reasons. The deterministic promotion audit
+      returns COMPLETE_RETAIN_FIXED. Neither recurrent arm is eligible: pooled
+      OOD mean deltas versus fixed are -0.1698 for flat and -0.1729 for
+      hierarchy; pooled ID deltas are -0.1552 and -0.2115, and every registered
+      protected-region non-inferiority claim fails. Compute-normalized training
+      and inference controls do not reverse the decision. Extra recurrent depth
+      declines by 0.5 and adaptive halting has zero median compute saving.
+    selection: >
+      contracts/wamrx_reasoner_selection_v1.json binds the exact terminal
+      result SHA-256 and frozen run manifest to fixed-depth-v1 at macro depth 4.
+      Flat and hierarchical recurrence are preserved as negative evidence and
+      are retired as general-core candidates.
     scope_limit: >
-      Status is NOT_RUN. The runner is inert without an explicit
-      --execute-registered flag. No recurrence, hierarchy, or adaptive-halting
-      performance claim exists yet, and neural memory or MoE work remains
-      blocked.
+      The result selects only the registered fixed-depth general core. It does
+      not authorize native neural memory, MoE, adapters, consolidation,
+      autonomous promotion, or self-improvement; those require separate frozen
+      contracts.
 
   # -- Root 1 - estimator quality ------------------------------------------
   - id: E1.1

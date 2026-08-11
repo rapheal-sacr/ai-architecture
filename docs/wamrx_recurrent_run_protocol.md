@@ -1,6 +1,6 @@
 # WAM-RX registered recurrent-run protocol
 
-**Status:** frozen and operationally preflighted; model comparison `NOT_RUN`
+**Status:** complete; terminal decision `COMPLETE_RETAIN_FIXED`
 
 This protocol closes the gap between the structural E0.12 assay and the first
 accuracy-bearing model run. It is an additive versioned contract; it does not
@@ -122,6 +122,16 @@ final-depth plus maximum/adaptive modes, validates trace and evidence journals,
 runs all eight manipulation paths, applies the frozen statistics and secondary
 compute control, and writes an explicit terminal status.
 
-Neural memory, MoE, adapters, consolidation, and self-improvement remain
-blocked. No recurrence or hierarchy claim exists until E0.14 has a complete,
-valid result.
+## Terminal result and selection
+
+E0.14 completed every registered arm/seed, stratum, journal, manipulation, and
+compute control without invalid or incomplete reasons. Neither recurrent arm is
+promotion-eligible. The terminal decision is `COMPLETE_RETAIN_FIXED`, which
+selects the four-block `fixed-depth-v1` core and stops recurrent development.
+
+`contracts/wamrx_reasoner_selection_v1.json` binds that choice to the exact
+result SHA-256 and frozen manifest. `tools/check_recurrent_selection.py` verifies
+the binding without importing MLX or re-reading performance metrics. Flat and
+hierarchical recurrence remain in the repository as reproducible negative
+evidence. Neural memory, MoE, adapters, consolidation, and self-improvement
+remain blocked and require separate contracts.

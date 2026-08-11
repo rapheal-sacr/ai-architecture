@@ -104,3 +104,14 @@ two points on every other family. Memory invalidation and manipulation failures
 override accuracy. The decision is therefore one of: adopt hierarchy, adopt
 flat recurrence, retain fixed depth, or retain a narrow specialist. None of
 those decisions authorizes native neural memory or autonomous promotion.
+
+## Post-run decision
+
+E0.14 completed with `COMPLETE_RETAIN_FIXED`. The four-block
+`fixed-depth-v1` arm is retained as the general reasoner core. Flat and
+hierarchical recurrence failed the frozen promotion gate and remain only as
+negative evidence. The post-run selection is hash-bound in
+`contracts/wamrx_reasoner_selection_v1.json` and checked by
+`tools/check_recurrent_selection.py`; it does not amend the frozen comparison or
+authorize any separately gated memory, expert, consolidation, or autonomous
+promotion mechanism.

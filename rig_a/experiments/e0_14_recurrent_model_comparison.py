@@ -1,8 +1,10 @@
 """E0.14 -- registered five-seed recurrent model comparison.
 
-This file is intentionally inert without ``--execute-registered``. The checked-
-in result remains ``NOT_RUN`` until the complete frozen budget is explicitly
-consumed. Interrupted runs may use ``--resume``; seed substitution is forbidden.
+This file is intentionally read-only without ``--execute-registered``: its
+default invocation prints the checked-in terminal result. The frozen budget has
+been consumed and the terminal decision is ``COMPLETE_RETAIN_FIXED``.
+Interrupted registered runs may use ``--resume``; seed substitution is
+forbidden.
 
 PRIMARY CLAIM
     Under equal updates, equal examples, shared data/interface/optimizer, and a

@@ -79,24 +79,25 @@ rebuilds. All seven requested negative-control classes fire as expected.
 These are small single-process representation results, not evidence for
 recurrence, expert routing, continual weight updates, self-improvement, or AGI.
 
-**Milestone 3's pre-model gate passes; recurrence itself is untested.** E0.12
-freezes a three-arm fixed/flat/hierarchical comparison with a 0.00390 parameter
-spread and identical 200M-FLOP, data, encoder/decoder, optimizer, and
-evidence-operation budgets. It also freezes 960 deterministic tasks, randomized
-training depths 1-4, unseen evaluation depths 6/8/12, the external residual
-gate, trace/compute schemas, and numeric promotion tolerances.
+**Milestone 3 is complete and retains fixed depth.** E0.12 freezes a three-arm
+fixed/flat/hierarchical comparison with a 0.00390 parameter spread and identical
+200M-FLOP, data, encoder/decoder, optimizer, and evidence-operation budgets. It
+also freezes 960 deterministic tasks, randomized training depths 1-4, unseen
+evaluation depths 6/8/12, the external residual gate, trace/compute schemas, and
+numeric promotion tolerances.
 
-All twelve assay checks and eight manipulations fire. This authorizes the next
-small-model implementation slice under the frozen contract; it does not support
-any claim that recurrence or hierarchy improves reasoning.
+All twelve assay checks and eight manipulations fire. The resulting small-model
+implementation reaches its exact registered parameter counts and preserves the
+evidence, compute, and trace boundaries.
 
-That small-model slice is now implemented in MLX and passes its runtime smoke
-test. The three arms hit their exact 8,388,608 / 8,372,224 / 8,404,992 parameter
-targets, train through the same scheduled batches, respect fail-closed compute
-accounting, and emit evidence-bound traces through the external residual gate.
-Only two optimizer updates per arm were run; smoke accuracy is 0/2 for all arms
-and is not a registered result. The five-seed, 2,000-update comparison remains
-**NOT_RUN**.
+E0.14 then completes all 15 arm/seed combinations and 600 periodic checkpoints
+with no invalid or incomplete reasons. Its terminal decision is
+`COMPLETE_RETAIN_FIXED`: neither recurrent arm is eligible. Flat and hierarchy
+have pooled OOD mean deltas of -0.1698 and -0.1729 versus fixed, and pooled ID
+deltas of -0.1552 and -0.2115; both fail the registered ID and protected-region
+non-inferiority gates. Compute-normalized controls do not reverse the result,
+extra depth declines by 0.5, and adaptive halting records zero median compute
+saving.
 
 The pre-run layer is now frozen separately. The primary comparison is labelled
 equal-update/equal-data under a common capped inference budget—not equal
@@ -105,9 +106,11 @@ inference FLOPs; the statistical procedure is one-sided paired Student-t with
 registered Holm families; compute-normalized, interruption, resume, and failure
 semantics are explicit. E0.13's 20-update train-only run reproduces schedules,
 losses, model/optimizer state, checkpoint bytes, and compute exactly across an
-update-10 interruption. It reads no ID/OOD metrics. The complete E0.14 runner is
-implemented but inert by default, so model comparison status remains
-**NOT_RUN**.
+update-10 interruption. The exact terminal E0.14 result and manifest are bound
+by `contracts/wamrx_reasoner_selection_v1.json`; the selected general core is
+the four-block `fixed-depth-v1` arm. Recurrent development stops here. Native
+neural memory, MoE, adapter consolidation, and self-improvement are not
+authorized by this outcome.
 
 ---
 
