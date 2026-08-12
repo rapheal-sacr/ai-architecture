@@ -1,0 +1,28 @@
+{
+  "completed_seeds": [],
+  "experiment": "E0.16",
+  "gate_parameter_count": 1892,
+  "incomplete_reasons": [],
+  "invalid_reasons": [],
+  "manifest": {
+    "core_checkpoint_manifest_hash": "b329ee406c11d9ab974f417d2855853c7afc503c7f698b1f43640ed288908875",
+    "e0_15_result_hash": "c7a017740d9b2ab7adf258363081e1dbb638ca1ac6ad632ad1c8a0355c3ba6bd",
+    "implementation_hash": "269b07601347eec6d6bb21546b1eacc2cb67bb98443743981e61aea031825e62",
+    "native_memory_contract_hash": "9bea97bce6109df0b1fcb3c0c288dc90ac27a59fc0519034048650adad671bc0",
+    "reasoner_selection_hash": "d09c26f609ccddd9107019769baefdad9faa01c54057f1233d99e63314ce1592",
+    "run_contract_hash": "bc521a2799c85c69208ee4f25be820f0d146159ee18e4c3733ce54dd4f713f02",
+    "runner_version": "wamrx-native-memory-comparison-v1",
+    "split_registry_hash": "7dc42a679754dd2d63e96a97798fbb3c29e2ab9060c89c904974602815df5aa2"
+  },
+  "registered_arms": [
+    "explicit-multiview-v1",
+    "deterministic-session-cache-v1",
+    "minimal-gated-native-memory-v1"
+  ],
+  "registered_evaluation_rows": 1080,
+  "registered_gate_updates": 2000,
+  "registered_seeds": [41001, 41002, 41003, 41004, 41005],
+  "run_id": "e0.16-registered-native-memory-comparison-v1",
+  "scope_limit": "No ID, OOD, family, protected-region, correction-latency, capacity, invalidation, or promotion metric has been read. The fixed-depth core remains immutable. MoE, LoRA, continual updates, consolidation, and self-improvement remain outside scope.",
+  "status": "NOT_RUN"
+}

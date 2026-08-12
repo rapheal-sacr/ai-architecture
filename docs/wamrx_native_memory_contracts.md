@@ -52,10 +52,10 @@ remains `NOT_RUN`.
 
 The five E0.14 fixed-depth checkpoints are separately bound by seed, byte count,
 file SHA-256, metadata hash, and state hash in
-`contracts/wamrx_native_memory_core_checkpoints_v1.json`. Their original paths
-are on the Linux run volume, and none is currently present at the registered
-macOS relocation path. E0.16 therefore cannot substitute newly initialized or
-retrained core weights; its artifact-availability gate remains closed.
+`contracts/wamrx_native_memory_core_checkpoints_v1.json`. They are now present
+at the registered ignored Linux relocation paths; the artifact checker reports
+`READY` with no identity error. E0.16 still cannot substitute newly initialized
+or retrained core weights.
 
 ## E0.15 structural result
 
@@ -72,3 +72,19 @@ This result authorizes only the smallest separately registered neural-memory
 comparison. It is not evidence that learned memory improves accuracy, beats
 explicit multiview memory, or merits persistent use. MoE, LoRA, continual
 weight updates, consolidation, and self-improvement remain outside scope.
+
+## E0.16 registered-run boundary
+
+The additive E0.16 contract freezes the three-arm paired comparison before any
+evaluation metric is read. The only learned component is a 472-by-4 affine gate
+(1,892 parameters) trained for 400 balanced updates per core seed. The selected
+four-block core is load-only and hash-checked before and after gate training.
+
+The runner reports ID/OOD exactness, family and protected-region strata,
+realized compute and storage, explicit-retrieval comparisons, correction
+latency, reset leakage, capacity saturation, unsupported durable writes, and
+post-invalidation behavior. Gate checkpoints and the append-only task journal
+are bound to the full run manifest. The two-update resume preflight passes
+bitwise without reading evaluation metrics. The registered result remains
+`NOT_RUN`; details and commands are in
+`docs/wamrx_native_memory_run_protocol.md`.

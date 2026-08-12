@@ -39,6 +39,7 @@ MANIPULATION CHECKS
 
 from __future__ import annotations
 
+import argparse
 import dataclasses
 import json
 import pathlib
@@ -176,7 +177,7 @@ def _fresh_bundle(store: AppendOnlyEventStore, *event_ids: str) -> MemoryEvidenc
     )
 
 
-def run() -> dict:
+def run(*, write_result: bool = True) -> dict:
     contract = json.loads(CONTRACT_PATH.read_text())
     mechanisms = load_contracts(CONTRACT_PATH)
     selection = validate_selection_files(ROOT)
@@ -700,9 +701,17 @@ def run() -> dict:
             "scope_limit": "Non-neural structural boundary only. E0.16 remains NOT_RUN; no learned memory, model-weight, depth, accuracy, MoE, consolidation, or promotion claim is made.",
         }
 
-    RESULT_PATH.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    if write_result:
+        RESULT_PATH.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     return result
 
 
 if __name__ == "__main__":
-    print(json.dumps(run(), indent=2, sort_keys=True))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--check-only",
+        action="store_true",
+        help="validate E0.15 without rewriting its checked-in result",
+    )
+    args = parser.parse_args()
+    print(json.dumps(run(write_result=not args.check_only), indent=2, sort_keys=True))

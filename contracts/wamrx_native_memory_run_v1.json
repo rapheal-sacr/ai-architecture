@@ -1,0 +1,235 @@
+{
+  "run_contract_schema_version": 1,
+  "contract_id": "wamrx-native-memory-run-v1",
+  "experiment": "E0.16",
+  "registered_at": "2026-08-11T20:49:12-04:00",
+  "comparison_label": "paired frozen-core native-memory comparison",
+  "depends_on": {
+    "e0_15_structural_result": {
+      "path": "results/e0_15_native_memory_boundary.json",
+      "content_hash": "c7a017740d9b2ab7adf258363081e1dbb638ca1ac6ad632ad1c8a0355c3ba6bd"
+    },
+    "reasoner_selection": {
+      "path": "contracts/wamrx_reasoner_selection_v1.json",
+      "content_hash": "d09c26f609ccddd9107019769baefdad9faa01c54057f1233d99e63314ce1592"
+    },
+    "native_memory_contract": {
+      "path": "contracts/wamrx_native_memory_v1.json",
+      "content_hash": "9bea97bce6109df0b1fcb3c0c288dc90ac27a59fc0519034048650adad671bc0"
+    },
+    "split_registry": {
+      "path": "contracts/wamrx_native_memory_splits_v1.json",
+      "content_hash": "7dc42a679754dd2d63e96a97798fbb3c29e2ab9060c89c904974602815df5aa2"
+    },
+    "core_checkpoint_manifest": {
+      "path": "contracts/wamrx_native_memory_core_checkpoints_v1.json",
+      "content_hash": "b329ee406c11d9ab974f417d2855853c7afc503c7f698b1f43640ed288908875"
+    },
+    "selected_core": {
+      "selection_commit": "0bb80a8c9c83e06542d18bf36ac754418aa48752",
+      "selection_tag": "wamrx-m3-fixed-depth-v1",
+      "arm_id": "fixed-depth-v1",
+      "macro_depth": 4,
+      "parameter_count": 8388608,
+      "update": 2000
+    }
+  },
+  "execution": {
+    "runner_version": "wamrx-native-memory-comparison-v1",
+    "framework": "mlx",
+    "tested_framework_version": "0.32.0",
+    "numeric_dtype": "float32",
+    "inert_by_default": true,
+    "registered_command": ".venv-m3/bin/python rig_a/experiments/e0_16_native_memory_comparison.py --execute-registered",
+    "default_run_directory": "runs/e0_16_registered_v1",
+    "resume": "only --execute-registered --resume against hash-verified gate checkpoints, evaluation journals, and this complete run identity",
+    "substitution_or_core_retraining_allowed": false
+  },
+  "paired_seeds": [41001, 41002, 41003, 41004, 41005],
+  "comparison_arms": [
+    "explicit-multiview-v1",
+    "deterministic-session-cache-v1",
+    "minimal-gated-native-memory-v1"
+  ],
+  "frozen_core": {
+    "load_only_from_registered_relocation_paths": true,
+    "trainable_parameters": 0,
+    "optimizer_state_loaded_for_identity_only": true,
+    "required_before_and_after_checks": [
+      "checkpoint file SHA-256",
+      "checkpoint metadata hash",
+      "checkpoint model-plus-optimizer state hash",
+      "model parameter tree hash",
+      "macro depth equals four"
+    ],
+    "mutation_response": "INVALID"
+  },
+  "learned_gate": {
+    "gate_id": "minimal-linear-operation-gate-v1",
+    "input": "the immutable fixed-depth-v1 prelude encoding of canonical JSON containing family, current turn, and query; no split label, target operation, expected answer, or future turn is encoded",
+    "hidden_dimensions": 472,
+    "operation_order": ["remember", "update", "merge", "forget"],
+    "architecture": "one affine map from 472 dimensions to four logits; no hidden layer, recurrence, attention, adapter, or learned readout",
+    "parameter_count": 1892,
+    "decision": "argmax over operation_order; an exact tie selects the lowest registered operation index",
+    "advisory_only": true,
+    "boundary_failure": "an invalid predicted operation fails closed for that turn and is counted as a policy error; it never falls back to the registered target",
+    "target_derivation": {
+      "remember": "initial remember turns and the first similar-fact variant",
+      "update": "declared update turns and verified contradiction turns",
+      "merge": "the second and later similar-fact variants",
+      "forget": "the pre-reset turn in reset/task-switch tasks",
+      "excluded_from_gate_supervision": [
+        "distractor",
+        "decay-pressure",
+        "poison",
+        "query-old-task"
+      ]
+    },
+    "operation_realization": {
+      "remember": "stage the current verified turn as a new exact-key slot",
+      "update": "replace the active exact-key slot value and support while preserving superseded support",
+      "merge": "stage the current verified similar-fact turn, then merge that slot with the active variant or prior variant-summary slot; both boundary operations are charged and journaled",
+      "forget": "remove active task slots with explicit-user reason immediately before the non-neural mandatory reset",
+      "mandatory_non_neural_controls": "reset, expiry, evidence validation, poison rejection, exact capacity, and support invalidation execute regardless of gate logits"
+    },
+    "frozen_example_registry": {
+      "train": {
+        "count": 137,
+        "class_counts": {"remember": 80, "update": 37, "merge": 12, "forget": 8},
+        "content_hash": "82ad714c9210a4e979a34e872d203c26f40b4beea64a05911d6e1fffe19c44f5"
+      },
+      "id": {
+        "count": 69,
+        "class_counts": {"remember": 40, "update": 19, "merge": 6, "forget": 4},
+        "content_hash": "7ae62373ddf620ff7de3175097b266f8754a2a5b7135f898a0bcb61d9398d0eb"
+      },
+      "ood": {
+        "count": 100,
+        "class_counts": {"remember": 40, "update": 32, "merge": 24, "forget": 4},
+        "content_hash": "77bf00a29aa9dbb18800369ab06ae37788b3e0118376db1cda1cdde808af2c12"
+      }
+    }
+  },
+  "gate_training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "betas": [0.9, 0.999],
+    "epsilon": 1e-08,
+    "weight_decay": 0.0,
+    "gradient_clip_norm": 1.0,
+    "loss": "four-class cross entropy",
+    "optimizer_updates": 400,
+    "batch_size": 16,
+    "examples_per_operation_per_batch": 4,
+    "schedule": "four independently shuffled operation queues cycle without omission; four examples are drawn from each queue and the resulting batch is shuffled",
+    "schedule_seed_offset": 61000,
+    "gate_initialization_seed_offset": 71000,
+    "checkpoint_frequency_updates": 100,
+    "schedule_hashes": {
+      "41001": "e2a051d48422f78444cafcb411578da3ed9591b4eef8b03bf514d834dff2bfea",
+      "41002": "5fafc2b0c83f1f2bed56f646e08beee3c58c90c0a932cab77b3bf13227b58974",
+      "41003": "4197317eaf69f9fd0cd8b53f0079fd8b1817022b0ba34ff30295a10174f9de25",
+      "41004": "57c48bf1f37e80c5b5962f81d51fdac8edb4b94ac65d37a51738565f99874032",
+      "41005": "0580431b23bacae62824daf541c316d58f6a79ae2d41e6f912bdfc15cc1ffd80"
+    },
+    "feature_cache": "derived per seed from the exact frozen core and discarded or hash-bound; it is never shared across core seeds",
+    "core_gradient_paths": 0
+  },
+  "arm_semantics": {
+    "explicit-multiview-v1": "rebuild the complete resolved task view at query time and select the current verified exact-key value; retain no native session slots",
+    "deterministic-session-cache-v1": "apply declared remember/update/reset semantics to an exact-key sixteen-slot cache; ignore distractor, decay-pressure, and unverified poison turns",
+    "minimal-gated-native-memory-v1": "apply only the learned gate decision through the E0.15 authority boundary; reset, expiry, poison rejection, evidence reinjection, and capacity enforcement remain non-neural",
+    "common_readout": "present the arm-selected current value, query, and ledger-only support to the unchanged fixed-depth core using one bounded canonical prompt; exact canonical-JSON decoder output is the task answer"
+  },
+  "evaluation": {
+    "splits": ["id", "ood"],
+    "tasks_per_split": 36,
+    "families": 9,
+    "primary_metric": "exact canonical-JSON answer match",
+    "gate_auxiliary_metric": "operation classification accuracy, reported separately and never substituted for task accuracy",
+    "report_by": ["arm", "seed", "split", "family", "protected_region"],
+    "required_secondary_reports": {
+      "correction_latency": "turns and realized FLOPs from the final verified correction/update to the first correct authority-bound answer; failures remain censored and are never imputed as successes",
+      "reset_leakage": "fraction of reset/task-switch tasks returning any pre-reset value; the registered maximum is zero",
+      "capacity_saturation_curve": "authority-bound selected-value accuracy, policy errors, serialized bytes, and memory FLOPs at forced occupancies 0, 4, 8, 12, and 16 on the lexicographically first OOD delayed-recall task for every paired seed; filler keys are derived from the task ID and cite only that task's already registered verified support",
+      "unsupported_durable_writes": "count of direct ledger writes or durable proposals without ledger-only observed support; the registered maximum is zero",
+      "post_invalidation_performance": "on the same registered OOD delayed-recall probe, tombstone the queried slot's support immediately before readout and report whether a pre-invalidation slot existed, whether it was disabled, and whether a stale value was emitted; required disable rate is 1.0 when a slot existed and maximum stale rate is zero"
+    },
+    "common_core_calls": "one final fixed-depth readout per task in every arm",
+    "additional_gate_calls": "one frozen-core prelude call per gate-eligible turn; counted separately",
+    "maximum_input_tokens": 1536,
+    "maximum_output_tokens": 64,
+    "journaling": "append-only per-task records keyed by run manifest, seed, arm, split, and task ID; duplicate keys must be byte-identical",
+    "accuracy_read_boundary": "no ID, OOD, family, protected-region, or promotion metric may be read during preflight or checkpoint/resume validation"
+  },
+  "compute_and_storage": {
+    "model_inference_flops": "analytical fixed-core forward FLOPs recorded separately for final readout and gate feature calls",
+    "gate_flops": "two FLOPs per input-weight pair plus one bias operation for each of four logits",
+    "memory_flops": "the exact E0.15 native-memory accounting record",
+    "explicit_view_flops": "two FLOPs per canonical input byte plus eight FLOPs per task event scanned",
+    "storage": "exact native slot bytes, deterministic cache bytes, gate checkpoint bytes, and evaluation journal bytes reported separately",
+    "compute_normalized_score": "task exactness multiplied by 100000000 and divided by total realized inference FLOPs; paired by core seed"
+  },
+  "statistics": {
+    "paired_unit": "core checkpoint seed",
+    "confidence_level": 0.95,
+    "test": "one-sided paired Student-t with registered finite-sample critical values",
+    "multiple_comparisons": "Holm step-down within the learned-versus-explicit and learned-versus-cache OOD family",
+    "learned_ood_superiority": "both Holm-adjusted lower bounds must exceed 0.0",
+    "id_noninferiority": "learned minus each simpler arm lower bound must be at least -0.02",
+    "protected_region_noninferiority": "learned minus each simpler arm lower bound must be at least 0.0 in every registered protected region",
+    "compute_normalized_superiority": "learned minus each simpler arm lower bound must exceed 0.0",
+    "deterministic_cache_superiority": "cache minus explicit OOD lower bound exceeds 0.0 with no ID or protected-region violation",
+    "zero_variance": "a strictly positive constant paired delta has an infinite statistic and a zero delta does not reject"
+  },
+  "secondary_thresholds": {
+    "maximum_reset_leakage": 0.0,
+    "maximum_unsupported_durable_writes": 0,
+    "minimum_post_invalidation_disable_rate": 1.0,
+    "maximum_post_invalidation_stale_answer_rate": 0.0,
+    "capacity_saturation_occupancies": [0, 4, 8, 12, 16],
+    "capacity_curve_rule": "report every registered point; no pooled accuracy can conceal a capacity-specific authority, deletion, reset, byte-cap, or protected-region failure",
+    "correction_latency_rule": "learned memory must answer every registered correction and temporal-update case correctly and may not exceed the slower simpler arm's paired median turn latency while claiming a promotion"
+  },
+  "post_training_manipulations": [
+    "M1 frozen core model and optimizer state hashes remain exact",
+    "M2 replacing learned decisions with a fixed operation changes at least one state trace",
+    "M3 omitted reinjected support fails before a model call",
+    "M4 tombstoned support disables the affected slot before readout",
+    "M5 reset and cross-owner access leave no readable state",
+    "M6 slot or byte overflow fails closed",
+    "M7 stale gate, core, or ontology checkpoint identity fails restore",
+    "M8 unverified poison cannot enter active memory",
+    "M9 protected-region state cannot be removed by automatic decay",
+    "M10 memory identifiers cannot appear in answer evidence",
+    "M11 every model, gate, memory, retrieval, and storage operation is accounted"
+  ],
+  "terminal_decisions": [
+    "COMPLETE_ADOPT_LEARNED_MEMORY",
+    "COMPLETE_RETAIN_DETERMINISTIC_CACHE",
+    "COMPLETE_RETAIN_EXPLICIT_MULTIVIEW",
+    "COMPLETE_COMPUTE_ONLY_ACCELERATOR",
+    "COMPLETE_SPECIALIST_ONLY"
+  ],
+  "decision_precedence": [
+    "INVALID if any identity, authority, evidence, split, journal, accounting, checkpoint, manipulation, or finite-value invariant fails",
+    "INCOMPLETE if any registered seed, arm, split, task, gate update, or evaluation row is missing",
+    "reject learned memory for persistent use if any deletion, reset, poison, unsupported-write, or protected-region violation occurs",
+    "adopt learned memory only if both primary and compute-normalized learned gates pass",
+    "classify a primary-only learned gain as COMPLETE_COMPUTE_ONLY_ACCELERATOR",
+    "retain a learned module for one family only when exactly one registered OOD family passes and every safety gate passes",
+    "otherwise retain deterministic cache if its gate passes; retain explicit multiview in every other complete case"
+  ],
+  "failure_states": {
+    "NOT_RUN": "the explicit execution flag has not consumed the frozen budget",
+    "INCOMPLETE": "the frozen identity remains resumable and at least one registered unit is unfinished",
+    "INVALID": "the run identity or a non-resumable integrity invariant failed; a new versioned protocol is required"
+  },
+  "excluded_scope": [
+    "changes to the fixed-depth core, its macro depth, or its selected checkpoint identities",
+    "a second learned memory architecture or learned answer readout",
+    "native memory as ledger authority or evidence root",
+    "MoE, LoRA, continual weight updates, consolidation, autonomous promotion, or self-improvement"
+  ]
+}

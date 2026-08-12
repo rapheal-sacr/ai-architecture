@@ -199,16 +199,29 @@ and byte capacity, owner/session/task/epoch reset and expiry, exact checkpoint
 compatibility, current-frontier evidence reinjection, immediate tombstone
 disabling, candidate-only durable output, and exact compute/storage accounting.
 All eleven checks and eleven negative controls pass. The deterministic task
-registry freezes 72 train, 36 ID, and 36 OOD cases across nine memory families,
-but the learned comparison remains `NOT_RUN`; no accuracy result or neural
-memory authorization is implied. The five selected E0.14 checkpoint identities
-are frozen separately; their files are not present at the registered macOS
-relocation paths, so substituting or retraining the core is not allowed.
+registry freezes 72 train, 36 ID, and 36 OOD cases across nine memory families.
+The additive E0.16 contract now freezes a paired comparison across the five
+selected core seeds, using one 1,892-parameter affine operation gate, 400
+updates per seed, exact checkpoint/resume identity, compute/storage accounting,
+paired statistics, and authority/deletion/reset gates. Its train-only
+two-update interruption preflight is bitwise exact and reads no evaluation
+metric.
+
+The five selected E0.14 checkpoints are present at their registered ignored
+Linux relocation paths and pass every identity check. The comparison remains
+`NOT_RUN`; no accuracy result or learned-memory authorization is implied, and
+substituting or retraining the core is not allowed.
 
 ```bash
-python3 rig_a/experiments/e0_15_native_memory_boundary.py
+python3 rig_a/experiments/e0_15_native_memory_boundary.py --check-only
 python3 tools/check_native_memory_core_artifacts.py
+python3 tools/check_native_memory_run_registration.py
+.venv-m3/bin/python rig_a/experiments/e0_16_native_memory_comparison.py
 ```
+
+The E0.16 runner is inert without `--execute-registered`. An interrupted
+registered run may continue only with `--execute-registered --resume`; an
+`INVALID` record requires a new versioned protocol.
 
 Every experiment is seeded and writes a JSON record to `results/`. Kill
 criteria are stated in each experiment's module docstring, before the first

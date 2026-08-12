@@ -112,7 +112,8 @@ the four-block `fixed-depth-v1` arm. Recurrent development stops here. Native
 neural memory, MoE, adapter consolidation, and self-improvement are not
 authorized by this outcome.
 
-**Milestone 4 is structurally ready, and its neural comparison is not run.**
+**Milestone 4's structural gate and registered neural-run boundary are ready;
+the neural comparison is not run.**
 The local `wamrx-m3-fixed-depth-v1` tag anchors commit `0bb80a8` and the exact
 E0.14 result hash. The new native-memory contract fixes three arms around the
 selected four-block core: explicit multiview memory, a deterministic session
@@ -130,11 +131,19 @@ so the compliant fixture changes no authoritative rows. MLX training, accuracy,
 MoE, consolidation, and self-improvement remain blocked pending the separately
 registered smallest native-memory comparison.
 
-That comparison is also operationally gated on the five exact E0.14
-fixed-depth checkpoints. Their hashes and relocation paths are frozen, but the
-files are not available in this checkout. Substituting or retraining the core
-is prohibited, so E0.16 remains `NOT_RUN` rather than silently using different
-weights.
+E0.16 now freezes the smallest comparison before execution: explicit multiview,
+deterministic sixteen-slot cache, and one 1,892-parameter affine operation gate,
+paired across the five selected core seeds. Its 400-update schedules, exact
+checkpoint/resume identity, append-only evaluation journal, compute/storage
+accounting, paired statistics, capacity/invalidation probes, safety gates, and
+five terminal outcomes are registered. A two-update interruption preflight is
+bitwise exact and reads no evaluation metric.
+
+All five exact E0.14 fixed-depth checkpoints are now present at the registered
+ignored Linux relocation paths. The artifact checker reports `READY` after
+matching byte counts, file, metadata, state, and E0.14 identity hashes.
+Substitution or retraining remains prohibited. E0.16 is still `NOT_RUN` until
+the explicit registered command consumes the frozen budget.
 
 ---
 

@@ -291,7 +291,7 @@ class NativeMemoryRegistrationTests(unittest.TestCase):
         )
 
     def test_registered_e0_15_passes_without_neural_metrics(self) -> None:
-        result = run()
+        result = run(write_result=False)
         self.assertEqual(result["status"], "PASS")
         self.assertEqual(result["neural_comparison_status"], "NOT_RUN")
         self.assertEqual(result["accuracy_metrics_read"], 0)

@@ -1699,10 +1699,39 @@ claims:
       claim follows from E0.15.
     artifact_gate: >
       The five selected E0.14 checkpoints are frozen by seed, byte count, file
-      SHA-256, metadata hash, and state hash. Their original Linux-volume paths
-      and macOS relocation paths are recorded, but the files are not available
-      in this checkout. E0.16 therefore remains NOT_RUN; substituting freshly
-      initialized or retrained core weights is prohibited.
+      SHA-256, metadata hash, and state hash. They are present at the registered
+      ignored Linux relocation paths and the artifact checker reports READY.
+      E0.16 remains NOT_RUN; substituting freshly initialized or retrained core
+      weights is prohibited.
+
+  - id: E0.16
+    tier: native working memory / smallest neural comparison
+    claim: "one minimal learned operation gate improves authority-limited session memory over explicit multiview reconstruction and a deterministic cache"
+    source: "WAM-RX Milestone 4 registered native-memory run protocol"
+    rig: B
+    kill: "any frozen core mutation, identity or split drift, missing seed/arm/task, conflicting journal row, non-finite value, unaccounted compute/storage, failed manipulation, reset/deletion/authority violation, or failure of the registered paired statistical and compute-normalized gates"
+    predicted: uncertain
+    status: untested
+    result: results/e0_16_native_memory_comparison.json
+    procedure: rig_a/experiments/e0_16_native_memory_comparison.py
+    tested_against: contracts/wamrx_native_memory_run_v1.json
+    registration: >
+      The three arms are paired across the five exact selected E0.14 core
+      checkpoints. The only learned component is a 472-by-4 affine gate with
+      1,892 parameters, trained for 400 balanced updates per seed. Schedules,
+      checkpoint/resume identity, append-only evaluation rows, compute/storage
+      accounting, paired statistics, secondary reports, failure states, and
+      five terminal outcomes are frozen before execution.
+    preflight: >
+      All five core artifacts match their registered byte, file, metadata,
+      state, and E0.14 identities. A two-update train-only interruption resumes
+      bitwise exactly and leaves the selected core unchanged. No ID, OOD,
+      family, protected-region, correction, capacity, invalidation, or
+      promotion metric is read by registration or preflight.
+    scope_limit: >
+      E0.16 remains NOT_RUN. The registration does not establish an accuracy
+      gain or authorize learned persistent memory, MoE, LoRA, continual weight
+      updates, consolidation, autonomous promotion, or self-improvement.
 
   # -- Root 1 - estimator quality ------------------------------------------
   - id: E1.1

@@ -2345,10 +2345,38 @@ and it does not authorize MoE, LoRA, continual consolidation, or
 self-improvement.
 
 The exact five E0.14 fixed-depth checkpoints are registered by seed, byte
-count, file SHA-256, metadata hash, and state hash. Their source paths point to
-the Linux run volume and none is present at the macOS relocation paths. That is
-an operational gate, not a failed memory result: E0.16 remains `NOT_RUN`, and
-new initialization or core retraining is explicitly forbidden as a substitute.
+count, file SHA-256, metadata hash, and state hash. They are now present at the
+registered ignored Linux relocation paths and the artifact checker reports
+`READY`. E0.16 remains `NOT_RUN`, and new initialization or core retraining is
+explicitly forbidden as a substitute.
+
+### E0.16 · smallest frozen-core native-memory comparison — registered run
+
+The additive E0.16 run contract freezes the accuracy-bearing comparison before
+execution. All five selected fixed-depth checkpoints are paired across explicit
+multiview reconstruction, a deterministic sixteen-slot exact-key cache, and one
+minimal learned gate. The gate is a single 472-by-4 affine map with exactly
+1,892 trainable parameters; the selected core has no gradient path and its
+parameter hash is checked before and after training.
+
+Each seed receives 400 balanced AdamW updates. Example registries, class counts,
+batch schedules, initialization offsets, checkpoint cadence, model identities,
+and resume hashes are exact. A two-update train-only interruption preflight is
+bitwise identical in losses and gate/optimizer state and reads zero ID/OOD or
+secondary metrics.
+
+Evaluation requires one common fixed-core readout per arm and task, separately
+charges every learned-gate feature call, and reports ID/OOD accuracy, family and
+protected-region results, compute/storage, correction latency, reset leakage,
+capacity points at 0/4/8/12/16 slots, unsupported durable writes, and immediate
+post-invalidation behavior. One-sided paired Student-t tests, Holm correction,
+non-inferiority margins, compute normalization, eleven post-training
+manipulations, status precedence, and all five terminal outcomes are frozen.
+
+The checked-in result is **`NOT_RUN`**. The runner is inert without the explicit
+execution flag. Only a hash-valid `INCOMPLETE` run can use `--resume`; an
+`INVALID` run requires a new versioned protocol. MoE, LoRA, continual updates,
+consolidation, and self-improvement remain outside scope.
 
 ## 2 · The claim ledger
 
@@ -2370,6 +2398,7 @@ experiment's docstring; `claims/claims.yaml` is the machine-readable version.
 | E0.13 | **Registered-run train-only preflight.** | B | Any schedule/loss/model/optimizer/checkpoint/compute mismatch across update-10 resume; any evaluation metric read. **DONE — PASS.** |
 | E0.14 | **Five-seed recurrent model comparison.** | B | Apply the frozen statistical, compute, evidence, manipulation, and failure gates. **DONE — `COMPLETE_RETAIN_FIXED`; recurrence retired as a general core.** |
 | E0.15 | **Authority-limited native-working-memory structural gate.** | A | Any ledger write, memory-derived evidence root, incomplete reinjection, stale support, reset/cross-user leak, capacity escape, incompatible checkpoint, unaccounted operation, changed split hash, or unfired manipulation. **DONE — PASS; neural comparison `NOT_RUN`.** |
+| E0.16 | **Smallest frozen-core native-memory comparison.** | B | Apply the frozen paired statistical, compute/storage, authority, deletion, reset, capacity, checkpoint/resume, journal, and manipulation gates. **REGISTERED — `NOT_RUN`.** |
 
 ### Root 1 · Estimator quality
 
