@@ -2338,17 +2338,15 @@ and slot IDs are rejected as independent evidence. Controls also fire on key
 collision, slot overflow, stale checkpoints, poisoned unverified observations,
 protected rare-state decay, and interrupted checkpoint creation.
 
-The smallest neural-memory comparison remains **`NOT_RUN`**. This gate
-authorizes only that later comparison under the frozen contract. It supplies no
-evidence that learned memory beats the deterministic cache or explicit views,
-and it does not authorize MoE, LoRA, continual consolidation, or
-self-improvement.
+At the E0.15 boundary the smallest neural-memory comparison was **`NOT_RUN`**.
+This gate authorized only the later frozen E0.16 comparison and supplied no
+learned-memory evidence itself.
 
 The exact five E0.14 fixed-depth checkpoints are registered by seed, byte
 count, file SHA-256, metadata hash, and state hash. They are now present at the
 registered ignored Linux relocation paths and the artifact checker reports
-`READY`. E0.16 remains `NOT_RUN`, and new initialization or core retraining is
-explicitly forbidden as a substitute.
+`READY`. E0.16 later consumed only these exact files; new initialization or core
+retraining remained explicitly forbidden.
 
 ### E0.16 · smallest frozen-core native-memory comparison — registered run
 
@@ -2373,10 +2371,20 @@ post-invalidation behavior. One-sided paired Student-t tests, Holm correction,
 non-inferiority margins, compute normalization, eleven post-training
 manipulations, status precedence, and all five terminal outcomes are frozen.
 
-The checked-in result is **`NOT_RUN`**. The runner is inert without the explicit
-execution flag. Only a hash-valid `INCOMPLETE` run can use `--resume`; an
-`INVALID` run requires a new versioned protocol. MoE, LoRA, continual updates,
-consolidation, and self-improvement remain outside scope.
+**E0.16 completes with `COMPLETE_RETAIN_EXPLICIT_MULTIVIEW`.** All five seeds,
+2,000 gate updates, 1,080 evaluation rows, and eleven manipulations completed
+without invalid or incomplete reasons. All three arms scored 4/36 per seed on
+both ID and OOD. Learned-minus-explicit and learned-minus-cache accuracy deltas
+were zero; the learned compute-normalized deltas were -0.05366 and -0.05365,
+and the learned correction gate failed. Reset leakage, unsupported durable
+writes, and stale post-invalidation emissions were zero.
+
+The auxiliary gate classified operations at mean 94.8% ID and 93.6% OOD, but
+that did not translate to frozen-core task accuracy. The post-run selection
+record binds the exact result and manifest to `explicit-multiview-v1`. Both
+stateful arms are negative evidence. Metamemory/compression work may proceed
+only over explicit ledger-derived views; MoE is not blocked by this result but
+still requires a separate frozen contract.
 
 ## 2 · The claim ledger
 
@@ -2397,8 +2405,8 @@ experiment's docstring; `claims/claims.yaml` is the machine-readable version.
 | E0.12 | **WAM-RX milestone-3 recurrent-reasoner pre-model gate.** Freeze a matched three-arm comparison, randomized-depth protocol, double halting gate, task splits, trace/compute schemas, and promotion thresholds. | A | Any comparison confound, split-hash drift, OOD-axis overlap, evidence-frontier substitution, halt bypass, budget escape, unjournaled operation, incomplete schema, or unfired manipulation. **DONE — PASS; E0.14 later consumed the frozen comparison.** |
 | E0.13 | **Registered-run train-only preflight.** | B | Any schedule/loss/model/optimizer/checkpoint/compute mismatch across update-10 resume; any evaluation metric read. **DONE — PASS.** |
 | E0.14 | **Five-seed recurrent model comparison.** | B | Apply the frozen statistical, compute, evidence, manipulation, and failure gates. **DONE — `COMPLETE_RETAIN_FIXED`; recurrence retired as a general core.** |
-| E0.15 | **Authority-limited native-working-memory structural gate.** | A | Any ledger write, memory-derived evidence root, incomplete reinjection, stale support, reset/cross-user leak, capacity escape, incompatible checkpoint, unaccounted operation, changed split hash, or unfired manipulation. **DONE — PASS; neural comparison `NOT_RUN`.** |
-| E0.16 | **Smallest frozen-core native-memory comparison.** | B | Apply the frozen paired statistical, compute/storage, authority, deletion, reset, capacity, checkpoint/resume, journal, and manipulation gates. **REGISTERED — `NOT_RUN`.** |
+| E0.15 | **Authority-limited native-working-memory structural gate.** | A | Any ledger write, memory-derived evidence root, incomplete reinjection, stale support, reset/cross-user leak, capacity escape, incompatible checkpoint, unaccounted operation, changed split hash, or unfired manipulation. **DONE — PASS; later E0.16 retained explicit views.** |
+| E0.16 | **Smallest frozen-core native-memory comparison.** | B | Apply the frozen paired statistical, compute/storage, authority, deletion, reset, capacity, checkpoint/resume, journal, and manipulation gates. **DONE — `COMPLETE_RETAIN_EXPLICIT_MULTIVIEW`; learned-memory claim FAILS.** |
 
 ### Root 1 · Estimator quality
 

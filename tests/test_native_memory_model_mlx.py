@@ -79,11 +79,11 @@ class NativeMemoryModelTests(unittest.TestCase):
         )
         self.assertEqual(report["core_hash_before"], report["core_hash_after"])
 
-    def test_registered_not_run_manifest_matches_implementation(self) -> None:
+    def test_terminal_result_manifest_matches_frozen_implementation(self) -> None:
         result = json.loads(
             (ROOT / "results" / "e0_16_native_memory_comparison.json").read_text()
         )
-        self.assertEqual(result["status"], "NOT_RUN")
+        self.assertEqual(result["status"], "COMPLETE_RETAIN_EXPLICIT_MULTIVIEW")
         self.assertEqual(result["manifest"], build_run_manifest(ROOT))
 
     @staticmethod

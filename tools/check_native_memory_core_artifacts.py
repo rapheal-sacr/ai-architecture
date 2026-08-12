@@ -59,9 +59,12 @@ def check() -> dict:
             }
         )
     ready = not identity_errors and all(row["file_sha256_matches"] for row in artifacts)
+    e0_16 = json.loads(
+        (ROOT / "results" / "e0_16_native_memory_comparison.json").read_text()
+    )
     return {
         "status": "READY" if ready else "NOT_AVAILABLE" if not identity_errors else "INVALID",
-        "e0_16_status": "NOT_RUN",
+        "e0_16_status": e0_16["status"],
         "manifest_id": manifest["manifest_id"],
         "manifest_hash": sha256_json(manifest),
         "identity_errors": identity_errors,

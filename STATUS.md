@@ -112,8 +112,7 @@ the four-block `fixed-depth-v1` arm. Recurrent development stops here. Native
 neural memory, MoE, adapter consolidation, and self-improvement are not
 authorized by this outcome.
 
-**Milestone 4's structural gate and registered neural-run boundary are ready;
-the neural comparison is not run.**
+**Milestone 4 completes with `COMPLETE_RETAIN_EXPLICIT_MULTIVIEW`.**
 The local `wamrx-m3-fixed-depth-v1` tag anchors commit `0bb80a8` and the exact
 E0.14 result hash. The new native-memory contract fixes three arms around the
 selected four-block core: explicit multiview memory, a deterministic session
@@ -127,23 +126,33 @@ expiry bound; every model call revalidates and reinjects current-frontier ledger
 evidence; tombstones disable affected slots before a read; reset leaves the
 canonical empty state; and checkpoints fail across model, ontology, or session
 identity. Durable output is candidate-only and names observed ledger support,
-so the compliant fixture changes no authoritative rows. MLX training, accuracy,
-MoE, consolidation, and self-improvement remain blocked pending the separately
-registered smallest native-memory comparison.
+so the compliant fixture changes no authoritative rows.
 
-E0.16 now freezes the smallest comparison before execution: explicit multiview,
+E0.16 froze the smallest comparison before execution: explicit multiview,
 deterministic sixteen-slot cache, and one 1,892-parameter affine operation gate,
 paired across the five selected core seeds. Its 400-update schedules, exact
 checkpoint/resume identity, append-only evaluation journal, compute/storage
 accounting, paired statistics, capacity/invalidation probes, safety gates, and
-five terminal outcomes are registered. A two-update interruption preflight is
-bitwise exact and reads no evaluation metric.
+five terminal outcomes. A two-update interruption preflight was bitwise exact
+and read no evaluation metric.
 
 All five exact E0.14 fixed-depth checkpoints are now present at the registered
 ignored Linux relocation paths. The artifact checker reports `READY` after
 matching byte counts, file, metadata, state, and E0.14 identity hashes.
-Substitution or retraining remains prohibited. E0.16 is still `NOT_RUN` until
-the explicit registered command consumes the frozen budget.
+Substitution or retraining remained prohibited. The CPU run completed all five
+seeds, 2,000 gate updates, 1,080 unique evaluation rows, and all eleven
+manipulations without invalid or incomplete reasons. Every arm scored 4/36 per
+seed on both ID and OOD, so learned-minus-simple accuracy deltas were exactly
+zero. The learned arm's compute-normalized OOD deltas were -0.05366 versus
+explicit and -0.05365 versus cache, and it failed the correction gate. Reset
+leakage, unsupported writes, and stale post-invalidation emissions were zero.
+
+The gate's auxiliary operation classifier reached mean 94.8% ID and 93.6% OOD,
+but this did not translate into task accuracy through the frozen readout. The
+hash-bound post-run selection therefore retains explicit ledger-derived views,
+retires both stateful arms as general-memory candidates, and authorizes the next
+metamemory/compression policy experiment only over explicit views. MoE remains
+separate and still requires its own frozen contract.
 
 ---
 

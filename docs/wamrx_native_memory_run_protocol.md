@@ -1,6 +1,6 @@
 # WAM-RX registered native-memory run protocol
 
-**Status:** frozen and structurally preflighted; E0.16 `NOT_RUN`
+**Status:** complete; terminal decision `COMPLETE_RETAIN_EXPLICIT_MULTIVIEW`
 
 This protocol closes the gap between the E0.15 non-neural authority assay and
 the smallest accuracy-bearing native-working-memory comparison. It is additive:
@@ -86,7 +86,27 @@ python3 tools/check_native_memory_run_registration.py
 .venv-m3/bin/python rig_a/experiments/e0_16_native_memory_comparison.py --execute-registered
 ```
 
-The default invocation prints the checked-in `NOT_RUN` record. If interrupted,
-the only valid continuation is the same command with `--resume`. MoE, LoRA,
-continual consolidation, autonomous promotion, and self-improvement remain out
-of scope until E0.16 reaches one registered terminal outcome.
+The registered budget is consumed. The default invocation prints the checked-in
+terminal record; it must not be rerun or resumed as memory development.
+
+## Terminal result and selection
+
+E0.16 completed every seed, 2,000 gate updates, 1,080 unique task rows, all
+capacity/invalidation probes, and all eleven manipulations with no invalid or
+incomplete reason. Every arm scored 4/36 per seed on ID and OOD. Both
+learned-versus-simple OOD accuracy deltas were zero, so neither Holm superiority
+claim rejected. The learned compute-normalized mean delta was -0.05366 versus
+explicit and -0.05365 versus cache, and learned correction success was zero.
+
+The operation gate itself classified its auxiliary labels at mean 94.8% ID and
+93.6% OOD, but this did not improve frozen-core answer accuracy. Reset leakage,
+unsupported durable writes, and stale post-invalidation emissions were all
+zero; the capacity curves reached the sixteen-slot cap and failed closed.
+
+`contracts/wamrx_native_memory_selection_v1.json` binds the exact terminal
+result SHA-256 and run manifest to `explicit-multiview-v1`. The cache and
+learned gate are preserved as negative evidence and are not selected for
+general memory. The next metamemory/compression policy may operate only over
+explicit ledger-derived views. MoE is not blocked by this negative memory
+result, but it still requires a separate frozen contract; LoRA, continual
+consolidation, autonomous promotion, and self-improvement remain unauthorized.

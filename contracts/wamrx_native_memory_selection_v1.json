@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "selection_id": "wamrx-native-memory-selection-v1",
+  "selected_from": {
+    "experiment": "E0.16",
+    "result_path": "results/e0_16_native_memory_comparison.json",
+    "result_sha256": "e96b6836132b660cdfa29aef63eb224975d33105e7fc4aea3b5e183214844624",
+    "terminal_status": "COMPLETE_RETAIN_EXPLICIT_MULTIVIEW",
+    "run_id": "e0.16-registered-native-memory-comparison-v1",
+    "manifest": {
+      "core_checkpoint_manifest_hash": "b329ee406c11d9ab974f417d2855853c7afc503c7f698b1f43640ed288908875",
+      "e0_15_result_hash": "c7a017740d9b2ab7adf258363081e1dbb638ca1ac6ad632ad1c8a0355c3ba6bd",
+      "implementation_hash": "269b07601347eec6d6bb21546b1eacc2cb67bb98443743981e61aea031825e62",
+      "native_memory_contract_hash": "9bea97bce6109df0b1fcb3c0c288dc90ac27a59fc0519034048650adad671bc0",
+      "reasoner_selection_hash": "d09c26f609ccddd9107019769baefdad9faa01c54057f1233d99e63314ce1592",
+      "run_contract_hash": "bc521a2799c85c69208ee4f25be820f0d146159ee18e4c3733ce54dd4f713f02",
+      "runner_version": "wamrx-native-memory-comparison-v1",
+      "split_registry_hash": "7dc42a679754dd2d63e96a97798fbb3c29e2ab9060c89c904974602815df5aa2"
+    }
+  },
+  "registered_seeds": [41001, 41002, 41003, 41004, 41005],
+  "completed_evaluation_rows": 1080,
+  "selected_configuration": {
+    "arm_id": "explicit-multiview-v1",
+    "policy": "retain-ledger-derived-explicit-views",
+    "native_session_slots": 0,
+    "learned_native_memory": false
+  },
+  "retired_general_memory_candidates": [
+    {
+      "arm_id": "deterministic-session-cache-v1",
+      "policy": "preserve-as-negative-evidence-only"
+    },
+    {
+      "arm_id": "minimal-gated-native-memory-v1",
+      "policy": "preserve-as-negative-evidence-only"
+    }
+  ],
+  "observed_summary": {
+    "per_seed_id_accuracy_by_arm": {
+      "explicit-multiview-v1": 0.1111111111111111,
+      "deterministic-session-cache-v1": 0.1111111111111111,
+      "minimal-gated-native-memory-v1": 0.1111111111111111
+    },
+    "per_seed_ood_accuracy_by_arm": {
+      "explicit-multiview-v1": 0.1111111111111111,
+      "deterministic-session-cache-v1": 0.1111111111111111,
+      "minimal-gated-native-memory-v1": 0.1111111111111111
+    },
+    "mean_gate_operation_accuracy": {
+      "id": 0.9478260869565217,
+      "ood": 0.936
+    },
+    "learned_ood_accuracy_delta_vs_explicit": 0.0,
+    "learned_ood_accuracy_delta_vs_cache": 0.0,
+    "learned_compute_normalized_delta_vs_explicit": -0.053660274550058874,
+    "learned_compute_normalized_delta_vs_cache": -0.053654669846177484,
+    "reset_leakage": 0.0,
+    "unsupported_durable_writes": 0,
+    "post_invalidation_stale_emissions": 0
+  },
+  "required_manipulations": [
+    "M1_frozen_core_state_exact",
+    "M2_learned_decisions_change_state_trace",
+    "M3_omitted_support_fails",
+    "M4_tombstone_disables_before_readout",
+    "M5_reset_and_cross_owner_leave_no_state",
+    "M6_capacity_fails_closed",
+    "M7_stale_checkpoint_identity_fails",
+    "M8_unverified_poison_rejected",
+    "M9_protected_decay_rejected",
+    "M10_memory_identifiers_not_evidence",
+    "M11_complete_compute_and_storage_accounting"
+  ],
+  "authorization": {
+    "explicit_multiview_memory": true,
+    "deterministic_session_cache": false,
+    "learned_native_memory": false,
+    "metamemory_over_explicit_views": true,
+    "mixture_of_experts": false,
+    "adapter_consolidation": false,
+    "self_improvement": false
+  },
+  "interpretation": "E0.16 selects explicit ledger-derived multiview memory. The minimal gate learned its auxiliary operation labels but produced no ID or OOD task gain, failed the correction and compute-normalized promotion gates, and added policy errors and compute. The deterministic cache also produced no task gain over explicit reconstruction. Both stateful arms remain reproducible negative evidence. The next memory-policy experiment must operate only over explicit ledger-derived views; this result neither authorizes native learned memory nor blocks a separately frozen later MoE experiment."
+}

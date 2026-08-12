@@ -200,28 +200,34 @@ compatibility, current-frontier evidence reinjection, immediate tombstone
 disabling, candidate-only durable output, and exact compute/storage accounting.
 All eleven checks and eleven negative controls pass. The deterministic task
 registry freezes 72 train, 36 ID, and 36 OOD cases across nine memory families.
-The additive E0.16 contract now freezes a paired comparison across the five
+The additive E0.16 contract froze a paired comparison across the five
 selected core seeds, using one 1,892-parameter affine operation gate, 400
 updates per seed, exact checkpoint/resume identity, compute/storage accounting,
 paired statistics, and authority/deletion/reset gates. Its train-only
-two-update interruption preflight is bitwise exact and reads no evaluation
+two-update interruption preflight was bitwise exact and read no evaluation
 metric.
 
 The five selected E0.14 checkpoints are present at their registered ignored
-Linux relocation paths and pass every identity check. The comparison remains
-`NOT_RUN`; no accuracy result or learned-memory authorization is implied, and
-substituting or retraining the core is not allowed.
+Linux relocation paths and pass every identity check. E0.16 completed all five
+seeds and returns `COMPLETE_RETAIN_EXPLICIT_MULTIVIEW`: all arms tied at 4/36
+per seed on ID and OOD, while the learned arm added compute and failed the
+correction gate. All structural manipulations passed, with zero reset leakage,
+unsupported durable writes, or stale post-invalidation emissions. Learned
+native memory and the deterministic cache are retained only as negative
+evidence; substituting or retraining the core remains prohibited.
 
 ```bash
 python3 rig_a/experiments/e0_15_native_memory_boundary.py --check-only
 python3 tools/check_native_memory_core_artifacts.py
 python3 tools/check_native_memory_run_registration.py
+python3 tools/check_native_memory_selection.py
 .venv-m3/bin/python rig_a/experiments/e0_16_native_memory_comparison.py
 ```
 
-The E0.16 runner is inert without `--execute-registered`. An interrupted
-registered run may continue only with `--execute-registered --resume`; an
-`INVALID` record requires a new versioned protocol.
+The E0.16 runner now prints its checked-in terminal record without an execution
+flag. Its registered budget is consumed; do not rerun or resume it as memory
+development. The selected next memory-policy scope is explicit ledger-derived
+views only.
 
 Every experiment is seeded and writes a JSON record to `results/`. Kill
 criteria are stated in each experiment's module docstring, before the first

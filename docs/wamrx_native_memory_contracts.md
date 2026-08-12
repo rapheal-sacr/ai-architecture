@@ -47,8 +47,8 @@ The frozen registry contains nine task families: delayed recall, correction,
 temporal update, distractor-heavy sessions, similar-fact interference, context
 overflow, reset/task switching, rare-region retention, and poisoned or
 contradictory input. It deterministically generates 72 train, 36 ID, and 36 OOD
-tasks. Every OOD family axis is disjoint from training. Accuracy-bearing work
-remains `NOT_RUN`.
+tasks. Every OOD family axis is disjoint from training. E0.16 later consumed
+this frozen population without changing it.
 
 The five E0.14 fixed-depth checkpoints are separately bound by seed, byte count,
 file SHA-256, metadata hash, and state hash in
@@ -80,11 +80,20 @@ evaluation metric is read. The only learned component is a 472-by-4 affine gate
 (1,892 parameters) trained for 400 balanced updates per core seed. The selected
 four-block core is load-only and hash-checked before and after gate training.
 
-The runner reports ID/OOD exactness, family and protected-region strata,
+The runner reported ID/OOD exactness, family and protected-region strata,
 realized compute and storage, explicit-retrieval comparisons, correction
 latency, reset leakage, capacity saturation, unsupported durable writes, and
 post-invalidation behavior. Gate checkpoints and the append-only task journal
-are bound to the full run manifest. The two-update resume preflight passes
-bitwise without reading evaluation metrics. The registered result remains
-`NOT_RUN`; details and commands are in
+are bound to the full run manifest. The two-update resume preflight passed
+bitwise without reading evaluation metrics.
+
+E0.16 completed all five seeds, 2,000 gate updates, and 1,080 evaluation rows.
+Every arm scored 4/36 per seed on both ID and OOD. Learned-minus-simple accuracy
+deltas were zero, while the learned arm's compute-normalized OOD deltas were
+negative and its correction gate failed. All eleven manipulations passed;
+reset leakage, unsupported durable writes, and stale post-invalidation
+emissions were zero. The terminal decision is
+`COMPLETE_RETAIN_EXPLICIT_MULTIVIEW`, hash-bound by
+`contracts/wamrx_native_memory_selection_v1.json`. The next memory-policy scope
+is explicit ledger-derived views only; details are in
 `docs/wamrx_native_memory_run_protocol.md`.
