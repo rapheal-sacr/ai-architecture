@@ -1751,6 +1751,40 @@ claims:
       persistent memory, MoE, LoRA, continual weight updates, consolidation,
       autonomous promotion, or self-improvement; MoE requires its own contract.
 
+  - id: E0.17
+    tier: metamemory and compression / pre-model boundary
+    claim: "an advisory policy can control explicit-view admission, retrieval, structure, compression, evidence requests, and skill candidates without erasing protected information or gaining authority"
+    source: "WAM-RX explicit-view metamemory and compression contract"
+    rig: A
+    kill: "K1-K12 and M1-M13 in the experiment; any authoritative write, metamemory evidence root, dropped region/contradiction/refutation/temporal/support/unresolved field, clean-rebuild drift, stale post-deletion artifact, unsupported or self-promoting skill candidate, capacity escape, split drift, metric read, or unfired manipulation"
+    predicted: uncertain
+    status: PASS
+    result: results/e0_17_metamemory_boundary.json
+    procedure: rig_a/experiments/e0_17_metamemory_boundary.py
+    tested_against: contracts/wamrx_metamemory_v1.json
+    finding: >
+      All twelve structural checks and thirteen manipulations pass without a
+      performance read. The compliant fixture exercises ignore, stage, link,
+      retrieve, summarize, structure, and request_evidence; changes no ledger
+      row; emits only ledger-supported advisory candidates; preserves exact
+      region, contradiction, refutation, temporal, support, and unresolved-item
+      manifests; and clean-rebuilds compression exactly.
+    controls: >
+      Fabricated and metamemory-derived support, dropped protected fields,
+      tombstoned support, changed source hashes, stale ontology/frontier,
+      self-promoting or under-repeated skill candidates, and both source-item
+      and serialized-byte capacity escapes all fail closed. Every policy action,
+      scanned item, decision, artifact, and candidate byte is accounted.
+    frozen_next_test: >
+      The seven-family registry contains 56 train, 28 ID, and 28 OOD tasks with
+      disjoint OOD axes. E0.18 may compare full-resolution explicit views, the
+      deterministic heuristic, and one minimal learned policy only after a
+      separately complete run contract; it remains NOT_RUN.
+    scope_limit: >
+      E0.17 authorizes no learned policy, native memory, reasoner change, MoE,
+      LoRA, continual consolidation, autonomous promotion, or self-improvement.
+      Any future policy must operate only over explicit ledger-derived views.
+
   # -- Root 1 - estimator quality ------------------------------------------
   - id: E1.1
     tier: L7

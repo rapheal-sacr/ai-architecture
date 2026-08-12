@@ -229,6 +229,17 @@ flag. Its registered budget is consumed; do not rerun or resume it as memory
 development. The selected next memory-policy scope is explicit ledger-derived
 views only.
 
+E0.17 freezes and passes that next non-neural boundary. It exercises all seven
+metamemory actions, exact protected compression and clean rebuild, deletion and
+frontier invalidation, witnessed skill candidates, fixed capacity, and exact
+compute/storage accounting. The frozen population contains 56 train, 28 ID,
+and 28 OOD tasks across seven disjoint-axis families; no performance metric is
+read and E0.18 remains `NOT_RUN`.
+
+```bash
+python3 rig_a/experiments/e0_17_metamemory_boundary.py --check-only
+```
+
 Every experiment is seeded and writes a JSON record to `results/`. Kill
 criteria are stated in each experiment's module docstring, before the first
 run — a result can always be narrated into a pass otherwise.

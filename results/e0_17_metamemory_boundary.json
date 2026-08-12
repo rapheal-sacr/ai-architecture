@@ -1,0 +1,452 @@
+{
+  "accuracy_metrics_read": 0,
+  "checks": {
+    "K10_accounting_complete": true,
+    "K11_splits_exact_and_disjoint": true,
+    "K12_scope_remains_non_neural": true,
+    "K1_dependencies_exact": true,
+    "K2_no_authoritative_write": true,
+    "K3_ledger_only_evidence": true,
+    "K4_protected_fields_preserved": true,
+    "K5_clean_rebuild_exact": true,
+    "K6_deletion_control_fires": true,
+    "K7_skill_candidate_witnessed": true,
+    "K8_ignore_and_request_semantics": true,
+    "K9_capacity_within_caps": true
+  },
+  "compression_artifact": {
+    "artifact_id": "summary:104de7bc08350b40e1c60da717639732f96b3d0d31170321b4255cffb0688f75",
+    "authority": "candidate-only-advisory-view",
+    "contradiction_item_ids": [
+      "metamemory/redundant_history_compression/train/0000:item:001"
+    ],
+    "independent_evidence": false,
+    "ledger_frontier_hash": "29dcac0c624e62db423d9cb95917326966d0322bab1f55be84521a349229f71e",
+    "ledger_frontier_sequence": 28,
+    "ontology_version": "v1",
+    "refutation_item_ids": [
+      "metamemory/redundant_history_compression/train/0000:item:002"
+    ],
+    "region_manifest": {
+      "finance": [
+        "metamemory/redundant_history_compression/train/0000:item:001",
+        "metamemory/redundant_history_compression/train/0000:item:002",
+        "metamemory/redundant_history_compression/train/0000:item:003",
+        "metamemory/redundant_history_compression/train/0000:item:004",
+        "metamemory/redundant_history_compression/train/0000:item:005",
+        "metamemory/redundant_history_compression/train/0000:item:006",
+        "metamemory/redundant_history_compression/train/0000:item:007",
+        "metamemory/redundant_history_compression/train/0000:item:008",
+        "metamemory/redundant_history_compression/train/0000:item:009",
+        "metamemory/redundant_history_compression/train/0000:item:010",
+        "metamemory/redundant_history_compression/train/0000:item:011"
+      ],
+      "rare-protected": [
+        "metamemory/redundant_history_compression/train/0000:item:000"
+      ]
+    },
+    "source_item_hash": "1bef6296d53df6c100fc190e1a9591fcba3649f543a49a494cb4b7ed97baf56e",
+    "source_item_ids": [
+      "metamemory/redundant_history_compression/train/0000:item:000",
+      "metamemory/redundant_history_compression/train/0000:item:001",
+      "metamemory/redundant_history_compression/train/0000:item:002",
+      "metamemory/redundant_history_compression/train/0000:item:003",
+      "metamemory/redundant_history_compression/train/0000:item:004",
+      "metamemory/redundant_history_compression/train/0000:item:005",
+      "metamemory/redundant_history_compression/train/0000:item:006",
+      "metamemory/redundant_history_compression/train/0000:item:007",
+      "metamemory/redundant_history_compression/train/0000:item:008",
+      "metamemory/redundant_history_compression/train/0000:item:009",
+      "metamemory/redundant_history_compression/train/0000:item:010",
+      "metamemory/redundant_history_compression/train/0000:item:011"
+    ],
+    "summary_digest": "e6b98a1f9471722e7e3b2f8df9bd165c5bba9117de20b79df1ca682fbd3f73bb",
+    "summary_text": "advisory-explicit-view-summary:e6b98a1f9471722e7e3b2f8df9bd165c5bba9117de20b79df1ca682fbd3f73bb",
+    "supporting_event_ids": [
+      "metamemory/redundant_history_compression/train/0000:event:000",
+      "metamemory/redundant_history_compression/train/0000:event:001",
+      "metamemory/redundant_history_compression/train/0000:event:002",
+      "metamemory/redundant_history_compression/train/0000:event:003",
+      "metamemory/redundant_history_compression/train/0000:event:004",
+      "metamemory/redundant_history_compression/train/0000:event:005",
+      "metamemory/redundant_history_compression/train/0000:event:006",
+      "metamemory/redundant_history_compression/train/0000:event:007",
+      "metamemory/redundant_history_compression/train/0000:event:008",
+      "metamemory/redundant_history_compression/train/0000:event:009",
+      "metamemory/redundant_history_compression/train/0000:event:010",
+      "metamemory/redundant_history_compression/train/0000:event:011"
+    ],
+    "task_id": "metamemory/redundant_history_compression/train/0000",
+    "temporal_qualifiers": {
+      "metamemory/redundant_history_compression/train/0000:item:000": "valid-window-0",
+      "metamemory/redundant_history_compression/train/0000:item:004": "valid-window-4"
+    },
+    "unresolved_item_ids": [
+      "metamemory/redundant_history_compression/train/0000:item:003"
+    ]
+  },
+  "compression_rebuild_exact": true,
+  "compute": {
+    "operation_counts": {
+      "ignore": 1,
+      "link": 1,
+      "request_evidence": 1,
+      "retrieve": 1,
+      "stage": 1,
+      "structure": 1,
+      "summarize": 1
+    },
+    "realized_policy_flops": 21576,
+    "serialized_artifact_bytes": 3477,
+    "serialized_decision_bytes": 5396,
+    "serialized_skill_candidate_bytes": 735
+  },
+  "contract_hash": "0e3a7310c637fce3e74ae01c19ae9fdedb7f8d53b7f2d7f15243965821693fc6",
+  "contract_id": "wamrx-metamemory-v1",
+  "decisions": [
+    {
+      "action": "ignore",
+      "authority": "candidate-only",
+      "decision_id": "policy:10d0dcf203e6fae937add6388329990b6ce449064199a1b643a0d8f519abaa62",
+      "direct_ledger_write_authorized": false,
+      "policy_id": "deterministic-metamemory-heuristic-v1",
+      "reason": "registered-feature-rule:ignore",
+      "selected_item_ids": [
+        "metamemory/distractor_admission/train/0000:item:000",
+        "metamemory/distractor_admission/train/0000:item:001"
+      ],
+      "supporting_event_ids": [],
+      "task_id": "metamemory/distractor_admission/train/0000"
+    },
+    {
+      "action": "request_evidence",
+      "authority": "candidate-only",
+      "decision_id": "policy:495483d91199b406243a399b94803479be590228b7f53fb9e4e5b1ec10dff22f",
+      "direct_ledger_write_authorized": false,
+      "policy_id": "deterministic-metamemory-heuristic-v1",
+      "reason": "registered-feature-rule:request_evidence",
+      "selected_item_ids": [
+        "metamemory/evidence_gap/train/0000:item:000"
+      ],
+      "supporting_event_ids": [],
+      "task_id": "metamemory/evidence_gap/train/0000"
+    },
+    {
+      "action": "link",
+      "authority": "candidate-only",
+      "decision_id": "policy:d3231bde8e385ef6c70f28c4a9b99f0e713351a1307c0c8722105144550ecbcb",
+      "direct_ledger_write_authorized": false,
+      "policy_id": "deterministic-metamemory-heuristic-v1",
+      "reason": "registered-feature-rule:link",
+      "selected_item_ids": [
+        "metamemory/cross_view_linkage/train/0000:item:000",
+        "metamemory/cross_view_linkage/train/0000:item:001"
+      ],
+      "supporting_event_ids": [
+        "metamemory/cross_view_linkage/train/0000:event:000",
+        "metamemory/cross_view_linkage/train/0000:event:001"
+      ],
+      "task_id": "metamemory/cross_view_linkage/train/0000"
+    },
+    {
+      "action": "retrieve",
+      "authority": "candidate-only",
+      "decision_id": "policy:bcb6fc765f84d23f939b96faeb8126e64d2284692f707586b4096f6139e6d5c1",
+      "direct_ledger_write_authorized": false,
+      "policy_id": "deterministic-metamemory-heuristic-v1",
+      "reason": "registered-feature-rule:retrieve",
+      "selected_item_ids": [
+        "metamemory/targeted_retrieval/train/0000:item:003"
+      ],
+      "supporting_event_ids": [
+        "metamemory/targeted_retrieval/train/0000:event:003"
+      ],
+      "task_id": "metamemory/targeted_retrieval/train/0000"
+    },
+    {
+      "action": "summarize",
+      "authority": "candidate-only",
+      "decision_id": "policy:f3d56d35d2a1d6200559a3c7a655c8eefaedee5e393c45b603381139041daeba",
+      "direct_ledger_write_authorized": false,
+      "policy_id": "deterministic-metamemory-heuristic-v1",
+      "reason": "registered-feature-rule:summarize",
+      "selected_item_ids": [
+        "metamemory/redundant_history_compression/train/0000:item:000",
+        "metamemory/redundant_history_compression/train/0000:item:001",
+        "metamemory/redundant_history_compression/train/0000:item:002",
+        "metamemory/redundant_history_compression/train/0000:item:003",
+        "metamemory/redundant_history_compression/train/0000:item:004",
+        "metamemory/redundant_history_compression/train/0000:item:005",
+        "metamemory/redundant_history_compression/train/0000:item:006",
+        "metamemory/redundant_history_compression/train/0000:item:007",
+        "metamemory/redundant_history_compression/train/0000:item:008",
+        "metamemory/redundant_history_compression/train/0000:item:009",
+        "metamemory/redundant_history_compression/train/0000:item:010",
+        "metamemory/redundant_history_compression/train/0000:item:011"
+      ],
+      "supporting_event_ids": [
+        "metamemory/redundant_history_compression/train/0000:event:000",
+        "metamemory/redundant_history_compression/train/0000:event:001",
+        "metamemory/redundant_history_compression/train/0000:event:002",
+        "metamemory/redundant_history_compression/train/0000:event:003",
+        "metamemory/redundant_history_compression/train/0000:event:004",
+        "metamemory/redundant_history_compression/train/0000:event:005",
+        "metamemory/redundant_history_compression/train/0000:event:006",
+        "metamemory/redundant_history_compression/train/0000:event:007",
+        "metamemory/redundant_history_compression/train/0000:event:008",
+        "metamemory/redundant_history_compression/train/0000:event:009",
+        "metamemory/redundant_history_compression/train/0000:event:010",
+        "metamemory/redundant_history_compression/train/0000:event:011"
+      ],
+      "task_id": "metamemory/redundant_history_compression/train/0000"
+    },
+    {
+      "action": "structure",
+      "authority": "candidate-only",
+      "decision_id": "policy:1e0e44ebe3ef0cbaf68dff010abcffaf7a23f38c19646571230bc4bc8c68955e",
+      "direct_ledger_write_authorized": false,
+      "policy_id": "deterministic-metamemory-heuristic-v1",
+      "reason": "registered-feature-rule:structure",
+      "selected_item_ids": [
+        "metamemory/constraint_structuring/train/0000:item:000",
+        "metamemory/constraint_structuring/train/0000:item:001",
+        "metamemory/constraint_structuring/train/0000:item:002"
+      ],
+      "supporting_event_ids": [
+        "metamemory/constraint_structuring/train/0000:event:000",
+        "metamemory/constraint_structuring/train/0000:event:001",
+        "metamemory/constraint_structuring/train/0000:event:002"
+      ],
+      "task_id": "metamemory/constraint_structuring/train/0000"
+    },
+    {
+      "action": "stage",
+      "authority": "candidate-only",
+      "decision_id": "policy:2219a81f37490e8cf3dd4a121a8890dcf4279db012228562cf9abe418922975b",
+      "direct_ledger_write_authorized": false,
+      "policy_id": "deterministic-metamemory-heuristic-v1",
+      "reason": "registered-feature-rule:stage",
+      "selected_item_ids": [
+        "metamemory/procedure_repetition/train/0000:item:000",
+        "metamemory/procedure_repetition/train/0000:item:001",
+        "metamemory/procedure_repetition/train/0000:item:002",
+        "metamemory/procedure_repetition/train/0000:item:003"
+      ],
+      "supporting_event_ids": [
+        "metamemory/procedure_repetition/train/0000:event:000",
+        "metamemory/procedure_repetition/train/0000:event:001",
+        "metamemory/procedure_repetition/train/0000:event:002",
+        "metamemory/procedure_repetition/train/0000:event:003"
+      ],
+      "task_id": "metamemory/procedure_repetition/train/0000"
+    }
+  ],
+  "dependency_report": {
+    "hashes": {
+      "native_memory_selection": "8084c87129964eca268168da42a0b5ec2302adff19078055f922bcc03cf1ed9c",
+      "task_registry": "a2f3e278890b67285956ed2f8e5eb95eaac5bd9384a1fe69c250e5dc155ce080"
+    },
+    "selection": {
+      "learned_native_memory": false,
+      "next_memory_policy_scope": "explicit-ledger-derived-views-only",
+      "selected_arm_id": "explicit-multiview-v1",
+      "selection_id": "wamrx-native-memory-selection-v1",
+      "source_experiment": "E0.16",
+      "source_result_sha256": "e96b6836132b660cdfa29aef63eb224975d33105e7fc4aea3b5e183214844624",
+      "terminal_status": "COMPLETE_RETAIN_EXPLICIT_MULTIVIEW"
+    }
+  },
+  "experiment": "E0.17",
+  "fixture_task_ids": [
+    "metamemory/distractor_admission/train/0000",
+    "metamemory/evidence_gap/train/0000",
+    "metamemory/cross_view_linkage/train/0000",
+    "metamemory/targeted_retrieval/train/0000",
+    "metamemory/redundant_history_compression/train/0000",
+    "metamemory/constraint_structuring/train/0000",
+    "metamemory/procedure_repetition/train/0000"
+  ],
+  "future_comparison_status": "NOT_RUN",
+  "learned_policy_status": "NOT_RUN",
+  "ledger_rows_after": 28,
+  "ledger_rows_before": 28,
+  "manipulations": {
+    "M10_no_direct_ledger_write_path": true,
+    "M11_unsupported_skill_candidate_rejected": true,
+    "M12_stale_ontology_rejected": true,
+    "M13_capacity_caps_fail_closed": true,
+    "M1_fabricated_support_rejected": true,
+    "M2_dropped_region_rejected": true,
+    "M3_dropped_contradiction_or_refutation_rejected": true,
+    "M4_dropped_temporal_qualifier_rejected": true,
+    "M5_hidden_unresolved_item_rejected": true,
+    "M6_omitted_source_support_rejected": true,
+    "M7_tombstoned_support_disables_artifact": true,
+    "M8_changed_rebuild_hash_rejected": true,
+    "M9_metamemory_ids_as_evidence_rejected": true
+  },
+  "scope_limit": "Structural explicit-view metamemory boundary only. No learned policy, ID/OOD performance, native memory, core change, MoE, consolidation, or promotion claim is made.",
+  "skill_candidate": {
+    "authority": "candidate-only",
+    "candidate_id": "policy:skill-candidate:1ecb6cb19ca0e74dad672821e8b504e54d5b3901e30c7d30e9028c894cce6a58",
+    "procedure_key": "procedure-243",
+    "promotion_authority": false,
+    "repetition_item_ids": [
+      "metamemory/procedure_repetition/train/0000:item:000",
+      "metamemory/procedure_repetition/train/0000:item:001",
+      "metamemory/procedure_repetition/train/0000:item:002",
+      "metamemory/procedure_repetition/train/0000:item:003"
+    ],
+    "supporting_event_ids": [
+      "metamemory/procedure_repetition/train/0000:event:000",
+      "metamemory/procedure_repetition/train/0000:event:001",
+      "metamemory/procedure_repetition/train/0000:event:002",
+      "metamemory/procedure_repetition/train/0000:event:003"
+    ],
+    "task_id": "metamemory/procedure_repetition/train/0000"
+  },
+  "split_report": {
+    "axes": {
+      "constraint_structuring": {
+        "id": [
+          "nodes:3",
+          "nodes:5"
+        ],
+        "ood": [
+          "nodes:12",
+          "nodes:8"
+        ],
+        "train": [
+          "nodes:3",
+          "nodes:5"
+        ]
+      },
+      "cross_view_linkage": {
+        "id": [
+          "links:2",
+          "links:3"
+        ],
+        "ood": [
+          "links:7"
+        ],
+        "train": [
+          "links:2",
+          "links:3"
+        ]
+      },
+      "distractor_admission": {
+        "id": [
+          "items:2",
+          "items:4"
+        ],
+        "ood": [
+          "items:12",
+          "items:8"
+        ],
+        "train": [
+          "items:2",
+          "items:4"
+        ]
+      },
+      "evidence_gap": {
+        "id": [
+          "gaps:1",
+          "gaps:2"
+        ],
+        "ood": [
+          "gaps:3",
+          "gaps:4"
+        ],
+        "train": [
+          "gaps:1",
+          "gaps:2"
+        ]
+      },
+      "procedure_repetition": {
+        "id": [
+          "repetitions:4"
+        ],
+        "ood": [
+          "repetitions:7"
+        ],
+        "train": [
+          "repetitions:3",
+          "repetitions:4"
+        ]
+      },
+      "redundant_history_compression": {
+        "id": [
+          "history:12",
+          "history:8"
+        ],
+        "ood": [
+          "history:24",
+          "history:32"
+        ],
+        "train": [
+          "history:12",
+          "history:8"
+        ]
+      },
+      "targeted_retrieval": {
+        "id": [
+          "candidates:4"
+        ],
+        "ood": [
+          "candidates:16",
+          "candidates:24"
+        ],
+        "train": [
+          "candidates:4",
+          "candidates:8"
+        ]
+      }
+    },
+    "generator_version": "wamrx-metamemory-tasks-v1",
+    "hash_mismatches": {},
+    "hashes": {
+      "id": {
+        "aggregate": "05168a1a3b4b3a99ef3194f0407252f10e0e0b6cbb696745c2f64741d5d38fd9",
+        "constraint_structuring": "d4b092f45b09c18fd0d8d86a42688304fe7885c93ccd6df9f015bbc9922cf6f5",
+        "cross_view_linkage": "6fd5b9d6579c27bbcd0298e70a9dc2af13da24e8a4aff7945d68cac20bdcfb6c",
+        "distractor_admission": "0e0801088266daf975d4ac0f5a39bed4df2dc880c5d48e756a22cf5f805269d6",
+        "evidence_gap": "d75d45dceaf879c9e23a3f5068750f98505eee67c2dd436de9173a15c66becd0",
+        "procedure_repetition": "e302a57cfc630b21a79d9b2431d2a8d990b685c82c37c0b5bc7330fde5892f12",
+        "redundant_history_compression": "91b1e21caeba5ad9f5ef2448c6551606718be449c97dacbe7b07316ca74e5b6f",
+        "targeted_retrieval": "f50db35fe0d6a460e6276c4b8f29759f3617ea50e2576ebfac150132c688c73c"
+      },
+      "ood": {
+        "aggregate": "043c14cf7c8f170491098ad8ea403b6321b1b0a4a010d5339558ac76f52b424b",
+        "constraint_structuring": "b75d2a23b41fcd739d48eef26e0b8a7374420f3329bc8113837fccc8f65b81a5",
+        "cross_view_linkage": "310c87e3f7776c48812aceeec309f6a917014ee7b414705bad6ca810f7bbf9ea",
+        "distractor_admission": "57aedeeeea8ccca35cb31191bfb489683bcdd4c557fad5d5b0dee7c753609d58",
+        "evidence_gap": "f7d0db40fd670c0b2172a8b84777912f97749fba29b87f30a152366eefd58d9d",
+        "procedure_repetition": "9b2ed371911f23805f94d5101f4ed80e25eebbd4438dd2de4d6b491f2a63a4d3",
+        "redundant_history_compression": "a44e6dde89ff42823646f320641b699973c07225ceb7ecd2ca8cfccb53eed606",
+        "targeted_retrieval": "73bb3be51e7b7865b235bf59d5994e06c923ef6aea8628b9c242d4f01933de62"
+      },
+      "train": {
+        "aggregate": "92004d56a5d7d60080729a6895cec2af05f3ce5aed43db5940ea9b45c018e11c",
+        "constraint_structuring": "7791ccce5f2cedcb383c0a1ab7d4bbbbd802e48a0706a7f00d9eb141c9dfcfb3",
+        "cross_view_linkage": "2727f93c048e9d17e25f4d6ec54300451c1e9134e5f16f2c72a635fa1fe6913f",
+        "distractor_admission": "cb300b66f8bec5084b6c1697cef92fc103ae90b90d196c8b400105ea183e5a40",
+        "evidence_gap": "5cf133a542021463e1c68c18610ec8250cfe7def999d9468287428c5f6d4336e",
+        "procedure_repetition": "23dc0dac3333ab64574a8c703f1c05893bebc53141819049c9361db0013335de",
+        "redundant_history_compression": "e95b0b5e56ba6142b5556243ea3fcad39c70c65e00d1c6c69625df9dee52b928",
+        "targeted_retrieval": "de3bd238518c44012809887653451370bc6f094299e769af66a02c75c4a89217"
+      }
+    },
+    "ood_axis_disjoint": {
+      "constraint_structuring": true,
+      "cross_view_linkage": true,
+      "distractor_admission": true,
+      "evidence_gap": true,
+      "procedure_repetition": true,
+      "redundant_history_compression": true,
+      "targeted_retrieval": true
+    },
+    "passed": true,
+    "registry_id": "wamrx-metamemory-splits-v1"
+  },
+  "status": "PASS"
+}

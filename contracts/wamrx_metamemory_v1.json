@@ -1,0 +1,148 @@
+{
+  "contract_schema_version": 1,
+  "contract_id": "wamrx-metamemory-v1",
+  "experiment": "E0.17",
+  "registered_at": "2026-08-11T22:55:00-04:00",
+  "depends_on": {
+    "native_memory_selection": {
+      "path": "contracts/wamrx_native_memory_selection_v1.json",
+      "content_hash": "8084c87129964eca268168da42a0b5ec2302adff19078055f922bcc03cf1ed9c",
+      "required_terminal_status": "COMPLETE_RETAIN_EXPLICIT_MULTIVIEW",
+      "required_arm": "explicit-multiview-v1"
+    },
+    "task_registry": {
+      "path": "contracts/wamrx_metamemory_splits_v1.json",
+      "content_hash": "a2f3e278890b67285956ed2f8e5eb95eaac5bd9384a1fe69c250e5dc155ce080"
+    }
+  },
+  "scope": {
+    "input_authority": "explicit ledger-derived retrieval, analytic, temporal, and belief/constraint views only",
+    "native_session_memory_allowed": false,
+    "fixed_reasoner_changes_allowed": false,
+    "ledger_write_authority": false,
+    "learned_policy_in_e0_17": false,
+    "future_learned_policy_gate": "only after every E0.17 invariant and manipulation passes"
+  },
+  "policy_actions": [
+    "ignore",
+    "stage",
+    "link",
+    "retrieve",
+    "summarize",
+    "structure",
+    "request_evidence"
+  ],
+  "action_semantics": {
+    "ignore": "discard only unverified noise for the current policy call; never delete ledger evidence",
+    "stage": "emit a candidate-only repeated-procedure or future-skill proposal with ledger-only support",
+    "link": "emit an advisory cross-view relation over two or more supported explicit items",
+    "retrieve": "select supported explicit items for the current query without creating persistent state",
+    "summarize": "emit a rebuildable advisory compression artifact preserving every protected field and support",
+    "structure": "emit an advisory typed constraint/graph projection while keeping unresolved items explicit",
+    "request_evidence": "return a witnessed evidence-gap request; never manufacture support"
+  },
+  "compression": {
+    "maximum_source_items": 64,
+    "maximum_serialized_bytes": 32768,
+    "artifact_authority": "candidate-only advisory derived view",
+    "required_preservation": {
+      "per_region_coverage": 1.0,
+      "contradiction_retention": 1.0,
+      "refutation_retention": 1.0,
+      "temporal_qualifier_retention": 1.0,
+      "support_event_coverage": 1.0,
+      "unresolved_item_retention": 1.0,
+      "clean_rebuild_equivalence": 1.0,
+      "post_deletion_stale_acceptance": 0.0
+    },
+    "summary_rule": "canonical item-kind and content digest plus explicit protected manifests; summary text is advisory and never an evidence root",
+    "deletion_rule": "any invalidated source support disables the artifact before reuse; rebuild only from the surviving explicit frontier"
+  },
+  "skill_candidate": {
+    "minimum_verified_repetitions": 3,
+    "authority": "candidate-only",
+    "required_support": "every staged repetition names a verified observed ledger event",
+    "promotion_authority": false
+  },
+  "accounting": {
+    "policy_base_flops": {
+      "ignore": 8,
+      "stage": 64,
+      "link": 40,
+      "retrieve": 32,
+      "summarize": 96,
+      "structure": 80,
+      "request_evidence": 24
+    },
+    "flops_per_canonical_input_byte": 2,
+    "flops_per_scanned_item": 8,
+    "storage": "exact canonical bytes for decisions, compression artifacts, and skill candidates"
+  },
+  "frozen_tasks": {
+    "families": 7,
+    "train": 56,
+    "id": 28,
+    "ood": 28,
+    "ood_axes_disjoint": true
+  },
+  "future_comparison": {
+    "experiment": "E0.18",
+    "status": "NOT_RUN",
+    "arms": [
+      "full-resolution-explicit-views-v1",
+      "deterministic-metamemory-heuristic-v1",
+      "minimal-learned-metamemory-policy-v1"
+    ],
+    "primary_reports": [
+      "long-horizon task quality",
+      "query value",
+      "retrieval FLOPs",
+      "serialized bytes",
+      "per-region coverage",
+      "contradiction and refutation retention",
+      "temporal qualifier retention",
+      "support coverage",
+      "unresolved-item retention",
+      "clean-rebuild equivalence",
+      "deletion correctness"
+    ],
+    "success": "learned policy improves registered long-horizon quality or reduces retrieval/storage cost by at least 10 percent without ID, OOD, protected-region, grounding, contradiction, temporal, unresolved, rebuild, or deletion regression",
+    "failure_branches": {
+      "tail_loss": "reject compression and retain higher-resolution explicit views",
+      "unsupported_summary": "keep summaries advisory only and exclude them from answer evidence",
+      "no_value": "retain deterministic admission and retrieval rules",
+      "environment_overfit": "restrict the policy to that environment",
+      "explicit_memory_selected": "train only over explicit ledger-derived views; native memory remains retired"
+    }
+  },
+  "kill_criteria": {
+    "K1": "the E0.16 selection or split registry hash drifts",
+    "K2": "a policy decision appends or mutates authoritative ledger state",
+    "K3": "a decision or artifact cites memory, slot, summary, or policy identifiers as evidence",
+    "K4": "compression loses any registered region, contradiction, refutation, temporal qualifier, support event, or unresolved item",
+    "K5": "a compression artifact differs after clean rebuild from the same explicit frontier",
+    "K6": "a tombstoned or otherwise invalidated support leaves an artifact reusable",
+    "K7": "a skill candidate lacks three verified repetitions or promotes itself",
+    "K8": "ignore discards verified evidence or request_evidence invents support",
+    "K9": "source-item or byte capacity can be exceeded",
+    "K10": "policy, compression, retrieval, or storage accounting is incomplete",
+    "K11": "any frozen split hash changes or an OOD axis overlaps training",
+    "K12": "E0.17 reads accuracy metrics, trains a policy, or authorizes E0.18, MoE, continual updates, or promotion"
+  },
+  "manipulations": [
+    "M1 fabricated support is rejected",
+    "M2 dropped protected-region coverage is rejected",
+    "M3 dropped contradiction or refutation is rejected",
+    "M4 dropped temporal qualifier is rejected",
+    "M5 hidden unresolved item is rejected",
+    "M6 omitted source support is rejected",
+    "M7 tombstoned support disables the artifact",
+    "M8 changed rebuild source hash is rejected",
+    "M9 memory or summary IDs cannot become evidence",
+    "M10 policy has no direct ledger-write path",
+    "M11 unsupported or under-repeated skill candidate is rejected",
+    "M12 stale ontology or ledger frontier is rejected",
+    "M13 source-item and serialized-byte caps fail closed"
+  ],
+  "statuses": ["NOT_RUN", "PASS", "FAIL", "INCOMPLETE", "INVALID"]
+}

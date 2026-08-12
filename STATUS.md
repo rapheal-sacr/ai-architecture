@@ -154,6 +154,20 @@ retires both stateful arms as general-memory candidates, and authorizes the next
 metamemory/compression policy experiment only over explicit views. MoE remains
 separate and still requires its own frozen contract.
 
+**E0.17 passes the explicit-view metamemory/compression structural gate.** It is
+bound to the exact E0.16 explicit-memory selection and freezes seven advisory
+actions—ignore, stage, link, retrieve, summarize, structure, and request
+evidence—across 56 train, 28 ID, and 28 OOD tasks with disjoint OOD axes.
+Compression preserves exact region, contradiction, refutation, temporal,
+support, and unresolved-item manifests; rebuilds exactly; and fails closed on
+deletion, ontology/frontier drift, and 64-item / 32,768-byte caps. Candidate
+skills require three verified repetitions and cannot promote themselves.
+
+All twelve checks and thirteen manipulations pass with zero accuracy reads and
+no ledger-row change. The learned-policy comparison E0.18 remains `NOT_RUN`.
+Its only permitted state source is explicit ledger-derived views; native memory
+remains retired.
+
 ---
 
 ## Invariants

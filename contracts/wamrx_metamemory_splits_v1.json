@@ -1,0 +1,101 @@
+{
+  "split_registry_schema_version": 1,
+  "registry_id": "wamrx-metamemory-splits-v1",
+  "generator_version": "wamrx-metamemory-tasks-v1",
+  "registered_at": "2026-08-11T22:45:00-04:00",
+  "splits": {
+    "train": {
+      "count_per_family": 8,
+      "family_seeds": {
+        "distractor_admission": 61001,
+        "evidence_gap": 61002,
+        "cross_view_linkage": 61003,
+        "targeted_retrieval": 61004,
+        "redundant_history_compression": 61005,
+        "constraint_structuring": 61006,
+        "procedure_repetition": 61007
+      },
+      "family_axes": {
+        "distractor_admission": ["items:2", "items:4"],
+        "evidence_gap": ["gaps:1", "gaps:2"],
+        "cross_view_linkage": ["links:2", "links:3"],
+        "targeted_retrieval": ["candidates:4", "candidates:8"],
+        "redundant_history_compression": ["history:8", "history:12"],
+        "constraint_structuring": ["nodes:3", "nodes:5"],
+        "procedure_repetition": ["repetitions:3", "repetitions:4"]
+      },
+      "expected_hashes": {
+        "distractor_admission": "cb300b66f8bec5084b6c1697cef92fc103ae90b90d196c8b400105ea183e5a40",
+        "evidence_gap": "5cf133a542021463e1c68c18610ec8250cfe7def999d9468287428c5f6d4336e",
+        "cross_view_linkage": "2727f93c048e9d17e25f4d6ec54300451c1e9134e5f16f2c72a635fa1fe6913f",
+        "targeted_retrieval": "de3bd238518c44012809887653451370bc6f094299e769af66a02c75c4a89217",
+        "redundant_history_compression": "e95b0b5e56ba6142b5556243ea3fcad39c70c65e00d1c6c69625df9dee52b928",
+        "constraint_structuring": "7791ccce5f2cedcb383c0a1ab7d4bbbbd802e48a0706a7f00d9eb141c9dfcfb3",
+        "procedure_repetition": "23dc0dac3333ab64574a8c703f1c05893bebc53141819049c9361db0013335de",
+        "aggregate": "92004d56a5d7d60080729a6895cec2af05f3ce5aed43db5940ea9b45c018e11c"
+      }
+    },
+    "id": {
+      "count_per_family": 4,
+      "family_seeds": {
+        "distractor_admission": 62001,
+        "evidence_gap": 62002,
+        "cross_view_linkage": 62003,
+        "targeted_retrieval": 62004,
+        "redundant_history_compression": 62005,
+        "constraint_structuring": 62006,
+        "procedure_repetition": 62007
+      },
+      "family_axes": {
+        "distractor_admission": ["items:2", "items:4"],
+        "evidence_gap": ["gaps:1", "gaps:2"],
+        "cross_view_linkage": ["links:2", "links:3"],
+        "targeted_retrieval": ["candidates:4", "candidates:8"],
+        "redundant_history_compression": ["history:8", "history:12"],
+        "constraint_structuring": ["nodes:3", "nodes:5"],
+        "procedure_repetition": ["repetitions:3", "repetitions:4"]
+      },
+      "expected_hashes": {
+        "distractor_admission": "0e0801088266daf975d4ac0f5a39bed4df2dc880c5d48e756a22cf5f805269d6",
+        "evidence_gap": "d75d45dceaf879c9e23a3f5068750f98505eee67c2dd436de9173a15c66becd0",
+        "cross_view_linkage": "6fd5b9d6579c27bbcd0298e70a9dc2af13da24e8a4aff7945d68cac20bdcfb6c",
+        "targeted_retrieval": "f50db35fe0d6a460e6276c4b8f29759f3617ea50e2576ebfac150132c688c73c",
+        "redundant_history_compression": "91b1e21caeba5ad9f5ef2448c6551606718be449c97dacbe7b07316ca74e5b6f",
+        "constraint_structuring": "d4b092f45b09c18fd0d8d86a42688304fe7885c93ccd6df9f015bbc9922cf6f5",
+        "procedure_repetition": "e302a57cfc630b21a79d9b2431d2a8d990b685c82c37c0b5bc7330fde5892f12",
+        "aggregate": "05168a1a3b4b3a99ef3194f0407252f10e0e0b6cbb696745c2f64741d5d38fd9"
+      }
+    },
+    "ood": {
+      "count_per_family": 4,
+      "family_seeds": {
+        "distractor_admission": 63001,
+        "evidence_gap": 63002,
+        "cross_view_linkage": 63003,
+        "targeted_retrieval": 63004,
+        "redundant_history_compression": 63005,
+        "constraint_structuring": 63006,
+        "procedure_repetition": 63007
+      },
+      "family_axes": {
+        "distractor_admission": ["items:8", "items:12"],
+        "evidence_gap": ["gaps:3", "gaps:4"],
+        "cross_view_linkage": ["links:5", "links:7"],
+        "targeted_retrieval": ["candidates:16", "candidates:24"],
+        "redundant_history_compression": ["history:24", "history:32"],
+        "constraint_structuring": ["nodes:8", "nodes:12"],
+        "procedure_repetition": ["repetitions:7", "repetitions:10"]
+      },
+      "expected_hashes": {
+        "distractor_admission": "57aedeeeea8ccca35cb31191bfb489683bcdd4c557fad5d5b0dee7c753609d58",
+        "evidence_gap": "f7d0db40fd670c0b2172a8b84777912f97749fba29b87f30a152366eefd58d9d",
+        "cross_view_linkage": "310c87e3f7776c48812aceeec309f6a917014ee7b414705bad6ca810f7bbf9ea",
+        "targeted_retrieval": "73bb3be51e7b7865b235bf59d5994e06c923ef6aea8628b9c242d4f01933de62",
+        "redundant_history_compression": "a44e6dde89ff42823646f320641b699973c07225ceb7ecd2ca8cfccb53eed606",
+        "constraint_structuring": "b75d2a23b41fcd739d48eef26e0b8a7374420f3329bc8113837fccc8f65b81a5",
+        "procedure_repetition": "9b2ed371911f23805f94d5101f4ed80e25eebbd4438dd2de4d6b491f2a63a4d3",
+        "aggregate": "043c14cf7c8f170491098ad8ea403b6321b1b0a4a010d5339558ac76f52b424b"
+      }
+    }
+  }
+}

@@ -2386,6 +2386,34 @@ stateful arms are negative evidence. Metamemory/compression work may proceed
 only over explicit ledger-derived views; MoE is not blocked by this result but
 still requires a separate frozen contract.
 
+### E0.17 · explicit-view metamemory and compression — structural gate
+
+E0.17 is anchored to the hash-bound E0.16 selection of explicit multiview
+memory. It cannot use native session slots or alter the fixed-depth reasoner.
+The policy interface exposes exactly seven advisory actions: ignore, stage,
+link, retrieve, summarize, structure, and request evidence. Outputs are
+candidate-only, have no authoritative write or promotion path, and name only
+observed ledger roots.
+
+Compression binds every source item, region, contradiction, refutation,
+temporal qualifier, supporting event, unresolved item, ontology version, and
+ledger frontier. It must clean-rebuild exactly and becomes stale immediately
+after support deletion or frontier drift. Fixed caps are 64 source items and
+32,768 canonical bytes. A staged skill requires three verified repetitions of
+one procedure and cannot promote itself.
+
+The frozen registry contains seven one-action families: 56 train, 28 ID, and
+28 OOD tasks, with every OOD axis disjoint from training. **E0.17 passes all
+twelve checks and thirteen manipulations with zero accuracy reads.** The
+compliant fixture exercises every action, changes no ledger row, rebuilds
+compression exactly, and accounts every operation and serialized byte.
+
+The learned E0.18 comparison remains **`NOT_RUN`**. Its three arms are
+full-resolution explicit views, the deterministic heuristic, and one minimal
+learned policy. Because E0.16 rejected native memory, all arms are restricted
+to explicit ledger-derived views. Learned policy, MoE, LoRA, continual
+consolidation, promotion, and self-improvement remain unauthorized.
+
 ## 2 · The claim ledger
 
 Every load-bearing claim, its rig, and what would falsify it. ★ marks a
@@ -2407,6 +2435,7 @@ experiment's docstring; `claims/claims.yaml` is the machine-readable version.
 | E0.14 | **Five-seed recurrent model comparison.** | B | Apply the frozen statistical, compute, evidence, manipulation, and failure gates. **DONE — `COMPLETE_RETAIN_FIXED`; recurrence retired as a general core.** |
 | E0.15 | **Authority-limited native-working-memory structural gate.** | A | Any ledger write, memory-derived evidence root, incomplete reinjection, stale support, reset/cross-user leak, capacity escape, incompatible checkpoint, unaccounted operation, changed split hash, or unfired manipulation. **DONE — PASS; later E0.16 retained explicit views.** |
 | E0.16 | **Smallest frozen-core native-memory comparison.** | B | Apply the frozen paired statistical, compute/storage, authority, deletion, reset, capacity, checkpoint/resume, journal, and manipulation gates. **DONE — `COMPLETE_RETAIN_EXPLICIT_MULTIVIEW`; learned-memory claim FAILS.** |
+| E0.17 | **Explicit-view metamemory/compression structural gate.** | A | Any authoritative write, metamemory evidence root, dropped region/contradiction/refutation/temporal/support/unresolved field, rebuild drift, stale post-deletion artifact, unsupported skill candidate, capacity escape, split drift, metric read, or unfired manipulation. **DONE — PASS; learned E0.18 `NOT_RUN`.** |
 
 ### Root 1 · Estimator quality
 
