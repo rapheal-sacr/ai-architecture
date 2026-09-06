@@ -1,0 +1,38 @@
+[
+  {
+    "arm": "online",
+    "mse": 0.14702273878499805,
+    "seconds": 28.17811903200345,
+    "first_ten_blocks_mse": 0.24210590110021266,
+    "last_ten_blocks_mse": 0.11528202382265887,
+    "modules": 1,
+    "capacity_hits": 0,
+    "forward_examples": 2000000,
+    "training_examples": 1000000,
+    "tensor_bytes": 66936
+  },
+  {
+    "arm": "context_replay",
+    "mse": 0.0812786258114567,
+    "seconds": 41.12541666949983,
+    "first_ten_blocks_mse": 0.2636350615460819,
+    "last_ten_blocks_mse": 0.050947612909583266,
+    "modules": 1,
+    "capacity_hits": 0,
+    "forward_examples": 2999968,
+    "training_examples": 1999968,
+    "tensor_bytes": 427128
+  },
+  {
+    "arm": "isolated_adaptation",
+    "mse": 0.11335760760179817,
+    "seconds": 63.532808901501994,
+    "first_ten_blocks_mse": 0.2432126557630727,
+    "last_ten_blocks_mse": 0.1212217620515764,
+    "modules": 8,
+    "capacity_hits": 27918.5,
+    "forward_examples": 10530096,
+    "training_examples": 1000000,
+    "tensor_bytes": 601668
+  }
+]

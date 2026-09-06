@@ -3,6 +3,11 @@
 Status: **design under investigation; continuous-learning and long-horizon
 efficiency goal not yet achieved**.
 
+Current boundary: E2 supports reuse under abrupt recurring functions, but E3
+exposes capacity and drift costs and E4 rejects efficient transfer to an
+independent changing-input benchmark. The current admission rule is not a
+general solution. Read `E4-RESULT.md` before extrapolating the earlier gains.
+
 This is a new model architecture research line. It does not extend WAM's ledger
 stack or the finite-hypothesis witness compiler. Historical files remain in the
 repository as prior evidence, not implementation dependencies. Read

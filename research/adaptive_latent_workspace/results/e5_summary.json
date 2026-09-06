@@ -1,0 +1,79 @@
+[
+  {
+    "arm": "online",
+    "mse": 0.03626107089722552,
+    "returning_mse": 0.16428584542466393,
+    "last_quarter_mse": 0.043258795330302746,
+    "seconds": 7.556032429009065,
+    "parameters": 4996,
+    "tensor_bytes": 60120,
+    "forwards": 524288,
+    "training_examples": 262144
+  },
+  {
+    "arm": "context_replay",
+    "mse": 0.02456876124875862,
+    "returning_mse": 0.08068119313793432,
+    "last_quarter_mse": 0.01725054240625923,
+    "seconds": 10.91922263903325,
+    "parameters": 7300,
+    "tensor_bytes": 480984,
+    "forwards": 786400,
+    "training_examples": 524256
+  },
+  {
+    "arm": "wide_context_replay",
+    "mse": 0.022306108820863813,
+    "returning_mse": 0.07952463656926868,
+    "last_quarter_mse": 0.015942623281915758,
+    "seconds": 12.613992852504452,
+    "parameters": 19828,
+    "tensor_bytes": 631320,
+    "forwards": 786400,
+    "training_examples": 524256
+  },
+  {
+    "arm": "compact_wide_replay",
+    "mse": 0.02441176069355322,
+    "returning_mse": 0.08874763322273793,
+    "last_quarter_mse": 0.01846870567604242,
+    "seconds": 12.331070414533315,
+    "parameters": 19828,
+    "tensor_bytes": 287256,
+    "forwards": 786400,
+    "training_examples": 524256
+  },
+  {
+    "arm": "isolated_adaptation",
+    "mse": 0.009170972987956105,
+    "returning_mse": 0.02567648708912072,
+    "last_quarter_mse": 0.004765780431327471,
+    "seconds": 12.082675398498395,
+    "parameters": 19984,
+    "tensor_bytes": 239904,
+    "forwards": 1515520,
+    "training_examples": 262144
+  },
+  {
+    "arm": "overwrite_during_identification",
+    "mse": 0.03305082315536367,
+    "returning_mse": 0.16399903945992783,
+    "last_quarter_mse": 0.03371198664731878,
+    "seconds": 10.207076271752157,
+    "parameters": 4996,
+    "tensor_bytes": 59976,
+    "forwards": 808672,
+    "training_examples": 262144
+  },
+  {
+    "arm": "active_first_isolation",
+    "mse": 0.009170972987956105,
+    "returning_mse": 0.02567648708912072,
+    "last_quarter_mse": 0.004765780431327471,
+    "seconds": 9.529197708001448,
+    "parameters": 19984,
+    "tensor_bytes": 239904,
+    "forwards": 796240,
+    "training_examples": 262144
+  }
+]

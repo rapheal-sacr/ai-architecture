@@ -1,0 +1,17 @@
+{
+  "experiment": "E6-guarded-sharing-screen",
+  "status_at_freeze": "NOT_RUN",
+  "seeds": [9101, 9102],
+  "arms": ["context_replay", "active_first_isolation", "local_replay_isolation", "guarded_sharing"],
+  "cases": ["abrupt", "external"],
+  "abrupt_cycles": 4,
+  "external_observations": 1000000,
+  "anchor_capacity": 128,
+  "merge_relative_tolerance": 0.2,
+  "merge_absolute_tolerance": 0.005,
+  "learning_rule": "Active-first E5 routing, with a per-module reservoir of 128 observed examples. Local replay augments every update with up to one batch of the current source module's anchors. Temporary learning uses the source module's old anchors, and collects its new observations in a separate bounded reservoir.",
+  "merge_rule": "When E2 commits a temporary model, evaluate old and new models on the source module's retained anchors. Also evaluate a commit-eligible temporary model at full capacity every 32 temporary updates. In guarded_sharing only, replace the source module if new anchor MSE is no more than old MSE + max(0.005, 0.2*old MSE). Otherwise keep the separate module subject to the existing cap, or continue temporary learning if full. The local_replay_isolation arm performs replay and the same diagnostic checks but never merges.",
+  "hypotheses": ["Local replay helps the fixed-function external transfer problem", "Guarded sharing reduces unnecessary growth relative to replay-only isolation", "Sharing does not erase the abrupt-context advantage"],
+  "cost_rules": "Count replay examples, all routing/merge evaluations, anchor tensor allocations, parameters, updates and measured time. Do not claim equal compute. Evaluation-only source models may coexist transiently; peak counters must include that state.",
+  "limitations": "Two-seed exploratory screen. Anchor preservation is an empirical sample test, not a semantic guarantee; rare-context/fact deletion and distribution expansion remain mandatory falsification tests. This does not yet implement a general reasoning agent."
+}
