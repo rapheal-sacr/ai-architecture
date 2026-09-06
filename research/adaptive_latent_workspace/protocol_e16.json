@@ -1,0 +1,18 @@
+{
+  "experiment": "E16-temporal-action-proposal-control",
+  "status_at_freeze": "NOT_RUN",
+  "seeds": [14101, 14102],
+  "gravity_sequence": [10.0, 30.0, 5.0, 10.0],
+  "modes": ["oracle_diagnostic", "frozen_learned_replay"],
+  "blocks": [1, 5, 10],
+  "horizon": 60,
+  "parallel_envs": 4,
+  "evaluation_steps": 200,
+  "intervention": "Search piecewise-constant action sequences by choosing one coefficient per block of 1, 5 or 10 timesteps. This changes proposal dimension from 60 to 12 or 6 while retaining the same 60 predicted timesteps, 64 candidates, two CEM iterations and eight elites. Replan after each actual environment step. Project the shifted warm-start mean into the new blocks by averaging before the next search.",
+  "comparators": "The oracle block-one comparator reuses the exact completed E15 horizon-sixty result and retains its original costs/identity. Other arms execute new evaluation. Frozen learned models come from the matching E14 replay_mpc20 stage checkpoint and receive no updates, oracle gravity or simulator equations. The oracle predictor remains a separate diagnostic.",
+  "preflight": "Verify block-one proposals/actions/warm starts exactly reproduce the original planner on dummy observations. Verify sampled blocked proposals are constant within each declared block. Check the same counted model examples per decision for all block sizes and finite bounded actions.",
+  "evaluation": "Use E14/E15 paired initial states and planner seeds. No weights, memory, proposal parameters or admission criteria learn during this test. Existing development checkpoints and seeds mean this is a causal diagnostic, not a fresh final benchmark.",
+  "costs": "Record newly consumed and inherited environment/model work separately, checkpoint hashes, parameter/tensor state, and measured restoration/planning time. Compare proposal families within the same predictor; cheap oracle formulas are not learned-model efficiency. No fixed-time or energy claim follows.",
+  "falsification": "If temporal structure does not improve high-gravity control at matched model evaluations, simple action blocking has not repaired the search limitation. If it helps the accurate predictor but not the frozen neural predictor, model error is an additional limit under the changed action distribution. A successful fixed blocking rule is a strong control for a future learned procedure memory, not itself learned compression or recursive improvement.",
+  "scope": "Control for action representation and useful computation. No new general reasoning, persistent learned procedure, semantic compression or novelty claim. Broad architecture success remains unproven."
+}
