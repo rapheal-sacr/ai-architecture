@@ -35,10 +35,18 @@ then returning two-room environments. The policy sees partial symbolic images
 and receives sparse task reward; it cannot read the hidden grid or transition
 function. The preflight exercised real learning and feature replacement.
 
-Full E8 outcomes are not yet recorded in this state note. Inspect its run output
-and checkpoints rather than treating this note as proof of completion. Even a
-successful E8 result would be a foothold: standard limits are only 40/80 steps,
-the pilot has two seeds, and it is not the full modular/planning architecture.
+E8 has completed and is recorded in `E8-RESULT.md`. It exposes severe old-task
+loss during unsuccessful harder-task training in both arms. Head renewal improves
+later transfer after returning to the easier task, but does not prevent that
+loss. These 40/80-step tasks are a foothold, not proof of very long-horizon
+competence or the full modular/planning architecture.
+
+E9 is now running the learned-updater and self-application experiment. Its
+controller is persistent across student tasks, but students reset. This tests a
+learning-procedure subproblem, not retained task-specific knowledge. E10 has a
+frozen protocol and passed its intervention preflight; the full objective/
+representation counterfactual is pending. No early self-update acceptance or
+preflight score should be treated as recursive-improvement success.
 
 ## Binding constraint and unresolved measurement
 

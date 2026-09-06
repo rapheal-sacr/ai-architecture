@@ -1,0 +1,218 @@
+[
+  {
+    "seed": 11101,
+    "arm": "recurrent_ppo",
+    "stage": 0,
+    "two_room_success": 1.0,
+    "four_room_success": 0.14,
+    "seconds": 185.1643862020137,
+    "parameters": 52664,
+    "tensor_bytes": 842624,
+    "peak_gpu_bytes": 25290752,
+    "replacements": 0,
+    "last_entropy": 0.728539239615202,
+    "forward_examples": {
+      "rollout": 264192,
+      "update": 1032192,
+      "evaluation": 4216
+    }
+  },
+  {
+    "seed": 11101,
+    "arm": "recurrent_ppo",
+    "stage": 1,
+    "two_room_success": 0.04,
+    "four_room_success": 0.0,
+    "seconds": 181.14501626399579,
+    "parameters": 52664,
+    "tensor_bytes": 842624,
+    "peak_gpu_bytes": 25290752,
+    "replacements": 0,
+    "last_entropy": 1.9458964318037033,
+    "forward_examples": {
+      "rollout": 528384,
+      "update": 2064384,
+      "evaluation": 10183
+    }
+  },
+  {
+    "seed": 11101,
+    "arm": "recurrent_ppo",
+    "stage": 2,
+    "two_room_success": 1.0,
+    "four_room_success": 0.18,
+    "seconds": 187.94495581999945,
+    "parameters": 52664,
+    "tensor_bytes": 842624,
+    "peak_gpu_bytes": 25290752,
+    "replacements": 0,
+    "last_entropy": 0.7733689118176699,
+    "forward_examples": {
+      "rollout": 792576,
+      "update": 3096576,
+      "evaluation": 14288
+    }
+  },
+  {
+    "seed": 11101,
+    "arm": "recurrent_ppo_renewal",
+    "stage": 0,
+    "two_room_success": 1.0,
+    "four_room_success": 0.14,
+    "seconds": 186.62622696399922,
+    "parameters": 52664,
+    "tensor_bytes": 844672,
+    "peak_gpu_bytes": 25294848,
+    "replacements": 48,
+    "last_entropy": 0.745675154030323,
+    "forward_examples": {
+      "rollout": 264192,
+      "update": 1032192,
+      "evaluation": 4195
+    }
+  },
+  {
+    "seed": 11101,
+    "arm": "recurrent_ppo_renewal",
+    "stage": 1,
+    "two_room_success": 0.04,
+    "four_room_success": 0.0,
+    "seconds": 176.95197506499244,
+    "parameters": 52664,
+    "tensor_bytes": 844672,
+    "peak_gpu_bytes": 25294848,
+    "replacements": 101,
+    "last_entropy": 1.9458995833992958,
+    "forward_examples": {
+      "rollout": 528384,
+      "update": 2064384,
+      "evaluation": 10169
+    }
+  },
+  {
+    "seed": 11101,
+    "arm": "recurrent_ppo_renewal",
+    "stage": 2,
+    "two_room_success": 1.0,
+    "four_room_success": 0.44,
+    "seconds": 185.4822268320131,
+    "parameters": 52664,
+    "tensor_bytes": 844672,
+    "peak_gpu_bytes": 25294848,
+    "replacements": 161,
+    "last_entropy": 0.8841636795550585,
+    "forward_examples": {
+      "rollout": 792576,
+      "update": 3096576,
+      "evaluation": 13968
+    }
+  },
+  {
+    "seed": 11102,
+    "arm": "recurrent_ppo",
+    "stage": 0,
+    "two_room_success": 1.0,
+    "four_room_success": 0.26,
+    "seconds": 177.59002655699442,
+    "parameters": 52664,
+    "tensor_bytes": 842624,
+    "peak_gpu_bytes": 25294848,
+    "replacements": 0,
+    "last_entropy": 0.8208711910992861,
+    "forward_examples": {
+      "rollout": 264192,
+      "update": 1032192,
+      "evaluation": 4017
+    }
+  },
+  {
+    "seed": 11102,
+    "arm": "recurrent_ppo",
+    "stage": 1,
+    "two_room_success": 0.0,
+    "four_room_success": 0.0,
+    "seconds": 167.94891209599155,
+    "parameters": 52664,
+    "tensor_bytes": 842624,
+    "peak_gpu_bytes": 25290752,
+    "replacements": 0,
+    "last_entropy": 1.9458924047648907,
+    "forward_examples": {
+      "rollout": 528384,
+      "update": 2064384,
+      "evaluation": 10017
+    }
+  },
+  {
+    "seed": 11102,
+    "arm": "recurrent_ppo",
+    "stage": 2,
+    "two_room_success": 1.0,
+    "four_room_success": 0.26,
+    "seconds": 181.6436192330002,
+    "parameters": 52664,
+    "tensor_bytes": 842624,
+    "peak_gpu_bytes": 25290752,
+    "replacements": 0,
+    "last_entropy": 0.7632733061909676,
+    "forward_examples": {
+      "rollout": 792576,
+      "update": 3096576,
+      "evaluation": 14105
+    }
+  },
+  {
+    "seed": 11102,
+    "arm": "recurrent_ppo_renewal",
+    "stage": 0,
+    "two_room_success": 1.0,
+    "four_room_success": 0.24,
+    "seconds": 188.2777589479956,
+    "parameters": 52664,
+    "tensor_bytes": 844672,
+    "peak_gpu_bytes": 25294848,
+    "replacements": 53,
+    "last_entropy": 0.7852326035499573,
+    "forward_examples": {
+      "rollout": 264192,
+      "update": 1032192,
+      "evaluation": 4047
+    }
+  },
+  {
+    "seed": 11102,
+    "arm": "recurrent_ppo_renewal",
+    "stage": 1,
+    "two_room_success": 0.06,
+    "four_room_success": 0.0,
+    "seconds": 181.68485629300994,
+    "parameters": 52664,
+    "tensor_bytes": 844672,
+    "peak_gpu_bytes": 25294848,
+    "replacements": 96,
+    "last_entropy": 1.9459018781781197,
+    "forward_examples": {
+      "rollout": 528384,
+      "update": 2064384,
+      "evaluation": 10001
+    }
+  },
+  {
+    "seed": 11102,
+    "arm": "recurrent_ppo_renewal",
+    "stage": 2,
+    "two_room_success": 1.0,
+    "four_room_success": 0.58,
+    "seconds": 191.07512528900406,
+    "parameters": 52664,
+    "tensor_bytes": 844672,
+    "peak_gpu_bytes": 25294848,
+    "replacements": 151,
+    "last_entropy": 0.7244745045900345,
+    "forward_examples": {
+      "rollout": 792576,
+      "update": 3096576,
+      "evaluation": 13435
+    }
+  }
+]

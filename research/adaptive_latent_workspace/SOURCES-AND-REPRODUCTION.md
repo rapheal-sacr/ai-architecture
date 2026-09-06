@@ -12,6 +12,7 @@ continuous-learning system. Results include failed proposals and controls.
 | [rl-starter-files](https://github.com/lcswillems/rl-starter-files) | `317da04a9a6fb26506bbd7f6c7c7e10fc0de86e0` | Read CNN/LSTM policy, training and observation preprocessing; E8 executes the policy |
 | [torch-ac](https://github.com/lcswillems/torch-ac) | `b6602c8ce843a8bfe9cef1723d0151dd7a3c22c3` | Read PPO, rollout and recurrent update source; E8 executes PPO with synchronous environment stepping |
 | [continual-learning](https://github.com/GMvandeVen/continual-learning) | `e6d795aa81b9cef742b8de76cb71222d4d1ce00b` | Novelty audit: source for task-free replay, model copies and optional context labels; no reproduced benchmark yet |
+| [learned_optimization](https://github.com/google/learned_optimization) | `9561bb68c880ddc4b4eeba7a6ec82c25fe1530d5` | Read learned MLP update policy and full unrolled meta-gradient implementations; conceptual prior art for E9, not a reproduced Google benchmark |
 
 The original 24-paper/641-page reading corpus and past-branch audit are in the
 earlier WD dossier at `AI Architecture Research/2026-09-05`, including full text
@@ -44,6 +45,8 @@ python e5_controls.py --execute --out /path/on/large/drive/e5
 python e6_sharing.py --execute --repo /path/to/pinned/loss-of-plasticity --out /path/on/large/drive/e6
 python e7_renewal.py --execute --repo /path/to/pinned/loss-of-plasticity --out /path/on/large/drive/e7
 python e8_closed_loop.py --execute --repos /path/to/pinned/repository/parent --out /path/on/large/drive/e8
+python e9_recursive_updater.py --execute --out /path/on/large/drive/e9
+python e10_objective.py --execute --repos /path/to/pinned/repository/parent --runs /path/on/large/drive --out /path/on/large/drive/e10
 ```
 
 Protocols are JSON files. Completed arm results record protocol and source
