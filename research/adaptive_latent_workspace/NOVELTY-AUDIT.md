@@ -45,3 +45,7 @@ The cloned [POPLIN source](https://github.com/WilsonWangTHU/POPLIN/tree/edd8dba5
 Learning a reusable search procedure, distilling search into a policy, or searching a low-dimensional policy instead of each action is therefore not itself an invention of this project. E16's fixed temporal blocks also do not establish novelty. A potential distinction would need a precise new mechanism and evidence against such baselines, including the price of collecting and validating procedure-training data.
 
 The cloned Pendulum configuration uses an external MBBL wrapper, a 1,000-step task horizon, a 30-step planning horizon, population 500, 50 elites and five iterations, with supplied state/action costs. That wrapper's semantics were not audited or installed; these are not comparable benchmark scores or a replication of E14's Gymnasium reward. No POPLIN execution or numerical result was reproduced here.
+
+## Online procedure changes
+
+E18 combines learned update multipliers, retrospective differentiation, persistent student state, replay and finite candidate trials. Each component has prior art in the already reviewed learned-optimization, TTT, modular/replay and empirical self-improvement sources. The particular independently written combination is not enough to establish scientific novelty. Its input-shift gain and conflicting-function failure are reproducible project results, not evidence that online meta-learning or copied candidate learners were invented here.

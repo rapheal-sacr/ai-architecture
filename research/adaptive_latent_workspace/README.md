@@ -3,18 +3,19 @@
 Status: **design under investigation; continuous-learning and long-horizon
 efficiency goal not yet achieved**.
 
-Current boundary: E2/E5 support protected reuse under abrupt recurring functions,
-but E3 exposes capacity/drift costs and E4 rejects efficient external transfer.
-E6 sharing and E7 feature renewal expose further accuracy/cost tradeoffs. E8
-exposed a closed-loop failure; E10 repairs that particular failure by changing
-the entropy objective while preserving critic gradients. E9/E11 find mixed
-self-application benefits against conventional meta-updates. E13 establishes later cumulative accuracy gains at higher cost. E14 adds a
-learned world model and planner; E15 isolates a search failure that remains with
-accurate dynamics. E12 is still testing fresh action-chain transfer and has
-already produced a counterexample to a universal entropy-off repair. Read `FALSIFICATION.md` and `CURRENT-STATE.md` first, then
-`DESIGN-REVISION.md` for the current integrated proposal. The design below
-is not an implemented, validated system.
+Current boundary: E1–E18 are complete. Protected reuse has scoped support, but
+sharing, renewal and consolidation expose substantial transfer/cost limits.
+Fresh closed-loop trials reject a universal entropy-off repair. Learned planning
+still fails some cases even with accurate-model diagnostics. E18 now changes a
+learning procedure online while student and experience state persist: it helps
+input shift but loses to ordinary meta-updates in three of four conflicting-
+function cases, with substantial extra cost. General continuous improvement,
+efficient long-horizon reasoning, robust memory compression and research novelty
+remain unproved.
 
+Read `FALSIFICATION.md` and `CURRENT-STATE.md` first, then `DESIGN-REVISION.md`
+and `ONLINE-PROCEDURE-DESIGN.md`. The complete architectural proposal is not an
+implemented, validated system.
 This is a new model architecture research line. It does not extend WAM's ledger
 stack or the finite-hypothesis witness compiler. Historical files remain in the
 repository as prior evidence, not implementation dependencies. Read
@@ -29,7 +30,7 @@ allocation problem across recent observations, temporary weights, and persistent
 modules, rather than one authoritative database from which all competence is
 compiled.
 
-The proposed system has four interacting mechanisms:
+The proposed system has four state mechanisms plus a persistent learning procedure:
 
 1. A recurrent working state infers context from observations, actions and their
    outcomes. It receives no oracle task or regime IDs.
@@ -41,6 +42,11 @@ The proposed system has four interacting mechanisms:
 4. A bounded episodic buffer retains observations poorly explained by the model.
    Consolidation must demonstrate lower total cost and maintained predictive and
    task quality before replacing observations with weights or summaries.
+
+E18 adds a bounded persistent procedure that can propose updates to itself and
+trial them while student state persists. Its fixed evaluator and conventional
+meta-update control constrain the claim; its mixed transfer prevents treating
+admission as proof of improvement.
 
 Planning uses learned multi-step predictions, not privileged access to the
 environment transition function. Model disagreement and prediction error are

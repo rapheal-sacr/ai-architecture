@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. This is a proposed integrated system, not a claim
 that the components below already form a validated or scientifically novel
-agent. E1–E16 have implemented and tested only subsets. The original supplied
+agent. E1–E18 have implemented and tested only subsets. The original supplied
 papers and model gallery were reviewed through the preserved WD corpus/clones.
 
 ## The change that the failures require
@@ -129,3 +129,14 @@ the full design has not been earned.
 Persistent memory must retain both learned information and useful ways to search. E15 makes the second role concrete: the planner can possess accurate transition knowledge yet fail to generate a useful action sequence at its search budget. A candidate procedure memory would learn compact temporal action proposals from prior planning/real outcomes, while preserving an exploration route outside its learned proposal family. This is proposed, not implemented or established as novel. A fixed temporal action-blocking control should first test whether search representation, rather than extra model calls, repairs the failure. Any learned version must then beat that simple control after its training, storage and proposal costs.
 
 E16 is complete: simple temporal blocks do not repair high-gravity control at equal model evaluations. The exact-model improvements elsewhere do not reliably carry to learned models. The next design must retain uncertainty about both its prediction and its proposed computation. Learning policy proposals is already implemented in POPLIN; it is a baseline to credit, not a sufficient novelty claim.
+
+## Online procedure result
+
+E18 implements persistent student/optimizer/context/replay state together with
+online procedure proposals, actual self-application and temporary trials on
+subsequent observations. It improves input-shift learning against freezing and
+ordinary meta-updates in all four cases, but loses to both in three of four
+conflicting-function cases. It costs 1.73 times frozen-procedure execution and
+3.82 times fixed Adam. The complete design must explain this split; accepted
+self-updates alone do not provide the missing mechanism. Memory admission,
+compression, belief inference and procedure family remain fixed in this subset.

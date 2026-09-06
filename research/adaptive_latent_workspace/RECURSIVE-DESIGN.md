@@ -90,3 +90,19 @@ proposal and the overall goal remains unachieved.
 ## E11 causal-control boundary
 
 Conventional meta-updates with the same proposal/admission budget are now tested. Self-application has lower fresh query error in 4/9 and 5/9 correlated settings across the two bootstrap replicates. This does not establish a reliable benefit from the self-applied rule. A future procedure learner must improve retained sequential learning at charged total cost; repeating successful admission counts would not repair this result.
+
+## E18 closes the reset-student gap, not the general capability gap
+
+E18 now changes procedure state while one student, its optimizer, context and
+bounded replay continue learning. A retrospective gradient uses only observed
+traces; a candidate branch sees subsequent observations. The incumbent supplies
+all operational predictions until admission. Conventional meta-updates receive
+the same trial budget, and all duplicate work is charged.
+
+Self-application beats the conventional control in four of four input-shift
+cases but only one of four conflicting-function cases, and it loses to freezing
+in three conflicting cases. Its early mean advantage there reverses later.
+This is a measured failure of general transfer and of a monotonic-improvement
+interpretation. The input-shift gain remains valid within its scope. No general
+recursive improvement, total-resource efficiency, closed-loop counterfactual
+validity or open-ended architecture invention is established.

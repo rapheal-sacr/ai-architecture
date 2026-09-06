@@ -1,0 +1,254 @@
+[
+  {
+    "replicate": 12101,
+    "stream_seed": 18101,
+    "family": "conflicting_functions",
+    "arm": "adam_01",
+    "procedure_delta_l2": null,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18101,
+    "family": "conflicting_functions",
+    "arm": "frozen_bootstrap",
+    "procedure_delta_l2": 0.0,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18101,
+    "family": "conflicting_functions",
+    "arm": "online_meta_adam",
+    "procedure_delta_l2": 0.22830346796294004,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18101,
+    "family": "conflicting_functions",
+    "arm": "online_self_applied",
+    "procedure_delta_l2": 0.46698409729223483,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18101,
+    "family": "input_shift",
+    "arm": "adam_01",
+    "procedure_delta_l2": null,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18101,
+    "family": "input_shift",
+    "arm": "frozen_bootstrap",
+    "procedure_delta_l2": 0.0,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18101,
+    "family": "input_shift",
+    "arm": "online_meta_adam",
+    "procedure_delta_l2": 0.0150877143183525,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18101,
+    "family": "input_shift",
+    "arm": "online_self_applied",
+    "procedure_delta_l2": 0.9040102962883301,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18102,
+    "family": "conflicting_functions",
+    "arm": "adam_01",
+    "procedure_delta_l2": null,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18102,
+    "family": "conflicting_functions",
+    "arm": "frozen_bootstrap",
+    "procedure_delta_l2": 0.0,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18102,
+    "family": "conflicting_functions",
+    "arm": "online_meta_adam",
+    "procedure_delta_l2": 0.24854891575945345,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18102,
+    "family": "conflicting_functions",
+    "arm": "online_self_applied",
+    "procedure_delta_l2": 0.4604306127494502,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18102,
+    "family": "input_shift",
+    "arm": "adam_01",
+    "procedure_delta_l2": null,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18102,
+    "family": "input_shift",
+    "arm": "frozen_bootstrap",
+    "procedure_delta_l2": 0.0,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18102,
+    "family": "input_shift",
+    "arm": "online_meta_adam",
+    "procedure_delta_l2": 0.3279644468310523,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12101,
+    "stream_seed": 18102,
+    "family": "input_shift",
+    "arm": "online_self_applied",
+    "procedure_delta_l2": 0.9129120860109288,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18101,
+    "family": "conflicting_functions",
+    "arm": "frozen_bootstrap",
+    "procedure_delta_l2": 0.0,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18101,
+    "family": "conflicting_functions",
+    "arm": "online_meta_adam",
+    "procedure_delta_l2": 0.345095554498478,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18101,
+    "family": "conflicting_functions",
+    "arm": "online_self_applied",
+    "procedure_delta_l2": 0.5460616070063158,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18101,
+    "family": "input_shift",
+    "arm": "frozen_bootstrap",
+    "procedure_delta_l2": 0.0,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18101,
+    "family": "input_shift",
+    "arm": "online_meta_adam",
+    "procedure_delta_l2": 0.5035556698309348,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18101,
+    "family": "input_shift",
+    "arm": "online_self_applied",
+    "procedure_delta_l2": 0.8920742230856433,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18102,
+    "family": "conflicting_functions",
+    "arm": "frozen_bootstrap",
+    "procedure_delta_l2": 0.0,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18102,
+    "family": "conflicting_functions",
+    "arm": "online_meta_adam",
+    "procedure_delta_l2": 0.3686990575688105,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18102,
+    "family": "conflicting_functions",
+    "arm": "online_self_applied",
+    "procedure_delta_l2": 0.6015215362807629,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18102,
+    "family": "input_shift",
+    "arm": "frozen_bootstrap",
+    "procedure_delta_l2": 0.0,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18102,
+    "family": "input_shift",
+    "arm": "online_meta_adam",
+    "procedure_delta_l2": 0.3231037052498769,
+    "student_step": 2304,
+    "replay_size": 512
+  },
+  {
+    "replicate": 12102,
+    "stream_seed": 18102,
+    "family": "input_shift",
+    "arm": "online_self_applied",
+    "procedure_delta_l2": 0.7103277764626529,
+    "student_step": 2304,
+    "replay_size": 512
+  }
+]

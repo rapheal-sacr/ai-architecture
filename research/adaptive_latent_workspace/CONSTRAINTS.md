@@ -90,8 +90,8 @@ whole-stream mean while repeatedly paying to relearn excluded contexts; E3 and
 E4 show why the late-time quantities matter.
 
 This is a candidate bottleneck to measure, not an established universal scalar
-bound. Current tests retain early-window and late-window losses rather than a
-thresholded recovery-time distribution. They establish interference and routing
+bound. E1–E16 retained early-window and late-window losses rather than a
+thresholded recovery-time distribution; E17/E18 add the limited assay below. They establish interference and routing
 effects, and expose capacity exhaustion; they do not yet establish which single
 quantity binds a general autonomous agent's improvement rate.
 

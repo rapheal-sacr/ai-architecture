@@ -1,0 +1,66 @@
+{
+  "identity": {
+    "protocol_e18.json": "ebfbd5fdc5814617a32819e6bbded9fadb541aae9061636e808e78337fc8c230",
+    "e18_online_procedure.py": "2de7ec69f3dfac2295dcbe66e2cf3af971d66587dadea10a632c4d41dd168e42",
+    "protocol_e17.json": "7fc5f12c4fbaf5978040efbd637f6b5d40a6e567cea8fd48e0cbe9a7ad3a40bf",
+    "e17_persistent_student.py": "d9d69f46aea3d868a898ddccd0952a0ecca3bbdbc2545f0d02cbeb47e4071403",
+    "protocol_e9.json": "37680ac4081717ebd3c779961ff22692d08e29b540f93330a91f90021c556a37",
+    "e9_recursive_updater.py": "4041ad19047e547ffaf570956b92aed279d161a8d955977e8e92b8d53c250cd4"
+  },
+  "checks": {
+    "retrospective_parameters_exact": true,
+    "meta_gradient_analytic": -0.0638097403777455,
+    "meta_gradient_finite_difference": -0.06380974037767384,
+    "zero_controller_proposal_exact": true,
+    "branch_copy_exact": true,
+    "retrospective_updates": 3,
+    "full_loop_first_zero_proposal_equal": true,
+    "trained_controller_replay_exact": true,
+    "smoke_counts": [
+      {
+        "student_forward_examples": 4352,
+        "student_gradient_batches": 46,
+        "controller_forward_calls": 276,
+        "observed_examples": 1280,
+        "replayed_examples": 1248,
+        "updates": 46,
+        "reservoir_draws": 640,
+        "meta_gradient_calls": 2,
+        "outer_controller_forward_calls": 0,
+        "outer_proposals": 2,
+        "retrospective_updates": 6,
+        "trace_preview_examples": 384
+      },
+      {
+        "student_forward_examples": 4352,
+        "student_gradient_batches": 46,
+        "controller_forward_calls": 276,
+        "observed_examples": 1280,
+        "replayed_examples": 1248,
+        "updates": 46,
+        "reservoir_draws": 640,
+        "meta_gradient_calls": 2,
+        "outer_controller_forward_calls": 8,
+        "outer_proposals": 2,
+        "retrospective_updates": 6,
+        "trace_preview_examples": 384
+      },
+      {
+        "student_forward_examples": 4352,
+        "student_gradient_batches": 46,
+        "controller_forward_calls": 276,
+        "observed_examples": 1280,
+        "replayed_examples": 1248,
+        "updates": 46,
+        "reservoir_draws": 640,
+        "meta_gradient_calls": 2,
+        "outer_controller_forward_calls": 8,
+        "outer_proposals": 2,
+        "retrospective_updates": 6,
+        "trace_preview_examples": 384
+      }
+    ],
+    "smoke_seconds": 0.5415045160189038,
+    "note": "Synthetic preflight uses three replayed updates, double-precision finite differences, and one paired branch update; not a scored replicate."
+  }
+}
