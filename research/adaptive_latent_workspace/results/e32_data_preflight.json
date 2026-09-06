@@ -1,0 +1,68 @@
+{
+  "status": "E32_FULL_DATA_PREFLIGHT_ONLY",
+  "seeds": [
+    1911,
+    1912,
+    1913
+  ],
+  "disjoint": {
+    "worlds": 30,
+    "all_seed_specs_disjoint": true,
+    "all_world_labels_distinct": true
+  },
+  "cases": [
+    {
+      "seed": 1911,
+      "teacher_actions": 138,
+      "queries": 138,
+      "categories": {
+        "explore_one_edge": 18,
+        "pick_target": 32,
+        "home_one_edge": 32,
+        "deliver": 32,
+        "stock_one_edge": 20,
+        "stock_multi_edge": 2,
+        "home_multi_edge": 2
+      },
+      "example_sha256": "ad4dcde77ace17d9dee570e07d5718c46daa7aa5d32f15cfebd15ffb0970b363",
+      "order_sha256": "27da0889365d116ea142a3dd7ee2eecd04e3216939b634ac443596b8a543b78c"
+    },
+    {
+      "seed": 1912,
+      "teacher_actions": 154,
+      "queries": 154,
+      "categories": {
+        "explore_one_edge": 21,
+        "pick_target": 32,
+        "home_multi_edge": 8,
+        "home_one_edge": 32,
+        "deliver": 32,
+        "stock_multi_edge": 6,
+        "stock_one_edge": 23
+      },
+      "example_sha256": "0616a12e2c161531a45ae3a7becbfcf6bb17d830814dcdff6d716bd20e24de09",
+      "order_sha256": "4abac012292f80b95ac7f2aa1c33a41871c032e53df49e2605b0f47f495fa3ac"
+    },
+    {
+      "seed": 1913,
+      "teacher_actions": 153,
+      "queries": 153,
+      "categories": {
+        "explore_one_edge": 21,
+        "pick_target": 32,
+        "home_one_edge": 32,
+        "deliver": 32,
+        "stock_multi_edge": 6,
+        "stock_one_edge": 22,
+        "home_multi_edge": 8
+      },
+      "example_sha256": "3b28a6b0dd63cd26ed98d21062597a27182fa442b940e747dadefab0a7b7e17b",
+      "order_sha256": "ff66e303d70dee4da9245639755d49cedf129c62afca273104d3c9e5f08cfedf"
+    }
+  ],
+  "references_independently_verified": true,
+  "source_hashes": {
+    "delivery_training_data.py": "058ae0b025a8c78665cb5e7c39ca1a75b18787975e33edef85f91a66021c2e6e",
+    "preflight_e32_data.py": "89f518f02c08a48e6cd17b92292feae0e1fa17e2e6534a210feeb685fad16d41"
+  }
+}

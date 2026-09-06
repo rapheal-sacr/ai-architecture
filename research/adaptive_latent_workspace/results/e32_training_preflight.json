@@ -1,0 +1,39 @@
+{
+  "status": "E32_TRAINING_PREFLIGHT_ONLY",
+  "historical_seed": 30101,
+  "source_checkpoint_sha256": "97f9d84b2cf855f86087891447f97111e05cc9732ca76749e7c9c6c58e99ea84",
+  "historical_updates": 256,
+  "historical_losses_gradients_actor_optimizer_rng_work_exact": true,
+  "historical_replay_seconds": 64.23907033899741,
+  "mean_gradient_examples": 4,
+  "mean_loss_and_clipped_gradients_within_tolerance": true,
+  "gradient_tolerance": {
+    "atol": 1e-06,
+    "rtol": 0.0001
+  },
+  "max_clipped_gradient_absolute_difference": 7.450580596923828e-09,
+  "max_post_adam_parameter_absolute_difference": 3.6141136661171913e-07,
+  "accumulation": {
+    "loss": 1.2559486404061317,
+    "grad_norm": 1.2806518077850342,
+    "example_losses": [
+      0.3572262227535248,
+      0.8185057044029236,
+      1.2106536626815796,
+      2.637408971786499
+    ],
+    "examples": 4
+  },
+  "joint_loss": {
+    "loss": 1.255948543548584,
+    "grad_norm": 1.2806518077850342
+  },
+  "joint_backward_cuda_peak_bytes": 2806733824,
+  "base_and_source_unchanged": true,
+  "gradient_example_presentations": 264,
+  "source_hashes": {
+    "language_training_controls.py": "ed58eef7871ea35bb92e15440d4fe8fbc7c5de7f635287675d7013ed458b0b5c",
+    "preflight_language_training_controls.py": "021b15d5db4a3fa0f2508af15dee5967b4a567606468bba8d4929150bf53b87d"
+  },
+  "scope": "Historical compatibility and mean-gradient arithmetic only. No E32 scored fitting, held-out task result or self-improvement claim."
+}

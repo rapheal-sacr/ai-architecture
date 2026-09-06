@@ -1,0 +1,427 @@
+{
+  "status": "PREFLIGHT_ONLY",
+  "manifest": {
+    "config": {
+      "experiment": "E32 matched-example learning-rate and accumulation controls",
+      "seeds": [
+        1911
+      ],
+      "arms": [
+        {
+          "name": "batch1_lr1e3",
+          "batch": 1,
+          "learning_rate": 0.001
+        },
+        {
+          "name": "batch1_lr1e4",
+          "batch": 1,
+          "learning_rate": 0.0001
+        },
+        {
+          "name": "batch8_lr1e3",
+          "batch": 8,
+          "learning_rate": 0.001
+        },
+        {
+          "name": "batch8_lr1e4",
+          "batch": 8,
+          "learning_rate": 0.0001
+        }
+      ],
+      "milestones": [
+        8,
+        16
+      ],
+      "tutorial_worlds": 1,
+      "tutorial_rooms": 4,
+      "tutorial_missions_per_world": 4,
+      "tutorial_steps_per_room": 8,
+      "eval_world_sizes": [
+        2,
+        3
+      ],
+      "eval_missions": [
+        {
+          "world": 0,
+          "target": 0,
+          "budget": 8
+        },
+        {
+          "world": 1,
+          "target": 1,
+          "budget": 8
+        }
+      ],
+      "source_protocol": "protocol_e30.json",
+      "seed_design": "SHA256 domain-separated64-bit seeds from E32|learning_seed|domain|world_index. Assert all tutorial/evaluation world seeds, specifications and labels disjoint across every scored source before training. Training-index RNG uses a separate domain. No adjacent seed ranges.",
+      "training": "All arms within a learning seed use identical initial adapters, teacher examples and ordered index draws with replacement. Each milestone has exactly the same gradient-example presentations, input tokens and forward attention elements. Batch8 accumulates eight separately evaluated scaled gradients at fixed weights, then clips once and makes one Adam update. No padding or larger-model confound. Its optimizer step count is eight times smaller; accumulation changes update schedule and is not a pure noise intervention.",
+      "teacher": "Observed-only planner teaches eight four-room worlds with four deliveries per world. Preserve every demonstration, action, memory and sampling exposure. This is declared external scaffolding, not autonomous discovery.",
+      "diagnostic": "At both fixed milestones evaluate every tutorial observation with tie-aware observed-reference sets, exact teacher labels and cross entropy. Tutorial mastery gate is>=95% rule correctness overall and>=80% in every category with>=10 queries. Report exposed/unexposed observations and ambiguity; supplied legal actions and tied routes do not establish general reasoning.",
+      "closed_loop": "At each milestone evaluate the frozen model on two disjoint new worlds,12 actual delivery missions, unannounced relocation at10. Full latest-observation memory persists across the12 missions to isolate learned execution from truncation. No evaluation label, hidden map, counterfactual outcome or policy trajectory enters training. Same model action distribution as E30. Restore exact saved actor/optimizer/RNG/work state after evaluation; evaluations are charged laboratory tests, not free policy branches. Observed-map planner is evaluated once per seed as an invariant control.",
+      "criteria": "Report every arm, milestone and seed. Initial acquisition requires3/4 successes in missions0\u20133; larger-world competence3/4 in4\u20137. Unchanged return8\u20139 only supports retention interpretation if acquired. Relocation10 and unchanged other object11 separate. Do not select the best milestone or arm to declare success. A competent baseline is prerequisite evidence, not the full architecture or RSI.",
+      "accounting": "Report every teacher action, gradient-example token/attention count, backward example, Adam step, fitting/diagnostic/acting seconds, model/adapter/optimizer/gradient/RNG/observation bytes, checkpoint and data storage, CUDA peak and all evaluation work. Attention elements are not FLOPs. CPU object overhead, energy and pretraining cost remain incompletely measured.",
+      "preflight": "First replay all256 E30 bootstrap updates for seed30101 through batch1 at0.001 and require exact losses, gradients, adapter, optimizer and RNG/work state. Compare four-example accumulated gradients with one joint mean-loss backward, recording numerical tolerance and parameter differences. A separate functional preflight uses seed1911, one tutorial world, milestones8/16 and two eight-step missions, all four arms. No E32 scored seed or logits inform settings.",
+      "no_selection": "Freeze source and protocol before scored data generation or fitting. Every arm runs through1024 examples even if early results fail. Preserve both milestones and all unsuccessful missions. No score-based early stopping, retries, checkpoint choice or hyperparameter changes. Human-written optimization controls are not recursive self-improvement."
+    },
+    "source_config": {
+      "experiment": "E30 integrated delivery-world memory and online language-adapter pilot",
+      "seeds": [
+        30101,
+        30102
+      ],
+      "arms": [
+        "observed_planner",
+        "frozen_full",
+        "frozen_bounded",
+        "adaptive_bounded"
+      ],
+      "world_sizes": [
+        4,
+        8
+      ],
+      "missions": [
+        {
+          "world": 0,
+          "target": 0,
+          "budget": 24
+        },
+        {
+          "world": 0,
+          "target": 1,
+          "budget": 24
+        },
+        {
+          "world": 0,
+          "target": 0,
+          "budget": 24
+        },
+        {
+          "world": 0,
+          "target": 1,
+          "budget": 24
+        },
+        {
+          "world": 1,
+          "target": 0,
+          "budget": 48
+        },
+        {
+          "world": 1,
+          "target": 1,
+          "budget": 48
+        },
+        {
+          "world": 1,
+          "target": 0,
+          "budget": 48
+        },
+        {
+          "world": 1,
+          "target": 1,
+          "budget": 48
+        },
+        {
+          "world": 0,
+          "target": 0,
+          "budget": 24
+        },
+        {
+          "world": 0,
+          "target": 1,
+          "budget": 24
+        },
+        {
+          "world": 0,
+          "target": 0,
+          "budget": 24,
+          "relocate": true
+        },
+        {
+          "world": 0,
+          "target": 1,
+          "budget": 24
+        }
+      ],
+      "world_seed_offsets": [
+        100000,
+        200000
+      ],
+      "bounded_room_records": 4,
+      "bootstrap_worlds": 8,
+      "bootstrap_world_size": 4,
+      "bootstrap_missions_per_world": 4,
+      "bootstrap_steps_per_mission": 24,
+      "bootstrap_updates": 256,
+      "bootstrap_learning_rate": 0.001,
+      "online_updates_per_mission": 8,
+      "online_learning_rate": 0.0001,
+      "experience_capacity": 64,
+      "ppo_clip": 0.2,
+      "reward_step_penalty": 0.01,
+      "return_baseline": 0.2,
+      "uniform_exploration": 0.05,
+      "temperature": 1.0,
+      "gradient_clip": 1.0,
+      "max_prompt_tokens": 1024,
+      "rank": 4,
+      "adapter_targets": [
+        "q_proj",
+        "v_proj"
+      ],
+      "base_model_commit": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "base_weights_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+      "transformers_commit": "052e652d6d53c2b26ffde87e039b723949a53493",
+      "base_dtype": "float16",
+      "adapter_dtype": "float32",
+      "device": "cuda",
+      "torch_threads": 1,
+      "observation_boundary": "Only local room/exits/stock, mission/home/world labels, own carrying state and action feedback enter memory or neural prompts. No hidden map, shelves, route or evaluator probe enters a policy. Stock persists after pickup; an unannounced relocation occurs only before mission10.",
+      "memory": "Latest observation per (world,room). Full arms retain every observed room. Bounded arms keep four records with real LRU eviction across worlds. This is explicit state reduction, not learned memory compression. All retained records and replay prompts count toward storage.",
+      "bootstrap": "Separate generated tutorial worlds; an external BFS teacher acts using its own observed map only. Teacher and bounded current-world memory views must be identical on the four-room tutorials. All neural arms inherit the same adapter and bootstrap cost for a seed. This declared teacher is not an autonomous discovery mechanism.",
+      "actions": "Single-token option letters score only currently legal actions, identically for all neural arms. Sample from 0.95*softmax(legal logits)+0.05*uniform using a private RNG. No validity score is credited for the supplied legal-action interface.",
+      "online_learning": "Adaptive arm retains bootstrap Adam moments. After every actual mission, each chosen-action record receives advantage=(success-0.01*actions)-0.2 and its collected action log probability. Insert into a uniform reservoir of64 records. Eight clipped PPO-style single-record updates use four samples from the just-completed trajectory and four from retained replay, without hidden action labels. Frozen arms do not update. This is a fixed learning procedure, not recursive self-improvement.",
+      "pairing": "World layouts, target schedule and exogenous relocation match across arms. Neural bootstrap and initial action RNG match. Actions may diverge, producing different real observations; no free counterfactual outcomes are supplied. Repeated steps and unsuccessful missions remain charged.",
+      "criteria": "Report all missions, actions and returns. Short-world acquisition requires at least3/4 initial deliveries; unchanged return-world retention uses missions8\u20139 only and is interpreted only when acquired. Larger-world competence requires at least3/4 deliveries in missions4\u20137. Mission10 is relocation recovery; mission11 revisits the other unchanged object and is reported separately. No passing pilot establishes broad long-horizon efficiency or the full architecture.",
+      "accounting": "Report source bootstrap environment actions/training work, operational inference calls/tokens/attention-score elements, online update calls/tokens/attention-score elements, wall time, base/adapter/optimizer/replay/room-state bytes and CUDA peak allocation. Attention elements are not FLOPs. Experimental logs and audit-only states are separate and inaccessible to policies.",
+      "preflight": "Different seed1711, two-room/three-room worlds, four bootstrap updates, two scored-style missions of16 steps, two online updates per mission, smaller experience capacity8. Only functional validation; no scored-seed tuning. The reduced functional bootstrap remains one three-room tutorial world; a separate CPU tutorial audit checks the full four-room teaching layout.",
+      "no_test_selection": "Freeze code/protocol before scoring. No query-dependent oracle memory, early stopping, best-checkpoint selection or hyperparameter changes from scored results. Preserve all failures and immutable base identity."
+    },
+    "preflight": true,
+    "git_commit": "a9243dc83ae86434db33f3cd0ccd38ced726b0c4",
+    "code_identity": {
+      "protocol_e32.json": "e72a4063c3749ea89046acf5b72bb3d70636a09d4da69d202ad490ae296a1107",
+      "protocol_e30.json": "c0e9e2a99682d91a2489c25a60a336df659ac0ade7a8cf98f193c44b3b311a82",
+      "e32_training_controls.py": "e6b2ba8d237498fa97b39cf2ae84aef7b4a3bf205ad0866384c8e4549ae08127",
+      "language_training_controls.py": "ed58eef7871ea35bb92e15440d4fe8fbc7c5de7f635287675d7013ed458b0b5c",
+      "delivery_training_data.py": "058ae0b025a8c78665cb5e7c39ca1a75b18787975e33edef85f91a66021c2e6e",
+      "delivery_checkpoint_evaluation.py": "f23dac27fc2d6dad9b1d0ca292024820bd3f2d45efdd0d5fdf631cf358042bf3",
+      "delivery_diagnostics.py": "d09529745ea12bf0f37235631bc83f3c099fe8c3087c541dc57e44d13824d2fc",
+      "delivery_world.py": "d7abc40594210bff6c118018e23342ecee0076dc23c1813c113c81182d1a7303",
+      "language_delivery_agent.py": "dc58e2fb992f95a663d77195250ab783b365801662065668c04f1e898712304e",
+      "preflight_language_adapter.py": "24637a0a6c8aedbaf2862a952861925e4245bc535f9b30265da9e1ae1d316db2",
+      "e28_depth.py": "e7ac215882a24a6113873057727092bab3ef91b17a0bde1c57d9bcbd4687e7af"
+    },
+    "model_source": {
+      "repository": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+      "commit": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "weights_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+      "weights_bytes": 988097824,
+      "download_seconds": 11.877898176011513,
+      "source": "Git clone plus binary artifact resolved at exact commit; no rendered page fetched",
+      "status": "DOWNLOADED_NOT_EXECUTED"
+    },
+    "transformers_commit": "052e652d6d53c2b26ffde87e039b723949a53493",
+    "versions": {
+      "torch": "2.5.1+cu118",
+      "numpy": "2.2.6",
+      "transformers": "4.46.3",
+      "tokenizers": "0.20.3",
+      "safetensors": "0.8.0",
+      "huggingface-hub": "0.36.2"
+    }
+  },
+  "source_complete_sha256": "e6488b6842d08bb7a2461bd87f24b530719562125147bf6852b2ebc7561006d5",
+  "data_disjoint": {
+    "worlds": 3,
+    "all_seed_specs_disjoint": true,
+    "all_world_labels_distinct": true
+  },
+  "cases": [
+    {
+      "seed": 1911,
+      "arm": {
+        "name": "batch1_lr1e3",
+        "batch": 1,
+        "learning_rate": 0.001
+      },
+      "base_unchanged": true,
+      "stages": [
+        {
+          "milestone": 8,
+          "tutorial_correct": 8,
+          "tutorial_queries": 16,
+          "deliveries": 0,
+          "actions": 16,
+          "training_work": {
+            "inference_calls": 0,
+            "inference_tokens": 0,
+            "inference_attention_elements": 0,
+            "update_calls": 8,
+            "update_tokens": 2104,
+            "update_attention_elements": 186172224,
+            "audit_calls": 0,
+            "audit_tokens": 0
+          },
+          "optimizer_steps": 8,
+          "state_restore_exact": true
+        },
+        {
+          "milestone": 16,
+          "tutorial_correct": 16,
+          "tutorial_queries": 16,
+          "deliveries": 0,
+          "actions": 16,
+          "training_work": {
+            "inference_calls": 0,
+            "inference_tokens": 0,
+            "inference_attention_elements": 0,
+            "update_calls": 16,
+            "update_tokens": 4306,
+            "update_attention_elements": 389854752,
+            "audit_calls": 0,
+            "audit_tokens": 0
+          },
+          "optimizer_steps": 16,
+          "state_restore_exact": true
+        }
+      ]
+    },
+    {
+      "seed": 1911,
+      "arm": {
+        "name": "batch1_lr1e4",
+        "batch": 1,
+        "learning_rate": 0.0001
+      },
+      "base_unchanged": true,
+      "stages": [
+        {
+          "milestone": 8,
+          "tutorial_correct": 8,
+          "tutorial_queries": 16,
+          "deliveries": 1,
+          "actions": 12,
+          "training_work": {
+            "inference_calls": 0,
+            "inference_tokens": 0,
+            "inference_attention_elements": 0,
+            "update_calls": 8,
+            "update_tokens": 2104,
+            "update_attention_elements": 186172224,
+            "audit_calls": 0,
+            "audit_tokens": 0
+          },
+          "optimizer_steps": 8,
+          "state_restore_exact": true
+        },
+        {
+          "milestone": 16,
+          "tutorial_correct": 10,
+          "tutorial_queries": 16,
+          "deliveries": 1,
+          "actions": 12,
+          "training_work": {
+            "inference_calls": 0,
+            "inference_tokens": 0,
+            "inference_attention_elements": 0,
+            "update_calls": 16,
+            "update_tokens": 4306,
+            "update_attention_elements": 389854752,
+            "audit_calls": 0,
+            "audit_tokens": 0
+          },
+          "optimizer_steps": 16,
+          "state_restore_exact": true
+        }
+      ]
+    },
+    {
+      "seed": 1911,
+      "arm": {
+        "name": "batch8_lr1e3",
+        "batch": 8,
+        "learning_rate": 0.001
+      },
+      "base_unchanged": true,
+      "stages": [
+        {
+          "milestone": 8,
+          "tutorial_correct": 10,
+          "tutorial_queries": 16,
+          "deliveries": 1,
+          "actions": 15,
+          "training_work": {
+            "inference_calls": 0,
+            "inference_tokens": 0,
+            "inference_attention_elements": 0,
+            "update_calls": 8,
+            "update_tokens": 2104,
+            "update_attention_elements": 186172224,
+            "audit_calls": 0,
+            "audit_tokens": 0
+          },
+          "optimizer_steps": 1,
+          "state_restore_exact": true
+        },
+        {
+          "milestone": 16,
+          "tutorial_correct": 14,
+          "tutorial_queries": 16,
+          "deliveries": 0,
+          "actions": 16,
+          "training_work": {
+            "inference_calls": 0,
+            "inference_tokens": 0,
+            "inference_attention_elements": 0,
+            "update_calls": 16,
+            "update_tokens": 4306,
+            "update_attention_elements": 389854752,
+            "audit_calls": 0,
+            "audit_tokens": 0
+          },
+          "optimizer_steps": 2,
+          "state_restore_exact": true
+        }
+      ]
+    },
+    {
+      "seed": 1911,
+      "arm": {
+        "name": "batch8_lr1e4",
+        "batch": 8,
+        "learning_rate": 0.0001
+      },
+      "base_unchanged": true,
+      "stages": [
+        {
+          "milestone": 8,
+          "tutorial_correct": 8,
+          "tutorial_queries": 16,
+          "deliveries": 1,
+          "actions": 12,
+          "training_work": {
+            "inference_calls": 0,
+            "inference_tokens": 0,
+            "inference_attention_elements": 0,
+            "update_calls": 8,
+            "update_tokens": 2104,
+            "update_attention_elements": 186172224,
+            "audit_calls": 0,
+            "audit_tokens": 0
+          },
+          "optimizer_steps": 1,
+          "state_restore_exact": true
+        },
+        {
+          "milestone": 16,
+          "tutorial_correct": 8,
+          "tutorial_queries": 16,
+          "deliveries": 1,
+          "actions": 12,
+          "training_work": {
+            "inference_calls": 0,
+            "inference_tokens": 0,
+            "inference_attention_elements": 0,
+            "update_calls": 16,
+            "update_tokens": 4306,
+            "update_attention_elements": 389854752,
+            "audit_calls": 0,
+            "audit_tokens": 0
+          },
+          "optimizer_steps": 2,
+          "state_restore_exact": true
+        }
+      ]
+    }
+  ]
+}

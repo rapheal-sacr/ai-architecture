@@ -278,3 +278,13 @@ and cannot establish difficult reasoning. E31-RESULT.md preserves all categories
 exposure counts, overlap, flips, costs and limits. Tutorial fitting, interference
 and representation must be separated before adding another architecture module.
 The full goal, novel design, learned compression and reliable RSI remain open.
+
+## E32 preflight: equal-example optimization controls, no new acquisition result
+
+The batch1 implementation exactly replays all256 historical E30 updates.
+Accumulation agrees with an independent joint mean-loss backward calculation
+(max clipped-gradient difference7.45e-9). Four functional arms/eight snapshots
+match example work and restore complete training state after charged evaluation;
+failures remain recorded. Full development corpora have disjoint world seeds.
+E32-PROTOCOL.md freezes conventional rate/accumulation controls at256/1024
+examples before scoring. A better baseline would not establish RSI or novelty.

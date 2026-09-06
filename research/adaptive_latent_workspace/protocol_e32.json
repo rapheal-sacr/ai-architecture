@@ -1,0 +1,40 @@
+{
+  "experiment": "E32 matched-example learning-rate and accumulation controls",
+  "seeds": [32101, 32102, 32103],
+  "arms": [
+    {"name":"batch1_lr1e3","batch":1,"learning_rate":0.001},
+    {"name":"batch1_lr1e4","batch":1,"learning_rate":0.0001},
+    {"name":"batch8_lr1e3","batch":8,"learning_rate":0.001},
+    {"name":"batch8_lr1e4","batch":8,"learning_rate":0.0001}
+  ],
+  "milestones": [256, 1024],
+  "tutorial_worlds": 8,
+  "tutorial_rooms": 4,
+  "tutorial_missions_per_world": 4,
+  "tutorial_steps_per_room": 8,
+  "eval_world_sizes": [4, 8],
+  "eval_missions": [
+    {"world":0,"target":0,"budget":24},
+    {"world":0,"target":1,"budget":24},
+    {"world":0,"target":0,"budget":24},
+    {"world":0,"target":1,"budget":24},
+    {"world":1,"target":0,"budget":48},
+    {"world":1,"target":1,"budget":48},
+    {"world":1,"target":0,"budget":48},
+    {"world":1,"target":1,"budget":48},
+    {"world":0,"target":0,"budget":24},
+    {"world":0,"target":1,"budget":24},
+    {"world":0,"target":0,"budget":24,"relocate":true},
+    {"world":0,"target":1,"budget":24}
+  ],
+  "source_protocol": "protocol_e30.json",
+  "seed_design": "SHA256 domain-separated64-bit seeds from E32|learning_seed|domain|world_index. Assert all tutorial/evaluation world seeds, specifications and labels disjoint across every scored source before training. Training-index RNG uses a separate domain. No adjacent seed ranges.",
+  "training": "All arms within a learning seed use identical initial adapters, teacher examples and ordered index draws with replacement. Each milestone has exactly the same gradient-example presentations, input tokens and forward attention elements. Batch8 accumulates eight separately evaluated scaled gradients at fixed weights, then clips once and makes one Adam update. No padding or larger-model confound. Its optimizer step count is eight times smaller; accumulation changes update schedule and is not a pure noise intervention.",
+  "teacher": "Observed-only planner teaches eight four-room worlds with four deliveries per world. Preserve every demonstration, action, memory and sampling exposure. This is declared external scaffolding, not autonomous discovery.",
+  "diagnostic": "At both fixed milestones evaluate every tutorial observation with tie-aware observed-reference sets, exact teacher labels and cross entropy. Tutorial mastery gate is>=95% rule correctness overall and>=80% in every category with>=10 queries. Report exposed/unexposed observations and ambiguity; supplied legal actions and tied routes do not establish general reasoning.",
+  "closed_loop": "At each milestone evaluate the frozen model on two disjoint new worlds,12 actual delivery missions, unannounced relocation at10. Full latest-observation memory persists across the12 missions to isolate learned execution from truncation. No evaluation label, hidden map, counterfactual outcome or policy trajectory enters training. Same model action distribution as E30. Restore exact saved actor/optimizer/RNG/work state after evaluation; evaluations are charged laboratory tests, not free policy branches. Observed-map planner is evaluated once per seed as an invariant control.",
+  "criteria": "Report every arm, milestone and seed. Initial acquisition requires3/4 successes in missions0–3; larger-world competence3/4 in4–7. Unchanged return8–9 only supports retention interpretation if acquired. Relocation10 and unchanged other object11 separate. Do not select the best milestone or arm to declare success. A competent baseline is prerequisite evidence, not the full architecture or RSI.",
+  "accounting": "Report every teacher action, gradient-example token/attention count, backward example, Adam step, fitting/diagnostic/acting seconds, model/adapter/optimizer/gradient/RNG/observation bytes, checkpoint and data storage, CUDA peak and all evaluation work. Attention elements are not FLOPs. CPU object overhead, energy and pretraining cost remain incompletely measured.",
+  "preflight": "First replay all256 E30 bootstrap updates for seed30101 through batch1 at0.001 and require exact losses, gradients, adapter, optimizer and RNG/work state. Compare four-example accumulated gradients with one joint mean-loss backward, recording numerical tolerance and parameter differences. A separate functional preflight uses seed1911, one tutorial world, milestones8/16 and two eight-step missions, all four arms. No E32 scored seed or logits inform settings.",
+  "no_selection": "Freeze source and protocol before scored data generation or fitting. Every arm runs through1024 examples even if early results fail. Preserve both milestones and all unsuccessful missions. No score-based early stopping, retries, checkpoint choice or hyperparameter changes. Human-written optimization controls are not recursive self-improvement."
+}

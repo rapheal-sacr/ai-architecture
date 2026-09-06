@@ -1,20 +1,14 @@
-# Next work — establish a competent learned execution baseline
+# Next work — E32 optimization controls
 
-Read FALSIFICATION.md first. E1–E31 are complete and audited. No experiment is
-running and no E32 protocol is frozen. E31-RESULT.md rejects assumed tutorial
-mastery and compact renaming as a sufficient repair. On one seed, training
-damages the existing immediate-home decision while improving delivery.
+Read FALSIFICATION.md first. E1–E31 are complete. E32-PROTOCOL.md and
+protocol_e32.json are frozen in this revision before scored data generation.
+Run all12 cases and24 snapshots, then independently reconstruct examples,
+group boundaries, optimizer state, tutorial references, real world trajectories,
+RNG restoration and complete costs. Use RUNS/ACTIVE-STATE.json for live handles;
+do not restart after an observation timeout. Preserve all failures and both
+milestones. No score-based hyperparameter or checkpoint selection.
 
-Next, isolate ordinary optimization before adding memory or procedure modules:
-compare learning-rate and gradient-accumulation controls with matched observed
-examples, explicit optimizer work, initial state and costs. Reproduce an E30
-bootstrap exactly as an implementation preflight. Any changed-design scoring
-must use disjoint fresh tutorial/test world streams, a declared training budget,
-tutorial mastery checks and actual closed-loop action evaluation against the
-observed-map control. Do not select checkpoints or settings from scored results.
-The E30/E31 adjacent seed ranges shared worlds and must not be repeated.
-
-This is necessary groundwork for the complete architecture, not a substitute
-objective. Efficient learned compression, persistent useful memory, broad
-reasoning, reliable procedure self-improvement, novelty and long-horizon
-efficiency remain unproven. Manual optimizer changes do not count as RSI.
+This is prerequisite evidence for the complete architecture, not a substitute
+objective. Full persistent memory, efficient learned compression, broad reasoning,
+reliable procedure self-improvement, novelty and long-horizon efficiency remain
+unproven. Manual optimizer improvements are not RSI.

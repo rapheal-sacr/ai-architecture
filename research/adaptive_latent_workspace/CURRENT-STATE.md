@@ -2,7 +2,8 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E31 are complete and audited. No experiment is currently running.
+E1–E31 are complete and audited. E32 source/protocol is frozen in this revision
+before scoring; read E32-PROTOCOL.md and RUNS/ACTIVE-STATE.json for run status.
 E30 implements a bounded integrated language/memory/feedback pilot and fails
 reliable acquisition and efficient improvement; read E30-RESULT.md.
 
