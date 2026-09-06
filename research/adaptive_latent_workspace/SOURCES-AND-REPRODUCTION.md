@@ -91,3 +91,9 @@ python e14_world_model.py --execute --repo /path/to/pinned/Gymnasium --out /path
 `protocol_e16.json` and `e16_temporal_proposals.py` were committed as `2b0704c` before scored execution. Standalone preflight passed, the scored run completed, and `record_e16.py` retains all 48 cases and inherited/new work separately. `alw-runs/e16` holds original output; frozen learned predictors come from E14 checkpoints with SHA-256 identities in each case.
 
 POPLIN was cloned on WD at `edd8dba50f9049c6164eda774602bef0c299cb51`. No package install, training or numerical replication was performed. The source audit and differences from E14 are in `NOVELTY-AUDIT.md`.
+
+## Persistent student and online procedure tests
+
+E17 source/protocol were frozen at `6063e32`. Scored output is complete in `alw-runs/e17`; all 96 combinations are preserved, including the 24 explicitly reused fixed-optimizer records. Standalone preflight verifies zero-controller equality, persistent state, deterministic repeat and exact state restoration. All learned starting checkpoints carry E9/E11 identities and per-file SHA-256 hashes.
+
+E18 source/protocol were frozen at `d49a3b6`. Standalone preflight passes exact retrospective parameter replay, branch-copy equality, zero-controller proposal equality and a double-precision finite-difference meta-gradient (-0.0638097403777455 analytic versus -0.06380974037767384 numerical). Dummy end-to-end trials also exercise a trained E9 procedure. The scored run is in `alw-runs/e18`; its original logs and incomplete/completed status must be inspected before any restart. Both standalone and execution preflights add work.

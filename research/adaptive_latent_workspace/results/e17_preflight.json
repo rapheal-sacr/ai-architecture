@@ -1,0 +1,49 @@
+{
+  "identity": {
+    "protocol_e17.json": "7fc5f12c4fbaf5978040efbd637f6b5d40a6e567cea8fd48e0cbe9a7ad3a40bf",
+    "e17_persistent_student.py": "d9d69f46aea3d868a898ddccd0952a0ecca3bbdbc2545f0d02cbeb47e4071403",
+    "protocol_e9.json": "37680ac4081717ebd3c779961ff22692d08e29b540f93330a91f90021c556a37",
+    "e9_recursive_updater.py": "4041ad19047e547ffaf570956b92aed279d161a8d955977e8e92b8d53c250cd4"
+  },
+  "checks": {
+    "zero_controller_exact": true,
+    "deterministic_repeat": true,
+    "procedure_unchanged": true,
+    "exact_state_resume": true,
+    "boundaries": [
+      {
+        "start": 0,
+        "stop": 2,
+        "context": 1,
+        "recurring": false
+      },
+      {
+        "start": 2,
+        "stop": 4,
+        "context": 2,
+        "recurring": false
+      },
+      {
+        "start": 4,
+        "stop": 5,
+        "context": 0,
+        "recurring": false
+      }
+    ],
+    "costs": {
+      "student_forward_examples": 544,
+      "student_gradient_batches": 6,
+      "controller_forward_calls": 0,
+      "observed_examples": 192,
+      "replayed_examples": 160,
+      "updates": 6,
+      "reservoir_draws": 144,
+      "student_parameters": 738,
+      "controller_parameters": 0,
+      "stored_tensor_bytes": 19360,
+      "replay_size": 48,
+      "optimizer_step": 6
+    },
+    "persistent_step": 6
+  }
+}

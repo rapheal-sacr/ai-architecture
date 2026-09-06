@@ -59,10 +59,15 @@ E16 completed. At equal model-example counts, temporal blocks help 7/8 or 5/8 ac
 
 ## Binding constraint and unresolved measurement
 
+E17 completed with persistent student/optimizer/context/replay state and frozen inherited procedures. It records censored recovery across unpredictable changes: both self-applied procedures recover in only 115/228 conflicting-function segments, versus 227/228 input-shift segments. Learned procedures yield modest accuracy gains but cost about 2.27× fixed-optimizer execution time. Self-application's stream-level comparison with equal-extra-meta training remains mixed.
+
+E18 is now frozen, preflighted and running. It implements actual online procedure proposals and self-application while student state persists. Proposals use only already-observed update traces and are tested on subsequent observations in temporary branches. Incumbent predictions remain the operational record until admission. Conventional meta-updates receive the same trial/admission budget. Read `ONLINE-PROCEDURE-DESIGN.md`; no success claim precedes the complete scored result.
+
 The candidate quantity is amortized recovery cost relative to useful context
 lifetime, after charging identification, updates, replay, routing, memory growth
-and consolidation. Existing tests measure early/late errors, operation counts,
-storage and time, but not a complete recovery-time distribution. No universal
+and consolidation. E17 now supplies a declared censored recovery assay on two
+synthetic stream families, alongside errors, operation counts, storage and time.
+It does not measure a complete general-agent recovery-time distribution. No universal
 single binding quantity has been measured. `CONSTRAINTS.md` explains the three
 roots and why identifying evidence, retained information and useful computation
 cannot be substituted for one another.

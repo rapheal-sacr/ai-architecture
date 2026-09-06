@@ -99,3 +99,18 @@ Declaring “information”, “compute” or “verification” universally bin
 the environment and cost model would conceal that missing measurement. The
 architecture must earn a narrower claim by crossing all three roots on a
 specified task family, then survive transfer and long-horizon closed-loop tests.
+
+## First censored recovery measurement
+
+E17 implements a thresholded assay on unpredictable 16–64-batch recurring
+segments. Both inherited self-applied procedures recover in 115/228 segments
+under conflicting functions, compared with 227/228 under input shift. Every
+non-recovery is retained as censoring at the segment's actual end. The threshold
+is three consecutive clean normalized-MSE batches at or below 0.2 and is used
+only for evaluation. See `E17-RESULT.md` for costs and scope.
+
+This makes the proposed recovery-cost/lifetime ratio operational on one stream
+family, but not a universal law. Identification and adaptation occupy a large
+fraction of useful segment life in the conflicting case. The assay cannot
+attribute all of that fraction to one irreducible root, and lower average error
+does not prove improvement at fixed total work.
