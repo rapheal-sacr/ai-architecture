@@ -58,8 +58,7 @@ call a hidden transition function. Allocate recurrent depth and rollout horizon
 where extra prediction can change the chosen action. Validate predictions against
 subsequent real outcomes and charge mistaken plans, replanning and model updates.
 NeSyFS motivates belief-conditioned foresight, but internally consistent model
-rollouts cannot validate their own accuracy. This component is still unbuilt in
-the current neural prototype; PPO's recurrent policy is not a world model.
+rollouts cannot validate their own accuracy. E14 now implements a small neural dynamics/reward model with bounded replay and learned-only planning. It does not implement the full recurrent belief architecture. E15 shows that an accurate model alone does not repair the current high-gravity search failure.
 
 **Persistent procedure state.** A learned controller proposes learning rates,
 relative objectives, replay/admission allocations and computation budgets from

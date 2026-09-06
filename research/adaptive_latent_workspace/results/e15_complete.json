@@ -1,0 +1,630 @@
+{
+  "protocol": {
+    "experiment": "E15-privileged-model-planner-diagnostic",
+    "status_at_freeze": "NOT_RUN",
+    "seeds": [
+      14101,
+      14102
+    ],
+    "gravity_sequence": [
+      10.0,
+      30.0,
+      5.0,
+      10.0
+    ],
+    "horizons": [
+      1,
+      20,
+      60
+    ],
+    "parallel_envs": 4,
+    "evaluation_steps": 200,
+    "intervention": "Use E14's exact same CEM planner and paired evaluation reset/action-search seeds, but supply an explicitly privileged predictor with the known Pendulum transition and reward equations. Compare planning horizons 1, 20 and 60. This predictor is a diagnostic reference, never a candidate learner or training teacher available to E14.",
+    "motivation": "The first E14 replay planner improves return on some physics but fails at high gravity despite low normalized one-step error. A correct-model reference distinguishes a model-prediction limitation from a limitation that remains in this planner/search budget even with correct dynamics. A longer horizon may itself require more search; its failure is not a proof that the task is impossible.",
+    "preflight": "Compare oracle transition targets and circular next observations against real Gymnasium outcomes for 100 random-action steps in each gravity, using separate dummy seeds; require maximum absolute normalized target error below 1e-5.",
+    "costs": "Record all actual environment steps, oracle model calls/examples, planning decisions and runtime. CPU work may overlap E14, so wall times are descriptive. Do not present the privileged predictor's cheap formula evaluations as learned-model compute efficiency.",
+    "scope": "Development causal diagnostic on existing E14 evaluation families. No learning, retention, compression, general reasoning, self-improvement or novelty claim. The ordinary acting architecture remains prohibited from simulator-state/equation access."
+  },
+  "identity": {
+    "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+    "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+    "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+    "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+    "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+  },
+  "preflight": [
+    {
+      "gravity": 10.0,
+      "maximum_normalized_target_error": 1.1920928955078125e-07,
+      "steps": 100
+    },
+    {
+      "gravity": 30.0,
+      "maximum_normalized_target_error": 1.1920928955078125e-07,
+      "steps": 100
+    },
+    {
+      "gravity": 5.0,
+      "maximum_normalized_target_error": 1.1920928955078125e-07,
+      "steps": 100
+    }
+  ],
+  "records": [
+    {
+      "seed": 14101,
+      "stage": 0,
+      "gravity": 10.0,
+      "horizon": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1251.4013493656375,
+        -1706.2772280250433,
+        -1564.2594263537649,
+        -1416.7327594820583
+      ],
+      "mean_return": -1484.667690806626,
+      "seconds": 0.23428555300051812,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 102400
+    },
+    {
+      "seed": 14101,
+      "stage": 0,
+      "gravity": 10.0,
+      "horizon": 20,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -116.61325614673348,
+        -260.6086780339678,
+        -251.07619566651803,
+        -242.33796021709193
+      ],
+      "mean_return": -217.6590225160778,
+      "seconds": 2.7665005380113143,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 2048000
+    },
+    {
+      "seed": 14101,
+      "stage": 0,
+      "gravity": 10.0,
+      "horizon": 60,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -119.23690493204089,
+        -381.3812150218816,
+        -246.9246770269036,
+        -233.4682476036755
+      ],
+      "mean_return": -245.2527611461254,
+      "seconds": 8.136419188012951,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 6144000
+    },
+    {
+      "seed": 14101,
+      "stage": 1,
+      "gravity": 30.0,
+      "horizon": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1671.2586974652008,
+        -1691.5832306099066,
+        -1699.5817303938807,
+        -1687.1523437982103
+      ],
+      "mean_return": -1687.3940005667996,
+      "seconds": 0.23408011300489306,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 102400
+    },
+    {
+      "seed": 14101,
+      "stage": 1,
+      "gravity": 30.0,
+      "horizon": 20,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1607.449366381702,
+        -1585.9976436695856,
+        -1617.4199880802619,
+        -1602.4886622622666
+      ],
+      "mean_return": -1603.338915098454,
+      "seconds": 2.7812627920066006,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 2048000
+    },
+    {
+      "seed": 14101,
+      "stage": 1,
+      "gravity": 30.0,
+      "horizon": 60,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1620.3931158260737,
+        -1581.7917215621148,
+        -1626.66238899391,
+        -1621.4585147236144
+      ],
+      "mean_return": -1612.5764352764281,
+      "seconds": 8.149559666999266,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 6144000
+    },
+    {
+      "seed": 14101,
+      "stage": 2,
+      "gravity": 5.0,
+      "horizon": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1242.3086923165586,
+        -1729.8816544887663,
+        -548.6046636286609,
+        -633.9751946430964
+      ],
+      "mean_return": -1038.6925512692706,
+      "seconds": 0.24317995300225448,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 102400
+    },
+    {
+      "seed": 14101,
+      "stage": 2,
+      "gravity": 5.0,
+      "horizon": 20,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -122.34238588412757,
+        -288.7252201876401,
+        -0.3594428097071165,
+        -2.584406590323668
+      ],
+      "mean_return": -103.50286386794961,
+      "seconds": 2.796426604007138,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 2048000
+    },
+    {
+      "seed": 14101,
+      "stage": 2,
+      "gravity": 5.0,
+      "horizon": 60,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -140.82914366303478,
+        -330.78601495852854,
+        -1.7857260757985618,
+        -4.071894374618948
+      ],
+      "mean_return": -119.36819476799519,
+      "seconds": 8.177524066006299,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 6144000
+    },
+    {
+      "seed": 14101,
+      "stage": 3,
+      "gravity": 10.0,
+      "horizon": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1431.822658076136,
+        -1263.0946542567292,
+        -1424.6432293886237,
+        -1166.4922653325477
+      ],
+      "mean_return": -1321.513201763509,
+      "seconds": 0.23238362699339632,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 102400
+    },
+    {
+      "seed": 14101,
+      "stage": 3,
+      "gravity": 10.0,
+      "horizon": 20,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -241.22107379681128,
+        -117.67294991056737,
+        -239.6632674141036,
+        -116.66942980926797
+      ],
+      "mean_return": -178.80668023268754,
+      "seconds": 2.816767380994861,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 2048000
+    },
+    {
+      "seed": 14101,
+      "stage": 3,
+      "gravity": 10.0,
+      "horizon": 60,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -235.74937280636888,
+        -121.72896408507238,
+        -232.20882204023272,
+        -121.21328194836082
+      ],
+      "mean_return": -177.72511022000867,
+      "seconds": 8.184633379001752,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 6144000
+    },
+    {
+      "seed": 14102,
+      "stage": 0,
+      "gravity": 10.0,
+      "horizon": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1789.8085784041755,
+        -1337.2826691246096,
+        -1687.128143481039,
+        -848.8893794709509
+      ],
+      "mean_return": -1415.7771926201938,
+      "seconds": 0.24048323900206015,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 102400
+    },
+    {
+      "seed": 14102,
+      "stage": 0,
+      "gravity": 10.0,
+      "horizon": 20,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -351.1182837311545,
+        -115.60664726032545,
+        -232.28596199131377,
+        -125.31121704825595
+      ],
+      "mean_return": -206.0805275077624,
+      "seconds": 2.7586040110036265,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 2048000
+    },
+    {
+      "seed": 14102,
+      "stage": 0,
+      "gravity": 10.0,
+      "horizon": 60,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -343.9392015782849,
+        -240.01647514182213,
+        -353.55490770871654,
+        -124.97343090149904
+      ],
+      "mean_return": -265.62100383258064,
+      "seconds": 8.15542128800007,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 6144000
+    },
+    {
+      "seed": 14102,
+      "stage": 1,
+      "gravity": 30.0,
+      "horizon": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1699.8577430481616,
+        -1699.8616122304632,
+        -1697.1205198327355,
+        -1666.9715507630026
+      ],
+      "mean_return": -1690.9528564685907,
+      "seconds": 0.2367140010028379,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 102400
+    },
+    {
+      "seed": 14102,
+      "stage": 1,
+      "gravity": 30.0,
+      "horizon": 20,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1602.2013468714795,
+        -1607.8318803925126,
+        -1597.7060759781061,
+        -1535.4846512259594
+      ],
+      "mean_return": -1585.8059886170145,
+      "seconds": 2.751472970994655,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 2048000
+    },
+    {
+      "seed": 14102,
+      "stage": 1,
+      "gravity": 30.0,
+      "horizon": 60,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1602.9062181119684,
+        -1625.1885285199876,
+        -1592.23602806143,
+        -1555.0475872078564
+      ],
+      "mean_return": -1593.8445904753107,
+      "seconds": 8.067583142998046,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 6144000
+    },
+    {
+      "seed": 14102,
+      "stage": 2,
+      "gravity": 5.0,
+      "horizon": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1396.270788457926,
+        -1487.2908725042807,
+        -992.8908955319895,
+        -1419.8298108650163
+      ],
+      "mean_return": -1324.070591839803,
+      "seconds": 0.2333140300033847,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 102400
+    },
+    {
+      "seed": 14102,
+      "stage": 2,
+      "gravity": 5.0,
+      "horizon": 20,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -127.82005744049088,
+        -130.300734136124,
+        -148.09878763079317,
+        -131.46574319265443
+      ],
+      "mean_return": -134.4213306000156,
+      "seconds": 2.8032517950050533,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 2048000
+    },
+    {
+      "seed": 14102,
+      "stage": 2,
+      "gravity": 5.0,
+      "horizon": 60,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -143.59791136716194,
+        -148.3313328516956,
+        -143.46091417180307,
+        -143.85255127721513
+      ],
+      "mean_return": -144.81067741696893,
+      "seconds": 8.105869241000619,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 6144000
+    },
+    {
+      "seed": 14102,
+      "stage": 3,
+      "gravity": 10.0,
+      "horizon": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -1424.698377897433,
+        -1308.4471832304348,
+        -1775.9315392108538,
+        -1462.891499206431
+      ],
+      "mean_return": -1492.9921498862882,
+      "seconds": 0.2333233560057124,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 102400
+    },
+    {
+      "seed": 14102,
+      "stage": 3,
+      "gravity": 10.0,
+      "horizon": 20,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -246.84921543875788,
+        -115.51595170255251,
+        -269.14746520827015,
+        -238.74514043708103
+      ],
+      "mean_return": -217.56444319666542,
+      "seconds": 2.8160389410040807,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 2048000
+    },
+    {
+      "seed": 14102,
+      "stage": 3,
+      "gravity": 10.0,
+      "horizon": 60,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+      },
+      "returns": [
+        -242.5386354414964,
+        -240.84278305227252,
+        -399.9552761952717,
+        -228.86962847461464
+      ],
+      "mean_return": -278.0515807909138,
+      "seconds": 8.165588107003714,
+      "actual_environment_steps": 800,
+      "planning_calls": 200,
+      "oracle_model_examples": 6144000
+    }
+  ]
+}

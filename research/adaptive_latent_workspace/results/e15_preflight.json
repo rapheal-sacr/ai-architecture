@@ -1,0 +1,26 @@
+{
+  "identity": {
+    "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+    "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+    "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+    "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+    "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+  },
+  "checks": [
+    {
+      "gravity": 10.0,
+      "maximum_normalized_target_error": 1.1920928955078125e-07,
+      "steps": 100
+    },
+    {
+      "gravity": 30.0,
+      "maximum_normalized_target_error": 1.1920928955078125e-07,
+      "steps": 100
+    },
+    {
+      "gravity": 5.0,
+      "maximum_normalized_target_error": 1.1920928955078125e-07,
+      "steps": 100
+    }
+  ]
+}

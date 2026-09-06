@@ -1,0 +1,593 @@
+{
+  "identity": {
+    "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+    "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+    "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+    "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+    "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+    "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+    "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+    "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+    "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+    "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+    "gymnasium_version": "1.1.1",
+    "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+    "torch_version": "2.5.1+cu118"
+  },
+  "checks": [
+    "real observed transitions and parameter updates",
+    "planner leaves weights unchanged",
+    "exact planning forward count",
+    "finite bounded actions",
+    "all five interfaces exercised"
+  ],
+  "records": [
+    {
+      "seed": 77,
+      "arm": "random",
+      "identity": {
+        "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+        "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+        "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+        "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+        "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+        "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+        "gymnasium_version": "1.1.1",
+        "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+        "torch_version": "2.5.1+cu118"
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "gravity": 10.0,
+          "training": [
+            {
+              "vector_steps": 16,
+              "environment_steps": 64,
+              "completed_episode_returns": [],
+              "prequential_mse": null,
+              "seconds": 0.009481827990384772,
+              "costs": null,
+              "planning_calls": 0,
+              "planning_model_examples": 0
+            }
+          ],
+          "training_returns": [],
+          "training_seconds": 0.009489142001257278,
+          "evaluation": {
+            "returns": [
+              -29.479236475460027,
+              -72.30328626038659,
+              -7.2422721891008255,
+              -43.03628146560986
+            ],
+            "mean_return": -38.015269097639326,
+            "steps": 32,
+            "seconds": 0.0015047119959490374,
+            "planning_calls": 0,
+            "planning_model_examples": 0
+          },
+          "probe": null,
+          "costs": null
+        }
+      ],
+      "training_environment_steps": 64,
+      "evaluation_environment_steps": 32,
+      "probe_environment_steps": 0,
+      "seconds": 0.045970566003234126,
+      "costs": null
+    },
+    {
+      "seed": 77,
+      "arm": "replay_mpc1",
+      "identity": {
+        "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+        "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+        "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+        "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+        "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+        "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+        "gymnasium_version": "1.1.1",
+        "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+        "torch_version": "2.5.1+cu118"
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "gravity": 10.0,
+          "training": [
+            {
+              "vector_steps": 16,
+              "environment_steps": 64,
+              "completed_episode_returns": [],
+              "prequential_mse": 0.012345252325758338,
+              "seconds": 0.02592254000774119,
+              "costs": {
+                "parameter_count": 4675,
+                "stored_tensor_bytes": 113528,
+                "forward_examples": 604,
+                "training_examples": 124,
+                "optimizer_updates": 16,
+                "module_count": 1,
+                "module_switches": 0
+              },
+              "planning_calls": 13,
+              "planning_model_examples": 416
+            }
+          ],
+          "training_returns": [],
+          "training_seconds": 0.026025976010714658,
+          "evaluation": {
+            "returns": [
+              -38.39620191586076,
+              -68.70115825224373,
+              -2.5438317580395613,
+              -55.266698220926386
+            ],
+            "mean_return": -41.226972536767605,
+            "steps": 32,
+            "seconds": 0.0049784129951149225,
+            "planning_calls": 8,
+            "planning_model_examples": 256
+          },
+          "probe": {
+            "rows": [
+              {
+                "horizon": 1,
+                "one_step_target_mse": 0.012764192186295986,
+                "imagined_state_mse": 0.04291730746626854,
+                "imagined_reward_mse": 0.02221936774589716
+              },
+              {
+                "horizon": 2,
+                "one_step_target_mse": 0.008505841717123985,
+                "imagined_state_mse": 0.0492841936647892,
+                "imagined_reward_mse": 0.016785363969302736
+              },
+              {
+                "horizon": 3,
+                "one_step_target_mse": 0.010270226746797562,
+                "imagined_state_mse": 0.11362335830926895,
+                "imagined_reward_mse": 0.012093387600728705
+              },
+              {
+                "horizon": 4,
+                "one_step_target_mse": 0.01552510540932417,
+                "imagined_state_mse": 0.20899225771427155,
+                "imagined_reward_mse": 0.02868326893979638
+              }
+            ],
+            "actual_returns": [
+              -1.319474697113037,
+              -11.19732666015625,
+              -26.998489379882812,
+              -12.3630952835083
+            ],
+            "predicted_returns": [
+              4.858990669250488,
+              -9.374229431152344,
+              -39.58699035644531,
+              -15.611700057983398
+            ],
+            "steps": 16,
+            "seconds": 0.00262352499703411
+          },
+          "costs": {
+            "parameter_count": 4675,
+            "stored_tensor_bytes": 113528,
+            "forward_examples": 892,
+            "training_examples": 124,
+            "optimizer_updates": 16,
+            "module_count": 1,
+            "module_switches": 0
+          }
+        }
+      ],
+      "training_environment_steps": 64,
+      "evaluation_environment_steps": 32,
+      "probe_environment_steps": 16,
+      "seconds": 0.04165005600953009,
+      "costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 892,
+        "training_examples": 124,
+        "optimizer_updates": 16,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 77,
+      "arm": "replay_mpc20",
+      "identity": {
+        "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+        "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+        "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+        "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+        "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+        "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+        "gymnasium_version": "1.1.1",
+        "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+        "torch_version": "2.5.1+cu118"
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "gravity": 10.0,
+          "training": [
+            {
+              "vector_steps": 16,
+              "environment_steps": 64,
+              "completed_episode_returns": [],
+              "prequential_mse": 0.013592229573987424,
+              "seconds": 0.03491015599865932,
+              "costs": {
+                "parameter_count": 4675,
+                "stored_tensor_bytes": 113528,
+                "forward_examples": 1436,
+                "training_examples": 124,
+                "optimizer_updates": 16,
+                "module_count": 1,
+                "module_switches": 0
+              },
+              "planning_calls": 13,
+              "planning_model_examples": 1248
+            }
+          ],
+          "training_returns": [],
+          "training_seconds": 0.035000276009668596,
+          "evaluation": {
+            "returns": [
+              -39.16169488682429,
+              -73.40910965109913,
+              -9.353970655201099,
+              -53.7720885824878
+            ],
+            "mean_return": -43.92421594390308,
+            "steps": 32,
+            "seconds": 0.00985466300335247,
+            "planning_calls": 8,
+            "planning_model_examples": 768
+          },
+          "probe": {
+            "rows": [
+              {
+                "horizon": 1,
+                "one_step_target_mse": 0.006299231201410294,
+                "imagined_state_mse": 0.007905783131718636,
+                "imagined_reward_mse": 0.014805427552056402
+              },
+              {
+                "horizon": 2,
+                "one_step_target_mse": 0.005859877448529005,
+                "imagined_state_mse": 0.01720111258327961,
+                "imagined_reward_mse": 0.008589209608583916
+              },
+              {
+                "horizon": 3,
+                "one_step_target_mse": 0.006093427073210478,
+                "imagined_state_mse": 0.05010201409459114,
+                "imagined_reward_mse": 0.004767413240807089
+              },
+              {
+                "horizon": 4,
+                "one_step_target_mse": 0.006066320464015007,
+                "imagined_state_mse": 0.07998329401016235,
+                "imagined_reward_mse": 0.0058317464353614705
+              }
+            ],
+            "actual_returns": [
+              -1.319474697113037,
+              -11.19732666015625,
+              -26.998489379882812,
+              -12.3630952835083
+            ],
+            "predicted_returns": [
+              4.866191864013672,
+              -12.80180549621582,
+              -34.603790283203125,
+              -14.573603630065918
+            ],
+            "steps": 16,
+            "seconds": 0.0026820759958354756
+          },
+          "costs": {
+            "parameter_count": 4675,
+            "stored_tensor_bytes": 113528,
+            "forward_examples": 2236,
+            "training_examples": 124,
+            "optimizer_updates": 16,
+            "module_count": 1,
+            "module_switches": 0
+          }
+        }
+      ],
+      "training_environment_steps": 64,
+      "evaluation_environment_steps": 32,
+      "probe_environment_steps": 16,
+      "seconds": 0.0561024130001897,
+      "costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 2236,
+        "training_examples": 124,
+        "optimizer_updates": 16,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 77,
+      "arm": "context_mpc20",
+      "identity": {
+        "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+        "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+        "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+        "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+        "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+        "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+        "gymnasium_version": "1.1.1",
+        "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+        "torch_version": "2.5.1+cu118"
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "gravity": 10.0,
+          "training": [
+            {
+              "vector_steps": 16,
+              "environment_steps": 64,
+              "completed_episode_returns": [],
+              "prequential_mse": 0.009736222120409366,
+              "seconds": 0.03371695200621616,
+              "costs": {
+                "parameter_count": 5635,
+                "stored_tensor_bytes": 247928,
+                "forward_examples": 1436,
+                "training_examples": 124,
+                "optimizer_updates": 16,
+                "module_count": 1,
+                "module_switches": 0
+              },
+              "planning_calls": 13,
+              "planning_model_examples": 1248
+            }
+          ],
+          "training_returns": [],
+          "training_seconds": 0.03380047999962699,
+          "evaluation": {
+            "returns": [
+              -38.648973525189426,
+              -73.20663984468544,
+              -3.159940772879358,
+              -53.595213315449925
+            ],
+            "mean_return": -42.15269186455104,
+            "steps": 32,
+            "seconds": 0.009527996007818729,
+            "planning_calls": 8,
+            "planning_model_examples": 768
+          },
+          "probe": {
+            "rows": [
+              {
+                "horizon": 1,
+                "one_step_target_mse": 0.005511512514203787,
+                "imagined_state_mse": 0.0036268439143896103,
+                "imagined_reward_mse": 0.01110381804050248
+              },
+              {
+                "horizon": 2,
+                "one_step_target_mse": 0.002508830279111862,
+                "imagined_state_mse": 0.01450391486287117,
+                "imagined_reward_mse": 0.005925632010359255
+              },
+              {
+                "horizon": 3,
+                "one_step_target_mse": 0.00412391684949398,
+                "imagined_state_mse": 0.034780848771333694,
+                "imagined_reward_mse": 0.017009984956658085
+              },
+              {
+                "horizon": 4,
+                "one_step_target_mse": 0.004176327958703041,
+                "imagined_state_mse": 0.07132632285356522,
+                "imagined_reward_mse": 0.022840362492281906
+              }
+            ],
+            "actual_returns": [
+              -1.319474697113037,
+              -11.19732666015625,
+              -26.998489379882812,
+              -12.3630952835083
+            ],
+            "predicted_returns": [
+              1.782590627670288,
+              -22.102336883544922,
+              -33.23558807373047,
+              -18.66288948059082
+            ],
+            "steps": 16,
+            "seconds": 0.004056692006997764
+          },
+          "costs": {
+            "parameter_count": 5635,
+            "stored_tensor_bytes": 247928,
+            "forward_examples": 2236,
+            "training_examples": 124,
+            "optimizer_updates": 16,
+            "module_count": 1,
+            "module_switches": 0
+          }
+        }
+      ],
+      "training_environment_steps": 64,
+      "evaluation_environment_steps": 32,
+      "probe_environment_steps": 16,
+      "seconds": 0.05560025401064195,
+      "costs": {
+        "parameter_count": 5635,
+        "stored_tensor_bytes": 247928,
+        "forward_examples": 2236,
+        "training_examples": 124,
+        "optimizer_updates": 16,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 77,
+      "arm": "guarded_mpc20",
+      "identity": {
+        "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+        "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+        "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+        "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+        "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+        "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+        "gymnasium_version": "1.1.1",
+        "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+        "torch_version": "2.5.1+cu118"
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "gravity": 10.0,
+          "training": [
+            {
+              "vector_steps": 16,
+              "environment_steps": 64,
+              "completed_episode_returns": [],
+              "prequential_mse": 0.013592229573987424,
+              "seconds": 0.034500121997552924,
+              "costs": {
+                "parameter_count": 4675,
+                "stored_tensor_bytes": 59708,
+                "forward_examples": 1500,
+                "training_examples": 124,
+                "optimizer_updates": 16,
+                "module_count": 1,
+                "module_switches": 0,
+                "peak_tensor_bytes": 59708,
+                "peak_parameter_count": 4675,
+                "temporary_active": false,
+                "merges": 0
+              },
+              "planning_calls": 13,
+              "planning_model_examples": 1248
+            }
+          ],
+          "training_returns": [],
+          "training_seconds": 0.03457065499969758,
+          "evaluation": {
+            "returns": [
+              -39.16169488682429,
+              -73.40910965109913,
+              -9.353970655201099,
+              -53.7720885824878
+            ],
+            "mean_return": -43.92421594390308,
+            "steps": 32,
+            "seconds": 0.009421423994353972,
+            "planning_calls": 8,
+            "planning_model_examples": 768
+          },
+          "probe": {
+            "rows": [
+              {
+                "horizon": 1,
+                "one_step_target_mse": 0.006299231201410294,
+                "imagined_state_mse": 0.007905783131718636,
+                "imagined_reward_mse": 0.014805427552056402
+              },
+              {
+                "horizon": 2,
+                "one_step_target_mse": 0.005859877448529005,
+                "imagined_state_mse": 0.01720111258327961,
+                "imagined_reward_mse": 0.008589209608583916
+              },
+              {
+                "horizon": 3,
+                "one_step_target_mse": 0.006093427073210478,
+                "imagined_state_mse": 0.05010201409459114,
+                "imagined_reward_mse": 0.004767413240807089
+              },
+              {
+                "horizon": 4,
+                "one_step_target_mse": 0.006066320464015007,
+                "imagined_state_mse": 0.07998329401016235,
+                "imagined_reward_mse": 0.0058317464353614705
+              }
+            ],
+            "actual_returns": [
+              -1.319474697113037,
+              -11.19732666015625,
+              -26.998489379882812,
+              -12.3630952835083
+            ],
+            "predicted_returns": [
+              4.866191864013672,
+              -12.80180549621582,
+              -34.603790283203125,
+              -14.573603630065918
+            ],
+            "steps": 16,
+            "seconds": 0.0029265570046845824
+          },
+          "costs": {
+            "parameter_count": 4675,
+            "stored_tensor_bytes": 59708,
+            "forward_examples": 2300,
+            "training_examples": 124,
+            "optimizer_updates": 16,
+            "module_count": 1,
+            "module_switches": 0,
+            "peak_tensor_bytes": 59708,
+            "peak_parameter_count": 4675,
+            "temporary_active": false,
+            "merges": 0
+          }
+        }
+      ],
+      "training_environment_steps": 64,
+      "evaluation_environment_steps": 32,
+      "probe_environment_steps": 16,
+      "seconds": 0.05558187900169287,
+      "costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 59708,
+        "forward_examples": 2300,
+        "training_examples": 124,
+        "optimizer_updates": 16,
+        "module_count": 1,
+        "module_switches": 0,
+        "peak_tensor_bytes": 59708,
+        "peak_parameter_count": 4675,
+        "temporary_active": false,
+        "merges": 0
+      }
+    }
+  ]
+}

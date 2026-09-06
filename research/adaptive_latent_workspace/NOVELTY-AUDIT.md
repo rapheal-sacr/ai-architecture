@@ -31,3 +31,9 @@ Current contribution to this research project is the falsifiable implementation,
 its controls, source audits and negative transfer results. The current evidence
 does not support either broad architectural novelty or the user's overall
 continuous-learning/long-horizon capability goal.
+
+## Learned-model action search
+
+The cloned [PETS / handful-of-trials](https://github.com/kchua/handful-of-trials) source at `77fd8802cc30b7683f0227c90527b5414c0df34c` already learns dynamics and plans with cross-entropy search. Inspected `dmbrl/controllers/MPC.py`, `dmbrl/misc/optimizers/cem.py`, `dmbrl/config/default.py` and `dmbrl/config/cartpole.py`. The implementation stores observed transition data, warm-starts shifted action sequences, supports deterministic/probabilistic ensembles and several trajectory-sampling schemes, and uses supplied state/action cost functions. The default trajectory-sampling setup uses five networks and twenty particles; the Cartpole configuration uses a much larger network/search budget than E14. These are source observations, not reproduced benchmark scores.
+
+E14 is a small independent deterministic world model with bounded replay that also learns reward. Combining it with CEM or reusing previous action sequences is not novel. Its lack of ensemble uncertainty and its small search budget are material differences from this prior work. E15 specifically shows that even accurate predictions do not remove the observed search limitation at the existing budget.

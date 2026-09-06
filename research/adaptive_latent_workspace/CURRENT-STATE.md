@@ -49,7 +49,11 @@ E12 passed CPU/CUDA preflights and an exact CPU checkpoint-resume test. Scored e
 
 E13 completed its five-million-observation extension with exact prefix error/counter reproduction in all four arms. Cumulative error is lower with sharing in both seeds, reversing the earlier first-million deficit. Mean error improves 21.0%, but forward examples rise 2.42×, runtime 1.64×, and stored tensor bytes 1.45×. It still uses eight persistent modules. Accuracy amortization is established on this continuation; total-resource efficiency and rare retention are not.
 
-E14 passed a real neural world-model/planner preflight and is now running on CPU. The learner predicts observed state changes and rewards, plans only through its learned model, and preserves weights/replay/modules across hidden changes in Pendulum gravity. It compares random actions, one-step and twenty-step replay planning, context replay and guarded sharing. Independent frozen probes measure how one-step errors accumulate over forty imagined transitions. This is fully observable control, not a general reasoner or recursively learned procedure.
+E14 completed its neural world-model/planning pilot. Twenty-step replay planning improves actual return over one-step search in 7/8 stage means, with 19.63× forward examples and about 7.59× time. High gravity remains poor. Guarded sharing never activates protection or merging; checkpoint event lists confirm that those mechanisms did not operate. Its reduced storage is a smaller buffer, not a compression result.
+
+E15 completed an accurate-model diagnostic using the same planner. High gravity still fails at horizons twenty and sixty, and the longer horizon costs three times the model calls while improving only one of eight paired settings. The next search design must address action proposals/temporal structure rather than assuming more memory, model accuracy or depth automatically fixes this failure. The oracle predictor is a diagnostic only and is never available to the learning agent.
+
+E12 remains running. Its first zero-entropy seed learned the initial task but later collapsed during four-room training to zero success on all three evaluations. This provisional fresh counterexample already prevents treating E10's repair as universal; the complete two-seed result remains pending.
 
 ## Binding constraint and unresolved measurement
 
