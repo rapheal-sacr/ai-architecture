@@ -1,0 +1,1766 @@
+{
+  "short_online": {
+    "stages": {
+      "-1": {
+        "0-16-random": {
+          "parent_accuracy": 0.17100694444444442,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.05246983233761663,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.16145833333333334,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017155346664367244,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.34809027777777773,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017050752668486286,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.3567708333333333,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017048976000902865,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.15711805555555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.0172709876690836,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.1345486111111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017085047332026686,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.3376736111111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01707156466242547,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.3489583333333333,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01713518133328762,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.1208767361111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017292554994734626,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.11870659722222222,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017213930007225525,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.3361545138888889,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017295858003005076,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.3391927083333333,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01723811833653599,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "0": {
+        "0-16-random": {
+          "parent_accuracy": 0.8680555555555557,
+          "canonical_graph_accuracy": 0.1111111111111111,
+          "functional_graph_accuracy": 0.1111111111111111,
+          "invalid_tree_fraction": 0.041666666666666664,
+          "neural_query_seconds": 0.026883259667859722,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.6154513888888888,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.5555555555555556,
+          "neural_query_seconds": 0.01684250932885334,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.671875,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.016929596997215413,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.6006944444444445,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.016849349000646423,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.8012152777777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.01692709566850681,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.48394097222222215,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.4305555555555555,
+          "neural_query_seconds": 0.017229879667866044,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.5915798611111112,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017185015332264204,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.5516493055555557,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01698989100016964,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.7081163194444445,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.017016687993115436,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.35199652777777773,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.3194444444444445,
+          "neural_query_seconds": 0.01800536533119157,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.5397135416666666,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017378096003085375,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.5314670138888888,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01710249333215567,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "1": {
+        "0-16-random": {
+          "parent_accuracy": 0.7135416666666666,
+          "canonical_graph_accuracy": 0.013888888888888888,
+          "functional_graph_accuracy": 0.013888888888888888,
+          "invalid_tree_fraction": 0.5277777777777778,
+          "neural_query_seconds": 0.023651452672008116,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.7760416666666666,
+          "canonical_graph_accuracy": 0.027777777777777776,
+          "functional_graph_accuracy": 0.027777777777777776,
+          "invalid_tree_fraction": 0.7916666666666666,
+          "neural_query_seconds": 0.01718196933506988,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.6623263888888888,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017224075995424453,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.6631944444444445,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017227154996362515,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.6710069444444443,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.6527777777777778,
+          "neural_query_seconds": 0.017234579000311594,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.7022569444444443,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.8611111111111112,
+          "neural_query_seconds": 0.017271265004334662,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.5915798611111112,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017340445003355853,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.5911458333333334,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017186802661550853,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.6278211805555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.5972222222222222,
+          "neural_query_seconds": 0.01726546065765433,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.5414496527777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.8055555555555555,
+          "neural_query_seconds": 0.017535175667338383,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.5464409722222222,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017643346004964162,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.540798611111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017248201664187945,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "2": {
+        "0-16-random": {
+          "parent_accuracy": 0.915798611111111,
+          "canonical_graph_accuracy": 0.27777777777777773,
+          "functional_graph_accuracy": 0.27777777777777773,
+          "invalid_tree_fraction": 0.08333333333333333,
+          "neural_query_seconds": 0.028436265337707784,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.6805555555555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.375,
+          "neural_query_seconds": 0.016987693335977383,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.6892361111111112,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017207567997199174,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.6605902777777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017851184670386527,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.873263888888889,
+          "canonical_graph_accuracy": 0.027777777777777776,
+          "functional_graph_accuracy": 0.027777777777777776,
+          "invalid_tree_fraction": 0.013888888888888876,
+          "neural_query_seconds": 0.01711465999930321,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.5750868055555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.40277777777777785,
+          "neural_query_seconds": 0.017530233002617024,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.5902777777777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01820613733434584,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.5876736111111112,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01731340433373892,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.8335503472222222,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.01712362666633756,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.43337673611111116,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.34722222222222215,
+          "neural_query_seconds": 0.017397485998420354,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.5473090277777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01754402899435566,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.544704861111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017195098000229336,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      }
+    },
+    "trials": [
+      {
+        "seed": 27101,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": 0.08333333333333334,
+        "mst_drop_after_return": 0.041666666666666664,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      },
+      {
+        "seed": 27102,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": 0.125,
+        "mst_drop_after_return": 0.0,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      },
+      {
+        "seed": 27103,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": 0.08333333333333333,
+        "mst_drop_after_return": 0.041666666666666664,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      }
+    ],
+    "training_seconds": 24.081634488664957,
+    "trained_graph_presentations": 12288.0,
+    "current_graph_presentations": 12288.0,
+    "replay_graph_presentations": 0.0,
+    "optimizer_steps": 1536.0,
+    "message_candidates": 6291456.0,
+    "decoder_candidates": 3145728.0,
+    "persistent_tensor_bytes": 187296.0,
+    "cuda_peak_training_allocated_bytes": 70570496.0,
+    "evaluation_seconds": 0.8905847036658088
+  },
+  "short_replay": {
+    "stages": {
+      "-1": {
+        "0-16-random": {
+          "parent_accuracy": 0.17100694444444442,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.0173190953307009,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.16145833333333334,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017215262666771498,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.34809027777777773,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.0171484603342833,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.3567708333333333,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01710386866761837,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.15711805555555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01713324466254562,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.1345486111111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017109723999359023,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.3376736111111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017077355994842947,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.3489583333333333,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017088466993300244,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.1208767361111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01721053033543285,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.11870659722222222,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01714276933247068,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.3361545138888889,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017171607333390664,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.3391927083333333,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01714131300104782,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "0": {
+        "0-16-random": {
+          "parent_accuracy": 0.8871527777777778,
+          "canonical_graph_accuracy": 0.13888888888888887,
+          "functional_graph_accuracy": 0.13888888888888887,
+          "invalid_tree_fraction": 0.027777777777777752,
+          "neural_query_seconds": 0.024220592337466467,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.6180555555555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.5,
+          "neural_query_seconds": 0.017110756001784466,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.6701388888888888,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017137145002683003,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.6076388888888888,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01704194933214846,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.8294270833333334,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.017434081664153684,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.46831597222222227,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.4444444444444445,
+          "neural_query_seconds": 0.01749169333197642,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.6028645833333334,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017509807667617377,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.5529513888888888,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01766781267360784,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.7491319444444445,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.01719198500116666,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.33745659722222215,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.4166666666666667,
+          "neural_query_seconds": 0.017608744334817555,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.5473090277777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017601340339751914,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.5355902777777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01723005399981048,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "1": {
+        "0-16-random": {
+          "parent_accuracy": 0.8949652777777777,
+          "canonical_graph_accuracy": 0.16666666666666666,
+          "functional_graph_accuracy": 0.16666666666666666,
+          "invalid_tree_fraction": 0.041666666666666664,
+          "neural_query_seconds": 0.02518974000122398,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.782986111111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.8194444444444443,
+          "neural_query_seconds": 0.01685320666001644,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.6649305555555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.016966376332372118,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.6744791666666666,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.016852054667348664,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.857638888888889,
+          "canonical_graph_accuracy": 0.013888888888888888,
+          "functional_graph_accuracy": 0.013888888888888888,
+          "invalid_tree_fraction": 0.013888888888888876,
+          "neural_query_seconds": 0.01695492166133287,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.69921875,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.8333333333333334,
+          "neural_query_seconds": 0.017006626333265256,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.5889756944444445,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.016973573665988322,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.5863715277777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.016875568670608725,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.7938368055555557,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.01705661733285524,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.5234375,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.7777777777777777,
+          "neural_query_seconds": 0.017354966000614997,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.5503472222222223,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01728482733111984,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.54296875,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01711534766945988,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "2": {
+        "0-16-random": {
+          "parent_accuracy": 0.8975694444444445,
+          "canonical_graph_accuracy": 0.19444444444444442,
+          "functional_graph_accuracy": 0.19444444444444442,
+          "invalid_tree_fraction": 0.09722222222222225,
+          "neural_query_seconds": 0.02669789766756973,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.7586805555555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.9166666666666666,
+          "neural_query_seconds": 0.016943186667049304,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.6944444444444445,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.016969462327930767,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.671875,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.016856225663408015,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.8680555555555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.04166666666666663,
+          "neural_query_seconds": 0.016944271662699368,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.717013888888889,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.9722222222222222,
+          "neural_query_seconds": 0.017118159662156057,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.5963541666666666,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.01699949932905535,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.5902777777777777,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.016923548673124362,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.8285590277777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.017085307665790122,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.5746527777777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.888888888888889,
+          "neural_query_seconds": 0.017526749667013064,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.5516493055555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017192776998854242,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.5438368055555557,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.017130068998085335,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      }
+    },
+    "trials": [
+      {
+        "seed": 27101,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": 0.0,
+        "mst_drop_after_return": 0.0,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      },
+      {
+        "seed": 27102,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": -0.08333333333333334,
+        "mst_drop_after_return": 0.0,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      },
+      {
+        "seed": 27103,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": 0.0,
+        "mst_drop_after_return": 0.0,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      }
+    ],
+    "training_seconds": 24.577381007329677,
+    "trained_graph_presentations": 24568.0,
+    "current_graph_presentations": 12288.0,
+    "replay_graph_presentations": 12280.0,
+    "optimizer_steps": 1536.0,
+    "message_candidates": 12578816.0,
+    "decoder_candidates": 6289408.0,
+    "persistent_tensor_bytes": 336800.0,
+    "cuda_peak_training_allocated_bytes": 72780288.0,
+    "evaluation_seconds": 0.8479786416476903
+  },
+  "size_online": {
+    "stages": {
+      "-1": {
+        "0-16-random": {
+          "parent_accuracy": 0.21788194444444442,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.08449982099409681,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.1796875,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.08394751566326401,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.34375,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.08395771833602339,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.3194444444444444,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.08423138467090514,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.11197916666666667,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16128731166827492,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.17838541666666666,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.1610756989927419,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.3415798611111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16099243233232605,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.2821180555555556,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16356431499298196,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.05859375,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31473515333103325,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.24956597222222224,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3166451686653697,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.4134114583333333,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3134362479953173,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.20399305555555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3132381143271535,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "0": {
+        "0-16-random": {
+          "parent_accuracy": 0.896701388888889,
+          "canonical_graph_accuracy": 0.23611111111111113,
+          "functional_graph_accuracy": 0.23611111111111113,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.09646475033271902,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.5095486111111112,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.5555555555555555,
+          "neural_query_seconds": 0.08405459833253796,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.959201388888889,
+          "canonical_graph_accuracy": 0.4305555555555556,
+          "functional_graph_accuracy": 0.4305555555555556,
+          "invalid_tree_fraction": 0.5694444444444444,
+          "neural_query_seconds": 0.0841071109995634,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.5842013888888888,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.08386437632725574,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.6293402777777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.625,
+          "neural_query_seconds": 0.15965276066951142,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.5286458333333333,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.9861111111111112,
+          "neural_query_seconds": 0.16060841299865083,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.7426215277777777,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.1596706616692245,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.45269097222222227,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.15976153266577361,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.3860677083333333,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3131833970013152,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.47417534722222215,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31650684333483997,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.5991753472222222,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3121721666733113,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.3587239583333333,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31186705133586656,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "1": {
+        "0-16-random": {
+          "parent_accuracy": 0.6388888888888888,
+          "canonical_graph_accuracy": 0.013888888888888888,
+          "functional_graph_accuracy": 0.013888888888888888,
+          "invalid_tree_fraction": 0.4166666666666667,
+          "neural_query_seconds": 0.096166147995973,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.8307291666666666,
+          "canonical_graph_accuracy": 0.041666666666666664,
+          "functional_graph_accuracy": 0.041666666666666664,
+          "invalid_tree_fraction": 0.5833333333333334,
+          "neural_query_seconds": 0.0843527113320306,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.802951388888889,
+          "canonical_graph_accuracy": 0.2916666666666667,
+          "functional_graph_accuracy": 0.2916666666666667,
+          "invalid_tree_fraction": 0.7083333333333334,
+          "neural_query_seconds": 0.08470916700510618,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.9904513888888888,
+          "canonical_graph_accuracy": 0.8472222222222222,
+          "functional_graph_accuracy": 0.8472222222222222,
+          "invalid_tree_fraction": 0.1527777777777778,
+          "neural_query_seconds": 0.08456292400175396,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.5559895833333334,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.736111111111111,
+          "neural_query_seconds": 0.16118383933401978,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.7178819444444443,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.8333333333333334,
+          "neural_query_seconds": 0.1623762776677419,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.6640625,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16103481499885675,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.75390625,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16067382767020413,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.4318576388888889,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.9305555555555555,
+          "neural_query_seconds": 0.31334632700600196,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.6013454861111112,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.9722222222222222,
+          "neural_query_seconds": 0.3167513649968896,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.5670572916666666,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31304813133222825,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.603732638888889,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31418529233390774,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "2": {
+        "0-16-random": {
+          "parent_accuracy": 0.9713541666666666,
+          "canonical_graph_accuracy": 0.5972222222222222,
+          "functional_graph_accuracy": 0.5972222222222222,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.0988396036652072,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.6736111111111112,
+          "canonical_graph_accuracy": 0.013888888888888888,
+          "functional_graph_accuracy": 0.013888888888888888,
+          "invalid_tree_fraction": 0.34722222222222215,
+          "neural_query_seconds": 0.08442341533858173,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.9982638888888888,
+          "canonical_graph_accuracy": 0.9722222222222222,
+          "functional_graph_accuracy": 0.9722222222222222,
+          "invalid_tree_fraction": 0.02777777777777779,
+          "neural_query_seconds": 0.08463134766983178,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.7100694444444445,
+          "canonical_graph_accuracy": 0.1388888888888889,
+          "functional_graph_accuracy": 0.1388888888888889,
+          "invalid_tree_fraction": 0.861111111111111,
+          "neural_query_seconds": 0.08409889732623317,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.8515625,
+          "canonical_graph_accuracy": 0.013888888888888888,
+          "functional_graph_accuracy": 0.013888888888888888,
+          "invalid_tree_fraction": 0.027777777777777752,
+          "neural_query_seconds": 0.16319421499307887,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.631076388888889,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.47222222222222215,
+          "neural_query_seconds": 0.16126606933539733,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.8064236111111112,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16184302032828177,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.5833333333333334,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16077287200217447,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.6141493055555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.75,
+          "neural_query_seconds": 0.31358076466131024,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.568359375,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.6805555555555555,
+          "neural_query_seconds": 0.31501102167142864,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.6799045138888888,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3128214293295362,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.4904513888888889,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3145964069990441,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      }
+    },
+    "trials": [
+      {
+        "seed": 27101,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": 0.16666666666666666,
+        "mst_drop_after_return": 0.041666666666666664,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      },
+      {
+        "seed": 27102,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": 0.3333333333333333,
+        "mst_drop_after_return": 0.08333333333333333,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      },
+      {
+        "seed": 27103,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": 0.16666666666666669,
+        "mst_drop_after_return": -0.041666666666666664,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      }
+    ],
+    "training_seconds": 89.03504276232464,
+    "trained_graph_presentations": 12288.0,
+    "current_graph_presentations": 12288.0,
+    "replay_graph_presentations": 0.0,
+    "optimizer_steps": 1536.0,
+    "message_candidates": 50331648.0,
+    "decoder_candidates": 3145728.0,
+    "persistent_tensor_bytes": 187296.0,
+    "cuda_peak_training_allocated_bytes": 78182912.0,
+    "evaluation_seconds": 8.990994433304877
+  },
+  "size_replay": {
+    "stages": {
+      "-1": {
+        "0-16-random": {
+          "parent_accuracy": 0.21788194444444442,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.08487846366188023,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.1796875,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.08467169666255359,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.34375,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.08441274167368344,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.3194444444444444,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.08378063000175946,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.11197916666666667,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16024080533922339,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.17838541666666666,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16038368833445324,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.3415798611111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16114410900142198,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.2821180555555556,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16457639133538274,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.05859375,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31489318333236344,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.24956597222222224,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31376415033688926,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.4134114583333333,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3171787063377754,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.20399305555555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31620130032630794,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "0": {
+        "0-16-random": {
+          "parent_accuracy": 0.9210069444444443,
+          "canonical_graph_accuracy": 0.2916666666666667,
+          "functional_graph_accuracy": 0.2916666666666667,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.09342814965930302,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.5329861111111112,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.6666666666666666,
+          "neural_query_seconds": 0.08402648399836228,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.9869791666666666,
+          "canonical_graph_accuracy": 0.8055555555555557,
+          "functional_graph_accuracy": 0.8055555555555557,
+          "invalid_tree_fraction": 0.19444444444444442,
+          "neural_query_seconds": 0.08420168800512329,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.6241319444444444,
+          "canonical_graph_accuracy": 0.09722222222222222,
+          "functional_graph_accuracy": 0.09722222222222222,
+          "invalid_tree_fraction": 0.9027777777777777,
+          "neural_query_seconds": 0.08442600067064632,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.5876736111111112,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.6666666666666666,
+          "neural_query_seconds": 0.16031832600128837,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.4717881944444444,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.8194444444444445,
+          "neural_query_seconds": 0.16227727000174733,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.7526041666666666,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16029635166341905,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.5,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.1613325553383523,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.4637586805555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.6666666666666666,
+          "neural_query_seconds": 0.31204271999983274,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.46050347222222227,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3139868826692691,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.5963541666666666,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3153479293396231,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.4079861111111111,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31378566366523347,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "1": {
+        "0-16-random": {
+          "parent_accuracy": 0.9461805555555557,
+          "canonical_graph_accuracy": 0.40277777777777773,
+          "functional_graph_accuracy": 0.40277777777777773,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.09014797767061584,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.84375,
+          "canonical_graph_accuracy": 0.08333333333333333,
+          "functional_graph_accuracy": 0.08333333333333333,
+          "invalid_tree_fraction": 0.5555555555555556,
+          "neural_query_seconds": 0.08360291267066107,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 0.9956597222222222,
+          "canonical_graph_accuracy": 0.9305555555555555,
+          "functional_graph_accuracy": 0.9305555555555555,
+          "invalid_tree_fraction": 0.06944444444444446,
+          "neural_query_seconds": 0.0839555543352617,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.9973958333333334,
+          "canonical_graph_accuracy": 0.9583333333333334,
+          "functional_graph_accuracy": 0.9583333333333334,
+          "invalid_tree_fraction": 0.041666666666666664,
+          "neural_query_seconds": 0.08329989133441511,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.7408854166666666,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.47222222222222215,
+          "neural_query_seconds": 0.16118194933126992,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.6987847222222222,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.9583333333333334,
+          "neural_query_seconds": 0.1613573400002982,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.77734375,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.1646411253362506,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.7951388888888888,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16012592132998785,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.5948350694444445,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.7083333333333334,
+          "neural_query_seconds": 0.3165274156684366,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.6391059027777778,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.9722222222222222,
+          "neural_query_seconds": 0.3105057936675924,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.5759548611111112,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31181571033084765,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.6182725694444445,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3115818096654645,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      },
+      "2": {
+        "0-16-random": {
+          "parent_accuracy": 0.9696180555555555,
+          "canonical_graph_accuracy": 0.6388888888888888,
+          "functional_graph_accuracy": 0.6388888888888888,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.09034371833937864,
+          "exact_reference_query_seconds": 0.008338746993103996
+        },
+        "1-16-random": {
+          "parent_accuracy": 0.8385416666666666,
+          "canonical_graph_accuracy": 0.06944444444444443,
+          "functional_graph_accuracy": 0.06944444444444443,
+          "invalid_tree_fraction": 0.5694444444444444,
+          "neural_query_seconds": 0.08397479133175996,
+          "exact_reference_query_seconds": 0.007708250021096319
+        },
+        "0-16-chain": {
+          "parent_accuracy": 1.0,
+          "canonical_graph_accuracy": 1.0,
+          "functional_graph_accuracy": 1.0,
+          "invalid_tree_fraction": 0.0,
+          "neural_query_seconds": 0.08447538133380779,
+          "exact_reference_query_seconds": 0.00700908167345915
+        },
+        "1-16-chain": {
+          "parent_accuracy": 0.9895833333333334,
+          "canonical_graph_accuracy": 0.8333333333333334,
+          "functional_graph_accuracy": 0.8333333333333334,
+          "invalid_tree_fraction": 0.16666666666666666,
+          "neural_query_seconds": 0.08366172699606977,
+          "exact_reference_query_seconds": 0.007057638989257005
+        },
+        "0-32-random": {
+          "parent_accuracy": 0.7994791666666666,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.3194444444444445,
+          "neural_query_seconds": 0.15998865033422285,
+          "exact_reference_query_seconds": 0.01803854033156919
+        },
+        "1-32-random": {
+          "parent_accuracy": 0.7178819444444445,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.16126205100348065,
+          "exact_reference_query_seconds": 0.017763656995763693
+        },
+        "0-32-chain": {
+          "parent_accuracy": 0.8077256944444443,
+          "canonical_graph_accuracy": 0.013888888888888888,
+          "functional_graph_accuracy": 0.013888888888888888,
+          "invalid_tree_fraction": 0.9861111111111112,
+          "neural_query_seconds": 0.1594640743326939,
+          "exact_reference_query_seconds": 0.015162686332284162
+        },
+        "1-32-chain": {
+          "parent_accuracy": 0.7860243055555555,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.15957659933095178,
+          "exact_reference_query_seconds": 0.015344815013425736
+        },
+        "0-64-random": {
+          "parent_accuracy": 0.4776475694444445,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 0.7638888888888888,
+          "neural_query_seconds": 0.31096474767158117,
+          "exact_reference_query_seconds": 0.05076655364731172
+        },
+        "1-64-random": {
+          "parent_accuracy": 0.65625,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31114484766537015,
+          "exact_reference_query_seconds": 0.049120724351572186
+        },
+        "0-64-chain": {
+          "parent_accuracy": 0.638888888888889,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.31535543766221963,
+          "exact_reference_query_seconds": 0.038968337971406676
+        },
+        "1-64-chain": {
+          "parent_accuracy": 0.6432291666666666,
+          "canonical_graph_accuracy": 0.0,
+          "functional_graph_accuracy": 0.0,
+          "invalid_tree_fraction": 1.0,
+          "neural_query_seconds": 0.3119448026603398,
+          "exact_reference_query_seconds": 0.03898532668245025
+        }
+      }
+    },
+    "trials": [
+      {
+        "seed": 27101,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": -0.08333333333333331,
+        "mst_drop_after_return": 0.0,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      },
+      {
+        "seed": 27102,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": -0.16666666666666663,
+        "mst_drop_after_return": 0.0,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      },
+      {
+        "seed": 27103,
+        "dijkstra_acquired": false,
+        "mst_acquired": false,
+        "dijkstra_drop_after_switch": -0.08333333333333334,
+        "mst_drop_after_return": 0.041666666666666664,
+        "dijkstra_retention_pass_given_acquisition": null,
+        "mst_retention_pass_given_acquisition": null,
+        "final_n64_random_both_pass": false,
+        "final_n64_chain_both_pass": false
+      }
+    ],
+    "training_seconds": 89.19752997199733,
+    "trained_graph_presentations": 24568.0,
+    "current_graph_presentations": 12288.0,
+    "replay_graph_presentations": 12280.0,
+    "optimizer_steps": 1536.0,
+    "message_candidates": 100630528.0,
+    "decoder_candidates": 6289408.0,
+    "persistent_tensor_bytes": 336800.0,
+    "cuda_peak_training_allocated_bytes": 88005120.0,
+    "evaluation_seconds": 8.962496117358873
+  }
+}

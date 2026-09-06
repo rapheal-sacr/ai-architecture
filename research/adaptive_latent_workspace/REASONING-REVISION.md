@@ -112,3 +112,58 @@ locally plausible pointers can form invalid cycles. Failure to acquire must not
 be mislabeled catastrophic forgetting. Test queries never select checkpoints,
 set stopping times, enter replay, or modify training. Full tensor costs and
 training/evaluation message candidates are distinct from measured FLOPs.
+
+## Distinguish possible causes before another training change
+
+The supplied TTC-LR review explicitly describes randomized recurrence depth and
+truncated backpropagation; E27 deliberately uses fixed train depth and full
+backpropagation in a different, much smaller graph processor. E27 failure must
+not be reported as a replication failure of that language-model work.
+
+A useful next diagnostic is frozen-checkpoint inference at several declared
+budgets, separately from changes in graph size. Evaluate all seeds and both
+recurrence-trained models; keep any evaluator-selected best depth explicitly
+privileged and unavailable to the candidate. Public N and fixed training depth
+are deployable controls. Additional steps can expose a computation-depth
+mismatch, but cannot by themselves distinguish poor optimization, an unstable
+learned state transition, and insufficient algorithmic representation.
+
+Only after this attribution test consider randomized train recurrence against a
+fixed-depth control with matched expected work, or training-only intermediate
+supervision against final-only targets. Training supervision and inference-time
+oracle information are different resources and must be stated separately. No
+such follow-up protocol or scored run is registered yet.
+
+## E27: trained recurrence succeeds locally and fails size transfer
+
+All twelve registered cases completed from `505da5d`; all 36 stage checkpoints
+and three paired stream/replay histories pass audit. The shared 15,177-parameter
+processor learns Dijkstra, Prim, then Dijkstra, with explicit requested-task IDs
+and final parent targets only. No gold hint trajectories or target-derived
+stopping times enter the candidate. Initial weights and current observations
+match across two/public-N recurrence and no-replay/128-graph-replay arms.
+
+No arm or seed meets the declared 80% random-N16 acquisition criterion after its
+first Dijkstra or Prim stage. Final random-N16 Dijkstra correctness averages
+27.8% short/no-replay, 19.4% short/replay, 59.7% size/no-replay and 63.9%
+size/replay. Prim remains poor. Size/replay nevertheless solves all 72 tested
+final N16 Dijkstra chains; size/no-replay solves 70/72. At N64, every final
+arm/task/family cell has zero functionally correct graphs. High pointer accuracy
+can conceal incorrect solutions: short/no-replay's final N64 random Dijkstra
+parent accuracy is 83.4%, with zero optimal whole graphs.
+
+Replay preserves or improves some earlier accuracy during the task switch, but
+successful retention of the registered random task cannot be claimed where
+acquisition failed. Public-N recurrence costs eight times forward training
+message candidates and about 3.6–3.7 times training time at the same replay
+choice. Size/replay uses about sixteen times short/no-replay message candidates
+and 1.80 times persistent tensor bytes. More computation has not established
+size-general algorithmic reasoning or an efficient autonomous agent.
+
+This falsifies the current component's sufficiency, not recurrence in general.
+Fixed training depth, optimization, representation and supervision remain
+confounded explanations of transfer failure. `E27-RESULT.md` and its preserved
+predictions include every failure. The next bounded diagnostic should change
+inference depth on frozen checkpoints before changing training. No E28 protocol
+or run is yet registered. Full integrated learning, compression, reliable RSI
+and architectural novelty remain unproven.

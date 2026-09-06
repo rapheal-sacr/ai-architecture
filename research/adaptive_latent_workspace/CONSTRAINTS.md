@@ -139,3 +139,11 @@ why constant message-passing depth cannot solve arbitrary long chains regardless
 of width. This is a structural bound on this graph processor, not a universal
 numeric bound on AI improvement. Longer recurrence changes compute availability;
 its trainability, cost and continual retention must still be measured.
+
+The E27 graph core computes all N² message candidates on each local step even
+though graph masks discard most candidates on a chain. With N public steps,
+that is N³ forward message candidates, before backpropagation. Sparse execution
+could reduce this overhead without removing the graph's communication-depth
+requirement. Algorithm acquisition, computation allocation, and kernel/storage
+efficiency must therefore remain separate measurements. No speed or competence
+gain from a sparse implementation is measured here.

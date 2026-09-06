@@ -1,0 +1,374 @@
+{
+  "checkpoints": [
+    {
+      "seed": 27101,
+      "arm": "short_online",
+      "stage": 0,
+      "hash": "b2b0ebccead3505aa2a8c326f2f05cfa838dbf4a91da8da3c2c379f52188c2bf",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "short_online",
+      "stage": 1,
+      "hash": "6d7ffbb6796171e03e79455534bedba4567c84debbda82064de09be42ae9e818",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "short_online",
+      "stage": 2,
+      "hash": "d36f0954f4a7f993c5aca2cdd6a8ffee6c3a9980b4c0ed65e17c14e26d38670f",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "short_replay",
+      "stage": 0,
+      "hash": "e85354ac2066d072b06bb122354e853ec50d2ef7f5e4eef433e7453bde1b17ed",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "short_replay",
+      "stage": 1,
+      "hash": "9d5e9b9f67789fac578f4c943dc68ff26392fc9cac3b268ed4039b5dbe1948f5",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "short_replay",
+      "stage": 2,
+      "hash": "479ece194b3dfc97dc39660a55fb9172f26fbea98f506b99529cea3d1be39f1f",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "size_online",
+      "stage": 0,
+      "hash": "bf469ce609f12ea36cb898089079d9c892112fbdbf9897ffd1440dc36396cd19",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "size_online",
+      "stage": 1,
+      "hash": "f4f9db766e2b6563d5f27ac4a409da63ac0b626de942dc925253a3b87ca77114",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "size_online",
+      "stage": 2,
+      "hash": "b856c35794a555d83487d0379e793f44c58426994d553966e1ccde5c69e3468a",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "size_replay",
+      "stage": 0,
+      "hash": "6d8feb262dc02d128dc789bdee8d98c441a5233c9addebcacd295129054f029a",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "size_replay",
+      "stage": 1,
+      "hash": "9d2245db2e384c974e29b21e2a72d61e7f980843067887cbd861b6fa3e5720bf",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "size_replay",
+      "stage": 2,
+      "hash": "5843b4992284aee85c5e8744baca76d3d40394b2895ad6f344effa9e95761028",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "short_online",
+      "stage": 0,
+      "hash": "c08235aff1efaddcfbd7fef1bd6836471d936a6774fda8d5c0b233faa6baf684",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "short_online",
+      "stage": 1,
+      "hash": "96fc8be06bb2a9a88c5b31bfc036e09fb7cc24a24a0352857599c7f613999789",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "short_online",
+      "stage": 2,
+      "hash": "964cf401e423960e7825230e662719dd1a26638b70fa92ae9dcb10b4265e8cfe",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "short_replay",
+      "stage": 0,
+      "hash": "3be3489f848356618d219b70118d0b8a5bb6bfccaf19d902d2a4801915380c4e",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "short_replay",
+      "stage": 1,
+      "hash": "7cbaead8f66ec4575c54c65fe9324e5884b678f3c1bece67c565bd95bfdc2777",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "short_replay",
+      "stage": 2,
+      "hash": "d7b79fcb61cc54b03536406c4083cd9146e4a123e0178044787cd959d52db647",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "size_online",
+      "stage": 0,
+      "hash": "fc985c18b1b661bdadfdd2f515f92126c0483e62dc5b86bc8ec0219578c45ac7",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "size_online",
+      "stage": 1,
+      "hash": "cd7c9c3e6ee44c0ab3a868d22e7c642608b0d45ecc41bbc47555d92850cc303c",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "size_online",
+      "stage": 2,
+      "hash": "521de5993d7ff098ec5de84905f0817b7d0d14fc694bb7c486b04b5dfeeb719f",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "size_replay",
+      "stage": 0,
+      "hash": "43e9fd9317c78ef2e7c0f2c6ca26f684f6a9c00fa3f82cde8821bc8d4c3e7164",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "size_replay",
+      "stage": 1,
+      "hash": "ec668c5afa906f46dd4013410d1a4431e2197ac284b5f6917f391214e6cbe888",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "size_replay",
+      "stage": 2,
+      "hash": "cf8b1cefd13290fa444b7bd5cce81878be2c3b7b223385143771b850476d8aa7",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "short_online",
+      "stage": 0,
+      "hash": "eef2d1b79026dc20714c2d41d1ee43bbd1b77268d2915499ed05fc26318e1983",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "short_online",
+      "stage": 1,
+      "hash": "ec4494d454ede92e44bbcae1fb1acda2b0b3183723f990f1326bf66eda2c402c",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "short_online",
+      "stage": 2,
+      "hash": "8a50196e0b10f149846a76a43c8c410d8f6775f56eb17e45f3c942239d09e6f4",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "short_replay",
+      "stage": 0,
+      "hash": "38f0297259ab75add715891b2d53a2029d56c207c0b9f3b86354130a759a16cd",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "short_replay",
+      "stage": 1,
+      "hash": "4b1474e72028d13fbd594849f95e364ee7aed30aec0caba915b836fce77f0038",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "short_replay",
+      "stage": 2,
+      "hash": "5974dc1aae744acfb1deeed7ff525b6b846938c38d5ebfe351b953bc66ba844a",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "size_online",
+      "stage": 0,
+      "hash": "3a823bd79187d4e396c09d7771342ef11da0ab617aa5e213ee1be0f54ebd342e",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "size_online",
+      "stage": 1,
+      "hash": "b699b311deb83314f5a2b48cdb2a5b09f27a0d01e0e330fc65fd4be8e935f2d8",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "size_online",
+      "stage": 2,
+      "hash": "7faf138456ec68b2ccdbfefc95e5c003e3d4394cd793c41b6968ce17fc6a01e6",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "size_replay",
+      "stage": 0,
+      "hash": "0760663821b0b54ec64deb91ef6e6c47c83ec088368d96b39ac99de133017e4f",
+      "optimizer_steps": 512,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "size_replay",
+      "stage": 1,
+      "hash": "da58c1aacce7301d95ed1df113cd2b977413795ded0ccbc0f217ac7382850359",
+      "optimizer_steps": 1024,
+      "counters_and_memory_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "size_replay",
+      "stage": 2,
+      "hash": "25317e4ec5483e69ec056aaf75d6fee6961b621c6d993643eddfa69fddeb51d7",
+      "optimizer_steps": 1536,
+      "counters_and_memory_exact": true
+    }
+  ],
+  "pair_checks": [
+    {
+      "seed": 27101,
+      "identical_initial_model": true,
+      "all_current_data_hashes_exact": true,
+      "replay_contents_reconstructed_at_all_stages": true
+    },
+    {
+      "seed": 27102,
+      "identical_initial_model": true,
+      "all_current_data_hashes_exact": true,
+      "replay_contents_reconstructed_at_all_stages": true
+    },
+    {
+      "seed": 27103,
+      "identical_initial_model": true,
+      "all_current_data_hashes_exact": true,
+      "replay_contents_reconstructed_at_all_stages": true
+    }
+  ],
+  "final_prediction_reproduction": [
+    {
+      "seed": 27101,
+      "arm": "short_online",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "short_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "size_online",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 27101,
+      "arm": "size_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "short_online",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "short_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "size_online",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 27102,
+      "arm": "size_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "short_online",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "short_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "size_online",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 27103,
+      "arm": "size_replay",
+      "final_predictions_exact": true
+    }
+  ]
+}

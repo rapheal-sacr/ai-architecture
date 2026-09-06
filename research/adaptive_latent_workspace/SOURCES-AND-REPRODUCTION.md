@@ -198,3 +198,14 @@ prelude/shared core/coda and truncated-gradient recurrence are implemented prior
 art. Reconfirmed MoR at `53d0fee43632b53fb9bddd4acf9af7a2eba43bb6`; the
 previous paper/source audit remains the authority beyond the inspected header.
 The new small graph processor is not a reproduction of those language models.
+
+E27 completed from source frozen at `505da5d` after the separate CUDA preflight.
+All twelve final checkpoint models reproduce all final predictions exactly in
+the scored runner. `record_e27.py` checks all 36 stage checkpoint hashes,
+optimizer steps, graph/message counters, tensor bytes, finite weights and
+recorded pointer metrics. It reconstructs every stage reservoir/RNG directly
+from the frozen stream and verifies paired initialization and data hashes.
+The reasoning figure was rendered and inspected. The source CLRS functions are
+reference labels through the small adapter, not a published-score replication.
+The descriptive distance-bucket analysis uses already-recorded final predictions;
+it is labeled post-hoc and never changes training or the registered criteria.

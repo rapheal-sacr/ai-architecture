@@ -1,0 +1,773 @@
+{
+  "status": "DESCRIPTIVE_POST_HOC_ALREADY_RECORDED_PREDICTIONS",
+  "results": {
+    "short_online-0-16-chain": {
+      "0-2": {
+        "correct": 214,
+        "nodes": 216,
+        "accuracy": 0.9907407407407407
+      },
+      "3-4": {
+        "correct": 108,
+        "nodes": 144,
+        "accuracy": 0.75
+      },
+      "5-8": {
+        "correct": 147,
+        "nodes": 288,
+        "accuracy": 0.5104166666666666
+      },
+      "9-16": {
+        "correct": 325,
+        "nodes": 504,
+        "accuracy": 0.6448412698412699
+      },
+      "17-32": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "short_online-1-16-chain": {
+      "0-2": {
+        "correct": 210,
+        "nodes": 216,
+        "accuracy": 0.9722222222222222
+      },
+      "3-4": {
+        "correct": 99,
+        "nodes": 144,
+        "accuracy": 0.6875
+      },
+      "5-8": {
+        "correct": 140,
+        "nodes": 288,
+        "accuracy": 0.4861111111111111
+      },
+      "9-16": {
+        "correct": 312,
+        "nodes": 504,
+        "accuracy": 0.6190476190476191
+      },
+      "17-32": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "short_online-0-32-chain": {
+      "0-2": {
+        "correct": 215,
+        "nodes": 216,
+        "accuracy": 0.9953703703703703
+      },
+      "3-4": {
+        "correct": 107,
+        "nodes": 144,
+        "accuracy": 0.7430555555555556
+      },
+      "5-8": {
+        "correct": 149,
+        "nodes": 288,
+        "accuracy": 0.5173611111111112
+      },
+      "9-16": {
+        "correct": 289,
+        "nodes": 576,
+        "accuracy": 0.5017361111111112
+      },
+      "17-32": {
+        "correct": 600,
+        "nodes": 1080,
+        "accuracy": 0.5555555555555556
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "short_online-1-32-chain": {
+      "0-2": {
+        "correct": 209,
+        "nodes": 216,
+        "accuracy": 0.9675925925925926
+      },
+      "3-4": {
+        "correct": 91,
+        "nodes": 144,
+        "accuracy": 0.6319444444444444
+      },
+      "5-8": {
+        "correct": 156,
+        "nodes": 288,
+        "accuracy": 0.5416666666666666
+      },
+      "9-16": {
+        "correct": 295,
+        "nodes": 576,
+        "accuracy": 0.5121527777777778
+      },
+      "17-32": {
+        "correct": 603,
+        "nodes": 1080,
+        "accuracy": 0.5583333333333333
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "short_online-0-64-chain": {
+      "0-2": {
+        "correct": 215,
+        "nodes": 216,
+        "accuracy": 0.9953703703703703
+      },
+      "3-4": {
+        "correct": 107,
+        "nodes": 144,
+        "accuracy": 0.7430555555555556
+      },
+      "5-8": {
+        "correct": 138,
+        "nodes": 288,
+        "accuracy": 0.4791666666666667
+      },
+      "9-16": {
+        "correct": 293,
+        "nodes": 576,
+        "accuracy": 0.5086805555555556
+      },
+      "17-32": {
+        "correct": 562,
+        "nodes": 1152,
+        "accuracy": 0.4878472222222222
+      },
+      "33-1000": {
+        "correct": 1207,
+        "nodes": 2232,
+        "accuracy": 0.5407706093189965
+      }
+    },
+    "short_online-1-64-chain": {
+      "0-2": {
+        "correct": 207,
+        "nodes": 216,
+        "accuracy": 0.9583333333333334
+      },
+      "3-4": {
+        "correct": 95,
+        "nodes": 144,
+        "accuracy": 0.6597222222222222
+      },
+      "5-8": {
+        "correct": 140,
+        "nodes": 288,
+        "accuracy": 0.4861111111111111
+      },
+      "9-16": {
+        "correct": 287,
+        "nodes": 576,
+        "accuracy": 0.4982638888888889
+      },
+      "17-32": {
+        "correct": 584,
+        "nodes": 1152,
+        "accuracy": 0.5069444444444444
+      },
+      "33-1000": {
+        "correct": 1197,
+        "nodes": 2232,
+        "accuracy": 0.5362903225806451
+      }
+    },
+    "short_replay-0-16-chain": {
+      "0-2": {
+        "correct": 214,
+        "nodes": 216,
+        "accuracy": 0.9907407407407407
+      },
+      "3-4": {
+        "correct": 112,
+        "nodes": 144,
+        "accuracy": 0.7777777777777778
+      },
+      "5-8": {
+        "correct": 141,
+        "nodes": 288,
+        "accuracy": 0.4895833333333333
+      },
+      "9-16": {
+        "correct": 333,
+        "nodes": 504,
+        "accuracy": 0.6607142857142857
+      },
+      "17-32": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "short_replay-1-16-chain": {
+      "0-2": {
+        "correct": 202,
+        "nodes": 216,
+        "accuracy": 0.9351851851851852
+      },
+      "3-4": {
+        "correct": 106,
+        "nodes": 144,
+        "accuracy": 0.7361111111111112
+      },
+      "5-8": {
+        "correct": 146,
+        "nodes": 288,
+        "accuracy": 0.5069444444444444
+      },
+      "9-16": {
+        "correct": 320,
+        "nodes": 504,
+        "accuracy": 0.6349206349206349
+      },
+      "17-32": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "short_replay-0-32-chain": {
+      "0-2": {
+        "correct": 215,
+        "nodes": 216,
+        "accuracy": 0.9953703703703703
+      },
+      "3-4": {
+        "correct": 109,
+        "nodes": 144,
+        "accuracy": 0.7569444444444444
+      },
+      "5-8": {
+        "correct": 151,
+        "nodes": 288,
+        "accuracy": 0.5243055555555556
+      },
+      "9-16": {
+        "correct": 286,
+        "nodes": 576,
+        "accuracy": 0.4965277777777778
+      },
+      "17-32": {
+        "correct": 613,
+        "nodes": 1080,
+        "accuracy": 0.5675925925925925
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "short_replay-1-32-chain": {
+      "0-2": {
+        "correct": 200,
+        "nodes": 216,
+        "accuracy": 0.9259259259259259
+      },
+      "3-4": {
+        "correct": 106,
+        "nodes": 144,
+        "accuracy": 0.7361111111111112
+      },
+      "5-8": {
+        "correct": 141,
+        "nodes": 288,
+        "accuracy": 0.4895833333333333
+      },
+      "9-16": {
+        "correct": 286,
+        "nodes": 576,
+        "accuracy": 0.4965277777777778
+      },
+      "17-32": {
+        "correct": 627,
+        "nodes": 1080,
+        "accuracy": 0.5805555555555556
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "short_replay-0-64-chain": {
+      "0-2": {
+        "correct": 214,
+        "nodes": 216,
+        "accuracy": 0.9907407407407407
+      },
+      "3-4": {
+        "correct": 107,
+        "nodes": 144,
+        "accuracy": 0.7430555555555556
+      },
+      "5-8": {
+        "correct": 148,
+        "nodes": 288,
+        "accuracy": 0.5138888888888888
+      },
+      "9-16": {
+        "correct": 305,
+        "nodes": 576,
+        "accuracy": 0.5295138888888888
+      },
+      "17-32": {
+        "correct": 581,
+        "nodes": 1152,
+        "accuracy": 0.5043402777777778
+      },
+      "33-1000": {
+        "correct": 1187,
+        "nodes": 2232,
+        "accuracy": 0.5318100358422939
+      }
+    },
+    "short_replay-1-64-chain": {
+      "0-2": {
+        "correct": 200,
+        "nodes": 216,
+        "accuracy": 0.9259259259259259
+      },
+      "3-4": {
+        "correct": 101,
+        "nodes": 144,
+        "accuracy": 0.7013888888888888
+      },
+      "5-8": {
+        "correct": 144,
+        "nodes": 288,
+        "accuracy": 0.5
+      },
+      "9-16": {
+        "correct": 290,
+        "nodes": 576,
+        "accuracy": 0.5034722222222222
+      },
+      "17-32": {
+        "correct": 581,
+        "nodes": 1152,
+        "accuracy": 0.5043402777777778
+      },
+      "33-1000": {
+        "correct": 1190,
+        "nodes": 2232,
+        "accuracy": 0.5331541218637993
+      }
+    },
+    "size_online-0-16-chain": {
+      "0-2": {
+        "correct": 216,
+        "nodes": 216,
+        "accuracy": 1.0
+      },
+      "3-4": {
+        "correct": 144,
+        "nodes": 144,
+        "accuracy": 1.0
+      },
+      "5-8": {
+        "correct": 288,
+        "nodes": 288,
+        "accuracy": 1.0
+      },
+      "9-16": {
+        "correct": 502,
+        "nodes": 504,
+        "accuracy": 0.996031746031746
+      },
+      "17-32": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "size_online-1-16-chain": {
+      "0-2": {
+        "correct": 194,
+        "nodes": 216,
+        "accuracy": 0.8981481481481481
+      },
+      "3-4": {
+        "correct": 113,
+        "nodes": 144,
+        "accuracy": 0.7847222222222222
+      },
+      "5-8": {
+        "correct": 169,
+        "nodes": 288,
+        "accuracy": 0.5868055555555556
+      },
+      "9-16": {
+        "correct": 342,
+        "nodes": 504,
+        "accuracy": 0.6785714285714286
+      },
+      "17-32": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "size_online-0-32-chain": {
+      "0-2": {
+        "correct": 211,
+        "nodes": 216,
+        "accuracy": 0.9768518518518519
+      },
+      "3-4": {
+        "correct": 144,
+        "nodes": 144,
+        "accuracy": 1.0
+      },
+      "5-8": {
+        "correct": 272,
+        "nodes": 288,
+        "accuracy": 0.9444444444444444
+      },
+      "9-16": {
+        "correct": 423,
+        "nodes": 576,
+        "accuracy": 0.734375
+      },
+      "17-32": {
+        "correct": 808,
+        "nodes": 1080,
+        "accuracy": 0.7481481481481481
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "size_online-1-32-chain": {
+      "0-2": {
+        "correct": 184,
+        "nodes": 216,
+        "accuracy": 0.8518518518518519
+      },
+      "3-4": {
+        "correct": 105,
+        "nodes": 144,
+        "accuracy": 0.7291666666666666
+      },
+      "5-8": {
+        "correct": 173,
+        "nodes": 288,
+        "accuracy": 0.6006944444444444
+      },
+      "9-16": {
+        "correct": 275,
+        "nodes": 576,
+        "accuracy": 0.4774305555555556
+      },
+      "17-32": {
+        "correct": 607,
+        "nodes": 1080,
+        "accuracy": 0.562037037037037
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "size_online-0-64-chain": {
+      "0-2": {
+        "correct": 205,
+        "nodes": 216,
+        "accuracy": 0.9490740740740741
+      },
+      "3-4": {
+        "correct": 141,
+        "nodes": 144,
+        "accuracy": 0.9791666666666666
+      },
+      "5-8": {
+        "correct": 264,
+        "nodes": 288,
+        "accuracy": 0.9166666666666666
+      },
+      "9-16": {
+        "correct": 388,
+        "nodes": 576,
+        "accuracy": 0.6736111111111112
+      },
+      "17-32": {
+        "correct": 711,
+        "nodes": 1152,
+        "accuracy": 0.6171875
+      },
+      "33-1000": {
+        "correct": 1424,
+        "nodes": 2232,
+        "accuracy": 0.6379928315412187
+      }
+    },
+    "size_online-1-64-chain": {
+      "0-2": {
+        "correct": 181,
+        "nodes": 216,
+        "accuracy": 0.8379629629629629
+      },
+      "3-4": {
+        "correct": 84,
+        "nodes": 144,
+        "accuracy": 0.5833333333333334
+      },
+      "5-8": {
+        "correct": 137,
+        "nodes": 288,
+        "accuracy": 0.4756944444444444
+      },
+      "9-16": {
+        "correct": 267,
+        "nodes": 576,
+        "accuracy": 0.4635416666666667
+      },
+      "17-32": {
+        "correct": 525,
+        "nodes": 1152,
+        "accuracy": 0.4557291666666667
+      },
+      "33-1000": {
+        "correct": 1066,
+        "nodes": 2232,
+        "accuracy": 0.4775985663082437
+      }
+    },
+    "size_replay-0-16-chain": {
+      "0-2": {
+        "correct": 216,
+        "nodes": 216,
+        "accuracy": 1.0
+      },
+      "3-4": {
+        "correct": 144,
+        "nodes": 144,
+        "accuracy": 1.0
+      },
+      "5-8": {
+        "correct": 288,
+        "nodes": 288,
+        "accuracy": 1.0
+      },
+      "9-16": {
+        "correct": 504,
+        "nodes": 504,
+        "accuracy": 1.0
+      },
+      "17-32": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "size_replay-1-16-chain": {
+      "0-2": {
+        "correct": 208,
+        "nodes": 216,
+        "accuracy": 0.9629629629629629
+      },
+      "3-4": {
+        "correct": 143,
+        "nodes": 144,
+        "accuracy": 0.9930555555555556
+      },
+      "5-8": {
+        "correct": 288,
+        "nodes": 288,
+        "accuracy": 1.0
+      },
+      "9-16": {
+        "correct": 501,
+        "nodes": 504,
+        "accuracy": 0.9940476190476191
+      },
+      "17-32": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "size_replay-0-32-chain": {
+      "0-2": {
+        "correct": 194,
+        "nodes": 216,
+        "accuracy": 0.8981481481481481
+      },
+      "3-4": {
+        "correct": 123,
+        "nodes": 144,
+        "accuracy": 0.8541666666666666
+      },
+      "5-8": {
+        "correct": 259,
+        "nodes": 288,
+        "accuracy": 0.8993055555555556
+      },
+      "9-16": {
+        "correct": 504,
+        "nodes": 576,
+        "accuracy": 0.875
+      },
+      "17-32": {
+        "correct": 781,
+        "nodes": 1080,
+        "accuracy": 0.7231481481481481
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "size_replay-1-32-chain": {
+      "0-2": {
+        "correct": 177,
+        "nodes": 216,
+        "accuracy": 0.8194444444444444
+      },
+      "3-4": {
+        "correct": 95,
+        "nodes": 144,
+        "accuracy": 0.6597222222222222
+      },
+      "5-8": {
+        "correct": 223,
+        "nodes": 288,
+        "accuracy": 0.7743055555555556
+      },
+      "9-16": {
+        "correct": 545,
+        "nodes": 576,
+        "accuracy": 0.9461805555555556
+      },
+      "17-32": {
+        "correct": 771,
+        "nodes": 1080,
+        "accuracy": 0.7138888888888889
+      },
+      "33-1000": {
+        "correct": 0,
+        "nodes": 0,
+        "accuracy": null
+      }
+    },
+    "size_replay-0-64-chain": {
+      "0-2": {
+        "correct": 145,
+        "nodes": 216,
+        "accuracy": 0.6712962962962963
+      },
+      "3-4": {
+        "correct": 84,
+        "nodes": 144,
+        "accuracy": 0.5833333333333334
+      },
+      "5-8": {
+        "correct": 214,
+        "nodes": 288,
+        "accuracy": 0.7430555555555556
+      },
+      "9-16": {
+        "correct": 466,
+        "nodes": 576,
+        "accuracy": 0.8090277777777778
+      },
+      "17-32": {
+        "correct": 867,
+        "nodes": 1152,
+        "accuracy": 0.7526041666666666
+      },
+      "33-1000": {
+        "correct": 1168,
+        "nodes": 2232,
+        "accuracy": 0.5232974910394266
+      }
+    },
+    "size_replay-1-64-chain": {
+      "0-2": {
+        "correct": 161,
+        "nodes": 216,
+        "accuracy": 0.7453703703703703
+      },
+      "3-4": {
+        "correct": 94,
+        "nodes": 144,
+        "accuracy": 0.6527777777777778
+      },
+      "5-8": {
+        "correct": 193,
+        "nodes": 288,
+        "accuracy": 0.6701388888888888
+      },
+      "9-16": {
+        "correct": 358,
+        "nodes": 576,
+        "accuracy": 0.6215277777777778
+      },
+      "17-32": {
+        "correct": 893,
+        "nodes": 1152,
+        "accuracy": 0.7751736111111112
+      },
+      "33-1000": {
+        "correct": 1265,
+        "nodes": 2232,
+        "accuracy": 0.5667562724014337
+      }
+    }
+  }
+}
