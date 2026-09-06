@@ -47,7 +47,9 @@ E10 completed after a recorded checkpoint-device launch failure and successful C
 
 E12 passed CPU/CUDA preflights and an exact CPU checkpoint-resume test. Scored execution is running on fresh seeds: both entropy choices start from scratch, then encounter an unseen key-door action chain with a 640-step limit and return to the original task. This remains a fixed-procedure mechanism test, not a planner or learned procedure.
 
-E13 is running a five-million-observation extension of E6's consolidation test. It preserves the exact recorded first million and the same teacher, then continues the declared Markov input process. Recreating the official bulk generator at a longer length would change the prefix; the explicit continuation avoids that error. Exact prefix learner loss/cost checks gate continuation. It tests whether late accuracy gains repay earlier error/work, not general memory compression or long-horizon agency.
+E13 completed its five-million-observation extension with exact prefix error/counter reproduction in all four arms. Cumulative error is lower with sharing in both seeds, reversing the earlier first-million deficit. Mean error improves 21.0%, but forward examples rise 2.42×, runtime 1.64×, and stored tensor bytes 1.45×. It still uses eight persistent modules. Accuracy amortization is established on this continuation; total-resource efficiency and rare retention are not.
+
+E14 passed a real neural world-model/planner preflight and is now running on CPU. The learner predicts observed state changes and rewards, plans only through its learned model, and preserves weights/replay/modules across hidden changes in Pendulum gravity. It compares random actions, one-step and twenty-step replay planning, context replay and guarded sharing. Independent frozen probes measure how one-step errors accumulate over forty imagined transitions. This is fully observable control, not a general reasoner or recursively learned procedure.
 
 ## Binding constraint and unresolved measurement
 

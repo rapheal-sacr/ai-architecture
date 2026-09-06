@@ -1,0 +1,302 @@
+{
+  "rows": [
+    {
+      "seed": 9101,
+      "arm": "context_replay",
+      "mse": 0.07863644202310183,
+      "late_mse": 0.08368383415338167,
+      "seconds": 200.85453364900604,
+      "costs": {
+        "parameter_count": 6913,
+        "stored_tensor_bytes": 427128,
+        "forward_examples": 14999968,
+        "training_examples": 9999968,
+        "optimizer_updates": 156250,
+        "module_count": 1,
+        "module_switches": 0
+      },
+      "prefix_check": {
+        "mse_equal": true,
+        "costs_equal": true,
+        "mse": 0.08829774456305989,
+        "prior_mse": 0.08829774456305989
+      }
+    },
+    {
+      "seed": 9101,
+      "arm": "guarded_sharing",
+      "mse": 0.05894387112335011,
+      "late_mse": 0.06061966807469067,
+      "seconds": 330.0729517870059,
+      "costs": {
+        "parameter_count": 44552,
+        "stored_tensor_bytes": 620832,
+        "forward_examples": 35813952,
+        "training_examples": 9999968,
+        "optimizer_updates": 156250,
+        "module_count": 8,
+        "module_switches": 21,
+        "peak_tensor_bytes": 698436,
+        "peak_parameter_count": 50121,
+        "temporary_active": false,
+        "merges": 465
+      },
+      "prefix_check": {
+        "mse_equal": true,
+        "costs_equal": true,
+        "mse": 0.09758288274218488,
+        "prior_mse": 0.09758288274218488
+      }
+    },
+    {
+      "seed": 9102,
+      "arm": "context_replay",
+      "mse": 0.08417313221676387,
+      "late_mse": 0.05980421816044147,
+      "seconds": 203.128483441993,
+      "costs": {
+        "parameter_count": 6913,
+        "stored_tensor_bytes": 427128,
+        "forward_examples": 14999968,
+        "training_examples": 9999968,
+        "optimizer_updates": 156250,
+        "module_count": 1,
+        "module_switches": 0
+      },
+      "prefix_check": {
+        "mse_equal": true,
+        "costs_equal": true,
+        "mse": 0.10089249136687442,
+        "prior_mse": 0.10089249136687442
+      }
+    },
+    {
+      "seed": 9102,
+      "arm": "guarded_sharing",
+      "mse": 0.06976220277873402,
+      "late_mse": 0.030689173039284305,
+      "seconds": 330.75933660900046,
+      "costs": {
+        "parameter_count": 44552,
+        "stored_tensor_bytes": 620832,
+        "forward_examples": 36726752,
+        "training_examples": 9999968,
+        "optimizer_updates": 156250,
+        "module_count": 8,
+        "module_switches": 18,
+        "peak_tensor_bytes": 698436,
+        "peak_parameter_count": 50121,
+        "temporary_active": false,
+        "merges": 470
+      },
+      "prefix_check": {
+        "mse_equal": true,
+        "costs_equal": true,
+        "mse": 0.12484198633111841,
+        "prior_mse": 0.12484198633111841
+      }
+    }
+  ],
+  "windows": [
+    {
+      "seed": 9101,
+      "arm": "context_replay",
+      "start_observation": 0,
+      "end_observation": 1000000,
+      "mse": 0.08829774456305989,
+      "cumulative_mse": 0.08829774456305989,
+      "cumulative_seconds": 40.3376993109996,
+      "cumulative_forward_examples": 2999968
+    },
+    {
+      "seed": 9101,
+      "arm": "context_replay",
+      "start_observation": 1000000,
+      "end_observation": 1991584,
+      "mse": 0.06663860370383815,
+      "cumulative_mse": 0.07751393753822411,
+      "cumulative_seconds": 79.99677951000922,
+      "cumulative_forward_examples": 5974720
+    },
+    {
+      "seed": 9101,
+      "arm": "context_replay",
+      "start_observation": 1991584,
+      "end_observation": 2993184,
+      "mse": 0.06458275970966242,
+      "cumulative_mse": 0.07318681708285371,
+      "cumulative_seconds": 119.82216644400614,
+      "cumulative_forward_examples": 8979520
+    },
+    {
+      "seed": 9101,
+      "arm": "context_replay",
+      "start_observation": 2993184,
+      "end_observation": 3994784,
+      "mse": 0.08131092324207266,
+      "cumulative_mse": 0.07522374942489615,
+      "cumulative_seconds": 160.26181399500638,
+      "cumulative_forward_examples": 11984320
+    },
+    {
+      "seed": 9101,
+      "arm": "context_replay",
+      "start_observation": 3994784,
+      "end_observation": 5000000,
+      "mse": 0.09219867122382128,
+      "cumulative_mse": 0.07863644202310183,
+      "cumulative_seconds": 200.85401238501072,
+      "cumulative_forward_examples": 14999968
+    },
+    {
+      "seed": 9101,
+      "arm": "guarded_sharing",
+      "start_observation": 0,
+      "end_observation": 1000000,
+      "mse": 0.09758288274218488,
+      "cumulative_mse": 0.09758288274218488,
+      "cumulative_seconds": 68.81665736400464,
+      "cumulative_forward_examples": 8221888
+    },
+    {
+      "seed": 9101,
+      "arm": "guarded_sharing",
+      "start_observation": 1000000,
+      "end_observation": 1991584,
+      "mse": 0.05410194223533565,
+      "cumulative_mse": 0.07593428297860795,
+      "cumulative_seconds": 135.0570965509978,
+      "cumulative_forward_examples": 15449664
+    },
+    {
+      "seed": 9101,
+      "arm": "guarded_sharing",
+      "start_observation": 1991584,
+      "end_observation": 2993184,
+      "mse": 0.0493652284413118,
+      "cumulative_mse": 0.06704356158474917,
+      "cumulative_seconds": 201.13914167199982,
+      "cumulative_forward_examples": 22507328
+    },
+    {
+      "seed": 9101,
+      "arm": "guarded_sharing",
+      "start_observation": 2993184,
+      "end_observation": 3994784,
+      "mse": 0.04420352244765568,
+      "cumulative_mse": 0.06131694828107296,
+      "cumulative_seconds": 265.45511700600036,
+      "cumulative_forward_examples": 29178016
+    },
+    {
+      "seed": 9101,
+      "arm": "guarded_sharing",
+      "start_observation": 3994784,
+      "end_observation": 5000000,
+      "mse": 0.04951313120234139,
+      "cumulative_mse": 0.05894387112335011,
+      "cumulative_seconds": 330.07160814100644,
+      "cumulative_forward_examples": 35813952
+    },
+    {
+      "seed": 9102,
+      "arm": "context_replay",
+      "start_observation": 0,
+      "end_observation": 1000000,
+      "mse": 0.10089249136687442,
+      "cumulative_mse": 0.10089249136687442,
+      "cumulative_seconds": 40.431605890000355,
+      "cumulative_forward_examples": 2999968
+    },
+    {
+      "seed": 9102,
+      "arm": "context_replay",
+      "start_observation": 1000000,
+      "end_observation": 1991584,
+      "mse": 0.0736680662469328,
+      "cumulative_mse": 0.08733780105095895,
+      "cumulative_seconds": 80.4111578269949,
+      "cumulative_forward_examples": 5974720
+    },
+    {
+      "seed": 9102,
+      "arm": "context_replay",
+      "start_observation": 1991584,
+      "end_observation": 2993184,
+      "mse": 0.08721622307994255,
+      "cumulative_mse": 0.08729711778665912,
+      "cumulative_seconds": 121.16943315099343,
+      "cumulative_forward_examples": 8979520
+    },
+    {
+      "seed": 9102,
+      "arm": "context_replay",
+      "start_observation": 2993184,
+      "end_observation": 3994784,
+      "mse": 0.08392427604985438,
+      "cumulative_mse": 0.08645145547210503,
+      "cumulative_seconds": 161.5077890149987,
+      "cumulative_forward_examples": 11984320
+    },
+    {
+      "seed": 9102,
+      "arm": "context_replay",
+      "start_observation": 3994784,
+      "end_observation": 5000000,
+      "mse": 0.07511894954630817,
+      "cumulative_mse": 0.08417313221676387,
+      "cumulative_seconds": 203.12796801899094,
+      "cumulative_forward_examples": 14999968
+    },
+    {
+      "seed": 9102,
+      "arm": "guarded_sharing",
+      "start_observation": 0,
+      "end_observation": 1000000,
+      "mse": 0.12484198633111841,
+      "cumulative_mse": 0.12484198633111841,
+      "cumulative_seconds": 68.37341575601022,
+      "cumulative_forward_examples": 7974944
+    },
+    {
+      "seed": 9102,
+      "arm": "guarded_sharing",
+      "start_observation": 1000000,
+      "end_observation": 1991584,
+      "mse": 0.07259598691800367,
+      "cumulative_mse": 0.09882937672888523,
+      "cumulative_seconds": 136.01869719001115,
+      "cumulative_forward_examples": 15901472
+    },
+    {
+      "seed": 9102,
+      "arm": "guarded_sharing",
+      "start_observation": 1991584,
+      "end_observation": 2993184,
+      "mse": 0.05530289293465507,
+      "cumulative_mse": 0.08426424268824459,
+      "cumulative_seconds": 202.00675898400368,
+      "cumulative_forward_examples": 23176320
+    },
+    {
+      "seed": 9102,
+      "arm": "guarded_sharing",
+      "start_observation": 2993184,
+      "end_observation": 3994784,
+      "mse": 0.05102668236036654,
+      "cumulative_mse": 0.07593069063026031,
+      "cumulative_seconds": 266.70578543900046,
+      "cumulative_forward_examples": 30117376
+    },
+    {
+      "seed": 9102,
+      "arm": "guarded_sharing",
+      "start_observation": 3994784,
+      "end_observation": 5000000,
+      "mse": 0.045248290770298384,
+      "cumulative_mse": 0.06976220277873402,
+      "cumulative_seconds": 330.7585641700134,
+      "cumulative_forward_examples": 36726752
+    }
+  ]
+}

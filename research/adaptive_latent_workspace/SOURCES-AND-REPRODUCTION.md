@@ -77,3 +77,11 @@ block. E4 explicitly slices to one million scored observations. Its file is
 locally generated, not an externally supplied pickle. Source experiment code
 often uses individual-example updates and many more seeds; E4 does not reproduce
 those published experiments.
+
+## E14 learned-dynamics source
+
+The full [Gymnasium clone](https://github.com/Farama-Foundation/Gymnasium) is checked out at v1.1.1, commit `17eff00220d210beda933f78b0e52850022b0690`. The installed Pendulum implementation and cloned source both hash to `ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8`. Source inspected: `gymnasium/envs/classic_control/pendulum.py`, including its observation/action interface, reward, reset and step equations. The experiment harness creates differing-gravity environments; the planner receives only observations and its learned model. It does not call those equations or read private simulator state. This is an independent small PyTorch world-model/planning pilot, not a PETS or Dreamer replication.
+
+```bash
+python e14_world_model.py --execute --repo /path/to/pinned/Gymnasium --out /path/on/large/drive/e14
+```
