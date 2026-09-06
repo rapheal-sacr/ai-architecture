@@ -20,7 +20,7 @@ what signals change the learner, as well as step size. It must be possible for
 an update to be rejected, shared or isolated on the basis of measured downstream
 consequences. That decision is learned and fallible; it is not a certificate.
 
-E10 completed. Removing entropy with shared critic gradients succeeds on both old and harder tasks in both development seeds. Removing entropy and detaching the critic succeeds in only one seed; keeping entropy fails in both. This does not justify a universal rule to delete entropy or block critic gradients. E12 was frozen to challenge the promising setting with fresh initialization and unseen actions.
+E10 completed. Removing entropy with shared critic gradients succeeds on both old and harder tasks in both development seeds. Removing entropy and detaching the critic succeeds in only one seed; keeping entropy fails in both. This does not justify a universal rule to delete entropy or block critic gradients. E12's first completed fresh seed is a counterexample: entropy-off learning collapses after initial success and does not reacquire the old task. The complete second-seed outcome remains pending.
 
 ## Proposed states and computations
 
@@ -102,9 +102,11 @@ as improvement would give the wrong sign.
 1. E10's factor comparison is complete; finish E12's fresh new-action/retention test.
    A useful objective correction becomes a strong baseline, not an architectural
    achievement attributed to unused memory mechanisms.
-2. Add learned dynamics to a baseline that actually acquires useful behavior.
-   Test imagined multi-step outcomes against real outcomes, then compare planning
-   against the same agent without search at equal work.
+2. E14 adds learned dynamics and planning; E15 shows a search limitation even
+   with an accurate model. Test temporally structured action proposals at the
+   same number of model evaluations before adding model capacity or depth.
+   A future learned proposal memory should retain useful computations, with
+   real-outcome checks against self-reinforcing model errors.
 3. Add bounded episodic memory and neural compression. Distinguish retention,
    retrieval, routing and readout failures. Test rare-query loss under exhausted
    capacity and whether consolidation repays its complete cost.
@@ -121,3 +123,7 @@ The integrated algorithm, broad reasoning, reliable recursive improvement,
 long-horizon efficiency and research novelty remain open. The evidence supports
 specific mechanisms and rejects several broad interpretations; confidence in
 the full design has not been earned.
+
+## The next architectural distinction
+
+Persistent memory must retain both learned information and useful ways to search. E15 makes the second role concrete: the planner can possess accurate transition knowledge yet fail to generate a useful action sequence at its search budget. A candidate procedure memory would learn compact temporal action proposals from prior planning/real outcomes, while preserving an exploration route outside its learned proposal family. This is proposed, not implemented or established as novel. A fixed temporal action-blocking control should first test whether search representation, rather than extra model calls, repairs the failure. Any learned version must then beat that simple control after its training, storage and proposal costs.

@@ -8,8 +8,10 @@ but E3 exposes capacity/drift costs and E4 rejects efficient external transfer.
 E6 sharing and E7 feature renewal expose further accuracy/cost tradeoffs. E8
 exposed a closed-loop failure; E10 repairs that particular failure by changing
 the entropy objective while preserving critic gradients. E9/E11 find mixed
-self-application benefits against conventional meta-updates. E12/E13 are active
-falsification tests of new-action transfer and consolidation amortization. Read `FALSIFICATION.md` and `CURRENT-STATE.md` first, then
+self-application benefits against conventional meta-updates. E13 establishes later cumulative accuracy gains at higher cost. E14 adds a
+learned world model and planner; E15 isolates a search failure that remains with
+accurate dynamics. E12 is still testing fresh action-chain transfer and has
+already produced a counterexample to a universal entropy-off repair. Read `FALSIFICATION.md` and `CURRENT-STATE.md` first, then
 `DESIGN-REVISION.md` for the current integrated proposal. The design below
 is not an implemented, validated system.
 
