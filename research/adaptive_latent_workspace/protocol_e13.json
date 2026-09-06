@@ -1,0 +1,16 @@
+{
+  "experiment": "E13-consolidation-cost-amortization-extension",
+  "status_at_freeze": "NOT_RUN",
+  "seeds": [9101, 9102],
+  "arms": ["context_replay", "guarded_sharing"],
+  "prefix_observations": 1000000,
+  "total_observations": 5000000,
+  "extension_seed_offset": 90000000,
+  "starting_point": "Relearn the exact preserved E6 first million observations from the same learner initialization. Require exact prefix mean loss and final cost counters against E6 before continuing. E6 did not save learner checkpoints, so replaying its prefix is charged work.",
+  "data_extension": "Keep the preserved E6 teacher and exact scored prefix. Extend from the prefix's last slow-bit vector, flipping one uniformly chosen bit every 10000 observations, with five independent fair fast bits per observation. Use a separate declared generator seed for the extension. The teacher labels observations; it is never accessible to the learner.",
+  "generator_caveat": "Calling the official bulk generator with a larger length and the same seed changes random-number consumption before the fast bits, so it does not preserve the E6 prefix. This explicit continuation has the same declared Markov flip/fast-bit data law, but is not a claim to reproduce the source generator's hypothetical five-million draw.",
+  "algorithm": "Import frozen E6 GuardedSharing and context replay unchanged; same dimensions, cap, replay size, thresholds, learning rate and seed. No tuning on the extension.",
+  "measurement": "Prequential loss, complete learner cost counters and elapsed time in approximately 10000-observation blocks, with an exact flush at the original million boundary. Report prefix, each subsequent million, cumulative and final-ten-block errors. Compare additional errors/work and total errors/work; a late benefit alone is insufficient.",
+  "falsification": "E6's modest late improvement might repay its earlier error and compute cost. If guarded sharing still has worse cumulative error or work at five million, amortized superiority has not been established at this horizon. A lower late error can motivate a longer test but cannot erase the observed deficit. No estimate of an unobserved break-even point is treated as measured.",
+  "scope": "Longer supervised continuation of two already studied seeds, not a fresh benchmark, rare-fact preservation guarantee, semantic compression proof, closed-loop long-horizon agent or recursive improvement. CPU execution may overlap independent GPU experiments, so wall time is indicative; operation counts are the stronger comparison."
+}
