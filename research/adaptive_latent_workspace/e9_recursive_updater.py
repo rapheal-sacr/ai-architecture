@@ -4,6 +4,7 @@ import torch
 from torch.nn import functional as F
 
 HERE=Path(__file__).resolve().parent
+COUNTS={k:0 for k in ('inner_updates','training_observations','query_observations','student_forward_examples','student_gradient_batches','meta_gradient_calls')}
 
 def student(params,x):
     x=torch.tanh(F.linear(x,params[0],params[1]))
@@ -51,13 +52,18 @@ def task(cfg,seed,phi,steps=None,distribution='in_distribution',meta=False,lr=No
         return x,clean+.03*torch.randn(n,o,generator=g,dtype=dtype)
     for t in range(1,steps+1):
         x,y=sample(cfg['batch_size']);loss=(student(params,x)-y).square().mean()
-        if not torch.isfinite(loss):raise RuntimeError('nonfinite student loss')
+        COUNTS['training_observations']+=len(x);COUNTS['student_forward_examples']+=len(x)
+        if not torch.isfinite(loss):raise FloatingPointError(f'nonfinite student loss at step {t}')
         losses.append(float(loss.detach()))
         grads=torch.autograd.grad(loss,params,create_graph=meta)
+        COUNTS['student_gradient_batches']+=1
         params,m,v=update(params,grads,m,v,t,loss,phi,cfg,lr)
+        COUNTS['inner_updates']+=1
         if not meta:
             params=leaves(params);m=[z.detach() for z in m];v=[z.detach() for z in v]
     x,y=sample(cfg['query_size']);query=(student(params,x)-y).square().mean()
+    COUNTS['query_observations']+=len(x);COUNTS['student_forward_examples']+=len(x)
+    if not torch.isfinite(query):raise FloatingPointError('nonfinite query loss')
     return query,dict(prequential_mse=sum(losses)/len(losses),query_mse=float(query.detach()),
         inner_updates=steps,training_observations=steps*cfg['batch_size'],query_observations=cfg['query_size'])
 
@@ -65,9 +71,12 @@ def evaluate(cfg,phi,seeds,**kwargs):
     rows=[];start=time.perf_counter()
     frozen=None if phi is None else [p.detach() for p in phi]
     for seed in seeds:
-        _,row=task(cfg,seed,frozen,**kwargs);row['seed']=seed;rows.append(row)
-    return dict(rows=rows,query_mse=sum(r['query_mse'] for r in rows)/len(rows),
-        prequential_mse=sum(r['prequential_mse'] for r in rows)/len(rows),seconds=time.perf_counter()-start)
+        try:_,row=task(cfg,seed,frozen,**kwargs)
+        except FloatingPointError as e:row=dict(failed=str(e),query_mse=None,prequential_mse=None)
+        row['seed']=seed;rows.append(row)
+    failed=sum('failed' in r for r in rows)
+    return dict(rows=rows,diverged_tasks=failed,query_mse=None if failed else sum(r['query_mse'] for r in rows)/len(rows),
+        prequential_mse=None if failed else sum(r['prequential_mse'] for r in rows)/len(rows),seconds=time.perf_counter()-start)
 
 def meta_loss(cfg,phi,seeds):return torch.stack([task(cfg,s,phi,meta=True,dtype=phi[0].dtype)[0] for s in seeds]).mean()
 
@@ -85,23 +94,32 @@ def preflight(cfg):
     return dict(meta_gradient_analytic=analytic,meta_gradient_finite_difference=numeric,adam_equivalence=True)
 
 def run(cfg,rep,out,identity):
+    for k in COUNTS:COUNTS[k]=0
+    trial_path=out/f'{rep}-trials.jsonl'
+    if trial_path.exists():raise RuntimeError('Partial trial log exists; inspect before rerunning this replicate')
+    def log(row):
+        with trial_path.open('a') as f:f.write(json.dumps(dict(**row,cumulative_counts=COUNTS.copy()))+'\n')
     start=time.perf_counter();phi=leaves(init_controller(cfg,rep));opt=torch.optim.Adam(phi,lr=cfg['bootstrap_learning_rate'])
     prefix=rep*100000;bootstrap=[]
     for t in range(cfg['bootstrap_updates']):
         seeds=[prefix+t*cfg['tasks_per_meta_update']+i for i in range(cfg['tasks_per_meta_update'])]
         loss=meta_loss(cfg,phi,seeds);opt.zero_grad();loss.backward();torch.nn.utils.clip_grad_norm_(phi,1.);opt.step()
+        COUNTS['meta_gradient_calls']+=1
         bootstrap.append(float(loss.detach()))
+        log(dict(phase='bootstrap',update=t,loss=bootstrap[-1],elapsed_seconds=time.perf_counter()-start))
         if (t+1)%32==0:print(json.dumps(dict(replicate=rep,bootstrap_updates=t+1,meta_loss=bootstrap[-1])),flush=True)
     bootstrap_seconds=time.perf_counter()-start;frozen=leaves(phi)
     torch.save(dict(phi=[p.detach() for p in frozen],identity=identity),out/f'{rep}-bootstrap.pt')
     anchors=[prefix+10000+i for i in range(cfg['retention_validation_tasks'])]
     selection_seeds=[prefix+20000+i for i in range(cfg['baseline_selection_tasks'])]
     baseline_selection={str(lr):evaluate(cfg,None,selection_seeds,lr=lr) for lr in cfg['baseline_learning_rates']}
-    best_lr=min(cfg['baseline_learning_rates'],key=lambda lr:baseline_selection[str(lr)]['query_mse'])
+    best_lr=min(cfg['baseline_learning_rates'],key=lambda lr:baseline_selection[str(lr)]['query_mse']
+        if baseline_selection[str(lr)]['query_mse'] is not None else float('inf'))
     rounds=[];m=[torch.zeros_like(p) for p in phi];v=[torch.zeros_like(p) for p in phi];accepted=0
     for t in range(cfg['self_rounds']):
         started=time.perf_counter();train_seeds=[prefix+30000+t*10+i for i in range(cfg['tasks_per_meta_update'])]
         loss=meta_loss(cfg,phi,train_seeds);grads=torch.autograd.grad(loss,phi)
+        COUNTS['meta_gradient_calls']+=1
         # The controller processes gradients of its own parameters. No outer
         # Adam optimizer proposes this update; bootstrap Adam has finished.
         candidate,cm,cv=update(phi,[g.detach() for g in grads],m,v,accepted+1,loss.detach(),
@@ -109,13 +127,15 @@ def run(cfg,rep,out,identity):
         candidate=leaves(candidate);fresh=[prefix+40000+t*10+i for i in range(cfg['fresh_validation_tasks_per_round'])]
         before=evaluate(cfg,phi,fresh);after=evaluate(cfg,candidate,fresh)
         old_anchor=evaluate(cfg,phi,anchors);new_anchor=evaluate(cfg,candidate,anchors)
-        accept=(after['query_mse']<before['query_mse']*(1-cfg['accept_improvement_fraction']) and
+        accept=(all(e['query_mse'] is not None for e in (before,after,old_anchor,new_anchor)) and
+            after['query_mse']<before['query_mse']*(1-cfg['accept_improvement_fraction']) and
             new_anchor['query_mse']<=old_anchor['query_mse']*(1+cfg['retention_tolerance_fraction']))
         if accept:phi=candidate;m=[z.detach() for z in cm];v=[z.detach() for z in cv];accepted+=1
         row=dict(round=t,accepted=accept,training_meta_loss=float(loss.detach()),fresh_before=before,fresh_after=after,
             anchor_before=old_anchor,anchor_after=new_anchor,seconds=time.perf_counter()-started)
         rounds.append(row);print(json.dumps(dict(replicate=rep,self_round=t,accepted=accept,
             before=before['query_mse'],after=after['query_mse'])),flush=True)
+        log(dict(phase='self_application',trial=row))
     torch.save(dict(phi=[p.detach() for p in phi],identity=identity),out/f'{rep}-self-applied.pt')
     final=[]
     for distribution in cfg['final_distributions']:
@@ -125,11 +145,12 @@ def run(cfg,rep,out,identity):
                 ('frozen_bootstrap',frozen,cfg['base_learning_rate']),('self_applied',phi,cfg['base_learning_rate'])]:
                 result=evaluate(cfg,control,seeds,steps=horizon,distribution=distribution,lr=lr)
                 result.update(arm=name,distribution=distribution,horizon=horizon);final.append(result)
+                log(dict(phase='final_evaluation',result=result))
                 print(json.dumps(dict(replicate=rep,arm=name,distribution=distribution,horizon=horizon,
                     query_mse=result['query_mse'],seconds=result['seconds'])),flush=True)
     return dict(replicate=rep,identity=identity,bootstrap_losses=bootstrap,bootstrap_seconds=bootstrap_seconds,
         baseline_selection=baseline_selection,selected_baseline_lr=best_lr,self_rounds=rounds,accepted_self_updates=accepted,
-        final=final,controller_parameters=sum(p.numel() for p in phi),total_seconds=time.perf_counter()-start)
+        final=final,controller_parameters=sum(p.numel() for p in phi),total_seconds=time.perf_counter()-start,cost_counts=COUNTS.copy())
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--execute',action='store_true');p.add_argument('--out',type=Path,required=True)
@@ -142,7 +163,12 @@ def main():
     for rep in cfg['replicates']:
         path=a.out/f'{rep}.json'
         if path.exists():r=json.loads(path.read_text());assert r['identity']==identity
-        else:r=run(cfg,rep,a.out,identity);path.write_text(json.dumps(r,indent=2)+'\n')
+        else:
+            started=time.perf_counter()
+            try:r=run(cfg,rep,a.out,identity)
+            except FloatingPointError as e:r=dict(replicate=rep,identity=identity,failed=str(e),
+                cost_counts=COUNTS.copy(),total_seconds=time.perf_counter()-started)
+            path.write_text(json.dumps(r,indent=2)+'\n')
         records.append(r)
     (a.out/'complete.json').write_text(json.dumps(dict(protocol=cfg,identity=identity,preflight=check,records=records),indent=2)+'\n')
     print('E9_COMPLETE',flush=True)
