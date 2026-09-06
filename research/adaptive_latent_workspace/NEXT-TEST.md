@@ -1,3 +1,13 @@
+# Current continuation: E27 recurrent reasoning training
+
+`protocol_e27.json` and `e27_reasoning.py` implement the first trained graph
+reasoning assay. Functional GPU preflight uses separate seeds and reduced
+budgets. Freeze source before scoring; inspect the recorded live session or
+completion artifact before restarting. Do not change the protocol after seeing
+scores. Read `REASONING-REVISION.md` for controls and limits.
+
+Prior plans follow as history.
+
 # Current continuation: train and falsify recurrent reasoning
 
 E26 is complete and audited. Move to the missing reasoning component; additional

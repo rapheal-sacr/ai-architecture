@@ -1,0 +1,83 @@
+{
+  "experiment": "E27 final-target recurrent graph learning and retention",
+  "seeds": [
+    27101,
+    27102,
+    27103
+  ],
+  "arms": [
+    "short_online",
+    "short_replay",
+    "size_online",
+    "size_replay"
+  ],
+  "stages": [
+    0,
+    1,
+    0
+  ],
+  "algorithms": [
+    "dijkstra",
+    "mst_prim"
+  ],
+  "updates_per_stage": 512,
+  "current_batch": 8,
+  "replay_batch": 8,
+  "replay_capacity_graphs": 128,
+  "train_nodes": 16,
+  "train_chain_probability": 0.25,
+  "random_extra_edge_probability": 0.25,
+  "weight_range": [
+    0.1,
+    1.0
+  ],
+  "hidden": 32,
+  "short_steps": 2,
+  "size_steps": "public node count",
+  "optimizer": "Adam",
+  "learning_rate": 0.001,
+  "gradient_clip": 1.0,
+  "eval_nodes": [
+    16,
+    32,
+    64
+  ],
+  "eval_families": [
+    "random",
+    "chain"
+  ],
+  "eval_graphs_per_task_size_family": 24,
+  "eval_batch": 4,
+  "evaluation_points": [
+    "initial",
+    "after_stage_0",
+    "after_stage_1",
+    "after_stage_2"
+  ],
+  "device": "cuda",
+  "torch_threads": 1,
+  "task_identity": "Explicit requested algorithm; no hidden context label",
+  "supervision": "Final parent pointers only; no intermediate hints or target-derived computation length",
+  "graph_generation": "Positive float32 symmetric weights on a chain backbone; random graphs add independent extra edges; random node relabeling. Train source uniform. Evaluation chain source chosen uniformly from two backbone ends before relabeling. All connected.",
+  "replay": "Uniform reservoir of observed current graphs, inserted after prediction/update. Sample up to a full replay batch with replacement from previously observed memory. State persists across stages. No evaluation examples enter memory.",
+  "pairing": "Same seed initializes all arms identically; all arms consume exactly the same current data; replay selections and final buffers identical across recurrence depths",
+  "metrics": [
+    "canonical parent accuracy",
+    "whole graph canonical accuracy",
+    "functional optimal graph fraction",
+    "invalid tree fraction",
+    "task retention",
+    "train and evaluation time",
+    "message and decoder candidates",
+    "current and replay graph presentations",
+    "optimizer steps",
+    "persistent tensor bytes",
+    "CUDA peak allocated bytes",
+    "reference label generation and exact query seconds"
+  ],
+  "decision": "Scoped acquisition requires >=0.80 functional graph accuracy on fresh random N16 graphs of each acquired task; retention loss must be <=0.05 absolute after task switch; N64 functional transfer must be >=0.80 to support this pilot's size generalization claim. Report all seeds and failures. No passing component establishes general AI reasoning or reliable recursive improvement.",
+  "cost_boundary": "Matched current observations and parameters, not matched FLOPs. Longer recurrence and replay are explicitly charged. Exact classical algorithms are strong baselines, not candidate neural capabilities. CPU reference and GPU neural timing are hardware-specific and exclude common setup from per-arm execution.",
+  "source_boundary": "Uses pinned original CLRS Dijkstra/Prim function bodies through a local adapter, not the official CLRS training system or published benchmark reproduction.",
+  "no_adaptation_to_test": "No checkpoint selection, early stopping or hyperparameter changes using evaluation outcomes. All final and stage checkpoints retained. Preflight uses different seeds and reduced size solely for functional validation.",
+  "classical_timing": "Original CLRS function body plus minimal probe-recorder overhead, excluding independent NetworkX validation. Not an optimized algorithm implementation or hardware-matched runtime."
+}

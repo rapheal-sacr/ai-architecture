@@ -72,8 +72,8 @@ Train on a sequential shortest-path, spanning-tree, shortest-path curriculum,
 retaining neural weights, optimizer and a bounded graph replay buffer. Use
 positive continuous edge weights to avoid canonical-parent ambiguity on most
 cases. Freeze graph seeds, replay capacity, training budget, iteration controls
-and reporting rules before any scored training. The runner and full E27 protocol
-are not yet implemented or registered.
+and reporting rules before any scored training. The runner and full E27 protocol are now implemented in `e27_reasoning.py`
+and `protocol_e27.json`; scoring starts only after their source commit is frozen.
 
 Compare the shared recurrent processor at a public-size budget with the same
 parameterization at a short fixed depth. Both need matched observations,
@@ -92,3 +92,23 @@ but it is not proof of learned reasoning or transfer.
 Only a trained result can justify the next integration with persistent episodic
 facts, compressed state and procedural self-application. General reasoning,
 long-horizon autonomous efficiency and scientific novelty remain open.
+
+## E27 registered comparison
+
+Three fresh seeds, four arms (two versus public-N steps, each with/without
+128-graph reservoir replay), 512 updates per stage and eight new graphs per
+update. Sequence: Dijkstra, Prim, Dijkstra. The 15,177-parameter model and Adam
+state persist. Replay adds up to eight prior graphs per update and is charged;
+longer recurrence costs eight times the training message candidates at N16.
+Positive weighted graphs mix relabeled random graphs with chains. Fresh tests
+use N16/N32/N64; chain sources lie at an endpoint before relabeling. Each cell
+contains 24 graphs, so uncertainty and per-seed counts must remain visible.
+
+Acquisition is assessed as at least 80% functionally correct whole graphs on
+fresh random N16 inputs, retention as at most five percentage points lost after
+the switch, and N64 transfer as at least 80%. These are declared pilot criteria,
+not a universal definition of reasoning. Parent accuracy alone is insufficient:
+locally plausible pointers can form invalid cycles. Failure to acquire must not
+be mislabeled catastrophic forgetting. Test queries never select checkpoints,
+set stopping times, enter replay, or modify training. Full tensor costs and
+training/evaluation message candidates are distinct from measured FLOPs.
