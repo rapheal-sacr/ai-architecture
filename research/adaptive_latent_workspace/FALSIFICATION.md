@@ -394,3 +394,22 @@ and drift across both E33 E2E objectives/all seeds. It charges candidate search,
 probation and snapshots and includes exact no-selection and specialized table
 controls. Scored data will be generated after the source freeze. No goal-success
 or novelty claim follows from implementation checks.
+
+## New frontier sources: efficient mixing does not erase state/access costs
+
+FRONTIER-ARCHITECTURE-AUDIT.md records five new source reviews and local probes.
+Unchanged GDN/KDA recurrence bodies permit decay of an old state component even
+under orthogonal subsequent writes; chosen scalar/channel gates expose their
+different selectivity, not released-model task accuracy. The Nanbeige helper
+allocates44 execution-cache slots for22 reused layers. Its future4.5 options in
+the source are disabled by the4.2 checkpoint and cannot be credited to it.
+
+Configuration accounting finds recurrent matrices additional to Qwen/GLM's
+per-token attention caches, and extra DeepSeek index keys beyond its7.7 KiB
+main-KV estimate. DeepSeek's indexer scans the growing compressed history before
+top-k. These are source/analytic costs, not measured full-model throughput.
+The linked GLM-5 paper is not a5.3-Flash report; its190B-token attention-conversion
+ablation still loses fine retrieval accuracy. All five WebP asset requests were
+403; checkpoint/source and original rendered paper figures were used instead.
+No large released weights, population failure rates or architecture-isolated
+benchmark advantage were measured. E35 scorer remains frozen and running.

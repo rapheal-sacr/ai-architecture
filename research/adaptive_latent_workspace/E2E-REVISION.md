@@ -110,3 +110,55 @@ write/read boundary before fast layers is a candidate to test; higher-layer
 features can depend on fast history. Re-encoding on slow updates must be charged,
 with the conditional throughput bound in CONSTRAINTS.md. Compatibility and
 metadata checks do not establish useful retention or efficient learned compression.
+
+## Implemented extension and next integration boundary
+
+E33 now establishes acquisition on its grammar family, and E34 isolates retained
+function and interference with frozen-state interventions. E35 implements a
+bounded protected fast-state bank, future-observation probation and causal
+selection. Its admission/selection controller is fixed, not learned. The shared
+prefix is numerically exact only for the implemented single final adaptive MLP;
+both that MLP and the subsequent static residual must be evaluated per candidate.
+E35's scored results require the independent audit before interpretation.
+
+FRONTIER-ARCHITECTURE-AUDIT.md supplies a stronger account of the proposed
+execution core. A recurrent sequence state can reduce the growing context cost,
+periodic selective evidence access can retain consequential distinctions, and
+shared reasoning layers can spend more work on difficult decisions. These are
+existing mechanisms with costs and failure modes, not architectural novelty.
+Replacing the fixed prefix with KDA/GDN or adding loops is not yet implemented
+in the E2E archive, and the current results cannot be credited to those additions.
+
+The full candidate should distinguish seven states: slow encoder/init version,
+short recurrent/context state, active fast parameters, protected parameter
+snapshots, bounded evidence records, temporary reasoning workspace, and persistent
+learning-procedure state. The current E35 core implements only context state,
+active parameters and a protected bank behind a fixed slow version. Its probe
+is an admission sample, not a general episodic evidence store.
+
+For an action-capable integration, encode the latest real observation and the
+previous executed action/outcome; retrieve evidence under an explicit budget;
+refine candidate consequences in the temporary workspace; execute one selected
+action; then learn from the actual new outcome. Imagined outcomes can guide
+planning but must not be silently relabeled as observed targets. This preserves
+the causal distinction the imitation/source audits required. E2E meta-training
+must optimize later actual decisions through the learning updates, while
+evaluation measures acquisition, recurring-goal success, failed exploration,
+retention and complete work. Better next-token loss is only an intermediate test.
+
+A tractable next integration target is an action-conditioned transition learner
+on previously unseen worlds, using its learned predictions for bounded planning.
+It must face unannounced world changes and returning goals, without hidden maps
+or context IDs. An observed-transition planner is a strong specialized control;
+a private-world oracle is diagnostic only. This is not yet a frozen experiment
+or a replacement of the general-reasoning requirement with grammar prediction.
+E30–E32's action failures remain part of the completion boundary.
+
+Slow representation improvement introduces an unresolved obligation: current
+archives are meaningful only with their original slow base. Hash rejection
+prevents silent reuse but does not make learning a new base possible cheaply.
+Migration must pay for replay/re-encoding, compatible transport or temporary
+coexistence, and must test old queries after its compression budget is exhausted.
+Procedure self-revision similarly needs multiple actual generations and fresh
+outcomes against equally funded conventional learning. Neither ability follows
+from a successful fixed archive selector. The full goal remains unachieved.
