@@ -2,8 +2,7 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E28 are complete. E29 is running from frozen source `c8a0884`; inspect
-WD `ACTIVE-STATE.json` and the live handle before any restart.
+E1–E29 are complete; no experiment is currently running.
 
 ## What is locally established
 
@@ -223,5 +222,30 @@ learning or reliable recursive improvement.
 
 E29 now compares fixed16, fixed24 and balanced variable16–32 recurrence on three
 fresh seeds, with exactly matched message work for fixed24/variable. Its separate
-preflight reproduces E27 baseline losses and state exactly. No scored E29 result
-is complete yet; read `NEXT-TEST.md` and the saved live run.
+preflight reproduces E27 baseline losses and state exactly. The complete E29 result and state audit now supersede the running-status record.
+
+## E29: depth robustness improves, general reasoning still fails
+
+All nine cases completed from frozen source `c8a0884`; all 27 stage checkpoints,
+reconstructed replay histories and nine equal-work stage pairs pass audit.
+Variable16–32 and fixed24 each use 150,945,792 forward training message
+candidates, identical observations, parameters and memory. At 32 inference
+steps, variable training gives 95.8% final N16 Dijkstra chain correctness versus
+63.9% for fixed24. Two seeds improve; the first loses 4.2 percentage points.
+This is a scoped stability gain, not a uniform one.
+
+With public-N inference, final random-N16 Dijkstra correctness is 50.0% variable
+versus 29.2% fixed24, but the cheaper fixed16 reaches 54.2%. Variable training
+costs 1.36 times fixed16 training time and 1.50 times its message candidates.
+No seed/arm meets the registered initial acquisition criteria; all final N64
+cells are zero whole-graph correctness for every arm, task, family and policy.
+Thus learning a range of depths does not establish a transferable algorithm.
+Read `E29-RESULT.md`; it preserves all failures and all inference policies.
+
+Further graph-depth variants cannot by themselves meet the full goal. A pinned
+pretrained language core now passes CPU execution and a GPU low-rank-adapter
+preflight. Base weights remain unchanged and saved adapters restore exact logits.
+These are feasibility checks, not learned memory, reliable procedure improvement
+or architectural novelty. The next work should define an integrated, genuinely
+closed-loop memory-and-adaptation assay, retaining the source/falsification and
+cost obligations in `GOAL-EVIDENCE.md`.

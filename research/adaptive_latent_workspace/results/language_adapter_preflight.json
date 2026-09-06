@@ -1,0 +1,45 @@
+{
+  "status": "GPU_ADAPTER_PREFLIGHT_ONLY_NO_CONTINUAL_LEARNING_RESULT",
+  "model_source": {
+    "repository": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+    "commit": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "weights_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+    "weights_bytes": 988097824,
+    "download_seconds": 11.877898176011513,
+    "source": "Git clone plus binary artifact resolved at exact commit; no rendered page fetched",
+    "status": "DOWNLOADED_NOT_EXECUTED"
+  },
+  "device": "NVIDIA GeForce GTX 1060 6GB",
+  "torch": "2.5.1+cu118",
+  "base_dtype": "float16",
+  "adapter_dtype": "float32",
+  "rank": 4,
+  "adapted_projections": "q_proj and v_proj in each of 24 layers",
+  "trainable_parameters": 270336,
+  "adapter_parameter_bytes": 1081344,
+  "base_parameters": 494032768,
+  "base_parameter_bytes": 988065536,
+  "load_seconds": 2.6274709069984965,
+  "update_seconds": 0.3886585680011194,
+  "updates": 2,
+  "sequence_tokens": 45,
+  "target_tokens": 5,
+  "losses": [
+    0.6586519479751587,
+    0.32161322236061096
+  ],
+  "final_same_example_loss": 0.06938239187002182,
+  "gradient_norms": [
+    4.410488128662109,
+    3.1312367916107178
+  ],
+  "zero_adapter_exact": true,
+  "base_weights_unchanged": true,
+  "base_state_sha256": "e2f2ef76a42046f2221046c85fc9a95c3f1fb1fb75a90948645c27050de64690",
+  "restored_logits_exact": true,
+  "cuda_peak_training_allocated_bytes": 1234241024,
+  "max_process_rss_bytes": 2430910464,
+  "adapter_checkpoint_sha256": "6a91128ecf00b3fec22147fa301e892ae847fe82d935c56594a482caee105f55",
+  "script_sha256": "24637a0a6c8aedbaf2862a952861925e4245bc535f9b30265da9e1ae1d316db2",
+  "scope": "Two repeated-example updates establish execution and state isolation only. No old-task retention, novel-task transfer, memory compression, procedure improvement or efficiency claim."
+}

@@ -154,3 +154,9 @@ More inference work is therefore not a monotonic improvement axis for this
 learned transition. The structural communication lower bound remains valid, but
 satisfying it is insufficient for a stable algorithm. No universal AI rate
 bound follows.
+
+E29 gives a partial intervention on learned computation stability at exactly
+matched message work, but retains zero N64 whole-graph transfer. This separates
+tolerance to extra iterations from the acquisition of a correct compositional
+algorithm. It does not identify a universal cause of poor reasoning or establish
+that stability regularization alone is sufficient.

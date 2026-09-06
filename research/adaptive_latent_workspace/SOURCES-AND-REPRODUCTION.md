@@ -237,3 +237,14 @@ and Transformers repositories were cloned and pinned, and binary weights match
 the cloned LFS hash. Read `LANGUAGE-CORE-PREFLIGHT.md` and its raw records for
 exact source identity, measured memory, order-sensitive prompts and boundaries.
 This is not a published-score replication or a continual-learning result.
+
+E29 is complete: all 27 stage checkpoint hashes, counters, schedules and raw
+replay/RNG reconstructions pass; all 9 final restored models reproduce all three
+inference policies exactly. Fixed24/variable message counts match at all 9 paired
+stages. The result figure was rendered and visually inspected. This supersedes
+the earlier running-status entry.
+
+The separate language GPU/adapter preflight also completed after E29 released
+the GPU. It verifies exact zero-adapter behavior, finite trainable gradients,
+unchanged frozen base weights and exact saved-adapter output restoration. This
+is two repeated-example updates on 45 tokens, not a continual-learning result.

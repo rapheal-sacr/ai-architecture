@@ -1,0 +1,359 @@
+{
+  "checkpoints": [
+    {
+      "seed": 29101,
+      "arm": "fixed16_replay",
+      "stage": 0,
+      "checkpoint_sha256": "daf51fc4df3a3fef6225de09a8764d9b030919b3ef6a129a698007fbc3d50b58",
+      "optimizer_steps": 512,
+      "messages": 33521664,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29101,
+      "arm": "fixed16_replay",
+      "stage": 1,
+      "checkpoint_sha256": "75c7f73649a6b7287770a84c6ec335c158610e58fdd786379714b0b264ae42b2",
+      "optimizer_steps": 1024,
+      "messages": 67076096,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29101,
+      "arm": "fixed16_replay",
+      "stage": 2,
+      "checkpoint_sha256": "435cf8f5c63821cd85ff8a8293fb6ba7f075b252bd79b92e24b7a8870e4d28fd",
+      "optimizer_steps": 1536,
+      "messages": 100630528,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29101,
+      "arm": "fixed24_replay",
+      "stage": 0,
+      "checkpoint_sha256": "be598d90413d7614a7ff959349290f67a59a9606b167b8e96948d38c3d1623a9",
+      "optimizer_steps": 512,
+      "messages": 50282496,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29101,
+      "arm": "fixed24_replay",
+      "stage": 1,
+      "checkpoint_sha256": "14ee3ee5d2821ba8b5637f6dc894a7ed5e5a23856b25a94a0666d2cfeea62ec5",
+      "optimizer_steps": 1024,
+      "messages": 100614144,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29101,
+      "arm": "fixed24_replay",
+      "stage": 2,
+      "checkpoint_sha256": "24fdb257a684b154400692b0c142ea6a8c915c4a2ea37c556dc6a38a270de259",
+      "optimizer_steps": 1536,
+      "messages": 150945792,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29101,
+      "arm": "variable_replay",
+      "stage": 0,
+      "checkpoint_sha256": "add459608eff7dffc5bbae795b1da9bda8b0f74f5c65c94991a95e3b7f58a25a",
+      "optimizer_steps": 512,
+      "messages": 50282496,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29101,
+      "arm": "variable_replay",
+      "stage": 1,
+      "checkpoint_sha256": "59f44b18a6497bd15473877687f302e28acea4668e3648e820685d08710f2cf1",
+      "optimizer_steps": 1024,
+      "messages": 100614144,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29101,
+      "arm": "variable_replay",
+      "stage": 2,
+      "checkpoint_sha256": "00fc446a2e1660b2d2810d30b64eb9fe9e8e1fc0199501b248b744d6c66fdfe6",
+      "optimizer_steps": 1536,
+      "messages": 150945792,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "fixed16_replay",
+      "stage": 0,
+      "checkpoint_sha256": "983dff3345fe0a29faba55ef71041f6ddc2ca2eff2c992ad582ef4dd034a4337",
+      "optimizer_steps": 512,
+      "messages": 33521664,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "fixed16_replay",
+      "stage": 1,
+      "checkpoint_sha256": "9de671c657e1d6c0b7d7a34e99fc69838b4e0ff193dfd8a8e65d3af5e5f7e158",
+      "optimizer_steps": 1024,
+      "messages": 67076096,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "fixed16_replay",
+      "stage": 2,
+      "checkpoint_sha256": "cb98d0045c6d1ab01d8bf1d244aca6fad7e92fe98b20be79365e881a589fb56c",
+      "optimizer_steps": 1536,
+      "messages": 100630528,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "fixed24_replay",
+      "stage": 0,
+      "checkpoint_sha256": "95663f32c7e20f97553f9b3b70f4eadb3bd72f606cd713fe9b0f46d451f6e790",
+      "optimizer_steps": 512,
+      "messages": 50282496,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "fixed24_replay",
+      "stage": 1,
+      "checkpoint_sha256": "10ccb5c2d99a71169810c13547a3c8313b36356aa7a3358fc6de836c60d9aa50",
+      "optimizer_steps": 1024,
+      "messages": 100614144,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "fixed24_replay",
+      "stage": 2,
+      "checkpoint_sha256": "fda34547aac3f982d325a8a81faa08c106f32104b4ceb43332dcc759fa1065a5",
+      "optimizer_steps": 1536,
+      "messages": 150945792,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "variable_replay",
+      "stage": 0,
+      "checkpoint_sha256": "2ba751d19dfbc9d6ee4e47005bf69c16e7d3a63aa4f6ea291b07078196dfc6f1",
+      "optimizer_steps": 512,
+      "messages": 50282496,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "variable_replay",
+      "stage": 1,
+      "checkpoint_sha256": "9e0e6effff280f80009b4352c76085c3a8621571375220fd618255fbbf79d9be",
+      "optimizer_steps": 1024,
+      "messages": 100614144,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "variable_replay",
+      "stage": 2,
+      "checkpoint_sha256": "ae256678d2fdc2a7fa272c728dab729e84288f595399e48fe83bd3496da6501d",
+      "optimizer_steps": 1536,
+      "messages": 150945792,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "fixed16_replay",
+      "stage": 0,
+      "checkpoint_sha256": "b70344706912895fda661e3cdc4b2f7adb53b7b6c6a6e2f04de0a8807035af0c",
+      "optimizer_steps": 512,
+      "messages": 33521664,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "fixed16_replay",
+      "stage": 1,
+      "checkpoint_sha256": "e5134210e689db4858404d4b6c8a657b26452b18ad2ee9252d4d360a5cfbfca2",
+      "optimizer_steps": 1024,
+      "messages": 67076096,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "fixed16_replay",
+      "stage": 2,
+      "checkpoint_sha256": "f7e4d631b4d84e6f139bb2f3b9ab3f9567fe100928179eff6b14097a0f76800a",
+      "optimizer_steps": 1536,
+      "messages": 100630528,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "fixed24_replay",
+      "stage": 0,
+      "checkpoint_sha256": "8461cb7686fc89f65e8f2df3ba58fddff0d44d08fff387e1c22af4f76f018bfe",
+      "optimizer_steps": 512,
+      "messages": 50282496,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "fixed24_replay",
+      "stage": 1,
+      "checkpoint_sha256": "71bfa9cf175088c82133703e0ec08cf40ceac76a3d71a000624be6e193ae8e50",
+      "optimizer_steps": 1024,
+      "messages": 100614144,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "fixed24_replay",
+      "stage": 2,
+      "checkpoint_sha256": "fb21021de76f4f6d487eede8ae8530d083b695ec14b5583ee6b8bfb62f656574",
+      "optimizer_steps": 1536,
+      "messages": 150945792,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "variable_replay",
+      "stage": 0,
+      "checkpoint_sha256": "39376b24d9bd5a6c49f37c6ceb6030a6aea6821a5562a47358384fd56bfe6896",
+      "optimizer_steps": 512,
+      "messages": 50282496,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "variable_replay",
+      "stage": 1,
+      "checkpoint_sha256": "ca69cfd2b44c45e2c024f000914ec5d8d91bfe7d2b601d76a9fe68377575278a",
+      "optimizer_steps": 1024,
+      "messages": 100614144,
+      "memory_reconstructed_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "variable_replay",
+      "stage": 2,
+      "checkpoint_sha256": "1706b86fc9e8427d7d3a72073972cad6b2dce68614cb74ef22ca6598e65c9a42",
+      "optimizer_steps": 1536,
+      "messages": 150945792,
+      "memory_reconstructed_exact": true
+    }
+  ],
+  "paired_stages": [
+    {
+      "seed": 29101,
+      "stage": 0,
+      "all_replay_states_exact": true,
+      "variable_fixed24_message_counts_exact": true,
+      "message_candidates": 50282496
+    },
+    {
+      "seed": 29101,
+      "stage": 1,
+      "all_replay_states_exact": true,
+      "variable_fixed24_message_counts_exact": true,
+      "message_candidates": 100614144
+    },
+    {
+      "seed": 29101,
+      "stage": 2,
+      "all_replay_states_exact": true,
+      "variable_fixed24_message_counts_exact": true,
+      "message_candidates": 150945792
+    },
+    {
+      "seed": 29102,
+      "stage": 0,
+      "all_replay_states_exact": true,
+      "variable_fixed24_message_counts_exact": true,
+      "message_candidates": 50282496
+    },
+    {
+      "seed": 29102,
+      "stage": 1,
+      "all_replay_states_exact": true,
+      "variable_fixed24_message_counts_exact": true,
+      "message_candidates": 100614144
+    },
+    {
+      "seed": 29102,
+      "stage": 2,
+      "all_replay_states_exact": true,
+      "variable_fixed24_message_counts_exact": true,
+      "message_candidates": 150945792
+    },
+    {
+      "seed": 29103,
+      "stage": 0,
+      "all_replay_states_exact": true,
+      "variable_fixed24_message_counts_exact": true,
+      "message_candidates": 50282496
+    },
+    {
+      "seed": 29103,
+      "stage": 1,
+      "all_replay_states_exact": true,
+      "variable_fixed24_message_counts_exact": true,
+      "message_candidates": 100614144
+    },
+    {
+      "seed": 29103,
+      "stage": 2,
+      "all_replay_states_exact": true,
+      "variable_fixed24_message_counts_exact": true,
+      "message_candidates": 150945792
+    }
+  ],
+  "final_restore": [
+    {
+      "seed": 29101,
+      "arm": "fixed16_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 29101,
+      "arm": "fixed24_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 29101,
+      "arm": "variable_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "fixed16_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "fixed24_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 29102,
+      "arm": "variable_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "fixed16_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "fixed24_replay",
+      "final_predictions_exact": true
+    },
+    {
+      "seed": 29103,
+      "arm": "variable_replay",
+      "final_predictions_exact": true
+    }
+  ]
+}

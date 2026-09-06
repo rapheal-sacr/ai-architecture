@@ -21,12 +21,12 @@ model configuration. A separate WD `language-runtime` installs that source and
 shares the existing torch/numpy packages read-only through a `.pth` entry. Its
 additional dependencies do not change the ongoing graph experiment's runtime.
 
-The local configuration has 24 layers, hidden width896, 14 query heads and two
-KV heads; maximum position embeddings is configured as32,768. That last value
+The local configuration has 24 layers, hidden width 896, 14 query heads and two
+KV heads; maximum position embeddings is configured as 32,768. That last value
 is not a measured long-context capability. CPU float32/eager inference reports
 494,032,768 unique parameters, 1,976,131,072 parameter bytes and tied input/output
 embedding storage. Each 54-token prompt produces 1,327,104 KV-cache bytes.
-Peak process RSS in the preflight is about3.42GB and includes loading overhead.
+Peak process RSS in the preflight is about 3.42 GB and includes loading overhead.
 
 Two prompts have identical token multisets but reverse red/blue box order.
 Their logits differ, and greedy outputs are respectively blue and red. This
@@ -41,3 +41,20 @@ define fresh closed-loop tasks and strong explicit-memory controls, freeze the
 protocol, and separate pretrained competence from acquired facts and changed
 procedures. Existing pretrained ability cannot count as this architecture's
 self-improvement. Retain all prior failure obligations in `GOAL-EVIDENCE.md`.
+
+## GPU adaptation feasibility
+
+After E29 terminated, a separate preflight loaded the base in float16 on the
+GTX1060 6GB and inserted rank 4 low-rank updates into q/v projections in all 24
+layers. This is conventional low-rank adaptation, not an invention. There are
+270,336 trainable float32 parameters (1,081,344 bytes), in addition to 988,065,536
+frozen base parameter bytes. Zero adapters preserve original logits exactly.
+Two 45-token repeated-example Adam updates have finite gradients and reduce
+same-example loss from 0.659 to 0.069. This is a functionality check, not transfer.
+
+The base-weight hash is unchanged; saved adapters restore trained logits exactly.
+Two updates take 0.389 seconds in this preflight and peak allocated CUDA tensor
+memory is 1,234,241,024 bytes. These numbers exclude untracked driver/context and
+Python overhead and say nothing about large-context training. Optimizer-state
+restoration across a real continual run, old-task retention, independent memory
+queries, compression and procedure self-improvement remain untested here.
