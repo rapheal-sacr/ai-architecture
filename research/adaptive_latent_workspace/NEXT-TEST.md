@@ -1,16 +1,23 @@
-# Current continuation: repair inferred context and memory assignment
+# Current continuation: separate relationship evidence from input statistics
 
-E19 completed the keep/revert test below. Its exact-prefix, matched-student
-results show specialization and acquisition/retention tradeoffs, not uniform
-procedure improvement. Read `E19-RESULT.md`.
+E22 completed all 100 cases. Its learned gate fails the strong fixed controls
+on conflicting, independent, alternating and fixed-function families. Read
+`E22-RESULT.md` before any new allocation claim. Do not tune more gate features
+on these scored seeds and describe that as autonomous self-improvement.
 
-E20 then found that privileged context helps conflicting functions much more
-than added width. E21 completed: fixed model/replay budget,
-slow versus faster context decay, and prior versus post-outcome assignment of
-training/replay examples. Predictions always precede outputs. It reduces conflicting-function error 63.5% but increases input-shift error
-21.8%. The next implementation/test is the learned causal evidence-allocation
-gate in `INFERENCE-REVISION.md`, with independent input/function change clocks.
-It is proposed, not yet implemented or registered as a scored experiment.
+The next bounded diagnostic replaces raw input/output cross-moments with a
+regularized local linear relationship estimate. Hold the student, assignment
+timing and replay budget fixed; cross descriptor type with the two evidence
+decays. Validate exact linear invariance under a no-noise/no-ridge algebra
+preflight, then try to break transfer on fresh nonlinear coupled, independent
+and alternating streams. Count the covariance state and solves. This is a
+representation intervention using established regression, not a new architecture
+claim. Its protocol must be frozen before scoring.
+
+After this diagnostic, return to the untested compression and ordered-reasoning
+components; accumulating more wins on the same supervised family cannot fulfill
+the broad goal. ALPaCA's cloned source provides relevant learned-basis regression
+prior art, but no published scores have been replicated.
 
 The original E19 design is retained below as history.
 

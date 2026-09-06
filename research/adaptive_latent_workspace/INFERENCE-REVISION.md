@@ -6,10 +6,13 @@ uniformly improving algorithm. Correct context helps much more than width in
 E20. E21 then repairs much of that failure without oracle information, extra
 student parameters or a larger buffer, but causes negative input-shift transfer.
 
-The next proposed component is a learned causal gate over fast and slow evidence
-states. This component is **not yet implemented or validated**. It replaces the
-fixed context-timescale choice, rather than attributing a newly tuned constant
-to autonomous learning.
+E22 implemented and falsified the proposed causal gate as a sufficient repair.
+It learns from recorded prediction errors but loses to fixed fast/prior on all
+conflicting, independent and alternating worlds, and fixed slow/prior on all
+input-shift worlds, at 1.95 times fast/prior execution cost. Coupled changes give
+a small scoped gain. The original design below is retained to show what was
+intended; `protocol_e22.json` specifies the actual implementation, which uses
+prior assignment for the learned gate and includes a fast/posterior comparator.
 
 ## State and causal update
 
@@ -70,3 +73,20 @@ also established ideas. This proposed component is an evidence-driven research
 implementation, not an established novelty claim. The distinctive full
 architecture, semantic compression, general reasoning and efficient autonomous
 long-horizon behavior remain open.
+
+## After E22: evidence geometry is the next causal intervention
+
+Raw cross-moments E[[x,1] y] depend on the input distribution even when the
+conditional function is unchanged. A regularized linear coefficient estimate
+(E[[x,1][x,1]^T] + ridge I)^-1 E[[x,1]y] separates these effects exactly only in
+a noiseless full-rank linear setting with zero ridge. With nonlinearity it is a
+distribution-weighted projection; it can still change under input shift. This
+limitation is a falsification target, not a claim of invariant task identity.
+
+Test the coefficient descriptor against the same raw descriptor, prediction
+and post-outcome assignment timing, decay choices, student size, observations
+and reservoir. Count covariance storage and all matrix solves. A linear
+invariance preflight validates the algebra; fresh nonlinear independent and
+alternating streams determine whether it helps the actual problem. No outcome
+of that intervention alone establishes learned semantic compression, reliable
+self-improvement or general reasoning. The wider architecture remains open.

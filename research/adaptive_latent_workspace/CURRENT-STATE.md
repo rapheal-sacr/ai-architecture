@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E21 are complete; no experiment is currently running.
+E1–E22 are complete; no experiment is currently running.
 
 ## What is locally established
 
@@ -76,10 +76,18 @@ irreducible identification bound.
 E21 completed those non-oracle changes. Faster decay plus post-outcome assignment
 reduces conflicting-function error 63.5% and raises recovery from 195/408 to
 385/408 at the same model-example count and stored learner state, with about
-4% extra runtime. Input-shift error rises 21.8%. The next proposed learned
-evidence-allocation gate is described in `INFERENCE-REVISION.md`; it is not yet
-implemented. Coupled and independently timed input/function changes must prevent
-it from merely recognizing the present two-family shortcut.
+4% extra runtime. Input-shift error rises 21.8%. E22 now implements the learned
+causal gate described in `INFERENCE-REVISION.md`. It changes online but loses to
+fast/prior in every conflicting, independent and alternating world, and to
+slow/prior in every input-shift world. Coupled changes give a small scoped gain.
+At 1.95 times fast/prior runtime, it is rejected as a sufficient repair.
+
+The next diagnostic changes the evidence representation itself: estimate a
+regularized input/output relationship instead of treating raw cross-moments as
+conditional identity. ALPaCA already supplies learned features plus Bayesian
+linear regression, so this direction does not establish novelty. A fixed linear
+context descriptor may fail for nonlinear functions and must be challenged there.
+No larger gate or further gate tuning is justified by E22 alone.
 
 ## Binding constraint and unresolved measurement
 

@@ -121,3 +121,23 @@ final keep/revert experience-state pairs at 6,400 updates;
 `results/e20_state_audit.json` verifies all 32 final diagnostic states and every
 oracle replay code. No checkpoint has been used to introduce oracle labels into
 an inferred learner.
+
+## E22 and conditional evidence prior art
+
+E22's five-family protocol and implementation were frozen at `2fcffe1` before
+scoring. All 100 cases completed; `record_e22.py` retains the complete errors,
+gate trajectories, recovery censoring and state audit. The three-panel plot was
+rendered and visually inspected. The gate derivative preflight gives
+0.00018065443364264556 analytically and agrees with finite differences. All
+100 restored state-cost counters and 80 raw reservoir/RNG pair checks match.
+
+[ALPaCA](https://github.com/StanfordASL/ALPaCA) was cloned on WD at
+`d06391a1bf11beda573078a6a1d62418aac367c4`. Inspected `README.md` and
+`main/alpaca.py` through training, prediction, save/restore and matrix helpers.
+The implementation learns a neural basis and prior mean/precision for a linear
+output model, computes contextual posterior weights from a regularized Gram
+matrix and scores query predictive negative log likelihood. Its training code
+samples tasks and varying context lengths. It does not establish arbitrary
+hidden change detection or protection against a drifting learned basis in our
+persistent stream. No dependencies were installed, notebooks executed or
+published numerical results reproduced.

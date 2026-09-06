@@ -57,3 +57,14 @@ The cloned [LEO implementation](https://github.com/google-deepmind/leo/tree/de9a
 The cloned [Continual Learning with Hypernetworks source](https://github.com/chrhenning/hypercl/tree/e32567889f772f8de783a437ff0beb2d426bc7b6) at `e32567889f772f8de783a437ff0beb2d426bc7b6` already generates task-conditioned model weights and regularizes generated weights for previous task embeddings. Inspected README, `utils/hnet_regularizer.py` target creation and fixed-output regularizer, and task-embedding call sites in `toy_example/train.py`. The regularizer can store detached generated targets or regenerate them from a previous hypernetwork and old embeddings, explicitly trading storage for computation. The inspected training path receives task indices; other source paths also contain a recognition model, so do not describe the entire repository as universally oracle-only. That recognition path was not reproduced or fully audited. Total memory must include embeddings, targets or predecessor weights and optimizer state, not only the shared hypernetwork. No numerical experiment from this repository was executed.
 
 These sources constrain future latent memory designs. The remaining research task is to infer and assign latent state from actual observations, preserve useful distinctions under bounded compression and demonstrate the complete resource tradeoff. Combining established latent adaptation and generated weights is not a sufficient novelty distinction.
+
+## Conditional regression is prior art
+
+ALPaCA at `d06391a1bf11beda573078a6a1d62418aac367c4` already learns a neural
+feature basis and prior for fast Bayesian linear regression. The inspected
+`main/alpaca.py` computes posterior coefficients using context Gram/cross-product
+matrices and trains on later query likelihood. Replacing raw cross-moments
+with regularized coefficients, or adding learned features and a fast linear
+head, cannot by itself establish novelty. This audit is source inspection,
+not numerical reproduction. E22's learned multi-timescale gate also fails its
+sufficient-repair claim despite actual online parameter adaptation.
