@@ -1,0 +1,47 @@
+[
+  {
+    "arm": "context_replay",
+    "mse": 0.08465913620363455,
+    "seconds": 40.87643137949635,
+    "late_mse": 0.07392507945145031,
+    "replacements": 0,
+    "tensor_bytes": 427128,
+    "last_training_saturation": null
+  },
+  {
+    "arm": "adam_gnt",
+    "mse": 0.14770557784731186,
+    "seconds": 41.836478905999684,
+    "late_mse": 0.11077452612016869,
+    "replacements": 0,
+    "tensor_bytes": 89188,
+    "last_training_saturation": 0.8248291015625
+  },
+  {
+    "arm": "cbp_gnt",
+    "mse": 0.09091892762536302,
+    "seconds": 56.13957928349555,
+    "late_mse": 0.06709255105934868,
+    "replacements": 408.5,
+    "tensor_bytes": 91236,
+    "last_training_saturation": 0.6156005859375
+  },
+  {
+    "arm": "replay_gnt",
+    "mse": 0.07060465416887693,
+    "seconds": 50.397075968503486,
+    "late_mse": 0.04660912985484231,
+    "replacements": 0,
+    "tensor_bytes": 261220,
+    "last_training_saturation": 0.68878173828125
+  },
+  {
+    "arm": "replay_cbp_gnt",
+    "mse": 0.06633013625668885,
+    "seconds": 64.92950792549527,
+    "late_mse": 0.04885885515737645,
+    "replacements": 391,
+    "tensor_bytes": 263268,
+    "last_training_saturation": 0.62652587890625
+  }
+]
