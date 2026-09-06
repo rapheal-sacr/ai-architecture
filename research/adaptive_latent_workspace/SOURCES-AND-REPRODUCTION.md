@@ -217,3 +217,10 @@ identity. All twelve inference runs separately check unchanged torch/CUDA RNG
 and model state. The depth-response figure was rendered and inspected. No source
 algorithm or published result was newly reproduced; this is an intervention on
 our frozen E27 states.
+
+E29 source and protocol were frozen at `c8a0884` before scoring. The CUDA
+preflight passes final prediction restoration and paired replay checks; an
+additional baseline audit reproduces E27's losses, model/optimizer/memory/RNG
+and public-N predictions exactly across all three reduced stages. Full balanced
+depth schedules match fixed24 message work exactly for seeds29101–29103.
+Scoring is running on WD; no final E29 result is claimed.

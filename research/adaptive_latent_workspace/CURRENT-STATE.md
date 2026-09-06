@@ -2,7 +2,8 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E28 are complete; no experiment is currently running.
+E1–E28 are complete. E29 is running from frozen source `c8a0884`; inspect
+WD `ACTIVE-STATE.json` and the live handle before any restart.
 
 ## What is locally established
 
@@ -219,3 +220,8 @@ hypothesis, not an established repair. Compare it with an equal-message-work
 fixed-depth control before attributing any gain to the distribution of depths.
 Read `E28-RESULT.md`. No result establishes general reasoning, efficient continual
 learning or reliable recursive improvement.
+
+E29 now compares fixed16, fixed24 and balanced variable16–32 recurrence on three
+fresh seeds, with exactly matched message work for fixed24/variable. Its separate
+preflight reproduces E27 baseline losses and state exactly. No scored E29 result
+is complete yet; read `NEXT-TEST.md` and the saved live run.
