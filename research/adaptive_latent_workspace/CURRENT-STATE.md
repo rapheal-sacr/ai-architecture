@@ -70,3 +70,10 @@ The working design should incorporate only mechanisms that survive those tests.
 The next architecture claim must explain both E2's need for protection and E4's
 need for sharing, rather than optimizing one of those cases and ignoring the
 other. No current experiment licenses completion of the overall goal.
+
+The user's updated objective explicitly requires recursive self-improvement and
+persistent memory. The manual E1–E8 research sequence is not itself evidence of an
+autonomous self-improving architecture. A learned, persistent update/memory
+controller and a test of its own improvement process are now explicit missing
+requirements. Student-weight learning, feature renewal with a fixed rule and
+better researcher-chosen hyperparameters do not satisfy them.

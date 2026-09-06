@@ -27,6 +27,7 @@ architecture does not import that implementation or its finite hypothesis class.
 | H3 | Consolidation lowers long-horizon resource cost without hiding rare failures | NOT_ESTABLISHED | E6 sample-tested merging costs more and worsens whole-stream error versus context replay; final-window error improves, so amortization remains open; rare retention untested |
 | H4 | Learned dynamics support efficient long-horizon planning | NOT_RUN | Closed-loop task success with no privileged transition access |
 | H5 | Plasticity can be sustained over many task changes | LIMITED_DURATION_AND_RENEWAL_SUPPORT | E7 renewal lowers whole-stream error with extra runtime; replay-only wins the final window; indefinite plasticity is not established |
+| H6 | The system improves its own learning or memory procedure, and that improvement transfers | NOT_IMPLEMENTED | A persistent learned update/controller changes from experience, with fresh-task gains after charging outer-loop trials and retention checks; student-weight learning alone is insufficient |
 
 ## New failures and boundaries
 
@@ -42,6 +43,21 @@ architecture does not import that implementation or its finite hypothesis class.
 - E7 imported feature renewal lowers mean error 38.4% without replay and 6.1% with replay versus the same optimizer without renewal, with 34.2%/28.8% more time. Both seeds agree on whole-stream direction, but replay without renewal has lower final-window error. This supports a mechanism in a limited port; it is not a published CBP replication or proof of sustained superiority. See [E7-RESULT.md](E7-RESULT.md).
 
 The broad goal remains active. No measured result currently establishes a universal binding constraint. In the tested streams, identification delay, destructive adaptation, and per-module scoring cost are separable limits. Their practical importance depends on context lifetime and capacity. E4 further shows why novelty in observations must not be equated with a need for another conditional model. Representational underfit, distribution change and interference are candidate explanations to distinguish experimentally.
+
+## Updated explicit requirement: recursive self-improvement
+
+The user clarified that recursive self-improvement and persistent memory are
+explicit goals. E1–E7 are fixed learning procedures tested by a human-directed
+research process. E8 is also a fixed procedure. They do not demonstrate a system
+improving its own learning algorithm, and this agent's manual experiment edits
+must not be counted as the proposed architecture's autonomous improvement.
+
+An outer learning process is therefore required. Its learned update or memory
+policy must change persistently from experience, improve acquisition/retention on
+fresh tasks after all meta-training and selection costs, and survive adversarial
+distribution changes. Self-application of the learned updater is a further test,
+not something established by ordinary meta-learning. A fixed candidate menu or
+repeated tuning on the final evaluation set would not establish the full claim.
 
 No improvement is counted from oracle-selected heads, hindsight task assignment,
 or metrics computed only after training on the same target. These may be labeled
