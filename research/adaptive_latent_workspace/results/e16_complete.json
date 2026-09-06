@@ -1,0 +1,2963 @@
+{
+  "protocol": {
+    "experiment": "E16-temporal-action-proposal-control",
+    "status_at_freeze": "NOT_RUN",
+    "seeds": [
+      14101,
+      14102
+    ],
+    "gravity_sequence": [
+      10.0,
+      30.0,
+      5.0,
+      10.0
+    ],
+    "modes": [
+      "oracle_diagnostic",
+      "frozen_learned_replay"
+    ],
+    "blocks": [
+      1,
+      5,
+      10
+    ],
+    "horizon": 60,
+    "parallel_envs": 4,
+    "evaluation_steps": 200,
+    "intervention": "Search piecewise-constant action sequences by choosing one coefficient per block of 1, 5 or 10 timesteps. This changes proposal dimension from 60 to 12 or 6 while retaining the same 60 predicted timesteps, 64 candidates, two CEM iterations and eight elites. Replan after each actual environment step. Project the shifted warm-start mean into the new blocks by averaging before the next search.",
+    "comparators": "The oracle block-one comparator reuses the exact completed E15 horizon-sixty result and retains its original costs/identity. Other arms execute new evaluation. Frozen learned models come from the matching E14 replay_mpc20 stage checkpoint and receive no updates, oracle gravity or simulator equations. The oracle predictor remains a separate diagnostic.",
+    "preflight": "Verify block-one proposals/actions/warm starts exactly reproduce the original planner on dummy observations. Verify sampled blocked proposals are constant within each declared block. Check the same counted model examples per decision for all block sizes and finite bounded actions.",
+    "evaluation": "Use E14/E15 paired initial states and planner seeds. No weights, memory, proposal parameters or admission criteria learn during this test. Existing development checkpoints and seeds mean this is a causal diagnostic, not a fresh final benchmark.",
+    "costs": "Record newly consumed and inherited environment/model work separately, checkpoint hashes, parameter/tensor state, and measured restoration/planning time. Compare proposal families within the same predictor; cheap oracle formulas are not learned-model efficiency. No fixed-time or energy claim follows.",
+    "falsification": "If temporal structure does not improve high-gravity control at matched model evaluations, simple action blocking has not repaired the search limitation. If it helps the accurate predictor but not the frozen neural predictor, model error is an additional limit under the changed action distribution. A successful fixed blocking rule is a strong control for a future learned procedure memory, not itself learned compression or recursive improvement.",
+    "scope": "Control for action representation and useful computation. No new general reasoning, persistent learned procedure, semantic compression or novelty claim. Broad architecture success remains unproven."
+  },
+  "identity": {
+    "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+    "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+    "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+    "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+    "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+    "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+    "e14_identity": {
+      "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+      "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+      "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+      "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+      "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+      "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+      "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+      "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+      "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+      "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+      "gymnasium_version": "1.1.1",
+      "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+      "torch_version": "2.5.1+cu118"
+    },
+    "e15_identity": {
+      "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+      "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+      "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+      "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+      "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+    }
+  },
+  "records": [
+    {
+      "seed": 14101,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -119.23690493204089,
+        -381.3812150218816,
+        -246.9246770269036,
+        -233.4682476036755
+      ],
+      "mean_return": -245.2527611461254,
+      "new_environment_steps": 0,
+      "new_model_examples": 0,
+      "inherited_environment_steps": 800,
+      "inherited_model_examples": 6144000,
+      "seconds": 8.136419188012951,
+      "reused_e15_record": {
+        "seed": 14101,
+        "stage": 0,
+        "gravity": 10.0,
+        "horizon": 60,
+        "identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        },
+        "returns": [
+          -119.23690493204089,
+          -381.3812150218816,
+          -246.9246770269036,
+          -233.4682476036755
+        ],
+        "mean_return": -245.2527611461254,
+        "seconds": 8.136419188012951,
+        "actual_environment_steps": 800,
+        "planning_calls": 200,
+        "oracle_model_examples": 6144000
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -120.3690981330482,
+        -244.45663483914046,
+        -232.24478586910905,
+        -232.25276999338445
+      ],
+      "mean_return": -207.33082220867055,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.164652620995184,
+      "restore_seconds": 1.4329998521134257e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14101,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -118.96196582062701,
+        -242.12178800129865,
+        -227.11739259945193,
+        -119.7275209919808
+      ],
+      "mean_return": -176.9821668533396,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.389580272996682,
+      "restore_seconds": 1.6229896573349833e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14101,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -122.04681459619326,
+        -502.0618239201549,
+        -372.7233267254523,
+        -235.51325021008114
+      ],
+      "mean_return": -308.0863038629704,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.549906450993149,
+      "restore_seconds": 0.0027761829987866804,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage0.pt",
+      "checkpoint_sha256": "7a101c3b324317acad3b6f89e273bd40f094fa7350b32770672465c7e26ff449",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 9594556,
+        "training_examples": 6396,
+        "optimizer_updates": 800,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -120.21218548539692,
+        -366.656646243579,
+        -241.9829739320852,
+        -238.7715394502345
+      ],
+      "mean_return": -241.9058362778239,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.452058965995093,
+      "restore_seconds": 0.002232137994724326,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage0.pt",
+      "checkpoint_sha256": "7a101c3b324317acad3b6f89e273bd40f094fa7350b32770672465c7e26ff449",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 9594556,
+        "training_examples": 6396,
+        "optimizer_updates": 800,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -376.7505939043556,
+        -498.84491936117536,
+        -366.26840923919315,
+        -368.3339949213807
+      ],
+      "mean_return": -402.5494793565262,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.489697383003659,
+      "restore_seconds": 0.0020960209949407727,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage0.pt",
+      "checkpoint_sha256": "7a101c3b324317acad3b6f89e273bd40f094fa7350b32770672465c7e26ff449",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 9594556,
+        "training_examples": 6396,
+        "optimizer_updates": 800,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "oracle_diagnostic",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1620.3931158260737,
+        -1581.7917215621148,
+        -1626.66238899391,
+        -1621.4585147236144
+      ],
+      "mean_return": -1612.5764352764281,
+      "new_environment_steps": 0,
+      "new_model_examples": 0,
+      "inherited_environment_steps": 800,
+      "inherited_model_examples": 6144000,
+      "seconds": 8.149559666999266,
+      "reused_e15_record": {
+        "seed": 14101,
+        "stage": 1,
+        "gravity": 30.0,
+        "horizon": 60,
+        "identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        },
+        "returns": [
+          -1620.3931158260737,
+          -1581.7917215621148,
+          -1626.66238899391,
+          -1621.4585147236144
+        ],
+        "mean_return": -1612.5764352764281,
+        "seconds": 8.149559666999266,
+        "actual_environment_steps": 800,
+        "planning_calls": 200,
+        "oracle_model_examples": 6144000
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "oracle_diagnostic",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1607.030722274504,
+        -1584.7332226620163,
+        -1608.2995435180678,
+        -1603.841094153062
+      ],
+      "mean_return": -1600.9761456519125,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.245399982988602,
+      "restore_seconds": 2.9149960028007627e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14101,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "oracle_diagnostic",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1620.6532500722494,
+        -1646.8021643638926,
+        -1680.2713447277742,
+        -1623.4717917827265
+      ],
+      "mean_return": -1642.7996377366605,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.40192576100526,
+      "restore_seconds": 1.3230019249022007e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14101,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "frozen_learned_replay",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1665.3463423146873,
+        -1647.4222138425412,
+        -1673.1775824240228,
+        -1669.081862841308
+      ],
+      "mean_return": -1663.7570003556398,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.505542220998905,
+      "restore_seconds": 0.002993935006088577,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage1.pt",
+      "checkpoint_sha256": "c6a7999e268e30c41e0eccdaf44c9585e839a528a1bb7a6e3bfae1d109f18575",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 19844476,
+        "training_examples": 12796,
+        "optimizer_updates": 1600,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "frozen_learned_replay",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1682.4793517893934,
+        -1641.9509895423637,
+        -1699.4070644832059,
+        -1697.640200234423
+      ],
+      "mean_return": -1680.3694015123465,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.495453198003815,
+      "restore_seconds": 0.002620350001961924,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage1.pt",
+      "checkpoint_sha256": "c6a7999e268e30c41e0eccdaf44c9585e839a528a1bb7a6e3bfae1d109f18575",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 19844476,
+        "training_examples": 12796,
+        "optimizer_updates": 1600,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "frozen_learned_replay",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1737.3354104356783,
+        -1699.6218923039528,
+        -1754.342236299579,
+        -1751.2262751092376
+      ],
+      "mean_return": -1735.6314535371118,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.583849392001866,
+      "restore_seconds": 0.0026315919967601076,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage1.pt",
+      "checkpoint_sha256": "c6a7999e268e30c41e0eccdaf44c9585e839a528a1bb7a6e3bfae1d109f18575",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 19844476,
+        "training_examples": 12796,
+        "optimizer_updates": 1600,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "oracle_diagnostic",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -140.82914366303478,
+        -330.78601495852854,
+        -1.7857260757985618,
+        -4.071894374618948
+      ],
+      "mean_return": -119.36819476799519,
+      "new_environment_steps": 0,
+      "new_model_examples": 0,
+      "inherited_environment_steps": 800,
+      "inherited_model_examples": 6144000,
+      "seconds": 8.177524066006299,
+      "reused_e15_record": {
+        "seed": 14101,
+        "stage": 2,
+        "gravity": 5.0,
+        "horizon": 60,
+        "identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        },
+        "returns": [
+          -140.82914366303478,
+          -330.78601495852854,
+          -1.7857260757985618,
+          -4.071894374618948
+        ],
+        "mean_return": -119.36819476799519,
+        "seconds": 8.177524066006299,
+        "actual_environment_steps": 800,
+        "planning_calls": 200,
+        "oracle_model_examples": 6144000
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "oracle_diagnostic",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -133.5331438512262,
+        -222.70575550581722,
+        -1.2343233749394649,
+        -3.213988987039274
+      ],
+      "mean_return": -90.17180292975556,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.564424151001731,
+      "restore_seconds": 2.44499824475497e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14101,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "oracle_diagnostic",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -130.47495244137448,
+        -154.10001774038673,
+        -1.7395439561671109,
+        -5.040445466146916
+      ],
+      "mean_return": -72.83873990101881,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.665780812996672,
+      "restore_seconds": 1.5020050341263413e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14101,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "frozen_learned_replay",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -151.99236320579405,
+        -402.10078368521755,
+        -3.2813888776945412,
+        -6.850333717350211
+      ],
+      "mean_return": -141.0562173715141,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.462289142000373,
+      "restore_seconds": 0.003655281994724646,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage2.pt",
+      "checkpoint_sha256": "c263fd400fb6c3e4cfe47cf96db6aec9ad74d76220e7cb4c43d894f6a7bde43c",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 30094396,
+        "training_examples": 19196,
+        "optimizer_updates": 2400,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "frozen_learned_replay",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -127.51381189885824,
+        -235.81784498290327,
+        -1.5382428976313138,
+        -3.504204866268678
+      ],
+      "mean_return": -92.09352616141537,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.442690965996007,
+      "restore_seconds": 0.002389594999840483,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage2.pt",
+      "checkpoint_sha256": "c263fd400fb6c3e4cfe47cf96db6aec9ad74d76220e7cb4c43d894f6a7bde43c",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 30094396,
+        "training_examples": 19196,
+        "optimizer_updates": 2400,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "frozen_learned_replay",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -127.95698452576458,
+        -1394.7145502096,
+        -4.055171793958747,
+        -6.898040897205336
+      ],
+      "mean_return": -383.4061868566322,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.426884531989344,
+      "restore_seconds": 0.0022987539996393025,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage2.pt",
+      "checkpoint_sha256": "c263fd400fb6c3e4cfe47cf96db6aec9ad74d76220e7cb4c43d894f6a7bde43c",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 30094396,
+        "training_examples": 19196,
+        "optimizer_updates": 2400,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -235.74937280636888,
+        -121.72896408507238,
+        -232.20882204023272,
+        -121.21328194836082
+      ],
+      "mean_return": -177.72511022000867,
+      "new_environment_steps": 0,
+      "new_model_examples": 0,
+      "inherited_environment_steps": 800,
+      "inherited_model_examples": 6144000,
+      "seconds": 8.184633379001752,
+      "reused_e15_record": {
+        "seed": 14101,
+        "stage": 3,
+        "gravity": 10.0,
+        "horizon": 60,
+        "identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        },
+        "returns": [
+          -235.74937280636888,
+          -121.72896408507238,
+          -232.20882204023272,
+          -121.21328194836082
+        ],
+        "mean_return": -177.72511022000867,
+        "seconds": 8.184633379001752,
+        "actual_environment_steps": 800,
+        "planning_calls": 200,
+        "oracle_model_examples": 6144000
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -239.93730837936837,
+        -118.45782265161981,
+        -239.51313505183438,
+        -119.2512425656302
+      ],
+      "mean_return": -179.2898771621132,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.13482026499696,
+      "restore_seconds": 3.0249939300119877e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14101,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -241.5097127420758,
+        -117.71868461895389,
+        -238.19621509479433,
+        -118.87639616116434
+      ],
+      "mean_return": -179.0752521542471,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.145179471001029,
+      "restore_seconds": 1.6429985407739878e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14101,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -235.0661539766295,
+        -125.00059917124523,
+        -235.16721470627567,
+        -121.50995556861184
+      ],
+      "mean_return": -179.18598085569056,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.492535108991433,
+      "restore_seconds": 0.003147284995066002,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage3.pt",
+      "checkpoint_sha256": "376dc336c2d74ef2c5efaabc87974a492686733c0d06de2c96ac778d78788858",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 40344316,
+        "training_examples": 25596,
+        "optimizer_updates": 3200,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -234.5233090301881,
+        -117.49336683817262,
+        -371.0921179101365,
+        -119.58349011395056
+      ],
+      "mean_return": -210.67307097311195,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.398104275998776,
+      "restore_seconds": 0.002437286006170325,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage3.pt",
+      "checkpoint_sha256": "376dc336c2d74ef2c5efaabc87974a492686733c0d06de2c96ac778d78788858",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 40344316,
+        "training_examples": 25596,
+        "optimizer_updates": 3200,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14101,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -222.18515977316204,
+        -118.13559546004936,
+        -324.3643398316701,
+        -119.13391855016013
+      ],
+      "mean_return": -195.95475340376044,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.388205099996412,
+      "restore_seconds": 0.00400698599696625,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14101-replay_mpc20-stage3.pt",
+      "checkpoint_sha256": "376dc336c2d74ef2c5efaabc87974a492686733c0d06de2c96ac778d78788858",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 40344316,
+        "training_examples": 25596,
+        "optimizer_updates": 3200,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -343.9392015782849,
+        -240.01647514182213,
+        -353.55490770871654,
+        -124.97343090149904
+      ],
+      "mean_return": -265.62100383258064,
+      "new_environment_steps": 0,
+      "new_model_examples": 0,
+      "inherited_environment_steps": 800,
+      "inherited_model_examples": 6144000,
+      "seconds": 8.15542128800007,
+      "reused_e15_record": {
+        "seed": 14102,
+        "stage": 0,
+        "gravity": 10.0,
+        "horizon": 60,
+        "identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        },
+        "returns": [
+          -343.9392015782849,
+          -240.01647514182213,
+          -353.55490770871654,
+          -124.97343090149904
+        ],
+        "mean_return": -265.62100383258064,
+        "seconds": 8.15542128800007,
+        "actual_environment_steps": 800,
+        "planning_calls": 200,
+        "oracle_model_examples": 6144000
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -327.8459131433061,
+        -116.56861630416083,
+        -224.81006457450746,
+        -124.74099621492245
+      ],
+      "mean_return": -198.49139755922423,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.76158411600045,
+      "restore_seconds": 5.0100061343982816e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14102,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -221.60722585429787,
+        -116.17214237556664,
+        -221.17400841868505,
+        -125.32249733017701
+      ],
+      "mean_return": -171.06896849468166,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.797343614991405,
+      "restore_seconds": 1.5629921108484268e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14102,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -873.2498567181798,
+        -768.8544929934376,
+        -969.5259034559346,
+        -779.0602813439891
+      ],
+      "mean_return": -847.6726336278853,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.54072255200299,
+      "restore_seconds": 0.0030980620067566633,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage0.pt",
+      "checkpoint_sha256": "b8133360f6f4fd370607610d6a7574333a558d2dd89eecfbd699ba11be2711e3",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 9594556,
+        "training_examples": 6396,
+        "optimizer_updates": 800,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -918.4888972031704,
+        -756.3615682882335,
+        -1526.9710821166989,
+        -770.5147922768564
+      ],
+      "mean_return": -993.0840849712398,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.468820756999776,
+      "restore_seconds": 0.0022896680020494387,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage0.pt",
+      "checkpoint_sha256": "b8133360f6f4fd370607610d6a7574333a558d2dd89eecfbd699ba11be2711e3",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 9594556,
+        "training_examples": 6396,
+        "optimizer_updates": 800,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 0,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -920.0520241373896,
+        -756.2035163054373,
+        -750.1574835086791,
+        -772.0955853258403
+      ],
+      "mean_return": -799.6271523193366,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.482430194999324,
+      "restore_seconds": 0.0022241950064199045,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage0.pt",
+      "checkpoint_sha256": "b8133360f6f4fd370607610d6a7574333a558d2dd89eecfbd699ba11be2711e3",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 9594556,
+        "training_examples": 6396,
+        "optimizer_updates": 800,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "oracle_diagnostic",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1602.9062181119684,
+        -1625.1885285199876,
+        -1592.23602806143,
+        -1555.0475872078564
+      ],
+      "mean_return": -1593.8445904753107,
+      "new_environment_steps": 0,
+      "new_model_examples": 0,
+      "inherited_environment_steps": 800,
+      "inherited_model_examples": 6144000,
+      "seconds": 8.067583142998046,
+      "reused_e15_record": {
+        "seed": 14102,
+        "stage": 1,
+        "gravity": 30.0,
+        "horizon": 60,
+        "identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        },
+        "returns": [
+          -1602.9062181119684,
+          -1625.1885285199876,
+          -1592.23602806143,
+          -1555.0475872078564
+        ],
+        "mean_return": -1593.8445904753107,
+        "seconds": 8.067583142998046,
+        "actual_environment_steps": 800,
+        "planning_calls": 200,
+        "oracle_model_examples": 6144000
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "oracle_diagnostic",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1602.6651517638543,
+        -1609.7375016729052,
+        -1598.3428529061807,
+        -1535.0605595785757
+      ],
+      "mean_return": -1586.451516480379,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.153672132000793,
+      "restore_seconds": 2.2039894247427583e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14102,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "oracle_diagnostic",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1675.503467596894,
+        -1698.2828533354793,
+        -1645.0629888701687,
+        -1622.6689623392429
+      ],
+      "mean_return": -1660.3795680354463,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.341583638000884,
+      "restore_seconds": 1.5830009942874312e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14102,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "frozen_learned_replay",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1664.4343995421093,
+        -1675.7116968058997,
+        -1643.8962548368697,
+        -1607.908339478239
+      ],
+      "mean_return": -1647.9876726657794,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.416734269994777,
+      "restore_seconds": 0.002748824001173489,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage1.pt",
+      "checkpoint_sha256": "cb3af1d43d6a446bf79ecf93552e19f44b16d65335a89845f99ab484295c4027",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 19844476,
+        "training_examples": 12796,
+        "optimizer_updates": 1600,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "frozen_learned_replay",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1652.3462932926004,
+        -1689.215531674794,
+        -1649.8170490059101,
+        -1622.2813894635656
+      ],
+      "mean_return": -1653.4150658592175,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.357762733998243,
+      "restore_seconds": 0.002628376998472959,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage1.pt",
+      "checkpoint_sha256": "cb3af1d43d6a446bf79ecf93552e19f44b16d65335a89845f99ab484295c4027",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 19844476,
+        "training_examples": 12796,
+        "optimizer_updates": 1600,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 1,
+      "gravity": 30.0,
+      "mode": "frozen_learned_replay",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1703.9426448828597,
+        -1707.1452053737348,
+        -1700.0025153614554,
+        -1628.6926329209273
+      ],
+      "mean_return": -1684.9457496347443,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.313494368005195,
+      "restore_seconds": 0.002202023009886034,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage1.pt",
+      "checkpoint_sha256": "cb3af1d43d6a446bf79ecf93552e19f44b16d65335a89845f99ab484295c4027",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 19844476,
+        "training_examples": 12796,
+        "optimizer_updates": 1600,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "oracle_diagnostic",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -143.59791136716194,
+        -148.3313328516956,
+        -143.46091417180307,
+        -143.85255127721513
+      ],
+      "mean_return": -144.81067741696893,
+      "new_environment_steps": 0,
+      "new_model_examples": 0,
+      "inherited_environment_steps": 800,
+      "inherited_model_examples": 6144000,
+      "seconds": 8.105869241000619,
+      "reused_e15_record": {
+        "seed": 14102,
+        "stage": 2,
+        "gravity": 5.0,
+        "horizon": 60,
+        "identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        },
+        "returns": [
+          -143.59791136716194,
+          -148.3313328516956,
+          -143.46091417180307,
+          -143.85255127721513
+        ],
+        "mean_return": -144.81067741696893,
+        "seconds": 8.105869241000619,
+        "actual_environment_steps": 800,
+        "planning_calls": 200,
+        "oracle_model_examples": 6144000
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "oracle_diagnostic",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -135.39322205405566,
+        -138.61535357464962,
+        -141.64791959564891,
+        -135.8487251323334
+      ],
+      "mean_return": -137.87630508917192,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.449191623003571,
+      "restore_seconds": 2.535001840442419e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14102,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "oracle_diagnostic",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -136.21462738048214,
+        -135.86591020660046,
+        -138.74126671471976,
+        -141.69629558708593
+      ],
+      "mean_return": -138.12952497222207,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.466031897012726,
+      "restore_seconds": 1.4630059013143182e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14102,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "frozen_learned_replay",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1251.0403917480896,
+        -168.6325312971188,
+        -1293.3533733148683,
+        -1303.0858101488225
+      ],
+      "mean_return": -1004.0280266272248,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.45449150299828,
+      "restore_seconds": 0.003202349995262921,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage2.pt",
+      "checkpoint_sha256": "7d0beee4575543cf07bedb7a26255b50a73cf842707921f440ef671e23442dd8",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 30094396,
+        "training_examples": 19196,
+        "optimizer_updates": 2400,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "frozen_learned_replay",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -1172.0826406788872,
+        -153.47794875336433,
+        -1312.099318457707,
+        -1192.171097002301
+      ],
+      "mean_return": -957.457751223065,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.36424910200003,
+      "restore_seconds": 0.0023218490096041933,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage2.pt",
+      "checkpoint_sha256": "7d0beee4575543cf07bedb7a26255b50a73cf842707921f440ef671e23442dd8",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 30094396,
+        "training_examples": 19196,
+        "optimizer_updates": 2400,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 2,
+      "gravity": 5.0,
+      "mode": "frozen_learned_replay",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -276.7392068343848,
+        -173.55027374862158,
+        -1291.643121236956,
+        -280.7652865203061
+      ],
+      "mean_return": -505.67447208506707,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.47491002100287,
+      "restore_seconds": 0.0028221620013937354,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage2.pt",
+      "checkpoint_sha256": "7d0beee4575543cf07bedb7a26255b50a73cf842707921f440ef671e23442dd8",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 30094396,
+        "training_examples": 19196,
+        "optimizer_updates": 2400,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -242.5386354414964,
+        -240.84278305227252,
+        -399.9552761952717,
+        -228.86962847461464
+      ],
+      "mean_return": -278.0515807909138,
+      "new_environment_steps": 0,
+      "new_model_examples": 0,
+      "inherited_environment_steps": 800,
+      "inherited_model_examples": 6144000,
+      "seconds": 8.165588107003714,
+      "reused_e15_record": {
+        "seed": 14102,
+        "stage": 3,
+        "gravity": 10.0,
+        "horizon": 60,
+        "identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        },
+        "returns": [
+          -242.5386354414964,
+          -240.84278305227252,
+          -399.9552761952717,
+          -228.86962847461464
+        ],
+        "mean_return": -278.0515807909138,
+        "seconds": 8.165588107003714,
+        "actual_environment_steps": 800,
+        "planning_calls": 200,
+        "oracle_model_examples": 6144000
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -241.7816467845887,
+        -116.28945798935797,
+        -347.7757052726692,
+        -233.34731143228427
+      ],
+      "mean_return": -234.79853036972506,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.129227748999256,
+      "restore_seconds": 3.426001057960093e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14102,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "oracle_diagnostic",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -245.96458677351694,
+        -116.39987486065661,
+        -247.28392713354793,
+        -230.4440006147352
+      ],
+      "mean_return": -210.02309734561416,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 8.139114342004177,
+      "restore_seconds": 1.2930104276165366e-06,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "learner_costs": null
+    },
+    {
+      "seed": 14102,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 1,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -247.35326681508343,
+        -120.61115959470746,
+        -388.4143983615691,
+        -754.7992503519466
+      ],
+      "mean_return": -377.7945187808267,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.517463587995735,
+      "restore_seconds": 0.002825029005180113,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage3.pt",
+      "checkpoint_sha256": "a621197c10535a36e2f0b7b65c0300c94550d452a70ea2517abeaf5611b3826a",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 40344316,
+        "training_examples": 25596,
+        "optimizer_updates": 3200,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 5,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -248.6714803832663,
+        -116.93888891259796,
+        -356.59940477509116,
+        -240.70453766991784
+      ],
+      "mean_return": -240.7285779352183,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.475403142001596,
+      "restore_seconds": 0.002408643005765043,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage3.pt",
+      "checkpoint_sha256": "a621197c10535a36e2f0b7b65c0300c94550d452a70ea2517abeaf5611b3826a",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 40344316,
+        "training_examples": 25596,
+        "optimizer_updates": 3200,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    },
+    {
+      "seed": 14102,
+      "stage": 3,
+      "gravity": 10.0,
+      "mode": "frozen_learned_replay",
+      "block": 10,
+      "identity": {
+        "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+        "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+        "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+        "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+        "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+        "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+        "e14_identity": {
+          "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+          "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+          "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+          "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+          "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+          "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+          "gymnasium_version": "1.1.1",
+          "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+          "torch_version": "2.5.1+cu118"
+        },
+        "e15_identity": {
+          "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+          "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+          "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+          "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+          "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+        }
+      },
+      "returns": [
+        -242.0615903461996,
+        -128.7931205609644,
+        -355.0698209093293,
+        -231.66796523269247
+      ],
+      "mean_return": -239.39812426229645,
+      "new_environment_steps": 800,
+      "new_model_examples": 6144000,
+      "inherited_environment_steps": 0,
+      "inherited_model_examples": 0,
+      "seconds": 9.474925530987093,
+      "restore_seconds": 0.0027692029980244115,
+      "checkpoint": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e14/14102-replay_mpc20-stage3.pt",
+      "checkpoint_sha256": "a621197c10535a36e2f0b7b65c0300c94550d452a70ea2517abeaf5611b3826a",
+      "learner_costs": {
+        "parameter_count": 4675,
+        "stored_tensor_bytes": 113528,
+        "forward_examples": 40344316,
+        "training_examples": 25596,
+        "optimizer_updates": 3200,
+        "module_count": 1,
+        "module_switches": 0
+      }
+    }
+  ]
+}

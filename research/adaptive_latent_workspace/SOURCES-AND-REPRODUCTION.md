@@ -85,3 +85,9 @@ The full [Gymnasium clone](https://github.com/Farama-Foundation/Gymnasium) is ch
 ```bash
 python e14_world_model.py --execute --repo /path/to/pinned/Gymnasium --out /path/on/large/drive/e14
 ```
+
+## E16 and policy-proposal prior art
+
+`protocol_e16.json` and `e16_temporal_proposals.py` were committed as `2b0704c` before scored execution. Standalone preflight passed, the scored run completed, and `record_e16.py` retains all 48 cases and inherited/new work separately. `alw-runs/e16` holds original output; frozen learned predictors come from E14 checkpoints with SHA-256 identities in each case.
+
+POPLIN was cloned on WD at `edd8dba50f9049c6164eda774602bef0c299cb51`. No package install, training or numerical replication was performed. The source audit and differences from E14 are in `NOVELTY-AUDIT.md`.

@@ -1,0 +1,386 @@
+[
+  {
+    "seed": 13101,
+    "arm": "standard_entropy",
+    "stage": 0,
+    "environment": "MiniGrid-MultiRoom-N2-S4-v0",
+    "max_steps": 40,
+    "success_rates": [
+      1.0,
+      0.16,
+      0.38
+    ],
+    "training_seconds": 176.28169807400263,
+    "evaluation_seconds": 32.361818945995765,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 264192,
+      "update": 1032192,
+      "evaluation": 28285,
+      "optimizer_updates": 4096
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13101,
+    "arm": "standard_entropy",
+    "stage": 1,
+    "environment": "MiniGrid-MultiRoom-N4-S5-v1",
+    "max_steps": 80,
+    "success_rates": [
+      0.0,
+      0.0,
+      0.02
+    ],
+    "training_seconds": 159.80729787499877,
+    "evaluation_seconds": 42.35019545799878,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 528384,
+      "update": 2064384,
+      "evaluation": 66163,
+      "optimizer_updates": 8192
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13101,
+    "arm": "standard_entropy",
+    "stage": 2,
+    "environment": "MiniGrid-DoorKey-8x8-v0",
+    "max_steps": 640,
+    "success_rates": [
+      0.0,
+      0.0,
+      0.02
+    ],
+    "training_seconds": 165.25804079399677,
+    "evaluation_seconds": 43.991027237003436,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 792576,
+      "update": 3096576,
+      "evaluation": 104081,
+      "optimizer_updates": 12288
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13101,
+    "arm": "standard_entropy",
+    "stage": 3,
+    "environment": "MiniGrid-MultiRoom-N2-S4-v0",
+    "max_steps": 40,
+    "success_rates": [
+      1.0,
+      0.42,
+      0.34
+    ],
+    "training_seconds": 175.27070912400086,
+    "evaluation_seconds": 31.944572729000356,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 1056768,
+      "update": 4128768,
+      "evaluation": 132764,
+      "optimizer_updates": 16384
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13101,
+    "arm": "zero_entropy",
+    "stage": 0,
+    "environment": "MiniGrid-MultiRoom-N2-S4-v0",
+    "max_steps": 40,
+    "success_rates": [
+      1.0,
+      0.9,
+      0.0
+    ],
+    "training_seconds": 183.70406839300995,
+    "evaluation_seconds": 37.11542537900095,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 264192,
+      "update": 1032192,
+      "evaluation": 33823,
+      "optimizer_updates": 4096
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13101,
+    "arm": "zero_entropy",
+    "stage": 1,
+    "environment": "MiniGrid-MultiRoom-N4-S5-v1",
+    "max_steps": 80,
+    "success_rates": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "training_seconds": 181.53098494000733,
+    "evaluation_seconds": 42.90582778099633,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 528384,
+      "update": 2064384,
+      "evaluation": 71823,
+      "optimizer_updates": 8192
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13101,
+    "arm": "zero_entropy",
+    "stage": 2,
+    "environment": "MiniGrid-DoorKey-8x8-v0",
+    "max_steps": 640,
+    "success_rates": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "training_seconds": 160.13684861100046,
+    "evaluation_seconds": 43.64013967900246,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 792576,
+      "update": 3096576,
+      "evaluation": 109823,
+      "optimizer_updates": 12288
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13101,
+    "arm": "zero_entropy",
+    "stage": 3,
+    "environment": "MiniGrid-MultiRoom-N2-S4-v0",
+    "max_steps": 40,
+    "success_rates": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "training_seconds": 170.26967217399215,
+    "evaluation_seconds": 42.72784694399161,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 1056768,
+      "update": 4128768,
+      "evaluation": 147823,
+      "optimizer_updates": 16384
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13102,
+    "arm": "standard_entropy",
+    "stage": 0,
+    "environment": "MiniGrid-MultiRoom-N2-S4-v0",
+    "max_steps": 40,
+    "success_rates": [
+      1.0,
+      0.12,
+      0.4
+    ],
+    "training_seconds": 176.62044369599607,
+    "evaluation_seconds": 33.0060547900066,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 264192,
+      "update": 1032192,
+      "evaluation": 29519,
+      "optimizer_updates": 4096
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13102,
+    "arm": "standard_entropy",
+    "stage": 1,
+    "environment": "MiniGrid-MultiRoom-N4-S5-v1",
+    "max_steps": 80,
+    "success_rates": [
+      0.06,
+      0.0,
+      0.04
+    ],
+    "training_seconds": 172.20433427899843,
+    "evaluation_seconds": 41.870919987995876,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 528384,
+      "update": 2064384,
+      "evaluation": 67251,
+      "optimizer_updates": 8192
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13102,
+    "arm": "standard_entropy",
+    "stage": 2,
+    "environment": "MiniGrid-DoorKey-8x8-v0",
+    "max_steps": 640,
+    "success_rates": [
+      0.1,
+      0.0,
+      0.06
+    ],
+    "training_seconds": 162.36198957600573,
+    "evaluation_seconds": 41.0284902509884,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 792576,
+      "update": 3096576,
+      "evaluation": 104440,
+      "optimizer_updates": 12288
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13102,
+    "arm": "standard_entropy",
+    "stage": 3,
+    "environment": "MiniGrid-MultiRoom-N2-S4-v0",
+    "max_steps": 40,
+    "success_rates": [
+      1.0,
+      0.2,
+      0.2
+    ],
+    "training_seconds": 180.67958064899722,
+    "evaluation_seconds": 34.97855657499167,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 1056768,
+      "update": 4128768,
+      "evaluation": 136472,
+      "optimizer_updates": 16384
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13102,
+    "arm": "zero_entropy",
+    "stage": 0,
+    "environment": "MiniGrid-MultiRoom-N2-S4-v0",
+    "max_steps": 40,
+    "success_rates": [
+      0.06,
+      0.02,
+      0.0
+    ],
+    "training_seconds": 184.82715787700727,
+    "evaluation_seconds": 40.323975138002425,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 264192,
+      "update": 1032192,
+      "evaluation": 37834,
+      "optimizer_updates": 4096
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13102,
+    "arm": "zero_entropy",
+    "stage": 1,
+    "environment": "MiniGrid-MultiRoom-N4-S5-v1",
+    "max_steps": 80,
+    "success_rates": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "training_seconds": 172.20150224999816,
+    "evaluation_seconds": 41.30666641501011,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 528384,
+      "update": 2064384,
+      "evaluation": 75834,
+      "optimizer_updates": 8192
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13102,
+    "arm": "zero_entropy",
+    "stage": 2,
+    "environment": "MiniGrid-DoorKey-8x8-v0",
+    "max_steps": 640,
+    "success_rates": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "training_seconds": 161.8260913330014,
+    "evaluation_seconds": 41.662454096003785,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 792576,
+      "update": 3096576,
+      "evaluation": 113834,
+      "optimizer_updates": 12288
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  },
+  {
+    "seed": 13102,
+    "arm": "zero_entropy",
+    "stage": 3,
+    "environment": "MiniGrid-MultiRoom-N2-S4-v0",
+    "max_steps": 40,
+    "success_rates": [
+      1.0,
+      0.12,
+      0.02
+    ],
+    "training_seconds": 171.03705090399308,
+    "evaluation_seconds": 39.260980514009134,
+    "tensor_bytes": 842624,
+    "counts": {
+      "mode": "evaluation",
+      "rollout": 1056768,
+      "update": 4128768,
+      "evaluation": 149829,
+      "optimizer_updates": 16384
+    },
+    "parameters": 52664,
+    "peak_gpu_bytes": 25290752
+  }
+]

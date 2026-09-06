@@ -45,7 +45,7 @@ E9 and E11 completed. The controller persists but students reset. On fresh E11 t
 
 E10 completed after a recorded checkpoint-device launch failure and successful CUDA preflight. With shared critic gradients, removing entropy changes harder-task success from 0/50 to 50/50 in both development seeds and retains the old task at 50/50. Detaching the critic is inconsistent across seeds. Baseline evaluation episodes reproduce E8 exactly; training floating-point trajectories do not. Read `E10-RESULT.md`.
 
-E12 passed CPU/CUDA preflights and an exact CPU checkpoint-resume test. Scored execution is running on fresh seeds: both entropy choices start from scratch, then encounter an unseen key-door action chain with a 640-step limit and return to the original task. This remains a fixed-procedure mechanism test, not a planner or learned procedure.
+E12 passed CPU/CUDA preflights and an exact CPU checkpoint-resume test. Scored execution completed on fresh seeds: both entropy choices start from scratch, then encounter an unseen key-door action chain with a 640-step limit and return to the original task. This remains a fixed-procedure mechanism test, not a planner or learned procedure.
 
 E13 completed its five-million-observation extension with exact prefix error/counter reproduction in all four arms. Cumulative error is lower with sharing in both seeds, reversing the earlier first-million deficit. Mean error improves 21.0%, but forward examples rise 2.42×, runtime 1.64×, and stored tensor bytes 1.45×. It still uses eight persistent modules. Accuracy amortization is established on this continuation; total-resource efficiency and rare retention are not.
 
@@ -53,7 +53,9 @@ E14 completed its neural world-model/planning pilot. Twenty-step replay planning
 
 E15 completed an accurate-model diagnostic using the same planner. High gravity still fails at horizons twenty and sixty, and the longer horizon costs three times the model calls while improving only one of eight paired settings. The next search design must address action proposals/temporal structure rather than assuming more memory, model accuracy or depth automatically fixes this failure. The oracle predictor is a diagnostic only and is never available to the learning agent.
 
-E12 remains running. Its first zero-entropy seed learned the initial task but later collapsed during four-room training to zero success on all three evaluations. This provisional fresh counterexample already prevents treating E10's repair as universal; the complete two-seed result remains pending.
+E12 completed. Both zero-entropy seeds collapse to zero success on all three tasks after four-room training and remain there after key-door training. Only one reacquires the initial task on return. Standard entropy reacquires that task in both seeds but fails harder-task acquisition. E10's entropy-off repair is not sufficient on this fresh sequence; the exact cause of the late within-stage collapses remains unisolated. Read `E12-RESULT.md`.
+
+E16 completed. At equal model-example counts, temporal blocks help 7/8 or 5/8 accurate-model cases but only 4/8 or 3/8 learned-model cases. High-gravity control stays poor, and both learned blocked versions are worse there in both seeds. Simple temporal structure has not repaired the search limitation. POPLIN source directly precedes learned policy proposals; that idea alone cannot establish novelty.
 
 ## Binding constraint and unresolved measurement
 
@@ -70,8 +72,7 @@ cannot be substituted for one another.
 1. A criterion that separates genuinely conflicting conditional functions from
    learnable changes in input distribution or temporary representational underfit.
 2. Memory consolidation that repays its full cost, including rare and old-context
-   tests outside the admission sample. Extending E6 beyond its first million
-   observations with the same prefix is a useful test of the possible late gain.
+   tests outside the admission sample. E13 establishes a later accuracy gain but still costs more in total measured resources; rare-query loss remains untested.
 3. A thresholded, censored recovery-time assay with unpredictable switches,
    overlapping contexts and recurrence, rather than only regular fixed segments.
 4. Closed-loop transfer and substantially longer tasks; learned multi-step models

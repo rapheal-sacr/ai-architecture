@@ -1,0 +1,50 @@
+{
+  "identity": {
+    "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+    "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+    "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+    "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+    "protocol_e16.json": "1bb146200d678ce177934ce08f5e53b52325fa0f89e29837e88acf7e1b8fddb2",
+    "e16_temporal_proposals.py": "cacb54e889d7ef145b9b1cb60ef76e36eb6df90f21a4241c8a47954e1225a2b1",
+    "e14_identity": {
+      "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+      "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+      "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+      "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+      "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+      "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+      "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+      "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f",
+      "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+      "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690",
+      "gymnasium_version": "1.1.1",
+      "pendulum_sha256": "ce3b08152cccb75ef6c401c399860311cbaf85f44340445f28ae6eb48d1034f8",
+      "torch_version": "2.5.1+cu118"
+    },
+    "e15_identity": {
+      "protocol_e14.json": "4204f4648a6ae198f84ab4ff5d3cb8b75ccf8cc097e6ad077c108b94b268869a",
+      "e14_world_model.py": "4b28265c4dcaa71a28804519cf9650f4509458cb04c85c7bc72cf579d054f8f1",
+      "protocol_e15.json": "3a2f3207af936d29ae60565ef1cf2e6be2ad0230b6202efa023ac967abef5703",
+      "e15_oracle_planner.py": "89de6532c153bc3c43509f4ded5187a177585d91817ea72af729c6b4d73a36e6",
+      "gymnasium_commit": "17eff00220d210beda933f78b0e52850022b0690"
+    }
+  },
+  "block_one_exact": true,
+  "checks": [
+    {
+      "block": 1,
+      "forward_examples": 1920,
+      "within_block_constant": true
+    },
+    {
+      "block": 5,
+      "forward_examples": 1920,
+      "within_block_constant": true
+    },
+    {
+      "block": 10,
+      "forward_examples": 1920,
+      "within_block_constant": true
+    }
+  ]
+}

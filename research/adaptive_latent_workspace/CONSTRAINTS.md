@@ -31,7 +31,7 @@ distribution and E1's conflicting conditional functions can both cause surprise.
 | Check active model before searching alternatives | 3 | E5 reduces measured routing work; overlapping-context false acceptance remains open |
 | Retain a bounded sample and test shared consolidation | 2 and 3 | E6 is an exploratory test; finite anchors cannot certify all rare knowledge |
 | Renew low-utility neural features | 2 and 3 | E7 improves whole-stream error at extra cost; E8 does not prevent closed-loop forgetting |
-| Plan using learned multi-step dynamics | 3 | No closed-loop candidate result yet; supervised prediction is insufficient |
+| Plan using learned multi-step dynamics | 3 | E14 gives a costly scoped gain; E15/E16 expose remaining search limits even with accurate dynamics |
 
 ## An identification lower bound
 

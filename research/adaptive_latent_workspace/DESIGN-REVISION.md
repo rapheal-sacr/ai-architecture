@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. This is a proposed integrated system, not a claim
 that the components below already form a validated or scientifically novel
-agent. E1–E11 have implemented and tested only subsets. The original supplied
+agent. E1–E16 have implemented and tested only subsets. The original supplied
 papers and model gallery were reviewed through the preserved WD corpus/clones.
 
 ## The change that the failures require
@@ -20,7 +20,7 @@ what signals change the learner, as well as step size. It must be possible for
 an update to be rejected, shared or isolated on the basis of measured downstream
 consequences. That decision is learned and fallible; it is not a certificate.
 
-E10 completed. Removing entropy with shared critic gradients succeeds on both old and harder tasks in both development seeds. Removing entropy and detaching the critic succeeds in only one seed; keeping entropy fails in both. This does not justify a universal rule to delete entropy or block critic gradients. E12's first completed fresh seed is a counterexample: entropy-off learning collapses after initial success and does not reacquire the old task. The complete second-seed outcome remains pending.
+E10 completed. Removing entropy with shared critic gradients succeeds on both old and harder tasks in both development seeds. Removing entropy and detaching the critic succeeds in only one seed; keeping entropy fails in both. This does not justify a universal rule to delete entropy or block critic gradients. E12 supplies fresh counterexamples: both entropy-off seeds collapse by the end of four-room training and only one reacquires the old task. Neither fixed entropy choice reliably learns the harder sequence. Collapse can occur late within a stationary stage; its cause remains unisolated.
 
 ## Proposed states and computations
 
@@ -99,7 +99,7 @@ as improvement would give the wrong sign.
 
 ## The falsification sequence before an architecture claim
 
-1. E10's factor comparison is complete; finish E12's fresh new-action/retention test.
+1. E10's factor comparison and E12's fresh new-action/retention test are complete.
    A useful objective correction becomes a strong baseline, not an architectural
    achievement attributed to unused memory mechanisms.
 2. E14 adds learned dynamics and planning; E15 shows a search limitation even
@@ -127,3 +127,5 @@ the full design has not been earned.
 ## The next architectural distinction
 
 Persistent memory must retain both learned information and useful ways to search. E15 makes the second role concrete: the planner can possess accurate transition knowledge yet fail to generate a useful action sequence at its search budget. A candidate procedure memory would learn compact temporal action proposals from prior planning/real outcomes, while preserving an exploration route outside its learned proposal family. This is proposed, not implemented or established as novel. A fixed temporal action-blocking control should first test whether search representation, rather than extra model calls, repairs the failure. Any learned version must then beat that simple control after its training, storage and proposal costs.
+
+E16 is complete: simple temporal blocks do not repair high-gravity control at equal model evaluations. The exact-model improvements elsewhere do not reliably carry to learned models. The next design must retain uncertainty about both its prediction and its proposed computation. Learning policy proposals is already implemented in POPLIN; it is a baseline to credit, not a sufficient novelty claim.
