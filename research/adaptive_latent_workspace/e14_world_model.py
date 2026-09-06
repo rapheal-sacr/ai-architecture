@@ -129,6 +129,8 @@ def main():
                             costs=learner.costs() if learner else None,planning_calls=planner.calls if planner else 0,planning_model_examples=planner.model_examples if planner else 0)
                         rows.append(row)
                         if a.execute:print(json.dumps(dict(seed=seed,arm=arm,stage=stage,vector_steps=t+1,mean_return=float(np.mean(completed)) if completed else None,mse=row['prequential_mse'])),flush=True)
+                if not a.execute and learner is not None:
+                    assert any(not torch.equal(x,p) for x,p in zip(before,[p for m in learner.models for p in m.parameters()]))
                 for env in envs:env.close()
                 training_seconds=time.perf_counter()-stage_start
                 with torch.random.fork_rng():
