@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` before design prose. This map preserves the user's full
 objective; component tests do not redefine success as a smaller graph or stream
-problem. E1–E30 are complete and audited. E30 now executes integrated language, observed
+problem. E1–E31 are complete and audited. E30 now executes integrated language, observed
 memory and actual-feedback adaptation, but fails reliable acquisition and
 efficient improvement. No experiment is currently running.
 
@@ -39,3 +39,9 @@ online updates. It does not complete the full latent-workspace or procedure
 architecture. The strong observed-map control completes24/24 deliveries, versus
 9/24 for adaptive language at extra cost. Read E30-RESULT.md for the per-seed
 acquisition gate and the limited relocation gain.
+
+E31 adds4,293 frozen tutorial/renaming diagnostic queries with independent
+reference and metric reconstruction. It falsifies assumed tutorial mastery and
+compact naming as a sufficient repair. These are teacher-induced static states,
+not autonomous behavior. Tutorial/fresh overlap between learning seeds is now
+explicitly recorded; the corpora are not independent replications.

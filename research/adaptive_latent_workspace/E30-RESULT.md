@@ -146,3 +146,11 @@ does not implement the complete ordered latent workspace, learned world model,
 compression/admission process or procedure-trial loop. Conventional language
 LoRA, LRU memory and fixed PPO-style replay are not a novelty claim. The full
 goal remains active and unachieved.
+
+## Later provenance correction from the E31 audit
+
+The two learning/action seeds use different operational worlds, but their
+tutorial world seeds were constructed as seed+700000+i. They therefore share
+seven of eight tutorial worlds. Do not treat the two seeds as independent
+training corpora. This changes no recorded outcome, but weakens replication
+claims. Future corpus generation should use disjoint hierarchical seed streams.

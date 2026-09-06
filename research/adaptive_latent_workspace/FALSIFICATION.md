@@ -251,3 +251,30 @@ labels. Structural tie and irrelevant-world checks pass; nine neural preflight
 cells preserve weights and RNG. The initial command omitted --preflight and was
 rejected before queries; corrected execution passed. No scored E31 logits exist
 at this source freeze. Read E31-PROTOCOL.md; it is not an autonomous-task result.
+
+## Cross-seed dependence found during E31 reconstruction
+
+E30's tutorial generator uses consecutive seed offsets: learning seeds30101 and
+30102 share7/8 tutorial worlds. Operational test worlds differ. E31's fresh
+world generator also shares2/4 exact (seed,size) world specifications between
+these sources, while remaining disjoint from tutorials. These are correlated
+corpora, not independent environment replications. Preserve the frozen runs
+and report the overlap; use disjoint streams for future changed designs.
+
+## E31: failed tutorial fitting and a counterexample to compact naming
+
+All18 cells complete fromff78ad7. All4,293 queries, references, metrics, source
+adapters and work reconstruct;648 identical-prompt repeats have exact logits.
+Original bootstrap tutorial correctness is58.2%/76.5%; exposed-query accuracy
+is59.9%/76.7%. Every cell fails the mastery gate. We cannot call fresh failure
+transfer after demonstrated acquisition. On30101, training improves delivery
+but damages immediate-home choice16/32→2/32 and worsens tutorial CE1.095→1.572.
+
+Pure renaming changes correct decisions with unchanged facts/weights. Compact
+IDs sometimes help, but hurt the first final adapter's fresh correctness
+58.0%→40.7%; no compact cell passes mastery. This rejects compact renaming as
+a sufficient repair. Some multi-edge categories contain only tied valid routes
+and cannot establish difficult reasoning. E31-RESULT.md preserves all categories,
+exposure counts, overlap, flips, costs and limits. Tutorial fitting, interference
+and representation must be separated before adding another architecture module.
+The full goal, novel design, learned compression and reliable RSI remain open.

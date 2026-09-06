@@ -319,3 +319,14 @@ for an execution core that reliably uses known facts. The next diagnostic must
 separate tutorial fitting, symbol/address binding and planning before a revised
 architecture is claimed. See E30-RESULT.md and NEXT-TEST.md. No novelty claim is
 established by replacing one conventional component with another.
+
+## E31 strengthens the execution-core objection
+
+Frozen diagnostic queries show that tutorial mastery was never established.
+Original bootstrap rule fidelity is58.2%/76.5%, with one seed's immediate-home
+decisions damaged by training. Name changes alone affect answers; compact IDs
+are not a sufficient repair and can make them worse. Retention proposals cannot
+explain away failures on unchanged, exposed tutorial states. Establish a
+competent learned execution baseline under matched-example controls before
+attributing gains to new memory or procedure mechanisms. This does not validate
+the full architecture or establish novelty. Read E31-RESULT.md.

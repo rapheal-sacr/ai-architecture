@@ -1,0 +1,1786 @@
+{
+  "status": "E31_PREFLIGHT_AUDITED",
+  "source_sha256": "a04f36427b3796b4228b4d8823ceb13a69aaed43ff6d5144faeb4ffb465ed703",
+  "source_commit": "89fb30f9ab6b950dc7f1f016e5a37d3a488a7769",
+  "audit_script_sha256": "884e27cb55686402a32509913ac2caf683a71e270d52a657b33a907ea54386d2",
+  "inventory": [
+    {
+      "seed": 1711,
+      "query_counts": {
+        "tutorial": 8,
+        "fresh": 8
+      },
+      "categories": {
+        "tutorial": {
+          "explore_one_edge": 2,
+          "pick_target": 2,
+          "home_one_edge": 2,
+          "deliver": 1,
+          "stock_one_edge": 1
+        },
+        "fresh": {
+          "explore_one_edge": 3,
+          "pick_target": 2,
+          "home_one_edge": 2,
+          "deliver": 1
+        }
+      },
+      "unique_tutorial_prompt_labels": 8,
+      "tutorial_exposed_queries": 3,
+      "generation": {
+        "tutorial_source_queries": 9,
+        "fresh_teacher_actions": 77,
+        "tutorial_scored_queries": 8,
+        "fresh_scored_queries": 8
+      },
+      "all_floyd_reference_sets_exact": true
+    }
+  ],
+  "cross_seed_overlap": [],
+  "cells": [
+    {
+      "seed": 1711,
+      "state": "base",
+      "encoding": "original",
+      "groups": {
+        "tutorial": {
+          "n": 8,
+          "rule_correct": 6,
+          "rule_accuracy": 0.75,
+          "teacher_exact": 6,
+          "teacher_accuracy": 0.75,
+          "mean_teacher_ce": 0.8280163332819939,
+          "mean_rule_probability": 0.47450412809848785,
+          "tokens": 2056
+        },
+        "fresh": {
+          "n": 8,
+          "rule_correct": 4,
+          "rule_accuracy": 0.5,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.5,
+          "mean_teacher_ce": 1.10886599868536,
+          "mean_rule_probability": 0.4085387662053108,
+          "tokens": 2197
+        },
+        "fresh_n4": {
+          "n": 8,
+          "rule_correct": 4,
+          "rule_accuracy": 0.5,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.5,
+          "mean_teacher_ce": 1.10886599868536,
+          "mean_rule_probability": 0.4085387662053108,
+          "tokens": 2197
+        },
+        "tutorial_unique_prompt_label": {
+          "n": 8,
+          "rule_correct": 6,
+          "rule_accuracy": 0.75,
+          "teacher_exact": 6,
+          "teacher_accuracy": 0.75,
+          "mean_teacher_ce": 0.8280163332819939,
+          "mean_rule_probability": 0.47450412809848785,
+          "tokens": 2056
+        },
+        "tutorial_exposed": {
+          "n": 3,
+          "rule_correct": 2,
+          "rule_accuracy": 0.6666666666666666,
+          "teacher_exact": 2,
+          "teacher_accuracy": 0.6666666666666666,
+          "mean_teacher_ce": 0.8527151942253113,
+          "mean_rule_probability": 0.5327573319276174,
+          "tokens": 741
+        },
+        "tutorial_unexposed": {
+          "n": 5,
+          "rule_correct": 4,
+          "rule_accuracy": 0.8,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.8,
+          "mean_teacher_ce": 0.8131970167160034,
+          "mean_rule_probability": 0.4395522058010101,
+          "tokens": 1315
+        }
+      },
+      "categories": {
+        "tutorial": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 1,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 1,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.8756789565086365,
+            "mean_rule_probability": 0.4057501256465912,
+            "tokens": 268
+          },
+          "explore_one_edge": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.5092253684997559,
+            "mean_rule_probability": 0.7200493514537811,
+            "tokens": 441
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 0.9562033712863922,
+            "mean_rule_probability": 0.38114064931869507,
+            "tokens": 550
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.7842188775539398,
+            "mean_rule_probability": 0.4494134932756424,
+            "tokens": 542
+          },
+          "stock_one_edge": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.2491564750671387,
+            "mean_rule_probability": 0.28907591104507446,
+            "tokens": 255
+          }
+        },
+        "fresh": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.5972237586975098,
+            "mean_rule_probability": 0.20066826045513153,
+            "tokens": 289
+          },
+          "explore_one_edge": {
+            "n": 3,
+            "rule_correct": 1,
+            "rule_accuracy": 0.3333333333333333,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.3333333333333333,
+            "mean_teacher_ce": 1.1969383756319683,
+            "mean_rule_probability": 0.471982662876447,
+            "tokens": 745
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 1.2127915918827057,
+            "mean_rule_probability": 0.30662402510643005,
+            "tokens": 593
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.628652960062027,
+            "mean_rule_probability": 0.5192229151725769,
+            "tokens": 570
+          }
+        }
+      },
+      "tutorial_gate": false,
+      "query_seconds": 1.9619272440031637,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4253,
+        "inference_attention_elements": 383159952,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1046672384,
+      "source_adapter_sha256": "2e47bdef3c15f3e4e3501a4ed6d9d073d2e1c6f0e04c47f337b9fbd09f817381",
+      "all_rows_metrics_tokens_reference_source_verified": true
+    },
+    {
+      "seed": 1711,
+      "state": "base",
+      "encoding": "fresh_nonce",
+      "groups": {
+        "tutorial": {
+          "n": 8,
+          "rule_correct": 4,
+          "rule_accuracy": 0.5,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.5,
+          "mean_teacher_ce": 0.9512130059301853,
+          "mean_rule_probability": 0.43539735674858093,
+          "tokens": 2058
+        },
+        "fresh": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 1.1702349707484245,
+          "mean_rule_probability": 0.39740074053406715,
+          "tokens": 2153
+        },
+        "fresh_n4": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 1.1702349707484245,
+          "mean_rule_probability": 0.39740074053406715,
+          "tokens": 2153
+        },
+        "tutorial_unique_prompt_label": {
+          "n": 8,
+          "rule_correct": 4,
+          "rule_accuracy": 0.5,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.5,
+          "mean_teacher_ce": 0.9512130059301853,
+          "mean_rule_probability": 0.43539735674858093,
+          "tokens": 2058
+        },
+        "tutorial_exposed": {
+          "n": 3,
+          "rule_correct": 1,
+          "rule_accuracy": 0.3333333333333333,
+          "teacher_exact": 1,
+          "teacher_accuracy": 0.3333333333333333,
+          "mean_teacher_ce": 0.9465119342009226,
+          "mean_rule_probability": 0.5089793105920156,
+          "tokens": 727
+        },
+        "tutorial_unexposed": {
+          "n": 5,
+          "rule_correct": 3,
+          "rule_accuracy": 0.6,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.6,
+          "mean_teacher_ce": 0.9540336489677429,
+          "mean_rule_probability": 0.39124818444252013,
+          "tokens": 1331
+        }
+      },
+      "categories": {
+        "tutorial": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 1,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 1,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 1.1316978931427002,
+            "mean_rule_probability": 0.3163609504699707,
+            "tokens": 276
+          },
+          "explore_one_edge": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.4054766148328781,
+            "mean_rule_probability": 0.7729059755802155,
+            "tokens": 437
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 1.0125706195831299,
+            "mean_rule_probability": 0.35843704640865326,
+            "tokens": 560
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.3308038711547852,
+            "mean_rule_probability": 0.26551400125026703,
+            "tokens": 531
+          },
+          "stock_one_edge": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 0.980303943157196,
+            "mean_rule_probability": 0.3731038570404053,
+            "tokens": 254
+          }
+        },
+        "fresh": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 2.0140397548675537,
+            "mean_rule_probability": 0.13510940968990326,
+            "tokens": 284
+          },
+          "explore_one_edge": {
+            "n": 3,
+            "rule_correct": 1,
+            "rule_accuracy": 0.3333333333333333,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.3333333333333333,
+            "mean_teacher_ce": 1.2823325792948406,
+            "mean_rule_probability": 0.45605256656805676,
+            "tokens": 728
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 1.1027770042419434,
+            "mean_rule_probability": 0.32750773429870605,
+            "tokens": 584
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.6476441323757172,
+            "mean_rule_probability": 0.5104616731405258,
+            "tokens": 557
+          }
+        }
+      },
+      "tutorial_gate": false,
+      "query_seconds": 1.8504800969967619,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4211,
+        "inference_attention_elements": 375788112,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1044069888,
+      "source_adapter_sha256": "2e47bdef3c15f3e4e3501a4ed6d9d073d2e1c6f0e04c47f337b9fbd09f817381",
+      "all_rows_metrics_tokens_reference_source_verified": true
+    },
+    {
+      "seed": 1711,
+      "state": "base",
+      "encoding": "compact",
+      "groups": {
+        "tutorial": {
+          "n": 8,
+          "rule_correct": 3,
+          "rule_accuracy": 0.375,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.375,
+          "mean_teacher_ce": 0.9966261833906174,
+          "mean_rule_probability": 0.43209526874125004,
+          "tokens": 1815
+        },
+        "fresh": {
+          "n": 8,
+          "rule_correct": 4,
+          "rule_accuracy": 0.5,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.5,
+          "mean_teacher_ce": 1.204542275518179,
+          "mean_rule_probability": 0.3919425392523408,
+          "tokens": 1867
+        },
+        "fresh_n4": {
+          "n": 8,
+          "rule_correct": 4,
+          "rule_accuracy": 0.5,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.5,
+          "mean_teacher_ce": 1.204542275518179,
+          "mean_rule_probability": 0.3919425392523408,
+          "tokens": 1867
+        },
+        "tutorial_unique_prompt_label": {
+          "n": 8,
+          "rule_correct": 3,
+          "rule_accuracy": 0.375,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.375,
+          "mean_teacher_ce": 0.9966261833906174,
+          "mean_rule_probability": 0.43209526874125004,
+          "tokens": 1815
+        },
+        "tutorial_exposed": {
+          "n": 3,
+          "rule_correct": 1,
+          "rule_accuracy": 0.3333333333333333,
+          "teacher_exact": 1,
+          "teacher_accuracy": 0.3333333333333333,
+          "mean_teacher_ce": 1.0646705627441406,
+          "mean_rule_probability": 0.4782608300447464,
+          "tokens": 662
+        },
+        "tutorial_unexposed": {
+          "n": 5,
+          "rule_correct": 2,
+          "rule_accuracy": 0.4,
+          "teacher_exact": 2,
+          "teacher_accuracy": 0.4,
+          "mean_teacher_ce": 0.9557995557785034,
+          "mean_rule_probability": 0.40439593195915224,
+          "tokens": 1153
+        }
+      },
+      "categories": {
+        "tutorial": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.225094199180603,
+            "mean_rule_probability": 0.2890435457229614,
+            "tokens": 233
+          },
+          "explore_one_edge": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.3190772235393524,
+            "mean_rule_probability": 0.8092162907123566,
+            "tokens": 405
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.2067137956619263,
+            "mean_rule_probability": 0.2980090379714966,
+            "tokens": 480
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 1.3612972497940063,
+            "mean_rule_probability": 0.2889081612229347,
+            "tokens": 470
+          },
+          "stock_one_edge": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 0.9737387299537659,
+            "mean_rule_probability": 0.37545162439346313,
+            "tokens": 227
+          }
+        },
+        "fresh": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 2.272829055786133,
+            "mean_rule_probability": 0.1062026396393776,
+            "tokens": 241
+          },
+          "explore_one_edge": {
+            "n": 3,
+            "rule_correct": 1,
+            "rule_accuracy": 0.3333333333333333,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.3333333333333333,
+            "mean_teacher_ce": 1.2610221306482952,
+            "mean_rule_probability": 0.44457268714904785,
+            "tokens": 650
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 1.227620542049408,
+            "mean_rule_probability": 0.289604052901268,
+            "tokens": 499
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.5626008361577988,
+            "mean_rule_probability": 0.5582057535648346,
+            "tokens": 477
+          }
+        }
+      },
+      "tutorial_gate": false,
+      "query_seconds": 1.530607570995926,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 3682,
+        "inference_attention_elements": 286011936,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1041062912,
+      "source_adapter_sha256": "2e47bdef3c15f3e4e3501a4ed6d9d073d2e1c6f0e04c47f337b9fbd09f817381",
+      "all_rows_metrics_tokens_reference_source_verified": true
+    },
+    {
+      "seed": 1711,
+      "state": "bootstrap",
+      "encoding": "original",
+      "groups": {
+        "tutorial": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 0.6888277172110975,
+          "mean_rule_probability": 0.5719455201178789,
+          "tokens": 2056
+        },
+        "fresh": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 1.212152237072587,
+          "mean_rule_probability": 0.44060893543064594,
+          "tokens": 2197
+        },
+        "fresh_n4": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 1.212152237072587,
+          "mean_rule_probability": 0.44060893543064594,
+          "tokens": 2197
+        },
+        "tutorial_unique_prompt_label": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 0.6888277172110975,
+          "mean_rule_probability": 0.5719455201178789,
+          "tokens": 2056
+        },
+        "tutorial_exposed": {
+          "n": 3,
+          "rule_correct": 2,
+          "rule_accuracy": 0.6666666666666666,
+          "teacher_exact": 2,
+          "teacher_accuracy": 0.6666666666666666,
+          "mean_teacher_ce": 0.6904638595879078,
+          "mean_rule_probability": 0.6332919746637344,
+          "tokens": 741
+        },
+        "tutorial_unexposed": {
+          "n": 5,
+          "rule_correct": 3,
+          "rule_accuracy": 0.6,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.6,
+          "mean_teacher_ce": 0.6878460317850112,
+          "mean_rule_probability": 0.5351376473903656,
+          "tokens": 1315
+        }
+      },
+      "categories": {
+        "tutorial": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 1,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 1,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.6114116311073303,
+            "mean_rule_probability": 0.525455117225647,
+            "tokens": 268
+          },
+          "explore_one_edge": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.14264429174363613,
+            "mean_rule_probability": 0.8745419085025787,
+            "tokens": 441
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.1785439550876617,
+            "mean_rule_probability": 0.31100259721279144,
+            "tokens": 550
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.25122013688087463,
+            "mean_rule_probability": 0.7489959001541138,
+            "tokens": 542
+          },
+          "stock_one_edge": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.7543933391571045,
+            "mean_rule_probability": 0.18102823197841644,
+            "tokens": 255
+          }
+        },
+        "fresh": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 1,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 1,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 1.2291196584701538,
+            "mean_rule_probability": 0.286255806684494,
+            "tokens": 289
+          },
+          "explore_one_edge": {
+            "n": 3,
+            "rule_correct": 1,
+            "rule_accuracy": 0.3333333333333333,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.3333333333333333,
+            "mean_teacher_ce": 1.763677214582761,
+            "mean_rule_probability": 0.3914787173271179,
+            "tokens": 745
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 1.2954145967960358,
+            "mean_rule_probability": 0.3117043897509575,
+            "tokens": 593
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.2931187003850937,
+            "mean_rule_probability": 0.7203853726387024,
+            "tokens": 570
+          }
+        }
+      },
+      "tutorial_gate": false,
+      "query_seconds": 1.8575833549984964,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4253,
+        "inference_attention_elements": 383159952,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1046672384,
+      "source_adapter_sha256": "e62c7b05cf7f8685b3e00a9c989a5b7f85b0e7fca85ce13c6d743269716b9cdb",
+      "all_rows_metrics_tokens_reference_source_verified": true
+    },
+    {
+      "seed": 1711,
+      "state": "bootstrap",
+      "encoding": "fresh_nonce",
+      "groups": {
+        "tutorial": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 0.8145377305336297,
+          "mean_rule_probability": 0.4990494195371866,
+          "tokens": 2058
+        },
+        "fresh": {
+          "n": 8,
+          "rule_correct": 4,
+          "rule_accuracy": 0.5,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.5,
+          "mean_teacher_ce": 1.2392318919301033,
+          "mean_rule_probability": 0.4493764308281243,
+          "tokens": 2153
+        },
+        "fresh_n4": {
+          "n": 8,
+          "rule_correct": 4,
+          "rule_accuracy": 0.5,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.5,
+          "mean_teacher_ce": 1.2392318919301033,
+          "mean_rule_probability": 0.4493764308281243,
+          "tokens": 2153
+        },
+        "tutorial_unique_prompt_label": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 0.8145377305336297,
+          "mean_rule_probability": 0.4990494195371866,
+          "tokens": 2058
+        },
+        "tutorial_exposed": {
+          "n": 3,
+          "rule_correct": 2,
+          "rule_accuracy": 0.6666666666666666,
+          "teacher_exact": 2,
+          "teacher_accuracy": 0.6666666666666666,
+          "mean_teacher_ce": 0.7665787053604921,
+          "mean_rule_probability": 0.5608816891908646,
+          "tokens": 727
+        },
+        "tutorial_unexposed": {
+          "n": 5,
+          "rule_correct": 3,
+          "rule_accuracy": 0.6,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.6,
+          "mean_teacher_ce": 0.8433131456375123,
+          "mean_rule_probability": 0.4619500577449799,
+          "tokens": 1331
+        }
+      },
+      "categories": {
+        "tutorial": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 1,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 1,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.8475757837295532,
+            "mean_rule_probability": 0.4170296788215637,
+            "tokens": 276
+          },
+          "explore_one_edge": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.092272924259305,
+            "mean_rule_probability": 0.9166819155216217,
+            "tokens": 437
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.2646377682685852,
+            "mean_rule_probability": 0.28174425661563873,
+            "tokens": 560
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.7043624520301819,
+            "mean_rule_probability": 0.4797196537256241,
+            "tokens": 531
+          },
+          "stock_one_edge": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.5461797714233398,
+            "mean_rule_probability": 0.21907402575016022,
+            "tokens": 254
+          }
+        },
+        "fresh": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.6539429426193237,
+            "mean_rule_probability": 0.19006279110908508,
+            "tokens": 284
+          },
+          "explore_one_edge": {
+            "n": 3,
+            "rule_correct": 1,
+            "rule_accuracy": 0.3333333333333333,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.3333333333333333,
+            "mean_teacher_ce": 1.9149580399195354,
+            "mean_rule_probability": 0.3911146434644858,
+            "tokens": 728
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 1.0061466693878174,
+            "mean_rule_probability": 0.3657006174325943,
+            "tokens": 584
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.251372367143631,
+            "mean_rule_probability": 0.7501017451286316,
+            "tokens": 557
+          }
+        }
+      },
+      "tutorial_gate": false,
+      "query_seconds": 1.8480025409953669,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4211,
+        "inference_attention_elements": 375788112,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1044069888,
+      "source_adapter_sha256": "e62c7b05cf7f8685b3e00a9c989a5b7f85b0e7fca85ce13c6d743269716b9cdb",
+      "all_rows_metrics_tokens_reference_source_verified": true
+    },
+    {
+      "seed": 1711,
+      "state": "bootstrap",
+      "encoding": "compact",
+      "groups": {
+        "tutorial": {
+          "n": 8,
+          "rule_correct": 3,
+          "rule_accuracy": 0.375,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.375,
+          "mean_teacher_ce": 0.9713905961252749,
+          "mean_rule_probability": 0.4638341646641493,
+          "tokens": 1815
+        },
+        "fresh": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 1.3642542567104101,
+          "mean_rule_probability": 0.42922418192029,
+          "tokens": 1867
+        },
+        "fresh_n4": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 1.3642542567104101,
+          "mean_rule_probability": 0.42922418192029,
+          "tokens": 1867
+        },
+        "tutorial_unique_prompt_label": {
+          "n": 8,
+          "rule_correct": 3,
+          "rule_accuracy": 0.375,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.375,
+          "mean_teacher_ce": 0.9713905961252749,
+          "mean_rule_probability": 0.4638341646641493,
+          "tokens": 1815
+        },
+        "tutorial_exposed": {
+          "n": 3,
+          "rule_correct": 1,
+          "rule_accuracy": 0.3333333333333333,
+          "teacher_exact": 1,
+          "teacher_accuracy": 0.3333333333333333,
+          "mean_teacher_ce": 0.8244723354776701,
+          "mean_rule_probability": 0.5229771633942922,
+          "tokens": 662
+        },
+        "tutorial_unexposed": {
+          "n": 5,
+          "rule_correct": 2,
+          "rule_accuracy": 0.4,
+          "teacher_exact": 2,
+          "teacher_accuracy": 0.4,
+          "mean_teacher_ce": 1.0595415525138379,
+          "mean_rule_probability": 0.4283483654260635,
+          "tokens": 1153
+        }
+      },
+      "categories": {
+        "tutorial": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.0999599695205688,
+            "mean_rule_probability": 0.3262401819229126,
+            "tokens": 233
+          },
+          "explore_one_edge": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.057313526049256325,
+            "mean_rule_probability": 0.9422059953212738,
+            "tokens": 405
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.788019597530365,
+            "mean_rule_probability": 0.1765785589814186,
+            "tokens": 480
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 0.915138840675354,
+            "mean_rule_probability": 0.41472943127155304,
+            "tokens": 470
+          },
+          "stock_one_edge": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.1502208709716797,
+            "mean_rule_probability": 0.31740516424179077,
+            "tokens": 227
+          }
+        },
+        "fresh": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 2.474287509918213,
+            "mean_rule_probability": 0.08834514766931534,
+            "tokens": 241
+          },
+          "explore_one_edge": {
+            "n": 3,
+            "rule_correct": 1,
+            "rule_accuracy": 0.3333333333333333,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.3333333333333333,
+            "mean_teacher_ce": 1.9723828037579854,
+            "mean_rule_probability": 0.3723701511820157,
+            "tokens": 650
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 1.0263357162475586,
+            "mean_rule_probability": 0.35180382430553436,
+            "tokens": 499
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.23496334999799728,
+            "mean_rule_probability": 0.7623651027679443,
+            "tokens": 477
+          }
+        }
+      },
+      "tutorial_gate": false,
+      "query_seconds": 1.5289798680023523,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 3682,
+        "inference_attention_elements": 286011936,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1041062912,
+      "source_adapter_sha256": "e62c7b05cf7f8685b3e00a9c989a5b7f85b0e7fca85ce13c6d743269716b9cdb",
+      "all_rows_metrics_tokens_reference_source_verified": true
+    },
+    {
+      "seed": 1711,
+      "state": "adaptive_final",
+      "encoding": "original",
+      "groups": {
+        "tutorial": {
+          "n": 8,
+          "rule_correct": 6,
+          "rule_accuracy": 0.75,
+          "teacher_exact": 6,
+          "teacher_accuracy": 0.75,
+          "mean_teacher_ce": 0.6647116774693131,
+          "mean_rule_probability": 0.5764100309461355,
+          "tokens": 2056
+        },
+        "fresh": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 1.2099751140922308,
+          "mean_rule_probability": 0.4368501901626587,
+          "tokens": 2197
+        },
+        "fresh_n4": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 1.2099751140922308,
+          "mean_rule_probability": 0.4368501901626587,
+          "tokens": 2197
+        },
+        "tutorial_unique_prompt_label": {
+          "n": 8,
+          "rule_correct": 6,
+          "rule_accuracy": 0.75,
+          "teacher_exact": 6,
+          "teacher_accuracy": 0.75,
+          "mean_teacher_ce": 0.6647116774693131,
+          "mean_rule_probability": 0.5764100309461355,
+          "tokens": 2056
+        },
+        "tutorial_exposed": {
+          "n": 3,
+          "rule_correct": 2,
+          "rule_accuracy": 0.6666666666666666,
+          "teacher_exact": 2,
+          "teacher_accuracy": 0.6666666666666666,
+          "mean_teacher_ce": 0.6632615650693575,
+          "mean_rule_probability": 0.636337990562121,
+          "tokens": 741
+        },
+        "tutorial_unexposed": {
+          "n": 5,
+          "rule_correct": 4,
+          "rule_accuracy": 0.8,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.8,
+          "mean_teacher_ce": 0.6655817449092865,
+          "mean_rule_probability": 0.5404532551765442,
+          "tokens": 1315
+        }
+      },
+      "categories": {
+        "tutorial": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 1,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 1,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.6085109114646912,
+            "mean_rule_probability": 0.5269525051116943,
+            "tokens": 268
+          },
+          "explore_one_edge": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.14733939245343208,
+            "mean_rule_probability": 0.872146725654602,
+            "tokens": 441
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 1.1161701679229736,
+            "mean_rule_probability": 0.3296358585357666,
+            "tokens": 550
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.26109786331653595,
+            "mean_rule_probability": 0.7417290210723877,
+            "tokens": 542
+          },
+          "stock_one_edge": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.6599676609039307,
+            "mean_rule_probability": 0.19730453193187714,
+            "tokens": 255
+          }
+        },
+        "fresh": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 1,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 1,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 1.2279627323150635,
+            "mean_rule_probability": 0.2865775525569916,
+            "tokens": 289
+          },
+          "explore_one_edge": {
+            "n": 3,
+            "rule_correct": 1,
+            "rule_accuracy": 0.3333333333333333,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.3333333333333333,
+            "mean_teacher_ce": 1.7060592621564865,
+            "mean_rule_probability": 0.3963668743769328,
+            "tokens": 745
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 1.3647626340389252,
+            "mean_rule_probability": 0.29559873044490814,
+            "tokens": 593
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.3020675629377365,
+            "mean_rule_probability": 0.7139629423618317,
+            "tokens": 570
+          }
+        }
+      },
+      "tutorial_gate": false,
+      "query_seconds": 1.8552808889944572,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4253,
+        "inference_attention_elements": 383159952,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1046672384,
+      "source_adapter_sha256": "2573c1ee7b9b221de78e434dd9748bfd9d5c0f2046ab5a37e164b63fd75998f5",
+      "all_rows_metrics_tokens_reference_source_verified": true
+    },
+    {
+      "seed": 1711,
+      "state": "adaptive_final",
+      "encoding": "fresh_nonce",
+      "groups": {
+        "tutorial": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 0.7989927297458053,
+          "mean_rule_probability": 0.5011516753584146,
+          "tokens": 2058
+        },
+        "fresh": {
+          "n": 8,
+          "rule_correct": 4,
+          "rule_accuracy": 0.5,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.5,
+          "mean_teacher_ce": 1.242324087768793,
+          "mean_rule_probability": 0.444015234708786,
+          "tokens": 2153
+        },
+        "fresh_n4": {
+          "n": 8,
+          "rule_correct": 4,
+          "rule_accuracy": 0.5,
+          "teacher_exact": 4,
+          "teacher_accuracy": 0.5,
+          "mean_teacher_ce": 1.242324087768793,
+          "mean_rule_probability": 0.444015234708786,
+          "tokens": 2153
+        },
+        "tutorial_unique_prompt_label": {
+          "n": 8,
+          "rule_correct": 5,
+          "rule_accuracy": 0.625,
+          "teacher_exact": 5,
+          "teacher_accuracy": 0.625,
+          "mean_teacher_ce": 0.7989927297458053,
+          "mean_rule_probability": 0.5011516753584146,
+          "tokens": 2058
+        },
+        "tutorial_exposed": {
+          "n": 3,
+          "rule_correct": 2,
+          "rule_accuracy": 0.6666666666666666,
+          "teacher_exact": 2,
+          "teacher_accuracy": 0.6666666666666666,
+          "mean_teacher_ce": 0.7453998203078905,
+          "mean_rule_probability": 0.5644313643376032,
+          "tokens": 727
+        },
+        "tutorial_unexposed": {
+          "n": 5,
+          "rule_correct": 3,
+          "rule_accuracy": 0.6,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.6,
+          "mean_teacher_ce": 0.8311484754085541,
+          "mean_rule_probability": 0.4631838619709015,
+          "tokens": 1331
+        }
+      },
+      "categories": {
+        "tutorial": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 1,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 1,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.8501487374305725,
+            "mean_rule_probability": 0.41598376631736755,
+            "tokens": 276
+          },
+          "explore_one_edge": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.09974842891097069,
+            "mean_rule_probability": 0.912587970495224,
+            "tokens": 437
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.214274287223816,
+            "mean_rule_probability": 0.29570172727108,
+            "tokens": 560
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.7252951860427856,
+            "mean_rule_probability": 0.47002729773521423,
+            "tokens": 531
+          },
+          "stock_one_edge": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.463157296180725,
+            "mean_rule_probability": 0.23659564554691315,
+            "tokens": 254
+          }
+        },
+        "fresh": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.6464807987213135,
+            "mean_rule_probability": 0.1914239525794983,
+            "tokens": 284
+          },
+          "explore_one_edge": {
+            "n": 3,
+            "rule_correct": 1,
+            "rule_accuracy": 0.3333333333333333,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.3333333333333333,
+            "mean_teacher_ce": 1.8808426360289257,
+            "mean_rule_probability": 0.3939259847005208,
+            "tokens": 728
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 1.0654182434082031,
+            "mean_rule_probability": 0.3452521562576294,
+            "tokens": 584
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.2593737542629242,
+            "mean_rule_probability": 0.7442078292369843,
+            "tokens": 557
+          }
+        }
+      },
+      "tutorial_gate": false,
+      "query_seconds": 1.8470539200061467,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4211,
+        "inference_attention_elements": 375788112,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1044069888,
+      "source_adapter_sha256": "2573c1ee7b9b221de78e434dd9748bfd9d5c0f2046ab5a37e164b63fd75998f5",
+      "all_rows_metrics_tokens_reference_source_verified": true
+    },
+    {
+      "seed": 1711,
+      "state": "adaptive_final",
+      "encoding": "compact",
+      "groups": {
+        "tutorial": {
+          "n": 8,
+          "rule_correct": 3,
+          "rule_accuracy": 0.375,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.375,
+          "mean_teacher_ce": 0.9549035197123885,
+          "mean_rule_probability": 0.4658514466136694,
+          "tokens": 1815
+        },
+        "fresh": {
+          "n": 8,
+          "rule_correct": 3,
+          "rule_accuracy": 0.375,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.375,
+          "mean_teacher_ce": 1.3524156771600246,
+          "mean_rule_probability": 0.42533131316304207,
+          "tokens": 1867
+        },
+        "fresh_n4": {
+          "n": 8,
+          "rule_correct": 3,
+          "rule_accuracy": 0.375,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.375,
+          "mean_teacher_ce": 1.3524156771600246,
+          "mean_rule_probability": 0.42533131316304207,
+          "tokens": 1867
+        },
+        "tutorial_unique_prompt_label": {
+          "n": 8,
+          "rule_correct": 3,
+          "rule_accuracy": 0.375,
+          "teacher_exact": 3,
+          "teacher_accuracy": 0.375,
+          "mean_teacher_ce": 0.9549035197123885,
+          "mean_rule_probability": 0.4658514466136694,
+          "tokens": 1815
+        },
+        "tutorial_exposed": {
+          "n": 3,
+          "rule_correct": 1,
+          "rule_accuracy": 0.3333333333333333,
+          "teacher_exact": 1,
+          "teacher_accuracy": 0.3333333333333333,
+          "mean_teacher_ce": 0.817992960413297,
+          "mean_rule_probability": 0.5257396896680196,
+          "tokens": 662
+        },
+        "tutorial_unexposed": {
+          "n": 5,
+          "rule_correct": 2,
+          "rule_accuracy": 0.4,
+          "teacher_exact": 2,
+          "teacher_accuracy": 0.4,
+          "mean_teacher_ce": 1.0370498552918435,
+          "mean_rule_probability": 0.42991850078105925,
+          "tokens": 1153
+        }
+      },
+      "categories": {
+        "tutorial": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.0952930450439453,
+            "mean_rule_probability": 0.327719509601593,
+            "tokens": 233
+          },
+          "explore_one_edge": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.06329616531729698,
+            "mean_rule_probability": 0.9390679597854614,
+            "tokens": 405
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.7208489775657654,
+            "mean_rule_probability": 0.18809788674116135,
+            "tokens": 480
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 1,
+            "rule_accuracy": 0.5,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.5,
+            "mean_teacher_ce": 0.9356961846351624,
+            "mean_rule_probability": 0.40660402178764343,
+            "tokens": 470
+          },
+          "stock_one_edge": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.1042524576187134,
+            "mean_rule_probability": 0.33155232667922974,
+            "tokens": 227
+          }
+        },
+        "fresh": {
+          "deliver": {
+            "n": 1,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 2.429698944091797,
+            "mean_rule_probability": 0.09199352562427521,
+            "tokens": 241
+          },
+          "explore_one_edge": {
+            "n": 3,
+            "rule_correct": 1,
+            "rule_accuracy": 0.3333333333333333,
+            "teacher_exact": 1,
+            "teacher_accuracy": 0.3333333333333333,
+            "mean_teacher_ce": 1.915304273366928,
+            "mean_rule_probability": 0.3755858391523361,
+            "tokens": 650
+          },
+          "home_one_edge": {
+            "n": 2,
+            "rule_correct": 0,
+            "rule_accuracy": 0.0,
+            "teacher_exact": 0,
+            "teacher_accuracy": 0.0,
+            "mean_teacher_ce": 1.0818458795547485,
+            "mean_rule_probability": 0.3333737254142761,
+            "tokens": 499
+          },
+          "pick_target": {
+            "n": 2,
+            "rule_correct": 2,
+            "rule_accuracy": 1.0,
+            "teacher_exact": 2,
+            "teacher_accuracy": 1.0,
+            "mean_teacher_ce": 0.24001094698905945,
+            "mean_rule_probability": 0.7585760056972504,
+            "tokens": 477
+          }
+        }
+      },
+      "tutorial_gate": false,
+      "query_seconds": 1.528997581001022,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 3682,
+        "inference_attention_elements": 286011936,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1041062912,
+      "source_adapter_sha256": "2573c1ee7b9b221de78e434dd9748bfd9d5c0f2046ab5a37e164b63fd75998f5",
+      "all_rows_metrics_tokens_reference_source_verified": true
+    }
+  ],
+  "paired_renaming": [
+    {
+      "seed": 1711,
+      "state": "base",
+      "encoding": "fresh_nonce",
+      "split": "tutorial",
+      "n": 8,
+      "prediction_changes": 2,
+      "correct_to_wrong": 2,
+      "wrong_to_correct": 0,
+      "both_wrong": 2
+    },
+    {
+      "seed": 1711,
+      "state": "base",
+      "encoding": "fresh_nonce",
+      "split": "fresh",
+      "n": 8,
+      "prediction_changes": 1,
+      "correct_to_wrong": 0,
+      "wrong_to_correct": 1,
+      "both_wrong": 3
+    },
+    {
+      "seed": 1711,
+      "state": "base",
+      "encoding": "compact",
+      "split": "tutorial",
+      "n": 8,
+      "prediction_changes": 3,
+      "correct_to_wrong": 3,
+      "wrong_to_correct": 0,
+      "both_wrong": 2
+    },
+    {
+      "seed": 1711,
+      "state": "base",
+      "encoding": "compact",
+      "split": "fresh",
+      "n": 8,
+      "prediction_changes": 2,
+      "correct_to_wrong": 1,
+      "wrong_to_correct": 1,
+      "both_wrong": 3
+    },
+    {
+      "seed": 1711,
+      "state": "bootstrap",
+      "encoding": "fresh_nonce",
+      "split": "tutorial",
+      "n": 8,
+      "prediction_changes": 0,
+      "correct_to_wrong": 0,
+      "wrong_to_correct": 0,
+      "both_wrong": 3
+    },
+    {
+      "seed": 1711,
+      "state": "bootstrap",
+      "encoding": "fresh_nonce",
+      "split": "fresh",
+      "n": 8,
+      "prediction_changes": 1,
+      "correct_to_wrong": 1,
+      "wrong_to_correct": 0,
+      "both_wrong": 3
+    },
+    {
+      "seed": 1711,
+      "state": "bootstrap",
+      "encoding": "compact",
+      "split": "tutorial",
+      "n": 8,
+      "prediction_changes": 2,
+      "correct_to_wrong": 2,
+      "wrong_to_correct": 0,
+      "both_wrong": 3
+    },
+    {
+      "seed": 1711,
+      "state": "bootstrap",
+      "encoding": "compact",
+      "split": "fresh",
+      "n": 8,
+      "prediction_changes": 2,
+      "correct_to_wrong": 1,
+      "wrong_to_correct": 1,
+      "both_wrong": 2
+    },
+    {
+      "seed": 1711,
+      "state": "adaptive_final",
+      "encoding": "fresh_nonce",
+      "split": "tutorial",
+      "n": 8,
+      "prediction_changes": 1,
+      "correct_to_wrong": 1,
+      "wrong_to_correct": 0,
+      "both_wrong": 2
+    },
+    {
+      "seed": 1711,
+      "state": "adaptive_final",
+      "encoding": "fresh_nonce",
+      "split": "fresh",
+      "n": 8,
+      "prediction_changes": 1,
+      "correct_to_wrong": 1,
+      "wrong_to_correct": 0,
+      "both_wrong": 3
+    },
+    {
+      "seed": 1711,
+      "state": "adaptive_final",
+      "encoding": "compact",
+      "split": "tutorial",
+      "n": 8,
+      "prediction_changes": 3,
+      "correct_to_wrong": 3,
+      "wrong_to_correct": 0,
+      "both_wrong": 2
+    },
+    {
+      "seed": 1711,
+      "state": "adaptive_final",
+      "encoding": "compact",
+      "split": "fresh",
+      "n": 8,
+      "prediction_changes": 2,
+      "correct_to_wrong": 2,
+      "wrong_to_correct": 0,
+      "both_wrong": 3
+    }
+  ],
+  "duplicate_identical_prompt_queries_exact": 0,
+  "total_queries": 144,
+  "total_tokens": 36438,
+  "total_attention_elements": 3134880000,
+  "total_query_seconds": 15.808913065993693,
+  "model_load_seconds_once_per_seed": 2.8935066620033467,
+  "audit_seconds": 0.4398971399932634,
+  "limits": "Static teacher-induced states and correlated repeated queries. All reference sets independently match Floyd-Warshall observed-map distances, metrics recompute from recorded logits, and source adapters match. Neural logits are not independently reexecuted here. Source bootstrap and model pretraining costs are not erased; query-local encodings are not a deployed memory system."
+}

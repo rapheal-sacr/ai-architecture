@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E30 are complete and audited. No experiment is currently running.
+E1–E31 are complete and audited. No experiment is currently running.
 E30 implements a bounded integrated language/memory/feedback pilot and fails
 reliable acquisition and efficient improvement; read E30-RESULT.md.
 
@@ -267,3 +267,17 @@ separate tutorial fitting, symbol/address binding and exploration before a new
 adaptation mechanism is trained. No E31 protocol is frozen. Full architecture,
 learned compression, reliable RSI, broad reasoning and long-horizon efficiency
 remain unproven.
+
+## E31: diagnose acquisition before redesigning retention
+
+All18 frozen cells and4,293 queries are audited. Bootstrap original tutorial
+rule fidelity reaches58.2%/76.5%, failing the mastery gate even on exposed
+queries. Training damages one source's immediate-home choice16/32→2/32.
+Pure renaming changes correct decisions, but compact IDs have counterexamples
+and are not a sufficient repair. E30 tutorials share7/8 worlds across learning
+seeds, and E31 fresh sets share2/4 worlds; report their dependence.
+
+The next study should establish a competent learned execution baseline using
+matched-example conventional optimization controls and disjoint fresh data.
+That is necessary groundwork, not a replacement for the full architecture.
+Read E31-RESULT.md. No E32 protocol is frozen or running.
