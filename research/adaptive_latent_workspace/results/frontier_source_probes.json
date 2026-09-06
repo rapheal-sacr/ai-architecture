@@ -1,0 +1,158 @@
+{
+  "event": "FRONTIER_SOURCE_PROBES_COMPLETE",
+  "sources": [
+    {
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/repos/transformers-2026-09-06/src/transformers/models/qwen3_5/modeling_qwen3_5.py",
+      "file_sha256": "458360c8072e6130580639170ad3e645b975512dbabae31eab5f92de5f0f09ef",
+      "function": "torch_recurrent_gated_delta_rule",
+      "line": 436,
+      "body_sha256": "fb8111ece4a6586b77d32a0104dede390ab7e2728a74e28f3c91d7c821793bba"
+    },
+    {
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/repos/transformers-2026-09-06/src/transformers/models/glm5_next/modeling_glm5_next.py",
+      "file_sha256": "e276fd6c7131c5abfa196045a4542eec1e37e6f232475963e6a3a5023d820c66",
+      "function": "recurrent_kimi_delta_attention",
+      "line": 430,
+      "body_sha256": "3c64fb6a6872510902c579b186c211b3a81d30e196e7a4a53d9d781d20180b9a"
+    },
+    {
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/repos/Nanbeige4.2-3B/modeling_nanbeige.py",
+      "file_sha256": "547737f989f5cb741c1a568acaf85f83521fa67a8f7268e19f9a37e60127c0d5",
+      "function": "_get_loop_cache_layer_idx",
+      "line": 133,
+      "body_sha256": "a2e16da8378f4605ba032d2e86caffa8bcd016fda945287d53ec4183eb97f71d"
+    }
+  ],
+  "repositories": {
+    "GLM-5.3-Flash": {
+      "commit": "690b705278a3a58e538fcb37c2ca8b5f9511213c",
+      "files": {
+        "config.json": "bb8f01c42cb92a52ca72e65afb4d5bd8d11aef083cd210e8de25dfb904f23e9f",
+        "README.md": "e6c5d41400e28f5a89418a0d15b09b9c113314a7553d40d7d4a8a72fcdb87d02"
+      }
+    },
+    "DeepSeek-V4-Pro": {
+      "commit": "b5968e9190ef611bbf34a7229255be88a0e937c1",
+      "files": {
+        "config.json": "5fe4568daee51c208cb8a79538eaeda090ae011ade1dee2c386aa95f569c810e",
+        "README.md": "c4d714818a4d3333542edc7d38ea065825a0cf7aa8fea3605bbd1d1c18e4a610"
+      }
+    },
+    "Nanbeige4.2-3B": {
+      "commit": "3384e426066d1a49c3aea90a7190b81260a6533f",
+      "files": {
+        "config.json": "f6cb15b22847664f3a6049dc4b58fdd10f1650d112ac99a1da3d051f17c2ca19",
+        "README.md": "18a2b0079a823db40ff9ef5b527f37ca1bc0deec2be913e2c22a54dc376096dc"
+      }
+    },
+    "Qwen3.8-27B": {
+      "commit": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+      "files": {
+        "config.json": "191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab",
+        "README.md": "57e4bdb258ee1a7d2635c5174ebd4e56abe392505cdb5f8bbb356b0dc4293641"
+      }
+    },
+    "Kimi-K3": {
+      "commit": "3cb39dfd32e51c3328e2e4b4af21341247d06c43",
+      "files": {
+        "README.md": "849a303d849486aac61d1f0c253e3a1148ca59e801be807151c2dc3cce57ccb2",
+        "k3_tech_report.pdf": "86fb82a63ced501f0c3f4f404c0c6fa88a7a6cfac17aae81fd1a8f455998067c"
+      }
+    }
+  },
+  "recurrence_fixture": [
+    {
+      "orthogonal_writes": 1,
+      "scalar_gate_old_component": 0.9900000095367432,
+      "channel_gate_old_component": 0.9990000128746033,
+      "scalar_read": 0.9900000095367432,
+      "channel_read": 0.9989999532699585,
+      "state_tensor_bytes_each": 8
+    },
+    {
+      "orthogonal_writes": 32,
+      "scalar_gate_old_component": 0.7249804735183716,
+      "channel_gate_old_component": 0.9684913754463196,
+      "scalar_read": 0.7249804735183716,
+      "channel_read": 0.9684913158416748,
+      "state_tensor_bytes_each": 8
+    },
+    {
+      "orthogonal_writes": 256,
+      "scalar_gate_old_component": 0.07631517201662064,
+      "channel_gate_old_component": 0.7740453481674194,
+      "scalar_read": 0.07631517201662064,
+      "channel_read": 0.7740452885627747,
+      "state_tensor_bytes_each": 8
+    },
+    {
+      "orthogonal_writes": 1024,
+      "scalar_gate_old_component": 3.391905192984268e-05,
+      "channel_gate_old_component": 0.3589763343334198,
+      "scalar_read": 3.391905192984268e-05,
+      "channel_read": 0.3589763045310974,
+      "state_tensor_bytes_each": 8
+    }
+  ],
+  "nanbeige_loop_cache_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43
+  ],
+  "derived_bytes_batch1_main_decoder_no_MTP": {
+    "nanbeige_bf16_KV_per_token": 180224,
+    "qwen_fp32_recurrent_state_only": 150994944,
+    "qwen_bf16_attention_KV_per_token": 65536,
+    "glm_fp32_recurrent_state_only": 142606336,
+    "glm_bf16_MLA_latents_per_token": 11264,
+    "deepseek_bf16_compressed_attention_KV_per_token_asymptotic": 7928.0,
+    "deepseek_bf16_indexer_KV_per_token_asymptotic_extra": 1920.0,
+    "deepseek_compression_layer_counts": {
+      "128": 31,
+      "4": 30
+    }
+  },
+  "scope": "Unchanged PyTorch recurrence/helper bodies plus configuration-derived logical storage; no released weights, trained hidden-state reachability, accuracy, full runtime peak memory or throughput measured. Dispatch decorators removed; optional L2 branch unused. Convolution/state buffers, model weights, indexes other than explicitly counted, vision and MTP additional.",
+  "seconds": 0.31958807702176273
+}

@@ -1,5 +1,9 @@
 # Constraints before further architecture claims
 
+Latest source extension: FRONTIER-ARCHITECTURE-AUDIT.md separates growing
+attention/index caches from fixed recurrent matrices and loop execution caches.
+New source mechanisms refine the costs below; they do not remove the three roots.
+
 The current design is not a demonstrated general continual learner. E4 is an
 external counterexample to its efficient-transfer claim. The following arguments
 clarify which failures can be repaired architecturally and which require an
