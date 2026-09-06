@@ -1,0 +1,18 @@
+{
+  "experiment": "E20-context-identification-versus-shared-capacity-diagnostic",
+  "status_at_freeze": "NOT_RUN",
+  "stream_seeds": [20101, 20102, 20103, 20104],
+  "families": ["conflicting_functions", "input_shift"],
+  "context_modes": ["inferred_ema", "oracle_onehot_diagnostic"],
+  "hidden_widths": [16, 64],
+  "updates": 4096,
+  "learning_rate": 0.01,
+  "learner": "Use E17's persistent student, context-conditioned replay, Adam-shaped update and exact world generator. No procedure controller or meta-training. All four cells receive the same observations and replay budget. Width changes only the two hidden layer sizes; the input remains 26 dimensions and output remains two.",
+  "context_intervention": "The real candidate infers its 18-component context from preceding observed cross-moments, unchanged from E17. The explicitly privileged diagnostic receives the actual hidden regime index before prediction, encoded one-hot in the first four components of the same 18-component context interface. Its replay stores that code with each example. No oracle label reaches inferred arms. The encoding itself changes along with available information, so a gain is not attributed solely to an information-theoretic identification bound.",
+  "capacity_intervention": "Compare hidden widths 16 and 64 under both context modes. Wider students have more weights and arithmetic; this is a relief-of-constraint diagnostic, not an equal-resource architecture win. The same fixed learning rate is used; results do not optimize the wide model's training procedure.",
+  "evaluation": "Four fresh worlds per family, 4,096 batches each, all prequential predictions before outcomes. Report clean/noisy whole-stream and quarter MSE, first/final-four-batch segment errors and censored recovery under E17's frozen criterion. Boundaries and clean targets are recorder-only except the clearly labeled oracle regime input. Student, optimizer, replay and inferred context never reset at boundaries.",
+  "preflight": "Require the inferred width-16 path to reproduce the unchanged E17 student exactly on dummy data; verify oracle codes and stored replay codes are valid one-hot vectors; verify fixed input/output shapes across widths, capacity counts, no hidden-state access in inferred input construction, paired observations, bounded replay and global step continuity.",
+  "costs": "Record actual wall time, student forwards/gradient batches, weights, moments, replay/context/RNG tensor bytes and final checkpoints. Equal forward-example counts do not imply equal FLOPs for widths 16 and 64. No complete process RAM or energy measurement; CPU work may overlap E19. Diagnostic oracle access must never be advertised as autonomous inference.",
+  "falsification": "If privileged context helps little but width helps, context identification alone does not explain the current failure. If privileged context helps while width under inferred context does little, identification/encoding is a stronger limit than raw capacity in this assay. If both help, the limits interact. Persistent residual failure even with oracle context and width means further learning/interference limits remain; the diagnostic does not promise a solution.",
+  "scope": "A causal resource/information diagnostic, not a new deployed architecture. These finite fully supervised streams do not establish semantic memory compression, general reasoning, autonomous long-horizon control or novel recursive improvement. The full goal remains unachieved."
+}
