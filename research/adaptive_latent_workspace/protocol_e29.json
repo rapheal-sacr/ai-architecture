@@ -1,0 +1,93 @@
+{
+  "experiment": "E29 depth-robust continual graph training",
+  "seeds": [
+    29101,
+    29102,
+    29103
+  ],
+  "arms": [
+    "fixed16_replay",
+    "fixed24_replay",
+    "variable_replay"
+  ],
+  "stages": [
+    0,
+    1,
+    0
+  ],
+  "algorithms": [
+    "dijkstra",
+    "mst_prim"
+  ],
+  "updates_per_stage": 512,
+  "current_batch": 8,
+  "replay_batch": 8,
+  "replay_capacity_graphs": 128,
+  "train_nodes": 16,
+  "train_chain_probability": 0.25,
+  "random_extra_edge_probability": 0.25,
+  "weight_range": [
+    0.1,
+    1.0
+  ],
+  "hidden": 32,
+  "short_steps": 2,
+  "optimizer": "Adam",
+  "learning_rate": 0.001,
+  "gradient_clip": 1.0,
+  "eval_nodes": [
+    16,
+    32,
+    64
+  ],
+  "eval_families": [
+    "random",
+    "chain"
+  ],
+  "eval_graphs_per_task_size_family": 24,
+  "eval_batch": 4,
+  "evaluation_points": [
+    "initial",
+    "after_stage_0",
+    "after_stage_1",
+    "after_stage_2"
+  ],
+  "device": "cuda",
+  "torch_threads": 1,
+  "task_identity": "Explicit requested algorithm; no hidden context label",
+  "supervision": "Final parent targets only at the sampled training depth; no intermediate hints, auxiliary depth losses, gold stopping times or test-dependent halting.",
+  "graph_generation": "Positive float32 symmetric weights on a chain backbone; random graphs add independent extra edges; random node relabeling. Train source uniform. Evaluation chain source chosen uniformly from two backbone ends before relabeling. All connected.",
+  "replay": "Uniform reservoir of observed current graphs, inserted after prediction/update. Sample up to a full replay batch with replacement from previously observed memory. State persists across stages. No evaluation examples enter memory.",
+  "pairing": "Same fresh graph streams and neural initialization in all arms; optimizer and 128-graph reservoir persist across Dijkstra/Prim/Dijkstra. Reservoir samples and insertion RNG are exactly identical. Variable and fixed24 have equal total graph-weighted recurrence work at every stage.",
+  "metrics": [
+    "canonical parent accuracy",
+    "whole graph canonical accuracy",
+    "functional optimal graph fraction",
+    "invalid tree fraction",
+    "task retention",
+    "train and evaluation time",
+    "message and decoder candidates",
+    "current and replay graph presentations",
+    "optimizer steps",
+    "persistent tensor bytes",
+    "CUDA peak allocated bytes",
+    "reference label generation and exact query seconds"
+  ],
+  "decision": "Use the E27 acquisition >=0.80, retention loss <=0.05 given acquisition, and N64 transfer >=0.80 criteria for the declared public_N policy. Also report fixed24 and public_2N, including all failures; no selecting the best policy from test answers. Assess whether variable depth preserves N16 chain competence at public_2N and improves N64 transfer relative to equal-work fixed24. No component gain establishes RSI or architectural novelty.",
+  "cost_boundary": "All arms share current/replay examples and parameters. Variable and fixed24 have identical total forward message candidates and corresponding recurrence backpropagation, not necessarily identical FLOPs or runtime. Fixed16 uses less recurrence. Report all three evaluation policy costs separately and total executed evaluation work.",
+  "source_boundary": "Uses pinned original CLRS Dijkstra/Prim function bodies through a local adapter, not the official CLRS training system or published benchmark reproduction.",
+  "no_adaptation_to_test": "No checkpoint selection, early stopping or hyperparameter changes using evaluation outcomes. All final and stage checkpoints retained. Preflight uses different seeds and reduced size solely for functional validation.",
+  "classical_timing": "Original CLRS function body plus minimal probe-recorder overhead, excluding independent NetworkX validation. Not an optimized algorithm implementation or hardware-matched runtime.",
+  "baseline_depth": 16,
+  "mean_depth": 24,
+  "variable_min": 16,
+  "variable_max": 32,
+  "evaluation_policies": [
+    "public_N",
+    "fixed24",
+    "public_2N"
+  ],
+  "source_idea": "Randomized recurrent depth from supplied TTC-LR/Raven audit; small graph transfer, not a language-model reproduction.",
+  "variable_schedule": "Per stage: first and last update at 24. The remaining 510 updates are 255 pairs (r,48-r), r uniform integer 16..32, shuffled using a private seeded generator. Thus exactly 512*24 recurrence steps per stage. First-update replay absence occurs at depth24, giving exact total message-work equality against fixed24.",
+  "preflight": "Separate seed 1191, N8, four updates per stage, replay capacity8, depth8 fixed baseline / depth12 control / balanced variable8..16; two graphs per evaluation cell. Functional validation only."
+}

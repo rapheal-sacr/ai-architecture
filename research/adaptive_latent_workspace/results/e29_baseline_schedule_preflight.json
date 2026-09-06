@@ -1,0 +1,32 @@
+{
+  "status": "PASSED",
+  "baseline_training_losses_exact": true,
+  "baseline_model_optimizer_memory_rng_exact_all_stages": true,
+  "original_public_N_predictions_exact": true,
+  "full_schedule_checks": [
+    {
+      "seed": 29101,
+      "equal_message_candidates_at_each_stage": [
+        50282496,
+        100614144,
+        150945792
+      ]
+    },
+    {
+      "seed": 29102,
+      "equal_message_candidates_at_each_stage": [
+        50282496,
+        100614144,
+        150945792
+      ]
+    },
+    {
+      "seed": 29103,
+      "equal_message_candidates_at_each_stage": [
+        50282496,
+        100614144,
+        150945792
+      ]
+    }
+  ]
+}

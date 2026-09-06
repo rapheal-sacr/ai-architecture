@@ -204,3 +204,27 @@ hypothesis, not an established repair. Compare it with an equal-message-work
 fixed-depth control before attributing any gain to the distribution of depths.
 Read `E28-RESULT.md`. No result establishes general reasoning, efficient continual
 learning or reliable recursive improvement.
+
+## E29 registered variable-depth training
+
+Three fresh seeds compare fixed16, fixed24 and variable integer depth16–32,
+all with the identical 128-graph replay policy, 15,177 parameters, optimizer,
+observations and Dijkstra/Prim/Dijkstra sequence. Each stage pairs r with 48-r,
+shuffles the interior schedule, and fixes first/last depth at24. Thus variable
+and fixed24 exactly match graph-weighted forward message candidates at every
+stage, including the first update before any replay exists. Final counts are
+150,945,792 each versus 100,630,528 for fixed16. This matches message work, not
+measured FLOPs or wall-clock time.
+
+Primary evaluation uses public N; fixed24 and public 2N are also predeclared and
+fully charged. No answer chooses a budget, no intermediate hints enter learning,
+and all weights/optimizer/replay state persist across stages. A separate GPU
+preflight verifies exact fixed16 equivalence to the E27 training runner, including
+all training losses, saved model/optimizer/memory/RNG and public-N predictions.
+The full 512-update schedules have exact paired message counts on all three
+fresh seeds. Scoring starts only after source freeze.
+
+This imports a randomized-depth training idea from the supplied TTC-LR work into
+a small graph component. It is not a faithful Raven reproduction or a novel
+learning procedure. It attacks useful-computation stability (root3); improved
+memory or autonomous recursive improvement must not be inferred from a pass.

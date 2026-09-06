@@ -1,16 +1,19 @@
-# Current continuation: train for recurrence-depth robustness
+# Current continuation: finish E29 variable-depth training
 
-E28 is complete and audited. Extra recurrence damages familiar-length answers
-and does not repair N64 transfer. Read `E28-RESULT.md` before another change.
-The next bounded training test should compare fixed16, fixed24 and variable
-16–32 recurrence with exactly matched mean message work for the latter pair,
-using fresh seeds, the same model, persistent optimizer and replay, identical
-current observations, and the Dijkstra/Prim/Dijkstra sequence. Charge every
-backward pass, replay sample and evaluation budget. Do not call the variable
-schedule recursive self-improvement; it is a fixed training policy.
+E28 is complete and audited. E29 is implemented and has passed its separate GPU
+preflight plus an exact E27-baseline equivalence check. `protocol_e29.json` freezes
+three seeds, fixed16/fixed24/variable16–32 replay arms, and public-N/fixed24/public-
+2N evaluation. Fixed24 and variable depth have identical message work at every
+stage. Verify the recorded live session or terminal completion before restarting.
+Do not change the protocol after scored outcomes.
 
-Pre-register public-N, fixed24 and public-2N evaluation without target-dependent
-halting. Retain all failed acquisitions and N64 results. Randomized recurrence
-is prior art described in the supplied TTC-LR paper; this is a bounded transfer
-of an idea, not a faithful Raven reproduction or novelty claim. E29 has not yet
-been implemented, frozen or scored.
+When complete, audit all 27 stage checkpoints, raw graph stream identities,
+all three paired replay/RNG histories, realized depth schedules, optimizer steps
+and message counts. Preserve all acquisitions that fail, all N64 outcomes and
+all inference policies. The runner restores all nine final models and checks
+all policy predictions. Build a result report that distinguishes depth stability
+from acquisition, retention and generalization; extra recurrence is not free.
+
+The broad architecture remains unproven. A fixed randomized training schedule
+is not recursive self-improvement, and a graph-only pilot cannot establish the
+full goal. No new downstream design should be selected from partial scores.
