@@ -33,7 +33,7 @@ architecture does not import that implementation or its finite hypothesis class.
 - E1's unprotected module bank fails returning-context reuse against context-conditioned replay. Preserve [E1-RESULT.md](E1-RESULT.md).
 - E2's isolated adaptation package reduces early returning-context MSE 63.4% against context replay across four fresh teacher seeds. It uses more model parameters, fewer stored replay bytes, and more model evaluations. This is evidence for the package on one synthetic family, not proof of the architecture. See [E2-RESULT.md](E2-RESULT.md).
 - E3 gradual drift produces exactly the online learner's errors while costing roughly 23% more runtime. No context-history retention benefit is established there.
-- E3 exceeds persistent capacity: thousands of repeated commit requests cannot receive a slot. Accuracy remains better on the screen, but routing/temporary-learning cost grows substantially. See [E3-RESULT.md](E3-RESULT.md).
+- E3 exceeds persistent capacity: thousands of repeated commit requests cannot receive a slot. Whole-stream accuracy remains better on the screen, but the final eighth is worse than context replay and routing/temporary-learning cost grows substantially. See [E3-RESULT.md](E3-RESULT.md).
 - E3's million-observation case is supervised prediction on four recurring functions. It does not satisfy the user's requirement for efficient autonomous long-horizon tasks.
 
 The broad goal remains active. No measured result currently establishes a universal binding constraint. In the tested streams, identification delay, destructive adaptation, and per-module scoring cost are separable limits. Their practical importance depends on context lifetime and capacity.

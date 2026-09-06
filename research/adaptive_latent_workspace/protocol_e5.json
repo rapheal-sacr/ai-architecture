@@ -1,0 +1,15 @@
+{
+  "experiment": "E5-capacity-controls-and-routing-ablation",
+  "status_at_freeze": "NOT_RUN",
+  "seeds": [7101, 7102, 7103, 7104],
+  "cycles_of_e1_order": 4,
+  "arms": ["online", "context_replay", "wide_context_replay", "compact_wide_replay", "isolated_adaptation", "overwrite_during_identification", "active_first_isolation"],
+  "wide_hidden": 118,
+  "compact_replay_capacity": 256,
+  "hypotheses": ["E2 benefit persists against a context-replay network with approximately the same parameter count as four modules", "Copying temporary updates into the source module destroys useful retention", "Testing the active module before scoring alternatives lowers routing work without materially increasing error"],
+  "resource_control_scope": "Width 118 yields 19,828 parameters, versus 19,984 for four 64-wide modules. This is approximate parameter matching only: replay bytes and gradient work differ and must be reported. The compact buffer arm reduces total storage but cannot be assumed exactly matched before its costs are measured.",
+  "isolation_ablation": "After each temporary update, overwrite the source persistent module weights and optimizer with the temporary state. Keep all E2 thresholds and selection/commit code unchanged. This specifically removes protection while adaptation is unresolved; resulting module counts may change.",
+  "routing_intervention": "When no temporary model exists, score the active model on the observed target. If below the existing E2 reuse threshold, train it and skip other models. Otherwise run the original E2 rule, counting the repeated active score. This trades best-model search for a cheap acceptance test.",
+  "metrics": ["whole stream MSE", "first 32 returning-context batches MSE", "last-quarter MSE", "tensor bytes", "parameter count", "forward examples", "training examples", "wall time"],
+  "success_scope": "Ablations and stronger controls for the same synthetic family. Not independent evidence of general intelligence or closed-loop long-horizon success."
+}
