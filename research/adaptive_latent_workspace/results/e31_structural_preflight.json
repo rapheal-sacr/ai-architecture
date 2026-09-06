@@ -1,0 +1,65 @@
+{
+  "status": "E31_STRUCTURAL_PREFLIGHT_ONLY",
+  "tied_routes_accepted": true,
+  "one_edge_route_unique": true,
+  "irrelevant_world_state_does_not_change_mapping": true,
+  "checks": [
+    {
+      "encoding": "original",
+      "reference": {
+        "category": "home_multi_edge",
+        "indices": [
+          0,
+          1
+        ],
+        "distance": 2
+      },
+      "prompt": "Remembered observations in this world, oldest to newest:\nrddddd | exits rbbbbb,rccccc | stock none\nrccccc | exits raaaaa,rddddd | stock none\nrbbbbb | exits raaaaa,rddddd | stock none\nraaaaa | exits rbbbbb,rccccc | stock none\nCurrent world: waaaaa\nCurrent room: raaaaa\nHome: rddddd\nRequested object: oaaaaa\nCarrying: oaaaaa\nVisible stock: none\nFeedback: Moved to raaaaa.\nOptions:\nA. move:rbbbbb\nB. move:rccccc\nC. drop:oaaaaa\nD. wait:here\nAnswer with one option letter only.",
+      "mapping": {}
+    },
+    {
+      "encoding": "fresh_nonce",
+      "reference": {
+        "category": "home_multi_edge",
+        "indices": [
+          0,
+          1
+        ],
+        "distance": 2
+      },
+      "prompt": "Remembered observations in this world, oldest to newest:\nrufntc | exits rdhacg,rmfcib | stock none\nrmfcib | exits rrzrpf,rufntc | stock none\nrdhacg | exits rrzrpf,rufntc | stock none\nrrzrpf | exits rdhacg,rmfcib | stock none\nCurrent world: wrykaa\nCurrent room: rrzrpf\nHome: rufntc\nRequested object: orivrx\nCarrying: orivrx\nVisible stock: none\nFeedback: Moved to rrzrpf.\nOptions:\nA. move:rdhacg\nB. move:rmfcib\nC. drop:orivrx\nD. wait:here\nAnswer with one option letter only.",
+      "mapping": {
+        "waaaaa": "wrykaa",
+        "raaaaa": "rrzrpf",
+        "rbbbbb": "rdhacg",
+        "rccccc": "rmfcib",
+        "rddddd": "rufntc",
+        "oaaaaa": "orivrx"
+      }
+    },
+    {
+      "encoding": "compact",
+      "reference": {
+        "category": "home_multi_edge",
+        "indices": [
+          0,
+          1
+        ],
+        "distance": 2
+      },
+      "prompt": "Remembered observations in this world, oldest to newest:\nr3 | exits r1,r2 | stock none\nr2 | exits r0,r3 | stock none\nr1 | exits r0,r3 | stock none\nr0 | exits r1,r2 | stock none\nCurrent world: w0\nCurrent room: r0\nHome: r3\nRequested object: o0\nCarrying: o0\nVisible stock: none\nFeedback: Moved to r0.\nOptions:\nA. move:r1\nB. move:r2\nC. drop:o0\nD. wait:here\nAnswer with one option letter only.",
+      "mapping": {
+        "waaaaa": "w0",
+        "raaaaa": "r0",
+        "rbbbbb": "r1",
+        "rccccc": "r2",
+        "rddddd": "r3",
+        "oaaaaa": "o0"
+      }
+    }
+  ],
+  "source_hashes": {
+    "delivery_diagnostics.py": "d09529745ea12bf0f37235631bc83f3c099fe8c3087c541dc57e44d13824d2fc",
+    "preflight_delivery_diagnostics.py": "e5dbb9c72def9032a4d651f946e06521f5db339c5087a7ba082e0a3a9e9ef46a"
+  }
+}

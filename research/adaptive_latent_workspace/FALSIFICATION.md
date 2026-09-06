@@ -242,3 +242,12 @@ complete candidate architecture. Tutorial fitting, symbol binding, exploration
 and credit assignment remain confounded; diagnose frozen checkpoints before
 claiming successful learning followed by a transfer failure. The broad goal
 remains unachieved.
+
+## E31 preflight: frozen binding diagnostic, no new competence result
+
+E30 tutorial mastery remains unverified. E31 will compare frozen base/bootstrap/
+final adapters on identical observed facts with original, fresh random and compact
+labels. Structural tie and irrelevant-world checks pass; nine neural preflight
+cells preserve weights and RNG. The initial command omitted --preflight and was
+rejected before queries; corrected execution passed. No scored E31 logits exist
+at this source freeze. Read E31-PROTOCOL.md; it is not an autonomous-task result.

@@ -1,0 +1,40 @@
+{
+  "status": "E31_FULL_DEVELOPMENT_INVENTORY_ONLY",
+  "seed": 1711,
+  "generation": {
+    "tutorial_source_queries": 9,
+    "fresh_teacher_actions": 77,
+    "tutorial_scored_queries": 9,
+    "fresh_scored_queries": 77
+  },
+  "categories": {
+    "explore_one_edge": 16,
+    "pick_target": 18,
+    "home_one_edge": 18,
+    "deliver": 18,
+    "stock_one_edge": 10,
+    "home_multi_edge": 4,
+    "stock_multi_edge": 2
+  },
+  "encodings": {
+    "original": {
+      "queries": 86,
+      "min_tokens": 215,
+      "max_tokens": 324,
+      "total_tokens": 24839
+    },
+    "fresh_nonce": {
+      "queries": 86,
+      "min_tokens": 212,
+      "max_tokens": 340,
+      "total_tokens": 24666
+    },
+    "compact": {
+      "queries": 86,
+      "min_tokens": 200,
+      "max_tokens": 276,
+      "total_tokens": 21237
+    }
+  },
+  "script_sha256": "96c4186818d62f7c8154846a01a7ad441d802715262352052e3f3a2e47ac6001"
+}

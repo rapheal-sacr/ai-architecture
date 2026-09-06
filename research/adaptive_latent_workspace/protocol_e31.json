@@ -1,0 +1,22 @@
+{
+  "experiment": "E31 frozen language tutorial fidelity and address-binding diagnostic",
+  "source_commit": "028bffe",
+  "source_status": "E30_COMPLETE",
+  "source_seeds": [30101, 30102],
+  "states": ["base", "bootstrap", "adaptive_final"],
+  "encodings": ["original", "fresh_nonce", "compact"],
+  "fresh_world_sizes": [4, 4, 8, 8],
+  "fresh_world_seed_offset": 900000,
+  "fresh_missions_per_world": 4,
+  "fresh_steps_per_room": 8,
+  "renaming_seed_offset": 910000,
+  "tutorial_queries": "All recorded E30 teacher observations, with observed memory reconstructed exactly. Reconstruct bootstrap sample counts and label repeated/exposed/unexposed observations without selecting by outcomes.",
+  "fresh_queries": "Four new teacher-led observed-only worlds per source seed at sizes4,4,8,8, four missions each. These are static queries on teacher-induced states, not autonomous candidate episodes. No gold hidden map or action consequence is passed to the candidate.",
+  "reference": "Observed-state planner rule: deliver at home with target; otherwise follow a shortest observed route home carrying target; drop wrong object; pick visible requested stock; otherwise shortest observed route to known requested stock, or nearest unobserved frontier. When no frontier remains, recheck oldest observed other room. Accept every shortest first step, preserving ties. Frontier policy agreement is not globally optimal exploration.",
+  "representation": "Original prompt and action order are fixed. Fresh nonce is a query-local bijection over labels visible in observation and memory; no future or hidden names are used. Compact uses r0,r1,...,o0,...,w0 assigned in sorted visible-label order. Replace all references consistently, preserve record/exit/item/option order, and verify inverse reconstruction and identical allowable option indices. These encodings change token lengths; charge actual work. Query-local compact IDs are not a deployed persistent address store or learned compression.",
+  "query": "For every state/encoding/query compute legal option logits, strict teacher-label top1 and cross entropy, allowable-rule top1, and allowable probability under E30's0.95softmax+0.05uniform distribution. Do not sample actions or update weights. Base is the pinned pretrained model with a zero-output adapter. Bootstrap and adaptive-final load exact source adapters only, without optimizer updates.",
+  "criteria": "Report every state/encoding/split/category/seed, actual bootstrap training-exposure counts, and paired prediction/correctness flips under renaming. Tutorial rule fidelity is adequate for this diagnostic only at>=95% overall and>=80% in each category with>=10 queries. Exact-label fidelity is separately reported because teacher choices can tie. Failure of this gate prevents describing fresh-query failure as transfer after demonstrated tutorial mastery. No passing cell establishes general reasoning, autonomous acquisition, retention, RSI or architecture novelty.",
+  "accounting": "Charge all inference calls/tokens/forward attention-score elements, model setup and query wall time, base/adapter bytes, source bootstrap work, mapping and query-state serialized bytes, and diagnostic-only temporary query storage. Attention elements are not FLOPs. Record source/checkpoint/code identities and unchanged base/adapter/RNG state. Source checkpoint/log archives are audit-only.",
+  "preflight": "Use the E30 functional-preflight source seed1711. First8 tutorial queries and first8 fresh teacher queries; all three states and encodings. Validate source reconstruction, legal ties, renaming inverse/noninterference and unchanged model/RNG. Never use scored sources to tune this protocol.",
+  "no_selection": "Freeze source/protocol before any scored E31 logits. Generate all declared teacher states independently of model answers. No best-checkpoint choice, outcome-selected query subset, fitting, early stopping or new hyperparameters chosen from scores. Preserve all failures."
+}

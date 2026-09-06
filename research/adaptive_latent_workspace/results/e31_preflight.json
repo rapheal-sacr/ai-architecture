@@ -1,0 +1,592 @@
+{
+  "status": "PREFLIGHT_ONLY",
+  "manifest": {
+    "config": {
+      "experiment": "E31 frozen language tutorial fidelity and address-binding diagnostic",
+      "source_commit": "028bffe",
+      "source_status": "E30_COMPLETE",
+      "source_seeds": [
+        1711
+      ],
+      "states": [
+        "base",
+        "bootstrap",
+        "adaptive_final"
+      ],
+      "encodings": [
+        "original",
+        "fresh_nonce",
+        "compact"
+      ],
+      "fresh_world_sizes": [
+        4,
+        4,
+        8,
+        8
+      ],
+      "fresh_world_seed_offset": 900000,
+      "fresh_missions_per_world": 4,
+      "fresh_steps_per_room": 8,
+      "renaming_seed_offset": 910000,
+      "tutorial_queries": "All recorded E30 teacher observations, with observed memory reconstructed exactly. Reconstruct bootstrap sample counts and label repeated/exposed/unexposed observations without selecting by outcomes.",
+      "fresh_queries": "Four new teacher-led observed-only worlds per source seed at sizes4,4,8,8, four missions each. These are static queries on teacher-induced states, not autonomous candidate episodes. No gold hidden map or action consequence is passed to the candidate.",
+      "reference": "Observed-state planner rule: deliver at home with target; otherwise follow a shortest observed route home carrying target; drop wrong object; pick visible requested stock; otherwise shortest observed route to known requested stock, or nearest unobserved frontier. When no frontier remains, recheck oldest observed other room. Accept every shortest first step, preserving ties. Frontier policy agreement is not globally optimal exploration.",
+      "representation": "Original prompt and action order are fixed. Fresh nonce is a query-local bijection over labels visible in observation and memory; no future or hidden names are used. Compact uses r0,r1,...,o0,...,w0 assigned in sorted visible-label order. Replace all references consistently, preserve record/exit/item/option order, and verify inverse reconstruction and identical allowable option indices. These encodings change token lengths; charge actual work. Query-local compact IDs are not a deployed persistent address store or learned compression.",
+      "query": "For every state/encoding/query compute legal option logits, strict teacher-label top1 and cross entropy, allowable-rule top1, and allowable probability under E30's0.95softmax+0.05uniform distribution. Do not sample actions or update weights. Base is the pinned pretrained model with a zero-output adapter. Bootstrap and adaptive-final load exact source adapters only, without optimizer updates.",
+      "criteria": "Report every state/encoding/split/category/seed, actual bootstrap training-exposure counts, and paired prediction/correctness flips under renaming. Tutorial rule fidelity is adequate for this diagnostic only at>=95% overall and>=80% in each category with>=10 queries. Exact-label fidelity is separately reported because teacher choices can tie. Failure of this gate prevents describing fresh-query failure as transfer after demonstrated tutorial mastery. No passing cell establishes general reasoning, autonomous acquisition, retention, RSI or architecture novelty.",
+      "accounting": "Charge all inference calls/tokens/forward attention-score elements, model setup and query wall time, base/adapter bytes, source bootstrap work, mapping and query-state serialized bytes, and diagnostic-only temporary query storage. Attention elements are not FLOPs. Record source/checkpoint/code identities and unchanged base/adapter/RNG state. Source checkpoint/log archives are audit-only.",
+      "preflight": "Use the E30 functional-preflight source seed1711. First8 tutorial queries and first8 fresh teacher queries; all three states and encodings. Validate source reconstruction, legal ties, renaming inverse/noninterference and unchanged model/RNG. Never use scored sources to tune this protocol.",
+      "no_selection": "Freeze source/protocol before any scored E31 logits. Generate all declared teacher states independently of model answers. No best-checkpoint choice, outcome-selected query subset, fitting, early stopping or new hyperparameters chosen from scores. Preserve all failures."
+    },
+    "preflight": true,
+    "source_config": {
+      "experiment": "E30 integrated delivery-world memory and online language-adapter pilot",
+      "seeds": [
+        1711
+      ],
+      "arms": [
+        "observed_planner",
+        "frozen_full",
+        "frozen_bounded",
+        "adaptive_bounded"
+      ],
+      "world_sizes": [
+        2,
+        3
+      ],
+      "missions": [
+        {
+          "world": 0,
+          "target": 0,
+          "budget": 16
+        },
+        {
+          "world": 1,
+          "target": 1,
+          "budget": 16
+        }
+      ],
+      "world_seed_offsets": [
+        100000,
+        200000
+      ],
+      "bounded_room_records": 4,
+      "bootstrap_worlds": 1,
+      "bootstrap_world_size": 3,
+      "bootstrap_missions_per_world": 2,
+      "bootstrap_steps_per_mission": 24,
+      "bootstrap_updates": 4,
+      "bootstrap_learning_rate": 0.001,
+      "online_updates_per_mission": 2,
+      "online_learning_rate": 0.0001,
+      "experience_capacity": 8,
+      "ppo_clip": 0.2,
+      "reward_step_penalty": 0.01,
+      "return_baseline": 0.2,
+      "uniform_exploration": 0.05,
+      "temperature": 1.0,
+      "gradient_clip": 1.0,
+      "max_prompt_tokens": 1024,
+      "rank": 4,
+      "adapter_targets": [
+        "q_proj",
+        "v_proj"
+      ],
+      "base_model_commit": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "base_weights_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+      "transformers_commit": "052e652d6d53c2b26ffde87e039b723949a53493",
+      "base_dtype": "float16",
+      "adapter_dtype": "float32",
+      "device": "cuda",
+      "torch_threads": 1,
+      "observation_boundary": "Only local room/exits/stock, mission/home/world labels, own carrying state and action feedback enter memory or neural prompts. No hidden map, shelves, route or evaluator probe enters a policy. Stock persists after pickup; an unannounced relocation occurs only before mission10.",
+      "memory": "Latest observation per (world,room). Full arms retain every observed room. Bounded arms keep four records with real LRU eviction across worlds. This is explicit state reduction, not learned memory compression. All retained records and replay prompts count toward storage.",
+      "bootstrap": "Separate generated tutorial worlds; an external BFS teacher acts using its own observed map only. Teacher and bounded current-world memory views must be identical on the four-room tutorials. All neural arms inherit the same adapter and bootstrap cost for a seed. This declared teacher is not an autonomous discovery mechanism.",
+      "actions": "Single-token option letters score only currently legal actions, identically for all neural arms. Sample from 0.95*softmax(legal logits)+0.05*uniform using a private RNG. No validity score is credited for the supplied legal-action interface.",
+      "online_learning": "Adaptive arm retains bootstrap Adam moments. After every actual mission, each chosen-action record receives advantage=(success-0.01*actions)-0.2 and its collected action log probability. Insert into a uniform reservoir of64 records. Eight clipped PPO-style single-record updates use four samples from the just-completed trajectory and four from retained replay, without hidden action labels. Frozen arms do not update. This is a fixed learning procedure, not recursive self-improvement.",
+      "pairing": "World layouts, target schedule and exogenous relocation match across arms. Neural bootstrap and initial action RNG match. Actions may diverge, producing different real observations; no free counterfactual outcomes are supplied. Repeated steps and unsuccessful missions remain charged.",
+      "criteria": "Report all missions, actions and returns. Short-world acquisition requires at least3/4 initial deliveries; evaluate return-world retention only when acquired. Larger-world competence requires at least3/4 deliveries. Report relocation recovery separately. No passing pilot establishes broad long-horizon efficiency or the full architecture.",
+      "accounting": "Report source bootstrap environment actions/training work, operational inference calls/tokens/attention-score elements, online update calls/tokens/attention-score elements, wall time, base/adapter/optimizer/replay/room-state bytes and CUDA peak allocation. Attention elements are not FLOPs. Experimental logs and audit-only states are separate and inaccessible to policies.",
+      "preflight": "Different seed1711, two-room/three-room worlds, four bootstrap updates, two scored-style missions of16 steps, two online updates per mission, smaller experience capacity8. Only functional validation; no scored-seed tuning. The reduced functional bootstrap remains one three-room tutorial world; a separate CPU tutorial audit checks the full four-room teaching layout.",
+      "no_test_selection": "Freeze code/protocol before scoring. No query-dependent oracle memory, early stopping, best-checkpoint selection or hyperparameter changes from scored results. Preserve all failures and immutable base identity."
+    },
+    "source_complete_sha256": "cf58546bcbc455d0c0126140d42c73ab0021df8ecbccf175dc4808183bbec4c8",
+    "git_commit": "89fb30f9ab6b950dc7f1f016e5a37d3a488a7769",
+    "code_identity": {
+      "protocol_e31.json": "e79fbb07b02b1044a24b6cfc99171d473afb172b67c0c2b1185dada992739718",
+      "e31_frozen_binding.py": "75d0df50ded69274aa97c1bf2755db10ee866a824fe903a6877c0e594940d9b6",
+      "delivery_diagnostics.py": "d09529745ea12bf0f37235631bc83f3c099fe8c3087c541dc57e44d13824d2fc",
+      "delivery_world.py": "d7abc40594210bff6c118018e23342ecee0076dc23c1813c113c81182d1a7303",
+      "language_delivery_agent.py": "dc58e2fb992f95a663d77195250ab783b365801662065668c04f1e898712304e",
+      "preflight_language_adapter.py": "24637a0a6c8aedbaf2862a952861925e4245bc535f9b30265da9e1ae1d316db2",
+      "e28_depth.py": "e7ac215882a24a6113873057727092bab3ef91b17a0bde1c57d9bcbd4687e7af"
+    },
+    "source_manifest": {
+      "config": {
+        "experiment": "E30 integrated delivery-world memory and online language-adapter pilot",
+        "seeds": [
+          1711
+        ],
+        "arms": [
+          "observed_planner",
+          "frozen_full",
+          "frozen_bounded",
+          "adaptive_bounded"
+        ],
+        "world_sizes": [
+          2,
+          3
+        ],
+        "missions": [
+          {
+            "world": 0,
+            "target": 0,
+            "budget": 16
+          },
+          {
+            "world": 1,
+            "target": 1,
+            "budget": 16
+          }
+        ],
+        "world_seed_offsets": [
+          100000,
+          200000
+        ],
+        "bounded_room_records": 4,
+        "bootstrap_worlds": 1,
+        "bootstrap_world_size": 3,
+        "bootstrap_missions_per_world": 2,
+        "bootstrap_steps_per_mission": 24,
+        "bootstrap_updates": 4,
+        "bootstrap_learning_rate": 0.001,
+        "online_updates_per_mission": 2,
+        "online_learning_rate": 0.0001,
+        "experience_capacity": 8,
+        "ppo_clip": 0.2,
+        "reward_step_penalty": 0.01,
+        "return_baseline": 0.2,
+        "uniform_exploration": 0.05,
+        "temperature": 1.0,
+        "gradient_clip": 1.0,
+        "max_prompt_tokens": 1024,
+        "rank": 4,
+        "adapter_targets": [
+          "q_proj",
+          "v_proj"
+        ],
+        "base_model_commit": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "base_weights_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "transformers_commit": "052e652d6d53c2b26ffde87e039b723949a53493",
+        "base_dtype": "float16",
+        "adapter_dtype": "float32",
+        "device": "cuda",
+        "torch_threads": 1,
+        "observation_boundary": "Only local room/exits/stock, mission/home/world labels, own carrying state and action feedback enter memory or neural prompts. No hidden map, shelves, route or evaluator probe enters a policy. Stock persists after pickup; an unannounced relocation occurs only before mission10.",
+        "memory": "Latest observation per (world,room). Full arms retain every observed room. Bounded arms keep four records with real LRU eviction across worlds. This is explicit state reduction, not learned memory compression. All retained records and replay prompts count toward storage.",
+        "bootstrap": "Separate generated tutorial worlds; an external BFS teacher acts using its own observed map only. Teacher and bounded current-world memory views must be identical on the four-room tutorials. All neural arms inherit the same adapter and bootstrap cost for a seed. This declared teacher is not an autonomous discovery mechanism.",
+        "actions": "Single-token option letters score only currently legal actions, identically for all neural arms. Sample from 0.95*softmax(legal logits)+0.05*uniform using a private RNG. No validity score is credited for the supplied legal-action interface.",
+        "online_learning": "Adaptive arm retains bootstrap Adam moments. After every actual mission, each chosen-action record receives advantage=(success-0.01*actions)-0.2 and its collected action log probability. Insert into a uniform reservoir of64 records. Eight clipped PPO-style single-record updates use four samples from the just-completed trajectory and four from retained replay, without hidden action labels. Frozen arms do not update. This is a fixed learning procedure, not recursive self-improvement.",
+        "pairing": "World layouts, target schedule and exogenous relocation match across arms. Neural bootstrap and initial action RNG match. Actions may diverge, producing different real observations; no free counterfactual outcomes are supplied. Repeated steps and unsuccessful missions remain charged.",
+        "criteria": "Report all missions, actions and returns. Short-world acquisition requires at least3/4 initial deliveries; evaluate return-world retention only when acquired. Larger-world competence requires at least3/4 deliveries. Report relocation recovery separately. No passing pilot establishes broad long-horizon efficiency or the full architecture.",
+        "accounting": "Report source bootstrap environment actions/training work, operational inference calls/tokens/attention-score elements, online update calls/tokens/attention-score elements, wall time, base/adapter/optimizer/replay/room-state bytes and CUDA peak allocation. Attention elements are not FLOPs. Experimental logs and audit-only states are separate and inaccessible to policies.",
+        "preflight": "Different seed1711, two-room/three-room worlds, four bootstrap updates, two scored-style missions of16 steps, two online updates per mission, smaller experience capacity8. Only functional validation; no scored-seed tuning. The reduced functional bootstrap remains one three-room tutorial world; a separate CPU tutorial audit checks the full four-room teaching layout.",
+        "no_test_selection": "Freeze code/protocol before scoring. No query-dependent oracle memory, early stopping, best-checkpoint selection or hyperparameter changes from scored results. Preserve all failures and immutable base identity."
+      },
+      "preflight": true,
+      "git_commit": "17ecef795710f0c4608770735ff2b7b1e35021fd",
+      "code_identity": {
+        "e28_depth.py": "e7ac215882a24a6113873057727092bab3ef91b17a0bde1c57d9bcbd4687e7af",
+        "protocol_e30.json": "2adeabc3d3f071a1c62e94d25b5f412e963790198a5d2b61f1cd2bfb09f2f04c",
+        "e30_integrated_delivery.py": "7718f7c9440f6dbed01cbfbe9eaf6603b69ea54e0c1a5515e79f38704751054f",
+        "language_delivery_agent.py": "dc58e2fb992f95a663d77195250ab783b365801662065668c04f1e898712304e",
+        "delivery_world.py": "d7abc40594210bff6c118018e23342ecee0076dc23c1813c113c81182d1a7303",
+        "preflight_language_adapter.py": "24637a0a6c8aedbaf2862a952861925e4245bc535f9b30265da9e1ae1d316db2"
+      },
+      "model_source": {
+        "repository": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+        "commit": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "weights_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "weights_bytes": 988097824,
+        "download_seconds": 11.877898176011513,
+        "source": "Git clone plus binary artifact resolved at exact commit; no rendered page fetched",
+        "status": "DOWNLOADED_NOT_EXECUTED"
+      },
+      "transformers_commit": "052e652d6d53c2b26ffde87e039b723949a53493",
+      "versions": {
+        "torch": "2.5.1+cu118",
+        "numpy": "2.2.6",
+        "transformers": "4.46.3",
+        "tokenizers": "0.20.3",
+        "safetensors": "0.8.0",
+        "huggingface-hub": "0.36.2"
+      },
+      "torch": "2.5.1+cu118",
+      "device": "NVIDIA GeForce GTX 1060 6GB"
+    }
+  },
+  "source_complete_sha256": "a04f36427b3796b4228b4d8823ceb13a69aaed43ff6d5144faeb4ffb465ed703",
+  "cells": [
+    {
+      "seed": 1711,
+      "state": "base",
+      "encoding": "original",
+      "query_seconds": 1.9619272440031637,
+      "model_load_seconds": 2.8935066620033467,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4253,
+        "inference_attention_elements": 383159952,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 16,
+        "inference_tokens": 4253,
+        "inference_attention_elements": 383159952,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1046672384,
+      "adapter_sha256": "2e47bdef3c15f3e4e3501a4ed6d9d073d2e1c6f0e04c47f337b9fbd09f817381",
+      "actor_weights_optimizer_memory_rng_unchanged": true,
+      "dataset_sha256": "a151a29107f21aef3e23b6b9efeaedc71ed7fa1209cafac78761e2b16bdcbf94",
+      "queries": 16,
+      "rule_correct": 10
+    },
+    {
+      "seed": 1711,
+      "state": "base",
+      "encoding": "fresh_nonce",
+      "query_seconds": 1.8504800969967619,
+      "model_load_seconds": 2.8935066620033467,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4211,
+        "inference_attention_elements": 375788112,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 32,
+        "inference_tokens": 8464,
+        "inference_attention_elements": 758948064,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1044069888,
+      "adapter_sha256": "2e47bdef3c15f3e4e3501a4ed6d9d073d2e1c6f0e04c47f337b9fbd09f817381",
+      "actor_weights_optimizer_memory_rng_unchanged": true,
+      "dataset_sha256": "a151a29107f21aef3e23b6b9efeaedc71ed7fa1209cafac78761e2b16bdcbf94",
+      "queries": 16,
+      "rule_correct": 9
+    },
+    {
+      "seed": 1711,
+      "state": "base",
+      "encoding": "compact",
+      "query_seconds": 1.530607570995926,
+      "model_load_seconds": 2.8935066620033467,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 3682,
+        "inference_attention_elements": 286011936,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 48,
+        "inference_tokens": 12146,
+        "inference_attention_elements": 1044960000,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1041062912,
+      "adapter_sha256": "2e47bdef3c15f3e4e3501a4ed6d9d073d2e1c6f0e04c47f337b9fbd09f817381",
+      "actor_weights_optimizer_memory_rng_unchanged": true,
+      "dataset_sha256": "a151a29107f21aef3e23b6b9efeaedc71ed7fa1209cafac78761e2b16bdcbf94",
+      "queries": 16,
+      "rule_correct": 7
+    },
+    {
+      "seed": 1711,
+      "state": "bootstrap",
+      "encoding": "original",
+      "query_seconds": 1.8575833549984964,
+      "model_load_seconds": 2.8935066620033467,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4253,
+        "inference_attention_elements": 383159952,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 64,
+        "inference_tokens": 16399,
+        "inference_attention_elements": 1428119952,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1046672384,
+      "adapter_sha256": "e62c7b05cf7f8685b3e00a9c989a5b7f85b0e7fca85ce13c6d743269716b9cdb",
+      "actor_weights_optimizer_memory_rng_unchanged": true,
+      "dataset_sha256": "a151a29107f21aef3e23b6b9efeaedc71ed7fa1209cafac78761e2b16bdcbf94",
+      "queries": 16,
+      "rule_correct": 10
+    },
+    {
+      "seed": 1711,
+      "state": "bootstrap",
+      "encoding": "fresh_nonce",
+      "query_seconds": 1.8480025409953669,
+      "model_load_seconds": 2.8935066620033467,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4211,
+        "inference_attention_elements": 375788112,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 80,
+        "inference_tokens": 20610,
+        "inference_attention_elements": 1803908064,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1044069888,
+      "adapter_sha256": "e62c7b05cf7f8685b3e00a9c989a5b7f85b0e7fca85ce13c6d743269716b9cdb",
+      "actor_weights_optimizer_memory_rng_unchanged": true,
+      "dataset_sha256": "a151a29107f21aef3e23b6b9efeaedc71ed7fa1209cafac78761e2b16bdcbf94",
+      "queries": 16,
+      "rule_correct": 9
+    },
+    {
+      "seed": 1711,
+      "state": "bootstrap",
+      "encoding": "compact",
+      "query_seconds": 1.5289798680023523,
+      "model_load_seconds": 2.8935066620033467,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 3682,
+        "inference_attention_elements": 286011936,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 96,
+        "inference_tokens": 24292,
+        "inference_attention_elements": 2089920000,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1041062912,
+      "adapter_sha256": "e62c7b05cf7f8685b3e00a9c989a5b7f85b0e7fca85ce13c6d743269716b9cdb",
+      "actor_weights_optimizer_memory_rng_unchanged": true,
+      "dataset_sha256": "a151a29107f21aef3e23b6b9efeaedc71ed7fa1209cafac78761e2b16bdcbf94",
+      "queries": 16,
+      "rule_correct": 8
+    },
+    {
+      "seed": 1711,
+      "state": "adaptive_final",
+      "encoding": "original",
+      "query_seconds": 1.8552808889944572,
+      "model_load_seconds": 2.8935066620033467,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4253,
+        "inference_attention_elements": 383159952,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 112,
+        "inference_tokens": 28545,
+        "inference_attention_elements": 2473079952,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1046672384,
+      "adapter_sha256": "2573c1ee7b9b221de78e434dd9748bfd9d5c0f2046ab5a37e164b63fd75998f5",
+      "actor_weights_optimizer_memory_rng_unchanged": true,
+      "dataset_sha256": "a151a29107f21aef3e23b6b9efeaedc71ed7fa1209cafac78761e2b16bdcbf94",
+      "queries": 16,
+      "rule_correct": 11
+    },
+    {
+      "seed": 1711,
+      "state": "adaptive_final",
+      "encoding": "fresh_nonce",
+      "query_seconds": 1.8470539200061467,
+      "model_load_seconds": 2.8935066620033467,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 4211,
+        "inference_attention_elements": 375788112,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 128,
+        "inference_tokens": 32756,
+        "inference_attention_elements": 2848868064,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1044069888,
+      "adapter_sha256": "2573c1ee7b9b221de78e434dd9748bfd9d5c0f2046ab5a37e164b63fd75998f5",
+      "actor_weights_optimizer_memory_rng_unchanged": true,
+      "dataset_sha256": "a151a29107f21aef3e23b6b9efeaedc71ed7fa1209cafac78761e2b16bdcbf94",
+      "queries": 16,
+      "rule_correct": 9
+    },
+    {
+      "seed": 1711,
+      "state": "adaptive_final",
+      "encoding": "compact",
+      "query_seconds": 1.528997581001022,
+      "model_load_seconds": 2.8935066620033467,
+      "work": {
+        "inference_calls": 16,
+        "inference_tokens": 3682,
+        "inference_attention_elements": 286011936,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 144,
+        "inference_tokens": 36438,
+        "inference_attention_elements": 3134880000,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "cuda_peak_allocated_bytes": 1041062912,
+      "adapter_sha256": "2573c1ee7b9b221de78e434dd9748bfd9d5c0f2046ab5a37e164b63fd75998f5",
+      "actor_weights_optimizer_memory_rng_unchanged": true,
+      "dataset_sha256": "a151a29107f21aef3e23b6b9efeaedc71ed7fa1209cafac78761e2b16bdcbf94",
+      "queries": 16,
+      "rule_correct": 6
+    }
+  ],
+  "launch_error": "First invocation omitted --preflight. Source-status assertion rejected preflight E30 input before model queries; log preserved on WD. Corrected invocation passed."
+}
