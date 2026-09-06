@@ -1,0 +1,33 @@
+{
+  "status": "IMITATION_SOURCE_COLLECTOR_AUDIT_ONLY",
+  "repo_commit": "e5ef18806c449ca47153b494a02471c5e2ae3a14",
+  "source_hashes": {
+    "src/imitation/algorithms/dagger.py": "dc7fcf31735220573d2f7c772af0d233b925d19972d26613e50b035e339b9cc1",
+    "src/imitation/algorithms/bc.py": "6fd968d4db3142147717805662f42beaf70a2236d062ea0a2b36e174323742a9",
+    "setup.py": "6aeea7213aa3786ef8ec69849db94fca617049018011c7e68250e8a86b6e0bbb"
+  },
+  "unmodified_method_bodies_executed": [
+    "step_async",
+    "step_wait"
+  ],
+  "cases": [
+    {
+      "beta": 0.0,
+      "initial_observation": 0,
+      "expert_label": 2,
+      "executed_action": 1,
+      "saved_next_observation": 1,
+      "using_saved_label_as_executed_action_would_misidentify_transition": true
+    },
+    {
+      "beta": 1.0,
+      "initial_observation": 0,
+      "expert_label": 2,
+      "executed_action": 2,
+      "saved_next_observation": 2,
+      "using_saved_label_as_executed_action_would_misidentify_transition": false
+    }
+  ],
+  "scope": "Minimal deterministic environment executes the upstream collector method bodies. It proves the stored action is an expert label even when the learner action caused the next observation. This is valid behavior-cloning data, not a bug claim. Reusing that label as the executed action in a world-model transition would be incorrect. No upstream policy training, benchmark reproduction or autonomous-learning result.",
+  "script_sha256": "bc0f7df98551810af1b55b661cbe6c24c1c2a0cc1b8848983faa6daeecbc9798"
+}

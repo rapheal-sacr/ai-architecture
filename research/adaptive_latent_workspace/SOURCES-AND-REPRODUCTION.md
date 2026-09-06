@@ -248,3 +248,13 @@ The separate language GPU/adapter preflight also completed after E29 released
 the GPU. It verifies exact zero-adapter behavior, finite trainable gradients,
 unchanged frozen base weights and exact saved-adapter output restoration. This
 is two repeated-example updates on 45 tokens, not a continual-learning result.
+
+## Imitation/DAGGER source audit during E32
+
+Cloned HumanCompatibleAI/imitation on WD at
+`e5ef18806c449ca47153b494a02471c5e2ae3a14`. Read collector action/label semantics,
+all-history aggregation, rollout budgets, BC accumulation and default objective.
+Executed only the unchanged collector method bodies in a minimal deterministic
+harness; no upstream neural training or benchmark reproduction.
+IMITATION-SOURCE-AUDIT.md and results/imitation_source_audit.json preserve the
+role-confusion counterexample and costs. Current scored E32 source is unchanged.

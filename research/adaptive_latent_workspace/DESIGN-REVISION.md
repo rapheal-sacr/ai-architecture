@@ -330,3 +330,15 @@ explain away failures on unchanged, exposed tutorial states. Establish a
 competent learned execution baseline under matched-example controls before
 attributing gains to new memory or procedure mechanisms. This does not validate
 the full architecture or establish novelty. Read E31-RESULT.md.
+
+## Preserve causal and advisory roles in integrated experience
+
+The imitation source audit gives an executable counterexample to naively
+reusing supervision trajectories as dynamics data: an expert label can differ
+from the executed action that produced the saved next observation. A shared
+episodic representation must keep observed state, executed action, observed
+consequence, optional advisory target and provenance separate. Compression
+that conflates those roles cannot safely support both world-model fitting and
+policy supervision. This is a necessary semantic constraint, not architectural
+novelty or an implemented learned-compression result. See
+IMITATION-SOURCE-AUDIT.md. The frozen E32 experiment remains unchanged.

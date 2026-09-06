@@ -288,3 +288,16 @@ match example work and restore complete training state after charged evaluation;
 failures remain recorded. Full development corpora have disjoint world seeds.
 E32-PROTOCOL.md freezes conventional rate/accumulation controls at256/1024
 examples before scoring. A better baseline would not establish RSI or novelty.
+
+## Source counterexample: advisory labels cannot be causal action records
+
+The cloned imitation collector at e5ef188 saves expert action labels even when
+a learner action executes and produces the next observation. An executable
+probe of its unchanged method bodies records label2, executed action1, next
+observation1 under beta0. This is correct behavior-cloning data; using label2
+as the cause in world-model fitting would be wrong. Future integrated memory
+and compression must preserve actual action versus advisory target/provenance.
+Current E30/E32 operational records are not implicated. Read
+IMITATION-SOURCE-AUDIT.md. The upstream all-history/four-epoch default also
+requires charging repeated fitting and retained data; no reproduction or
+autonomous-learning gain is claimed.
