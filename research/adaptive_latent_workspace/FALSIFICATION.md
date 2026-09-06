@@ -378,3 +378,19 @@ Correct archived E2E weights still make many first-chunk errors (50–75% correc
 so preservation does not guarantee immediate cold-context recall. Read E34-RESULT.md
 for all cells and source acquisition gates. Bounded autonomous selection,
 representation robustness, compression, broad reasoning and RSI remain open.
+
+## E35 preflight: bounded archive is executable; task benefit unscored
+
+The shared one-final-suffix path exactly matches the original core in float32
+and float64 for logits, gradients and caches. Full-core independent policy
+fixtures exercise2 selections,8 admissions,8 duplicates and6 evictions. Snapshot
+immutability, actual serialized continuation, update skipping, hard capacity and
+model/policy mismatch rejection pass. A separate untrained development assay
+replays1920 chunks/updates and60 saved states exactly with independent transition,
+metric and event checks. These fixtures do not establish acquired competence.
+
+E35-PROTOCOL.md freezes continuous unannounced recurrence, expanding rule sets
+and drift across both E33 E2E objectives/all seeds. It charges candidate search,
+probation and snapshots and includes exact no-selection and specialized table
+controls. Scored data will be generated after the source freeze. No goal-success
+or novelty claim follows from implementation checks.

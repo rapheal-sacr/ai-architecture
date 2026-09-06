@@ -1,0 +1,42 @@
+{
+  "event": "SUFFIX_ARCHIVE_PREFLIGHT_PASSED",
+  "checks": {
+    "torch.float32_32_updates_exact_standard_core": true,
+    "torch.float32_4_arbitrary_candidates_logits_gradients_caches_exact": true,
+    "torch.float64_32_updates_exact_standard_core": true,
+    "torch.float64_4_arbitrary_candidates_logits_gradients_caches_exact": true,
+    "fresh_probation_immutable_snapshots_capacity_eviction": {
+      "admissions": 5,
+      "evictions": 3
+    },
+    "serialized_archive_probe_cache_continuation_exact_16_chunks": true,
+    "actual_archive_switches_exercised": 2,
+    "target_intervention_no_retrospective_prediction_selection": true,
+    "disabled_selection_exact_gated_active_with_extra_charged_work": true,
+    "correct_low_loss_chunk_skips_update_exact": true,
+    "full_core_and_independent_policy_audit_populated_fixture": {
+      "prefix_tokens": 128,
+      "attention_score_elements": 8064,
+      "suffix_tokens": 496,
+      "suffix_forwards": 124,
+      "gradient_updates": 32,
+      "gradient_tokens": 128,
+      "switches": 2,
+      "admissions": 8,
+      "duplicates": 8,
+      "rejections": 0,
+      "evictions": 6
+    },
+    "changed_encoder_or_initialization_rejected": true,
+    "changed_policy_rejected": true,
+    "multiple_adaptive_layers_rejected": true,
+    "static_and_initialization_weights_unchanged": true,
+    "tensor_bytes_at_capacity": {
+      "active_and_cache": 6656,
+      "archives": 9216,
+      "probe": 4608
+    }
+  },
+  "seconds": 1.898708655993687,
+  "scope": "Mechanism fixtures, no competence or efficiency claim"
+}

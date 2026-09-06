@@ -1,0 +1,28 @@
+{
+  "experiment": "E35",
+  "source_commit": "63baff850bac6f5d1b65fd6e41a6312a0a13598f",
+  "source_seeds": [33101, 33102, 33103],
+  "source_arms": ["e2e_reset", "e2e_carry"],
+  "targets_per_stream": 8192,
+  "replicates_per_regime_seed": 1,
+  "regimes": [
+    {"name": "recurring", "initial_contexts": 4, "max_contexts": 4, "new_probability": 0.0, "mutate_probability": 0.0, "min_duration": 48, "max_duration": 128},
+    {"name": "expanding", "initial_contexts": 2, "max_contexts": 12, "new_probability": 0.35, "mutate_probability": 0.0, "min_duration": 24, "max_duration": 96},
+    {"name": "drifting", "initial_contexts": 4, "max_contexts": 4, "new_probability": 0.0, "mutate_probability": 0.35, "min_duration": 48, "max_duration": 128}
+  ],
+  "policy_defaults": {"switch_margin": 0.1, "probation_chunks": 4, "admit_accuracy": 0.75, "admit_nll": 1.0},
+  "policies": {
+    "active_always": {"capacity": 0, "select": true, "update_nll_threshold": null},
+    "active_gated": {"capacity": 0, "select": true, "update_nll_threshold": 0.5},
+    "bank2_gated": {"capacity": 2, "select": true, "update_nll_threshold": 0.5},
+    "bank8_gated": {"capacity": 8, "select": true, "update_nll_threshold": 0.5},
+    "bank8_no_select_gated": {"capacity": 8, "select": false, "update_nll_threshold": 0.5}
+  },
+  "checkpoint_chunks": 512,
+  "acquisition_window": 16,
+  "acquisition_accuracy": 0.75,
+  "primary": "Paired all-token operational NLL and error, including cold start and every hidden change. Bank8 must lower both aggregate NLL and errors against active_gated in recurring streams for each source-training arm, with non-worsening NLL on every source seed, to pass the limited recurrence-benefit criterion. All other regimes/costs and failures reported; this criterion is not architecture success.",
+  "secondary": "First16 after exact-map recurrence conditional on previously acquired last16; late-stream half performance; expanding/drifting degradation; bank2/bank8 capacity; full suffix/gradient/attention work, wall time and persistent tensor bytes. State-sharing exactness is an implementation property; lower compute per retained correct prediction is an empirical question.",
+  "specialized_control": "Causal last-observed successor table, with each four-token chunk predicted from the pre-chunk table before its labels are installed. Same observed input chunk and labels, no context IDs; accuracy only, no invented smoothing.",
+  "selection": "All arms and seeds, source final checkpoint only, no new outer training or parameter search. Data generated only after source commit freeze. Preflight uses separate seed and 256 targets with untrained small models. No session/context IDs or change notifications enter learner; KV and absolute position persist across all hidden changes. Scored streams and all checkpoint serialization on WD."
+}
