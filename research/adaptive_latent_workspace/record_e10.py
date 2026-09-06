@@ -21,7 +21,7 @@ report=['# E10: entropy and critic-gradient counterfactual','',
 for r in rows:
     entropy='—' if r['last_entropy'] is None else f"{r['last_entropy']:.6f}"
     report.append(f"| {r['seed']} | {r['arm']} | {round(50*r['two_room_success'])} | {round(50*r['four_room_success'])} | {entropy} | {r['seconds']:.1f} |")
-report+=['','The maximum seven-action entropy is log(7) = '+f'{math.log(7):.6f}.','', '## Checkpoint control reproduction','']
+report+=['','Removing entropy while retaining shared critic gradients acquires the harder task and retains the old task at 50/50 successes each in both seeds. With entropy retained, detaching the critic still fails. With entropy removed, critic detachment fails in one seed and succeeds in the other. This supports the entropy intervention in this development setup and rejects critic detachment as a reliable general repair.','','The maximum seven-action entropy is log(7) = '+f'{math.log(7):.6f}.','', '## Checkpoint control reproduction','']
 for c in checks:report.append(f"Seed {c['seed']}: complete training rows equal to E8 = {c['training_equal']}; all recorded evaluation fields equal = {c['evaluation_common_fields_equal']}; maximum training metric differences = {c['maximum_absolute_training_difference']}.")
 report+=['',
 'The factors can change exploration and subsequent data as well as direct gradient interference. This is a closed-loop causal intervention, not an attribution of every downstream effect to one local gradient. Successful retention alone does not establish acquisition of the harder task.','',

@@ -17,6 +17,8 @@ The first CUDA launch failed before its first optimizer update because restored 
 | 11102 | no_entropy_detached_critic | 50 | 50 | 0.012013 | 172.1 |
 | 11102 | frozen_no_update | 50 | 13 | — | 0.0 |
 
+Removing entropy while retaining shared critic gradients acquires the harder task and retains the old task at 50/50 successes each in both seeds. With entropy retained, detaching the critic still fails. With entropy removed, critic detachment fails in one seed and succeeds in the other. This supports the entropy intervention in this development setup and rejects critic detachment as a reliable general repair.
+
 The maximum seven-action entropy is log(7) = 1.945910.
 
 ## Checkpoint control reproduction
