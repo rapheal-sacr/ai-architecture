@@ -231,3 +231,9 @@ art; see `DEQ-SOURCE-AUDIT.md` for work/memory accounting boundaries and the
 verified legacy `torch.solve` incompatibility with the local runtime. No
 published result was reproduced and no equilibrium mechanism added to the
 candidate. Convergence cannot certify semantic correctness.
+
+A Qwen2.5-0.5B-Instruct language-core CPU feasibility check now exists. The model
+and Transformers repositories were cloned and pinned, and binary weights match
+the cloned LFS hash. Read `LANGUAGE-CORE-PREFLIGHT.md` and its raw records for
+exact source identity, measured memory, order-sensitive prompts and boundaries.
+This is not a published-score replication or a continual-learning result.
