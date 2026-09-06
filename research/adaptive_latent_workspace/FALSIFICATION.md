@@ -319,3 +319,19 @@ E33 freezes reset/carry meta-training controls before scoring. Six development
 outer updates and21 sessions replay exactly, establishing executability only.
 Read E2E-REVISION.md and E33-PROTOCOL.md. E32 continues unchanged; acquisition,
 retention, efficiency, novelty, RSI and the full goal remain unproven.
+
+## MSA source probes: information loss versus representation staleness
+
+Authors' source cloned at77fbdfd. Unchanged-method CPU probes find identical
+pooled KV for distinct associations, reversed old-cache routing after a fresh-
+equivalent coordinate change, and changed same-count documents accepted by an
+optional cache-reuse branch. These are local interface/admission counterexamples;
+no4B model or published benchmark was run. Earlier contextual encoding and
+source-text reinjection may preserve detail lost by isolated pooling. Read
+MSA-SOURCE-AUDIT.md for exact fixture limits and source provenance.
+
+Persistent evidence needs compatible reader representations or charged refresh/
+transport. Fixed-prefix encoding before adaptive layers is a proposed boundary,
+not an implemented repair or novelty claim. CONSTRAINTS.md gives a conditional
+maintenance-rate bound; the universal improvement bound remains unmeasured.
+Frozen E32/E33 scorers are unchanged.

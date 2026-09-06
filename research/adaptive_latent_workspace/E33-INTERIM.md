@@ -1,18 +1,19 @@
-# E33 execution record — no completed result yet
+# E33 scorer complete — independent audit running
 
-Read FALSIFICATION.md first. Frozen source63baff8; CPU scorer session3205.
-WD output is alw-runs/e33, log alw-runs/e33.log. Continue that process; never
-restart because a tool observation times out. E32 scorer62513 continues on GPU.
-The unchanged protocols record shared-machine timing limitations.
+Read FALSIFICATION.md first. Scorer session3205 completed with exit0 from
+frozen63baff8. All nine cases completed128 outer updates and all252 policy/stream
+evaluations. Scorer wall time740.606s. Data contain768 distinct training maps and
+108 distinct evaluation maps, disjoint by the generator's completed checks.
+No competence conclusion is drawn before independent audit.
 
-All nine training cases must finish128 outer updates each, then all252 policy/
-stream evaluations must finish. Run record_e33.py against the completed output
-and independently replay all1152 outer updates and all per-session states.
-Keep every acquisition failure and all reset/carry comparisons. E33-PROTOCOL.md
-sets criteria before scores; do not select a checkpoint from interim losses.
+Audit session71977 now runs record_e33.py on the same output, replaying all1152
+outer updates and all1008 per-session checkpoints. Output alw-runs/e33-audit.json;
+log alw-runs/e33-audit.log. Continue this process; never restart on an observation
+timeout. E32 scorer62513 remains on GPU, unchanged. Training and replay wall
+measurements include shared-machine effects.
 
-Functional evidence only: core causal/finite-difference/state checks pass;
-six development outer updates and21 sessions replay exactly. The design/source
-mapping is in E2E-REVISION.md. No grammar test, even a future pass, establishes
-the full architecture, learned episodic compression, general reasoning,
-long-horizon autonomous efficiency, novelty or reliable RSI.
+Functional checks had passed: six development updates and21 sessions replayed
+exactly, with separate causal/meta-gradient/serialization checks for the core.
+E33-PROTOCOL.md preserves acquisition prerequisites and all controls. Do not
+interpret a grammar pass as integrated architecture success, learned episodic
+compression, broad reasoning, novelty, long-horizon autonomy or reliable RSI.

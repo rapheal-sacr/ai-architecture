@@ -101,3 +101,12 @@ scoring. Both clipping branches and fast-dependent caches were then checked.
 Finite-direction checks are not a proof for all parameters/inputs. Results and
 hashes: `results/e2e_core_preflight.json`. E33-PROTOCOL.md challenges persistence;
 a grammar pass cannot replace long-horizon autonomous tasks or the full goal.
+
+## Representation compatibility of persistent evidence
+
+MSA-SOURCE-AUDIT.md adds a concrete integration obligation: fast/slow weight
+updates must not silently invalidate stored evidence encodings. A fixed-prefix
+write/read boundary before fast layers is a candidate to test; higher-layer
+features can depend on fast history. Re-encoding on slow updates must be charged,
+with the conditional throughput bound in CONSTRAINTS.md. Compatibility and
+metadata checks do not establish useful retention or efficient learned compression.

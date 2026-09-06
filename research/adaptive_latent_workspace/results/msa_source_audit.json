@@ -1,0 +1,131 @@
+{
+  "event": "MSA_SOURCE_COUNTEREXAMPLES_EXECUTED",
+  "commit": "77fbdfde88e150cd91307fd710067cf06828cfdc",
+  "sources": {
+    "pooling": {
+      "file": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/repos/MSA/src/msa/memory_sparse_attention.py",
+      "line": 467,
+      "file_sha256": "37a519a17c624f533bc391853d502fa2818ce03fe59f3c51aa39b1dec27d2ca9",
+      "body_ast_sha256": "ba5023311b06a80a7729277cc65b686561f429b91b1d2958161894ac7ff4a9f5"
+    },
+    "routing": {
+      "file": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/repos/MSA/src/msa/memory_sparse_attention.py",
+      "line": 407,
+      "file_sha256": "37a519a17c624f533bc391853d502fa2818ce03fe59f3c51aa39b1dec27d2ca9",
+      "body_ast_sha256": "6eb09290ccd3ceca85ade5062bb796065587923a885b81f9c2cda4862b36f9d9"
+    },
+    "reuse_gate": {
+      "file": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/repos/MSA/src/msa_service.py",
+      "line": 497,
+      "file_sha256": "8b03be6f9d6168b41d97f57bad3d393a9f552146c83dfcc5364391118a1869d3",
+      "body_ast_sha256": "d87318da80feb99f232cf843924688d8b1888cf222c2f1a4141e7694b88dac68"
+    }
+  },
+  "pooling_collision": {
+    "keys": [
+      [
+        [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            -1.0,
+            0.0
+          ]
+        ]
+      ]
+    ],
+    "values_a": [
+      [
+        [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ]
+      ]
+    ],
+    "values_b": [
+      [
+        [
+          [
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ]
+      ]
+    ],
+    "pooled_keys_equal": true,
+    "pooled_values_equal": true,
+    "pooled_values": [
+      [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    ],
+    "unpooled_answer_a": [
+      1.0,
+      2.06115369216775e-09
+    ],
+    "unpooled_answer_b": [
+      2.06115369216775e-09,
+      1.0
+    ],
+    "scope": "Noninjective pooling at the KV interface. Does not measure trained MSA text accuracy or rule out upstream contextual encoding of associations."
+  },
+  "coordinate_staleness": {
+    "old_scores": [
+      [
+        1.0,
+        -1.0
+      ]
+    ],
+    "fresh_both_changed_scores": [
+      [
+        1.0,
+        -1.0
+      ]
+    ],
+    "new_query_old_cache_scores": [
+      [
+        -1.0,
+        1.0
+      ]
+    ],
+    "new_and_old_fresh_functions_identical": true,
+    "scope": "Constructed representation-coordinate change executed through upstream routing. Not an observed checkpoint update or learned-model failure rate."
+  },
+  "cache_admission": {
+    "requested_docs": [
+      "alpha has code NEW",
+      "beta has code KEEP"
+    ],
+    "loaded_docs": [
+      "alpha has code OLD",
+      "beta has code KEEP"
+    ],
+    "requested_encoder": "new-encoder",
+    "loaded_encoder": "old",
+    "same_document_count_accepted_without_rebuild": true,
+    "different_count_rejected": true,
+    "scope": "Opt-in MEMORY_DATA_PATH admission branch; fake loader/postprocessor isolate its validation. No GPU/model inference or wrong-answer rate measured."
+  },
+  "runtime": {
+    "torch": "2.5.1+cu118",
+    "device": "cpu",
+    "threads": 1
+  },
+  "seconds": 0.09114146798674483,
+  "audit_source_sha256": "5d278d71f9e3b6ddcf53d91e5f2abd9a2c666f5f55959cac8b1425757ede54ed"
+}

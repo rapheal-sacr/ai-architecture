@@ -258,3 +258,13 @@ Executed only the unchanged collector method bodies in a minimal deterministic
 harness; no upstream neural training or benchmark reproduction.
 IMITATION-SOURCE-AUDIT.md and results/imitation_source_audit.json preserve the
 role-confusion counterexample and costs. Current scored E32 source is unchanged.
+
+## MSA complementary evidence-memory source
+
+Authors' repository https://github.com/EverMind-AI/MSA cloned with history to WD
+repos/MSA at77fbdfde88e150cd91307fd710067cf06828cfdc. GitHub metadata API discovery,
+no rendered-page fetch. Read targeted attention/pooling/routing, text-reinjection
+and serialized-memory admission paths. MSA-SOURCE-AUDIT.md and
+results/msa_source_audit.json preserve three executed unchanged-method probes
+and their fixture limits. No4B weights, upstream training or benchmark scores
+were run. Frozen E32/E33 source is unaffected.

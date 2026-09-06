@@ -3,7 +3,8 @@
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
 E1–E31 are complete and audited. E32 is running from frozen source7d4edc9.
-E33 now runs from63baff8 on CPU; read E33-INTERIM.md and E2E-REVISION.md.
+E33 scorer completed from63baff8; full replay audit71977 is running.
+Read E33-INTERIM.md and E2E-REVISION.md.
 Read E32-PROTOCOL.md, E32-INTERIM.md and RUNS/ACTIVE-STATE.json for status.
 E30 implements a bounded integrated language/memory/feedback pilot and fails
 reliable acquisition and efficient improvement; read E30-RESULT.md.
@@ -302,3 +303,12 @@ functional core passes gradient, causality and save/resume checks. E33-PROTOCOL.
 freezes ordinary/reset/carry meta-training controls before scoring; six
 development updates and21 sessions replay exactly. Follow RUNS/ACTIVE-STATE.json
 for live execution. E32 continues unchanged. The full goal remains unachieved.
+
+## MSA representation-maintenance constraint
+
+MSA-SOURCE-AUDIT.md adds executed pooling, stale-coordinate and optional cache-
+admission counterexamples from the authors' pinned clone. These are scoped
+source probes, not4B benchmark results. Persistent external evidence must remain
+compatible with later updates or pay refresh/transport cost. A fixed-prefix
+boundary is proposed for integration; it does not establish novelty or solve
+retention. The conditional revision-rate bound is in CONSTRAINTS.md.

@@ -5,7 +5,7 @@ session62513 runs all12 cases/24 snapshots on WD. Use RUNS/ACTIVE-STATE.json
 and e32.log for current state; never restart on an observation timeout.
 This partial snapshot must be superseded by a complete audited report.
 
-Seven completed cases/fourteen snapshots are independently audited. Five cases
+Ten completed cases/twenty snapshots are independently audited. Two cases
 remain. Historical256-update replay and independent accumulation checks passed.
 The partial audit reconstructs references, data/order, optimizer/RNG/work state,
 real trajectories and memory. All30 scored world specifications are disjoint.
@@ -26,6 +26,12 @@ real trajectories and memory. All30 scored world specifications are disjoint.
 |32102|batch1_lr1e4|1024|135/140|True|2|0|3|
 |32102|batch8_lr1e3|256|127/140|False|0|0|1|
 |32102|batch8_lr1e3|1024|140/140|True|4|1|7|
+|32102|batch8_lr1e4|256|99/140|False|3|1|8|
+|32102|batch8_lr1e4|1024|122/140|False|3|1|8|
+|32103|batch1_lr1e3|256|114/140|False|3|1|7|
+|32103|batch1_lr1e3|1024|127/140|False|1|0|3|
+|32103|batch1_lr1e4|256|114/140|False|4|2|10|
+|32103|batch1_lr1e4|1024|134/140|False|4|1|8|
 
 Both improved fitting and deterioration remain in this record. Passing tutorial
 queries does not establish larger-world competence. These are partial cells,

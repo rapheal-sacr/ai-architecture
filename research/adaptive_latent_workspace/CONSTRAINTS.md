@@ -160,3 +160,21 @@ matched message work, but retains zero N64 whole-graph transfer. This separates
 tolerance to extra iterations from the acquisition of a correct compositional
 algorithm. It does not identify a universal cause of poor reasoning or establish
 that stability regularization alone is sufficient.
+
+## Conditional update-rate bound from representation maintenance
+
+Suppose a bank holds N encoded tokens, every global encoder revision invalidates
+all entries, exact fresh representations are required, no exact cheap transport
+exists, and at most B tokens/second can be re-encoded. Maintenance at revision
+rate f requires fN <= B, hence f <= B/N. Learning/routing/execution further
+reduce the available B. With U new tokens between revisions and R revisions,
+re-encoding all accumulated evidence costs U*R*(R+1)/2 token encodings. This is
+quadratic in revision count, conditional on those assumptions. It is not a
+universal AI improvement bound. B has not been measured for MSA locally.
+
+Freezing the memory producer, exact transport, selective refresh, multiple
+versions or tolerated stale/lost evidence changes the assumptions, with costs
+to measure. E2E's fixed per-token fast update does not itself pay an external
+bank's maintenance cost. MSA-SOURCE-AUDIT.md gives a constructed coordinate
+change preserving the fresh function but reversing old-cache access. Testing
+only newly encoded inputs would miss that failure.

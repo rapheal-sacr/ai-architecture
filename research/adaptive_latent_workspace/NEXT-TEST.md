@@ -10,10 +10,15 @@ three-root design mapping. The functional core passes causality, clipped
 meta-gradient, persistent-boundary and exact serialization checks. E33-PROTOCOL.md
 and protocol_e33.json freeze ordinary/reset-E2E/carry-E2E controls before scoring.
 Run all nine cases and independently replay updates/evaluations with record_e33.py.
-Six development updates and21 sessions already replay exactly. E33 now runs on CPU from63baff8, session3205. No completed scored result
-exists yet; preflights establish executability only.
+Six development updates and21 sessions already replay exactly. E33 scorer3205 has completed from63baff8. Full exact-replay audit71977 is
+running; await its terminal result before the completed comparison. Read
+E33-INTERIM.md. Do not restart on a timeout.
 
 E33 does not implement autonomous actions, learned episodic compression, broad
 reasoning or procedure self-revision. Carrying weights without acquisition is
 not retention. A grammar pass cannot replace the full goal. Novelty, reliable
 RSI and efficient long-horizon continual learning remain unestablished.
+
+MSA-SOURCE-AUDIT.md provides independently executable interface counterexamples.
+Before adding external KV to persistent E2E, define compatibility with fast/slow
+updates and charge any memory refresh. This source audit does not alter E33.

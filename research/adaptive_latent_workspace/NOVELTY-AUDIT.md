@@ -82,3 +82,14 @@ art; see `DEQ-SOURCE-AUDIT.md` for work/memory accounting boundaries and the
 verified legacy `torch.solve` incompatibility with the local runtime. No
 published result was reproduced and no equilibrium mechanism added to the
 candidate. Convergence cannot certify semantic correctness.
+
+## Persistent evidence beside E2E adaptive weights
+
+MSA source at77fbdfd already combines learned routing, compressed KV, original
+text reinjection and a persistent evidence bank. Combining it with E2E fast
+updates does not itself establish novelty. Encoding evidence at a fixed-prefix
+boundary and version-checking cached representations are proposed compatibility
+constraints, not claimed inventions. MSA-SOURCE-AUDIT.md provides executed
+pooling/staleness/admission counterexamples but no comparative trained-system
+gain or upstream benchmark reproduction. A new integrated architecture still
+needs stronger baselines, resource accounting and long-horizon capability tests.
