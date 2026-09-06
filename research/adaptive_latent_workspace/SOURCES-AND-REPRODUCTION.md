@@ -224,3 +224,10 @@ additional baseline audit reproduces E27's losses, model/optimizer/memory/RNG
 and public-N predictions exactly across all three reduced stages. Full balanced
 depth schedules match fixed24 message work exactly for seeds29101–29103.
 Scoring is running on WD; no final E29 result is claimed.
+
+DEQ was cloned at `1fb7059d6d89bb26d16da80ab9489dcc73fc5472`. The fixed-point
+solver, implicit backward path and Jacobian regularization are inspected prior
+art; see `DEQ-SOURCE-AUDIT.md` for work/memory accounting boundaries and the
+verified legacy `torch.solve` incompatibility with the local runtime. No
+published result was reproduced and no equilibrium mechanism added to the
+candidate. Convergence cannot certify semantic correctness.

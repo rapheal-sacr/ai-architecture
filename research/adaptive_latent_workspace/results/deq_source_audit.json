@@ -1,0 +1,13 @@
+{
+  "repo": "https://github.com/locuslab/deq",
+  "commit": "1fb7059d6d89bb26d16da80ab9489dcc73fc5472",
+  "files": {
+    "README.md": "0df916d2d1c91ffd32ceb22b5c1dd529a31a8d11cea8900448711a0078d3bece",
+    "lib/solvers.py": "4f66a6eed9abc8b95cc657ca93fe39ecdb7c97a0e89a3fa57c8b9a500aa33c66",
+    "lib/jacobian.py": "83d5cae2a3e9d28a1218003c6f5828bdb54e7ed4f7a0763af3d36bde6bee6074",
+    "DEQ-Sequence/models/deq_transformer.py": "c82c7f181b66a012abf9717840a94f42d28bac090f9277000473186df6a211ce"
+  },
+  "scope": "Source inspection plus local torch.solve compatibility probe; no DEQ training or published-score reproduction",
+  "runtime": "torch2.5.1+cu118",
+  "legacy_torch_solve": "RuntimeError: removed; torch.linalg.solve has reversed argument order and different return type"
+}

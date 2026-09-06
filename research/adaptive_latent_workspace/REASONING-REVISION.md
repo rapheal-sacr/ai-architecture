@@ -228,3 +228,17 @@ This imports a randomized-depth training idea from the supplied TTC-LR work into
 a small graph component. It is not a faithful Raven reproduction or a novel
 learning procedure. It attacks useful-computation stability (root3); improved
 memory or autonomous recursive improvement must not be inferred from a pass.
+
+## Read-only state tracing and fixed-point source boundary
+
+`reasoning_trace.py` exposes the unchanged processor's preparation, recurrent
+step and decoder for inspection. Its CPU preflight verifies bitwise equality
+with every native logit at depths0/2/8/16/32 on dense and chain inputs of
+sizes8/16/32, unchanged model/RNG state, residual arithmetic and prefix-reuse
+costs. No trained-state conclusion, halting policy or solver has been added.
+
+`DEQ-SOURCE-AUDIT.md` records a cloned fixed-point implementation and its
+Jacobian regularization. Solver workspace, backward work and function calls
+must be counted; a returned best-residual index is not total work. Convergence
+alone does not certify a correct answer. This source audit and neutral trace
+instrumentation do not select a repair from partial E29 scores.

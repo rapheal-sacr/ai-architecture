@@ -1,0 +1,90 @@
+{
+  "status": "PREFLIGHT_ONLY_NO_TRAINED_STABILITY_RESULT",
+  "device": "cpu",
+  "torch": "2.5.1+cu118",
+  "code_identity": {
+    "reasoning_processor.py": "016a083d49cd36cc7254d7c37100fff833ee6c78461d479aa4a4cdb0a1ecb0a4",
+    "reasoning_trace.py": "fae5623a920c735821a873792fa0c845f22afb2e5418645dfeb5f8075445fdb5",
+    "preflight_reasoning_trace.py": "21fa37a48e950017a9cc69717d32bc962c7d248126e67069fa9546cc17896999"
+  },
+  "checks": [
+    {
+      "nodes": 8,
+      "depth": 0,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 8,
+      "depth": 2,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 8,
+      "depth": 8,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 8,
+      "depth": 16,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 8,
+      "depth": 32,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 16,
+      "depth": 0,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 16,
+      "depth": 2,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 16,
+      "depth": 8,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 16,
+      "depth": 16,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 16,
+      "depth": 32,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 32,
+      "depth": 0,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 32,
+      "depth": 2,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 32,
+      "depth": 8,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 32,
+      "depth": 16,
+      "all_logits_bitwise_equal": true
+    },
+    {
+      "nodes": 32,
+      "depth": 32,
+      "all_logits_bitwise_equal": true
+    }
+  ],
+  "model_rng_unchanged": true,
+  "residual_arithmetic_exact": true,
+  "reused_prefix_costs_verified": true
+}
