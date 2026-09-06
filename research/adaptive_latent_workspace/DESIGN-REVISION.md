@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. This is a proposed integrated system, not a claim
 that the components below already form a validated or scientifically novel
-agent. E1–E21 have implemented and tested only subsets. The original supplied
+agent. E1–E23 have implemented and tested only subsets. The original supplied
 papers and model gallery were reviewed through the preserved WD corpus/clones.
 
 ## The change that the failures require
@@ -162,6 +162,9 @@ unannounced context inference or certify rare-query compression.
 E21 completed: faster evidence and post-outcome assignment produce a large cheap
 conflicting-function gain and a clear input-shift loss. `INFERENCE-REVISION.md`
 therefore proposes learned causal allocation across evidence timescales, with
-controls that break the original family/input-shift correlation. That new gate
-is not yet implemented. The experiment does not justify adding generated-weight
-memory or attributing fixed filtering improvements to recursive self-learning.
+controls that break the original family/input-shift correlation. E22 implemented that gate and rejected it as a sufficient repair: it loses to
+strong fixed controls at almost twice their runtime. E23 then obtains a modest
+repair with regularized coefficient descriptors, at 9% extra time, while retaining
+counterexamples. Neither result justifies attributing fixed filtering changes
+to recursive self-learning. E24 returns to actual merge decisions and rare-query
+retention; its probes are research instrumentation, not a new agent capability.

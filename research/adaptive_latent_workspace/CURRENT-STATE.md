@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E22 are complete; no experiment is currently running.
+E1–E23 are complete. E24 is running its frozen rare-query merge audit.
 
 ## What is locally established
 
@@ -82,12 +82,18 @@ fast/prior in every conflicting, independent and alternating world, and to
 slow/prior in every input-shift world. Coupled changes give a small scoped gain.
 At 1.95 times fast/prior runtime, it is rejected as a sufficient repair.
 
-The next diagnostic changes the evidence representation itself: estimate a
-regularized input/output relationship instead of treating raw cross-moments as
-conditional identity. ALPaCA already supplies learned features plus Bayesian
-linear regression, so this direction does not establish novelty. A fixed linear
-context descriptor may fail for nonlinear functions and must be challenged there.
-No larger gate or further gate tuning is justified by E22 alone.
+E23 implements regularized coefficient descriptors with the same student and
+post-outcome assignment. They improve 38/40 matched raw-descriptor pairs and
+reduce fast independent/alternating error 13.2%/9.9%. Runtime rises 9.0%, storage
+396 tensor bytes, and each run adds 4,096 nine-by-nine solves. Counterexamples
+remain; coefficients of a nonlinear function are still distribution-weighted
+projections. This is established regression machinery and a stronger fixed
+baseline, not autonomous self-improvement or a novelty claim.
+
+E24 now audits rare queries at actual E6 merge decisions. Its unchanged learner
+never receives the independent audit queries. Outgoing and replacement models
+are compared only after the real decision, with preflight equality of audited
+and unaudited trajectories. Final conclusions require all registered cases.
 
 ## Binding constraint and unresolved measurement
 

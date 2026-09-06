@@ -1,0 +1,736 @@
+{
+  "identity": {
+    "protocol_e23.json": "6810a087cbfe1caae07aaaaa9017766d27bb8a7c20e8579b52e7b99344e35c78",
+    "e23_conditional_evidence.py": "ff464a3053c042bcbbef6f5dfc7c4cf0180e211346c8357008e3b8d1e9b6cc3b",
+    "e22_learned_evidence.py": "278c26ec77dc7646e6dadfb21ef1bb79618dc30eff39dfc4bd140a0c1ae5bf90",
+    "e21_evidence_assignment.py": "da4cd844f8098e940019d1be6cecac703e634bd152116b8294e91aeebc531393",
+    "e17_persistent_student.py": "d9d69f46aea3d868a898ddccd0952a0ecca3bbdbc2545f0d02cbeb47e4071403",
+    "e18_online_procedure.py": "2de7ec69f3dfac2295dcbe66e2cf3af971d66587dadea10a632c4d41dd168e42",
+    "protocol_e17.json": "7fc5f12c4fbaf5978040efbd637f6b5d40a6e567cea8fd48e0cbe9a7ad3a40bf",
+    "protocol_e9.json": "37680ac4081717ebd3c779961ff22692d08e29b540f93330a91f90021c556a37",
+    "e9_recursive_updater.py": "4041ad19047e547ffaf570956b92aed279d161a8d955977e8e92b8d53c250cd4"
+  },
+  "checks": [
+    {
+      "seed": 23101,
+      "family": "conflicting_functions",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "f5820cd05a96afecbe3a06891cc7328e9b57796b37aaf9d432452eaaec768956",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "conflicting_functions",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "e58c268454eec932689d778b53c7e28f0c00bf1a9b2b53e9dd7b250aa48fc239",
+      "normal_equation_residual": 2.9802322387695312e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "conflicting_functions",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "881d92aec8e8522692b4601c1c9d1d52945f82984c16dc01c76fad113d3d5809",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "conflicting_functions",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "448fb85d037a22afd726e0c99abb63212e44d4fb90633dd2da05731dbeeb4ed9",
+      "normal_equation_residual": 8.940696716308594e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "input_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "93d1c2be07651ce6db2e68e657eff11ec21cc4de54a99adb7ec552e79f22243a",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "input_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "b8d08b9f6e8659d650cf25d8bc5e0bb4f2ac2250d113e41a4872ad9e7ed6b7f9",
+      "normal_equation_residual": 1.1920928955078125e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "input_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "0f1407ad1cb88cc2ed8674b9868e29ae8139b3a0fc5bf0363297b7d996d76752",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "input_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "f39156ce4f328008267bd976f97b1659aec7010ce7541f43e7b272aec5c132ba",
+      "normal_equation_residual": 4.76837158203125e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "coupled_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "b9920dbd40c7642d44ed3e5f308738d2e8c4b12c8c9f9f669fbc766f790453e6",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "coupled_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "c9ddea88bb268bba8cea86890e1fdd215c2abd22876ac180aa042a8cc6bd4d92",
+      "normal_equation_residual": 2.384185791015625e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "coupled_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "22ae1d3573104aaa15966433cb91bad9dde999237e2aa708d0bffa4ce77b13df",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "coupled_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "f31e5bfc7018a1677c1f8005acd44719479875b97b6c6240d1853515d0620a3e",
+      "normal_equation_residual": 1.1920928955078125e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "independent_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "9b405b0619f7de15a98fd6a12d5d8872782550792036c5057bd7e348f7d29e5c",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "independent_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "e20b17087c834f4b580dc2f5ac4718f3947ffa41de6fdd7b2b04eeaf7de20032",
+      "normal_equation_residual": 1.1920928955078125e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "independent_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "cd94e1fc03cdab42ab1f6d596124b8209c37296fca19dea10ac38e99af2eb5fa",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "independent_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "f921c4f94ba05d7d887c72131e15929036945b31efbc1e4168e9ae487ff4ff64",
+      "normal_equation_residual": 1.1920928955078125e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "alternating_dependency",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "eb28a6eebad334c1b5e1f4f6f00bdc244f5b68c6ed22e1e6f6c0daece977efb0",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "alternating_dependency",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "e4a4d463e4359fd37e357c9ef1c013e308bd688d737e4893e83c3daa7337505d",
+      "normal_equation_residual": 1.1920928955078125e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "alternating_dependency",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "e62b36d9d3e2f5f013f02a665716a47b4e2505dc47dce3b6deffa6a377b6fe22",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23101,
+      "family": "alternating_dependency",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "3e61cd3da6c920de182ce2ca8854164e4a564292f35c0077738c92f6a5ad9b0a",
+      "normal_equation_residual": 1.1920928955078125e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "conflicting_functions",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "319098bd052b8ce267f31ed8fe8892d22709fe9c05a8d3b5b1dd0fcbf33778ef",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "conflicting_functions",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "bf4f6736144dffffdfe6902b2781626874424dfdbe2ee5d12eb18c1f39cb0800",
+      "normal_equation_residual": 5.960464477539063e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "conflicting_functions",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "8f209042346073f385692a930348a9add052274be0b90af18812dd35e2fae0f0",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "conflicting_functions",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "ad0e61268fd22cbb0a43e6240a66f91fe012843b41f292fb6cd3fe9aafd23b47",
+      "normal_equation_residual": 5.960464477539063e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "input_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "fdbd4576be550282b9fa53da9e825b21663fee255dc9aa8afbf7881d1694566d",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "input_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "60f688052218ca46603ec7e25fe3f11c4db98597e79f8f0b979ff9441c64da9f",
+      "normal_equation_residual": 1.341104507446289e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "input_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "6ee1c754e0240efab36c1cb7402974bf225de3635fe6582a9283f7edf43a3b0e",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "input_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "54780f3a7c2985f4354d6db5fc060575986a541e402b9eb64209ee4aeda19f13",
+      "normal_equation_residual": 1.1920928955078125e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "coupled_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "ffaff762102ef19a7ea3868e1a961f9898a26f031badbb22691c16563d684516",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "coupled_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "347c9945954ba2849e203070fa48579b438dc1f44847cfa8128f0e728c1de875",
+      "normal_equation_residual": 1.4901161193847656e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "coupled_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "ec715666f68c40184495d28cec30602963fc5c80583f4dbdeaaf1663aa724ff1",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "coupled_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "53ec13097c0861307dcde793b7b483308b41c09be41ed9b5c0ddaf3859934280",
+      "normal_equation_residual": 2.682209014892578e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "independent_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "57d690540cad15e1ddbce6e9daf970e8605d4fae7ca296cd013c689af0e4041a",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "independent_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "87ac5f3aca8b8be37e8a7c7bc9308362e9800c8bb3f7407655720a17dbd2b2e1",
+      "normal_equation_residual": 3.725290298461914e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "independent_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "1c0df9ee620095161a117bd824e0c1775fa3a981c448b37bccc861ef5c316434",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "independent_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "2e487b58849b9a4a58f165ecb95d406a73fa2f9ada4b84e31a0daade4f0389b9",
+      "normal_equation_residual": 5.960464477539063e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "alternating_dependency",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "aa4b9849e05bdb2cb066631b9c9f7e84bd7d08d2ee606a48f514301e26015e94",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "alternating_dependency",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "b3a732792f70c849fb2c5f0e30346eb17c044097805e3b094020cf6c67bd628c",
+      "normal_equation_residual": 3.725290298461914e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "alternating_dependency",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "d8940050bdbd358981509add2bc51ed364212d63ba152a06c346f2beabc47ea8",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23102,
+      "family": "alternating_dependency",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "d2451df592865922ee0b1a7b67d2d034a1b095e9ea4dba8658552c772eb8abef",
+      "normal_equation_residual": 5.960464477539063e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "conflicting_functions",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "ab2bb29425e2d3fa4e97c89783aa31887698e356c83fbd535c01de61c1854945",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "conflicting_functions",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "2987c84e2320ec05e4377992d35af2c5bc2df6be785cd8df483824eea7126af7",
+      "normal_equation_residual": 4.470348358154297e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "conflicting_functions",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "11502c6eceee015f5d356344aebce73990d48479a11cdedbe06f63d0b5322897",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "conflicting_functions",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "14f8cf950698954d776703d530a8651bc12d8ebfa1d63536df5451177069e3fa",
+      "normal_equation_residual": 5.960464477539063e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "input_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "d1fd1c42538536ecb2161c9808f22a9bb50f357c8929d74e3c1b86bebdd3ef1b",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "input_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "b24747f821615cd089dfffb1c0959b0030eb2214b87100700289c07e0191746a",
+      "normal_equation_residual": 2.384185791015625e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "input_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "7b5a56363471331cf5b6f367e78630cd9748f8883eda24a09c2ededb59d3885a",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "input_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "124f84cf1dc4672c458275cc656cae3d92db68faadfadff089709a6caf690b31",
+      "normal_equation_residual": 4.76837158203125e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "coupled_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "418b1117ad20c43dde95a6f52c324069494b910f4e16e3649b2048287aa3b619",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "coupled_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "04eaadfac2e4e40407117aed60b5b0e58447e75e8bd67f11660eba1a9aafb808",
+      "normal_equation_residual": 2.9802322387695312e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "coupled_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "62cc572dc37ddf773b8bc676621cc3fc0f26fec43e58f6384f20ac9fb2544bd6",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "coupled_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "a8e0e232093d9aef0a01ae526cb46b7c5e189920e1586f84272e07c486271650",
+      "normal_equation_residual": 5.960464477539063e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "independent_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "c0cab73d866ebc265a27144dab3ffe6919cdc8052a8a2c5b0d054036bd994557",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "independent_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "7199542be59138302cfbfa32361ce1fd7f43ce5fd58c83b41a840a04dc36e3ab",
+      "normal_equation_residual": 2.9802322387695312e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "independent_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "9203523756bf794ad5372d9718816276a93935bc6b0dd540ac8564d1c08b6959",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "independent_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "65b64addd0daec850915df301e0b2c3eea4acb6dcbcf8931cf41a0feb7e4f5d3",
+      "normal_equation_residual": 2.9802322387695312e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "alternating_dependency",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "3080e37564c8f56b8d9edcfd246c9d800c3269c4ca0cdeb54259f27f08d8d1ea",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "alternating_dependency",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "6c52c4b80b766a3131536a1d092d7fac84ec8777bf66bf2b6393b6168b6a40d0",
+      "normal_equation_residual": 2.9802322387695312e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "alternating_dependency",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "d29e805798f076f2f93982e6d2b131d4de1436fa3966e556a6ea03406968a4bd",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23103,
+      "family": "alternating_dependency",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "b534ff25dd5a0bb6e2efec09c717429d9119611234cbe1902561c160a87d00aa",
+      "normal_equation_residual": 2.9802322387695312e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "conflicting_functions",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "e5d25cec825d9ecca08b457f8c80af57fbd19cd18d5e792bdc6e926a0369be9a",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "conflicting_functions",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "eef898663cc96dfb9b413193e0dc9814a3082ca1de76ec3db794bcb21fe02139",
+      "normal_equation_residual": 2.9802322387695312e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "conflicting_functions",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "b4f1241cafd1e8f7fd9eff3a03ad1a7132013838e5248f15958fbd292d5304dc",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "conflicting_functions",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "a0342ddc939bd73b631ecf23631ab42fd8cb468c65c9c4b604cc6460396f37b2",
+      "normal_equation_residual": 2.9802322387695312e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "input_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "85477bce200032a15ae71825c7a34643b22919a1f95bd8df93afb471c579d6e2",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "input_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "b5d3b8710408f0a637dc8e0ebe8ed2e0f734f51d3e3e507f783392cfebb2535c",
+      "normal_equation_residual": 6.332993507385254e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "input_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "ac428b56d3bec3834862a3370ce56c6982034c6d5e5d2e2dc353fff57c8c94e7",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "input_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "73c39411cd3c724dde1d89ccc7e92d4af4c093912a180149952c0e3554652aea",
+      "normal_equation_residual": 2.9802322387695312e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "coupled_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "e0038affd7df8dc9393ae198ddf5d5e1910b667ff95322e7e5a3d6615a77eff6",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "coupled_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "46ecdda0191b61d7fc05e58d9fe067f5dfe777fb7c4909de7480cff62be3054f",
+      "normal_equation_residual": 1.7881393432617188e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "coupled_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "f918dd472ef3828107462e61a8fd26c67036935aba045096c36ae914a1f05e00",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "coupled_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "9005f4aebbc0f26f5f0cc305a0f76fe81708fcff04866215b9961492bdf363a8",
+      "normal_equation_residual": 2.384185791015625e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "independent_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "6e94a286d5f497cc2f0e50994e893da5711b915c2f52bdb163c1ad055956620e",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "independent_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "73d7d35b93718e91c78627ec221d8c36cedbfaed8147c327b571a9c4c4efbce7",
+      "normal_equation_residual": 5.960464477539063e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "independent_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "cc233138f03fa3a73b3865313804b6da1ecfb8e44f41401e38eb8d00f903e2fc",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "independent_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "eef19ccd6816e89c5ac2dd03223364f67acd3ec678cc56c38ac0c7083a294a5e",
+      "normal_equation_residual": 1.7881393432617188e-07,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "alternating_dependency",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "4a828157717e0a5500c911fea45b082f59b1b43de385924d2f640b96f13c5a81",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "alternating_dependency",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "a3feb709508616295307aa3c1f9dfa3a6293121e7a462e53444968de446ff7bc",
+      "normal_equation_residual": 5.960464477539063e-08,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "alternating_dependency",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "checkpoint_sha256": "3ad58b7006055446607079134ec65217c2b1d317173991e54d81291eb0fdc969",
+      "normal_equation_residual": null,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 23104,
+      "family": "alternating_dependency",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "checkpoint_sha256": "036be816e2e8c239732c812670e18c6e8b633a9ef8db169630a93e65d4861b4f",
+      "normal_equation_residual": 1.7881393432617188e-07,
+      "restored_costs_exact": true
+    }
+  ],
+  "paired_raw_reservoir_and_rng_checks": 40
+}

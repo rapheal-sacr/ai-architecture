@@ -90,3 +90,10 @@ invariance preflight validates the algebra; fresh nonlinear independent and
 alternating streams determine whether it helps the actual problem. No outcome
 of that intervention alone establishes learned semantic compression, reliable
 self-improvement or general reasoning. The wider architecture remains open.
+
+E23 completed the coefficient intervention. It improves 38/40 matched pairs,
+including every independent and alternating world at both decays, with 9.0%
+extra local time and 396 extra tensor bytes. The two losing pairs and unchanged
+nonlinear-invariance limitation remain explicit in `E23-RESULT.md`. The fixed
+coefficient descriptor is a useful scoped baseline. The research now returns
+to memory compression and rare-query preservation in E24.

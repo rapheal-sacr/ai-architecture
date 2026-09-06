@@ -141,3 +141,14 @@ samples tasks and varying context lengths. It does not establish arbitrary
 hidden change detection or protection against a drifting learned basis in our
 persistent stream. No dependencies were installed, notebooks executed or
 published numerical results reproduced.
+
+E23 was frozen at `7e8bc9f` and completed all 80 cases. `record_e23.py` verifies
+all source identities, 80 restored final state-cost counters, 40 raw
+reservoir/RNG pairs and 40 regularized normal-equation residuals. Its plot was
+rendered and visually inspected. The scored teachers remain nonlinear; only the
+separate algebra preflight claims exact noiseless linear invariance.
+
+E24 was frozen at `db9f711` after its standalone preflight passed. The preflight
+exercises accepted E6 merges and verifies that audit instrumentation preserves
+predictions, weights, anchors, counters and RNG exactly. Its scored run is in
+`alw-runs/e24`; inspect completion and the live handle before any restart.

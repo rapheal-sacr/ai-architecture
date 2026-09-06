@@ -1,23 +1,24 @@
-# Current continuation: separate relationship evidence from input statistics
+# Current continuation: rare memory and compression
 
-E22 completed all 100 cases. Its learned gate fails the strong fixed controls
-on conflicting, independent, alternating and fixed-function families. Read
-`E22-RESULT.md` before any new allocation claim. Do not tune more gate features
-on these scored seeds and describe that as autonomous self-improvement.
+E23 completed all 80 cases. Regularized coefficients improve 38/40 matched
+raw-descriptor pairs at 9% extra local time and +396 tensor bytes, with explicit
+counterexamples. This is a useful fixed baseline for the tested inference
+subproblem. Stop accumulating small context-filter variants as if that could
+establish the broader architecture. Read `E23-RESULT.md`.
 
-The next bounded diagnostic replaces raw input/output cross-moments with a
-regularized local linear relationship estimate. Hold the student, assignment
-timing and replay budget fixed; cross descriptor type with the two evidence
-decays. Validate exact linear invariance under a no-noise/no-ridge algebra
-preflight, then try to break transfer on fresh nonlinear coupled, independent
-and alternating streams. Count the covariance state and solves. This is a
-representation intervention using established regression, not a new architecture
-claim. Its protocol must be frozen before scoring.
+E24 is frozen at `db9f711` and running on four fresh worlds, three existing
+learners and a bounded two-module cap. It first exposes rare information often
+enough for acquisition, then makes it rare while common inputs shift. Its audit
+compares outgoing and replacement models at actual E6 anchor checks on held-out
+rare inputs. Those probes never reach the agent or acceptance rule. All proposed
+checks, accepted/rejected decisions and never-competent sources must remain in
+the record. No relevant merges or no prior competence means the intended
+failure was not measured. Read `protocol_e24.json` before any interpretation.
 
-After this diagnostic, return to the untested compression and ordered-reasoning
-components; accumulating more wins on the same supervised family cannot fulfill
-the broad goal. ALPaCA's cloned source provides relevant learned-basis regression
-prior art, but no published scores have been replicated.
+General ordered reasoning, query-sensitive compression and robust recursive
+improvement remain missing from an integrated tested agent. Use the compression
+audit to choose a concrete next intervention, without reporting finite probe
+coverage as universal preservation.
 
 The original E19 design is retained below as history.
 

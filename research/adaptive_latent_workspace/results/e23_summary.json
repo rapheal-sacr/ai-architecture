@@ -1,0 +1,720 @@
+{
+  "rows": [
+    {
+      "family": "conflicting_functions",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "mse": 0.17633574315311762,
+      "seconds": 5.731674376998853,
+      "recovered": 201,
+      "segments": 403,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.1639670145391392,
+        0.17451570870116484,
+        0.18659703994489973,
+        0.1802632094272667
+      ]
+    },
+    {
+      "family": "conflicting_functions",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "mse": 0.17613333829933708,
+      "seconds": 6.247272443248221,
+      "recovered": 196,
+      "segments": 403,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71724,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "matrix_solves": 4096,
+        "gram_updates": 4096,
+        "solve_dimension": 9
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.16310794730316047,
+        0.17595382761965084,
+        0.1881057764653633,
+        0.17736580180917372
+      ]
+    },
+    {
+      "family": "conflicting_functions",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "mse": 0.0653015127644494,
+      "seconds": 5.726350043747516,
+      "recovered": 372,
+      "segments": 403,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.09207173448635331,
+        0.057537127922842046,
+        0.05718050664358998,
+        0.05441668200501226
+      ]
+    },
+    {
+      "family": "conflicting_functions",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "mse": 0.06325725871025156,
+      "seconds": 6.226967465499911,
+      "recovered": 382,
+      "segments": 403,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71724,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "matrix_solves": 4096,
+        "gram_updates": 4096,
+        "solve_dimension": 9
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.08613095532768966,
+        0.05628406163714317,
+        0.05681509801615903,
+        0.053798919860014394
+      ]
+    },
+    {
+      "family": "input_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "mse": 0.009063323908613086,
+      "seconds": 5.727211979003187,
+      "recovered": 403,
+      "segments": 403,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.02170223494522361,
+        0.005859331050743322,
+        0.004576780885088283,
+        0.00411494875339713
+      ]
+    },
+    {
+      "family": "input_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "mse": 0.00851372681331597,
+      "seconds": 6.260805946250912,
+      "recovered": 403,
+      "segments": 403,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71724,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "matrix_solves": 4096,
+        "gram_updates": 4096,
+        "solve_dimension": 9
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.019810930658422876,
+        0.0056707884825470956,
+        0.004545067298337813,
+        0.004028120813956093
+      ]
+    },
+    {
+      "family": "input_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "mse": 0.010099013454116346,
+      "seconds": 5.724035160252242,
+      "recovered": 403,
+      "segments": 403,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.022915168202359837,
+        0.006898884426817631,
+        0.005508494368228867,
+        0.005073506819059048
+      ]
+    },
+    {
+      "family": "input_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "mse": 0.008831229163231313,
+      "seconds": 6.256521872244775,
+      "recovered": 403,
+      "segments": 403,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71724,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "matrix_solves": 4096,
+        "gram_updates": 4096,
+        "solve_dimension": 9
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.02007838882695978,
+        0.006130263396727287,
+        0.004863058637695872,
+        0.004253205791542314
+      ]
+    },
+    {
+      "family": "coupled_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "mse": 0.06005244330475534,
+      "seconds": 5.70542859474881,
+      "recovered": 376,
+      "segments": 401,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.09045856369584726,
+        0.05382720566490207,
+        0.047746608598117746,
+        0.0481773952601543
+      ]
+    },
+    {
+      "family": "coupled_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "mse": 0.05683417319119144,
+      "seconds": 6.2221809920047235,
+      "recovered": 376,
+      "segments": 401,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71724,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "matrix_solves": 4096,
+        "gram_updates": 4096,
+        "solve_dimension": 9
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.08554538241628507,
+        0.050176663967249624,
+        0.046018132510880605,
+        0.045596513870350464
+      ]
+    },
+    {
+      "family": "coupled_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "mse": 0.05379895819527292,
+      "seconds": 5.702911508000398,
+      "recovered": 387,
+      "segments": 401,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.07883344781885171,
+        0.04952053108263499,
+        0.043103641695097394,
+        0.043738212184507574
+      ]
+    },
+    {
+      "family": "coupled_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "mse": 0.04876878998760503,
+      "seconds": 6.206591180998657,
+      "recovered": 391,
+      "segments": 401,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71724,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "matrix_solves": 4096,
+        "gram_updates": 4096,
+        "solve_dimension": 9
+      },
+      "short_segments": 0,
+      "quarter_mse": [
+        0.0771803159962019,
+        0.04285527565434677,
+        0.037237429060041904,
+        0.03780213923982956
+      ]
+    },
+    {
+      "family": "independent_shift",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "mse": 0.20537991203730144,
+      "seconds": 5.718449892247008,
+      "recovered": 197,
+      "segments": 793,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "short_segments": 35,
+      "quarter_mse": [
+        0.2098266229413639,
+        0.21110584069174365,
+        0.18823056326300502,
+        0.21235662125309318
+      ]
+    },
+    {
+      "family": "independent_shift",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "mse": 0.18851455012639917,
+      "seconds": 6.256056774251192,
+      "recovered": 261,
+      "segments": 793,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71724,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "matrix_solves": 4096,
+        "gram_updates": 4096,
+        "solve_dimension": 9
+      },
+      "short_segments": 35,
+      "quarter_mse": [
+        0.2067715887671966,
+        0.19442631348374562,
+        0.16833863039391872,
+        0.18452166786073576
+      ]
+    },
+    {
+      "family": "independent_shift",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "mse": 0.10433673194597759,
+      "seconds": 5.74297180575013,
+      "recovered": 536,
+      "segments": 793,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "short_segments": 35,
+      "quarter_mse": [
+        0.15093295965039033,
+        0.09939865966225625,
+        0.08254076823141077,
+        0.08447454023985301
+      ]
+    },
+    {
+      "family": "independent_shift",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "mse": 0.09057005527779438,
+      "seconds": 6.237232558247342,
+      "recovered": 579,
+      "segments": 793,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71724,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "matrix_solves": 4096,
+        "gram_updates": 4096,
+        "solve_dimension": 9
+      },
+      "short_segments": 35,
+      "quarter_mse": [
+        0.13297728701013511,
+        0.08733422407362923,
+        0.06903992816182836,
+        0.07292878186558482
+      ]
+    },
+    {
+      "family": "alternating_dependency",
+      "decay": 0.95,
+      "descriptor": "raw_cross_moment",
+      "mse": 0.11598130329144851,
+      "seconds": 5.722115656502865,
+      "recovered": 308,
+      "segments": 618,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "short_segments": 21,
+      "quarter_mse": [
+        0.11888567310484177,
+        0.12345853915303451,
+        0.10408347906331983,
+        0.11749752184459794
+      ]
+    },
+    {
+      "family": "alternating_dependency",
+      "decay": 0.95,
+      "descriptor": "ridge_coefficients",
+      "mse": 0.10677000280909965,
+      "seconds": 6.228769863500929,
+      "recovered": 348,
+      "segments": 618,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71724,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "matrix_solves": 4096,
+        "gram_updates": 4096,
+        "solve_dimension": 9
+      },
+      "short_segments": 21,
+      "quarter_mse": [
+        0.11915712623169838,
+        0.11121828743671358,
+        0.09340264190245762,
+        0.10330195566552902
+      ]
+    },
+    {
+      "family": "alternating_dependency",
+      "decay": 0.5,
+      "descriptor": "raw_cross_moment",
+      "mse": 0.07689347204821217,
+      "seconds": 5.714404973503406,
+      "recovered": 434,
+      "segments": 618,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "short_segments": 21,
+      "quarter_mse": [
+        0.1069970291320601,
+        0.07974990752109079,
+        0.06052604679439355,
+        0.06030090474530425
+      ]
+    },
+    {
+      "family": "alternating_dependency",
+      "decay": 0.5,
+      "descriptor": "ridge_coefficients",
+      "mse": 0.06930807317762344,
+      "seconds": 6.221615595997719,
+      "recovered": 468,
+      "segments": 618,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71724,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "matrix_solves": 4096,
+        "gram_updates": 4096,
+        "solve_dimension": 9
+      },
+      "short_segments": 21,
+      "quarter_mse": [
+        0.10483433120288055,
+        0.06708895938004389,
+        0.053922954505196685,
+        0.051386047622372644
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "family": "conflicting_functions",
+      "decay": 0.95,
+      "relative_error": -0.0011478379264536764,
+      "wins": 3,
+      "losses": [
+        23103
+      ],
+      "time_ratio": 1.0899559242790304
+    },
+    {
+      "family": "conflicting_functions",
+      "decay": 0.5,
+      "relative_error": -0.03130484988260096,
+      "wins": 4,
+      "losses": [],
+      "time_ratio": 1.087423475325091
+    },
+    {
+      "family": "input_shift",
+      "decay": 0.95,
+      "relative_error": -0.06063968372296846,
+      "wins": 4,
+      "losses": [],
+      "time_ratio": 1.093168188850694
+    },
+    {
+      "family": "input_shift",
+      "decay": 0.5,
+      "relative_error": -0.12553545914608966,
+      "wins": 3,
+      "losses": [
+        23102
+      ],
+      "time_ratio": 1.0930264572255122
+    },
+    {
+      "family": "coupled_shift",
+      "decay": 0.95,
+      "relative_error": -0.05359099374577925,
+      "wins": 4,
+      "losses": [],
+      "time_ratio": 1.0905720558367036
+    },
+    {
+      "family": "coupled_shift",
+      "decay": 0.5,
+      "relative_error": -0.0934993608874356,
+      "wins": 4,
+      "losses": [],
+      "time_ratio": 1.088319741993483
+    },
+    {
+      "family": "independent_shift",
+      "decay": 0.95,
+      "relative_error": -0.08211787483792066,
+      "wins": 4,
+      "losses": [],
+      "time_ratio": 1.0940126943724844
+    },
+    {
+      "family": "independent_shift",
+      "decay": 0.5,
+      "relative_error": -0.13194467961016043,
+      "wins": 4,
+      "losses": [],
+      "time_ratio": 1.0860635868005368
+    },
+    {
+      "family": "alternating_dependency",
+      "decay": 0.95,
+      "relative_error": -0.0794205636679376,
+      "wins": 4,
+      "losses": [],
+      "time_ratio": 1.0885431608538496
+    },
+    {
+      "family": "alternating_dependency",
+      "decay": 0.5,
+      "relative_error": -0.0986481513779569,
+      "wins": 4,
+      "losses": [],
+      "time_ratio": 1.088760006482941
+    }
+  ]
+}
