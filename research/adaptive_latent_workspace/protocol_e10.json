@@ -1,0 +1,16 @@
+{
+  "experiment": "E10-objective-and-representation-counterfactual",
+  "status_at_freeze": "NOT_RUN",
+  "starting_checkpoints": ["e8/11101-recurrent_ppo-stage0.pt", "e8/11102-recurrent_ppo-stage0.pt"],
+  "arms": ["entropy_shared", "no_entropy_shared", "entropy_detached_critic", "no_entropy_detached_critic", "frozen_no_update"],
+  "environment": "MiniGrid-MultiRoom-N4-S5-v1",
+  "frames": 262144,
+  "evaluation_episodes": 50,
+  "factor_entropy": [0.01, 0.0],
+  "factor_critic_representation_gradient": ["shared", "detached"],
+  "hypotheses": ["Entropy maximization during weak task feedback contributes to policy destruction", "Critic updates to the shared observation/LSTM representation contribute independently", "Protecting behavior may retain competence but fail to acquire the harder task"],
+  "controls": "Restore the same trained two-room policy, optimizer and random states for all learning arms. Reproduce E8's four-room environment seeds and PPO settings. The frozen policy receives no updates and provides a competence floor. Neither task IDs nor private environment state are supplied to a policy.",
+  "intervention": "Only change the entropy coefficient and whether the critic receives a detached shared embedding. Actor gradients still reach the CNN/LSTM. Parameters, observation interface, optimizer and collected frame budget remain matched across learning arms.",
+  "metrics": ["two-room retention", "four-room success", "training entropy and reward", "gradient/forward counts", "runtime", "parameters", "peak GPU allocation"],
+  "scope": "Exploratory causal diagnostic reusing E8 checkpoints, not a fresh final benchmark and not itself recursive self-improvement. Positive outcomes require replication after design decisions. The fixed learned-updater family in E9 does not yet control these PPO objective choices."
+}
