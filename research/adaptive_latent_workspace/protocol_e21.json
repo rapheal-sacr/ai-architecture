@@ -1,0 +1,19 @@
+{
+  "experiment": "E21-causal-evidence-recency-and-replay-assignment",
+  "status_at_freeze": "NOT_RUN",
+  "stream_seeds": [21101, 21102, 21103, 21104],
+  "families": ["conflicting_functions", "input_shift"],
+  "context_decays": [0.95, 0.5],
+  "assignment_modes": ["prior_assignment", "posterior_assignment"],
+  "hidden_width": 16,
+  "updates": 4096,
+  "learning_rate": 0.01,
+  "intervention": "Cross slow versus faster context evidence decay with assigning training/replay examples to the context available before their outputs versus the context updated after observing those outputs. Predictions ALWAYS use preceding context before current outputs. No hidden regime ID reaches any arm. E20 points to the inference/assignment interface; this tests two inexpensive non-oracle changes before adding a learned encoder or more capacity.",
+  "posterior_assignment": "After recording the prequential prediction and receiving the noisy outputs, compute the new cross-moment context. Attach that updated context to current training and replay examples. The persistent context advances once, so its trajectory is identical between prior/posterior assignment at a fixed decay. Current training labels contribute to this batch summary, but no current/future label is available in its prequential prediction. Training loss improvements alone never count as success.",
+  "controls": "At decay 0.95 with prior assignment, use the unchanged E17 learner. All arms retain the same 738-parameter student, Adam-shaped update, 512-example replay, model initialization, worlds and random sampling. Four fresh worlds per family, paired across all four cells. No controller, meta-learning, oracle context or width increase.",
+  "evaluation": "Use the unchanged E20 loop and E17 recovery rule, recording clean/noisy prequential MSE, quarters, all segment errors and censored recovery. Student and optimizer state never reset at boundaries. Context decay and assignment are frozen choices, not selected on final results.",
+  "preflight": "Require exact prior-assignment equality with E17 at each decay; verify equal first predictions, exact persistent context trajectories across assignment modes, posterior replay features using the just-observed cross-moment summary, bounded replay and equal counters. No regime-setting interface may exist on either class. Check that only training/replay assignment changes at a fixed decay.",
+  "costs": "Same model-example and gradient counts and stored student/replay/context state. The simple posterior adapter computes a redundant context update internally before restoring the intended single update; its actual elapsed cost is charged. It does not receive an optimized-runtime advantage. Report local times and tensor bytes; complete FLOPs, process RAM and energy remain unmeasured.",
+  "falsification": "Faster context may trade reduced lag for noisier assignments. Using current output summaries during training may create training-only shortcuts that fail future predictions. Gains must appear in prequential error and recovery, transfer across both stream families, and repay their computation. A failure rejects these repairs; it must not be replaced by training-error claims.",
+  "scope": "A bounded non-oracle inference/assignment repair candidate. Fixed filtering and evidence timing are not new inventions. No semantic compression, general reasoning, long-horizon closed-loop control or reliable recursive self-improvement claim follows from this test alone."
+}
