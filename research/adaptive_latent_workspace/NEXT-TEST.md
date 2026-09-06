@@ -10,8 +10,8 @@ three-root design mapping. The functional core passes causality, clipped
 meta-gradient, persistent-boundary and exact serialization checks. E33-PROTOCOL.md
 and protocol_e33.json freeze ordinary/reset-E2E/carry-E2E controls before scoring.
 Run all nine cases and independently replay updates/evaluations with record_e33.py.
-Six development updates and21 sessions already replay exactly. No scored E33
-result exists at this freeze; preflights establish executability only.
+Six development updates and21 sessions already replay exactly. E33 now runs on CPU from63baff8, session3205. No completed scored result
+exists yet; preflights establish executability only.
 
 E33 does not implement autonomous actions, learned episodic compression, broad
 reasoning or procedure self-revision. Carrying weights without acquisition is

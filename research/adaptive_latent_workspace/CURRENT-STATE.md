@@ -3,6 +3,7 @@
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
 E1–E31 are complete and audited. E32 is running from frozen source7d4edc9.
+E33 now runs from63baff8 on CPU; read E33-INTERIM.md and E2E-REVISION.md.
 Read E32-PROTOCOL.md, E32-INTERIM.md and RUNS/ACTIVE-STATE.json for status.
 E30 implements a bounded integrated language/memory/feedback pilot and fails
 reliable acquisition and efficient improvement; read E30-RESULT.md.
