@@ -51,3 +51,10 @@ budget, reward, legal-action representation, memory budgets and acceptance rules
 remain to be specified. No E30 protocol or scored experiment is registered.
 The graph trace utility and equilibrium source audit remain available for
 independent diagnostics; neither is currently a new solver or chosen repair.
+
+## E30 implementation supersedes the planning status above
+
+The environment, observed-map baseline, language actor, persistent observation
+memory and actual-feedback adapter updates now exist. E30-PROTOCOL.md and
+protocol_e30.json freeze the scored pilot. Functional checks alone do not satisfy
+the requirements above. Run and independently audit all registered cases next.

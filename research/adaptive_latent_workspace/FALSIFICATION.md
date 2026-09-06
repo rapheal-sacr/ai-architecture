@@ -203,3 +203,15 @@ These are feasibility checks, not learned memory, reliable procedure improvement
 or architectural novelty. The next work should define an integrated, genuinely
 closed-loop memory-and-adaptation assay, retaining the source/falsification and
 cost obligations in `GOAL-EVIDENCE.md`.
+
+## E30 preflight: integrated learning is not yet established
+
+The delivery-world planner initially failed after an unannounced shelf move;
+its observed-only reinspection fallback was corrected before scoring. It then
+completed54/54 development missions. The reduced neural functional preflight
+completed0/2 missions in every neural arm, versus2/2 for the planner. Exact
+state/logit restoration, immutable base identity, paired-world and memory-boundary
+checks pass; online adapter parameters change. None proves learned competence.
+The new four-room tutorial design and its256 updates are declared external
+scaffolding. E30-PROTOCOL.md records every pre-score correction and limitation.
+The scored source is being frozen; no scored results exist at this point.

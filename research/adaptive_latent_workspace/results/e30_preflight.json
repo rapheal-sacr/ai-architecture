@@ -1,0 +1,213 @@
+{
+  "status": "PREFLIGHT_ONLY",
+  "manifest": {
+    "config": {
+      "experiment": "E30 integrated delivery-world memory and online language-adapter pilot",
+      "seeds": [
+        1711
+      ],
+      "arms": [
+        "observed_planner",
+        "frozen_full",
+        "frozen_bounded",
+        "adaptive_bounded"
+      ],
+      "world_sizes": [
+        2,
+        3
+      ],
+      "missions": [
+        {
+          "world": 0,
+          "target": 0,
+          "budget": 16
+        },
+        {
+          "world": 1,
+          "target": 1,
+          "budget": 16
+        }
+      ],
+      "world_seed_offsets": [
+        100000,
+        200000
+      ],
+      "bounded_room_records": 4,
+      "bootstrap_worlds": 1,
+      "bootstrap_world_size": 3,
+      "bootstrap_missions_per_world": 2,
+      "bootstrap_steps_per_mission": 24,
+      "bootstrap_updates": 4,
+      "bootstrap_learning_rate": 0.001,
+      "online_updates_per_mission": 2,
+      "online_learning_rate": 0.0001,
+      "experience_capacity": 8,
+      "ppo_clip": 0.2,
+      "reward_step_penalty": 0.01,
+      "return_baseline": 0.2,
+      "uniform_exploration": 0.05,
+      "temperature": 1.0,
+      "gradient_clip": 1.0,
+      "max_prompt_tokens": 1024,
+      "rank": 4,
+      "adapter_targets": [
+        "q_proj",
+        "v_proj"
+      ],
+      "base_model_commit": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "base_weights_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+      "transformers_commit": "052e652d6d53c2b26ffde87e039b723949a53493",
+      "base_dtype": "float16",
+      "adapter_dtype": "float32",
+      "device": "cuda",
+      "torch_threads": 1,
+      "observation_boundary": "Only local room/exits/stock, mission/home/world labels, own carrying state and action feedback enter memory or neural prompts. No hidden map, shelves, route or evaluator probe enters a policy. Stock persists after pickup; an unannounced relocation occurs only before mission10.",
+      "memory": "Latest observation per (world,room). Full arms retain every observed room. Bounded arms keep four records with real LRU eviction across worlds. This is explicit state reduction, not learned memory compression. All retained records and replay prompts count toward storage.",
+      "bootstrap": "Separate generated tutorial worlds; an external BFS teacher acts using its own observed map only. Teacher and bounded current-world memory views must be identical on the four-room tutorials. All neural arms inherit the same adapter and bootstrap cost for a seed. This declared teacher is not an autonomous discovery mechanism.",
+      "actions": "Single-token option letters score only currently legal actions, identically for all neural arms. Sample from 0.95*softmax(legal logits)+0.05*uniform using a private RNG. No validity score is credited for the supplied legal-action interface.",
+      "online_learning": "Adaptive arm retains bootstrap Adam moments. After every actual mission, each chosen-action record receives advantage=(success-0.01*actions)-0.2 and its collected action log probability. Insert into a uniform reservoir of64 records. Eight clipped PPO-style single-record updates use four samples from the just-completed trajectory and four from retained replay, without hidden action labels. Frozen arms do not update. This is a fixed learning procedure, not recursive self-improvement.",
+      "pairing": "World layouts, target schedule and exogenous relocation match across arms. Neural bootstrap and initial action RNG match. Actions may diverge, producing different real observations; no free counterfactual outcomes are supplied. Repeated steps and unsuccessful missions remain charged.",
+      "criteria": "Report all missions, actions and returns. Short-world acquisition requires at least3/4 initial deliveries; evaluate return-world retention only when acquired. Larger-world competence requires at least3/4 deliveries. Report relocation recovery separately. No passing pilot establishes broad long-horizon efficiency or the full architecture.",
+      "accounting": "Report source bootstrap environment actions/training work, operational inference calls/tokens/attention-score elements, online update calls/tokens/attention-score elements, wall time, base/adapter/optimizer/replay/room-state bytes and CUDA peak allocation. Attention elements are not FLOPs. Experimental logs and audit-only states are separate and inaccessible to policies.",
+      "preflight": "Different seed1711, two-room/three-room worlds, four bootstrap updates, two scored-style missions of16 steps, two online updates per mission, smaller experience capacity8. Only functional validation; no scored-seed tuning. The reduced functional bootstrap remains one three-room tutorial world; a separate CPU tutorial audit checks the full four-room teaching layout.",
+      "no_test_selection": "Freeze code/protocol before scoring. No query-dependent oracle memory, early stopping, best-checkpoint selection or hyperparameter changes from scored results. Preserve all failures and immutable base identity."
+    },
+    "preflight": true,
+    "git_commit": "17ecef795710f0c4608770735ff2b7b1e35021fd",
+    "code_identity": {
+      "e28_depth.py": "e7ac215882a24a6113873057727092bab3ef91b17a0bde1c57d9bcbd4687e7af",
+      "protocol_e30.json": "2adeabc3d3f071a1c62e94d25b5f412e963790198a5d2b61f1cd2bfb09f2f04c",
+      "e30_integrated_delivery.py": "7718f7c9440f6dbed01cbfbe9eaf6603b69ea54e0c1a5515e79f38704751054f",
+      "language_delivery_agent.py": "dc58e2fb992f95a663d77195250ab783b365801662065668c04f1e898712304e",
+      "delivery_world.py": "d7abc40594210bff6c118018e23342ecee0076dc23c1813c113c81182d1a7303",
+      "preflight_language_adapter.py": "24637a0a6c8aedbaf2862a952861925e4245bc535f9b30265da9e1ae1d316db2"
+    },
+    "model_source": {
+      "repository": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+      "commit": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "weights_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+      "weights_bytes": 988097824,
+      "download_seconds": 11.877898176011513,
+      "source": "Git clone plus binary artifact resolved at exact commit; no rendered page fetched",
+      "status": "DOWNLOADED_NOT_EXECUTED"
+    },
+    "transformers_commit": "052e652d6d53c2b26ffde87e039b723949a53493",
+    "versions": {
+      "torch": "2.5.1+cu118",
+      "numpy": "2.2.6",
+      "transformers": "4.46.3",
+      "tokenizers": "0.20.3",
+      "safetensors": "0.8.0",
+      "huggingface-hub": "0.36.2"
+    },
+    "torch": "2.5.1+cu118",
+    "device": "NVIDIA GeForce GTX 1060 6GB"
+  },
+  "complete_source_sha256": "cf58546bcbc455d0c0126140d42c73ab0021df8ecbccf175dc4808183bbec4c8",
+  "cases": [
+    {
+      "seed": 1711,
+      "arm": "observed_planner",
+      "total_successes": 2,
+      "total_actions": 9,
+      "costs": {},
+      "audit": {}
+    },
+    {
+      "seed": 1711,
+      "arm": "frozen_full",
+      "total_successes": 0,
+      "total_actions": 32,
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 32,
+        "inference_tokens": 7508,
+        "inference_attention_elements": 594035232,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 2,
+        "audit_tokens": 500
+      },
+      "audit": {
+        "base_unchanged": true,
+        "complete_actor_restoration_exact": true,
+        "restored_logits_exact": true,
+        "frozen_adapter_unchanged": true,
+        "restore_audit_queries": 2,
+        "restore_audit_tokens": 500
+      }
+    },
+    {
+      "seed": 1711,
+      "arm": "frozen_bounded",
+      "total_successes": 0,
+      "total_actions": 32,
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 32,
+        "inference_tokens": 7508,
+        "inference_attention_elements": 594035232,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 2,
+        "audit_tokens": 500
+      },
+      "audit": {
+        "base_unchanged": true,
+        "complete_actor_restoration_exact": true,
+        "restored_logits_exact": true,
+        "frozen_adapter_unchanged": true,
+        "restore_audit_queries": 2,
+        "restore_audit_tokens": 500
+      }
+    },
+    {
+      "seed": 1711,
+      "arm": "adaptive_bounded",
+      "total_successes": 0,
+      "total_actions": 32,
+      "costs": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 2163072,
+        "gradient_tensor_bytes": 1081344,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 4593,
+        "replay_records": 8,
+        "inference_calls": 32,
+        "inference_tokens": 7508,
+        "inference_attention_elements": 594035232,
+        "update_calls": 4,
+        "update_tokens": 983,
+        "update_attention_elements": 81287472,
+        "audit_calls": 2,
+        "audit_tokens": 500
+      },
+      "audit": {
+        "base_unchanged": true,
+        "complete_actor_restoration_exact": true,
+        "restored_logits_exact": true,
+        "frozen_adapter_unchanged": false,
+        "restore_audit_queries": 2,
+        "restore_audit_tokens": 500
+      }
+    }
+  ],
+  "full_bounded_null_events_identical": true,
+  "final_protocol_sha256": "c0e9e2a99682d91a2489c25a60a336df659ac0ade7a8cf98f193c44b3b311a82",
+  "post_preflight_edit": "Only criteria prose now explicitly assigns unchanged retention to missions8\u20139, larger-world to4\u20137 and reports10/11 separately; execution source hashes unchanged. Registered preflight overrides are declared in source."
+}

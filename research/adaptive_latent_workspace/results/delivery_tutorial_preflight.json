@@ -1,0 +1,199 @@
+{
+  "status": "CPU_TUTORIAL_PREFLIGHT_ONLY",
+  "missions": [
+    {
+      "world": 0,
+      "mission": 0,
+      "actions": 6,
+      "success": true
+    },
+    {
+      "world": 0,
+      "mission": 1,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 0,
+      "mission": 2,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 0,
+      "mission": 3,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 1,
+      "mission": 0,
+      "actions": 6,
+      "success": true
+    },
+    {
+      "world": 1,
+      "mission": 1,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 1,
+      "mission": 2,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 1,
+      "mission": 3,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 2,
+      "mission": 0,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 2,
+      "mission": 1,
+      "actions": 6,
+      "success": true
+    },
+    {
+      "world": 2,
+      "mission": 2,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 2,
+      "mission": 3,
+      "actions": 6,
+      "success": true
+    },
+    {
+      "world": 3,
+      "mission": 0,
+      "actions": 5,
+      "success": true
+    },
+    {
+      "world": 3,
+      "mission": 1,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 3,
+      "mission": 2,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 3,
+      "mission": 3,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 4,
+      "mission": 0,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 4,
+      "mission": 1,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 4,
+      "mission": 2,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 4,
+      "mission": 3,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 5,
+      "mission": 0,
+      "actions": 5,
+      "success": true
+    },
+    {
+      "world": 5,
+      "mission": 1,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 5,
+      "mission": 2,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 5,
+      "mission": 3,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 6,
+      "mission": 0,
+      "actions": 5,
+      "success": true
+    },
+    {
+      "world": 6,
+      "mission": 1,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 6,
+      "mission": 2,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 6,
+      "mission": 3,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 7,
+      "mission": 0,
+      "actions": 5,
+      "success": true
+    },
+    {
+      "world": 7,
+      "mission": 1,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 7,
+      "mission": 2,
+      "actions": 4,
+      "success": true
+    },
+    {
+      "world": 7,
+      "mission": 3,
+      "actions": 4,
+      "success": true
+    }
+  ],
+  "two_edge_or_longer_requested_routes": 2,
+  "teacher_and_bounded_view_exact": true
+}

@@ -1,0 +1,123 @@
+{
+  "experiment": "E30 integrated delivery-world memory and online language-adapter pilot",
+  "seeds": [
+    30101,
+    30102
+  ],
+  "arms": [
+    "observed_planner",
+    "frozen_full",
+    "frozen_bounded",
+    "adaptive_bounded"
+  ],
+  "world_sizes": [
+    4,
+    8
+  ],
+  "missions": [
+    {
+      "world": 0,
+      "target": 0,
+      "budget": 24
+    },
+    {
+      "world": 0,
+      "target": 1,
+      "budget": 24
+    },
+    {
+      "world": 0,
+      "target": 0,
+      "budget": 24
+    },
+    {
+      "world": 0,
+      "target": 1,
+      "budget": 24
+    },
+    {
+      "world": 1,
+      "target": 0,
+      "budget": 48
+    },
+    {
+      "world": 1,
+      "target": 1,
+      "budget": 48
+    },
+    {
+      "world": 1,
+      "target": 0,
+      "budget": 48
+    },
+    {
+      "world": 1,
+      "target": 1,
+      "budget": 48
+    },
+    {
+      "world": 0,
+      "target": 0,
+      "budget": 24
+    },
+    {
+      "world": 0,
+      "target": 1,
+      "budget": 24
+    },
+    {
+      "world": 0,
+      "target": 0,
+      "budget": 24,
+      "relocate": true
+    },
+    {
+      "world": 0,
+      "target": 1,
+      "budget": 24
+    }
+  ],
+  "world_seed_offsets": [
+    100000,
+    200000
+  ],
+  "bounded_room_records": 4,
+  "bootstrap_worlds": 8,
+  "bootstrap_world_size": 4,
+  "bootstrap_missions_per_world": 4,
+  "bootstrap_steps_per_mission": 24,
+  "bootstrap_updates": 256,
+  "bootstrap_learning_rate": 0.001,
+  "online_updates_per_mission": 8,
+  "online_learning_rate": 0.0001,
+  "experience_capacity": 64,
+  "ppo_clip": 0.2,
+  "reward_step_penalty": 0.01,
+  "return_baseline": 0.2,
+  "uniform_exploration": 0.05,
+  "temperature": 1.0,
+  "gradient_clip": 1.0,
+  "max_prompt_tokens": 1024,
+  "rank": 4,
+  "adapter_targets": [
+    "q_proj",
+    "v_proj"
+  ],
+  "base_model_commit": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "base_weights_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+  "transformers_commit": "052e652d6d53c2b26ffde87e039b723949a53493",
+  "base_dtype": "float16",
+  "adapter_dtype": "float32",
+  "device": "cuda",
+  "torch_threads": 1,
+  "observation_boundary": "Only local room/exits/stock, mission/home/world labels, own carrying state and action feedback enter memory or neural prompts. No hidden map, shelves, route or evaluator probe enters a policy. Stock persists after pickup; an unannounced relocation occurs only before mission10.",
+  "memory": "Latest observation per (world,room). Full arms retain every observed room. Bounded arms keep four records with real LRU eviction across worlds. This is explicit state reduction, not learned memory compression. All retained records and replay prompts count toward storage.",
+  "bootstrap": "Separate generated tutorial worlds; an external BFS teacher acts using its own observed map only. Teacher and bounded current-world memory views must be identical on the four-room tutorials. All neural arms inherit the same adapter and bootstrap cost for a seed. This declared teacher is not an autonomous discovery mechanism.",
+  "actions": "Single-token option letters score only currently legal actions, identically for all neural arms. Sample from 0.95*softmax(legal logits)+0.05*uniform using a private RNG. No validity score is credited for the supplied legal-action interface.",
+  "online_learning": "Adaptive arm retains bootstrap Adam moments. After every actual mission, each chosen-action record receives advantage=(success-0.01*actions)-0.2 and its collected action log probability. Insert into a uniform reservoir of64 records. Eight clipped PPO-style single-record updates use four samples from the just-completed trajectory and four from retained replay, without hidden action labels. Frozen arms do not update. This is a fixed learning procedure, not recursive self-improvement.",
+  "pairing": "World layouts, target schedule and exogenous relocation match across arms. Neural bootstrap and initial action RNG match. Actions may diverge, producing different real observations; no free counterfactual outcomes are supplied. Repeated steps and unsuccessful missions remain charged.",
+  "criteria": "Report all missions, actions and returns. Short-world acquisition requires at least3/4 initial deliveries; unchanged return-world retention uses missions8\u20139 only and is interpreted only when acquired. Larger-world competence requires at least3/4 deliveries in missions4\u20137. Mission10 is relocation recovery; mission11 revisits the other unchanged object and is reported separately. No passing pilot establishes broad long-horizon efficiency or the full architecture.",
+  "accounting": "Report source bootstrap environment actions/training work, operational inference calls/tokens/attention-score elements, online update calls/tokens/attention-score elements, wall time, base/adapter/optimizer/replay/room-state bytes and CUDA peak allocation. Attention elements are not FLOPs. Experimental logs and audit-only states are separate and inaccessible to policies.",
+  "preflight": "Different seed1711, two-room/three-room worlds, four bootstrap updates, two scored-style missions of16 steps, two online updates per mission, smaller experience capacity8. Only functional validation; no scored-seed tuning. The reduced functional bootstrap remains one three-room tutorial world; a separate CPU tutorial audit checks the full four-room teaching layout.",
+  "no_test_selection": "Freeze code/protocol before scoring. No query-dependent oracle memory, early stopping, best-checkpoint selection or hyperparameter changes from scored results. Preserve all failures and immutable base identity."
+}

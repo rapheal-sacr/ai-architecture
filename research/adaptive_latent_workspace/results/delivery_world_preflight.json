@@ -1,0 +1,138 @@
+{
+  "status": "ENVIRONMENT_PREFLIGHT_ONLY_NO_NEURAL_AGENT_RESULT",
+  "planner_cases": [
+    {
+      "seed": 1611,
+      "rooms": 4,
+      "missions": 6,
+      "all_success": true,
+      "action_counts": [
+        6,
+        6,
+        4,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "seed": 1611,
+      "rooms": 8,
+      "missions": 6,
+      "all_success": true,
+      "action_counts": [
+        8,
+        8,
+        8,
+        8,
+        6,
+        8
+      ]
+    },
+    {
+      "seed": 1611,
+      "rooms": 16,
+      "missions": 6,
+      "all_success": true,
+      "action_counts": [
+        13,
+        9,
+        8,
+        8,
+        21,
+        8
+      ]
+    },
+    {
+      "seed": 1612,
+      "rooms": 4,
+      "missions": 6,
+      "all_success": true,
+      "action_counts": [
+        4,
+        4,
+        4,
+        4,
+        6,
+        4
+      ]
+    },
+    {
+      "seed": 1612,
+      "rooms": 8,
+      "missions": 6,
+      "all_success": true,
+      "action_counts": [
+        13,
+        6,
+        8,
+        6,
+        4,
+        6
+      ]
+    },
+    {
+      "seed": 1612,
+      "rooms": 16,
+      "missions": 6,
+      "all_success": true,
+      "action_counts": [
+        6,
+        6,
+        6,
+        6,
+        8,
+        6
+      ]
+    },
+    {
+      "seed": 1613,
+      "rooms": 4,
+      "missions": 6,
+      "all_success": true,
+      "action_counts": [
+        4,
+        4,
+        4,
+        4,
+        5,
+        4
+      ]
+    },
+    {
+      "seed": 1613,
+      "rooms": 8,
+      "missions": 6,
+      "all_success": true,
+      "action_counts": [
+        9,
+        8,
+        8,
+        8,
+        4,
+        8
+      ]
+    },
+    {
+      "seed": 1613,
+      "rooms": 16,
+      "missions": 6,
+      "all_success": true,
+      "action_counts": [
+        10,
+        6,
+        6,
+        6,
+        9,
+        6
+      ]
+    }
+  ],
+  "hidden_state_noninterference": true,
+  "capacity_really_evicts": true,
+  "action_changes_observation": true,
+  "source_hashes": {
+    "delivery_world.py": "d7abc40594210bff6c118018e23342ecee0076dc23c1813c113c81182d1a7303",
+    "preflight_delivery_world.py": "cb89d9b3d00021526419b062c9d606656769b432cb8ee057839786d617ad25e7"
+  }
+}

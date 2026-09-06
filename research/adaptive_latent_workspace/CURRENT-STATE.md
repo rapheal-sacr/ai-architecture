@@ -2,7 +2,9 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E29 are complete; no experiment is currently running.
+E1–E29 are complete. E30 source/protocol is frozen in this revision, before
+scoring. The integrated preflight passed functional checks but no neural mission;
+read E30-PROTOCOL.md and the next status record for scored-run progress.
 
 ## What is locally established
 
