@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E24 are complete; no experiment is currently running.
+E1–E25 are complete; no experiment is currently running.
 
 ## What is locally established
 
@@ -99,9 +99,14 @@ beating both controls on mean final rare error. This is neither universal
 preservation nor evidence that an accepted merge caused each later loss.
 
 Three of four non-merging worlds retain a rare-competent persistent module while
-the operational active prediction is not competent. The next causal intervention
-should test input-dependent access to that retained state using only actual
-stored observations to train a router. The privileged best-module audit is not
+the operational active prediction is not competent. E25 now tests input-dependent access trained only from stored observations.
+Learned top-one routing reduces non-merging mean query error 45.4%/42.0% on
+original/shifted support, winning every world versus active selection. Nearest
+anchors recover much of the gain at less fitting cost. Learned fitting plus
+8,192 queries costs 2.19 times nearest-anchor execution. Three one-expert merged
+states cannot improve, and the remaining merged state trades rare accuracy for
+better whole-query error. The next test must let the experts and memory change
+while keeping the access comparison causal. The privileged best-module audit is not
 an existing agent capability. No wider memory bank is justified before this
 selection gap is addressed.
 

@@ -1,0 +1,37 @@
+{
+  "identity": {
+    "protocol_e25.json": "c43769e292395960c74312dfd456bf7da97e3a4b12bc229805f667e24915f927",
+    "e25_query_routing.py": "a3220f73c1cc2f56db0ca79ff295240f6effab341ef50f9f2e81ae3e981dd55c",
+    "e24_rare_merge_audit.py": "b1db8a39507358294eeebccb66055762f481bf9fba7759a4ac3462058f04ad4e",
+    "protocol_e24.json": "01704cce17dcccd3e91f9578f1de8c046ebc1cb134d96a5eff53a09dc7a4fdff",
+    "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+    "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+    "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+    "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f"
+  },
+  "checks": {
+    "checks": [
+      {
+        "kind": "nearest_anchor",
+        "mean_fit_error": 0.0,
+        "roundtrip_exact": true,
+        "one_expert_bypass_exact": true
+      },
+      {
+        "kind": "learned_top1",
+        "mean_fit_error": 0.0,
+        "roundtrip_exact": true,
+        "one_expert_bypass_exact": true
+      },
+      {
+        "kind": "learned_mixture",
+        "mean_fit_error": 0.02009632997214794,
+        "roundtrip_exact": true,
+        "one_expert_bypass_exact": true
+      }
+    ],
+    "expert_weights_unchanged": true,
+    "mixture_gradient_analytic": -0.0011990863952076795,
+    "mixture_gradient_numeric": -0.0011990863950416333
+  }
+}

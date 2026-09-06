@@ -159,3 +159,11 @@ zero material accepted rare losses. All final checkpoint counters and probe
 predictions reproduce exactly. The rare-memory figure was rendered and visually
 inspected. No novel memory policy was added; this audits the frozen E6 behavior
 under new inputs and a declared cap, with probe work separated and charged.
+
+E25 was frozen at `376a7d2`, then completed all 64 query cases. It uses every
+E24 merging and non-merging source with verified checkpoint hashes and includes
+any retained temporary expert. `record_e25.py` verifies restored full query-error
+sequences and counts for all 32 selector states. An initial audit omitted the
+frozen single-thread setting and failed exact equality; the matched setting
+restores exact equality without changing scored results. The cost/retrieval plot
+was rendered and visually inspected.

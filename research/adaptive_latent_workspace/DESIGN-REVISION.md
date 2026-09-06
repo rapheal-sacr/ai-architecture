@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. This is a proposed integrated system, not a claim
 that the components below already form a validated or scientifically novel
-agent. E1–E24 have implemented and tested only subsets. The original supplied
+agent. E1–E25 have implemented and tested only subsets. The original supplied
 papers and model gallery were reviewed through the preserved WD corpus/clones.
 
 ## The change that the failures require
@@ -186,3 +186,14 @@ loss, then test online continuation before claiming improved continual memory.
 This is established mixture/retrieval machinery and is not itself a novelty
 claim. Neither an input router nor a successful compression sample establishes
 ordered reasoning or reliable recursive improvement.
+
+E25 converts part of the privileged best-module gap into a learned input router
+using only actual stored observations. It improves all frozen non-merging
+worlds on two supports, but nearest anchors supply most of the access benefit
+without neural fitting. Learned fitting has not amortized at 8,192 queries, and
+routing does not restore a missing expert. The next integration must retain
+query-dependent selection through actual model and memory updates. Model-slot
+changes, stale competence labels, normalization drift and fitting cost are
+explicit new failure modes. This remains a component of the proposed system;
+ordered general reasoning and closed-loop efficient learning still require
+separate implementation and falsification.

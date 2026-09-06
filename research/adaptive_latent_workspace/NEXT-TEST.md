@@ -1,34 +1,29 @@
-# Current continuation: access to retained rare knowledge
+# Current continuation: online access while models and memory change
 
-E22–E24 are complete. Read their falsification records first. E22's learned gate
-fails strong fixed controls. E23's regularized descriptor is a modest stronger
-baseline. E24's attempted immediate-merge failure does not occur in ten accepted
-merges, while later rare competence deteriorates and three non-merging worlds
-retain an unselected competent module. Do not describe the merge rule as proven
-safe or blame it for all later forgetting.
+E25 completed: observed-memory routing repairs much of the frozen non-merging
+access gap, but nearest anchors are strong and neural fitting has not amortized.
+One-expert limitations and rare-query regressions remain. Read `E25-RESULT.md`.
 
-The next proposed diagnostic holds the final E24 modules and observed reservoirs
-fixed and changes only query-dependent selection. Use both merging and
-non-merging source states, including every failing world. Preserve any retained
-temporary model explicitly and count it if available to prediction. A small
-input-dependent router can learn from the actual stored (x,y) records: target
-expert choices or mixture error may be computed with those observed targets,
-never with audit probe labels, hidden regions or future outcomes. Compare the
-unchanged active selection, a simple nearest-anchor/centroid control and the
-learned router. Charge expert evaluations used to construct training targets,
-router fitting, retained optimizer state, query inference and all memory.
+The next integration should continue each E24 source with active selection,
+periodically refreshed nearest-anchor labels, and an incrementally trained
+input router. Keep the underlying E6 learning policy identical across arms so
+expert/memory/RNG trajectories can be checked exactly. Predictions change;
+observed outcomes train the router only afterwards. Charge all target-building,
+query routing, bootstrap and incremental fitting work. Stable expert slots and
+explicit validity masks must handle temporary models and merges. Do not train
+on audit outcomes or region flags.
 
-Use fresh probe samples and changing query frequencies. Freeze protocol, routing
-training budget and all choices before scoring. The original E24 probes may
-remain a labeled development diagnostic but must not select a router checkpoint.
-Keep a best-stored-model reference explicitly privileged. A frozen-state retrieval
-repair would establish access to retained knowledge, not continual improvement;
-any positive result still needs a causal online continuation with the same
-memory/compute budget. This proposal is not yet implemented or registered as E25.
+E24 checkpoint files do not retain the global torch reservoir RNG. Reconstruct
+it by replaying the frozen E24 prefix with the same seed and verify every prefix
+error plus model/optimizer/anchor/counter state against its saved checkpoint
+before continuation. Charge this reconstruction separately. Verify a longer
+world preserves the whole old prefix. The online continuation protocol must be
+frozen before scoring; E26 is not yet implemented or registered.
 
-The larger agent still lacks an integrated demonstration of ordered general
-reasoning, query-sensitive compression and reliable recursive improvement.
-Evidence about a small retrieval subsystem cannot substitute for those tests.
+After this causal integration, move to the missing ordered-reasoning component.
+Further supervised routing variants cannot establish general reasoning,
+self-improvement or autonomous task efficiency. No component pass is a substitute
+for an integrated architecture facing those failures.
 
 The original E19 design is retained below as history.
 

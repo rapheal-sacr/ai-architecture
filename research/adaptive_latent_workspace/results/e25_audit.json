@@ -1,0 +1,238 @@
+{
+  "identity": {
+    "protocol_e25.json": "c43769e292395960c74312dfd456bf7da97e3a4b12bc229805f667e24915f927",
+    "e25_query_routing.py": "a3220f73c1cc2f56db0ca79ff295240f6effab341ef50f9f2e81ae3e981dd55c",
+    "e24_rare_merge_audit.py": "b1db8a39507358294eeebccb66055762f481bf9fba7759a4ac3462058f04ad4e",
+    "protocol_e24.json": "01704cce17dcccd3e91f9578f1de8c046ebc1cb134d96a5eff53a09dc7a4fdff",
+    "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+    "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+    "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+    "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f"
+  },
+  "checks": [
+    {
+      "seed": 24101,
+      "source_arm": "local_replay_isolation",
+      "arm": "active",
+      "router_checkpoint_sha256": "b4879833d3f774a9d2b9a5ee04f35c4e5daa6dec7dd326c7ca4805bfa36b87fe",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24101,
+      "source_arm": "local_replay_isolation",
+      "arm": "nearest_anchor",
+      "router_checkpoint_sha256": "7a4833ed862deb7a38d957db4ad741540450c56efd1d957ef175cb8a0b95ffcd",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24101,
+      "source_arm": "local_replay_isolation",
+      "arm": "learned_top1",
+      "router_checkpoint_sha256": "057aa9e6572cff0ec66e3f3056979fa0a9e943bd14a5d53f6d7a58905255348e",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24101,
+      "source_arm": "local_replay_isolation",
+      "arm": "learned_mixture",
+      "router_checkpoint_sha256": "8a30e7e5274de6eba60de06fd993d7fea5576deb6abd7c5c49ec2aa80aca61e0",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24101,
+      "source_arm": "guarded_sharing",
+      "arm": "active",
+      "router_checkpoint_sha256": "643af6a492bbef0acf7b3aff6553e243afd3362bc43ede1b1ed473da99663d23",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24101,
+      "source_arm": "guarded_sharing",
+      "arm": "nearest_anchor",
+      "router_checkpoint_sha256": "f4a01de12e36e4b8584693d80a320c227c5f07897332855988769044947822a6",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24101,
+      "source_arm": "guarded_sharing",
+      "arm": "learned_top1",
+      "router_checkpoint_sha256": "7bdb84d02b9c10300c5242cf7c23830ab189732d4e3ad4de181614ebd044e01f",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24101,
+      "source_arm": "guarded_sharing",
+      "arm": "learned_mixture",
+      "router_checkpoint_sha256": "513680724bb066a42dd11fc6720bfac6d0c40db4491b8a8fa361bb07ef3856f1",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24102,
+      "source_arm": "local_replay_isolation",
+      "arm": "active",
+      "router_checkpoint_sha256": "04c1684433193d22e57dd40e6d3d317d792f1ca6c0649b03d8e2e4101e4e9faf",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24102,
+      "source_arm": "local_replay_isolation",
+      "arm": "nearest_anchor",
+      "router_checkpoint_sha256": "3d0c9cf019dc06831c1f00819853338e543df16d2ece879fc02efd960a62d8e3",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24102,
+      "source_arm": "local_replay_isolation",
+      "arm": "learned_top1",
+      "router_checkpoint_sha256": "f6be7abdcc12fc3a36d1979f27e082f1988df8fba3283b1a774f551c1845abbb",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24102,
+      "source_arm": "local_replay_isolation",
+      "arm": "learned_mixture",
+      "router_checkpoint_sha256": "bc2ec944cfda83afc491416c54ef50b8c9c138fcb8130673adc37f9f3990eedc",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24102,
+      "source_arm": "guarded_sharing",
+      "arm": "active",
+      "router_checkpoint_sha256": "fec16138163f9e6f0b24b5e02e7df8bbaa3e9cfc5a84888ef64feac522094a99",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24102,
+      "source_arm": "guarded_sharing",
+      "arm": "nearest_anchor",
+      "router_checkpoint_sha256": "6708962bac94e5826772bd3ed176df3fea6bf02953b6228103096583525e4b24",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24102,
+      "source_arm": "guarded_sharing",
+      "arm": "learned_top1",
+      "router_checkpoint_sha256": "51508bcc3b25d3e6e14574bb4c97ba728989d699fd2d096afb9db6537bdd7463",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24102,
+      "source_arm": "guarded_sharing",
+      "arm": "learned_mixture",
+      "router_checkpoint_sha256": "7fdda023b4295671248ddec0e713539a0dd65488340fa00aab4ab821cf2a52e3",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24103,
+      "source_arm": "local_replay_isolation",
+      "arm": "active",
+      "router_checkpoint_sha256": "8491f4216d42f7fa33e2cd2fc0d94cd34bb1dbcebb22cb2a16f572f767884d36",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24103,
+      "source_arm": "local_replay_isolation",
+      "arm": "nearest_anchor",
+      "router_checkpoint_sha256": "a9174a5d4d9ad243a361d7c3ea2456a37fb8defa3562029935dc3f5c8c9aeaf7",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24103,
+      "source_arm": "local_replay_isolation",
+      "arm": "learned_top1",
+      "router_checkpoint_sha256": "950627e8db0bd1d178ab6c4aeed037fd1a77b8e8248735a739f6c12cdc6fdd6d",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24103,
+      "source_arm": "local_replay_isolation",
+      "arm": "learned_mixture",
+      "router_checkpoint_sha256": "ffe1efd4ef872f5653611b0659b9b6dfecbe00c7ff7b13b2d1bdf570f2b552be",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24103,
+      "source_arm": "guarded_sharing",
+      "arm": "active",
+      "router_checkpoint_sha256": "ea4cc8680786cd12083be566f1f18960332e1581325e650480f10780bb1939f9",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24103,
+      "source_arm": "guarded_sharing",
+      "arm": "nearest_anchor",
+      "router_checkpoint_sha256": "d64acbd4884ff296ca1c724f351948892b2b254ebb67ee86f0355cc755a740a4",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24103,
+      "source_arm": "guarded_sharing",
+      "arm": "learned_top1",
+      "router_checkpoint_sha256": "ba3ec72352ad831619165187c1e0cde5ec60c7e32c3113adfae5039b31a6ce76",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24103,
+      "source_arm": "guarded_sharing",
+      "arm": "learned_mixture",
+      "router_checkpoint_sha256": "24adc979ea3d005271ed67b4956ec371d191b9eb1b0a044232caf9fd7355091e",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24104,
+      "source_arm": "local_replay_isolation",
+      "arm": "active",
+      "router_checkpoint_sha256": "980c9bdf74957c4872332ea2716a59ca5a84bcab40fb960789b7d801524e6b9f",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24104,
+      "source_arm": "local_replay_isolation",
+      "arm": "nearest_anchor",
+      "router_checkpoint_sha256": "a8c9682f0e51adcc42b3ba197f89fc654bbbedf28aad579a5227b568ba0db25f",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24104,
+      "source_arm": "local_replay_isolation",
+      "arm": "learned_top1",
+      "router_checkpoint_sha256": "056d7b1ccb3b921ad19141d63a4eccf8203bc2f3caa000e490eb9ff3890adec5",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24104,
+      "source_arm": "local_replay_isolation",
+      "arm": "learned_mixture",
+      "router_checkpoint_sha256": "60165b3b9c081ba796953f52a29fde0a7835a25058d6c316675c457af5b50634",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24104,
+      "source_arm": "guarded_sharing",
+      "arm": "active",
+      "router_checkpoint_sha256": "a48d734e609d03d7be43d5629b075718178213fcb7800da3c0e7a6503b2b04c9",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24104,
+      "source_arm": "guarded_sharing",
+      "arm": "nearest_anchor",
+      "router_checkpoint_sha256": "6c6c470168a128f5c63f011e246888dbe89968b2851492449cd67d7a07288810",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24104,
+      "source_arm": "guarded_sharing",
+      "arm": "learned_top1",
+      "router_checkpoint_sha256": "cec38a52eec60872d0a73764311c25fddbb8330fd951493a9651cfe0df0dd33d",
+      "both_query_laws_exact_after_restore": true
+    },
+    {
+      "seed": 24104,
+      "source_arm": "guarded_sharing",
+      "arm": "learned_mixture",
+      "router_checkpoint_sha256": "6f04334e4426a5add85d6420959d68bd022beedcceab313f12cb15db89af16e5",
+      "both_query_laws_exact_after_restore": true
+    }
+  ]
+}
