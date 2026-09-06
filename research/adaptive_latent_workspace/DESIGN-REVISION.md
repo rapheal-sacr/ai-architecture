@@ -342,3 +342,13 @@ that conflates those roles cannot safely support both world-model fitting and
 policy supervision. This is a necessary semantic constraint, not architectural
 novelty or an implemented learned-compression result. See
 IMITATION-SOURCE-AUDIT.md. The frozen E32 experiment remains unchanged.
+
+## E2E priority: train the update before claiming persistent competence
+
+E2E-REVISION.md proposes an execution core trained through future fast-weight
+updates, extended to persistent contexts and returns. E30–E32's LoRA is not
+that objective. The small core passes causal, numerical-gradient and save/resume
+checks. E33 compares ordinary, reset-E2E and carry-E2E training with acquisition
+gates and strong task controls. This is not the full architecture or a paper
+replication. Residual evidence, learned selection, planning and procedure
+self-application still need integration/falsification; novelty is unestablished.

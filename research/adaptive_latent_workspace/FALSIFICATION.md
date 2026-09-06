@@ -301,3 +301,21 @@ Current E30/E32 operational records are not implicated. Read
 IMITATION-SOURCE-AUDIT.md. The upstream all-history/four-epoch default also
 requires charging repeated fitting and retained data; no reproduction or
 autonomous-learning gain is claimed.
+
+## E2E boundary and mechanism checks before E33 scoring
+
+E30–E32 do not train through future gradient updates and cannot establish E2E's
+mechanism. The upstream evaluator discards final fast state per sequence;
+predictive-compression results do not establish cross-session retention. Its
+weak Table2 exact recall remains alongside NLL/latency benefits.
+
+A small checked PyTorch core differentiates through clipped SGD, including
+across sessions and fast-dependent caches. Finite differences, causal
+interventions and exact save/resume pass. Same-query logits change by.7584 with
+initialization/static weights unchanged: fixed downstream weights do not fix
+their input/function. This random-model counterexample is not measured forgetting.
+
+E33 freezes reset/carry meta-training controls before scoring. Six development
+outer updates and21 sessions replay exactly, establishing executability only.
+Read E2E-REVISION.md and E33-PROTOCOL.md. E32 continues unchanged; acquisition,
+retention, efficiency, novelty, RSI and the full goal remain unproven.

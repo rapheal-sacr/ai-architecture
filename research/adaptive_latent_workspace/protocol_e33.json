@@ -1,0 +1,32 @@
+{
+  "experiment": "E33",
+  "purpose": "Falsify a persistent E2E meta-training mechanism; not reproduce the large paper or establish the full architecture.",
+  "seeds": [33101, 33102, 33103],
+  "training_arms": ["static", "e2e_reset", "e2e_carry"],
+  "outer_steps": 128,
+  "outer_lr": 0.001,
+  "outer_weight_decay": 0.01,
+  "outer_clip": 1.0,
+  "train_schedule": "ABA",
+  "train_cycles_per_session": 4,
+  "config": {
+    "vocab": 16, "width": 32, "hidden": 64, "layers": 4, "suffix": 1,
+    "heads": 4, "window": 4, "chunk": 4, "inner_lr": 0.3,
+    "clip": 1.0, "eps": 0.000001, "rope_theta": 500000.0, "init_std": 0.1
+  },
+  "evaluation_worlds_per_regime": 4,
+  "evaluation_regimes": [
+    {"name": "familiar_schedule", "schedule": "ABA", "cycles_per_session": 4},
+    {"name": "long_life", "schedule": "ABA", "cycles_per_session": 16},
+    {"name": "extra_interference", "schedule": "ABCDEA", "cycles_per_session": 4}
+  ],
+  "evaluation_policies": {
+    "static": ["frozen", "reset_ttt", "carry_ttt"],
+    "e2e_reset": ["reset_ttt", "carry_ttt"],
+    "e2e_carry": ["reset_ttt", "carry_ttt"]
+  },
+  "acquisition_cycle_accuracy": 0.75,
+  "primary": "Final-cycle competence is a prerequisite; compare return first-cycle NLL/correctness separately from reacquisition and all-token NLL. No inference of retention after a failed acquisition gate.",
+  "controls": "Identical initialization and exact ordered training tokens per seed. Equal observations, not equal FLOPs/time. All inner/outer fitting and evaluation costs are charged. Last-observed-transition table is an information-matched specialized control.",
+  "selection": "All seeds/arms execute fixed128 updates. Final checkpoint only. No scored-data hyperparameter choice or stopping. Preflight uses distinct seeds and smaller budgets."
+}

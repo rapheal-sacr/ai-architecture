@@ -1,0 +1,91 @@
+{
+  "event": "E2E_CORE_PREFLIGHT_PASS",
+  "upstream_commit": "a4fc4788ace38e29b5067916d4f4be33da894085",
+  "scope": "Mechanism checks only; no upstream numerical replication, acquired-task retention or RSI result.",
+  "model": {
+    "config": {
+      "vocab": 12,
+      "width": 16,
+      "hidden": 24,
+      "layers": 4,
+      "suffix": 1,
+      "heads": 2,
+      "window": 4,
+      "chunk": 2,
+      "inner_lr": 0.7,
+      "clip": 1.0,
+      "eps": 1e-06,
+      "rope_theta": 500000.0,
+      "init_std": 0.2
+    },
+    "parameters": 10416,
+    "fast_parameters": 1152,
+    "parameter_bytes": 83328,
+    "dtype": "torch.float64",
+    "fast_names": [
+      "b3_fast_w1",
+      "b3_fast_w2",
+      "b3_fast_w3"
+    ]
+  },
+  "checks": {
+    "dense_reference_max_difference": 2.4424906541753444e-15,
+    "causality_all_16_future_interventions_max_difference": 0.0,
+    "pre_update_scoring": true,
+    "serialized_continuation_exact": true,
+    "bounded_inference_state_tensor_bytes": 13312,
+    "attention_elements_16_tokens": 672,
+    "attention_elements_64_tokens": 2976,
+    "all_initialization_and_static_weights_unchanged": true,
+    "same_query_after_persistent_fast_updates_max_logit_change": 0.7584346709356682,
+    "finite_difference_meta_gradient": [
+      {
+        "clip": 100.0,
+        "inner_norms": [
+          1.6801869813929964,
+          0.8347363997952759,
+          0.7359208200583436
+        ],
+        "analytic_directional_derivative": 0.0868150506210357,
+        "central_differences": [
+          0.08681505061058914,
+          0.08681505061503003
+        ],
+        "absolute_error": 6.0056681849829374e-12,
+        "full_vs_first_order_gradient_l2": 2.408997445386354
+      },
+      {
+        "clip": 0.001,
+        "inner_norms": [
+          1.6801869813929964,
+          0.7992569430517794,
+          1.023888097975706
+        ],
+        "analytic_directional_derivative": -0.0019169034015340538,
+        "central_differences": [
+          -0.0019169033871335728,
+          -0.0019169034048971412
+        ],
+        "absolute_error": 3.3630873693540897e-12,
+        "full_vs_first_order_gradient_l2": 0.0017890153534014942
+      }
+    ],
+    "two_suffix_blocks_persistent_meta_gradient": {
+      "analytic": 0.0499991264681875,
+      "central_difference": 0.04999912607939194,
+      "absolute_error": 3.8879555824822276e-10,
+      "fast_dependent_cache_serialization_exact": true
+    },
+    "outer_changes_prefix_and_fast_initialization": true
+  },
+  "seconds": 3.714981433993671,
+  "runtime": {
+    "torch": "2.5.1+cu118",
+    "device": "cpu",
+    "threads": 1
+  },
+  "sources": {
+    "e2e_core.py": "7328c37da9f9ee1a1a36fceb060012ff78d8709c201986e386230107dafd87f2",
+    "preflight_e2e_core.py": "ea44acca1a080cd9b3bd2723d57e8ce87fdd06187292bec74db300b7a128d8e5"
+  }
+}

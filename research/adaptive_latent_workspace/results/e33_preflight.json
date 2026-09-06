@@ -1,0 +1,28 @@
+{
+  "event": "E33_PREFLIGHT_COMPLETE",
+  "source_commit": "f8d6b6b3072bedd0bb54cf9dab363dbf11633129",
+  "cases": [
+    {
+      "seed": 1933,
+      "arm": "static",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33-preflight/1933_static/result.json"
+    },
+    {
+      "seed": 1933,
+      "arm": "e2e_reset",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33-preflight/1933_e2e_reset/result.json"
+    },
+    {
+      "seed": 1933,
+      "arm": "e2e_carry",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33-preflight/1933_e2e_carry/result.json"
+    }
+  ],
+  "data_audit": {
+    "distinct_train_maps": 4,
+    "distinct_eval_maps": 2,
+    "train_evaluation_map_disjoint": true
+  },
+  "seconds": 4.7183141260029515,
+  "status": "Await independent audit; no success inferred"
+}

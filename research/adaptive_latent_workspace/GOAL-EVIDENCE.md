@@ -46,3 +46,9 @@ reference and metric reconstruction. It falsifies assumed tutorial mastery and
 compact naming as a sufficient repair. These are teacher-induced static states,
 not autonomous behavior. Tutorial/fresh overlap between learning seeds is now
 explicitly recorded; the corpora are not independent replications.
+
+E2E-REVISION.md now prioritizes training through future fast updates, which
+E30–E32 conventional LoRA does not implement. Source-grounded small-core checks
+pass, including cross-session meta-gradients. E33 freezes a reset/carry assay
+with explicit acquisition gates and exact replay. Its preflight is not new
+competence evidence or a replacement for the integrated full-goal requirements.

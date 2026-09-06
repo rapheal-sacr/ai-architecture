@@ -292,3 +292,12 @@ to93/142 tutorial decisions and4/12 to0/12 deliveries with more fitting.
 The other ten cases remain running; this is not the completed E32 result.
 The imitation source audit separately establishes the need to preserve executed
 actions versus advisory labels when sharing experience with a world model.
+
+## E2E mechanism priority
+
+The user emphasized E2E. E2E-REVISION.md maps its source mechanism to the
+persistent candidate and preserves exact-recall/persistence limitations. A small
+functional core passes gradient, causality and save/resume checks. E33-PROTOCOL.md
+freezes ordinary/reset/carry meta-training controls before scoring; six
+development updates and21 sessions replay exactly. Follow RUNS/ACTIVE-STATE.json
+for live execution. E32 continues unchanged. The full goal remains unachieved.
