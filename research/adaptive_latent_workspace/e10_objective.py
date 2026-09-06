@@ -72,6 +72,11 @@ def main():
         assert all(payload['identity'][n]==h for n,h in expected.items())
         model.load_state_dict(payload['model']);opt=AdamGnT(model.parameters(),lr=base_spec['learning_rate'])
         opt.load_state_dict(payload['optimizer'])
+        # PyTorch specially preserves optimizer 'step' on CPU during loading.
+        # AdamGnT uses a per-parameter step tensor in device arithmetic instead.
+        for parameter,state in opt.state.items():
+            for key,value in state.items():
+                if isinstance(value,torch.Tensor):state[key]=value.to(parameter.device)
         torch.set_rng_state(payload['torch_rng']);np.random.set_state(payload['numpy_rng']);random.setstate(payload['python_rng'])
         if device.type=='cuda':torch.cuda.set_rng_state_all(payload['cuda_rng'])
         counts={'mode':'rollout','rollout':0,'update':0,'evaluation':0,'optimizer_updates':0}

@@ -1,0 +1,11 @@
+{
+  "status": "LAUNCH_FAILED_BEFORE_FIRST_OPTIMIZER_UPDATE",
+  "error": "Custom AdamGnT per-parameter step state restored on CPU while parameters are CUDA; optimizer.load_state_dict preserves step device specially.",
+  "protocol_changed": false,
+  "identity": {
+    "protocol_e10.json": "43f543a29692b7df3fa1b7f09c9a2b8a486f70c491e09671d19743ebfd7227ac",
+    "e10_objective.py": "8b141483e6124ddc109f9ceeaf60fe59d509deae60eed8e1d2e7f6b9c68b6466"
+  },
+  "recorded_utc": "2026-09-06T04:14:23.724206+00:00",
+  "terminal_exec_session": 29223
+}
