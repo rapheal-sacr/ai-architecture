@@ -27,7 +27,7 @@ architecture does not import that implementation or its finite hypothesis class.
 | H3 | Consolidation lowers long-horizon resource cost without hiding rare failures | NOT_ESTABLISHED | E6 sample-tested merging costs more and worsens whole-stream error versus context replay; final-window error improves, so amortization remains open; rare retention untested |
 | H4 | Learned dynamics support efficient long-horizon planning | NOT_RUN | Closed-loop task success with no privileged transition access |
 | H5 | Plasticity can be sustained over many task changes | LIMITED_DURATION_AND_RENEWAL_SUPPORT | E7 renewal lowers whole-stream error with extra runtime; replay-only wins the final window; indefinite plasticity is not established |
-| H6 | The system improves its own learning or memory procedure, and that improvement transfers | MIXED_BOUNDED_SELF_APPLICATION | E9 uses its own learned updater on its procedure parameters; one replicate improves 9/9 final settings, the other 2/9; extra-meta-training control and cost-matched evaluation remain missing |
+| H6 | The system improves its own learning or memory procedure, and that improvement transfers | MIXED_BOUNDED_SELF_APPLICATION | E9 uses its own learned updater on its procedure parameters; E9 transfer is mixed; E11 self-application beats equal-budget conventional meta-updates in 4/9 and 5/9 fresh settings; reliable superiority and cost-matched efficiency remain unestablished |
 
 ## New failures and boundaries
 
@@ -65,3 +65,5 @@ No improvement is counted from oracle-selected heads, hindsight task assignment,
 or metrics computed only after training on the same target. These may be labeled
 diagnostics. A failing pilot must remain in the record even if the next version
 fixes it.
+
+- E11 supplies the previously missing conventional meta-update control. It reuses the frozen E9 bootstrap states and proposal/admission budget but sets the learned multiplier to one. On new final tasks self-application beats this control in only 4/9 and 5/9 distribution/horizon means; it beats freezing in 4/9 and 8/9. There are no divergent final tasks. These correlated setting summaries do not establish reliable self-application superiority. See [E11-RESULT.md](E11-RESULT.md).

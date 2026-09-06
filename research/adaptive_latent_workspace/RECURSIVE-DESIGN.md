@@ -86,3 +86,7 @@ will improve itself safely, efficiently or indefinitely.
 
 Until these survive, the recursive extension remains a falsifiable research
 proposal and the overall goal remains unachieved.
+
+## E11 causal-control boundary
+
+Conventional meta-updates with the same proposal/admission budget are now tested. Self-application has lower fresh query error in 4/9 and 5/9 correlated settings across the two bootstrap replicates. This does not establish a reliable benefit from the self-applied rule. A future procedure learner must improve retained sequential learning at charged total cost; repeating successful admission counts would not repair this result.
