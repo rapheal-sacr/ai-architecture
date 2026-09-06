@@ -1,0 +1,80 @@
+[
+  {
+    "arm": "context_replay",
+    "mean_prequential_mse": 0.008103217434348053,
+    "mean_rare_acquisition": 0.015201128087937832,
+    "mean_rare_final": 0.10985090024769306,
+    "mean_common_final": 0.008626309951068833,
+    "final_rare_competent": 1,
+    "checks": 0,
+    "source_competent_checks": 0,
+    "accepted": 0,
+    "accepted_source_competent": 0,
+    "material_proposal_losses": 0,
+    "accepted_material_losses": 0,
+    "mean_loop_seconds": 10.186425911997503,
+    "mean_audit_seconds": 0.009598120512237074,
+    "mean_non_audit_loop_seconds": 10.176827791485266,
+    "mean_forward_examples": 786400,
+    "mean_audit_forward_examples": 8192,
+    "mean_stored_tensor_bytes": 480984,
+    "module_counts": [
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "arm": "local_replay_isolation",
+    "mean_prequential_mse": 0.007749194160625805,
+    "mean_rare_acquisition": 0.012047766242176294,
+    "mean_rare_final": 0.0657025296241045,
+    "mean_common_final": 0.001394285325659439,
+    "final_rare_competent": 0,
+    "checks": 254,
+    "source_competent_checks": 188,
+    "accepted": 0,
+    "accepted_source_competent": 0,
+    "material_proposal_losses": 20,
+    "accepted_material_losses": 0,
+    "mean_loop_seconds": 11.960488255248492,
+    "mean_audit_seconds": 0.08319056122127222,
+    "mean_non_audit_loop_seconds": 11.87729769402722,
+    "mean_forward_examples": 1196728,
+    "mean_audit_forward_examples": 89088,
+    "mean_stored_tensor_bytes": 148770,
+    "module_counts": [
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "arm": "guarded_sharing",
+    "mean_prequential_mse": 0.005747458858317067,
+    "mean_rare_acquisition": 0.012047766242176294,
+    "mean_rare_final": 0.05067317094653845,
+    "mean_common_final": 0.019496832886943594,
+    "final_rare_competent": 1,
+    "checks": 11,
+    "source_competent_checks": 11,
+    "accepted": 10,
+    "accepted_source_competent": 10,
+    "material_proposal_losses": 0,
+    "accepted_material_losses": 0,
+    "mean_loop_seconds": 10.781377154497022,
+    "mean_audit_seconds": 0.01980471876595402,
+    "mean_non_audit_loop_seconds": 10.761572435731068,
+    "mean_forward_examples": 1052984,
+    "mean_audit_forward_examples": 21120,
+    "mean_stored_tensor_bytes": 82650,
+    "module_counts": [
+      1,
+      1,
+      1,
+      2
+    ]
+  }
+]

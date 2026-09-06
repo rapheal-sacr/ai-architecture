@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E23 are complete. E24 is running its frozen rare-query merge audit.
+E1–E24 are complete; no experiment is currently running.
 
 ## What is locally established
 
@@ -90,10 +90,20 @@ remain; coefficients of a nonlinear function are still distribution-weighted
 projections. This is established regression machinery and a stronger fixed
 baseline, not autonomous self-improvement or a novelty claim.
 
-E24 now audits rare queries at actual E6 merge decisions. Its unchanged learner
-never receives the independent audit queries. Outgoing and replacement models
-are compared only after the real decision, with preflight equality of audited
-and unaudited trajectories. Final conclusions require all registered cases.
+E24 completed the actual E6 merge audit. All arms acquire rare competence.
+Guarded sharing accepts ten merges from competent sources; none crosses the
+frozen material rare-loss threshold on independent probes. That attempted
+falsification did not occur. Its final rare error still rises 4.21 times from
+acquisition and narrowly fails the 0.05 threshold in three of four worlds, while
+beating both controls on mean final rare error. This is neither universal
+preservation nor evidence that an accepted merge caused each later loss.
+
+Three of four non-merging worlds retain a rare-competent persistent module while
+the operational active prediction is not competent. The next causal intervention
+should test input-dependent access to that retained state using only actual
+stored observations to train a router. The privileged best-module audit is not
+an existing agent capability. No wider memory bank is justified before this
+selection gap is addressed.
 
 ## Binding constraint and unresolved measurement
 

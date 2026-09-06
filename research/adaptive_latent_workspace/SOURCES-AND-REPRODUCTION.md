@@ -152,3 +152,10 @@ E24 was frozen at `db9f711` after its standalone preflight passed. The preflight
 exercises accepted E6 merges and verifies that audit instrumentation preserves
 predictions, weights, anchors, counters and RNG exactly. Its scored run is in
 `alw-runs/e24`; inspect completion and the live handle before any restart.
+
+E24 completed all twelve cases. `record_e24.py` retains all 265 merge checks,
+including the 254 deliberately non-merging checks, ten accepted merges and
+zero material accepted rare losses. All final checkpoint counters and probe
+predictions reproduce exactly. The rare-memory figure was rendered and visually
+inspected. No novel memory policy was added; this audits the frozen E6 behavior
+under new inputs and a declared cap, with probe work separated and charged.

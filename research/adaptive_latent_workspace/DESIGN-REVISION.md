@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. This is a proposed integrated system, not a claim
 that the components below already form a validated or scientifically novel
-agent. E1–E23 have implemented and tested only subsets. The original supplied
+agent. E1–E24 have implemented and tested only subsets. The original supplied
 papers and model gallery were reviewed through the preserved WD corpus/clones.
 
 ## The change that the failures require
@@ -168,3 +168,21 @@ repair with regularized coefficient descriptors, at 9% extra time, while retaini
 counterexamples. Neither result justifies attributing fixed filtering changes
 to recursive self-learning. E24 returns to actual merge decisions and rare-query
 retention; its probes are research instrumentation, not a new agent capability.
+
+## Rare-memory audit changes the next intervention
+
+E24 supplies no material rare-query loss in ten actual accepted E6 merges.
+The finite checks do not certify preservation, but the attempted immediate
+counterexample did not occur. Later rare answers deteriorate anyway. In three
+non-merging worlds, rare competence remains in a persistent module that the
+operational choice fails to select. The next addition should therefore learn
+query-dependent access to retained models before expanding their number.
+
+Fit any routing policy using observed memory records and later real errors,
+not private audit targets or region flags. Count target construction, fitting,
+stored routing state and query execution. Compare a simple distance-based
+memory selector. First hold experts fixed to isolate access from information
+loss, then test online continuation before claiming improved continual memory.
+This is established mixture/retrieval machinery and is not itself a novelty
+claim. Neither an input router nor a successful compression sample establishes
+ordered reasoning or reliable recursive improvement.

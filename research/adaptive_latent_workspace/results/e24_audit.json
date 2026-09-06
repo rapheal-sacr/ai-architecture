@@ -1,0 +1,185 @@
+{
+  "identity": {
+    "protocol_e24.json": "01704cce17dcccd3e91f9578f1de8c046ebc1cb134d96a5eff53a09dc7a4fdff",
+    "e24_rare_merge_audit.py": "b1db8a39507358294eeebccb66055762f481bf9fba7759a4ac3462058f04ad4e",
+    "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+    "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+    "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+    "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+    "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+    "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+    "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f"
+  },
+  "checks": [
+    {
+      "seed": 24101,
+      "arm": "context_replay",
+      "checkpoint_sha256": "a53257166d812a52180144637ad76cbef5b42e8d01149ab7fcd0b31f2324f633",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": []
+    },
+    {
+      "seed": 24101,
+      "arm": "local_replay_isolation",
+      "checkpoint_sha256": "16bb236e04efc4759d38e2ca501ca62d214f73c74e22eff6b21baa8ef9345ef3",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": [
+        {
+          "module": 0,
+          "size": 128,
+          "seen": 16384,
+          "rare_examples": 65
+        },
+        {
+          "module": 1,
+          "size": 128,
+          "seen": 229376,
+          "rare_examples": 0
+        }
+      ]
+    },
+    {
+      "seed": 24101,
+      "arm": "guarded_sharing",
+      "checkpoint_sha256": "10cf8e53cd45f8ad66a728e3f748343e7001cc1b16e62d2529d03f225371c6aa",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": [
+        {
+          "module": 0,
+          "size": 128,
+          "seen": 259456,
+          "rare_examples": 2
+        }
+      ]
+    },
+    {
+      "seed": 24102,
+      "arm": "context_replay",
+      "checkpoint_sha256": "8966f0a43ac4a471e2ac6eb77ace4998920c2f4e7b2850242e6145043713db29",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": []
+    },
+    {
+      "seed": 24102,
+      "arm": "local_replay_isolation",
+      "checkpoint_sha256": "a205b1cf2191d7354f3b139c9cdbc58a9daeb49c77c2bb453df843289012292a",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": [
+        {
+          "module": 0,
+          "size": 128,
+          "seen": 130272,
+          "rare_examples": 6
+        },
+        {
+          "module": 1,
+          "size": 128,
+          "seen": 65504,
+          "rare_examples": 0
+        }
+      ]
+    },
+    {
+      "seed": 24102,
+      "arm": "guarded_sharing",
+      "checkpoint_sha256": "28ceb4645abfad2272e15c877a28e3fcae00abc1e7bbb41046176d12ce4cf8c9",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": [
+        {
+          "module": 0,
+          "size": 128,
+          "seen": 259456,
+          "rare_examples": 6
+        }
+      ]
+    },
+    {
+      "seed": 24103,
+      "arm": "context_replay",
+      "checkpoint_sha256": "4354fa3f458f1a85af4a46fa5c4dadffe504f02359f107edf88ce3ee8598a06a",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": []
+    },
+    {
+      "seed": 24103,
+      "arm": "local_replay_isolation",
+      "checkpoint_sha256": "69d34826f64e9eb0cb7198fd72a8eef85c19e1afd7f890bd4a69598eebe8ba1c",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": [
+        {
+          "module": 0,
+          "size": 128,
+          "seen": 20480,
+          "rare_examples": 51
+        },
+        {
+          "module": 1,
+          "size": 128,
+          "seen": 184352,
+          "rare_examples": 0
+        }
+      ]
+    },
+    {
+      "seed": 24103,
+      "arm": "guarded_sharing",
+      "checkpoint_sha256": "62b45340dedaf1c2f6aa9aa95ccefe7e7768d551bcfadc7b0a7f453f10669582",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": [
+        {
+          "module": 0,
+          "size": 128,
+          "seen": 260352,
+          "rare_examples": 3
+        }
+      ]
+    },
+    {
+      "seed": 24104,
+      "arm": "context_replay",
+      "checkpoint_sha256": "a2edb546fca9645258359b5b641deaa2db3bbf246c9d53ed0530a4d0ad1eee58",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": []
+    },
+    {
+      "seed": 24104,
+      "arm": "local_replay_isolation",
+      "checkpoint_sha256": "65d25a1cd95163a19b28dffa99be2b98b29c70ed26b95178574bf290e02487e2",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": [
+        {
+          "module": 0,
+          "size": 128,
+          "seen": 94208,
+          "rare_examples": 15
+        },
+        {
+          "module": 1,
+          "size": 128,
+          "seen": 49152,
+          "rare_examples": 1
+        }
+      ]
+    },
+    {
+      "seed": 24104,
+      "arm": "guarded_sharing",
+      "checkpoint_sha256": "56cb55aa071e564ad85470fa6e1c048e272b3b778f79cf21291b5f8cf44ca332",
+      "restored_counters_and_probe_predictions_exact": true,
+      "anchor_coverage": [
+        {
+          "module": 0,
+          "size": 128,
+          "seen": 186624,
+          "rare_examples": 8
+        },
+        {
+          "module": 1,
+          "size": 128,
+          "seen": 73728,
+          "rare_examples": 1
+        }
+      ]
+    }
+  ]
+}

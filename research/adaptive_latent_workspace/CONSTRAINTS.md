@@ -114,3 +114,20 @@ family, but not a universal law. Identification and adaptation occupy a large
 fraction of useful segment life in the conflicting case. The assay cannot
 attribute all of that fraction to one irreducible root, and lower average error
 does not prove improvement at fixed total work.
+
+## Later interventions refine which root is binding
+
+E20–E23 show a large repairable inference/interface component. Correct context
+helps much more than width; fast evidence repairs many failures cheaply but
+hurts input-only shifts; a learned gate fails stronger fixed controls; normalized
+relationship coefficients then give modest gains with explicit cost and transfer
+counterexamples. These outcomes do not establish an irreducible evidence bound.
+
+E24 separately finds no material rare-loss event in ten accepted merges, while
+rare operational error worsens and three of four non-merging states contain
+competence their active selection fails to use. Root 3 (access/selection) is
+therefore directly measurable alongside root 2 (later retained-state loss).
+Calling both outcomes compression failure would conceal the distinction.
+A query-dependent router attacks the access part; no router can restore answers
+that all available modules and retained observations have lost. The universal
+numeric improvement-rate bound remains unmeasured.

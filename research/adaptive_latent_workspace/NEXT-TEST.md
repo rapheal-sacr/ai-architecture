@@ -1,24 +1,34 @@
-# Current continuation: rare memory and compression
+# Current continuation: access to retained rare knowledge
 
-E23 completed all 80 cases. Regularized coefficients improve 38/40 matched
-raw-descriptor pairs at 9% extra local time and +396 tensor bytes, with explicit
-counterexamples. This is a useful fixed baseline for the tested inference
-subproblem. Stop accumulating small context-filter variants as if that could
-establish the broader architecture. Read `E23-RESULT.md`.
+E22–E24 are complete. Read their falsification records first. E22's learned gate
+fails strong fixed controls. E23's regularized descriptor is a modest stronger
+baseline. E24's attempted immediate-merge failure does not occur in ten accepted
+merges, while later rare competence deteriorates and three non-merging worlds
+retain an unselected competent module. Do not describe the merge rule as proven
+safe or blame it for all later forgetting.
 
-E24 is frozen at `db9f711` and running on four fresh worlds, three existing
-learners and a bounded two-module cap. It first exposes rare information often
-enough for acquisition, then makes it rare while common inputs shift. Its audit
-compares outgoing and replacement models at actual E6 anchor checks on held-out
-rare inputs. Those probes never reach the agent or acceptance rule. All proposed
-checks, accepted/rejected decisions and never-competent sources must remain in
-the record. No relevant merges or no prior competence means the intended
-failure was not measured. Read `protocol_e24.json` before any interpretation.
+The next proposed diagnostic holds the final E24 modules and observed reservoirs
+fixed and changes only query-dependent selection. Use both merging and
+non-merging source states, including every failing world. Preserve any retained
+temporary model explicitly and count it if available to prediction. A small
+input-dependent router can learn from the actual stored (x,y) records: target
+expert choices or mixture error may be computed with those observed targets,
+never with audit probe labels, hidden regions or future outcomes. Compare the
+unchanged active selection, a simple nearest-anchor/centroid control and the
+learned router. Charge expert evaluations used to construct training targets,
+router fitting, retained optimizer state, query inference and all memory.
 
-General ordered reasoning, query-sensitive compression and robust recursive
-improvement remain missing from an integrated tested agent. Use the compression
-audit to choose a concrete next intervention, without reporting finite probe
-coverage as universal preservation.
+Use fresh probe samples and changing query frequencies. Freeze protocol, routing
+training budget and all choices before scoring. The original E24 probes may
+remain a labeled development diagnostic but must not select a router checkpoint.
+Keep a best-stored-model reference explicitly privileged. A frozen-state retrieval
+repair would establish access to retained knowledge, not continual improvement;
+any positive result still needs a causal online continuation with the same
+memory/compute budget. This proposal is not yet implemented or registered as E25.
+
+The larger agent still lacks an integrated demonstration of ordered general
+reasoning, query-sensitive compression and reliable recursive improvement.
+Evidence about a small retrieval subsystem cannot substitute for those tests.
 
 The original E19 design is retained below as history.
 
