@@ -1,0 +1,17 @@
+{
+  "model_tensors_equal": true,
+  "training_rows_equal": true,
+  "evaluations_equal": true,
+  "counts_equal": true,
+  "identity": {
+    "protocol_e8.json": "5c19477dbdacd7df69dcbe118a60e7abaf55a42fa5728fd5effe155800c08874",
+    "e8_closed_loop.py": "85d3b53ef6424e2a60fd65427f8e2ef3970c87766aa59c824c0aadf4af747e95",
+    "protocol_e12.json": "87983fc5e424ae11b1e7fa24469270da2151db865a24ed4393618e76e3f4f1e3",
+    "e12_transfer.py": "0066d41677d644765b5e1d037e62057d468ebd9c662173e46a5060208bde75d5",
+    "Minigrid": "622fa297cb9e97b6f62f9085d9e053d1ce191b05",
+    "rl-starter-files": "317da04a9a6fb26506bbd7f6c7c7e10fc0de86e0",
+    "torch-ac": "b6602c8ce843a8bfe9cef1723d0151dd7a3c22c3",
+    "loss-of-plasticity": "a6b79580d85f3025bdb601566d3627c5f489f13b"
+  },
+  "scope": "CPU dummy seed77,2048frames/stage,1evaluationepisode; stage3 restored from stage2. Not scored results."
+}
