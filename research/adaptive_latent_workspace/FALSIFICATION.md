@@ -99,3 +99,24 @@ fixes it.
 - E24 completed: all arms acquire rare-query competence, then operational rare error worsens. Guarded sharing accepts ten merges from rare-competent sources; none causes the frozen material rare-loss event on independent probes. The attempted immediate-merge falsification therefore did not occur. Its final rare error still rises 4.21× from acquisition and exceeds the competence threshold in three of four worlds, while remaining better than both controls on mean rare error. In three of four non-merging worlds, a stored module remains rare-competent but the active prediction is not, exposing a separate access/selection gap. All twelve final checkpoint/cost/probe audits pass. See [E24-RESULT.md](E24-RESULT.md).
 
 - E25 completed: routing trained only on stored observations improves frozen non-merging memory on all four worlds under both query laws. Learned top-one cuts mean error 45.4% on original support and 42.0% after support shift versus active selection. Nearest-anchor recovers much of the same gain; learned fitting plus 8,192 queries costs 2.19× nearest-anchor execution. Three single-expert merged states cannot benefit, and the fourth improves total error but worsens original-support rare error. All 32 saved routers reproduce 64 complete query sequences with the frozen single-thread setting. This establishes a scoped access repair, not information recovery or continual routing. See [E25-RESULT.md](E25-RESULT.md).
+
+## E26: online access gains survive continued learning, with substantial cost
+
+All 24 continuations reconstructed their E24 prefixes exactly and advanced to
+16,384 updates. Core model, optimizer, anchors and global RNG finish identical
+across selectors in all eight source groups. Routing changes predictions only.
+On non-merging sources, incremental top-one routing reduces mean stream error
+19.9% and final rare-query error 47.4% against active selection, at 2.03 times
+model examples and 1.83 times runtime. The simpler nearest cache helps rare
+queries but worsens whole-stream error 16.5%. Against guarded sources, online
+routing gives only 4.5% mean stream improvement (one strict seed win), worsens
+mean final rare error 0.5%, and costs 1.22 times time. The continuation revisits
+fixed laws; no new merge was accepted during scored continuation. It establishes
+neither novel-task transfer nor efficient autonomous memory. See `E26-RESULT.md`.
+
+The new `reasoning_processor.py` is untrained. Its source adapter and functional
+checks pass, including 96 independently validated graph references. A two-step
+local processor cannot distinguish two distant sources requiring different
+answers on a chain. That structural counterexample motivates a trained public-
+size recurrence test; it does not demonstrate learned reasoning. Read
+`REASONING-REVISION.md`. Full integration and architectural novelty remain open.

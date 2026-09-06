@@ -131,3 +131,11 @@ Calling both outcomes compression failure would conceal the distinction.
 A query-dependent router attacks the access part; no router can restore answers
 that all available modules and retained observations have lost. The universal
 numeric improvement-rate bound remains unmeasured.
+
+E25/E26 repair the access component with query-dependent selection, but the
+neural router's extra fitting and evaluation work has not established efficiency.
+A separate bounded-locality counterexample in `preflight_reasoning.py` shows
+why constant message-passing depth cannot solve arbitrary long chains regardless
+of width. This is a structural bound on this graph processor, not a universal
+numeric bound on AI improvement. Longer recurrence changes compute availability;
+its trainability, cost and continual retention must still be measured.

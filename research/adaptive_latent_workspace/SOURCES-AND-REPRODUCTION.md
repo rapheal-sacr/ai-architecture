@@ -167,3 +167,34 @@ sequences and counts for all 32 selector states. An initial audit omitted the
 frozen single-thread setting and failed exact equality; the matched setting
 restores exact equality without changing scored results. The cost/retrieval plot
 was rendered and visually inspected.
+
+E26 was frozen at `ff0d442`. All 24 continuations completed; `record_e26.py`
+verifies restored checkpoints and all eight equal core/RNG groups. Source
+reconstruction, routing targets, bootstrap, incremental training and probes are
+charged explicitly. The online-access figure was rendered and inspected.
+
+## CLRS and shared recurrence source audit
+
+Cloned `https://github.com/google-deepmind/clrs.git` on WD, pinned at
+`d33c3cfc765a18950194205a1ddb92a0981a355e`. Read README, dependency metadata,
+Dijkstra/BFS/Prim, probing helpers, graph samplers, and the relevant `nets.py`
+message-passing/forward paths. The inspected path derives scan length from hint
+tensor time and freezes outputs according to example trajectory lengths. This
+is a boundary to avoid in our final-target/public-size-budget assay, not a claim
+that every CLRS configuration has the same behavior. No official benchmark
+scores were reproduced and no JAX/Haiku/TensorFlow runtime installed.
+
+`clrs_reference.py` executes the original Dijkstra/Prim AST function bodies with
+small local rank/probe adapters. The graph source SHA256 is
+`75366fdd2bd72e8f84103dbda6417214fa071bd42237130909b0035b3cd34940`.
+Hint values are discarded. NetworkX 3.6.1 independently checks path and tree
+optimality on 96 preflight graphs. This is a source-based reference adapter,
+not a reproduction of the full CLRS training system or published results.
+
+Revisited `recurrent-pretraining` at
+`1ea7220ec7eb42d13e89db0663df254d0bcdc28e`, reading README and minimal Raven
+forward, recurrent core, recurrence sampling and initialization. Its ordered
+prelude/shared core/coda and truncated-gradient recurrence are implemented prior
+art. Reconfirmed MoR at `53d0fee43632b53fb9bddd4acf9af7a2eba43bb6`; the
+previous paper/source audit remains the authority beyond the inspected header.
+The new small graph processor is not a reproduction of those language models.

@@ -1,0 +1,55 @@
+{
+  "identity": {
+    "protocol_e26.json": "5d4c1714480a90be184f95ee496f882c303d9adfa0282252011c7013ee1d7f88",
+    "e26_online_access.py": "e5d8d862c773b9d5eea2ea5f0ddb0c35ce2fe46e35cc381a7e52a5e63ce79fd7",
+    "protocol_e24.json": "01704cce17dcccd3e91f9578f1de8c046ebc1cb134d96a5eff53a09dc7a4fdff",
+    "e24_rare_merge_audit.py": "b1db8a39507358294eeebccb66055762f481bf9fba7759a4ac3462058f04ad4e",
+    "protocol_e1.json": "1e45bc3b3d1b24ef3b4e36eaf6f1a3d0971ef9ad9bed84a00d0334ba4ca6ede8",
+    "protocol_e2.json": "29c1113ec155f2a37b9c52405f871d51945ad4355d69420e09623fb87f81b14f",
+    "protocol_e6.json": "a9439d09e04748c3f76ef7340234ee47dede318503e63b968f8158b4a609dc45",
+    "e1_stream.py": "627280ff2dfe016f43851bc0e85378ebdae6e6d8efa9c7a29852dcb5df48aabf",
+    "e2_isolation.py": "35748b62902d98b4d4f639d9de7c689016aa48eed524fab679160b95f9b0457d",
+    "e5_controls.py": "4b66191f37b8a05970eb8774b0d7122ce6d0cdb65fe876f58b73e8983a9bd77b",
+    "e6_sharing.py": "6cb9320e09e95b13cf26fb9a040290ec0e86681ee2f8f762dacab7e25f18207f"
+  },
+  "checks": {
+    "core_trajectory_and_rng_exact_across_selectors": true,
+    "valid_slot_masks": true,
+    "checks": [
+      {
+        "kind": "active",
+        "restore_and_next_update_exact": true,
+        "counts": {
+          "target_expert_examples": 0,
+          "router_train_examples": 0,
+          "router_backward_batches": 0,
+          "cache_refreshes": 0
+        },
+        "library_events": 3
+      },
+      {
+        "kind": "nearest_cached",
+        "restore_and_next_update_exact": true,
+        "counts": {
+          "target_expert_examples": 832,
+          "router_train_examples": 0,
+          "router_backward_batches": 0,
+          "cache_refreshes": 2
+        },
+        "library_events": 3
+      },
+      {
+        "kind": "online_top1",
+        "restore_and_next_update_exact": true,
+        "counts": {
+          "target_expert_examples": 3968,
+          "router_train_examples": 1984,
+          "router_backward_batches": 31,
+          "cache_refreshes": 0
+        },
+        "library_events": 3
+      }
+    ]
+  },
+  "seconds": 3.20474937200197
+}

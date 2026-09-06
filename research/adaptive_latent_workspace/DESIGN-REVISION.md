@@ -197,3 +197,24 @@ changes, stale competence labels, normalization drift and fitting cost are
 explicit new failure modes. This remains a component of the proposed system;
 ordered general reasoning and closed-loop efficient learning still require
 separate implementation and falsification.
+
+## E26: online access gains survive continued learning, with substantial cost
+
+All 24 continuations reconstructed their E24 prefixes exactly and advanced to
+16,384 updates. Core model, optimizer, anchors and global RNG finish identical
+across selectors in all eight source groups. Routing changes predictions only.
+On non-merging sources, incremental top-one routing reduces mean stream error
+19.9% and final rare-query error 47.4% against active selection, at 2.03 times
+model examples and 1.83 times runtime. The simpler nearest cache helps rare
+queries but worsens whole-stream error 16.5%. Against guarded sources, online
+routing gives only 4.5% mean stream improvement (one strict seed win), worsens
+mean final rare error 0.5%, and costs 1.22 times time. The continuation revisits
+fixed laws; no new merge was accepted during scored continuation. It establishes
+neither novel-task transfer nor efficient autonomous memory. See `E26-RESULT.md`.
+
+The new `reasoning_processor.py` is untrained. Its source adapter and functional
+checks pass, including 96 independently validated graph references. A two-step
+local processor cannot distinguish two distant sources requiring different
+answers on a chain. That structural counterexample motivates a trained public-
+size recurrence test; it does not demonstrate learned reasoning. Read
+`REASONING-REVISION.md`. Full integration and architectural novelty remain open.

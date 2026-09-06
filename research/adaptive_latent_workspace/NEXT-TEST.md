@@ -1,3 +1,16 @@
+# Current continuation: train and falsify recurrent reasoning
+
+E26 is complete and audited. Move to the missing reasoning component; additional
+router variants cannot establish the broader goal. Read `REASONING-REVISION.md`
+for the implemented untrained graph processor, source timing audit and locality
+counterexample. The next experiment must freeze its complete training protocol
+before scoring, compare short and public-size recurrence with and without
+bounded replay, retain weights/optimizer across task changes, and report larger-
+graph and long-chain failures with all compute costs. General reasoning and
+recursive improvement remain open.
+
+The previous plans below are historical and superseded where completed.
+
 # Current continuation: online access while models and memory change
 
 E25 completed: observed-memory routing repairs much of the frozen non-merging

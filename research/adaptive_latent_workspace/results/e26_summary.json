@@ -1,0 +1,160 @@
+{
+  "rows": [
+    {
+      "source_arm": "local_replay_isolation",
+      "arm": "active",
+      "mse": 0.0017936989757658672,
+      "final_rare": 0.08199763111770153,
+      "final_common": 0.08446147351060063,
+      "all_probe_rare": 0.07387961493805051,
+      "seconds": 11.432845745006489,
+      "audit_seconds": 0.023102488510630792,
+      "model_examples": 1104984,
+      "router_backward_batches": 0,
+      "router_train_examples": 0,
+      "distance_pairs": 0,
+      "tensor_bytes": 132240
+    },
+    {
+      "source_arm": "local_replay_isolation",
+      "arm": "nearest_cached",
+      "mse": 0.0020904054331531974,
+      "final_rare": 0.04324494092725217,
+      "final_common": 0.004430242945090868,
+      "all_probe_rare": 0.039054740031133406,
+      "seconds": 13.292714559753222,
+      "audit_seconds": 0.037163081233302364,
+      "model_examples": 1172072,
+      "router_backward_batches": 0,
+      "router_train_examples": 0,
+      "distance_pairs": 69682176,
+      "tensor_bytes": 142544
+    },
+    {
+      "source_arm": "local_replay_isolation",
+      "arm": "online_top1",
+      "mse": 0.0014365597834635757,
+      "final_rare": 0.04312584362924099,
+      "final_common": 0.004267140131560154,
+      "all_probe_rare": 0.038730860032956116,
+      "seconds": 20.87259778225416,
+      "audit_seconds": 0.03131328249583021,
+      "model_examples": 2239784,
+      "router_backward_batches": 8448,
+      "router_train_examples": 540672,
+      "distance_pairs": 0,
+      "tensor_bytes": 139716
+    },
+    {
+      "source_arm": "guarded_sharing",
+      "arm": "active",
+      "mse": 0.000997749437147366,
+      "final_rare": 0.05905431043356657,
+      "final_common": 0.0008499562536599115,
+      "all_probe_rare": 0.06427286483813077,
+      "seconds": 10.801594743494206,
+      "audit_seconds": 0.017398926243913593,
+      "model_examples": 1048688,
+      "router_backward_batches": 0,
+      "router_train_examples": 0,
+      "distance_pairs": 0,
+      "tensor_bytes": 82650
+    },
+    {
+      "source_arm": "guarded_sharing",
+      "arm": "nearest_cached",
+      "mse": 0.0009557611433783642,
+      "final_rare": 0.05889058951288462,
+      "final_common": 0.0008236361754825339,
+      "all_probe_rare": 0.06239573715720326,
+      "seconds": 11.265851583997573,
+      "audit_seconds": 0.020847604755545035,
+      "model_examples": 1057008,
+      "router_backward_batches": 0,
+      "router_train_examples": 0,
+      "distance_pairs": 16777216,
+      "tensor_bytes": 85226
+    },
+    {
+      "source_arm": "guarded_sharing",
+      "arm": "online_top1",
+      "mse": 0.0009524412971670948,
+      "final_rare": 0.059329099021852016,
+      "final_common": 0.000800841735326685,
+      "all_probe_rare": 0.06402715458534658,
+      "seconds": 13.14716327199858,
+      "audit_seconds": 0.019603306995122693,
+      "model_examples": 1319024,
+      "router_backward_batches": 2112,
+      "router_train_examples": 135168,
+      "distance_pairs": 0,
+      "tensor_bytes": 88311
+    }
+  ],
+  "library_changes": [
+    {
+      "seed": 24101,
+      "source_arm": "local_replay_isolation",
+      "new_events": 0,
+      "new_merges": 0,
+      "final_persistent_models": 2,
+      "final_temporary": false
+    },
+    {
+      "seed": 24101,
+      "source_arm": "guarded_sharing",
+      "new_events": 0,
+      "new_merges": 0,
+      "final_persistent_models": 1,
+      "final_temporary": false
+    },
+    {
+      "seed": 24102,
+      "source_arm": "local_replay_isolation",
+      "new_events": 74,
+      "new_merges": 0,
+      "final_persistent_models": 2,
+      "final_temporary": false
+    },
+    {
+      "seed": 24102,
+      "source_arm": "guarded_sharing",
+      "new_events": 0,
+      "new_merges": 0,
+      "final_persistent_models": 1,
+      "final_temporary": false
+    },
+    {
+      "seed": 24103,
+      "source_arm": "local_replay_isolation",
+      "new_events": 0,
+      "new_merges": 0,
+      "final_persistent_models": 2,
+      "final_temporary": false
+    },
+    {
+      "seed": 24103,
+      "source_arm": "guarded_sharing",
+      "new_events": 0,
+      "new_merges": 0,
+      "final_persistent_models": 1,
+      "final_temporary": false
+    },
+    {
+      "seed": 24104,
+      "source_arm": "local_replay_isolation",
+      "new_events": 46,
+      "new_merges": 0,
+      "final_persistent_models": 2,
+      "final_temporary": false
+    },
+    {
+      "seed": 24104,
+      "source_arm": "guarded_sharing",
+      "new_events": 0,
+      "new_merges": 0,
+      "final_persistent_models": 2,
+      "final_temporary": false
+    }
+  ]
+}

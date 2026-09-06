@@ -1,0 +1,37 @@
+{
+  "source": {
+    "repo_commit": "d33c3cfc765a18950194205a1ddb92a0981a355e",
+    "graphs_sha256": "75366fdd2bd72e8f84103dbda6417214fa071bd42237130909b0035b3cd34940",
+    "functions": [
+      "dijkstra",
+      "mst_prim"
+    ]
+  },
+  "code_identity": {
+    "clrs_reference.py": "f50b7aa6350167e1fef6cf70f7aaf9a9308a28ab61dcbeb97de14984bf5a9c1f",
+    "reasoning_processor.py": "016a083d49cd36cc7254d7c37100fff833ee6c78461d479aa4a4cdb0a1ecb0a4",
+    "preflight_reasoning.py": "1c0895b7a2cc5d40f75cef976db7a6a7875b004ee09e17c63fe54ca962f8eb75"
+  },
+  "networkx_version": "3.6.1",
+  "torch_version": "2.5.1+cu118",
+  "reference_cases": 96,
+  "independent_tree_validation": true,
+  "finite_graph_gradient": true,
+  "permutation_equivariance": true,
+  "short_depth_indistinguishability_counterexample": {
+    "node": 7,
+    "left_parent": 6,
+    "right_parent": 8,
+    "steps": 2
+  },
+  "repeated_public_size_budget_exact": true,
+  "model_counts": {
+    "processor_steps": 16,
+    "dense_message_candidates": 4096,
+    "decoder_candidates": 256,
+    "parameters": 15177,
+    "input_weight_bytes": 1024,
+    "latent_bytes": 2048
+  },
+  "status": "PREFLIGHT_ONLY_NO_TRAINED_REASONING_RESULT"
+}

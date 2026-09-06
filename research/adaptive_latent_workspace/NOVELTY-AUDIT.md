@@ -68,3 +68,10 @@ with regularized coefficients, or adding learned features and a fast linear
 head, cannot by itself establish novelty. This audit is source inspection,
 not numerical reproduction. E22's learned multi-timescale gate also fails its
 sufficient-repair claim despite actual online parameter adaptation.
+
+Shared graph message passing, GRU state, input reinjection and parent decoding
+are established neural algorithmic-reasoning methods. CLRS source was cloned and
+inspected; Raven's shared recurrent core was revisited. The new 15,177-parameter
+processor is a falsifiable component prototype, not an architectural novelty
+claim. Neither source inspection nor an untrained functional preflight establishes
+general reasoning or superior efficiency.
