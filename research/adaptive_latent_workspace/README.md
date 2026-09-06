@@ -3,10 +3,12 @@
 Status: **design under investigation; continuous-learning and long-horizon
 efficiency goal not yet achieved**.
 
-Current boundary: E2 supports reuse under abrupt recurring functions, but E3
-exposes capacity and drift costs and E4 rejects efficient transfer to an
-independent changing-input benchmark. The current admission rule is not a
-general solution. Read `E4-RESULT.md` before extrapolating the earlier gains.
+Current boundary: E2/E5 support protected reuse under abrupt recurring functions,
+but E3 exposes capacity/drift costs and E4 rejects efficient external transfer.
+E6 sharing and E7 feature renewal expose further accuracy/cost tradeoffs. E8 is
+the first closed-loop mechanism pilot. Read `FALSIFICATION.md` and
+`CURRENT-STATE.md` before extrapolating the gains or treating the design below
+as an implemented, validated system.
 
 This is a new model architecture research line. It does not extend WAM's ledger
 stack or the finite-hypothesis witness compiler. Historical files remain in the
