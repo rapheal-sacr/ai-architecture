@@ -1,0 +1,20 @@
+{
+  "experiment": "E19-matched-student-procedure-keep-versus-revert",
+  "status_at_freeze": "NOT_RUN",
+  "controller_replicates": [12101, 12102],
+  "source_stream_seeds": [18101, 18102],
+  "new_world_seeds": [19101, 19102],
+  "families": ["conflicting_functions", "input_shift"],
+  "continuation_modes": ["same_world", "new_world"],
+  "arms": ["keep_final_procedure", "revert_bootstrap_procedure"],
+  "prefix_updates": 2304,
+  "continuation_updates": 4096,
+  "starting_state": "Both arms restore exactly the same final E18 online_self_applied student, optimizer moments, context, replay, RNG and global update count. Keep its final procedure or replace only procedure tensors with the matching E9 bootstrap. The procedure is frozen during continuation; all student and experience learning continues. All eight E18 self-applied cases are included, including those that already lost.",
+  "same_world": "Regenerate the original world for 6,400 updates. Assert every one of the first 2,304 observation, noisy target and clean target tensors exactly equals the original-length generator output, and assert clipped segment metadata equality. Continue the originally sampled full latent segment across the old truncation point. No new regime is forced at the experimental cut. First partial continuation segments are marked left-truncated and are reported separately from full-segment recovery summaries.",
+  "new_world": "Replace the generating world with an independent world seeded 19101 or 19102, paired respectively with source seed 18101 or 18102. All student, optimizer, context and replay state persists across this change. Both procedure arms see the same new world. The source procedure replicate does not affect world generation. This tests transfer beyond the particular teacher functions encountered by E18.",
+  "evaluation": "Record clean and noisy prequential MSE for every batch, four quarters, bounded replay and full-segment censored recovery using the frozen E17 criterion. Clean targets and true contexts are recorder-only. No procedure admission, further meta-training, final-data selection or reset occurs. The first prediction must be exactly identical across keep/revert arms because only update behavior differs. Divergence is retained, not dropped from averages.",
+  "preflight": "Verify full non-procedure starting-state equality and equal first predictions, unchanged procedure tensors across learning, global optimizer-step continuity, paired reservoir RNG evolution and identical replay/context despite different weight updates. Exercise original-prefix equality and last-segment continuation on dummy and scored worlds. Check all stored source/checkpoint identities.",
+  "costs": "All 32 cases are new executions, each consuming 131,072 further observations. Record continuation-only counter deltas, global counters, restoration and data-generation time, tensor/checkpoint bytes and local elapsed time. E9 bootstrap and E18 proposal/student-training costs remain inherited. No complete FLOPs, full process RAM, energy or fixed-time efficiency claim. Prefix verification generates data but does not retrain the source student.",
+  "falsification": "If keeping the final procedure does not beat reverting when all student state starts identically, E18's package gain is not evidence of persistent procedure improvement on that continuation. A positive same-world result without new-world transfer supports specialization, not a generally better learning algorithm. A win does not retroactively repair E18's costly or failed cases, and this two-arm test does not isolate all alternatives to self-application.",
+  "scope": "Causal continuation diagnostic on two inherited bootstrap replicates and two source/new worlds per family. Persistent supervised learning, not closed-loop counterfactual validation, semantic compression, general reasoning, novel architecture invention or open-ended recursive improvement."
+}
