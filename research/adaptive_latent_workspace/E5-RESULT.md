@@ -21,3 +21,15 @@ Active-first routing has identical stored prediction metrics and held-out curren
 This supports a cheap active-model acceptance test when regimes are well separated. It does not establish a learned router or calibrated confidence. A broadly acceptable but suboptimal active model may hide a better alternative; overlapping contexts remain an adversarial follow-up.
 
 E4's independent transfer failure remains in force. Better routing does not solve unnecessary context partitioning, memory consolidation, or general reasoning. No closed-loop task was executed in E5.
+
+For width-aware arithmetic context, the following estimates count dense forward and backward matrix multiply-accumulates. They exclude activation functions, optimizer arithmetic, copies, replay sampling and routing decisions; they are not measured total FLOPs. For each MLP, S = d*h + h*h + h*o and MAC = forward_examples*S + training_examples*(2*S - d*h). The subtraction accounts for inputs that do not require gradients.
+
+| Arm | Estimated dense MAC, billions |
+|---|---:|
+| online | 4.966 |
+| context_replay | 11.676 |
+| wide_context_replay | 33.220 |
+| compact_wide_replay | 33.220 |
+| isolated_adaptation | 9.787 |
+| overwrite_during_identification | 6.349 |
+| active_first_isolation | 6.289 |

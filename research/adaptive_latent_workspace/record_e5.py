@@ -15,6 +15,12 @@ for arm in data['protocol']['arms']:
         tensor_bytes=st.mean(r['costs']['stored_tensor_bytes'] for r in rs),
         forwards=st.mean(r['costs']['forward_examples'] for r in rs),
         training_examples=st.mean(r['costs']['training_examples'] for r in rs)))
+    h=118 if arm in ('wide_context_replay','compact_wide_replay') else 64
+    d=44 if 'replay' in arm else 8
+    weights=d*h+h*h+h*4
+    # Dense matmuls only. Input tensors do not require gradients, so the first
+    # layer's input-gradient matmul is absent. Activations/Adam/router excluded.
+    rows[-1]['estimated_dense_mac']=rows[-1]['forwards']*weights+rows[-1]['training_examples']*(2*weights-d*h)
 (HERE/'results/e5_summary.json').write_text(json.dumps(rows,indent=2)+'\n')
 identical=[]
 for seed in data['protocol']['seeds']:
@@ -33,6 +39,9 @@ report += ['',
 'Copying temporary updates into the source persistent module eliminates most of the advantage and leaves one persistent module on every seed. The intervention changes only protection during unresolved adaptation; subsequent module counts and routing decisions can therefore differ. This supports the importance of protection within this implementation and tested family.','',
 f'Active-first routing has identical stored prediction metrics and held-out current-context metrics on all four seeds: {all(identical)}. This check compares aggregate scored metrics, not saved per-example prediction tensors. It reduces measured time by {100*(1-cheap["seconds"]/old["seconds"]):.1f}% and counted forward examples by {100*(1-cheap["forwards"]/old["forwards"]):.1f}%.','',
 'This supports a cheap active-model acceptance test when regimes are well separated. It does not establish a learned router or calibrated confidence. A broadly acceptable but suboptimal active model may hide a better alternative; overlapping contexts remain an adversarial follow-up.','',
-'E4\'s independent transfer failure remains in force. Better routing does not solve unnecessary context partitioning, memory consolidation, or general reasoning. No closed-loop task was executed in E5.']
+'E4\'s independent transfer failure remains in force. Better routing does not solve unnecessary context partitioning, memory consolidation, or general reasoning. No closed-loop task was executed in E5.','',
+'For width-aware arithmetic context, the following estimates count dense forward and backward matrix multiply-accumulates. They exclude activation functions, optimizer arithmetic, copies, replay sampling and routing decisions; they are not measured total FLOPs. For each MLP, S = d*h + h*h + h*o and MAC = forward_examples*S + training_examples*(2*S - d*h). The subtraction accounts for inputs that do not require gradients.','',
+'| Arm | Estimated dense MAC, billions |','|---|---:|']
+for r in rows:report.append(f"| {r['arm']} | {r['estimated_dense_mac']/1e9:.3f} |")
 (HERE/'E5-RESULT.md').write_text('\n'.join(report)+'\n')
 print(json.dumps(rows,indent=2));print('identical aggregate metrics',identical)

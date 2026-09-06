@@ -1,0 +1,17 @@
+{
+  "experiment": "E7-feature-renewal-external-screen",
+  "status_at_freeze": "NOT_RUN",
+  "seeds": [10101, 10102],
+  "observations": 1000000,
+  "batch_size": 32,
+  "arms": ["context_replay", "adam_gnt", "cbp_gnt", "replay_gnt", "replay_cbp_gnt"],
+  "source_commit": "a6b79580d85f3025bdb601566d3627c5f489f13b",
+  "replacement_rate": 0.0001,
+  "decay_rate": 0.99,
+  "maturity_threshold": 100,
+  "utility_type": "adaptable_contribution",
+  "hypothesis": "Feature renewal improves sustained learning under the fixed-function changing-input stream after controlling for its custom Adam optimizer and replay",
+  "learner": "Same 20->64 tanh->64 tanh->1 network, learning rate .003 and optional uniform replay capacity 2048 as earlier assays. Import official AdamGnT and GnT implementations from the pinned clone. Renewed and nonrenewed arms share AdamGnT to separate optimizer from renewal effects.",
+  "metrics": ["prequential MSE", "first/last ten-block MSE", "runtime", "forward/training examples", "tensor state", "feature replacement count", "training-feature saturation"],
+  "limitations": "Exploratory two-seed mechanism screen, not a reproduction of the published CBP experiment. No parameter sweep or claims about CBP generally. Hyperparameters are fixed before outcomes. Multi-layer tanh, batching and stream length differ from published small-ReLU individual-example protocols. No general reasoning or closed-loop success claim."
+}
