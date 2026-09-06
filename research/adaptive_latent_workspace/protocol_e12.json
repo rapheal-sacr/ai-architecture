@@ -1,0 +1,17 @@
+{
+  "experiment": "E12-fresh-objective-transfer-and-new-action-chain",
+  "status_at_freeze": "NOT_RUN",
+  "seeds": [13101, 13102],
+  "arms": {"standard_entropy": 0.01, "zero_entropy": 0.0},
+  "environments": ["MiniGrid-MultiRoom-N2-S4-v0", "MiniGrid-MultiRoom-N4-S5-v1", "MiniGrid-DoorKey-8x8-v0", "MiniGrid-MultiRoom-N2-S4-v0"],
+  "frames_per_stage": 262144,
+  "evaluation_episodes": 50,
+  "initialization": "Start every arm from random weights using fresh seeds, with its declared entropy coefficient from the first update. Do not reuse E8 checkpoints or manually switch the coefficient after acquisition.",
+  "continuity": "Preserve model and optimizer across stages; reset only episodic LSTM state. The policy sees partial symbolic images, no mission, stage ID, private grid, coordinates or transition function. Both families terminate at the green goal, so their ignored mission text does not specify conflicting hidden goals.",
+  "adversary": "DoorKey requires acquiring and using a key, an action chain absent from MultiRoom training. Removing entropy pressure may protect competence while suppressing discovery of new actions. Standard episode limits are 40, 80 and 640 steps; report those limits rather than relabeling the run general long-horizon reasoning.",
+  "control": "Pinned E8 policy, synchronous environments, PPO and AdamGnT. Same weights at initialization, training seeds, frame budget and optimizer settings across arms. Only entropy coefficient differs. No feature renewal, learned world model or new memory module is added.",
+  "evaluation": "Evaluate all three environments after each stage with frozen weights, stochastic actions and 50 disjoint environment seeds. Restore training RNG afterward. No final evaluation enters updates, schedule or checkpoint selection.",
+  "falsification": "The broad claim that removing entropy solves continual acquisition and retention fails if it prevents learning from scratch, fails the new key-door chain, or destroys acquired competence. Failure on the sparse-reward task may reflect insufficient evidence as well as interference; record both acquisition and retention. Compare both seeds separately.",
+  "costs": "Count all training and evaluation forwards, optimizer updates, environment frames, model/optimizer bytes, per-stage elapsed time and GPU peak allocation. Store per-stage checkpoints and complete logs on WD. Launch only after E10 releases the GPU; do not report elapsed time as an isolated hardware benchmark.",
+  "scope": "Fresh baseline/mechanism falsification following E10 development evidence. This remains fixed-procedure learning; it does not implement persistent learned procedures, neural memory compression or a planner, and does not establish the full architecture or general reasoning. Two seeds remain a pilot."
+}
