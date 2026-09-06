@@ -4,7 +4,8 @@ Read `FALSIFICATION.md` before design prose. This map preserves the user's full
 objective; component tests do not redefine success as a smaller graph or stream
 problem. E1–E31 are complete and audited. E30 now executes integrated language, observed
 memory and actual-feedback adaptation, but fails reliable acquisition and
-efficient improvement. No experiment is currently running.
+efficient improvement. E32 optimization controls are currently running from
+frozen source7d4edc9; E32-INTERIM.md is a partial record, not a completed result.
 
 | Requirement | Authoritative evidence currently available | Status and missing evidence |
 |---|---|---|

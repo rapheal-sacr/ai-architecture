@@ -2,8 +2,8 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E31 are complete and audited. E32 source/protocol is frozen in this revision
-before scoring; read E32-PROTOCOL.md and RUNS/ACTIVE-STATE.json for run status.
+E1–E31 are complete and audited. E32 is running from frozen source7d4edc9.
+Read E32-PROTOCOL.md, E32-INTERIM.md and RUNS/ACTIVE-STATE.json for status.
 E30 implements a bounded integrated language/memory/feedback pilot and fails
 reliable acquisition and efficient improvement; read E30-RESULT.md.
 
@@ -282,3 +282,13 @@ The next study should establish a competent learned execution baseline using
 matched-example conventional optimization controls and disjoint fresh data.
 That is necessary groundwork, not a replacement for the full architecture.
 Read E31-RESULT.md. No E32 protocol is frozen or running.
+
+## E32 interim — two of twelve cases audited, run continues
+
+Four snapshots are independently audited. On32101 at1024 examples, batch1
+with rate0.0001 reaches140/142 tutorial correctness and3/4 initial deliveries,
+but0/4 larger-world deliveries. Its rate0.001 control deteriorates from129/142
+to93/142 tutorial decisions and4/12 to0/12 deliveries with more fitting.
+The other ten cases remain running; this is not the completed E32 result.
+The imitation source audit separately establishes the need to preserve executed
+actions versus advisory labels when sharing experience with a world model.

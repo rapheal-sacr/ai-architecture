@@ -11,11 +11,20 @@ example/group order, optimizer steps, RNG/work state, reference metrics, real
 world trajectories and memory. All30 scored world specifications and world
 labels are disjoint.
 
-The first complete case,32101 batch1_lr1e3, is independently audited at both
-milestones. Tutorial rule correctness falls129/142→93/142 from256→1024 gradient
-examples; actual deliveries fall4/12→0/12. This is an interim counterexample to
-more fitting as an automatic repair, not a comparison of the four controls.
-Do not select an arm or interpret the experiment before all cases finish.
+Two cases/four snapshots for32101 are independently audited. Ten cases remain.
+
+| Arm | Gradient examples | Tutorial correct | Initial /4 | Larger /4 | Total /12 |
+|---|---:|---:|---:|---:|---:|
+| batch1_lr1e3 |256|129/142|2|0|4|
+| batch1_lr1e3 |1024|93/142|0|0|0|
+| batch1_lr1e4 |256|119/142|2|0|4|
+| batch1_lr1e4 |1024|140/142|3|0|5|
+
+The lower-rate final state passes the tutorial gate and initial acquisition,
+but solves no larger-world mission. The higher-rate state deteriorates with
+more fitting. This is an interim distinction between fitting and execution,
+not a completed comparison of all four controls and three worlds. Do not select
+an arm or declare the full experiment successful before every case is audited.
 
 The source audit of imitation is separate; it changes no E32 code or settings.
 The full architecture goal, learned compression, general reasoning, reliable
