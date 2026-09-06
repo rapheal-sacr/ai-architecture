@@ -167,3 +167,17 @@ predictions include every failure. The next bounded diagnostic should change
 inference depth on frozen checkpoints before changing training. No E28 protocol
 or run is yet registered. Full integrated learning, compression, reliable RSI
 and architectural novelty remain unproven.
+
+## E28 frozen-depth attribution protocol
+
+`protocol_e28.json` evaluates every final E27 source at fixed depths
+2, 8, 16, 32, 64 and 128 on its exact saved queries. The registered usable
+policies are training depth, fixed16, public N and public 2N. The grid executes
+each distinct depth once; policies reuse the corresponding rows without
+pretending the full search is free. No oracle best-depth policy is deployed.
+
+Every original-budget prediction must match E27 exactly. Source files, loaded
+checkpoint contents, model weights and torch/CUDA RNG must remain unchanged.
+The experiment tests a computation-depth intervention, not new task learning or
+fresh benchmark performance. Freeze the runner and protocol after the separate
+preflight, then retain every source and failure without changing the grid.

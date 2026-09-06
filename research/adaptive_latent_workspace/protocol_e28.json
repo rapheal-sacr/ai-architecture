@@ -1,0 +1,22 @@
+{
+  "experiment": "E28 frozen-checkpoint recurrence-depth attribution",
+  "source_run": "E27",
+  "source_commit": "505da5d09a035915efe081da0d42f63b632f95a6",
+  "seeds": [27101, 27102, 27103],
+  "source_arms": ["short_online", "short_replay", "size_online", "size_replay"],
+  "source_stage": 2,
+  "fixed_depths": [2, 8, 16, 32, 64, 128],
+  "primary_policies": ["training_depth", "fixed16", "public_N", "public_2N"],
+  "primary_questions": ["Does public_2N improve functional correctness over public_N?", "Does fixed training depth outperform public_N on larger inputs?", "Does extending N16 inference beyond trained depth destroy established chain competence?"],
+  "queries": "Exact saved E27 evaluation graphs and labels; all tasks, sizes and families retained. This is a causal depth diagnostic on existing queries, not a fresh benchmark or new training.",
+  "supervision": "None. Correct answers only score completed predictions. No intermediate hints, gold stopping times or per-query depth selection.",
+  "model_state": "All twelve final E27 checkpoints, including failed source arms. No training, normalization updates, memory edits or checkpoint selection.",
+  "device": "cuda",
+  "torch_threads": 1,
+  "eval_batch": 4,
+  "metrics": ["functional whole-graph accuracy", "parent accuracy", "canonical whole-graph accuracy", "invalid-tree fraction", "query seconds", "dense forward message candidates", "decoder candidates"],
+  "accounting": "Execute each fixed depth once per source/query cell. Primary policies reuse those recorded results, with their own deployable per-query costs; do not count aliases as additional executed work. Charge the full diagnostic grid separately.",
+  "verification": "Source checkpoint/data hashes must match E27; original inference budget must reproduce every E27 final prediction exactly. Loaded checkpoint contents, model weights, global torch/CUDA RNG and source files remain unchanged. Preserve all predictions and source identities.",
+  "scope": "No depth picked using correct answers is a candidate capability. Depth comparisons can expose harmful extra recurrence but cannot fully distinguish unstable learned dynamics, optimization or representational limitations. No broad reasoning or RSI claim follows.",
+  "preflight": "Use the separate E27 functional-preflight sources with all four arms, reduced grid [2,8,16,32], and original source checks. Scored seeds are never used to choose the protocol."
+}
