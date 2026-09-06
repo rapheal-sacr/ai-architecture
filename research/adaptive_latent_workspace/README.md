@@ -5,10 +5,13 @@ efficiency goal not yet achieved**.
 
 Current boundary: E2/E5 support protected reuse under abrupt recurring functions,
 but E3 exposes capacity/drift costs and E4 rejects efficient external transfer.
-E6 sharing and E7 feature renewal expose further accuracy/cost tradeoffs. E8 is
-the first closed-loop mechanism pilot. Read `FALSIFICATION.md` and
-`CURRENT-STATE.md` before extrapolating the gains or treating the design below
-as an implemented, validated system.
+E6 sharing and E7 feature renewal expose further accuracy/cost tradeoffs. E8
+exposed a closed-loop failure; E10 repairs that particular failure by changing
+the entropy objective while preserving critic gradients. E9/E11 find mixed
+self-application benefits against conventional meta-updates. E12/E13 are active
+falsification tests of new-action transfer and consolidation amortization. Read `FALSIFICATION.md` and `CURRENT-STATE.md` first, then
+`DESIGN-REVISION.md` for the current integrated proposal. The design below
+is not an implemented, validated system.
 
 This is a new model architecture research line. It does not extend WAM's ledger
 stack or the finite-hypothesis witness compiler. Historical files remain in the
