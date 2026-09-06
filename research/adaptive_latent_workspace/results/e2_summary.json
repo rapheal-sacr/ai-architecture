@@ -1,0 +1,42 @@
+[
+  {
+    "arm": "context_replay",
+    "stream_mse": 0.04262677139541893,
+    "returning_mse": 0.09702746494440362,
+    "seconds": 2.884988944239012,
+    "parameters": 7300.0,
+    "tensor_bytes": 480984.0,
+    "forward_examples": 196576.0,
+    "training_examples": 131040.0
+  },
+  {
+    "arm": "module_bank",
+    "stream_mse": 0.028203361908708757,
+    "returning_mse": 0.0977562071993816,
+    "seconds": 2.41424745974291,
+    "parameters": 13739.0,
+    "tensor_bytes": 164934.0,
+    "forward_examples": 261696.0,
+    "training_examples": 65536.0
+  },
+  {
+    "arm": "isolated_adaptation",
+    "stream_mse": 0.022884952230143085,
+    "returning_mse": 0.03553062632909132,
+    "seconds": 2.9214880034960515,
+    "parameters": 19984.0,
+    "tensor_bytes": 239904.0,
+    "forward_examples": 335872.0,
+    "training_examples": 65536.0
+  },
+  {
+    "arm": "oracle_modules",
+    "stream_mse": 0.017700572945344106,
+    "returning_mse": 0.01095912767596019,
+    "seconds": 1.9263319627643796,
+    "parameters": 19984.0,
+    "tensor_bytes": 239904.0,
+    "forward_examples": 131072.0,
+    "training_examples": 65536.0
+  }
+]

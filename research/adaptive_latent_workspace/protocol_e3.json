@@ -1,0 +1,17 @@
+{
+  "experiment": "E3-stream-stress",
+  "status_at_freeze": "NOT_RUN",
+  "seeds": [5101, 5102],
+  "arms": ["online", "context_replay", "isolated_adaptation"],
+  "base": "E1 plus E2 configuration, unchanged learning rules",
+  "cases": {
+    "noise": {"noise_std": 0.3, "context_order": [0, 1, 2, 0, 3, 1, 2, 3], "batches_per_context": 256},
+    "short": {"context_order": [0, 1, 2, 0, 3, 1, 2, 3], "batches_per_context": 32},
+    "capacity": {"contexts": 16, "cycles": 3, "batches_per_context": 128, "module_cap": 8},
+    "long": {"cycles_of_e1_order": 16, "batches_per_context": 256},
+    "gradual": {"segments": 32, "blend_steps_between_teachers": 8, "batches_per_context": 128}
+  },
+  "long_case_observations_per_arm_seed": 1048576,
+  "interpretation": "Exploratory stress screening with two seeds. This cannot establish broad confidence or replace a larger final replication.",
+  "requirements": ["Report every case including losses", "Keep parameters fixed across cases", "Do not use context IDs in learner inputs", "Count all router and update work", "Capacity overflow must be explicit", "Prediction benchmarks do not satisfy closed-loop task requirement"]
+}

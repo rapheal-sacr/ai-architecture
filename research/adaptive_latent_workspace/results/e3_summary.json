@@ -1,0 +1,167 @@
+[
+  {
+    "case": "noise",
+    "arm": "online",
+    "mse": 0.1328413556675514,
+    "clean_mse": 0.04297554966547068,
+    "seconds": 1.9227418255104567,
+    "modules": 1,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.1457509556785226,
+    "peak_tensor_bytes": 60120
+  },
+  {
+    "case": "noise",
+    "arm": "context_replay",
+    "mse": 0.1445342784627428,
+    "clean_mse": 0.05474789406707714,
+    "seconds": 2.7451498829977936,
+    "modules": 1,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.13589728575607296,
+    "peak_tensor_bytes": 480984
+  },
+  {
+    "case": "noise",
+    "arm": "isolated_adaptation",
+    "mse": 0.12237257404376578,
+    "clean_mse": 0.03250647019558528,
+    "seconds": 2.869624181992549,
+    "modules": 4,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.11237097124103457,
+    "peak_tensor_bytes": 239904
+  },
+  {
+    "case": "short",
+    "arm": "online",
+    "mse": 0.2240810540970415,
+    "clean_mse": 0.22316861778017483,
+    "seconds": 0.2389952789817471,
+    "modules": 1,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.3544217355665751,
+    "peak_tensor_bytes": 60120
+  },
+  {
+    "case": "short",
+    "arm": "context_replay",
+    "mse": 0.2307914872726542,
+    "clean_mse": 0.22986130455319653,
+    "seconds": 0.36213381600828143,
+    "modules": 1,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.3186195596354082,
+    "peak_tensor_bytes": 480984
+  },
+  {
+    "case": "short",
+    "arm": "isolated_adaptation",
+    "mse": 0.18830556152533973,
+    "clean_mse": 0.1874421357661049,
+    "seconds": 0.31029232599394163,
+    "modules": 2.5,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.2705568420351483,
+    "peak_tensor_bytes": 179928
+  },
+  {
+    "case": "capacity",
+    "arm": "online",
+    "mse": 0.08985895154440489,
+    "clean_mse": 0.08894445149053354,
+    "seconds": 5.792116378994251,
+    "modules": 1,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.10362716018971696,
+    "peak_tensor_bytes": 60120
+  },
+  {
+    "case": "capacity",
+    "arm": "context_replay",
+    "mse": 0.06868681050036685,
+    "clean_mse": 0.06775438757032741,
+    "seconds": 8.369262366009934,
+    "modules": 1,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.05769874011578698,
+    "peak_tensor_bytes": 480984
+  },
+  {
+    "case": "capacity",
+    "arm": "isolated_adaptation",
+    "mse": 0.04571925207142158,
+    "clean_mse": 0.044804479809026056,
+    "seconds": 12.146765272955236,
+    "modules": 8,
+    "capacity_hits": 2938.5,
+    "last_eighth_mse": 0.06141802989562469,
+    "peak_tensor_bytes": 539784
+  },
+  {
+    "case": "long",
+    "arm": "online",
+    "mse": 0.058445378507521184,
+    "clean_mse": 0.05755318875065285,
+    "seconds": 30.921853342973918,
+    "modules": 1,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.06272665687743029,
+    "peak_tensor_bytes": 60120
+  },
+  {
+    "case": "long",
+    "arm": "context_replay",
+    "mse": 0.01894154054354047,
+    "clean_mse": 0.018044397854460215,
+    "seconds": 43.79915932305448,
+    "modules": 1,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.015396683840378955,
+    "peak_tensor_bytes": 480984
+  },
+  {
+    "case": "long",
+    "arm": "isolated_adaptation",
+    "mse": 0.006211239860034468,
+    "clean_mse": 0.005313883059393509,
+    "seconds": 49.08111108448793,
+    "modules": 4,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.0049139899929997455,
+    "peak_tensor_bytes": 239904
+  },
+  {
+    "case": "gradual",
+    "arm": "online",
+    "mse": 0.006333491713263584,
+    "clean_mse": 0.005432384451992789,
+    "seconds": 3.9633372074822546,
+    "modules": 1,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.005226127304013062,
+    "peak_tensor_bytes": 60120
+  },
+  {
+    "case": "gradual",
+    "arm": "context_replay",
+    "mse": 0.012911447541910093,
+    "clean_mse": 0.012019851655395541,
+    "seconds": 5.714614851494844,
+    "modules": 1,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.009070117004284839,
+    "peak_tensor_bytes": 480984
+  },
+  {
+    "case": "gradual",
+    "arm": "isolated_adaptation",
+    "mse": 0.006333491713263584,
+    "clean_mse": 0.005432384451992789,
+    "seconds": 4.869331649460946,
+    "modules": 1,
+    "capacity_hits": 0,
+    "last_eighth_mse": 0.005226127304013062,
+    "peak_tensor_bytes": 59976
+  }
+]

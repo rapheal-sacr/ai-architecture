@@ -1,0 +1,16 @@
+{
+  "experiment": "E4-external-slowly-changing-regression",
+  "status_at_freeze": "NOT_RUN",
+  "source_repo": "https://github.com/shibhansh/loss-of-plasticity",
+  "source_commit": "a6b79580d85f3025bdb601566d3627c5f489f13b",
+  "generator": "lop.slowly_changing_regression.slowly_changing_regression.generate_problem_data",
+  "seeds": [6101, 6102],
+  "observations": 1000000,
+  "batch_size": 32,
+  "generator_parameters": {"flip_after": 10000, "num_inputs": 20, "num_target_features": 100, "num_flipping_bits": 15, "beta": 0.7, "flip_one": true},
+  "arms": ["online", "context_replay", "isolated_adaptation"],
+  "learner_changes": "Only input/output dimensions become 20/1. E2 learning rules, thresholds, hidden size, Adam learning rate, capacity, and replay settings remain unchanged.",
+  "metrics": ["prequential MSE by 10000-observation block", "whole-stream MSE", "first/last ten-block MSE", "runtime", "parameters", "tensor bytes", "forward examples", "training examples", "capacity hits"],
+  "limitations": "Two-seed transfer screen using the official generator, not a reproduction of published loss-of-plasticity results. Published experiments use individual-example updates, different learner widths/activations/optimizers, and substantially more runs/observations. No claim about CBP superiority or inferiority is possible from these arms.",
+  "requirements": ["Hash generated X/Y and verify same stream across arms", "Use only generated inputs and observed targets; no teacher access in learners", "Predict before observe", "Include all results", "Do not tune on outcomes"]
+}
