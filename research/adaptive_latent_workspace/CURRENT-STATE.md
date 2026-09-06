@@ -41,12 +41,13 @@ later transfer after returning to the easier task, but does not prevent that
 loss. These 40/80-step tasks are a foothold, not proof of very long-horizon
 competence or the full modular/planning architecture.
 
-E9 has completed and is recorded in `E9-RESULT.md`. Its controller persists across
-student tasks, but students reset. Self-application has mixed transfer across two
-initializations and costs more than a fixed optimizer; additional conventional
-meta-training is a missing causal control. It does not establish retained
-task-specific knowledge or reliable recursive improvement. E10's objective/
-representation counterfactual is now running from the frozen E8 checkpoints. Its first CUDA launch failed before any optimizer update; the corrected state-device adapter passed a CUDA preflight and the scored run uses `e10-v2`. E11 completed the missing conventional meta-update control with fresh final-task seeds. Its replay preflight exactly reconstructs E9's first self-applied controller, but final self-application beats conventional updates in only 4/9 and 5/9 settings. Reliable superiority remains unestablished. E12 is frozen and passed CPU preflight: it tests both entropy choices from scratch on fresh seeds, adds an unseen key-door action chain with a 640-step limit, and then tests return-task retention. It has not begun scored execution.
+E9 and E11 completed. The controller persists but students reset. On fresh E11 tasks, self-application beats equal-budget conventional meta-updates in only 4/9 and 5/9 settings across the two bootstrap states. Reliable superiority and cost-matched efficiency remain unestablished.
+
+E10 completed after a recorded checkpoint-device launch failure and successful CUDA preflight. With shared critic gradients, removing entropy changes harder-task success from 0/50 to 50/50 in both development seeds and retains the old task at 50/50. Detaching the critic is inconsistent across seeds. Baseline evaluation episodes reproduce E8 exactly; training floating-point trajectories do not. Read `E10-RESULT.md`.
+
+E12 passed CPU/CUDA preflights and an exact CPU checkpoint-resume test. Scored execution is running on fresh seeds: both entropy choices start from scratch, then encounter an unseen key-door action chain with a 640-step limit and return to the original task. This remains a fixed-procedure mechanism test, not a planner or learned procedure.
+
+E13 is running a five-million-observation extension of E6's consolidation test. It preserves the exact recorded first million and the same teacher, then continues the declared Markov input process. Recreating the official bulk generator at a longer length would change the prefix; the explicit continuation avoids that error. Exact prefix learner loss/cost checks gate continuation. It tests whether late accuracy gains repay earlier error/work, not general memory compression or long-horizon agency.
 
 ## Binding constraint and unresolved measurement
 

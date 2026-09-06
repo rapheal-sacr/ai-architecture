@@ -1,0 +1,204 @@
+{
+  "rows": [
+    {
+      "seed": 11101,
+      "arm": "entropy_shared",
+      "two_room_success": 0.04,
+      "four_room_success": 0.0,
+      "seconds": 168.29054044099757,
+      "training_frames": 262144,
+      "counts": {
+        "rollout": 264192,
+        "update": 1032192,
+        "evaluation": 5967,
+        "optimizer_updates": 4096
+      },
+      "parameters": 52664,
+      "peak_gpu_bytes": 25290752,
+      "last_entropy": 1.9458992592990398
+    },
+    {
+      "seed": 11101,
+      "arm": "no_entropy_shared",
+      "two_room_success": 1.0,
+      "four_room_success": 1.0,
+      "seconds": 169.40790663199732,
+      "training_frames": 262144,
+      "counts": {
+        "rollout": 264192,
+        "update": 1032192,
+        "evaluation": 1386,
+        "optimizer_updates": 4096
+      },
+      "parameters": 52664,
+      "peak_gpu_bytes": 25290752,
+      "last_entropy": 0.033866910031065345
+    },
+    {
+      "seed": 11101,
+      "arm": "entropy_detached_critic",
+      "two_room_success": 0.04,
+      "four_room_success": 0.0,
+      "seconds": 172.5477847669972,
+      "training_frames": 262144,
+      "counts": {
+        "rollout": 264192,
+        "update": 1032192,
+        "evaluation": 5967,
+        "optimizer_updates": 4096
+      },
+      "parameters": 52664,
+      "peak_gpu_bytes": 25288704,
+      "last_entropy": 1.9458891972899437
+    },
+    {
+      "seed": 11101,
+      "arm": "no_entropy_detached_critic",
+      "two_room_success": 0.0,
+      "four_room_success": 0.0,
+      "seconds": 170.61960566599737,
+      "training_frames": 262144,
+      "counts": {
+        "rollout": 264192,
+        "update": 1032192,
+        "evaluation": 6000,
+        "optimizer_updates": 4096
+      },
+      "parameters": 52664,
+      "peak_gpu_bytes": 25288704,
+      "last_entropy": 0.11261544679291546
+    },
+    {
+      "seed": 11101,
+      "arm": "frozen_no_update",
+      "two_room_success": 1.0,
+      "four_room_success": 0.14,
+      "seconds": 5.139700078871101e-05,
+      "training_frames": 0,
+      "counts": {
+        "rollout": 0,
+        "update": 0,
+        "evaluation": 4216,
+        "optimizer_updates": 0
+      },
+      "parameters": 52664,
+      "peak_gpu_bytes": 17895424,
+      "last_entropy": null
+    },
+    {
+      "seed": 11102,
+      "arm": "entropy_shared",
+      "two_room_success": 0.0,
+      "four_room_success": 0.0,
+      "seconds": 169.75778635698953,
+      "training_frames": 262144,
+      "counts": {
+        "rollout": 264192,
+        "update": 1032192,
+        "evaluation": 6000,
+        "optimizer_updates": 4096
+      },
+      "parameters": 52664,
+      "peak_gpu_bytes": 25290752,
+      "last_entropy": 1.9458984434604645
+    },
+    {
+      "seed": 11102,
+      "arm": "no_entropy_shared",
+      "two_room_success": 1.0,
+      "four_room_success": 1.0,
+      "seconds": 175.01116430900584,
+      "training_frames": 262144,
+      "counts": {
+        "rollout": 264192,
+        "update": 1032192,
+        "evaluation": 1375,
+        "optimizer_updates": 4096
+      },
+      "parameters": 52664,
+      "peak_gpu_bytes": 25290752,
+      "last_entropy": 0.012172115850262344
+    },
+    {
+      "seed": 11102,
+      "arm": "entropy_detached_critic",
+      "two_room_success": 0.0,
+      "four_room_success": 0.0,
+      "seconds": 168.99662932498904,
+      "training_frames": 262144,
+      "counts": {
+        "rollout": 264192,
+        "update": 1032192,
+        "evaluation": 6000,
+        "optimizer_updates": 4096
+      },
+      "parameters": 52664,
+      "peak_gpu_bytes": 25288704,
+      "last_entropy": 1.9458857588469982
+    },
+    {
+      "seed": 11102,
+      "arm": "no_entropy_detached_critic",
+      "two_room_success": 1.0,
+      "four_room_success": 1.0,
+      "seconds": 172.08077096700436,
+      "training_frames": 262144,
+      "counts": {
+        "rollout": 264192,
+        "update": 1032192,
+        "evaluation": 1387,
+        "optimizer_updates": 4096
+      },
+      "parameters": 52664,
+      "peak_gpu_bytes": 25288704,
+      "last_entropy": 0.01201275632774923
+    },
+    {
+      "seed": 11102,
+      "arm": "frozen_no_update",
+      "two_room_success": 1.0,
+      "four_room_success": 0.26,
+      "seconds": 4.581600660458207e-05,
+      "training_frames": 0,
+      "counts": {
+        "rollout": 0,
+        "update": 0,
+        "evaluation": 4017,
+        "optimizer_updates": 0
+      },
+      "parameters": 52664,
+      "peak_gpu_bytes": 17895424,
+      "last_entropy": null
+    }
+  ],
+  "reproduction": [
+    {
+      "seed": 11101,
+      "training_equal": false,
+      "evaluation_common_fields_equal": true,
+      "maximum_absolute_training_difference": {
+        "frames": 0,
+        "mean_return": 0.0,
+        "entropy": 0.00011471286416053772,
+        "value": 0.0007994032507667725,
+        "policy_loss": 0.0003164010646941051,
+        "value_loss": 6.036918911433986e-07,
+        "grad_norm": 0.0007727464116043105
+      }
+    },
+    {
+      "seed": 11102,
+      "training_equal": false,
+      "evaluation_common_fields_equal": true,
+      "maximum_absolute_training_difference": {
+        "frames": 0,
+        "mean_return": 0.013437500596046448,
+        "entropy": 0.004850603640079498,
+        "value": 0.004211636958643794,
+        "policy_loss": 0.0023383968509733677,
+        "value_loss": 8.79362069099443e-05,
+        "grad_norm": 0.002333985573035685
+      }
+    }
+  ]
+}

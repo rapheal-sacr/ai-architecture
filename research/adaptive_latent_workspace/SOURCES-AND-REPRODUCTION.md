@@ -48,6 +48,8 @@ python e8_closed_loop.py --execute --repos /path/to/pinned/repository/parent --o
 python e9_recursive_updater.py --execute --out /path/on/large/drive/e9
 python e10_objective.py --execute --repos /path/to/pinned/repository/parent --runs /path/on/large/drive --out /path/on/large/drive/e10-v2
 python e11_meta_control.py --execute --runs /path/on/large/drive --out /path/on/large/drive/e11
+python e12_transfer.py --execute --repos /path/to/pinned/repository/parent --out /path/on/large/drive/e12
+python e13_amortization.py --execute --repo /path/to/pinned/loss-of-plasticity --runs /path/on/large/drive --out /path/on/large/drive/e13
 ```
 
 Protocols are JSON files. Completed arm results record protocol and source
