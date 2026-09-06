@@ -1,0 +1,14 @@
+{
+  "experiment": "E15-privileged-model-planner-diagnostic",
+  "status_at_freeze": "NOT_RUN",
+  "seeds": [14101, 14102],
+  "gravity_sequence": [10.0, 30.0, 5.0, 10.0],
+  "horizons": [1, 20, 60],
+  "parallel_envs": 4,
+  "evaluation_steps": 200,
+  "intervention": "Use E14's exact same CEM planner and paired evaluation reset/action-search seeds, but supply an explicitly privileged predictor with the known Pendulum transition and reward equations. Compare planning horizons 1, 20 and 60. This predictor is a diagnostic reference, never a candidate learner or training teacher available to E14.",
+  "motivation": "The first E14 replay planner improves return on some physics but fails at high gravity despite low normalized one-step error. A correct-model reference distinguishes a model-prediction limitation from a limitation that remains in this planner/search budget even with correct dynamics. A longer horizon may itself require more search; its failure is not a proof that the task is impossible.",
+  "preflight": "Compare oracle transition targets and circular next observations against real Gymnasium outcomes for 100 random-action steps in each gravity, using separate dummy seeds; require maximum absolute normalized target error below 1e-5.",
+  "costs": "Record all actual environment steps, oracle model calls/examples, planning decisions and runtime. CPU work may overlap E14, so wall times are descriptive. Do not present the privileged predictor's cheap formula evaluations as learned-model compute efficiency.",
+  "scope": "Development causal diagnostic on existing E14 evaluation families. No learning, retention, compression, general reasoning, self-improvement or novelty claim. The ordinary acting architecture remains prohibited from simulator-state/equation access."
+}
