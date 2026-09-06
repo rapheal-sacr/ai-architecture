@@ -1,0 +1,362 @@
+[
+  {
+    "distribution": "in_distribution",
+    "horizon": 16,
+    "arm": "adam_default",
+    "replicates": 2,
+    "query_mse": 0.24862772645428777,
+    "prequential_mse": 0.4360084735453711,
+    "seconds": 0.22334927949123085,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "in_distribution",
+    "horizon": 16,
+    "arm": "adam_selected",
+    "replicates": 2,
+    "query_mse": 0.07273977081058547,
+    "prequential_mse": 0.18078217113907158,
+    "seconds": 0.22322358150267974,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "in_distribution",
+    "horizon": 16,
+    "arm": "frozen_bootstrap",
+    "replicates": 2,
+    "query_mse": 0.06857509713154286,
+    "prequential_mse": 0.20279893375118263,
+    "seconds": 0.6822936309908982,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "in_distribution",
+    "horizon": 16,
+    "arm": "self_applied",
+    "replicates": 2,
+    "query_mse": 0.06556941935559735,
+    "prequential_mse": 0.19281745938860695,
+    "seconds": 0.6855614675005199,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "in_distribution",
+    "horizon": 128,
+    "arm": "adam_default",
+    "replicates": 2,
+    "query_mse": 0.03614808706333861,
+    "prequential_mse": 0.11573282830806875,
+    "seconds": 1.77121523549431,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "in_distribution",
+    "horizon": 128,
+    "arm": "adam_selected",
+    "replicates": 2,
+    "query_mse": 0.018936822641990148,
+    "prequential_mse": 0.05143958744167776,
+    "seconds": 1.7472978350051562,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "in_distribution",
+    "horizon": 128,
+    "arm": "frozen_bootstrap",
+    "replicates": 2,
+    "query_mse": 0.020225561078405008,
+    "prequential_mse": 0.054852155636467614,
+    "seconds": 5.43247223799699,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "in_distribution",
+    "horizon": 128,
+    "arm": "self_applied",
+    "replicates": 2,
+    "query_mse": 0.020117429812671617,
+    "prequential_mse": 0.053320249976536616,
+    "seconds": 5.438734317998751,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "in_distribution",
+    "horizon": 512,
+    "arm": "adam_default",
+    "replicates": 2,
+    "query_mse": 0.014451992392423563,
+    "prequential_mse": 0.045864146037132514,
+    "seconds": 6.904537052003434,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "in_distribution",
+    "horizon": 512,
+    "arm": "adam_selected",
+    "replicates": 2,
+    "query_mse": 0.010790628250106238,
+    "prequential_mse": 0.022689933152221897,
+    "seconds": 6.883294369501527,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "in_distribution",
+    "horizon": 512,
+    "arm": "frozen_bootstrap",
+    "replicates": 2,
+    "query_mse": 0.009190659620799124,
+    "prequential_mse": 0.022990784037702383,
+    "seconds": 21.62682398800098,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "in_distribution",
+    "horizon": 512,
+    "arm": "self_applied",
+    "replicates": 2,
+    "query_mse": 0.008997237557196058,
+    "prequential_mse": 0.022541279178440732,
+    "seconds": 21.672100424002565,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 16,
+    "arm": "adam_default",
+    "replicates": 2,
+    "query_mse": 0.6773133482784033,
+    "prequential_mse": 0.9602731025224784,
+    "seconds": 0.22356971349654486,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 16,
+    "arm": "adam_selected",
+    "replicates": 2,
+    "query_mse": 0.3067243518307805,
+    "prequential_mse": 0.5235835332714487,
+    "seconds": 0.221367743499286,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 16,
+    "arm": "frozen_bootstrap",
+    "replicates": 2,
+    "query_mse": 0.32521061692386866,
+    "prequential_mse": 0.5820890282921027,
+    "seconds": 0.6933085100026801,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 16,
+    "arm": "self_applied",
+    "replicates": 2,
+    "query_mse": 0.3144847387447953,
+    "prequential_mse": 0.5627415406779619,
+    "seconds": 0.685511754003528,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 128,
+    "arm": "adam_default",
+    "replicates": 2,
+    "query_mse": 0.23426378099247813,
+    "prequential_mse": 0.40886039563156373,
+    "seconds": 1.745875024003908,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 128,
+    "arm": "adam_selected",
+    "replicates": 2,
+    "query_mse": 0.14383207203354686,
+    "prequential_mse": 0.23658474194280643,
+    "seconds": 1.7419691999893985,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 128,
+    "arm": "frozen_bootstrap",
+    "replicates": 2,
+    "query_mse": 0.15249413275159895,
+    "prequential_mse": 0.25344526433264036,
+    "seconds": 5.434762266500911,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 128,
+    "arm": "self_applied",
+    "replicates": 2,
+    "query_mse": 0.1515342810889706,
+    "prequential_mse": 0.24998266751345,
+    "seconds": 5.447348064000835,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 512,
+    "arm": "adam_default",
+    "replicates": 2,
+    "query_mse": 0.11608700186479837,
+    "prequential_mse": 0.22245422864580178,
+    "seconds": 6.95302971899946,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 512,
+    "arm": "adam_selected",
+    "replicates": 2,
+    "query_mse": 0.07220396294724196,
+    "prequential_mse": 0.13056766339752812,
+    "seconds": 6.8900195289970725,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 512,
+    "arm": "frozen_bootstrap",
+    "replicates": 2,
+    "query_mse": 0.06606495572486892,
+    "prequential_mse": 0.13337872449227461,
+    "seconds": 21.666952807005146,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "scaled_inputs",
+    "horizon": 512,
+    "arm": "self_applied",
+    "replicates": 2,
+    "query_mse": 0.06614429416367784,
+    "prequential_mse": 0.13167317018218228,
+    "seconds": 21.627961073507322,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 16,
+    "arm": "adam_default",
+    "replicates": 2,
+    "query_mse": 0.3619982113596052,
+    "prequential_mse": 0.537660786168999,
+    "seconds": 0.2238663599928259,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 16,
+    "arm": "adam_selected",
+    "replicates": 2,
+    "query_mse": 0.17109675472602248,
+    "prequential_mse": 0.27599160900717834,
+    "seconds": 0.222075481498905,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 16,
+    "arm": "frozen_bootstrap",
+    "replicates": 2,
+    "query_mse": 0.16719393245875835,
+    "prequential_mse": 0.29921222686971305,
+    "seconds": 0.6865747604970238,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 16,
+    "arm": "self_applied",
+    "replicates": 2,
+    "query_mse": 0.16576032096054405,
+    "prequential_mse": 0.2906262218093616,
+    "seconds": 0.6940729890047805,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 128,
+    "arm": "adam_default",
+    "replicates": 2,
+    "query_mse": 0.12815255229361355,
+    "prequential_mse": 0.2113983787644429,
+    "seconds": 1.7286230335012078,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 128,
+    "arm": "adam_selected",
+    "replicates": 2,
+    "query_mse": 0.05160976911429316,
+    "prequential_mse": 0.12142493974374702,
+    "seconds": 1.7261339934921125,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 128,
+    "arm": "frozen_bootstrap",
+    "replicates": 2,
+    "query_mse": 0.06503389083081856,
+    "prequential_mse": 0.1329229692687477,
+    "seconds": 5.405945822996728,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 128,
+    "arm": "self_applied",
+    "replicates": 2,
+    "query_mse": 0.06491287017706782,
+    "prequential_mse": 0.13108512719941245,
+    "seconds": 5.4321042754963855,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 512,
+    "arm": "adam_default",
+    "replicates": 2,
+    "query_mse": 0.052697897946927696,
+    "prequential_mse": 0.11968827613100075,
+    "seconds": 6.930399856006261,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 512,
+    "arm": "adam_selected",
+    "replicates": 2,
+    "query_mse": 0.020700555993244052,
+    "prequential_mse": 0.05138461501289271,
+    "seconds": 6.86061151749891,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 512,
+    "arm": "frozen_bootstrap",
+    "replicates": 2,
+    "query_mse": 0.01975911171757616,
+    "prequential_mse": 0.0552153324873359,
+    "seconds": 21.580719652498374,
+    "diverged_tasks": 0
+  },
+  {
+    "distribution": "relu_teacher",
+    "horizon": 512,
+    "arm": "self_applied",
+    "replicates": 2,
+    "query_mse": 0.01923182407335844,
+    "prequential_mse": 0.05465466185313517,
+    "seconds": 21.882887624000432,
+    "diverged_tasks": 0
+  }
+]

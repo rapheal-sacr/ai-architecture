@@ -41,12 +41,12 @@ later transfer after returning to the easier task, but does not prevent that
 loss. These 40/80-step tasks are a foothold, not proof of very long-horizon
 competence or the full modular/planning architecture.
 
-E9 is now running the learned-updater and self-application experiment. Its
-controller is persistent across student tasks, but students reset. This tests a
-learning-procedure subproblem, not retained task-specific knowledge. E10 has a
-frozen protocol and passed its intervention preflight; the full objective/
-representation counterfactual is pending. No early self-update acceptance or
-preflight score should be treated as recursive-improvement success.
+E9 has completed and is recorded in `E9-RESULT.md`. Its controller persists across
+student tasks, but students reset. Self-application has mixed transfer across two
+initializations and costs more than a fixed optimizer; additional conventional
+meta-training is a missing causal control. It does not establish retained
+task-specific knowledge or reliable recursive improvement. E10's objective/
+representation counterfactual is now running from the frozen E8 checkpoints.
 
 ## Binding constraint and unresolved measurement
 
