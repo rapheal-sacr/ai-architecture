@@ -1,0 +1,62 @@
+[
+  {
+    "arm": "online",
+    "mean_mse": 0.030274436308161512,
+    "return_first32": 0.14213694190766546,
+    "final_heldout": 0.01023257290944457,
+    "seconds": 1.911232406499039,
+    "parameters": 4996.0,
+    "bytes": 60120.0,
+    "forward_examples": 131072.0,
+    "training_examples": 65536.0,
+    "modules": 1.0
+  },
+  {
+    "arm": "replay",
+    "mean_mse": 0.09087805333143706,
+    "return_first32": 0.16026135189895285,
+    "final_heldout": 0.08223222754895687,
+    "seconds": 2.562108593265293,
+    "parameters": 4996.0,
+    "bytes": 158424.0,
+    "forward_examples": 196576.0,
+    "training_examples": 131040.0,
+    "modules": 1.0
+  },
+  {
+    "arm": "context_replay",
+    "mean_mse": 0.038217980661727324,
+    "return_first32": 0.08550580514929607,
+    "final_heldout": 0.014088312862440944,
+    "seconds": 2.791651448504126,
+    "parameters": 7300.0,
+    "bytes": 480984.0,
+    "forward_examples": 196576.0,
+    "training_examples": 131040.0,
+    "modules": 1.0
+  },
+  {
+    "arm": "module_bank",
+    "mean_mse": 0.027659355356973947,
+    "return_first32": 0.11605572888493043,
+    "final_heldout": 0.008286005817353725,
+    "seconds": 2.328496612251911,
+    "parameters": 11241.0,
+    "bytes": 134946.0,
+    "forward_examples": 237248.0,
+    "training_examples": 65536.0,
+    "modules": 2.25
+  },
+  {
+    "arm": "oracle_modules",
+    "mean_mse": 0.01615332082212717,
+    "return_first32": 0.010371322538048844,
+    "final_heldout": 0.004244487849064171,
+    "seconds": 1.910957686501206,
+    "parameters": 19984.0,
+    "bytes": 239904.0,
+    "forward_examples": 131072.0,
+    "training_examples": 65536.0,
+    "modules": 4.0
+  }
+]

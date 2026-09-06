@@ -1,0 +1,19 @@
+{
+  "experiment": "E2-isolated-temporary-adaptation",
+  "status_at_freeze": "NOT_RUN",
+  "relation_to_e1": "Exploratory follow-up after E1. E1 code and outputs remain unchanged.",
+  "development_seeds": [3101, 3102, 3103, 3104],
+  "fresh_seeds": [4101, 4102, 4103, 4104],
+  "base_protocol": "protocol_e1.json",
+  "temporary_min_age": 32,
+  "recent_score_window": 8,
+  "reuse_error_floor": 0.04,
+  "reuse_error_ratio": 4.0,
+  "error_ema_decay": 0.95,
+  "commit_improvement_ratio": 0.8,
+  "arms": ["context_replay", "module_bank", "isolated_adaptation", "oracle_modules"],
+  "hypothesis": "Protecting persistent models during context identification improves return-task performance without oracle task IDs",
+  "cost_rules": "Same observations and optimizer updates; count all model scoring, temporary parameters and peak tensor state; do not claim equal FLOPs",
+  "success_scope": "Necessary context-retention subproblem only. No completion claim for the overall architecture.",
+  "adversarial_followups_required": ["continuous drift", "higher observation noise", "many contexts and exhausted module capacity", "short regimes", "router overhead", "closed-loop long-horizon tasks"]
+}
