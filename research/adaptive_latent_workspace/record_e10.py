@@ -11,7 +11,7 @@ rows=[];checks=[]
 for r in data['records']:
     if r['arm']=='entropy_shared':
         prior=next(x for x in old['records'] if x['seed']==r['seed'] and x['arm']=='recurrent_ppo')['stages'][1]
-        check=dict(seed=r['seed'],training_equal=r['training']==prior['training'],evaluations_equal=r['evaluations']==prior['evaluations'])
+        check=dict(seed=r['seed'],training_equal=r['training']==prior['training'],evaluation_common_fields_equal=all(all(x[k]==y[k] for k in x) for x,y in zip(r['evaluations'],prior['evaluations'])),maximum_absolute_training_difference={k:max(abs(x[k]-y[k]) for x,y in zip(r['training'],prior['training'])) for k in r['training'][0]})
         checks.append(check)
     rows.append(dict(seed=r['seed'],arm=r['arm'],two_room_success=r['evaluations'][0]['success_rate'],four_room_success=r['evaluations'][1]['success_rate'],seconds=r['seconds'],training_frames=r['training_frames'],counts=r['counts'],parameters=r['parameters'],peak_gpu_bytes=r['peak_gpu_bytes'],last_entropy=r['training'][-1]['entropy'] if r['training'] else None))
 report=['# E10: entropy and critic-gradient counterfactual','',
@@ -22,7 +22,7 @@ for r in rows:
     entropy='—' if r['last_entropy'] is None else f"{r['last_entropy']:.6f}"
     report.append(f"| {r['seed']} | {r['arm']} | {round(50*r['two_room_success'])} | {round(50*r['four_room_success'])} | {entropy} | {r['seconds']:.1f} |")
 report+=['','The maximum seven-action entropy is log(7) = '+f'{math.log(7):.6f}.','', '## Checkpoint control reproduction','']
-for c in checks:report.append(f"Seed {c['seed']}: complete training rows equal to E8 = {c['training_equal']}; complete evaluation objects equal = {c['evaluations_equal']}.")
+for c in checks:report.append(f"Seed {c['seed']}: complete training rows equal to E8 = {c['training_equal']}; all recorded evaluation fields equal = {c['evaluation_common_fields_equal']}; maximum training metric differences = {c['maximum_absolute_training_difference']}.")
 report+=['',
 'The factors can change exploration and subsequent data as well as direct gradient interference. This is a closed-loop causal intervention, not an attribution of every downstream effect to one local gradient. Successful retention alone does not establish acquisition of the harder task.','',
 'These checkpoints and environment families were already studied in E8. The counterfactual is a development diagnostic, not fresh final validation. Only two training seeds are tested. Fifty evaluation episodes per checkpoint are not fifty independently trained models.','',

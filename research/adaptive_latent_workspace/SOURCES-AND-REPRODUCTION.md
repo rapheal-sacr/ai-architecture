@@ -8,7 +8,7 @@ continuous-learning system. Results include failed proposals and controls.
 | Source | Pinned commit | Used for |
 |---|---|---|
 | [loss-of-plasticity](https://github.com/shibhansh/loss-of-plasticity) | `a6b79580d85f3025bdb601566d3627c5f489f13b` | E4 official data generator; read teacher, BP, CBP and generate-and-test source |
-| [Minigrid](https://github.com/Farama-Foundation/Minigrid) | `622fa297cb9e97b6f62f9085d9e053d1ce191b05` | E8 closed-loop preflight passed; registered mechanism pilot running |
+| [Minigrid](https://github.com/Farama-Foundation/Minigrid) | `622fa297cb9e97b6f62f9085d9e053d1ce191b05` | E8 completed closed-loop mechanism pilot; E10 objective counterfactual |
 | [rl-starter-files](https://github.com/lcswillems/rl-starter-files) | `317da04a9a6fb26506bbd7f6c7c7e10fc0de86e0` | Read CNN/LSTM policy, training and observation preprocessing; E8 executes the policy |
 | [torch-ac](https://github.com/lcswillems/torch-ac) | `b6602c8ce843a8bfe9cef1723d0151dd7a3c22c3` | Read PPO, rollout and recurrent update source; E8 executes PPO with synchronous environment stepping |
 | [continual-learning](https://github.com/GMvandeVen/continual-learning) | `e6d795aa81b9cef742b8de76cb71222d4d1ce00b` | Novelty audit: source for task-free replay, model copies and optional context labels; no reproduced benchmark yet |
@@ -29,7 +29,7 @@ but the reported tiny-network timings are CPU measurements.
 
 Minigrid is installed from its pinned editable clone with Gymnasium 1.1.1 and
 pygame-ce 2.5.7. torch-ac 1.4.0 is installed from its pinned editable clone.
-E8's closed-loop preflight passed; full scored outcomes must be checked separately.
+E8 completed; see its full scored outcome and negative transfer result in E8-RESULT.md.
 Installation or a runtime check is not a benchmark result.
 
 From this directory, use the dedicated Python runtime (shown as `python` below)
@@ -46,7 +46,8 @@ python e6_sharing.py --execute --repo /path/to/pinned/loss-of-plasticity --out /
 python e7_renewal.py --execute --repo /path/to/pinned/loss-of-plasticity --out /path/on/large/drive/e7
 python e8_closed_loop.py --execute --repos /path/to/pinned/repository/parent --out /path/on/large/drive/e8
 python e9_recursive_updater.py --execute --out /path/on/large/drive/e9
-python e10_objective.py --execute --repos /path/to/pinned/repository/parent --runs /path/on/large/drive --out /path/on/large/drive/e10
+python e10_objective.py --execute --repos /path/to/pinned/repository/parent --runs /path/on/large/drive --out /path/on/large/drive/e10-v2
+python e11_meta_control.py --execute --runs /path/on/large/drive --out /path/on/large/drive/e11
 ```
 
 Protocols are JSON files. Completed arm results record protocol and source

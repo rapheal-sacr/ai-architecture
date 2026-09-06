@@ -46,7 +46,7 @@ student tasks, but students reset. Self-application has mixed transfer across tw
 initializations and costs more than a fixed optimizer; additional conventional
 meta-training is a missing causal control. It does not establish retained
 task-specific knowledge or reliable recursive improvement. E10's objective/
-representation counterfactual is now running from the frozen E8 checkpoints.
+representation counterfactual is now running from the frozen E8 checkpoints. Its first CUDA launch failed before any optimizer update; the corrected state-device adapter passed a CUDA preflight and the scored run uses `e10-v2`. E11 adds the missing conventional meta-update control with fresh final-task seeds; its replay preflight exactly reconstructs E9's first self-applied controller.
 
 ## Binding constraint and unresolved measurement
 
