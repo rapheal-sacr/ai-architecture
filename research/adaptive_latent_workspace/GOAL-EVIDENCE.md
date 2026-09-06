@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` before design prose. This map preserves the user's full
 objective; component tests do not redefine success as a smaller graph or stream
-problem. E1–E33 are complete and audited. E32 conventional controls repair some
+problem. E1–E34 are complete and audited. E32 conventional controls repair some
 imitation fitting but not larger-world competence. E33 provides scoped positive
 evidence for update-trained acquisition and carried-state reuse in a synthetic
 grammar; it does not implement an autonomous long-horizon agent. Read the full
@@ -59,3 +59,9 @@ It improves the evidence for persistent useful neural state on one task family.
 First-return cycles include intervening updates; E34 is a frozen-return diagnosis,
 not a new benchmark or a replacement goal. Learned episodic compression, broad
 reasoning, novelty and reliable autonomous procedure improvement remain open.
+
+E34 audits540 return interventions, separating frozen read-time function from
+additional updates. Earlier snapshots recover capability that current weights
+fail to express, but selection is oracle and first-chunk errors persist. This
+strengthens the case for testing bounded preserved fast states, not a claim that
+autonomous retrieval, compression or the full integrated architecture is solved.

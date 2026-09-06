@@ -364,3 +364,14 @@ return/archive interventions will distinguish retained function from adaptation
 needed to use it. Oracle restored snapshots are diagnostics, not a deployed
 memory router. Integration with evidence, actions and actual procedure changes
 remains necessary; E33 is not completion of the candidate or novelty proof.
+
+## E34 selects the next architectural question
+
+The current E2E state retains useful function without additional gradients, but
+interfering updates cause large functional loss. A preserved first-A snapshot
+recovers much of it while holding slow weights/inputs fixed. This motivates
+protected fast-state storage and observed-evidence selection. Oracle restoration
+in E34 is not that selector. The next integrated mechanism must pay bounded
+archive, routing, admission and update costs under unpredictable recurrence and
+new contexts. Cold-context errors persist even with the correct snapshot. Read
+E34-RESULT.md; a bank of snapshots alone is not a complete architecture or novelty.

@@ -1,15 +1,20 @@
-# Next work — diagnose E33 returns, then integrate persistent evidence
+# Next work — bounded preservation and causal selection of E2E fast states
 
-Read FALSIFICATION.md first. E1–E33 complete and audited. E33 achieves acquisition
-and useful carried state on a small grammar, with counterexamples to uniform
-persistent-objective superiority and to overall efficiency against a task table.
-E34-PROTOCOL.md freezes current/archive/reset and adaptive/frozen return controls
-on all source states. Run every condition and audit with record_e34.py. No scored
-counterfactual exists at this freeze. Oracle archives are diagnostic scaffolding.
+Read FALSIFICATION.md first. E1–E34 complete and audited. E34 shows partial
+retained function, additional adaptation benefits and large oracle-snapshot
+recovery after interference. Existing snapshot selection is not autonomous.
 
-Then use the measured distinction between stored function, selection and needed
-updates to revise the integrated learner. MSA-SOURCE-AUDIT.md constrains external
-memory compatibility: fast/slow updates cannot silently invalidate encoded
-records. Charge refresh/transport and preserve actual versus advisory action roles.
-A grammar pass, metadata check or isolated memory module cannot replace the full
-continuous-learning, general-reasoning and recursive-improvement goal.
+Implement a bounded fast-state archive and select from already observed evidence,
+without scoring an action using its future label. Compare the active learner,
+archive without learned selection, and capacity/cost controls under unpredictable
+recurrence and arrival of new contexts. Charge every snapshot, forward, selection
+and update. Do not give the learner evaluator-only context IDs or free boundaries.
+A shared fixed prefix is possible for the one-fast-suffix core; confirm numerical
+and causal equivalence before crediting saved computation. Multiple adaptive
+layers do not automatically share that compatibility property.
+
+Keep cold-context failures, archive eviction, mis-selection and stale encoder
+versions in the falsification plan. Read MSA-SOURCE-AUDIT.md for representation
+maintenance limits. This mechanism still needs integration with evidence records,
+actual actions and procedure self-revision; synthetic grammar gains do not
+complete the full goal or establish scientific novelty.

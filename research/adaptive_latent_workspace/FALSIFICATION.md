@@ -361,3 +361,20 @@ accuracy in every regime while weaker first-return accuracy. Preserve both the
 useful learned persistence and its cost/control objections. Read E33-RESULT.md.
 This is a small fixed grammar, not general reasoning, novelty, learned episodic
 compression, autonomous long-horizon efficiency or reliable RSI.
+
+## E34 complete: stored competence survives partly, but snapshots recover more
+
+All540 conditions audit, including216 exact adaptive replays and324 independent
+dense frozen references (max logit difference6.2434e-6). Frozen current E2E
+weights preserve first-return-cycle performance, supporting real retained
+function beyond learning during the return. Across the full return, further
+updates improve performance. After four intervening contexts, carry-trained
+current frozen accuracy is45.8%; an earlier frozen first-A snapshot gives95.6%.
+This isolates functional interference in fast weights with unchanged input,
+initialization and cleared KV. It does not prove all old information is erased.
+
+Archive choice is oracle scaffolding with extra24,576 tensor bytes per snapshot.
+Correct archived E2E weights still make many first-chunk errors (50–75% correct),
+so preservation does not guarantee immediate cold-context recall. Read E34-RESULT.md
+for all cells and source acquisition gates. Bounded autonomous selection,
+representation robustness, compression, broad reasoning and RSI remain open.

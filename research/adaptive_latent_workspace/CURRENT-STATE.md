@@ -2,12 +2,13 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E33 are complete and audited. E32-RESULT.md records tutorial-fitting
-improvements but failed larger-world competence. E33-RESULT.md records real
-update-trained acquisition and carried-state reuse on a synthetic grammar,
-with nonuniform persistent-training gains and stronger task-specific controls.
-E34-PROTOCOL.md freezes a post hoc no-update/archive-return diagnosis before
-execution. Consult RUNS/ACTIVE-STATE.json for current processes.
+E1–E34 are complete and audited. E32-RESULT.md shows tutorial fitting can
+improve without larger-world competence. E33-RESULT.md establishes scoped
+E2E acquisition and carried-state reuse. E34-RESULT.md separates retained
+function from further adaptation and shows what an oracle old snapshot recovers.
+There is no running scored process at this update. Next: bounded fast-state
+preservation and selection from observed evidence, without oracle context IDs.
+Consult RUNS/ACTIVE-STATE.json for authoritative process state.
 
 ## What is locally established
 

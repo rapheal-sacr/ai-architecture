@@ -1,0 +1,11 @@
+{
+  "artifact": "E34 complete540-condition record retained on WD",
+  "source_path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e34/complete.json",
+  "source_sha256": "18ab1a4f4b3db51c2f414b63f356aba1327f014c1da382b14ccb29135f0f46c2",
+  "source_bytes": 734098,
+  "frozen_commit": "76fb017a9aeca69e02580960d4199f1f090e5089",
+  "status": "E34_COMPLETE exit0; E34_AUDITED exit0",
+  "scorer_seconds": 73.96472544698918,
+  "conditions": 540,
+  "audit": "results/e34_audit.json"
+}
