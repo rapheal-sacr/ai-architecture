@@ -1,0 +1,44 @@
+[
+  {
+    "model": "kimi-k3",
+    "source": "/tmp/codex-clipboard-e8ab3d51-9bf2-4129-910b-41656b48421c.png",
+    "stored": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/frontier-sources-2026-09-06/user-diagrams/kimi-k3.png",
+    "sha256": "ea449ef04b26fa15ad8aaec47061d4904b6928a49611ab6249c30aa1e15eb813",
+    "bytes": 1584503
+  },
+  {
+    "model": "qwen3.8-27b",
+    "source": "/tmp/codex-clipboard-833c1413-5815-41af-8b18-12c004cb8d05.png",
+    "stored": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/frontier-sources-2026-09-06/user-diagrams/qwen3.8-27b.png",
+    "sha256": "d83ea50e1ffe454f7bfdc4c1a9fcd8daf594e7a32b741d1a37386343539da7b4",
+    "bytes": 1325881
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "source": "/tmp/codex-clipboard-f357d22c-3dc3-40e5-8a81-acf82ee393ae.png",
+    "stored": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/frontier-sources-2026-09-06/user-diagrams/deepseek-v4-pro.png",
+    "sha256": "8c50119fecc0de9bfcfed6ce74a025c11e1dd47f25e9352f76df431848e38394",
+    "bytes": 1859849
+  },
+  {
+    "model": "glm-5.3-flash",
+    "source": "/tmp/codex-clipboard-f2605210-afda-4954-bae3-4b5509317517.png",
+    "stored": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/frontier-sources-2026-09-06/user-diagrams/glm-5.3-flash.png",
+    "sha256": "f1159b9ab984462e48e0d2961aacdebc05a08ba7c0049497762097487c98c7cb",
+    "bytes": 2079434
+  },
+  {
+    "model": "muse-glimmer",
+    "source": "/tmp/codex-clipboard-0edda428-1551-4594-9bd1-5df7d3148b9f.png",
+    "stored": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/frontier-sources-2026-09-06/user-diagrams/muse-glimmer.png",
+    "sha256": "8e927fabcaa1a5e08447db5c5765e19cd76776c57f0964b6669582e9bc342bda",
+    "bytes": 1209288
+  },
+  {
+    "model": "nanbeige4.2-3b",
+    "source": "/tmp/codex-clipboard-a1847fbd-8cff-4a54-87e9-429c0431375d.png",
+    "stored": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/frontier-sources-2026-09-06/user-diagrams/nanbeige4.2-3b.png",
+    "sha256": "5c9e1230d75c6b78c28cdb13b324cd019c3c2a7a327eed6d88bc90135c9c1db8",
+    "bytes": 1023351
+  }
+]

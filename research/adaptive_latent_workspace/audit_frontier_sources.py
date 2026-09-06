@@ -89,12 +89,23 @@ def main(repos, out):
     assert len(ratios) == 61 and set(ratios) == {4, 128}
     d_main = sum(dc["head_dim"]*2/r for r in ratios)
     d_index = sum(dc["index_head_dim"]*2/r for r in ratios if r == 4)
+    mc = json.loads((repos/"Muse-Glimmer-30B/config.json").read_text())["text_config"]
+    mmix = Counter(mc["layer_types"])
+    m_per_layer = 2*mc["num_key_value_heads"]*mc["head_dim"]*2
+    assert mmix == {"sliding_attention": 39, "full_attention": 13}
+    assert all(bool(theta) == (kind == "sliding_attention") for theta, kind in zip(mc["layer_rope_theta"], mc["layer_types"]))
+    m_global = mmix["full_attention"]*m_per_layer
+    # Current DynamicSlidingWindowLayer retains window-1 past entries. The
+    # current chunk and attention intermediates are extra, transient storage.
+    m_local = mmix["sliding_attention"]*(mc["sliding_window"]-1)*m_per_layer
     configs = {}
-    for repo in ("GLM-5.3-Flash", "DeepSeek-V4-Pro", "Nanbeige4.2-3B", "Qwen3.8-27B", "Kimi-K3"):
+    for repo in ("GLM-5.3-Flash", "DeepSeek-V4-Pro", "Nanbeige4.2-3B", "Qwen3.8-27B", "Kimi-K3", "Muse-Glimmer-30B"):
         path = repos/repo
         configs[repo] = {"commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=path, text=True).strip(),
                          "files": {name: sha(path/name) for name in ("config.json", "README.md", "k3_tech_report.pdf") if (path/name).exists()}}
     result = {"event": "FRONTIER_SOURCE_PROBES_COMPLETE", "sources": [gs, ks, ns], "repositories": configs,
+              "additional_implementation_hashes": {str(tr/name): sha(tr/name) for name in (
+                  "src/transformers/models/muse_glimmer/modeling_muse_glimmer.py", "src/transformers/cache_utils.py")},
               "recurrence_fixture": rows, "nanbeige_loop_cache_indices": indices,
               "derived_bytes_batch1_main_decoder_no_MTP": {
                   "nanbeige_bf16_KV_per_token": nc_bytes,
@@ -102,7 +113,10 @@ def main(repos, out):
                   "glm_fp32_recurrent_state_only": g_state, "glm_bf16_MLA_latents_per_token": g_slope,
                   "deepseek_bf16_compressed_attention_KV_per_token_asymptotic": d_main,
                   "deepseek_bf16_indexer_KV_per_token_asymptotic_extra": d_index,
-                  "deepseek_compression_layer_counts": dict(Counter(ratios))},
+                  "deepseek_compression_layer_counts": dict(Counter(ratios)),
+                  "muse_bf16_global_KV_per_token": m_global,
+                  "muse_bf16_local_persistent_KV_at_window_minus_one": m_local,
+                  "muse_naive_all_layers_unbounded_KV_per_token": mc["num_hidden_layers"]*m_per_layer},
               "scope": "Unchanged PyTorch recurrence/helper bodies plus configuration-derived logical storage; no released weights, trained hidden-state reachability, accuracy, full runtime peak memory or throughput measured. Dispatch decorators removed; optional L2 branch unused. Convolution/state buffers, model weights, indexes other than explicitly counted, vision and MTP additional.",
               "seconds": time.perf_counter()-start}
     Path(out).write_text(json.dumps(result, indent=2)+"\n")

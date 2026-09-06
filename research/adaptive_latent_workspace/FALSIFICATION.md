@@ -413,3 +413,14 @@ ablation still loses fine retrieval accuracy. All five WebP asset requests were
 403; checkpoint/source and original rendered paper figures were used instead.
 No large released weights, population failure rates or architecture-isolated
 benchmark advantage were measured. E35 scorer remains frozen and running.
+
+Subsequent evidence resolves the diagram-access limitation: the user supplied
+six PNGs, all inspected and preserved with hashes, including Muse Glimmer.
+Its source uses39 bounded local windows and13 growing global caches; treating
+all52 layers as unbounded overstates the persistent KV growth. The source-derived
+BF16 cost is13 KiB/token plus81,748,992 bytes of saturated local past KV, excluding
+the current chunk and other memory. No runtime peak or Muse benchmark was measured.
+
+E35 scorer subsequently completed all90 cases,951.7907s, exit0. Independent
+auditor52212 is running; first four cases passed at the verified poll. No scored
+benefit is interpreted yet. Read E35-INTERIM.md and poll the live handle.

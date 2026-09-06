@@ -1,0 +1,15 @@
+{
+  "event": "E35_COMPLETE",
+  "source_commit": "4e7730fc5445313455dd85f44bc9d00472aaa574",
+  "rows": 90,
+  "streams": 9,
+  "seconds": 951.7906765119988,
+  "data_sha256": "8f0fb3172b4649ca59e74e7d5058a9bc7e12681114ce9d02241b07271735d30c",
+  "manifest_sha256": "cc53d58fbb7eba132c99666eebfa9bcc422352917c8fd7614d0d808d4856bf92",
+  "full_complete_path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35/complete.json",
+  "full_complete_sha256": "e6c1f2f59722f528c3fb0e7a11bde420244289ba32163fcabb42418c020d02f7",
+  "full_complete_bytes": 7942559,
+  "no_select_outputs_states_exact": true,
+  "source_files_unchanged": true,
+  "audit_status": "Pending: full-core auditor session52212; no scored interpretation yet"
+}

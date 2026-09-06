@@ -58,7 +58,18 @@
         "README.md": "849a303d849486aac61d1f0c253e3a1148ca59e801be807151c2dc3cce57ccb2",
         "k3_tech_report.pdf": "86fb82a63ced501f0c3f4f404c0c6fa88a7a6cfac17aae81fd1a8f455998067c"
       }
+    },
+    "Muse-Glimmer-30B": {
+      "commit": "a4e59da52a7bc87ae7251dd5545c0dd437c44b68",
+      "files": {
+        "config.json": "5a9df2d8a385b3d361ab6ae68d73586f4e775033933bd0cd863fb7f3820e6a14",
+        "README.md": "5894e358c58f4f8425645a5b0b890468ecb3e6b049c2e941648db077c4b7df58"
+      }
     }
+  },
+  "additional_implementation_hashes": {
+    "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/repos/transformers-2026-09-06/src/transformers/models/muse_glimmer/modeling_muse_glimmer.py": "e69eb21d6efd815a48499d4d0e4180afda2f443beb441a734d50efc2cf83f975",
+    "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/repos/transformers-2026-09-06/src/transformers/cache_utils.py": "702144bb44553f6339ea1bf23c8205a708bb5f8c7c09cb3a2db484182646743c"
   },
   "recurrence_fixture": [
     {
@@ -151,8 +162,11 @@
     "deepseek_compression_layer_counts": {
       "128": 31,
       "4": 30
-    }
+    },
+    "muse_bf16_global_KV_per_token": 13312,
+    "muse_bf16_local_persistent_KV_at_window_minus_one": 81748992,
+    "muse_naive_all_layers_unbounded_KV_per_token": 53248
   },
   "scope": "Unchanged PyTorch recurrence/helper bodies plus configuration-derived logical storage; no released weights, trained hidden-state reachability, accuracy, full runtime peak memory or throughput measured. Dispatch decorators removed; optional L2 branch unused. Convolution/state buffers, model weights, indexes other than explicitly counted, vision and MTP additional.",
-  "seconds": 0.31958807702176273
+  "seconds": 0.3324208169942722
 }

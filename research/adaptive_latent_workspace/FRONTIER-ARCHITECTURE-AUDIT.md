@@ -5,12 +5,14 @@ execution, not a reproduction of any frontier model's benchmark results. E35
 continues from frozen4e7730f; this review does not change its scored protocol.
 
 The gallery clone is rasbt/LLM-architecture-gallery at8c820c3, whose models.yml
-contains all five supplied architectures. Direct requests for the five WebP
-assets returned403 with and without www; the gallery clone does not contain
-those images. A guessed website repository was unavailable. I did not inspect
-the inaccessible WebPs. I instead read checkpoint configurations/implementation
-source and rendered and inspected the original Kimi and DeepSeek architecture
-figures. Repositories were cloned, not scraped as rendered directory pages.
+contains the supplied architectures. Initial direct requests for five WebP
+assets returned403 with and without www; the clone does not contain those
+images and a guessed website repository was unavailable. The user subsequently
+attached six full PNG diagrams, adding Muse Glimmer. **All six attached diagrams
+have now been inspected**, alongside checkpoint/source details and original
+rendered Kimi/DeepSeek paper figures. Exact user attachments were copied to WD;
+results/user_architecture_diagrams.json records their paths and SHA256 hashes.
+Repositories were cloned, not scraped as rendered directory pages.
 Only paper assets were downloaded separately; the Nanbeige PDF matches its
 cloned LFS pointer hash. No large model weights were downloaded or executed.
 
@@ -88,6 +90,17 @@ Their presence in code cannot be credited to the released4.2 model. The two-pass
 design supports weight reuse, not an inference-time guarantee that arbitrary
 extra loops improve reasoning. Our E28 failures remain relevant.
 
+**Muse Glimmer30B.** The added diagram and [checkpoint](https://huggingface.co/meta-models/Muse-Glimmer-30B/blob/a4e59da52a7bc87ae7251dd5545c0dd437c44b68/config.json)
+agree on39 local and13 global layers,52 layers total,2048-token windows, width6656,
+32 query/2 KV heads, and pre/post RMS normalization. Transformers source confirms
+local-only RoPE, global NoPE, scaleless Q/K normalization and output gating.
+This gives a useful alternative to delta recurrence: retain exact local history
+and pay for periodic global access. It does not preserve arbitrarily old
+independent facts in fixed space. Its model card describes separate DFlash
+speculative decoding; verifying draft tokens against the target model accelerates
+sampling but is not a verifier of real-world truth or a learning-procedure update.
+No Muse weights, drafter, reported speedup or agent benchmarks were run locally.
+
 ## Local source probes and complete-memory objections
 
 audit_frontier_sources.py executes unchanged PyTorch recurrence/helper bodies
@@ -110,6 +123,7 @@ convolution buffers, allocators and other unspecified state:
 | GLM-5.3-Flash |11 KiB/token MLA latents |136 MiB fixed FP32 recurrent matrices; sparse index state additional |
 | Nanbeige4.2-3B |176 KiB/token across44 execution caches |Other buffers additional |
 | DeepSeek V4-Pro |7,928 B/token asymptotic compressed main KV |1,920 B/token extra BF16 index keys; local/pending buffers additional |
+| Muse Glimmer30B |13 KiB/token in13 global layers |81,748,992 B bounded local past KV with2047 entries per local layer; current chunk additional |
 
 These are derived storage counts, not runtime peaks or claims about deployed
 quantization. DeepSeek's reference comments explicitly distinguish intended
@@ -118,6 +132,13 @@ main compressed KV alone; adding the source's indexer increases that subtotal
 to9,848 B/token. Smaller per-token cache slopes do not establish bounded total
 memory, and fixed recurrent state does not make the remaining global attention
 cache constant. CPU/GPU/disk copies also count when evaluating a real system.
+
+Muse's gallery52 KiB/token value is the naive all52-layers-unbounded subtotal.
+The current model constructs DynamicCache with its local/global configuration,
+and DynamicSlidingWindowLayer retains only window−1 past entries. Its persistent
+KV growth is therefore13 KiB/token plus roughly78 MiB local storage once windows
+fill, rather than52 KiB/token indefinitely. This is source-derived accounting,
+not a measured process peak; full-prefill intermediates and backend choices matter.
 
 ## Consequences for the candidate, mapped to the three roots
 
