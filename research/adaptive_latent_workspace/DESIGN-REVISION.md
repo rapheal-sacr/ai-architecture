@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. This is a proposed integrated system, not a claim
 that the components below already form a validated or scientifically novel
-agent. E1–E18 have implemented and tested only subsets. The original supplied
+agent. E1–E21 have implemented and tested only subsets. The original supplied
 papers and model gallery were reviewed through the preserved WD corpus/clones.
 
 ## The change that the failures require
@@ -140,3 +140,28 @@ conflicting-function cases. It costs 1.73 times frozen-procedure execution and
 3.82 times fixed Adam. The complete design must explain this split; accepted
 self-updates alone do not provide the missing mechanism. Memory admission,
 compression, belief inference and procedure family remain fixed in this subset.
+
+## Inference and memory assignment before more capacity
+
+E19 isolates the procedure intervention with identical student starting states.
+Its mixed continuation and new-world results show that the procedure changes a
+plasticity/retention tradeoff, not a universally improving algorithm. E20 then
+finds that correctly identifying and encoding context helps conflicting tasks
+far more than increasing width. The next implementation target is causal belief
+formation and assigning experience to the appropriate retained conditional
+model. E21 tests simple recency and post-outcome assignment controls first.
+A prediction must use only past evidence; an observation can be written after
+its new evidence arrives. That distinction is established inference practice,
+not a novelty claim. Its actual benefit must survive fresh prequential tests.
+
+Future latent-code or generated-weight memories must also be compared with LEO
+and HyperCL, which already implement latent adaptation and task-conditioned
+weight generation/retention. Those mechanisms do not independently solve
+unannounced context inference or certify rare-query compression.
+
+E21 completed: faster evidence and post-outcome assignment produce a large cheap
+conflicting-function gain and a clear input-shift loss. `INFERENCE-REVISION.md`
+therefore proposes learned causal allocation across evidence timescales, with
+controls that break the original family/input-shift correlation. That new gate
+is not yet implemented. The experiment does not justify adding generated-weight
+memory or attributing fixed filtering improvements to recursive self-learning.

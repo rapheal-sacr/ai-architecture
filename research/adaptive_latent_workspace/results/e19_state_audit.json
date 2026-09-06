@@ -1,0 +1,130 @@
+[
+  {
+    "replicate": 12101,
+    "source_seed": 18101,
+    "family": "conflicting_functions",
+    "mode": "same_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18101,
+    "family": "conflicting_functions",
+    "mode": "same_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18101,
+    "family": "conflicting_functions",
+    "mode": "new_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18101,
+    "family": "conflicting_functions",
+    "mode": "new_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18101,
+    "family": "input_shift",
+    "mode": "same_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18101,
+    "family": "input_shift",
+    "mode": "same_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18101,
+    "family": "input_shift",
+    "mode": "new_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18101,
+    "family": "input_shift",
+    "mode": "new_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18102,
+    "family": "conflicting_functions",
+    "mode": "same_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18102,
+    "family": "conflicting_functions",
+    "mode": "same_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18102,
+    "family": "conflicting_functions",
+    "mode": "new_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18102,
+    "family": "conflicting_functions",
+    "mode": "new_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18102,
+    "family": "input_shift",
+    "mode": "same_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18102,
+    "family": "input_shift",
+    "mode": "same_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18102,
+    "family": "input_shift",
+    "mode": "new_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18102,
+    "family": "input_shift",
+    "mode": "new_world",
+    "paired_experience_equal": true,
+    "steps": 6400
+  }
+]

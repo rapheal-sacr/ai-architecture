@@ -1,0 +1,41 @@
+{
+  "identity": {
+    "protocol_e19.json": "c4f47e6b61a1097729539555fc64756bdcacefd75fc8e98aa0cbb115faeee534",
+    "e19_procedure_continuation.py": "8cc00a29762fd5846e8197635a40eb948ac4857a9eff9072c7cb0a95684e8daa",
+    "e18_identity": {
+      "protocol_e18.json": "ebfbd5fdc5814617a32819e6bbded9fadb541aae9061636e808e78337fc8c230",
+      "e18_online_procedure.py": "2de7ec69f3dfac2295dcbe66e2cf3af971d66587dadea10a632c4d41dd168e42",
+      "protocol_e17.json": "7fc5f12c4fbaf5978040efbd637f6b5d40a6e567cea8fd48e0cbe9a7ad3a40bf",
+      "e17_persistent_student.py": "d9d69f46aea3d868a898ddccd0952a0ecca3bbdbc2545f0d02cbeb47e4071403",
+      "protocol_e9.json": "37680ac4081717ebd3c779961ff22692d08e29b540f93330a91f90021c556a37",
+      "e9_recursive_updater.py": "4041ad19047e547ffaf570956b92aed279d161a8d955977e8e92b8d53c250cd4"
+    }
+  },
+  "checks": {
+    "non_procedure_state_equal": true,
+    "first_prediction_equal": true,
+    "procedures_frozen": true,
+    "paired_experience_state_equal": true,
+    "continued_global_step": 2312,
+    "prefix_check": {
+      "prefix_batches": 37,
+      "exact_x_y_clean": true,
+      "exact_clipped_segments": true,
+      "original_last_segment": {
+        "start": 16,
+        "stop": 37,
+        "context": 2,
+        "recurring": false
+      },
+      "continuing_first_segment": {
+        "start": 0,
+        "stop": 8,
+        "context": 2,
+        "recurring": false,
+        "left_truncated": true
+      }
+    },
+    "new_student_updates": 16,
+    "new_observations_per_branch": 256
+  }
+}

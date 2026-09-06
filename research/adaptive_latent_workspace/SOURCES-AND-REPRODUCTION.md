@@ -99,3 +99,25 @@ E17 source/protocol were frozen at `6063e32`. Scored output is complete in `alw-
 E18 source/protocol were frozen at `d49a3b6`. Standalone preflight passes exact retrospective parameter replay, branch-copy equality, zero-controller proposal equality and a double-precision finite-difference meta-gradient (-0.0638097403777455 analytic versus -0.06380974037767384 numerical). Dummy end-to-end trials also exercise a trained E9 procedure. The scored run is in `alw-runs/e18`; its original logs and incomplete/completed status must be inspected before any restart. Both standalone and execution preflights add work.
 
 E18 scored execution completed. `record_e18.py` and `plot_e18.py` preserve all 32 combinations, mark four reused fixed-optimizer cases and expose the context-dependent failure. The plot was rendered and visually inspected. `results/e18_state_audit.json` verifies all 28 newly written final checkpoints: 2,304 persistent student steps, 512 retained replay examples, identical frozen procedures and changed online procedures. The report discloses incomplete peak-tensor accounting rather than interpreting the raw tracked marker as full process memory.
+
+## E19–E21 and additional prior-art audits
+
+E19 was frozen at `0352ce3` and completed in `alw-runs/e19`. Original-world
+prefixes match every observation/target exactly; final students reach 6,400
+global updates. `record_e19.py` retains all paired states and both continuation
+modes. E20 was frozen at `5b5b81f` and completed in `alw-runs/e20`;
+`record_e20.py` preserves all context/capacity cells. E21 was frozen at `b3a45ab`
+and passed its evidence-timing preflight before scored execution in
+`alw-runs/e21`. Inspect live handles or complete output before any restart.
+
+Cloned on WD: LEO at `de9a0c2a77dd7a42c1986b1eef18d184a86e294a` and HyperCL at
+`e32567889f772f8de783a437ff0beb2d426bc7b6`. Their source audits are recorded in
+`NOVELTY-AUDIT.md`. Neither repository was installed or numerically reproduced.
+
+E21 also completed. `record_e21.py` retains all 32 cases and the negative
+input-shift transfer. `plot_e20_e21.py` renders a combined constraint/repair
+figure, visually inspected. `results/e19_state_audit.json` verifies all sixteen
+final keep/revert experience-state pairs at 6,400 updates;
+`results/e20_state_audit.json` verifies all 32 final diagnostic states and every
+oracle replay code. No checkpoint has been used to introduce oracle labels into
+an inferred learner.

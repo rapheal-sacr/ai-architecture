@@ -1,0 +1,258 @@
+[
+  {
+    "seed": 20101,
+    "family": "conflicting_functions",
+    "context_mode": "inferred_ema",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20101,
+    "family": "conflicting_functions",
+    "context_mode": "inferred_ema",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20101,
+    "family": "conflicting_functions",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20101,
+    "family": "conflicting_functions",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20101,
+    "family": "input_shift",
+    "context_mode": "inferred_ema",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20101,
+    "family": "input_shift",
+    "context_mode": "inferred_ema",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20101,
+    "family": "input_shift",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20101,
+    "family": "input_shift",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20102,
+    "family": "conflicting_functions",
+    "context_mode": "inferred_ema",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20102,
+    "family": "conflicting_functions",
+    "context_mode": "inferred_ema",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20102,
+    "family": "conflicting_functions",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20102,
+    "family": "conflicting_functions",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20102,
+    "family": "input_shift",
+    "context_mode": "inferred_ema",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20102,
+    "family": "input_shift",
+    "context_mode": "inferred_ema",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20102,
+    "family": "input_shift",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20102,
+    "family": "input_shift",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20103,
+    "family": "conflicting_functions",
+    "context_mode": "inferred_ema",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20103,
+    "family": "conflicting_functions",
+    "context_mode": "inferred_ema",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20103,
+    "family": "conflicting_functions",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20103,
+    "family": "conflicting_functions",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20103,
+    "family": "input_shift",
+    "context_mode": "inferred_ema",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20103,
+    "family": "input_shift",
+    "context_mode": "inferred_ema",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20103,
+    "family": "input_shift",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20103,
+    "family": "input_shift",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20104,
+    "family": "conflicting_functions",
+    "context_mode": "inferred_ema",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20104,
+    "family": "conflicting_functions",
+    "context_mode": "inferred_ema",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20104,
+    "family": "conflicting_functions",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20104,
+    "family": "conflicting_functions",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20104,
+    "family": "input_shift",
+    "context_mode": "inferred_ema",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20104,
+    "family": "input_shift",
+    "context_mode": "inferred_ema",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  },
+  {
+    "seed": 20104,
+    "family": "input_shift",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 16,
+    "steps": 4096,
+    "parameters": 738
+  },
+  {
+    "seed": 20104,
+    "family": "input_shift",
+    "context_mode": "oracle_onehot_diagnostic",
+    "width": 64,
+    "steps": 4096,
+    "parameters": 6018
+  }
+]

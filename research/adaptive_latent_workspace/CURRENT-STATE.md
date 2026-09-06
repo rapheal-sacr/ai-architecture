@@ -2,7 +2,7 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E18 are complete; no experiment is currently running.
+E1–E21 are complete; no experiment is currently running.
 
 ## What is locally established
 
@@ -59,10 +59,27 @@ receive full supervised feedback; this does not provide their counterfactual
 action outcomes in a closed-loop environment. Memory policy, model family and
 admission rule remain fixed.
 
-There is also a causal attribution gap: E18 admission adopts both procedure and
-adapted student branch. Its gain belongs to that package. A matched continuation
-must hold student/optimizer/context/replay state fixed and keep versus revert
-the procedure to isolate persistent improvement in the learning algorithm.
+E19 now holds student/optimizer/context/replay/RNG state fixed and changes only
+the procedure. The updater matters, but its benefit depends on world and horizon:
+input-shift keeping wins 4/4 original-world continuations and 0/4 new-world
+transfers on whole-stream error. New-world late error is better after a worse
+start, without repaying that deficit at this horizon. This supports a changed
+learning tradeoff, not uniform general improvement.
+
+E20 finds a much larger conflicting-function gain from privileged context than
+from width: 82.6% versus 9.5% less mean error. Correct context raises recovery
+from 234/407 to 396/407 segments; width alone reaches 260/407. The oracle changes
+information and encoding and also repairs replay assignment, so the result
+locates a limit in the inference/assignment package rather than proving an
+irreducible identification bound.
+
+E21 completed those non-oracle changes. Faster decay plus post-outcome assignment
+reduces conflicting-function error 63.5% and raises recovery from 195/408 to
+385/408 at the same model-example count and stored learner state, with about
+4% extra runtime. Input-shift error rises 21.8%. The next proposed learned
+evidence-allocation gate is described in `INFERENCE-REVISION.md`; it is not yet
+implemented. Coupled and independently timed input/function changes must prevent
+it from merely recognizing the present two-family shortcut.
 
 ## Binding constraint and unresolved measurement
 

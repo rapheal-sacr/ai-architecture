@@ -1,0 +1,54 @@
+{
+  "identity": {
+    "protocol_e21.json": "4593f3054e8af66b869c980e3a2290056fb16036e954ad894fb5452eecae9fb0",
+    "e21_evidence_assignment.py": "da4cd844f8098e940019d1be6cecac703e634bd152116b8294e91aeebc531393",
+    "e20_context_capacity.py": "45c07bb1fd18aaa7ce7d056d81a3c6824269504e2839292c0f49a978c947ff96",
+    "protocol_e17.json": "7fc5f12c4fbaf5978040efbd637f6b5d40a6e567cea8fd48e0cbe9a7ad3a40bf",
+    "e17_persistent_student.py": "d9d69f46aea3d868a898ddccd0952a0ecca3bbdbc2545f0d02cbeb47e4071403",
+    "e18_online_procedure.py": "2de7ec69f3dfac2295dcbe66e2cf3af971d66587dadea10a632c4d41dd168e42",
+    "protocol_e9.json": "37680ac4081717ebd3c779961ff22692d08e29b540f93330a91f90021c556a37",
+    "e9_recursive_updater.py": "4041ad19047e547ffaf570956b92aed279d161a8d955977e8e92b8d53c250cd4"
+  },
+  "checks": [
+    {
+      "decay": 0.95,
+      "prior_exact": true,
+      "context_trajectory_exact": true,
+      "posterior_assignment_verified": true,
+      "costs": {
+        "student_forward_examples": 768,
+        "student_gradient_batches": 8,
+        "controller_forward_calls": 0,
+        "observed_examples": 256,
+        "replayed_examples": 224,
+        "updates": 8,
+        "reservoir_draws": 0,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 256,
+        "optimizer_step": 8
+      }
+    },
+    {
+      "decay": 0.5,
+      "prior_exact": true,
+      "context_trajectory_exact": true,
+      "posterior_assignment_verified": true,
+      "costs": {
+        "student_forward_examples": 768,
+        "student_gradient_batches": 8,
+        "controller_forward_calls": 0,
+        "observed_examples": 256,
+        "replayed_examples": 224,
+        "updates": 8,
+        "reservoir_draws": 0,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 256,
+        "optimizer_step": 8
+      }
+    }
+  ]
+}

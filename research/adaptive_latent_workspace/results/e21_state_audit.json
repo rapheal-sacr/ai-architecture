@@ -1,0 +1,114 @@
+[
+  {
+    "seed": 21101,
+    "family": "conflicting_functions",
+    "decay": 0.95,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21101,
+    "family": "conflicting_functions",
+    "decay": 0.5,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21101,
+    "family": "input_shift",
+    "decay": 0.95,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21101,
+    "family": "input_shift",
+    "decay": 0.5,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21102,
+    "family": "conflicting_functions",
+    "decay": 0.95,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21102,
+    "family": "conflicting_functions",
+    "decay": 0.5,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21102,
+    "family": "input_shift",
+    "decay": 0.95,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21102,
+    "family": "input_shift",
+    "decay": 0.5,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21103,
+    "family": "conflicting_functions",
+    "decay": 0.95,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21103,
+    "family": "conflicting_functions",
+    "decay": 0.5,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21103,
+    "family": "input_shift",
+    "decay": 0.95,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21103,
+    "family": "input_shift",
+    "decay": 0.5,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21104,
+    "family": "conflicting_functions",
+    "decay": 0.95,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21104,
+    "family": "conflicting_functions",
+    "decay": 0.5,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21104,
+    "family": "input_shift",
+    "decay": 0.95,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  },
+  {
+    "seed": 21104,
+    "family": "input_shift",
+    "decay": 0.5,
+    "same_context_data_rng": true,
+    "different_replay_context_assignment": true
+  }
+]

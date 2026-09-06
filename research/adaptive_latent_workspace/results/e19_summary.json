@@ -1,0 +1,370 @@
+[
+  {
+    "replicate": 12101,
+    "source_seed": 18101,
+    "family": "conflicting_functions",
+    "mode": "same_world",
+    "keep_mse": 0.1863344267821958,
+    "revert_mse": 0.18694724068063806,
+    "keep_recovery": 15,
+    "revert_recovery": 17,
+    "full_segments": 110,
+    "keep_quarters": [
+      0.17616979356535012,
+      0.21453473582005245,
+      0.1769077449971519,
+      0.17772543274622876
+    ],
+    "revert_quarters": [
+      0.1736996245890623,
+      0.21975967931575724,
+      0.1786965372339182,
+      0.1756331215838145
+    ]
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18102,
+    "family": "conflicting_functions",
+    "mode": "same_world",
+    "keep_mse": 0.214173286985897,
+    "revert_mse": 0.21137444016221707,
+    "keep_recovery": 23,
+    "revert_recovery": 31,
+    "full_segments": 104,
+    "keep_quarters": [
+      0.2170768197356665,
+      0.22414320010284428,
+      0.21041864193830406,
+      0.20505448616677313
+    ],
+    "revert_quarters": [
+      0.2176473574436386,
+      0.22240383746975567,
+      0.2075239204787067,
+      0.19792264525676728
+    ]
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18101,
+    "family": "conflicting_functions",
+    "mode": "same_world",
+    "keep_mse": 0.19016342524537322,
+    "revert_mse": 0.187323969937097,
+    "keep_recovery": 7,
+    "revert_recovery": 13,
+    "full_segments": 110,
+    "keep_quarters": [
+      0.1778152926817711,
+      0.2226703524502227,
+      0.1767956006588065,
+      0.18337245519069256
+    ],
+    "revert_quarters": [
+      0.18022679070782033,
+      0.21725449405130348,
+      0.1742330501547258,
+      0.17758154483453836
+    ]
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18102,
+    "family": "conflicting_functions",
+    "mode": "same_world",
+    "keep_mse": 0.21649802857700706,
+    "revert_mse": 0.21444607190551324,
+    "keep_recovery": 16,
+    "revert_recovery": 25,
+    "full_segments": 104,
+    "keep_quarters": [
+      0.21402216150818276,
+      0.22457550821491168,
+      0.21762455759380828,
+      0.20976988699112553
+    ],
+    "revert_quarters": [
+      0.22116014605853707,
+      0.22137387683687848,
+      0.21130201455162023,
+      0.20394825017501717
+    ]
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18101,
+    "family": "conflicting_functions",
+    "mode": "new_world",
+    "keep_mse": 0.23901075944468175,
+    "revert_mse": 0.2415358342395848,
+    "keep_recovery": 5,
+    "revert_recovery": 6,
+    "full_segments": 97,
+    "keep_quarters": [
+      0.2777448463712062,
+      0.24300205829786137,
+      0.21356845230911858,
+      0.22172768080054084
+    ],
+    "revert_quarters": [
+      0.27749889030747,
+      0.25273641400781344,
+      0.21678782742310432,
+      0.21912020521995146
+    ]
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18102,
+    "family": "conflicting_functions",
+    "mode": "new_world",
+    "keep_mse": 0.22745141646555567,
+    "revert_mse": 0.23298290070306393,
+    "keep_recovery": 23,
+    "revert_recovery": 26,
+    "full_segments": 108,
+    "keep_quarters": [
+      0.24184092075302033,
+      0.21713935363004566,
+      0.2322534970335255,
+      0.2185718944456312
+    ],
+    "revert_quarters": [
+      0.2540011798591877,
+      0.22816995218090597,
+      0.2357858412033238,
+      0.21397462956883828
+    ]
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18101,
+    "family": "conflicting_functions",
+    "mode": "new_world",
+    "keep_mse": 0.23560280685796897,
+    "revert_mse": 0.24243970584939234,
+    "keep_recovery": 2,
+    "revert_recovery": 5,
+    "full_segments": 97,
+    "keep_quarters": [
+      0.2694524506368907,
+      0.2552087772273808,
+      0.20731331885326654,
+      0.21043668071433785
+    ],
+    "revert_quarters": [
+      0.290405040152109,
+      0.24695889427312068,
+      0.2098255863020313,
+      0.2225693026703084
+    ]
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18102,
+    "family": "conflicting_functions",
+    "mode": "new_world",
+    "keep_mse": 0.23619962670272798,
+    "revert_mse": 0.24585093439873162,
+    "keep_recovery": 20,
+    "revert_recovery": 22,
+    "full_segments": 108,
+    "keep_quarters": [
+      0.25479783181799576,
+      0.23277228150254814,
+      0.23730640337817022,
+      0.21992199011219782
+    ],
+    "revert_quarters": [
+      0.27992273102427134,
+      0.2455483563899179,
+      0.24155496442108415,
+      0.2163776857596531
+    ]
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18101,
+    "family": "input_shift",
+    "mode": "same_world",
+    "keep_mse": 0.0027404205898022838,
+    "revert_mse": 0.005186652181521367,
+    "keep_recovery": 110,
+    "revert_recovery": 110,
+    "full_segments": 110,
+    "keep_quarters": [
+      0.0032111676703152625,
+      0.002914082361257897,
+      0.0025382214814158033,
+      0.0022982108462201722
+    ],
+    "revert_quarters": [
+      0.005496805612892786,
+      0.005236397798171311,
+      0.0050455185579494355,
+      0.004967886757071938
+    ]
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18102,
+    "family": "input_shift",
+    "mode": "same_world",
+    "keep_mse": 0.0038910961686156043,
+    "revert_mse": 0.006631456139274405,
+    "keep_recovery": 104,
+    "revert_recovery": 104,
+    "full_segments": 104,
+    "keep_quarters": [
+      0.004550369102730656,
+      0.0037714902870220612,
+      0.003644909645572625,
+      0.003597615639137075
+    ],
+    "revert_quarters": [
+      0.007715912593766916,
+      0.006263060513674645,
+      0.006439933157253108,
+      0.006106918292402952
+    ]
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18101,
+    "family": "input_shift",
+    "mode": "same_world",
+    "keep_mse": 0.002434024549486935,
+    "revert_mse": 0.004217894846107129,
+    "keep_recovery": 110,
+    "revert_recovery": 110,
+    "full_segments": 110,
+    "keep_quarters": [
+      0.0028682160668722645,
+      0.002455405881050865,
+      0.0022659943401777127,
+      0.002146481909846898
+    ],
+    "revert_quarters": [
+      0.004682908590780244,
+      0.0041486550252329835,
+      0.0040316447850727855,
+      0.004008370983342502
+    ]
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18102,
+    "family": "input_shift",
+    "mode": "same_world",
+    "keep_mse": 0.0038969979322871495,
+    "revert_mse": 0.005989450533775198,
+    "keep_recovery": 104,
+    "revert_recovery": 104,
+    "full_segments": 104,
+    "keep_quarters": [
+      0.004270239218953975,
+      0.0038850909738812334,
+      0.0037668999177640217,
+      0.003665761618549368
+    ],
+    "revert_quarters": [
+      0.006726361131882186,
+      0.005774501085511474,
+      0.0060324605930190955,
+      0.005424479324688036
+    ]
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18101,
+    "family": "input_shift",
+    "mode": "new_world",
+    "keep_mse": 0.01949077248394815,
+    "revert_mse": 0.01828938409460079,
+    "keep_recovery": 90,
+    "revert_recovery": 93,
+    "full_segments": 97,
+    "keep_quarters": [
+      0.045980543918631156,
+      0.013555806918702729,
+      0.010569068485665412,
+      0.0078576706127933
+    ],
+    "revert_quarters": [
+      0.03649633406166686,
+      0.014218122385500465,
+      0.012210167144985462,
+      0.010232912786250381
+    ]
+  },
+  {
+    "replicate": 12101,
+    "source_seed": 18102,
+    "family": "input_shift",
+    "mode": "new_world",
+    "keep_mse": 0.028827180812072584,
+    "revert_mse": 0.02877088804939376,
+    "keep_recovery": 107,
+    "revert_recovery": 108,
+    "full_segments": 108,
+    "keep_quarters": [
+      0.06794117827121227,
+      0.01940519346635483,
+      0.014814658380601031,
+      0.013147693130122207
+    ],
+    "revert_quarters": [
+      0.05422667294351413,
+      0.022132473753117665,
+      0.020122494667702995,
+      0.018601910833240254
+    ]
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18101,
+    "family": "input_shift",
+    "mode": "new_world",
+    "keep_mse": 0.01927288257343207,
+    "revert_mse": 0.018332394212109193,
+    "keep_recovery": 91,
+    "revert_recovery": 93,
+    "full_segments": 97,
+    "keep_quarters": [
+      0.044266401287131885,
+      0.01427392837467778,
+      0.010090152257362206,
+      0.008461048374556412
+    ],
+    "revert_quarters": [
+      0.036115919426265464,
+      0.015036387752843439,
+      0.012340361809037859,
+      0.009836907860290012
+    ]
+  },
+  {
+    "replicate": 12102,
+    "source_seed": 18102,
+    "family": "input_shift",
+    "mode": "new_world",
+    "keep_mse": 0.031034609259904755,
+    "revert_mse": 0.025913289755862934,
+    "keep_recovery": 107,
+    "revert_recovery": 108,
+    "full_segments": 108,
+    "keep_quarters": [
+      0.07155415487613936,
+      0.022086330007368815,
+      0.016251278501840716,
+      0.014246673654270126
+    ],
+    "revert_quarters": [
+      0.05272080197573814,
+      0.018895575793521857,
+      0.015827282605187065,
+      0.016209498649004672
+    ]
+  }
+]

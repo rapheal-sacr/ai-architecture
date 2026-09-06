@@ -3,7 +3,7 @@
 Status: **design under investigation; continuous-learning and long-horizon
 efficiency goal not yet achieved**.
 
-Current boundary: E1–E18 are complete. Protected reuse has scoped support, but
+Current boundary: E1–E21 are complete. Protected reuse has scoped support, but
 sharing, renewal and consolidation expose substantial transfer/cost limits.
 Fresh closed-loop trials reject a universal entropy-off repair. Learned planning
 still fails some cases even with accurate-model diagnostics. E18 now changes a
@@ -11,7 +11,10 @@ learning procedure online while student and experience state persist: it helps
 input shift but loses to ordinary meta-updates in three of four conflicting-
 function cases, with substantial extra cost. General continuous improvement,
 efficient long-horizon reasoning, robust memory compression and research novelty
-remain unproved.
+remain unproved. E19 confirms a horizon-dependent procedure tradeoff, and E20
+locates a major conflicting-task limit in context inference and memory assignment.
+E21 repairs much of it cheaply but worsens input-shift learning, requiring an
+evidence-allocation criterion rather than a universally faster filter.
 
 Read `FALSIFICATION.md` and `CURRENT-STATE.md` first, then `DESIGN-REVISION.md`
 and `ONLINE-PROCEDURE-DESIGN.md`. The complete architectural proposal is not an

@@ -1,3 +1,19 @@
+# Current continuation: repair inferred context and memory assignment
+
+E19 completed the keep/revert test below. Its exact-prefix, matched-student
+results show specialization and acquisition/retention tradeoffs, not uniform
+procedure improvement. Read `E19-RESULT.md`.
+
+E20 then found that privileged context helps conflicting functions much more
+than added width. E21 completed: fixed model/replay budget,
+slow versus faster context decay, and prior versus post-outcome assignment of
+training/replay examples. Predictions always precede outputs. It reduces conflicting-function error 63.5% but increases input-shift error
+21.8%. The next implementation/test is the learned causal evidence-allocation
+gate in `INFERENCE-REVISION.md`, with independent input/function change clocks.
+It is proposed, not yet implemented or registered as a scored experiment.
+
+The original E19 design is retained below as history.
+
 # Next falsification: procedure improvement or selected student trajectory?
 
 E18 is complete. All final learner states are on WD with verified hashes. The
