@@ -147,3 +147,10 @@ could reduce this overhead without removing the graph's communication-depth
 requirement. Algorithm acquisition, computation allocation, and kernel/storage
 efficiency must therefore remain separate measurements. No speed or competence
 gain from a sparse implementation is measured here.
+
+E28 directly separates available iterations from useful learned computation:
+extra steps on the same graph and weights destroy some formerly correct answers.
+More inference work is therefore not a monotonic improvement axis for this
+learned transition. The structural communication lower bound remains valid, but
+satisfying it is insufficient for a stable algorithm. No universal AI rate
+bound follows.

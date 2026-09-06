@@ -1,0 +1,110 @@
+[
+  {
+    "seed": 27101,
+    "source_arm": "short_online",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  },
+  {
+    "seed": 27101,
+    "source_arm": "short_replay",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  },
+  {
+    "seed": 27101,
+    "source_arm": "size_online",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  },
+  {
+    "seed": 27101,
+    "source_arm": "size_replay",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  },
+  {
+    "seed": 27102,
+    "source_arm": "short_online",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  },
+  {
+    "seed": 27102,
+    "source_arm": "short_replay",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  },
+  {
+    "seed": 27102,
+    "source_arm": "size_online",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  },
+  {
+    "seed": 27102,
+    "source_arm": "size_replay",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  },
+  {
+    "seed": 27103,
+    "source_arm": "short_online",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  },
+  {
+    "seed": 27103,
+    "source_arm": "short_replay",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  },
+  {
+    "seed": 27103,
+    "source_arm": "size_online",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  },
+  {
+    "seed": 27103,
+    "source_arm": "size_replay",
+    "state_hash_verified": true,
+    "all_original_predictions_exact": true,
+    "grid_cells": 72,
+    "unique_queries": 1728,
+    "work_counts_exact": true
+  }
+]

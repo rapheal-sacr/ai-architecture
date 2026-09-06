@@ -209,3 +209,11 @@ The reasoning figure was rendered and inspected. The source CLRS functions are
 reference labels through the small adapter, not a published-score replication.
 The descriptive distance-bucket analysis uses already-recorded final predictions;
 it is labeled post-hoc and never changes training or the registered criteria.
+
+E28 was frozen at `0105e35` and completed all twelve source checkpoints.
+`record_e28.py` verifies checkpoint/data hashes and loaded state hashes, all
+original-budget predictions, all 864 grid-cell counters and primary-policy row
+identity. All twelve inference runs separately check unchanged torch/CUDA RNG
+and model state. The depth-response figure was rendered and inspected. No source
+algorithm or published result was newly reproduced; this is an intervention on
+our frozen E27 states.

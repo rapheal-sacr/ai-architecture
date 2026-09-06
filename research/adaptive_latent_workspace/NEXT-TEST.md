@@ -1,21 +1,16 @@
-# Current continuation: diagnose frozen computation depth
+# Current continuation: train for recurrence-depth robustness
 
-E27 is complete and audited. Read `E27-RESULT.md` before another design revision.
-Longer recurrence learns N16 chains but fails N64 whole-graph transfer, while
-random-task acquisition remains below the declared threshold. No ongoing run
-needs restarting. E28 is not yet implemented or registered.
+E28 is complete and audited. Extra recurrence damages familiar-length answers
+and does not repair N64 transfer. Read `E28-RESULT.md` before another change.
+The next bounded training test should compare fixed16, fixed24 and variable
+16–32 recurrence with exactly matched mean message work for the latter pair,
+using fresh seeds, the same model, persistent optimizer and replay, identical
+current observations, and the Dijkstra/Prim/Dijkstra sequence. Charge every
+backward pass, replay sample and evaluation budget. Do not call the variable
+schedule recursive self-improvement; it is a fixed training policy.
 
-Freeze a diagnostic using the existing final checkpoints and multiple explicit
-inference depths, separating input size from recurrence length. Primary usable
-controls should include the fixed training depth and public node-count budgets.
-Report all source seeds and arms, charge every query, and verify weights,
-optimizer, memory and RNG remain unchanged. Any best-depth choice based on gold
-answers is only a privileged diagnostic, never an agent capability. No new
-training, test-based checkpoint selection or admission policy should enter this
-attribution test.
-
-Use the outcome to distinguish too little recurrence from damage caused by
-running a learned transition beyond its training depth. Neither alone isolates
-optimization versus representation. Randomized-depth training and training-only
-intermediate supervision are later controlled hypotheses, not automatic repairs.
-A graph-only pilot remains insufficient for the full architecture goal.
+Pre-register public-N, fixed24 and public-2N evaluation without target-dependent
+halting. Retain all failed acquisitions and N64 results. Randomized recurrence
+is prior art described in the supplied TTC-LR paper; this is a bounded transfer
+of an idea, not a faithful Raven reproduction or novelty claim. E29 has not yet
+been implemented, frozen or scored.

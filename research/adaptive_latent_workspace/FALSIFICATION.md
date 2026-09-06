@@ -154,3 +154,26 @@ predictions include every failure. The next bounded diagnostic should change
 inference depth on frozen checkpoints before changing training. No E28 protocol
 or run is yet registered. Full integrated learning, compression, reliable RSI
 and architectural novelty remain unproven.
+
+## E28: extra recurrence directly destroys some learned answers
+
+All twelve E27 final checkpoints completed the frozen-depth grid from `0105e35`.
+All original predictions reproduce exactly; loaded checkpoint states, model
+weights, memory, optimizer, RNG and source files remain unchanged. The grid
+executes 20,736 graph queries and 1,548,288,000 forward message candidates.
+
+Doubling public-N depth improves whole-graph accuracy in zero of 144 source/
+task/size/family cells and worsens it in 24; the others tie. These are correlated
+cells, not 144 independent experiments. Size/replay's N16 chain Dijkstra
+accuracy falls from 100% at 16 steps to 27.8% at 32, 9.7% at 64 and 5.6% at
+128. Size/no-replay falls from 97.2% to 18.1%, 15.3% and 12.5%. No frozen depth
+restores N64 whole-graph performance in the reported primary comparisons.
+
+Thus this failure is not solely a shortage of permitted inference steps: extra
+steps can damage an answer on the same input with identical weights. Fixed
+training-depth specialization, optimization and learned transition stability
+remain unresolved causes. Randomized-depth training is a source-motivated next
+hypothesis, not an established repair. Compare it with an equal-message-work
+fixed-depth control before attributing any gain to the distribution of depths.
+Read `E28-RESULT.md`. No result establishes general reasoning, efficient continual
+learning or reliable recursive improvement.
