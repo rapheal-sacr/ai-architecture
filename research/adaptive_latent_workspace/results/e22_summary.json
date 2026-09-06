@@ -1,0 +1,1096 @@
+{
+  "rows": [
+    {
+      "family": "conflicting_functions",
+      "arm": "slow_prior",
+      "mean_mse": 0.21488215506872166,
+      "recovered": 228,
+      "segments": 420,
+      "short_segments": 0,
+      "seconds": 5.290631996249431,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.20414570099273988,
+        0.20619932753515968,
+        0.2287985255084095,
+        0.22038506623857756
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "conflicting_functions",
+      "arm": "fast_prior",
+      "mean_mse": 0.08029610319891844,
+      "recovered": 411,
+      "segments": 420,
+      "short_segments": 0,
+      "seconds": 5.274273706494569,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.1138804151100885,
+        0.07104835238646956,
+        0.07009933643485056,
+        0.06615630886426516
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "conflicting_functions",
+      "arm": "fast_posterior",
+      "mean_mse": 0.07119877951271292,
+      "recovered": 416,
+      "segments": 420,
+      "short_segments": 0,
+      "seconds": 5.505522047998966,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.10270409922850376,
+        0.06160984791813462,
+        0.06189049516410705,
+        0.058590675740106235
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "conflicting_functions",
+      "arm": "fixed_mixture",
+      "mean_mse": 0.11114105084811854,
+      "recovered": 403,
+      "segments": 420,
+      "short_segments": 0,
+      "seconds": 5.892222102997039,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71472,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "gate_forward_calls": 0,
+        "gate_gradient_calls": 0,
+        "student_backward_for_gate": 0,
+        "gate_parameters": 0
+      },
+      "quarter_mse": [
+        0.1388639958654494,
+        0.10104005605717248,
+        0.10398328117116762,
+        0.10067687029868466
+      ],
+      "gate_quarters": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "family": "conflicting_functions",
+      "arm": "learned_gate",
+      "mean_mse": 0.08556156911487278,
+      "recovered": 406,
+      "segments": 420,
+      "short_segments": 0,
+      "seconds": 10.260565321754257,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 72268,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "gate_forward_calls": 4096,
+        "gate_gradient_calls": 4096,
+        "student_backward_for_gate": 4096,
+        "gate_parameters": 65
+      },
+      "quarter_mse": [
+        0.13039202542358908,
+        0.07380119743402247,
+        0.07119761166018179,
+        0.06685544194169779
+      ],
+      "gate_quarters": [
+        0.6386039220851671,
+        0.9494889041525312,
+        0.9882613182271598,
+        0.9843724073871272
+      ]
+    },
+    {
+      "family": "input_shift",
+      "arm": "slow_prior",
+      "mean_mse": 0.01126576877003771,
+      "recovered": 420,
+      "segments": 420,
+      "short_segments": 0,
+      "seconds": 5.277497981500346,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.028121055266296935,
+        0.007066142099887429,
+        0.005282726563024198,
+        0.004593151150942276
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "input_shift",
+      "arm": "fast_prior",
+      "mean_mse": 0.012683391973833835,
+      "recovered": 420,
+      "segments": 420,
+      "short_segments": 0,
+      "seconds": 5.277842129751662,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.03120487575944253,
+        0.008093597369594363,
+        0.006090766142307302,
+        0.005344328623991146
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "input_shift",
+      "arm": "fast_posterior",
+      "mean_mse": 0.012720154552134488,
+      "recovered": 420,
+      "segments": 420,
+      "short_segments": 0,
+      "seconds": 5.499279016501532,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.031317093716040745,
+        0.008167216696790547,
+        0.0059845713899733255,
+        0.005411736405733336
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "input_shift",
+      "arm": "fixed_mixture",
+      "mean_mse": 0.012209726275152377,
+      "recovered": 420,
+      "segments": 420,
+      "short_segments": 0,
+      "seconds": 5.877140485998098,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71472,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "gate_forward_calls": 0,
+        "gate_gradient_calls": 0,
+        "student_backward_for_gate": 0,
+        "gate_parameters": 0
+      },
+      "quarter_mse": [
+        0.029554520287717878,
+        0.0076097199170135355,
+        0.006171178599203131,
+        0.005503486296674964
+      ],
+      "gate_quarters": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "family": "input_shift",
+      "arm": "learned_gate",
+      "mean_mse": 0.011753277369805915,
+      "recovered": 420,
+      "segments": 420,
+      "short_segments": 0,
+      "seconds": 10.24511558550148,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 72268,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "gate_forward_calls": 4096,
+        "gate_gradient_calls": 4096,
+        "student_backward_for_gate": 4096,
+        "gate_parameters": 65
+      },
+      "quarter_mse": [
+        0.029087080063789017,
+        0.007229251387400382,
+        0.005733026341658842,
+        0.004963751686375417
+      ],
+      "gate_quarters": [
+        0.23010381077983766,
+        0.04584843991227672,
+        0.020248775011623366,
+        0.027022406667136067
+      ]
+    },
+    {
+      "family": "coupled_shift",
+      "arm": "slow_prior",
+      "mean_mse": 0.060268718940477584,
+      "recovered": 397,
+      "segments": 407,
+      "short_segments": 0,
+      "seconds": 5.255175512498681,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.0968202846136137,
+        0.05123312464331775,
+        0.04875995607949335,
+        0.04426151042548554
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "coupled_shift",
+      "arm": "fast_prior",
+      "mean_mse": 0.05852633943797514,
+      "recovered": 402,
+      "segments": 407,
+      "short_segments": 0,
+      "seconds": 5.263999321497977,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.09322802205633707,
+        0.04882913847450254,
+        0.04832463452783031,
+        0.04372356269323063
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "coupled_shift",
+      "arm": "fast_posterior",
+      "mean_mse": 0.06138384363718785,
+      "recovered": 404,
+      "segments": 407,
+      "short_segments": 0,
+      "seconds": 5.532168464251299,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.09013430831805636,
+        0.05326827467615658,
+        0.05289144759518649,
+        0.04924134395935198
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "coupled_shift",
+      "arm": "fixed_mixture",
+      "mean_mse": 0.05872980064717126,
+      "recovered": 401,
+      "segments": 407,
+      "short_segments": 0,
+      "seconds": 5.885200742253801,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71472,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "gate_forward_calls": 0,
+        "gate_gradient_calls": 0,
+        "student_backward_for_gate": 0,
+        "gate_parameters": 0
+      },
+      "quarter_mse": [
+        0.09709638011088373,
+        0.049564658371195947,
+        0.04655624244151113,
+        0.04170192166509423
+      ],
+      "gate_quarters": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "family": "coupled_shift",
+      "arm": "learned_gate",
+      "mean_mse": 0.05666530126748626,
+      "recovered": 400,
+      "segments": 407,
+      "short_segments": 0,
+      "seconds": 10.333814504003385,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 72268,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "gate_forward_calls": 4096,
+        "gate_gradient_calls": 4096,
+        "student_backward_for_gate": 4096,
+        "gate_parameters": 65
+      },
+      "quarter_mse": [
+        0.09671804332140255,
+        0.04675089161787582,
+        0.04349983420138415,
+        0.03969243592928251
+      ],
+      "gate_quarters": [
+        0.4954604460072005,
+        0.7192551296757301,
+        0.7652165845356649,
+        0.7276873181199335
+      ]
+    },
+    {
+      "family": "independent_shift",
+      "arm": "slow_prior",
+      "mean_mse": 0.2406441991408883,
+      "recovered": 237,
+      "segments": 811,
+      "short_segments": 36,
+      "seconds": 5.274363684253331,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.23031529626041447,
+        0.23410106023311528,
+        0.2513911029054725,
+        0.24676933716455096
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "independent_shift",
+      "arm": "fast_prior",
+      "mean_mse": 0.13079879314665277,
+      "recovered": 545,
+      "segments": 811,
+      "short_segments": 36,
+      "seconds": 5.2834778447504505,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.17545405087389554,
+        0.12314110874422113,
+        0.11640868437098106,
+        0.10819132859751335
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "independent_shift",
+      "arm": "fast_posterior",
+      "mean_mse": 0.1158482812817283,
+      "recovered": 606,
+      "segments": 811,
+      "short_segments": 36,
+      "seconds": 5.519249960754678,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.15892353423282657,
+        0.10830056845475156,
+        0.1012322427577601,
+        0.09493677968157499
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "independent_shift",
+      "arm": "fixed_mixture",
+      "mean_mse": 0.1713938603414249,
+      "recovered": 430,
+      "segments": 811,
+      "short_segments": 36,
+      "seconds": 5.890312499999709,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71472,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "gate_forward_calls": 0,
+        "gate_gradient_calls": 0,
+        "student_backward_for_gate": 0,
+        "gate_parameters": 0
+      },
+      "quarter_mse": [
+        0.1985590645110733,
+        0.16514174440635543,
+        0.16394378786208108,
+        0.15793084458618978
+      ],
+      "gate_quarters": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "family": "independent_shift",
+      "arm": "learned_gate",
+      "mean_mse": 0.14683179009870173,
+      "recovered": 496,
+      "segments": 811,
+      "short_segments": 36,
+      "seconds": 10.291267422249803,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 72268,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "gate_forward_calls": 4096,
+        "gate_gradient_calls": 4096,
+        "student_backward_for_gate": 4096,
+        "gate_parameters": 65
+      },
+      "quarter_mse": [
+        0.19648837363160965,
+        0.14685264979334534,
+        0.12564767695130286,
+        0.11833846001854909
+      ],
+      "gate_quarters": [
+        0.47955245410412317,
+        0.7180211221057107,
+        0.8889593608691939,
+        0.9537892067310167
+      ]
+    },
+    {
+      "family": "alternating_dependency",
+      "arm": "slow_prior",
+      "mean_mse": 0.14298656596368176,
+      "recovered": 333,
+      "segments": 622,
+      "short_segments": 23,
+      "seconds": 5.294166233499709,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.13841008593630022,
+        0.13044623242706166,
+        0.1514948049209579,
+        0.15159514057040724
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "alternating_dependency",
+      "arm": "fast_prior",
+      "mean_mse": 0.10071722199234046,
+      "recovered": 418,
+      "segments": 622,
+      "short_segments": 23,
+      "seconds": 5.30086743575157,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.12610559723236747,
+        0.0935414779344228,
+        0.09415000841204346,
+        0.08907180439052809
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "alternating_dependency",
+      "arm": "fast_posterior",
+      "mean_mse": 0.0889177536529786,
+      "recovered": 457,
+      "segments": 622,
+      "short_segments": 23,
+      "seconds": 5.53274219949526,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71328,
+        "replay_size": 512,
+        "optimizer_step": 4096
+      },
+      "quarter_mse": [
+        0.11589108359606826,
+        0.08221113610034081,
+        0.0820860237049601,
+        0.07548277121054525
+      ],
+      "gate_quarters": null
+    },
+    {
+      "family": "alternating_dependency",
+      "arm": "fixed_mixture",
+      "mean_mse": 0.11288104518047248,
+      "recovered": 392,
+      "segments": 622,
+      "short_segments": 23,
+      "seconds": 5.91989540124996,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 71472,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "gate_forward_calls": 0,
+        "gate_gradient_calls": 0,
+        "student_backward_for_gate": 0,
+        "gate_parameters": 0
+      },
+      "quarter_mse": [
+        0.1300328230050809,
+        0.10157954442695427,
+        0.11165810345801219,
+        0.10825370983184257
+      ],
+      "gate_quarters": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "family": "alternating_dependency",
+      "arm": "learned_gate",
+      "mean_mse": 0.12368179639315713,
+      "recovered": 360,
+      "segments": 622,
+      "short_segments": 23,
+      "seconds": 10.294537931749801,
+      "costs": {
+        "student_forward_examples": 393184,
+        "student_gradient_batches": 4096,
+        "controller_forward_calls": 0,
+        "observed_examples": 131072,
+        "replayed_examples": 131040,
+        "updates": 4096,
+        "reservoir_draws": 130560,
+        "student_parameters": 738,
+        "controller_parameters": 0,
+        "stored_tensor_bytes": 72268,
+        "replay_size": 512,
+        "optimizer_step": 4096,
+        "gate_forward_calls": 4096,
+        "gate_gradient_calls": 4096,
+        "student_backward_for_gate": 4096,
+        "gate_parameters": 65
+      },
+      "quarter_mse": [
+        0.13433239404025699,
+        0.11945988009870234,
+        0.12653758997021214,
+        0.11439732146345705
+      ],
+      "gate_quarters": [
+        0.23352863078957853,
+        0.16286012781802128,
+        0.2952379914027006,
+        0.41727991295783795
+      ]
+    }
+  ],
+  "alternating_phases": {
+    "slow_prior": [
+      {
+        "phase": 0,
+        "function_changes_active": false,
+        "mean_mse": 0.03193642153962628,
+        "mean_gate": null
+      },
+      {
+        "phase": 1,
+        "function_changes_active": true,
+        "mean_mse": 0.24488375033297416,
+        "mean_gate": null
+      },
+      {
+        "phase": 2,
+        "function_changes_active": false,
+        "mean_mse": 0.04929789101311144,
+        "mean_gate": null
+      },
+      {
+        "phase": 3,
+        "function_changes_active": true,
+        "mean_mse": 0.21159457384101188,
+        "mean_gate": null
+      },
+      {
+        "phase": 4,
+        "function_changes_active": false,
+        "mean_mse": 0.060341131295899686,
+        "mean_gate": null
+      },
+      {
+        "phase": 5,
+        "function_changes_active": true,
+        "mean_mse": 0.24264847854601612,
+        "mean_gate": null
+      },
+      {
+        "phase": 6,
+        "function_changes_active": false,
+        "mean_mse": 0.0610069560239026,
+        "mean_gate": null
+      },
+      {
+        "phase": 7,
+        "function_changes_active": true,
+        "mean_mse": 0.24218332511691187,
+        "mean_gate": null
+      }
+    ],
+    "fast_prior": [
+      {
+        "phase": 0,
+        "function_changes_active": false,
+        "mean_mse": 0.0343274751660374,
+        "mean_gate": null
+      },
+      {
+        "phase": 1,
+        "function_changes_active": true,
+        "mean_mse": 0.21788371929869754,
+        "mean_gate": null
+      },
+      {
+        "phase": 2,
+        "function_changes_active": false,
+        "mean_mse": 0.047859564858299564,
+        "mean_gate": null
+      },
+      {
+        "phase": 3,
+        "function_changes_active": true,
+        "mean_mse": 0.13922339101054604,
+        "mean_gate": null
+      },
+      {
+        "phase": 4,
+        "function_changes_active": false,
+        "mean_mse": 0.05294917288119905,
+        "mean_gate": null
+      },
+      {
+        "phase": 5,
+        "function_changes_active": true,
+        "mean_mse": 0.13535084394288788,
+        "mean_gate": null
+      },
+      {
+        "phase": 6,
+        "function_changes_active": false,
+        "mean_mse": 0.05303627548641998,
+        "mean_gate": null
+      },
+      {
+        "phase": 7,
+        "function_changes_active": true,
+        "mean_mse": 0.1251073332946362,
+        "mean_gate": null
+      }
+    ],
+    "fast_posterior": [
+      {
+        "phase": 0,
+        "function_changes_active": false,
+        "mean_mse": 0.03499090657567194,
+        "mean_gate": null
+      },
+      {
+        "phase": 1,
+        "function_changes_active": true,
+        "mean_mse": 0.19679126061646457,
+        "mean_gate": null
+      },
+      {
+        "phase": 2,
+        "function_changes_active": false,
+        "mean_mse": 0.04250454546217952,
+        "mean_gate": null
+      },
+      {
+        "phase": 3,
+        "function_changes_active": true,
+        "mean_mse": 0.1219177267385021,
+        "mean_gate": null
+      },
+      {
+        "phase": 4,
+        "function_changes_active": false,
+        "mean_mse": 0.04459103257886454,
+        "mean_gate": null
+      },
+      {
+        "phase": 5,
+        "function_changes_active": true,
+        "mean_mse": 0.11958101483105565,
+        "mean_gate": null
+      },
+      {
+        "phase": 6,
+        "function_changes_active": false,
+        "mean_mse": 0.0441125122865742,
+        "mean_gate": null
+      },
+      {
+        "phase": 7,
+        "function_changes_active": true,
+        "mean_mse": 0.1068530301345163,
+        "mean_gate": null
+      }
+    ],
+    "fixed_mixture": [
+      {
+        "phase": 0,
+        "function_changes_active": false,
+        "mean_mse": 0.032398124321616706,
+        "mean_gate": 0.5
+      },
+      {
+        "phase": 1,
+        "function_changes_active": true,
+        "mean_mse": 0.2276675216885451,
+        "mean_gate": 0.5
+      },
+      {
+        "phase": 2,
+        "function_changes_active": false,
+        "mean_mse": 0.042621735568900476,
+        "mean_gate": 0.5
+      },
+      {
+        "phase": 3,
+        "function_changes_active": true,
+        "mean_mse": 0.16053735328500807,
+        "mean_gate": 0.5
+      },
+      {
+        "phase": 4,
+        "function_changes_active": false,
+        "mean_mse": 0.05296967630783911,
+        "mean_gate": 0.5
+      },
+      {
+        "phase": 5,
+        "function_changes_active": true,
+        "mean_mse": 0.17034653060818528,
+        "mean_gate": 0.5
+      },
+      {
+        "phase": 6,
+        "function_changes_active": false,
+        "mean_mse": 0.05097204708317804,
+        "mean_gate": 0.5
+      },
+      {
+        "phase": 7,
+        "function_changes_active": true,
+        "mean_mse": 0.1655353725805071,
+        "mean_gate": 0.5
+      }
+    ],
+    "learned_gate": [
+      {
+        "phase": 0,
+        "function_changes_active": false,
+        "mean_mse": 0.031968723469162796,
+        "mean_gate": 0.2926272834192787
+      },
+      {
+        "phase": 1,
+        "function_changes_active": true,
+        "mean_mse": 0.23669606461135118,
+        "mean_gate": 0.17442997815987837
+      },
+      {
+        "phase": 2,
+        "function_changes_active": false,
+        "mean_mse": 0.04332624405469687,
+        "mean_gate": 0.1459187868765639
+      },
+      {
+        "phase": 3,
+        "function_changes_active": true,
+        "mean_mse": 0.1955935161427078,
+        "mean_gate": 0.17980146875947867
+      },
+      {
+        "phase": 4,
+        "function_changes_active": false,
+        "mean_mse": 0.05494710010862036,
+        "mean_gate": 0.23738614916510414
+      },
+      {
+        "phase": 5,
+        "function_changes_active": true,
+        "mean_mse": 0.19812807983180392,
+        "mean_gate": 0.353089833640297
+      },
+      {
+        "phase": 6,
+        "function_changes_active": false,
+        "mean_mse": 0.05318506336698192,
+        "mean_gate": 0.30825316120899515
+      },
+      {
+        "phase": 7,
+        "function_changes_active": true,
+        "mean_mse": 0.17560957955993217,
+        "mean_gate": 0.5263066647066807
+      }
+    ]
+  }
+}

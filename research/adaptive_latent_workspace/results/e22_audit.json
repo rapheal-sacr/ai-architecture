@@ -1,0 +1,815 @@
+{
+  "source_identity": {
+    "protocol_e22.json": "e84b4f96c6d48794b0ce34668e712ba5113e92f83b45cef5f47578261794bf35",
+    "e22_learned_evidence.py": "278c26ec77dc7646e6dadfb21ef1bb79618dc30eff39dfc4bd140a0c1ae5bf90",
+    "protocol_e17.json": "7fc5f12c4fbaf5978040efbd637f6b5d40a6e567cea8fd48e0cbe9a7ad3a40bf",
+    "e17_persistent_student.py": "d9d69f46aea3d868a898ddccd0952a0ecca3bbdbc2545f0d02cbeb47e4071403",
+    "e18_online_procedure.py": "2de7ec69f3dfac2295dcbe66e2cf3af971d66587dadea10a632c4d41dd168e42",
+    "e21_evidence_assignment.py": "da4cd844f8098e940019d1be6cecac703e634bd152116b8294e91aeebc531393",
+    "protocol_e9.json": "37680ac4081717ebd3c779961ff22692d08e29b540f93330a91f90021c556a37",
+    "e9_recursive_updater.py": "4041ad19047e547ffaf570956b92aed279d161a8d955977e8e92b8d53c250cd4"
+  },
+  "cases": [
+    {
+      "seed": 22101,
+      "family": "conflicting_functions",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "56ec00c38aa9c293db26eac66aa3e4a38b62152b18284fab8998e7605df7236d",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "conflicting_functions",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "cd302fa106685668a8ab24805d91293aecbb9f757bffeb53e77a69d058afbbd0",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "conflicting_functions",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "5e89cb130d987a74121ff70ce5d9ed067c5cbb536c8d517d6917a70858fb79e7",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "conflicting_functions",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "45eda7e559fbdd686821f14f74082afb4815a002ab343112e15c8473ca91af9c",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "conflicting_functions",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "b0569079495dc9460713ea143c839a20c9eaf005ef044772c4bbf13989c3057d",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "input_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "1108b35bcc62076a6b1f0d25e454c6dc8156a478fc1049b9b1ffd5a6e4d880a8",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "input_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "e93e67e8eb61d58129f81b047a62e00ec22d145f1f5ed704175335ed277dd11c",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "input_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "59a82f046971ca7ad0b1c76747ed92c6e07462fe4f5fbf93ddb670fb58940d71",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "input_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "a01adff868d99ef96d72fb789d2a39e322d8580db16b8de5065f3896c72bf762",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "input_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "eec814a16b587fc09c6fc2da6a447f3a76c1865e1df41eec6eb499607d0e28ac",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "coupled_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "67a3741ef358aab50dfc0e60b6c6aa55b6dfc76c32efa59d14cab121acf30a33",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "coupled_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "8df3f05eb8fd3c12e28e533c2e4099d061ed2e52d9de718bdd8a807fdb18161c",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "coupled_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "f86ddfc0eca27bd22312e7dbb8ebf6fce5ccc4a3b2f8eb326922b4c018d00e66",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "coupled_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "46a8f5c8e708b63cf0d80c976b6feaf809159f3c68fb211d07ed008120f89b81",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "coupled_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "e7328fd118201278290ca8c6ca89960a434377fcae671810e9c670a9462ede5d",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "independent_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "e7d7a2ad5cab4ca27cdb8d816a257404657de002c7702ba461efde5da9bc470d",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "independent_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "54af8e696ac0ee0aea8742cb802a96e10688e0bc791931d7a20f64ef538ef2c1",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "independent_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "306854f5a01bb2a4937631872ec9529f1e0524d505a77b44edacbf3c9ac5664e",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "independent_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "0795486de0f1f3576add9b39d346a1b1807e2e3593e9a3db77962a05c9b0040e",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "independent_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "4ebadd84f34d1b221cf5a51dd618803ab41576fb6b4a62345cd0f3415b5a0437",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "alternating_dependency",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "e6c9b7bad54a78985453eca865baa0392e9d2ce121cb2b66657addf8dccc9e67",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "alternating_dependency",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "8ceae923c23c8f788d5f6994a7cba3ed260d52706e14342bd0c75bcecb74b708",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "alternating_dependency",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "969b7a676152894f2987282b49ba2fc3dc953c6fe93b122eb8c9421dad66df82",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "alternating_dependency",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "1e278d2c459c7550f3a708b52440056511778950f3a82677b3711682e4880d4f",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22101,
+      "family": "alternating_dependency",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "62c8ac46a2666c55511bf1e0acbd634b4c6c7a8130fb49fb36eece0377761e00",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "conflicting_functions",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "0f8f0c81ffa5eebd094a83ac152fd79d7f413cad740cb471933024eb0f9b6511",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "conflicting_functions",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "2e02b11d03911435b427632271668d0aa95a2b7738332c240e840726b540e214",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "conflicting_functions",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "9ada9cd389133079e282e92fc15d8d04eb7ce9beea3c807092a98028252df203",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "conflicting_functions",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "e4123076bc561fda3f30a720e71d3fb6661415948f57f4f7c7a2a388f45c0194",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "conflicting_functions",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "e03ec0334dbe78e9c63117278efd152f89e8915d12ef4e2aee294a0544e78068",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "input_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "0243f86017fdd45c94424dae88b405623ad5c997cb73e34d215a36a79d3264dd",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "input_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "16cea73f942091dba17c67d8b4d081040f15750c0a2bc98ac847d786d2cf92a1",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "input_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "48424490e5f85fb94f947ba392b86eec9462ed8361f69fd4751bdb3d9ec91bf7",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "input_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "727877f39da51cb3d572ae4e5aef7a2dc56ab25bd9dda2565da91f0639be2c4c",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "input_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "836f9d1f1ee5253859c19b2cfb610d489ba5aaedbf6ba417adbfbb6fd5de99b5",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "coupled_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "ee8ca78f274ebfe05872119bd29ef490e90d83472e7ed924a239ad6552c394e7",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "coupled_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "572ac4b69a601993a0e3ba3f7dfc59bac73d17b2a5e1eda9edb3de48612ad2a4",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "coupled_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "b0622f3f3c3c572bdd640be76592201301eba0426b47e4dae64d8ccd65efc470",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "coupled_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "e8c347ad042e74391a452435eccaab738b75a84e99bb8f5ed0df406c81e994e3",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "coupled_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "0701a33d9104e4f9b8489d117218c5b982e4a00ac4ca8c68924a2b235067274c",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "independent_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "4a0f81756f8e062478b944aabd324e82206f8fc7dc21bc0a57d9405c07fc7dd8",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "independent_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "e6507fd163114f0694312ac9d3b39669b1bc98332981aaabbf22e67fecd16fb2",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "independent_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "31c58f6339646e2ced7ff3bcedabeb1d3918d7f0997afbd827e8763fde811ea0",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "independent_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "c448ae2dca5c02261c6b2fdf448329c5495d2e06507720fb210616f5776843d4",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "independent_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "051923329845525f98b356a3758297d2dec1d3e12a39bb1d29f9a9d4e6c89f2c",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "alternating_dependency",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "3e440f77a6ab1ead8145999f6acd803b4e6855f9b92c74e3b1b261093889ec2a",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "alternating_dependency",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "72794af6716cc40d66c880bfa844da2a3082f70db516e4f4367cb8d083cf18f1",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "alternating_dependency",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "ff7a04c0a3bcedb3391ccebb746efd9f0348829668f4f4d9a7d5d85b9eba3302",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "alternating_dependency",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "3a28af4e967206b3fd9ef75e439e75b577d1b5cf3278701216fbb40811a3de5c",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22102,
+      "family": "alternating_dependency",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "65cb31699d70c10de34fb15316d6e99a0638cad79051bc9d3b5c6a0f06841e23",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "conflicting_functions",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "0e93c0be62f4c49cbe24deff2dc87371cdfd1f85ef4cb5ea19222282542ae595",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "conflicting_functions",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "f9c39b58537d8b20ba9a1aab465aab4c54fc7a8f8b7bd63db670d24a2a4750a0",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "conflicting_functions",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "234f6496791b9c986eeefe1e87fa06beb040178296b80883883d5346e56292ff",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "conflicting_functions",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "51780987a575e7c059754d8019ca4723733cc79f59a559cfb4d8a196dabdc324",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "conflicting_functions",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "085b1fb68123d993c07833aed6bbb0ec4a40224ca8cf8c1cdc1d5fb36012464c",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "input_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "952547857e806758f2695f144681abb1f9120ef7351c7f8a3f2b10eed4a1cd9a",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "input_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "0a789d24f3a5974609886956a926a47475517dccac1544465f6427549969677c",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "input_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "5c59ea41b64f457647694ddfe5923c60c9511003c60b703b581b245daced902a",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "input_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "315e339cb34f7859562ba808450f9c04b8ed7a2f0433100685917aa6fc64e662",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "input_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "591a6c84a3e2b75df38e6d8667cbb8a5073cf6d986dab0c085de70bce8d7cc67",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "coupled_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "9b1e541cf3b3d6c1917c6e2c02975b2d8a4320291c12cecba43b72b8edc448bd",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "coupled_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "18f6d718ce655b7eb99e948f26df1529a9190f08670a2bf7fb48951d8fe04ed0",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "coupled_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "74c7f3a45f7eeda67d21e9cefde65bd309a5f7d2cb6c12bf01ae4fb99ea30661",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "coupled_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "1ce96967a8572a427b624ff5a18e1269e67b395729336c3d83039b00c04f2179",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "coupled_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "5894f86f6b53ff16b59e45b1f7deeb09a3399848a106506acfbc24b870a40f69",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "independent_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "23e69541dd13a6892104d9334e19ba15b94c94e57da090e9c55bd7f453cb62cc",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "independent_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "b8f112122c0a2d81502390880bd507d0bb65ab92e53cd0a0aed59dc4d36c1601",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "independent_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "cdb96d2cbb1897f903d789a329033d695e6aca5adb57710b3b46fc43fa45329d",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "independent_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "8016000216ed7fae1828815f8beadad9e7fd00a1bf74f70796e9512a48356e56",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "independent_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "f6e3735e5c9dd95a26ebd75ad733db8d04b3b7a856a57d809264d46536fdeb63",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "alternating_dependency",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "d6c66f631c2cd1f79817684aab86cb2d7df36ca2e9aaed6fa287e4a292af9bcb",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "alternating_dependency",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "2e28e967bcfb38f0f1b2df556ba71aaca9a02210a35d18fcd11389cf37669314",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "alternating_dependency",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "f8840163fef65b4b8708539f175943df43150b65dd815a8f0720678f7944c603",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "alternating_dependency",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "127e308c7928b3125264447b2b22ce140c9cc1a188949f37acb90dc1d52378da",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22103,
+      "family": "alternating_dependency",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "860447789c1556136bf407b328317653df33e155f9fabb923a8f923f8d0c3c8b",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "conflicting_functions",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "076fea6e43311c29a95a2bd5e13e5ed98cdb8323778b54b382863381cf5cbdfd",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "conflicting_functions",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "e57caacb0114522984a1c39c544acdc2c7f1a9be91c337d5febffb0d59a760f7",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "conflicting_functions",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "a5e035bc4e4128709fb54f7bd653b81f72711da938ee7c43c8b26ecad355abd8",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "conflicting_functions",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "f6708c28baddba8c498e3bf266cf6508c6c4d5b67c487b4d466c1c061626d1a3",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "conflicting_functions",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "a8c7fca4d6bcf52947044977023372b9ec7f15759e23ac02fd3d07be53640886",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "input_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "5fb7bc9c2111ffef3d003acface75b010e7eb2e930bed6b7a24ab258f801d2ee",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "input_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "37e326e474c6c95478d06694fab5e409355816a164c33224fa9f56b7b1969ca4",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "input_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "af8ba9c94206415683e8a19d705123b21488dc28a19b97e4e548d644426e0f36",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "input_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "41f01a03222d8783001c365394b669a8c392a108029a13ffe3384a75977d3d84",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "input_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "16c0075cb4c21d88ae6a0b4be7e22524094a0cebab5d216d05ff5ebeb42823d9",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "coupled_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "b440afde84b3275c8519fd169483101aba680cd1bbb32aae40a2e68005284817",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "coupled_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "90b304358d1624557d5f168a2d19180cb8d846433cf2ea0a9e3a9f763135a4c5",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "coupled_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "e115b9bfa808af5920a3aad10ddb004d0e2310ec483a9a34110e5c9a41973541",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "coupled_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "9a40ed84cda6ed89d4e10839409f8b3a864ca3d15d4e722343da9f5b63d26948",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "coupled_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "db928eab15efefbb3741bd69cf9cada4502f8a80f2afbd260d402073265d8cb5",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "independent_shift",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "dbdb15e3f94d1c7c9ea0f6f2563dc114f1bbf4cf7b75b0ec90d9a7e5a4348b56",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "independent_shift",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "1e5a9c02d1c15bc12a2d3922ce2ca3d6b69dacd10c2530c6d2f1bb32e1417562",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "independent_shift",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "5f87c8476609b9d8b8a80cc8c6b44ef7ef62d108887c8f49866e8e7c1de01498",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "independent_shift",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "a6e47b07d6ff442f6fdb6c4c28f63f12dce4194da01766a3c4ce2df9bb079bc2",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "independent_shift",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "0d6ebb373cc3bec0f2f491eb19e990095f044c028e10fa609de21cd9636bec9e",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "alternating_dependency",
+      "arm": "slow_prior",
+      "checkpoint_sha256": "35ab17af6c0f7bd656dd653a12484b06d16110f6867c4b13f63467a0e50152cc",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "alternating_dependency",
+      "arm": "fast_prior",
+      "checkpoint_sha256": "b335c060a1fb6595dfed838531e3940a8888f1c345245e9d0e395ebebc54b2ab",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "alternating_dependency",
+      "arm": "fast_posterior",
+      "checkpoint_sha256": "3c782ce816b4ec25b082b05a7adebee8ebd5096c09b5cb95268f0e4bc62e575b",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "alternating_dependency",
+      "arm": "fixed_mixture",
+      "checkpoint_sha256": "49b5b6e9b076d6d8165be11f196d37df66eff44562aed3e20e80590e14ecf212",
+      "step": 4096,
+      "restored_costs_exact": true
+    },
+    {
+      "seed": 22104,
+      "family": "alternating_dependency",
+      "arm": "learned_gate",
+      "checkpoint_sha256": "58285b318593588ad1a6040e314a398a798c307dca3f080a5dd56d90159163b9",
+      "step": 4096,
+      "restored_costs_exact": true
+    }
+  ],
+  "paired_raw_reservoir_and_rng_checks": 80
+}
