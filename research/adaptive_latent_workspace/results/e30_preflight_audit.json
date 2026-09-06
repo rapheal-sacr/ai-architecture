@@ -1,0 +1,231 @@
+{
+  "status": "E30_PREFLIGHT_AUDITED",
+  "source_sha256": "cf58546bcbc455d0c0126140d42c73ab0021df8ecbccf175dc4808183bbec4c8",
+  "source_commit": "17ecef795710f0c4608770735ff2b7b1e35021fd",
+  "audit_script_sha256": "df0fe97c72ac0748610aca9495e32bbf33488e99cbb41e161084c70b99e84c3e",
+  "bootstrap_audits": [
+    {
+      "seed": 1711,
+      "teacher_missions": 2,
+      "teacher_actions": 9,
+      "teaching_and_work_reconstructed": true,
+      "checkpoint_sha256": "c54b37cdc9e88952a98492c3a8d7e83ede155f9f6a5a2f688db084eeb4f21a6e"
+    }
+  ],
+  "pair_diagnostics": [
+    {
+      "seed": 1711,
+      "full_bounded_initial_four_exact": null,
+      "mission_event_sequences_equal": [
+        true,
+        true
+      ],
+      "mission_prompt_sequences_equal": [
+        true,
+        true
+      ]
+    }
+  ],
+  "mission_checkpoints_audited": 8,
+  "rows": [
+    {
+      "seed": 1711,
+      "arm": "observed_planner",
+      "total_successes": 2,
+      "total_actions": 9,
+      "wait_or_drop_actions": 0,
+      "posthoc_local_action_diagnostics": {
+        "delivery_opportunities": 2,
+        "missed_delivery": 0,
+        "target_pickup_opportunities": 2,
+        "missed_target_pickup": 0,
+        "wrong_object_pickup": 0,
+        "discarded_target": 0,
+        "immediate_home_opportunities": 2,
+        "missed_immediate_home": 0
+      },
+      "adapter_changed_missions": 0,
+      "costs": {
+        "room_utf8_bytes": 439,
+        "numpy_rng_utf8_bytes": 0
+      },
+      "setup_seconds": 4.268003976903856e-06,
+      "loop_seconds": 0.004140980003285222,
+      "acting_seconds": 0.0007617469964316115,
+      "update_seconds": 6.919872248545289e-07,
+      "cuda_peak_allocated_bytes": 0,
+      "max_temporary_trajectory_utf8_bytes": 2,
+      "mission_actions": [
+        4,
+        5
+      ],
+      "mission_successes": [
+        true,
+        true
+      ],
+      "trajectory_memory_replay_work_checkpoint_audit": true
+    },
+    {
+      "seed": 1711,
+      "arm": "frozen_full",
+      "total_successes": 0,
+      "total_actions": 32,
+      "wait_or_drop_actions": 6,
+      "posthoc_local_action_diagnostics": {
+        "delivery_opportunities": 3,
+        "missed_delivery": 3,
+        "target_pickup_opportunities": 5,
+        "missed_target_pickup": 1,
+        "wrong_object_pickup": 1,
+        "discarded_target": 4,
+        "immediate_home_opportunities": 7,
+        "missed_immediate_home": 4
+      },
+      "adapter_changed_missions": 0,
+      "costs": {
+        "room_utf8_bytes": 440,
+        "numpy_rng_utf8_bytes": 335,
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 32,
+        "inference_tokens": 7508,
+        "inference_attention_elements": 594035232,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 2,
+        "audit_tokens": 500,
+        "persistent_parameter_optimizer_rng_replay_room_bytes": 989152729
+      },
+      "setup_seconds": 2.8820346540014725,
+      "loop_seconds": 3.1732095790066523,
+      "acting_seconds": 3.1189281300030416,
+      "update_seconds": 0.00046023799222894013,
+      "cuda_peak_allocated_bytes": 1077207552,
+      "max_temporary_trajectory_utf8_bytes": 9137,
+      "mission_actions": [
+        16,
+        16
+      ],
+      "mission_successes": [
+        false,
+        false
+      ],
+      "trajectory_memory_replay_work_checkpoint_audit": true
+    },
+    {
+      "seed": 1711,
+      "arm": "frozen_bounded",
+      "total_successes": 0,
+      "total_actions": 32,
+      "wait_or_drop_actions": 6,
+      "posthoc_local_action_diagnostics": {
+        "delivery_opportunities": 3,
+        "missed_delivery": 3,
+        "target_pickup_opportunities": 5,
+        "missed_target_pickup": 1,
+        "wrong_object_pickup": 1,
+        "discarded_target": 4,
+        "immediate_home_opportunities": 7,
+        "missed_immediate_home": 4
+      },
+      "adapter_changed_missions": 0,
+      "costs": {
+        "room_utf8_bytes": 372,
+        "numpy_rng_utf8_bytes": 335,
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 0,
+        "gradient_tensor_bytes": 0,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 2,
+        "replay_records": 0,
+        "inference_calls": 32,
+        "inference_tokens": 7508,
+        "inference_attention_elements": 594035232,
+        "update_calls": 0,
+        "update_tokens": 0,
+        "update_attention_elements": 0,
+        "audit_calls": 2,
+        "audit_tokens": 500,
+        "persistent_parameter_optimizer_rng_replay_room_bytes": 989152661
+      },
+      "setup_seconds": 2.882785829002387,
+      "loop_seconds": 3.175635884006624,
+      "acting_seconds": 3.122388496005442,
+      "update_seconds": 0.0004046729882247746,
+      "cuda_peak_allocated_bytes": 1077207552,
+      "max_temporary_trajectory_utf8_bytes": 9137,
+      "mission_actions": [
+        16,
+        16
+      ],
+      "mission_successes": [
+        false,
+        false
+      ],
+      "trajectory_memory_replay_work_checkpoint_audit": true
+    },
+    {
+      "seed": 1711,
+      "arm": "adaptive_bounded",
+      "total_successes": 0,
+      "total_actions": 32,
+      "wait_or_drop_actions": 6,
+      "posthoc_local_action_diagnostics": {
+        "delivery_opportunities": 3,
+        "missed_delivery": 3,
+        "target_pickup_opportunities": 5,
+        "missed_target_pickup": 1,
+        "wrong_object_pickup": 1,
+        "discarded_target": 4,
+        "immediate_home_opportunities": 7,
+        "missed_immediate_home": 4
+      },
+      "adapter_changed_missions": 2,
+      "costs": {
+        "room_utf8_bytes": 372,
+        "numpy_rng_utf8_bytes": 343,
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 2163072,
+        "gradient_tensor_bytes": 1081344,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 4593,
+        "replay_records": 8,
+        "inference_calls": 32,
+        "inference_tokens": 7508,
+        "inference_attention_elements": 594035232,
+        "update_calls": 4,
+        "update_tokens": 983,
+        "update_attention_elements": 81287472,
+        "audit_calls": 2,
+        "audit_tokens": 500,
+        "persistent_parameter_optimizer_rng_replay_room_bytes": 991320332
+      },
+      "setup_seconds": 2.907397505987319,
+      "loop_seconds": 4.238355925990618,
+      "acting_seconds": 3.1189102829957847,
+      "update_seconds": 0.9124832759989658,
+      "cuda_peak_allocated_bytes": 1529904640,
+      "max_temporary_trajectory_utf8_bytes": 9133,
+      "mission_actions": [
+        16,
+        16
+      ],
+      "mission_successes": [
+        false,
+        false
+      ],
+      "trajectory_memory_replay_work_checkpoint_audit": true
+    }
+  ],
+  "audit_seconds": 0.44803911600320134,
+  "tokenized_distinct_prompts": 27,
+  "limits": "Trajectory and state reconstruction includes actual chosen actions, memory, reservoir, private RNG progression, update selections and token counts. It does not recompute alternate-action logits or neural gradients; scorer supplied base-hash and final restore checks. Full Python overhead, base buffers, energy and pretraining cost are not measured. Attention elements are forward attention sizes, not FLOPs. Bootstrap and audit work are separate from operational use."
+}

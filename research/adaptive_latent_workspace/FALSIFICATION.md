@@ -215,3 +215,30 @@ checks pass; online adapter parameters change. None proves learned competence.
 The new four-room tutorial design and its256 updates are declared external
 scaffolding. E30-PROTOCOL.md records every pre-score correction and limitation.
 The scored source is being frozen; no scored results exist at this point.
+
+## E30: the first integrated pilot fails reliable acquisition and improvement
+
+All eight cases completed from028bffe. All96 mission checkpoints reconstruct
+exactly; all192 online updates replay to exact adapters, optimizers, memory,
+learning RNG and losses. The observed-map planner completes24/24 missions in119
+actions. Frozen full/bounded language completes6/24 and8/24; adaptive bounded
+completes9/24 in641 actions versus585 for its frozen control, at1.84 times acting
+plus update time. Common bootstrap adds306 teacher actions and512 gradient
+updates. Adaptation solves both relocations but loses a larger-world success.
+Registered step-penalized return improves2.15→2.59 overall, with one seed better
+and one worse. Runtime has no registered utility conversion: this is a tradeoff,
+not an established net-utility loss. The observed planner dominates both.
+
+All neural arms fail initial acquisition on seed30101 despite full memory in
+one control. Seed30102 acquires3/4 short missions but retains only1/2 unchanged
+return successes. No neural seed/arm reaches3/4 larger-world success. Frozen
+weights also fail returns, so not every failure is parameter forgetting.
+Local diagnostics reveal wrong-object pickups and discarded targets while the
+relevant facts are visible. Memory eviction is not a sufficient explanation.
+
+Read E30-RESULT.md for all cells, costs, post hoc diagnostics and limits. This
+fixed LoRA/LRU/PPO-style loop is not reliable RSI, learned compression or the
+complete candidate architecture. Tutorial fitting, symbol binding, exploration
+and credit assignment remain confounded; diagnose frozen checkpoints before
+claiming successful learning followed by a transfer failure. The broad goal
+remains unachieved.

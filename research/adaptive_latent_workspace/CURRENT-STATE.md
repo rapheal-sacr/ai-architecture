@@ -2,9 +2,9 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E29 are complete. E30 source/protocol is frozen in this revision, before
-scoring. The integrated preflight passed functional checks but no neural mission;
-read E30-PROTOCOL.md and the next status record for scored-run progress.
+E1–E30 are complete and audited. No experiment is currently running.
+E30 implements a bounded integrated language/memory/feedback pilot and fails
+reliable acquisition and efficient improvement; read E30-RESULT.md.
 
 ## What is locally established
 
@@ -251,3 +251,19 @@ These are feasibility checks, not learned memory, reliable procedure improvement
 or architectural novelty. The next work should define an integrated, genuinely
 closed-loop memory-and-adaptation assay, retaining the source/falsification and
 cost obligations in `GOAL-EVIDENCE.md`.
+
+## E30: integration executes, but competence is not reliable
+
+The observed-map baseline completes24/24 missions; full/bounded frozen language
+completes6/24 and8/24; adaptive bounded completes9/24. Adaptation costs1.84 times
+acting/update time and9.6% more actions than its frozen control. It succeeds on
+both relocations while losing one larger-world success. Initial acquisition
+fails on one of two seeds, and no neural case meets larger-world competence.
+All96 mission states reconstruct; all192 online updates replay exactly.
+
+Visible wrong-object and target-discarding errors show a use-of-present-evidence
+limit. This is not solely unavailable memory. Frozen checkpoints should next
+separate tutorial fitting, symbol/address binding and exploration before a new
+adaptation mechanism is trained. No E31 protocol is frozen. Full architecture,
+learned compression, reliable RSI, broad reasoning and long-horizon efficiency
+remain unproven.

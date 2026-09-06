@@ -301,3 +301,21 @@ These are feasibility checks, not learned memory, reliable procedure improvement
 or architectural novelty. The next work should define an integrated, genuinely
 closed-loop memory-and-adaptation assay, retaining the source/falsification and
 cost obligations in `GOAL-EVIDENCE.md`.
+
+## E30 execution-core limitation
+
+The first integrated language/memory/actual-feedback loop executes and its
+updates replay exactly, but it does not support confidence in this design.
+A conventional observed-map planner completes24/24 missions; the adaptive
+language pilot completes9/24 at much higher cost. One seed fails even short
+acquisition with full memory. Visible wrong-object and target-discarding errors
+show that useful computation over present facts is a current limitation.
+
+This pilot implements only explicit observed state, a conventional pretrained
+interpreter and fixed adapter learning. It does not validate the proposed
+latent workspace, learned compression, world model or procedure-admission loop.
+Increasing memory capacity or invoking recursive improvement cannot stand in
+for an execution core that reliably uses known facts. The next diagnostic must
+separate tutorial fitting, symbol/address binding and planning before a revised
+architecture is claimed. See E30-RESULT.md and NEXT-TEST.md. No novelty claim is
+established by replacing one conventional component with another.

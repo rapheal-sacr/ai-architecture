@@ -1,0 +1,177 @@
+{
+  "status": "E30_UPDATE_REPLAY_AUDITED",
+  "source_status": "E30_COMPLETE",
+  "source_sha256": "c51590945305064045df6f2e2238c22cebdac1d919dfb010e222f2ef160cddba",
+  "script_sha256": "9fefae241bbb8c4a94f29b89efcd5157c01dfe85ca42f0c50fe11201e5509444",
+  "results": [
+    {
+      "seed": 30101,
+      "missions": [
+        {
+          "mission": 0,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "b77d94becec1b8ef20f68f0c4284faa12fc2a401c674b88c62f92a90a3aaf3b4"
+        },
+        {
+          "mission": 1,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "ff7f94557ab7a3f021abb1f8dc207ca93118ec35c415f268b40c59e427caaa3e"
+        },
+        {
+          "mission": 2,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "e931bfba9afbfc4a01fdb16d357bd1fd386621674e2effec3a8954b7297fefee"
+        },
+        {
+          "mission": 3,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "fd464b91903ab4e002bc8dd802d24c86f038e31d3e40ac077ef62fb96b23032c"
+        },
+        {
+          "mission": 4,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "19ed5e1ca6d13a649f337624ddd2fe44684fd76001c588387baca9fa36209c7c"
+        },
+        {
+          "mission": 5,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "a04dffabd6139b83f82a023afbf1b30241fd18c0b932316132e805a3fd217a3c"
+        },
+        {
+          "mission": 6,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "533c3420ba1e54df9755116df83478dfe7afcb8a2b5ea72ea7ec637ccebe9940"
+        },
+        {
+          "mission": 7,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "d846472a01aafbfe39952bf8999095cef86b1283bf12c6bf2ee9cdd1c55c9cc7"
+        },
+        {
+          "mission": 8,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "36511b29bd145fbe767dff495be6118e923bd907df57501391c61bff072e80dc"
+        },
+        {
+          "mission": 9,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "6d620255f8d8b21d87ecb9a621f5daa39677ff12cbb61e1f6f5718022a5166eb"
+        },
+        {
+          "mission": 10,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "ffbaa62f03de0bf224624421ec51ab70a438755b8f0a0c0d33e91a1f8f98cc8d"
+        },
+        {
+          "mission": 11,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "e53a92360a05ab07d2b98a990506a24956dc0d0cff64779697434fa74ac62bd1"
+        }
+      ],
+      "audit_seconds": 25.02317526799743,
+      "audit_work": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 2163072,
+        "gradient_tensor_bytes": 1081344,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 41973,
+        "replay_records": 64,
+        "inference_calls": 0,
+        "inference_tokens": 0,
+        "inference_attention_elements": 0,
+        "update_calls": 96,
+        "update_tokens": 26158,
+        "update_attention_elements": 2403885792,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "base_unchanged": true
+    },
+    {
+      "seed": 30102,
+      "missions": [
+        {
+          "mission": 0,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "d55169b45459c9249d7541a883ee0ee17cf553bdf2be26a99371912347575c6c"
+        },
+        {
+          "mission": 1,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "44ab10848cac216d5e44f608fa76de64dd190feff0f3108154beb6d1d81830de"
+        },
+        {
+          "mission": 2,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "202a69cfd0834a2f5777b2446345c26af1e949460a61090a4ab33efe5197878e"
+        },
+        {
+          "mission": 3,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "93c1c587e7927bc6c3ed0d14edeccf771753827f01b6c260dbac407524caa1f2"
+        },
+        {
+          "mission": 4,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "a040848fe2d7a5241fe29c3def63aef219b2ca8927440284951d1aed3f2e797f"
+        },
+        {
+          "mission": 5,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "60318ca17a890141ac8f51696f01310a520107fd192d4781f708725b6a0330f9"
+        },
+        {
+          "mission": 6,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "4f2f91aaa10b2710d7f27d94e1e178c24a0ab2b09f879764b5dd97489a8acf24"
+        },
+        {
+          "mission": 7,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "1fc05910bc4ee24416a41a82626ec7f19b2674fd1648d79fdc80a6886a36d073"
+        },
+        {
+          "mission": 8,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "d84c8b6ad2432dfe34dc0221cb60caa53a09e83393b4c3fb94391e17a72164a8"
+        },
+        {
+          "mission": 9,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "4d1b88dfcf9be5bf662e0eda9c78f3ce7858a2f9e4fae19c3be31e3b8662cf99"
+        },
+        {
+          "mission": 10,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "8d1e2c9dda7a7a66453d6a7794f1f324f0f531e1586e5bd5b32eb815237a5df6"
+        },
+        {
+          "mission": 11,
+          "adapter_optimizer_replay_rng_losses_exact": true,
+          "checkpoint_sha256": "4917fcc6691ee475e4e98cc9d64ec5a346d0fc159de43ec8d59bc9df04151948"
+        }
+      ],
+      "audit_seconds": 23.575412300997414,
+      "audit_work": {
+        "base_parameter_bytes": 988065536,
+        "adapter_parameter_bytes": 1081344,
+        "optimizer_tensor_bytes": 2163072,
+        "gradient_tensor_bytes": 1081344,
+        "rng_tensor_bytes": 5072,
+        "replay_utf8_bytes": 41030,
+        "replay_records": 64,
+        "inference_calls": 0,
+        "inference_tokens": 0,
+        "inference_attention_elements": 0,
+        "update_calls": 96,
+        "update_tokens": 24640,
+        "update_attention_elements": 2132729088,
+        "audit_calls": 0,
+        "audit_tokens": 0
+      },
+      "base_unchanged": true
+    }
+  ],
+  "scope": "All adaptive online updates reexecuted from actual stored trajectories and bootstrap optimizer. Every mission adapter, optimizer, replay, learning RNG, torch/CUDA RNG, losses and update work exactly match. No counterfactual policy actions or new environment outcomes; this duplicate audit work is excluded from operational policy costs and reported separately. Bootstrap fitting and operational logits are not reexecuted."
+}

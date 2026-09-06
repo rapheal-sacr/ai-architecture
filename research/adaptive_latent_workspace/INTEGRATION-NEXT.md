@@ -58,3 +58,10 @@ The environment, observed-map baseline, language actor, persistent observation
 memory and actual-feedback adapter updates now exist. E30-PROTOCOL.md and
 protocol_e30.json freeze the scored pilot. Functional checks alone do not satisfy
 the requirements above. Run and independently audit all registered cases next.
+
+## E30 complete
+
+E30-RESULT.md supersedes the pending run status. All eight cases,96 mission
+checkpoints and192 online updates are audited. Integration executes but does
+not meet reliable competence or efficient continual improvement. NEXT-TEST.md
+now targets frozen-checkpoint acquisition/binding diagnostics.
