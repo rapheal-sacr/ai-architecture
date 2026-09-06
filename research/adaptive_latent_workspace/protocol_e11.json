@@ -1,0 +1,16 @@
+{
+  "experiment": "E11-self-application-versus-extra-meta-training",
+  "status_at_freeze": "NOT_RUN",
+  "replicates": [12101, 12102],
+  "starting_state": "Frozen E9 bootstrap controller checkpoints; verify their source/protocol identity. Load E9 admitted self-applied controllers unchanged.",
+  "intervention": "Repeat the eight E9 proposal rounds with the same training and admission task seeds, meta learning rate, moment coefficients, accepted-step counting and admission rules, but replace the learned per-tensor multiplier by one. This isolates the learned multiplier from an Adam-shaped conventional meta-update. Both start with zero proposal moments, as E9 did.",
+  "arms": ["frozen_bootstrap", "self_applied", "fixed_meta_adam"],
+  "final_task_seed_offset": 80000,
+  "final_tasks": 16,
+  "final_horizons": [16, 128, 512],
+  "final_distributions": ["in_distribution", "scaled_inputs", "relu_teacher"],
+  "preflight": "Replay E9 self-proposals from one bootstrap checkpoint and require exact final tensor equality and identical admissions against its preserved E9 result. Do not count this validation as a scored new replicate.",
+  "cost_rules": "Record counts and time for all conventional proposals and fresh evaluation. Link prior E9 bootstrap/self-proposal costs; no free starting controller. E11 CPU work may overlap the separate E10 GPU experiment, so wall time is descriptive and no fixed-time superiority claim is allowed.",
+  "falsification": "If conventional extra meta-training matches or exceeds self-application, E9 does not establish that applying the learned updater to itself causes better learning than further conventional meta-training. Compare paired task outcomes and report both replicates separately. No threshold selected after final evaluation.",
+  "scope": "Development causal control using already studied bootstrap replicates, with new final task seeds. Not an independent replication of the full pipeline, memory retention, open-ended recursive improvement, or efficient long-horizon agency. The fixed comparison shares the E9 beta coefficients and admission budget; it is not a search over all conventional meta-optimizers."
+}
