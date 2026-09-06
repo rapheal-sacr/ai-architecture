@@ -335,3 +335,29 @@ transport. Fixed-prefix encoding before adaptive layers is a proposed boundary,
 not an implemented repair or novelty claim. CONSTRAINTS.md gives a conditional
 maintenance-rate bound; the universal improvement bound remains unmeasured.
 Frozen E32/E33 scorers are unchanged.
+
+## E32 complete: optimizer repair does not establish larger-world execution
+
+All12 cases/24 snapshots complete and audit. Batch8/.001 at1024 examples passes
+tutorial and initial-acquisition gates on every seed, but solves only1/12 larger
+missions. No arm/seed/milestone reaches3/4 larger competence. The observed-map
+planner solves36/36 in206 actions. More fitting deteriorates some arms/seeds.
+Full observed memory was present. Read E32-RESULT.md; this is fixed conventional
+training followed by frozen evaluation, not online E2E or RSI.
+
+## E33 complete: real acquisition/reuse, nonuniform persistent-training gain
+
+All1152 outer updates and1008 session states replay exactly. Both E2E objectives
+acquire every tested context; static training plus SGD usually fails short
+acquisition. Carry-trained first-return accuracy is73.4%/67.7%/40.1% across the
+three regimes, versus6.2%/9.4%/8.3% resetting weights. But return cycles contain
+updates between chunks. E34 freezes updates/restores old snapshots to separate
+read-time competence from further adaptation; it is post hoc diagnosis.
+
+Persistent training improves long-life/interference NLL on every seed, but
+worsens familiar-schedule aggregate NLL and accuracy versus reset-trained E2E
+with the same carried evaluation. A16-entry transition table has higher overall
+accuracy in every regime while weaker first-return accuracy. Preserve both the
+useful learned persistence and its cost/control objections. Read E33-RESULT.md.
+This is a small fixed grammar, not general reasoning, novelty, learned episodic
+compression, autonomous long-horizon efficiency or reliable RSI.

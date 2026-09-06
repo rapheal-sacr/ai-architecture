@@ -1,0 +1,12 @@
+{
+  "artifact": "E32 full completion record retained on WD",
+  "source_path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e32/complete.json",
+  "source_sha256": "d2cb551d8c5d4581cb38a589090eeca7b149843726a88f2d97ae73eb7d2218b8",
+  "source_bytes": 22036051,
+  "frozen_source_commit": "7d4edc962214188b6d4537e8d261cdc8c3c7ad64",
+  "scorer_status": "E32_COMPLETE exit0",
+  "cases_completed": 12,
+  "snapshots_completed": 24,
+  "audit": "E32_AUDITED exit0; results/e32_audit.json",
+  "note": "This is a provenance/terminal summary; the full completion file, every case and checkpoint remain at source_path on WD."
+}

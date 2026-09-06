@@ -352,3 +352,15 @@ checks. E33 compares ordinary, reset-E2E and carry-E2E training with acquisition
 gates and strong task controls. This is not the full architecture or a paper
 replication. Residual evidence, learned selection, planning and procedure
 self-application still need integration/falsification; novelty is unestablished.
+
+## E33 evidence supports update-trained state, with explicit limits
+
+The small E2E core now acquires every tested context and uses carried state to
+improve early returns. This is stronger evidence for the future-update objective
+than E30–E32's conventional LoRA fitting. Training across persistent contexts
+adds gains under longer lifetimes/interference but is not uniformly better;
+the specialized transition-table control remains stronger overall. E34's frozen
+return/archive interventions will distinguish retained function from adaptation
+needed to use it. Oracle restored snapshots are diagnostics, not a deployed
+memory router. Integration with evidence, actions and actual procedure changes
+remains necessary; E33 is not completion of the candidate or novelty proof.

@@ -1,0 +1,58 @@
+{
+  "event": "E33_COMPLETE",
+  "source_commit": "63baff850bac6f5d1b65fd6e41a6312a0a13598f",
+  "cases": [
+    {
+      "seed": 33101,
+      "arm": "static",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33/33101_static/result.json"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33/33101_e2e_reset/result.json"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33/33101_e2e_carry/result.json"
+    },
+    {
+      "seed": 33102,
+      "arm": "static",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33/33102_static/result.json"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33/33102_e2e_reset/result.json"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33/33102_e2e_carry/result.json"
+    },
+    {
+      "seed": 33103,
+      "arm": "static",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33/33103_static/result.json"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33/33103_e2e_reset/result.json"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "path": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e33/33103_e2e_carry/result.json"
+    }
+  ],
+  "data_audit": {
+    "distinct_train_maps": 768,
+    "distinct_eval_maps": 108,
+    "train_evaluation_map_disjoint": true
+  },
+  "seconds": 740.6063772460038,
+  "status": "Await independent audit; no success inferred"
+}

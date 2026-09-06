@@ -1,3 +1,5 @@
+Historical interim snapshot; superseded by E32-RESULT.md. The full audit has completed.
+
 # E32 interim record — experiment still running
 
 Read FALSIFICATION.md first. Frozen scorer/protocol7d4edc9. Unified process

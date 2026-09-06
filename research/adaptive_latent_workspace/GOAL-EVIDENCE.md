@@ -2,10 +2,11 @@
 
 Read `FALSIFICATION.md` before design prose. This map preserves the user's full
 objective; component tests do not redefine success as a smaller graph or stream
-problem. E1–E31 are complete and audited. E30 now executes integrated language, observed
-memory and actual-feedback adaptation, but fails reliable acquisition and
-efficient improvement. E32 optimization controls are currently running from
-frozen source7d4edc9; E32-INTERIM.md is a partial record, not a completed result.
+problem. E1–E33 are complete and audited. E32 conventional controls repair some
+imitation fitting but not larger-world competence. E33 provides scoped positive
+evidence for update-trained acquisition and carried-state reuse in a synthetic
+grammar; it does not implement an autonomous long-horizon agent. Read the full
+results, including stronger controls and per-seed reversals.
 
 | Requirement | Authoritative evidence currently available | Status and missing evidence |
 |---|---|---|
@@ -52,3 +53,9 @@ E30–E32 conventional LoRA does not implement. Source-grounded small-core check
 pass, including cross-session meta-gradients. E33 freezes a reset/carry assay
 with explicit acquisition gates and exact replay. Its preflight is not new
 competence evidence or a replacement for the integrated full-goal requirements.
+
+E33 adds exact replay of1152 meta-training updates and1008 inference sessions.
+It improves the evidence for persistent useful neural state on one task family.
+First-return cycles include intervening updates; E34 is a frozen-return diagnosis,
+not a new benchmark or a replacement goal. Learned episodic compression, broad
+reasoning, novelty and reliable autonomous procedure improvement remain open.

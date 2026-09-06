@@ -1,0 +1,15 @@
+{
+  "experiment": "E34 frozen-return diagnosis of completed E33",
+  "source_commit": "63baff850bac6f5d1b65fd6e41a6312a0a13598f",
+  "source_audit": "E33_AUDITED,1152outer_updates,1008sessions",
+  "source_policy": "carry_ttt",
+  "treatments": ["current_adaptive", "current_frozen", "archive_adaptive", "archive_frozen", "reset_frozen"],
+  "selection": "All3 seeds,3 training arms,12 held-out source streams,5 treatments. No fitting or selection of checkpoints. Source streams are reused post hoc diagnostic data, not fresh generalization evidence.",
+  "current": "Restore fast weights from the end of the last interfering context before A returns. Clear KV exactly as in E33.",
+  "archive": "Restore fast weights saved after the first A. Clear KV. This is an oracle snapshot-selection upper bound, not a deployed memory mechanism or a free resource.",
+  "reset": "Restore trained initialization, clear KV, never adapt on the return.",
+  "frozen": "Continue causal local-context processing, but disable all gradient-based weight updates on the return. Targets only score predictions.",
+  "metrics": "Report first chunk before any update, first full cycle and complete-return NLL/accuracy. Condition forgetting interpretation on source first-A acquisition. No new competence threshold or aggregate success claim.",
+  "invariants": "Current-adaptive reexecutes exact E33 return logits/losses/final state. Current-frozen first chunk matches it exactly; archive frozen/adaptive first chunks match. Frozen fast weights and all trained initialization weights remain exact. Source files/checkpoints never mutate.",
+  "cost": "Charge all forward work, updates, wall time and archive tensor bytes. Archived state restoration is external scaffolding; source training remains charged. Attention entries are not FLOPs; tensor bytes are not total process RAM."
+}

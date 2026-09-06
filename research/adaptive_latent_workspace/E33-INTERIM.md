@@ -1,3 +1,5 @@
+Historical interim snapshot; superseded by E33-RESULT.md. The full audit has completed.
+
 # E33 scorer complete — independent audit running
 
 Read FALSIFICATION.md first. Scorer session3205 completed with exit0 from
