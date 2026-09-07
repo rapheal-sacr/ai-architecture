@@ -1,5 +1,12 @@
 # Research state — goal still active
 
+E36 is now source-frozen at `2d3eff32a79a1561ba76d98a81b6a7f10bc92c04` and
+scorer51019 is running on the WD drive. It trains static, first-order and full
+E2E predictive learners on identical real-action data, then evaluates actual
+goal completion in eight fresh worlds. Read E36-PROTOCOL.md and poll51019;
+no scored conclusion or audit is available yet. Training/evaluation maps are
+disjoint (768/26 unique maps). E36-PREFLIGHT.md is development-only evidence.
+
 Latest user steering: test the attached fourteen hypotheses and use them to
 inform this same goal. HYPOTHESES-LEDGER.md covers all fourteen; P1 directly
 tests only restricted H4 acquisition, H4/H8 source mechanisms and H2 equivalence.
@@ -7,7 +14,8 @@ HYPOTHESES-P1-RESULT.md records576 audited trajectories: surprise chases noise,
 information gain also fails under bounded memory/change, and retrospective CTM
 thinking time does not stop the inspected forward. The ledger retains positive
 cases and unmeasured claims. All P1 processes are terminal. Action planning/world
-mechanics now pass ACTION-PLANNING-PREFLIGHT.md; no action learner is trained yet.
+mechanics pass ACTION-PLANNING-PREFLIGHT.md; E36 training is in progress and no
+scored action competence is established yet.
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
@@ -23,7 +31,7 @@ can accompany long-run damage, and stopping later switches helps34/36 inherited
 states over1,024 targets, with explicit counterexamples. Next: actual action
 learning with the active E2E baseline, incorporating the attachment's acquisition
 and diagnostic controls. ActionE2E's checked real/imagined interface and fixed
-planner are not a trained agent. No experiment remains running at this update.
+planner alone are not a trained agent. E36 is the only newly running experiment.
 RUNS/ACTIVE-STATE.json locates process handles; verify their current live/terminal
 state with the handles themselves rather than trusting a historical snapshot.
 

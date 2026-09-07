@@ -1,5 +1,12 @@
 # Next work — actual action learning after E35's completed falsification
 
+E36 scorer51019 is live, frozen at2d3eff32a79a1561ba76d98a81b6a7f10bc92c04.
+Next poll that handle; do not restart it from a stale manifest or quiet output.
+After terminal completion, run audit_e36.py on RUNS/e36, then summarize actual
+goal completion, transition prediction, censored map acquisition and all costs.
+No result yet. E36-PROTOCOL.md preserves the limited predictive training claim;
+the broader learned-goal/consolidation/RSI scope below remains required.
+
 Latest steering is the fourteen-hypothesis attachment. Read its full ledger and
 HYPOTHESES-P1-RESULT.md after the falsification record. P1 is complete/audited;
 do not repeat it as new evidence. It falsifies surprise-only acquisition under
@@ -10,8 +17,8 @@ uncertainty/drive heads automatically supplies good goal choice.
 
 Read FALSIFICATION.md first. E1–E35 are complete/audited. E35 scorer14837,
 auditor52212, summarizer88879, local switch diagnosis28598, recovery87949 and
-stop-switching diagnosis69265 are all verified terminal exit0. No process is
-running at this update. Do not restart those completed experiments or poll old
+stop-switching diagnosis69265 are all verified terminal exit0. E36 is the newly
+running process. Do not restart those completed experiments or poll old
 handles as though they were live. RUNS/ACTIVE-STATE.json locates saved evidence.
 
 E35-RESULT.md rejects the short-sample snapshot selector on every whole-stream
