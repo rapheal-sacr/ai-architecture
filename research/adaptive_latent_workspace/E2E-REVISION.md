@@ -162,3 +162,26 @@ coexistence, and must test old queries after its compression budget is exhausted
 Procedure self-revision similarly needs multiple actual generations and fresh
 outcomes against equally funded conventional learning. Neither ability follows
 from a successful fixed archive selector. The full goal remains unachieved.
+
+## E35 falsification changes the integration baseline
+
+E35-RESULT.md now rejects the current protected-bank selection rule: whole-stream
+NLL/accuracy worsens on every seed/regime for both E2E objectives. Bank8 is worse
+than bank2. Carry-trained recurrence falls95.53%→73.35%, and drift88.68%→34.92%.
+The no-selection bank reproduces active-only predictions and state exactly,
+isolating selection's damage despite retained snapshots. Conditional acquired
+returns sometimes benefit, but do not compensate for acquisition/stream losses.
+
+Preserve the active learning trajectory as the action-integration baseline.
+Do not overwrite it with short-sample archive winners by default. Whether
+future-validated trials or read-only retrieval can use preserved competence
+without damaging accumulation is open; neither is yet a verified repair or
+novel mechanism. The post hoc switch intervention will isolate local effects.
+
+`action_e2e.py` implements the categorical observation/executed-action adapter,
+late observed-outcome loss and separate read-only imagined branches. The
+gradient/save-resume/provenance checks in ACTION-E2E-PREFLIGHT.md pass. This is
+preparation, not a trained agent: there is no learned goal-conditioned planner,
+task-reward outer objective, acquired long-horizon task or procedure self-revision.
+The next full-system test must establish actual closed-loop acquisition before
+calling later failures forgetting, and preserve strong observed-map controls.

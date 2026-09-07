@@ -452,3 +452,33 @@ exclude conflicting advisory labels. Abandoned imaginary branches leave exact
 real continuation unchanged; save/load and two-layer second-order gradients
 pass. These are checked mechanics, not a trained planner or action-acquisition
 result. ACTION-E2E-PREFLIGHT.md records the limits. Full goal remains active.
+
+E35-RECOVERY.md subsequently adds a post hoc chunk-boundary75%-of16 recovery
+assay on all9,660 segment/learner occurrences, retaining censoring. Under
+carry-trained drift, active/bank8 recover280/281 and78/281. One short final
+segment has no complete window; bank8 additionally fails202 evaluable segments.
+Its successful-only median appears faster despite the mass of non-recoveries.
+The fixed16–19-observation confirmation floor precludes interpreting this as
+earliest acquisition time. Independent direct-window calculations agree.
+
+The first E35 switch diagnosis contradicts the simple immediate-harm explanation.
+Across17,709 switches in all18 bank8 cases, selection has lower mean next-chunk
+NLL than retaining/updating the prior active state in four of six aggregates,
+including four of six when neither chunk crosses a hidden change. The overall
+trajectory still fails against active-from-start. Both local branches inherit
+the bank's earlier damaged history; this is not a no-selection policy estimate.
+All36,864 original chunks and18 final payloads replay exactly. Read
+E35-SELECTION-DIAGNOSIS.md. A finite-horizon stop-switching intervention follows;
+do not claim the long-run mechanism is settled from these local results.
+
+The subsequent stop-switching diagnosis completes36 inherited-state branches,
+with9,216 exact full-core reference chunks. At1,024 future observations, stopping
+improves NLL/accuracy in34/36 branches and every aggregate, raising pooled
+accuracy43.70%→78.66%. At64 observations it helps only23/36 NLL cases; one
+recurring aggregate initially worsens sharply before improving later. Both
+counterexamples at1,024 belong to carry seed33101 recurrence, where selection
+still helps. Read E35-SELECTION-DIAGNOSIS.md for every horizon and costs.
+This supports interference with the evolving learning trajectory while rejecting
+universal immediate-harm and universal disable-selection claims. No repaired
+learned selector or action competence is yet established. Move next to actual
+action learning using the checked ActionE2E interface and strong controls.

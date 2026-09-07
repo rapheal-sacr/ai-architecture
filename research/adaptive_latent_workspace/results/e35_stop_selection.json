@@ -1,0 +1,2938 @@
+{
+  "event": "E35_STOP_SELECTION_DIAGNOSED",
+  "protocol": {
+    "scope": "Post hoc finite-horizon intervention, not a trained policy or goal-completion test",
+    "checkpoints": [
+      1024,
+      1536
+    ],
+    "horizons": [
+      4,
+      64,
+      256,
+      1024
+    ],
+    "policy": "bank8_gated",
+    "intervention": "Disable only subsequent selection from each exact saved state; retain archives, probe, updates, all costs",
+    "reference": "Full-core active-only continuation from identical fast/KV state; exact at every chunk",
+    "limitation": "36 checkpoint-conditioned branches; does not explain all long-run interactions or guarantee future gains",
+    "source_complete_sha256": "e6c1f2f59722f528c3fb0e7a11bde420244289ba32163fcabb42418c020d02f7",
+    "audit_sha256": "3057fa7d734045a865286fe7e04f6ef6a48bdc7c0b8f19d0b51d181fda327460",
+    "files": {
+      "diagnose_e35_stop_switching.py": "ab7d974b3db39a3b8767ea42ea40253998722a865a3790bd84b89a770028312e",
+      "e2e_core.py": "7328c37da9f9ee1a1a36fceb060012ff78d8709c201986e386230107dafd87f2",
+      "suffix_archive.py": "43e223874e56a0a9b1e7651ccc42165ef402ea23d3a9f622de878dce97e0abd0",
+      "record_e35.py": "a6cc36eec5c9d9b94a59e1e4c478d4788c822a9a9614d52367f3f2c49bd3afde"
+    }
+  },
+  "rows": [
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "stream_index": 0,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 4,
+          "keep_selecting_loss_sum": 2.552114099264145,
+          "stop_selecting_loss_sum": 2.552114099264145
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 59,
+          "stop_selecting_correct": 54,
+          "keep_selecting_loss_sum": 43.20740583539009,
+          "stop_selecting_loss_sum": 65.45594674348831
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 241,
+          "stop_selecting_correct": 218,
+          "keep_selecting_loss_sum": 189.95728047192097,
+          "stop_selecting_loss_sum": 253.01103726029396
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 729,
+          "stop_selecting_correct": 885,
+          "keep_selecting_loss_sum": 1439.3667618483305,
+          "stop_selecting_loss_sum": 1004.1383157074451
+        }
+      ],
+      "seconds_including_reference": 3.582418759004213,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 9760,
+        "suffix_forwards": 2440,
+        "gradient_updates": 221,
+        "gradient_tokens": 884,
+        "switches": 0,
+        "admissions": 9,
+        "duplicates": 34,
+        "rejections": 21,
+        "evictions": 7
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 221,
+        "gradient_tokens": 884,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_reset_recurring_1024.pt",
+      "output_sha256": "cb9a6f966db6fb10cdc5e63512154d173d0572fecd02f5720dbabcb59544f77d"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "stream_index": 0,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 4,
+          "keep_selecting_loss_sum": 2.057747334241867,
+          "stop_selecting_loss_sum": 2.057747334241867
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 60,
+          "stop_selecting_correct": 35,
+          "keep_selecting_loss_sum": 52.017916679382324,
+          "stop_selecting_loss_sum": 120.04259765148163
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 177,
+          "stop_selecting_correct": 185,
+          "keep_selecting_loss_sum": 377.50591948628426,
+          "stop_selecting_loss_sum": 365.62109607458115
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 740,
+          "stop_selecting_correct": 886,
+          "keep_selecting_loss_sum": 1396.1373197585344,
+          "stop_selecting_loss_sum": 1011.3273154497147
+        }
+      ],
+      "seconds_including_reference": 3.5976777789765038,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10048,
+        "suffix_forwards": 2512,
+        "gradient_updates": 227,
+        "gradient_tokens": 908,
+        "switches": 0,
+        "admissions": 5,
+        "duplicates": 37,
+        "rejections": 22,
+        "evictions": 4
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 227,
+        "gradient_tokens": 908,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_reset_recurring_1536.pt",
+      "output_sha256": "0dddda044f8e882340ceb718ff5edabaf5f1e419465f9a274a7dac7009d26c1d"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "stream_index": 0,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 4,
+          "keep_selecting_loss_sum": 1.9286983013153076,
+          "stop_selecting_loss_sum": 1.9286983013153076
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 58,
+          "stop_selecting_correct": 58,
+          "keep_selecting_loss_sum": 63.178747564554214,
+          "stop_selecting_loss_sum": 61.62000182271004
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 241,
+          "stop_selecting_correct": 220,
+          "keep_selecting_loss_sum": 202.1635208427906,
+          "stop_selecting_loss_sum": 233.09033559262753
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 972,
+          "stop_selecting_correct": 909,
+          "keep_selecting_loss_sum": 796.2561068236828,
+          "stop_selecting_loss_sum": 883.8244352787733
+        }
+      ],
+      "seconds_including_reference": 3.4563654550001957,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 9744,
+        "suffix_forwards": 2436,
+        "gradient_updates": 173,
+        "gradient_tokens": 692,
+        "switches": 0,
+        "admissions": 5,
+        "duplicates": 41,
+        "rejections": 18,
+        "evictions": 3
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 173,
+        "gradient_tokens": 692,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_carry_recurring_1024.pt",
+      "output_sha256": "bcd3d5799e44422223143a2bd50cc6fd58c7ae11d8153863f5fef6e9e1fd1c9e"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "stream_index": 0,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 4,
+          "keep_selecting_loss_sum": 1.856681376695633,
+          "stop_selecting_loss_sum": 1.856681376695633
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 60,
+          "stop_selecting_correct": 37,
+          "keep_selecting_loss_sum": 46.964231848716736,
+          "stop_selecting_loss_sum": 106.2684015929699
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 244,
+          "stop_selecting_correct": 189,
+          "keep_selecting_loss_sum": 183.40829654037952,
+          "stop_selecting_loss_sum": 331.0108227133751
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 970,
+          "stop_selecting_correct": 906,
+          "keep_selecting_loss_sum": 821.7750978022814,
+          "stop_selecting_loss_sum": 899.8483001887798
+        }
+      ],
+      "seconds_including_reference": 3.4747990889882203,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 9936,
+        "suffix_forwards": 2484,
+        "gradient_updates": 175,
+        "gradient_tokens": 700,
+        "switches": 0,
+        "admissions": 10,
+        "duplicates": 38,
+        "rejections": 16,
+        "evictions": 8
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 175,
+        "gradient_tokens": 700,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_carry_recurring_1536.pt",
+      "output_sha256": "781f64196b7b53838eecbc477134fca3db4aa5d44c0392656c61a995b6894a6e"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "stream_index": 1,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 2,
+          "stop_selecting_correct": 2,
+          "keep_selecting_loss_sum": 9.51269680261612,
+          "stop_selecting_loss_sum": 9.51269680261612
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 62,
+          "stop_selecting_correct": 39,
+          "keep_selecting_loss_sum": 57.11591303348541,
+          "stop_selecting_loss_sum": 106.96373441815376
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 125,
+          "stop_selecting_correct": 120,
+          "keep_selecting_loss_sum": 532.683591991663,
+          "stop_selecting_loss_sum": 517.7789281010628
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 491,
+          "stop_selecting_correct": 684,
+          "keep_selecting_loss_sum": 2074.0913667976856,
+          "stop_selecting_loss_sum": 1551.2586489021778
+        }
+      ],
+      "seconds_including_reference": 3.6889882370014675,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 247,
+        "gradient_tokens": 988,
+        "switches": 0,
+        "admissions": 6,
+        "duplicates": 14,
+        "rejections": 44,
+        "evictions": 6
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 247,
+        "gradient_tokens": 988,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_reset_expanding_1024.pt",
+      "output_sha256": "a4988cfa86233931ff51adedb110a212f58cfca6db81736c9c9dd9434e8b51fc"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "stream_index": 1,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 15.27317500114441,
+          "stop_selecting_loss_sum": 15.27317500114441
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 24,
+          "keep_selecting_loss_sum": 207.73891270160675,
+          "stop_selecting_loss_sum": 155.78694707155228
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 68,
+          "stop_selecting_correct": 111,
+          "keep_selecting_loss_sum": 667.6446759998798,
+          "stop_selecting_loss_sum": 560.4239465594292
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 284,
+          "stop_selecting_correct": 651,
+          "keep_selecting_loss_sum": 2602.752672046423,
+          "stop_selecting_loss_sum": 1664.9278073459864
+        }
+      ],
+      "seconds_including_reference": 3.652600429020822,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 250,
+        "gradient_tokens": 1000,
+        "switches": 0,
+        "admissions": 10,
+        "duplicates": 6,
+        "rejections": 48,
+        "evictions": 10
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 250,
+        "gradient_tokens": 1000,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_reset_expanding_1536.pt",
+      "output_sha256": "55c41da4bd8b93cd0f02cfb37322327670a6faa663a546ee66ddd9fcc2b54bee"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "stream_index": 1,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 2,
+          "stop_selecting_correct": 2,
+          "keep_selecting_loss_sum": 8.849079638719559,
+          "stop_selecting_loss_sum": 8.849079638719559
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 9,
+          "stop_selecting_correct": 35,
+          "keep_selecting_loss_sum": 190.61442664265633,
+          "stop_selecting_loss_sum": 117.80046913027763
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 107,
+          "stop_selecting_correct": 124,
+          "keep_selecting_loss_sum": 571.5673834085464,
+          "stop_selecting_loss_sum": 509.2836737334728
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 593,
+          "stop_selecting_correct": 705,
+          "keep_selecting_loss_sum": 1807.3076703101397,
+          "stop_selecting_loss_sum": 1470.4044900685549
+        }
+      ],
+      "seconds_including_reference": 3.616940912004793,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 234,
+        "gradient_tokens": 936,
+        "switches": 0,
+        "admissions": 12,
+        "duplicates": 13,
+        "rejections": 39,
+        "evictions": 12
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 234,
+        "gradient_tokens": 936,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_carry_expanding_1024.pt",
+      "output_sha256": "de5ff81a991600a01b1781d8915c33418ace022d5d1f9279c6f60d4ff8890e40"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "stream_index": 1,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 14.81819486618042,
+          "stop_selecting_loss_sum": 14.81819486618042
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 8,
+          "stop_selecting_correct": 17,
+          "keep_selecting_loss_sum": 209.89764761924744,
+          "stop_selecting_loss_sum": 161.34137696027756
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 74,
+          "stop_selecting_correct": 105,
+          "keep_selecting_loss_sum": 658.5998906493187,
+          "stop_selecting_loss_sum": 552.6986929774284
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 477,
+          "stop_selecting_correct": 703,
+          "keep_selecting_loss_sum": 2086.4356732666492,
+          "stop_selecting_loss_sum": 1456.1947176456451
+        }
+      ],
+      "seconds_including_reference": 3.581195906008361,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 238,
+        "gradient_tokens": 952,
+        "switches": 0,
+        "admissions": 9,
+        "duplicates": 15,
+        "rejections": 40,
+        "evictions": 9
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 238,
+        "gradient_tokens": 952,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_carry_expanding_1536.pt",
+      "output_sha256": "d0c18048a95feb71df8a6a5df05d54e591a520b029b07a837e6ef21fd7faacd9"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "stream_index": 2,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 1,
+          "stop_selecting_correct": 1,
+          "keep_selecting_loss_sum": 9.939060091972351,
+          "stop_selecting_loss_sum": 9.939060091972351
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 28,
+          "stop_selecting_correct": 55,
+          "keep_selecting_loss_sum": 133.13075998425484,
+          "stop_selecting_loss_sum": 71.08254632353783
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 92,
+          "stop_selecting_correct": 203,
+          "keep_selecting_loss_sum": 582.8784799277782,
+          "stop_selecting_loss_sum": 307.3804007768631
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 356,
+          "stop_selecting_correct": 855,
+          "keep_selecting_loss_sum": 2362.8778895437717,
+          "stop_selecting_loss_sum": 1064.9745960831642
+        }
+      ],
+      "seconds_including_reference": 3.6494095999805722,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 215,
+        "gradient_tokens": 860,
+        "switches": 0,
+        "admissions": 15,
+        "duplicates": 25,
+        "rejections": 24,
+        "evictions": 15
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 215,
+        "gradient_tokens": 860,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_reset_drifting_1024.pt",
+      "output_sha256": "f0f46f90b8968e95c5b1ea34fa685474fd25d81c3616a7e2c7f532fec6d33392"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "stream_index": 2,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 4,
+          "keep_selecting_loss_sum": 2.989606887102127,
+          "stop_selecting_loss_sum": 2.989606887102127
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 64,
+          "stop_selecting_correct": 64,
+          "keep_selecting_loss_sum": 37.2364544570446,
+          "stop_selecting_loss_sum": 37.2364544570446
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 160,
+          "stop_selecting_correct": 163,
+          "keep_selecting_loss_sum": 397.7120313644409,
+          "stop_selecting_loss_sum": 393.6581087112427
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 396,
+          "stop_selecting_correct": 813,
+          "keep_selecting_loss_sum": 2309.6856881976128,
+          "stop_selecting_loss_sum": 1181.3428686708212
+        }
+      ],
+      "seconds_including_reference": 3.663706370978616,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 240,
+        "gradient_tokens": 960,
+        "switches": 0,
+        "admissions": 13,
+        "duplicates": 22,
+        "rejections": 29,
+        "evictions": 13
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 240,
+        "gradient_tokens": 960,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_reset_drifting_1536.pt",
+      "output_sha256": "70eafd1c6d040b22a8f1a4071a11b0ad7c37babb734f42b1dcb32fb96dc49bc4"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "stream_index": 2,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 10.741782307624817,
+          "stop_selecting_loss_sum": 10.741782307624817
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 16,
+          "stop_selecting_correct": 44,
+          "keep_selecting_loss_sum": 174.93235337734222,
+          "stop_selecting_loss_sum": 87.50274395942688
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 38,
+          "stop_selecting_correct": 185,
+          "keep_selecting_loss_sum": 743.8566610813141,
+          "stop_selecting_loss_sum": 340.49080750346184
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 245,
+          "stop_selecting_correct": 857,
+          "keep_selecting_loss_sum": 2769.2193220555782,
+          "stop_selecting_loss_sum": 1022.1567725837231
+        }
+      ],
+      "seconds_including_reference": 3.5591369250032585,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 186,
+        "gradient_tokens": 744,
+        "switches": 0,
+        "admissions": 13,
+        "duplicates": 29,
+        "rejections": 22,
+        "evictions": 13
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 186,
+        "gradient_tokens": 744,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_carry_drifting_1024.pt",
+      "output_sha256": "de7def67b5088695f2e591665be5af9389c8e68db5ee761d7c3f3dab920d53f2"
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "stream_index": 2,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 4,
+          "keep_selecting_loss_sum": 2.1166537404060364,
+          "stop_selecting_loss_sum": 2.1166537404060364
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 63,
+          "stop_selecting_correct": 63,
+          "keep_selecting_loss_sum": 34.310157895088196,
+          "stop_selecting_loss_sum": 34.310157895088196
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 111,
+          "stop_selecting_correct": 171,
+          "keep_selecting_loss_sum": 539.5247189104557,
+          "stop_selecting_loss_sum": 389.0206076800823
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 361,
+          "stop_selecting_correct": 849,
+          "keep_selecting_loss_sum": 2429.424096018076,
+          "stop_selecting_loss_sum": 1081.126302987337
+        }
+      ],
+      "seconds_including_reference": 3.6210575890145265,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 209,
+        "gradient_tokens": 836,
+        "switches": 0,
+        "admissions": 14,
+        "duplicates": 25,
+        "rejections": 25,
+        "evictions": 14
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 209,
+        "gradient_tokens": 836,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33101_e2e_carry_drifting_1536.pt",
+      "output_sha256": "d338719ffba29344c53466a92c43fc588784320165cc678cda61b5f3f20f3bb0"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "stream_index": 3,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 2,
+          "stop_selecting_correct": 2,
+          "keep_selecting_loss_sum": 6.704499781131744,
+          "stop_selecting_loss_sum": 6.704499781131744
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 58,
+          "stop_selecting_correct": 34,
+          "keep_selecting_loss_sum": 63.69770935177803,
+          "stop_selecting_loss_sum": 119.72687143087387
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 126,
+          "stop_selecting_correct": 192,
+          "keep_selecting_loss_sum": 523.4549229741096,
+          "stop_selecting_loss_sum": 339.93534657359123
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 591,
+          "stop_selecting_correct": 876,
+          "keep_selecting_loss_sum": 1800.477399945259,
+          "stop_selecting_loss_sum": 1009.6609021425247
+        }
+      ],
+      "seconds_including_reference": 3.626266820996534,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10176,
+        "suffix_forwards": 2544,
+        "gradient_updates": 226,
+        "gradient_tokens": 904,
+        "switches": 0,
+        "admissions": 9,
+        "duplicates": 33,
+        "rejections": 22,
+        "evictions": 8
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 226,
+        "gradient_tokens": 904,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_reset_recurring_1024.pt",
+      "output_sha256": "2498bde72cd3dbfdc839ec7f7fc0d302787ebfd7c327f77de1554ebc55def275"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "stream_index": 3,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 11.161457777023315,
+          "stop_selecting_loss_sum": 11.161457777023315
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 41,
+          "keep_selecting_loss_sum": 208.38949871063232,
+          "stop_selecting_loss_sum": 101.50309938192368
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 50,
+          "stop_selecting_correct": 179,
+          "keep_selecting_loss_sum": 714.1289853453636,
+          "stop_selecting_loss_sum": 369.346793204546
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 323,
+          "stop_selecting_correct": 884,
+          "keep_selecting_loss_sum": 2481.2705169916153,
+          "stop_selecting_loss_sum": 971.9274253845215
+        }
+      ],
+      "seconds_including_reference": 3.6114014479971956,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 226,
+        "gradient_tokens": 904,
+        "switches": 0,
+        "admissions": 13,
+        "duplicates": 32,
+        "rejections": 19,
+        "evictions": 13
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 226,
+        "gradient_tokens": 904,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_reset_recurring_1536.pt",
+      "output_sha256": "dc1dd003e4ec8ac5d43d785976080784ead150a6b1918f66528128f3153e9995"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "stream_index": 3,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 2,
+          "stop_selecting_correct": 2,
+          "keep_selecting_loss_sum": 6.181324601173401,
+          "stop_selecting_loss_sum": 6.181324601173401
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 59,
+          "stop_selecting_correct": 60,
+          "keep_selecting_loss_sum": 47.89820957183838,
+          "stop_selecting_loss_sum": 51.09062936902046
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 242,
+          "stop_selecting_correct": 209,
+          "keep_selecting_loss_sum": 174.86037889122963,
+          "stop_selecting_loss_sum": 271.99049830436707
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 777,
+          "stop_selecting_correct": 910,
+          "keep_selecting_loss_sum": 1284.7570170462132,
+          "stop_selecting_loss_sum": 874.3138221502304
+        }
+      ],
+      "seconds_including_reference": 3.522073972999351,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 168,
+        "gradient_tokens": 672,
+        "switches": 0,
+        "admissions": 11,
+        "duplicates": 38,
+        "rejections": 15,
+        "evictions": 11
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 168,
+        "gradient_tokens": 672,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_carry_recurring_1024.pt",
+      "output_sha256": "95742003bf6c6db1ab8ea3c1d38260ab031909e75fb6f6163f25843c39aa0e7b"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "stream_index": 3,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 4,
+          "keep_selecting_loss_sum": 2.035086840391159,
+          "stop_selecting_loss_sum": 2.035086840391159
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 64,
+          "stop_selecting_correct": 64,
+          "keep_selecting_loss_sum": 31.43192932009697,
+          "stop_selecting_loss_sum": 31.43192932009697
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 150,
+          "stop_selecting_correct": 205,
+          "keep_selecting_loss_sum": 420.68599328398705,
+          "stop_selecting_loss_sum": 284.89778661727905
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 599,
+          "stop_selecting_correct": 921,
+          "keep_selecting_loss_sum": 1710.650670915842,
+          "stop_selecting_loss_sum": 816.8751611113548
+        }
+      ],
+      "seconds_including_reference": 3.510282424016623,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 141,
+        "gradient_tokens": 564,
+        "switches": 0,
+        "admissions": 9,
+        "duplicates": 38,
+        "rejections": 17,
+        "evictions": 9
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 141,
+        "gradient_tokens": 564,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_carry_recurring_1536.pt",
+      "output_sha256": "69925ecde6740723017a7e5a88980e7be7dc216d4dc42fcc23062e865771c520"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "stream_index": 4,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 3,
+          "stop_selecting_correct": 3,
+          "keep_selecting_loss_sum": 4.791487336158752,
+          "stop_selecting_loss_sum": 4.791487336158752
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 63,
+          "stop_selecting_correct": 62,
+          "keep_selecting_loss_sum": 47.960971891880035,
+          "stop_selecting_loss_sum": 47.71966001391411
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 82,
+          "stop_selecting_correct": 155,
+          "keep_selecting_loss_sum": 584.7277015149593,
+          "stop_selecting_loss_sum": 419.39076629281044
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 378,
+          "stop_selecting_correct": 732,
+          "keep_selecting_loss_sum": 2356.4699374735355,
+          "stop_selecting_loss_sum": 1412.7854284346104
+        }
+      ],
+      "seconds_including_reference": 3.6385074779973365,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 9904,
+        "suffix_forwards": 2476,
+        "gradient_updates": 251,
+        "gradient_tokens": 1004,
+        "switches": 0,
+        "admissions": 7,
+        "duplicates": 13,
+        "rejections": 44,
+        "evictions": 6
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 251,
+        "gradient_tokens": 1004,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_reset_expanding_1024.pt",
+      "output_sha256": "4b7b890df9f8d4a8c2e5759a55bd47fc792b4bf5a70ffe346811ccd5fd25a991"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "stream_index": 4,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 11.957058191299438,
+          "stop_selecting_loss_sum": 11.957058191299438
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 3,
+          "stop_selecting_correct": 14,
+          "keep_selecting_loss_sum": 202.14791119098663,
+          "stop_selecting_loss_sum": 168.1572413444519
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 59,
+          "stop_selecting_correct": 142,
+          "keep_selecting_loss_sum": 658.5892985761166,
+          "stop_selecting_loss_sum": 478.53215661644936
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 207,
+          "stop_selecting_correct": 636,
+          "keep_selecting_loss_sum": 2816.9313384890556,
+          "stop_selecting_loss_sum": 1734.4765261411667
+        }
+      ],
+      "seconds_including_reference": 3.6659795079904143,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 255,
+        "gradient_tokens": 1020,
+        "switches": 0,
+        "admissions": 12,
+        "duplicates": 2,
+        "rejections": 50,
+        "evictions": 12
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 255,
+        "gradient_tokens": 1020,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_reset_expanding_1536.pt",
+      "output_sha256": "40f0aa3352e1a4d8065dc2d3d891c29898a3a976c7beb39366aaf7bf3bdd2e63"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "stream_index": 4,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 4,
+          "keep_selecting_loss_sum": 3.075004070997238,
+          "stop_selecting_loss_sum": 3.075004070997238
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 64,
+          "stop_selecting_correct": 64,
+          "keep_selecting_loss_sum": 40.061542212963104,
+          "stop_selecting_loss_sum": 40.061542212963104
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 138,
+          "stop_selecting_correct": 166,
+          "keep_selecting_loss_sum": 450.30842730402946,
+          "stop_selecting_loss_sum": 402.4166439175606
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 333,
+          "stop_selecting_correct": 730,
+          "keep_selecting_loss_sum": 2420.3475533127785,
+          "stop_selecting_loss_sum": 1401.0793797373772
+        }
+      ],
+      "seconds_including_reference": 3.631757455004845,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 234,
+        "gradient_tokens": 936,
+        "switches": 0,
+        "admissions": 10,
+        "duplicates": 15,
+        "rejections": 39,
+        "evictions": 10
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 234,
+        "gradient_tokens": 936,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_carry_expanding_1024.pt",
+      "output_sha256": "2bd7e0c9226f20f8aed856cb086d2a005015596b51c564776b278efcb95290e9"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "stream_index": 4,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 11.560200691223145,
+          "stop_selecting_loss_sum": 11.560200691223145
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 5,
+          "stop_selecting_correct": 15,
+          "keep_selecting_loss_sum": 191.28011238574982,
+          "stop_selecting_loss_sum": 162.13457262516022
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 89,
+          "stop_selecting_correct": 163,
+          "keep_selecting_loss_sum": 597.6396983861923,
+          "stop_selecting_loss_sum": 405.9475845694542
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 143,
+          "stop_selecting_correct": 648,
+          "keep_selecting_loss_sum": 2886.646229326725,
+          "stop_selecting_loss_sum": 1630.6759282648563
+        }
+      ],
+      "seconds_including_reference": 3.632469107018551,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 246,
+        "gradient_tokens": 984,
+        "switches": 0,
+        "admissions": 9,
+        "duplicates": 9,
+        "rejections": 46,
+        "evictions": 9
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 246,
+        "gradient_tokens": 984,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_carry_expanding_1536.pt",
+      "output_sha256": "389b1f8ae88d85e03828458aeb1be84238864506d0d1eafe4af0dab06ffd3f86"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "stream_index": 5,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 2,
+          "stop_selecting_correct": 2,
+          "keep_selecting_loss_sum": 9.483163833618164,
+          "stop_selecting_loss_sum": 9.483163833618164
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 9,
+          "stop_selecting_correct": 37,
+          "keep_selecting_loss_sum": 188.8236187696457,
+          "stop_selecting_loss_sum": 118.51976937055588
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 105,
+          "stop_selecting_correct": 168,
+          "keep_selecting_loss_sum": 603.4153852164745,
+          "stop_selecting_loss_sum": 395.2793293595314
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 249,
+          "stop_selecting_correct": 822,
+          "keep_selecting_loss_sum": 2649.7359141111374,
+          "stop_selecting_loss_sum": 1178.9224557876587
+        }
+      ],
+      "seconds_including_reference": 3.6055087630229536,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 235,
+        "gradient_tokens": 940,
+        "switches": 0,
+        "admissions": 16,
+        "duplicates": 18,
+        "rejections": 30,
+        "evictions": 16
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 235,
+        "gradient_tokens": 940,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_reset_drifting_1024.pt",
+      "output_sha256": "107fa0dca6558b3a5b383ea5b5a0d4c84e51dc9532df7135450871f43c4d9096"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "stream_index": 5,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 1,
+          "stop_selecting_correct": 1,
+          "keep_selecting_loss_sum": 10.196971774101257,
+          "stop_selecting_loss_sum": 10.196971774101257
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 9,
+          "stop_selecting_correct": 20,
+          "keep_selecting_loss_sum": 183.81928259134293,
+          "stop_selecting_loss_sum": 146.5992198586464
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 21,
+          "stop_selecting_correct": 138,
+          "keep_selecting_loss_sum": 769.4639735221863,
+          "stop_selecting_loss_sum": 459.250256806612
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 295,
+          "stop_selecting_correct": 819,
+          "keep_selecting_loss_sum": 2538.2912447452545,
+          "stop_selecting_loss_sum": 1172.1553418040276
+        }
+      ],
+      "seconds_including_reference": 3.6194721100036986,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 243,
+        "gradient_tokens": 972,
+        "switches": 0,
+        "admissions": 13,
+        "duplicates": 22,
+        "rejections": 29,
+        "evictions": 13
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 243,
+        "gradient_tokens": 972,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_reset_drifting_1536.pt",
+      "output_sha256": "93afa84547ef032bf18be4f8baf37f72d146c45265024bdd6100b1229a407f6c"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "stream_index": 5,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 2,
+          "stop_selecting_correct": 2,
+          "keep_selecting_loss_sum": 8.596966445446014,
+          "stop_selecting_loss_sum": 8.596966445446014
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 8,
+          "stop_selecting_correct": 30,
+          "keep_selecting_loss_sum": 204.60693752765656,
+          "stop_selecting_loss_sum": 134.04991799592972
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 68,
+          "stop_selecting_correct": 164,
+          "keep_selecting_loss_sum": 673.3325376212597,
+          "stop_selecting_loss_sum": 408.35193234682083
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 257,
+          "stop_selecting_correct": 809,
+          "keep_selecting_loss_sum": 2623.920854359865,
+          "stop_selecting_loss_sum": 1188.62506249547
+        }
+      ],
+      "seconds_including_reference": 3.628180058003636,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 220,
+        "gradient_tokens": 880,
+        "switches": 0,
+        "admissions": 15,
+        "duplicates": 20,
+        "rejections": 29,
+        "evictions": 15
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 220,
+        "gradient_tokens": 880,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_carry_drifting_1024.pt",
+      "output_sha256": "2752520b357775b5117d875b959004d866b5d5f5ff678cc964fad0163a6c8e8e"
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "stream_index": 5,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 12.415301084518433,
+          "stop_selecting_loss_sum": 12.415301084518433
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 15,
+          "stop_selecting_correct": 24,
+          "keep_selecting_loss_sum": 167.03828978538513,
+          "stop_selecting_loss_sum": 133.19364473223686
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 29,
+          "stop_selecting_correct": 145,
+          "keep_selecting_loss_sum": 730.2303433418274,
+          "stop_selecting_loss_sum": 455.151874601841
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 164,
+          "stop_selecting_correct": 801,
+          "keep_selecting_loss_sum": 2846.691488534212,
+          "stop_selecting_loss_sum": 1203.970741391182
+        }
+      ],
+      "seconds_including_reference": 3.625532887992449,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 225,
+        "gradient_tokens": 900,
+        "switches": 0,
+        "admissions": 14,
+        "duplicates": 19,
+        "rejections": 31,
+        "evictions": 14
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 225,
+        "gradient_tokens": 900,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33102_e2e_carry_drifting_1536.pt",
+      "output_sha256": "7d8c50e822ab0c7f792fcfd5071bebbea39465719f427126500a6d2e90b5839c"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "stream_index": 6,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 4,
+          "keep_selecting_loss_sum": 2.2772022485733032,
+          "stop_selecting_loss_sum": 2.2772022485733032
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 61,
+          "stop_selecting_correct": 54,
+          "keep_selecting_loss_sum": 46.97558581829071,
+          "stop_selecting_loss_sum": 63.966508120298386
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 248,
+          "stop_selecting_correct": 227,
+          "keep_selecting_loss_sum": 180.24726596474648,
+          "stop_selecting_loss_sum": 233.84917284548283
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 762,
+          "stop_selecting_correct": 913,
+          "keep_selecting_loss_sum": 1383.5190939456224,
+          "stop_selecting_loss_sum": 905.515955761075
+        }
+      ],
+      "seconds_including_reference": 3.582812107022619,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 199,
+        "gradient_tokens": 796,
+        "switches": 0,
+        "admissions": 11,
+        "duplicates": 34,
+        "rejections": 19,
+        "evictions": 11
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 199,
+        "gradient_tokens": 796,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_reset_recurring_1024.pt",
+      "output_sha256": "0a8c42a4d659440d6e73928576593886d9900757c89bf9853a8a08eccb4b2d22"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "stream_index": 6,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 10.699038743972778,
+          "stop_selecting_loss_sum": 10.699038743972778
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 23,
+          "stop_selecting_correct": 31,
+          "keep_selecting_loss_sum": 156.77172102034092,
+          "stop_selecting_loss_sum": 125.92420870065689
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 206,
+          "stop_selecting_correct": 197,
+          "keep_selecting_loss_sum": 301.5019784271717,
+          "stop_selecting_loss_sum": 328.17756809294224
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 764,
+          "stop_selecting_correct": 910,
+          "keep_selecting_loss_sum": 1319.3850557208061,
+          "stop_selecting_loss_sum": 929.1792853474617
+        }
+      ],
+      "seconds_including_reference": 3.5810749599768315,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 208,
+        "gradient_tokens": 832,
+        "switches": 0,
+        "admissions": 8,
+        "duplicates": 37,
+        "rejections": 19,
+        "evictions": 8
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 208,
+        "gradient_tokens": 832,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_reset_recurring_1536.pt",
+      "output_sha256": "d01c34c7b7ec0b3a96093964b75d9f704a0a3884b3ef86af630ed917208f8e31"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "stream_index": 6,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 4,
+          "keep_selecting_loss_sum": 2.5342396795749664,
+          "stop_selecting_loss_sum": 2.5342396795749664
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 59,
+          "stop_selecting_correct": 57,
+          "keep_selecting_loss_sum": 52.16502359509468,
+          "stop_selecting_loss_sum": 58.48954060673714
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 234,
+          "stop_selecting_correct": 238,
+          "keep_selecting_loss_sum": 239.26095667481422,
+          "stop_selecting_loss_sum": 207.94305278360844
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 710,
+          "stop_selecting_correct": 945,
+          "keep_selecting_loss_sum": 1551.4701979458332,
+          "stop_selecting_loss_sum": 785.5313988178968
+        }
+      ],
+      "seconds_including_reference": 3.5387959809741005,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 174,
+        "gradient_tokens": 696,
+        "switches": 0,
+        "admissions": 7,
+        "duplicates": 43,
+        "rejections": 14,
+        "evictions": 7
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 174,
+        "gradient_tokens": 696,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_carry_recurring_1024.pt",
+      "output_sha256": "2dd3f8091ab6df8ea67a7bde9b0b57aee729cf2376c9f03bea5bc2d96d39b669"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "stream_index": 6,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 1,
+          "stop_selecting_correct": 1,
+          "keep_selecting_loss_sum": 11.393057107925415,
+          "stop_selecting_loss_sum": 11.393057107925415
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 24,
+          "stop_selecting_correct": 38,
+          "keep_selecting_loss_sum": 159.55391547083855,
+          "stop_selecting_loss_sum": 108.22032994031906
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 197,
+          "stop_selecting_correct": 198,
+          "keep_selecting_loss_sum": 339.69080969691277,
+          "stop_selecting_loss_sum": 324.1076214015484
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 764,
+          "stop_selecting_correct": 921,
+          "keep_selecting_loss_sum": 1397.8329485058784,
+          "stop_selecting_loss_sum": 866.9329253286123
+        }
+      ],
+      "seconds_including_reference": 3.540429190004943,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 181,
+        "gradient_tokens": 724,
+        "switches": 0,
+        "admissions": 4,
+        "duplicates": 43,
+        "rejections": 17,
+        "evictions": 4
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 181,
+        "gradient_tokens": 724,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_carry_recurring_1536.pt",
+      "output_sha256": "0c2ff6e29bc9add2429140205d608ba56eecae0191d360a81209eb3721458289"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "stream_index": 7,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 11.852391719818115,
+          "stop_selecting_loss_sum": 11.852391719818115
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 24,
+          "keep_selecting_loss_sum": 194.4556007385254,
+          "stop_selecting_loss_sum": 142.86689645051956
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 48,
+          "stop_selecting_correct": 111,
+          "keep_selecting_loss_sum": 726.3871096670628,
+          "stop_selecting_loss_sum": 551.2161666154861
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 288,
+          "stop_selecting_correct": 664,
+          "keep_selecting_loss_sum": 2621.362192466855,
+          "stop_selecting_loss_sum": 1627.5941644608974
+        }
+      ],
+      "seconds_including_reference": 3.666709350014571,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 249,
+        "gradient_tokens": 996,
+        "switches": 0,
+        "admissions": 13,
+        "duplicates": 8,
+        "rejections": 43,
+        "evictions": 13
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 249,
+        "gradient_tokens": 996,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_reset_expanding_1024.pt",
+      "output_sha256": "e5a78c0f9bf89a0629514526a2ed20c8641b7b1a0510d4b6f41449cd9c04fdaf"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "stream_index": 7,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 13.432522296905518,
+          "stop_selecting_loss_sum": 13.432522296905518
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 5,
+          "stop_selecting_correct": 15,
+          "keep_selecting_loss_sum": 194.8712136745453,
+          "stop_selecting_loss_sum": 164.41535621881485
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 28,
+          "stop_selecting_correct": 141,
+          "keep_selecting_loss_sum": 767.9586409330368,
+          "stop_selecting_loss_sum": 468.4601063132286
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 181,
+          "stop_selecting_correct": 673,
+          "keep_selecting_loss_sum": 2840.944590240717,
+          "stop_selecting_loss_sum": 1576.107264444232
+        }
+      ],
+      "seconds_including_reference": 3.653190448996611,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 247,
+        "gradient_tokens": 988,
+        "switches": 0,
+        "admissions": 10,
+        "duplicates": 10,
+        "rejections": 44,
+        "evictions": 10
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 247,
+        "gradient_tokens": 988,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_reset_expanding_1536.pt",
+      "output_sha256": "44cf3a68b533e4a3f61539bc6e6cff8185e0f4c9b243642b918d630e1cc1071b"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "stream_index": 7,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 1,
+          "stop_selecting_correct": 1,
+          "keep_selecting_loss_sum": 12.491267561912537,
+          "stop_selecting_loss_sum": 12.491267561912537
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 6,
+          "stop_selecting_correct": 22,
+          "keep_selecting_loss_sum": 200.09269589185715,
+          "stop_selecting_loss_sum": 150.6793048977852
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 92,
+          "stop_selecting_correct": 115,
+          "keep_selecting_loss_sum": 608.2980333268642,
+          "stop_selecting_loss_sum": 530.9556724578142
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 286,
+          "stop_selecting_correct": 657,
+          "keep_selecting_loss_sum": 2648.315933227539,
+          "stop_selecting_loss_sum": 1604.9824046194553
+        }
+      ],
+      "seconds_including_reference": 3.6535416330152657,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 252,
+        "gradient_tokens": 1008,
+        "switches": 0,
+        "admissions": 17,
+        "duplicates": 4,
+        "rejections": 43,
+        "evictions": 17
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 252,
+        "gradient_tokens": 1008,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_carry_expanding_1024.pt",
+      "output_sha256": "2f1f71fde4e2863d8a8c16667a2bec24edb771e9c35e5ffa6ae4fb62f5029fa1"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "stream_index": 7,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 1,
+          "stop_selecting_correct": 1,
+          "keep_selecting_loss_sum": 11.05521273612976,
+          "stop_selecting_loss_sum": 11.05521273612976
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 38,
+          "stop_selecting_correct": 27,
+          "keep_selecting_loss_sum": 114.11606913805008,
+          "stop_selecting_loss_sum": 143.8747091293335
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 119,
+          "stop_selecting_correct": 166,
+          "keep_selecting_loss_sum": 523.9006324112415,
+          "stop_selecting_loss_sum": 426.74194356799126
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 380,
+          "stop_selecting_correct": 688,
+          "keep_selecting_loss_sum": 2328.8375367075205,
+          "stop_selecting_loss_sum": 1515.613188892603
+        }
+      ],
+      "seconds_including_reference": 3.669990622991463,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 241,
+        "gradient_tokens": 964,
+        "switches": 0,
+        "admissions": 13,
+        "duplicates": 11,
+        "rejections": 40,
+        "evictions": 13
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 241,
+        "gradient_tokens": 964,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_carry_expanding_1536.pt",
+      "output_sha256": "2ba169e9498723f44b2b805b116325bbc1a86f31a0c142612e7423a73fbc7335"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "stream_index": 8,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 11.729345083236694,
+          "stop_selecting_loss_sum": 11.729345083236694
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 1,
+          "stop_selecting_correct": 28,
+          "keep_selecting_loss_sum": 197.4992734193802,
+          "stop_selecting_loss_sum": 137.42509397864342
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 12,
+          "stop_selecting_correct": 197,
+          "keep_selecting_loss_sum": 772.3498853445053,
+          "stop_selecting_loss_sum": 333.441384062171
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 179,
+          "stop_selecting_correct": 821,
+          "keep_selecting_loss_sum": 2715.178242996335,
+          "stop_selecting_loss_sum": 1186.8142960220575
+        }
+      ],
+      "seconds_including_reference": 3.6103033740073442,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 236,
+        "gradient_tokens": 944,
+        "switches": 0,
+        "admissions": 13,
+        "duplicates": 20,
+        "rejections": 31,
+        "evictions": 13
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 236,
+        "gradient_tokens": 944,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_reset_drifting_1024.pt",
+      "output_sha256": "b4ff33a3510f104b6d45b295ce85d1a9d7a6b5874b6b541cc39d60f4a42a1723"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "stream_index": 8,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 11.381840705871582,
+          "stop_selecting_loss_sum": 11.381840705871582
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 41,
+          "stop_selecting_correct": 45,
+          "keep_selecting_loss_sum": 105.39175528287888,
+          "stop_selecting_loss_sum": 99.54564720392227
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 69,
+          "stop_selecting_correct": 180,
+          "keep_selecting_loss_sum": 611.4790163934231,
+          "stop_selecting_loss_sum": 371.68784099817276
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 333,
+          "stop_selecting_correct": 844,
+          "keep_selecting_loss_sum": 2378.5430592298508,
+          "stop_selecting_loss_sum": 1141.7317352890968
+        }
+      ],
+      "seconds_including_reference": 3.669847602985101,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 237,
+        "gradient_tokens": 948,
+        "switches": 0,
+        "admissions": 13,
+        "duplicates": 23,
+        "rejections": 28,
+        "evictions": 13
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 237,
+        "gradient_tokens": 948,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_reset_drifting_1536.pt",
+      "output_sha256": "cb62631692f05e21187e5b09e56a45e8f2b8dd34672eda9285b6c62ed584c8a5"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "stream_index": 8,
+      "checkpoint_chunk": 1024,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 0,
+          "stop_selecting_correct": 0,
+          "keep_selecting_loss_sum": 12.508046865463257,
+          "stop_selecting_loss_sum": 12.508046865463257
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 19,
+          "stop_selecting_correct": 25,
+          "keep_selecting_loss_sum": 158.97347342967987,
+          "stop_selecting_loss_sum": 139.91143941879272
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 104,
+          "stop_selecting_correct": 192,
+          "keep_selecting_loss_sum": 543.2408465147018,
+          "stop_selecting_loss_sum": 322.6690532565117
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 378,
+          "stop_selecting_correct": 831,
+          "keep_selecting_loss_sum": 2207.5586718916893,
+          "stop_selecting_loss_sum": 1110.9242058098316
+        }
+      ],
+      "seconds_including_reference": 3.667791632004082,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 220,
+        "gradient_tokens": 880,
+        "switches": 0,
+        "admissions": 15,
+        "duplicates": 22,
+        "rejections": 27,
+        "evictions": 15
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 220,
+        "gradient_tokens": 880,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_carry_drifting_1024.pt",
+      "output_sha256": "9132887530fcafb53ee49b0199c53c37ddbe66eb855aa27d53954ba26bbdc95c"
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "stream_index": 8,
+      "checkpoint_chunk": 1536,
+      "metrics": [
+        {
+          "targets": 4,
+          "keep_selecting_correct": 1,
+          "stop_selecting_correct": 1,
+          "keep_selecting_loss_sum": 11.592353582382202,
+          "stop_selecting_loss_sum": 11.592353582382202
+        },
+        {
+          "targets": 64,
+          "keep_selecting_correct": 4,
+          "stop_selecting_correct": 42,
+          "keep_selecting_loss_sum": 183.06507170200348,
+          "stop_selecting_loss_sum": 103.04454270005226
+        },
+        {
+          "targets": 256,
+          "keep_selecting_correct": 14,
+          "stop_selecting_correct": 180,
+          "keep_selecting_loss_sum": 741.9393968582153,
+          "stop_selecting_loss_sum": 373.5216645002365
+        },
+        {
+          "targets": 1024,
+          "keep_selecting_correct": 154,
+          "stop_selecting_correct": 841,
+          "keep_selecting_loss_sum": 2816.887303262949,
+          "stop_selecting_loss_sum": 1084.8179894983768
+        }
+      ],
+      "seconds_including_reference": 3.6448911339975893,
+      "branch_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 10240,
+        "suffix_forwards": 2560,
+        "gradient_updates": 212,
+        "gradient_tokens": 848,
+        "switches": 0,
+        "admissions": 13,
+        "duplicates": 26,
+        "rejections": 25,
+        "evictions": 13
+      },
+      "independent_reference_work": {
+        "prefix_tokens": 1024,
+        "attention_score_elements": 131072,
+        "suffix_tokens": 1024,
+        "suffix_forwards": 256,
+        "gradient_updates": 212,
+        "gradient_tokens": 848,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "output": "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e35-stop-selection/33103_e2e_carry_drifting_1536.pt",
+      "output_sha256": "be568b087e218b052fccdc8535d36685b30a10e3b0b0e08ba8ce7f6b1dd1262d"
+    }
+  ],
+  "aggregate": [
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "checkpoint_chunk": 1024,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.16666666666666666,
+      "stop_selecting_accuracy": 0.16666666666666666,
+      "keep_selecting_nll": 2.6538996348778405,
+      "stop_selecting_nll": 2.6538996348778405,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "checkpoint_chunk": 1024,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.22395833333333334,
+      "stop_selecting_accuracy": 0.515625,
+      "keep_selecting_nll": 2.804753980909785,
+      "stop_selecting_nll": 1.882625527990361,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "checkpoint_chunk": 1024,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.2734375,
+      "stop_selecting_accuracy": 0.7044270833333334,
+      "keep_selecting_nll": 2.5526432880433276,
+      "stop_selecting_nll": 1.3951976472744718,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "checkpoint_chunk": 1024,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.2864583333333333,
+      "stop_selecting_accuracy": 0.8128255208333334,
+      "keep_selecting_nll": 2.474185823016645,
+      "stop_selecting_nll": 1.0812845185185627,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "checkpoint_chunk": 1536,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.4166666666666667,
+      "stop_selecting_accuracy": 0.4166666666666667,
+      "keep_selecting_nll": 2.177025700608889,
+      "stop_selecting_nll": 2.177025700608889,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "checkpoint_chunk": 1536,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.4270833333333333,
+      "stop_selecting_accuracy": 0.671875,
+      "keep_selecting_nll": 2.0021537467837334,
+      "stop_selecting_nll": 1.4091059652467568,
+      "stop_nll_lower_seeds": 2
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "checkpoint_chunk": 1536,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.20052083333333334,
+      "stop_selecting_accuracy": 0.6458333333333334,
+      "keep_selecting_nll": 2.6193938269667947,
+      "stop_selecting_nll": 1.5855392536226038,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "checkpoint_chunk": 1536,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.22102864583333334,
+      "stop_selecting_accuracy": 0.8108723958333334,
+      "keep_selecting_nll": 2.634441044210689,
+      "stop_selecting_nll": 1.0969775500901353,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "checkpoint_chunk": 1024,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.5833333333333334,
+      "stop_selecting_accuracy": 0.5833333333333334,
+      "keep_selecting_nll": 2.034612605969111,
+      "stop_selecting_nll": 2.034612605969111,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "checkpoint_chunk": 1024,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.4114583333333333,
+      "stop_selecting_accuracy": 0.6302083333333334,
+      "keep_selecting_nll": 2.2435867955597737,
+      "stop_selecting_nll": 1.6069860220886767,
+      "stop_nll_lower_seeds": 2
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "checkpoint_chunk": 1024,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.4388020833333333,
+      "stop_selecting_accuracy": 0.52734375,
+      "keep_selecting_nll": 2.1226221927596876,
+      "stop_selecting_nll": 1.8784583204542287,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "checkpoint_chunk": 1024,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.39453125,
+      "stop_selecting_accuracy": 0.6809895833333334,
+      "keep_selecting_nll": 2.2382718609539247,
+      "stop_selecting_nll": 1.457183032039514,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "checkpoint_chunk": 1536,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.08333333333333333,
+      "stop_selecting_accuracy": 0.08333333333333333,
+      "keep_selecting_nll": 3.1194673577944436,
+      "stop_selecting_nll": 3.1194673577944436,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "checkpoint_chunk": 1536,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.265625,
+      "stop_selecting_accuracy": 0.3072916666666667,
+      "keep_selecting_nll": 2.683822026786705,
+      "stop_selecting_nll": 2.434118014139434,
+      "stop_nll_lower_seeds": 2
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "checkpoint_chunk": 1536,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.3671875,
+      "stop_selecting_accuracy": 0.5651041666666666,
+      "keep_selecting_nll": 2.3178909133421257,
+      "stop_selecting_nll": 1.803890912909992,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "checkpoint_chunk": 1536,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.3255208333333333,
+      "stop_selecting_accuracy": 0.6637369791666666,
+      "keep_selecting_nll": 2.376926900814093,
+      "stop_selecting_nll": 1.4982043733083021,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "checkpoint_chunk": 1024,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.8333333333333334,
+      "stop_selecting_accuracy": 0.8333333333333334,
+      "keep_selecting_nll": 0.8870218818386396,
+      "stop_selecting_nll": 0.8870218818386396,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "checkpoint_chunk": 1024,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.9166666666666666,
+      "stop_selecting_accuracy": 0.9114583333333334,
+      "keep_selecting_nll": 0.8502186496431628,
+      "stop_selecting_nll": 0.8916675614503523,
+      "stop_nll_lower_seeds": 1
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "checkpoint_chunk": 1024,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.93359375,
+      "stop_selecting_accuracy": 0.8684895833333334,
+      "keep_selecting_nll": 0.8024542401156699,
+      "stop_selecting_nll": 0.9284165191153685,
+      "stop_nll_lower_seeds": 1
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "checkpoint_chunk": 1024,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.8004557291666666,
+      "stop_selecting_accuracy": 0.8997395833333334,
+      "keep_selecting_nll": 1.182448997986891,
+      "stop_selecting_nll": 0.8280174662262046,
+      "stop_nll_lower_seeds": 2
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "checkpoint_chunk": 1536,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.75,
+      "stop_selecting_accuracy": 0.75,
+      "keep_selecting_nll": 1.2737354437510173,
+      "stop_selecting_nll": 1.2737354437510173,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "checkpoint_chunk": 1536,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.7708333333333334,
+      "stop_selecting_accuracy": 0.7239583333333334,
+      "keep_selecting_nll": 1.2393233158315222,
+      "stop_selecting_nll": 1.2808367752780516,
+      "stop_nll_lower_seeds": 1
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "checkpoint_chunk": 1536,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.76953125,
+      "stop_selecting_accuracy": 0.7708333333333334,
+      "keep_selecting_nll": 1.228886848334999,
+      "stop_selecting_nll": 1.2239794670992221,
+      "stop_nll_lower_seeds": 2
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "checkpoint_chunk": 1536,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.7594401041666666,
+      "stop_selecting_accuracy": 0.89453125,
+      "keep_selecting_nll": 1.2793810928463547,
+      "stop_selecting_nll": 0.8410339800223786,
+      "stop_nll_lower_seeds": 2
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "checkpoint_chunk": 1024,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.25,
+      "stop_selecting_accuracy": 0.25,
+      "keep_selecting_nll": 2.595964084068934,
+      "stop_selecting_nll": 2.595964084068934,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "checkpoint_chunk": 1024,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.19791666666666666,
+      "stop_selecting_accuracy": 0.625,
+      "keep_selecting_nll": 2.705487771735837,
+      "stop_selecting_nll": 1.7032677587121725,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "checkpoint_chunk": 1024,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.2721354166666667,
+      "stop_selecting_accuracy": 0.7395833333333334,
+      "keep_selecting_nll": 2.550317383448904,
+      "stop_selecting_nll": 1.3490899924460489,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "checkpoint_chunk": 1024,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.2552083333333333,
+      "stop_selecting_accuracy": 0.8131510416666666,
+      "keep_selecting_nll": 2.5155573068526187,
+      "stop_selecting_nll": 1.1167680168922136,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "checkpoint_chunk": 1536,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.4166666666666667,
+      "stop_selecting_accuracy": 0.4166666666666667,
+      "keep_selecting_nll": 2.0473682805895805,
+      "stop_selecting_nll": 2.0473682805895805,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "checkpoint_chunk": 1536,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.59375,
+      "stop_selecting_accuracy": 0.671875,
+      "keep_selecting_nll": 1.7002473558920126,
+      "stop_selecting_nll": 1.4759443829146524,
+      "stop_nll_lower_seeds": 2
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "checkpoint_chunk": 1536,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.3255208333333333,
+      "stop_selecting_accuracy": 0.6263020833333334,
+      "keep_selecting_nll": 2.3159570589583987,
+      "stop_selecting_nll": 1.594526310567744,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "checkpoint_chunk": 1536,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.3333333333333333,
+      "stop_selecting_accuracy": 0.8059895833333334,
+      "keep_selecting_nll": 2.3523828099520565,
+      "stop_selecting_nll": 1.137770164636701,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "checkpoint_chunk": 1024,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.4166666666666667,
+      "stop_selecting_accuracy": 0.4166666666666667,
+      "keep_selecting_nll": 2.179714654882749,
+      "stop_selecting_nll": 2.179714654882749,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "checkpoint_chunk": 1024,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.671875,
+      "stop_selecting_accuracy": 0.6510416666666666,
+      "keep_selecting_nll": 1.5600650294994314,
+      "stop_selecting_nll": 1.5497410983468096,
+      "stop_nll_lower_seeds": 2
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "checkpoint_chunk": 1024,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.33203125,
+      "stop_selecting_accuracy": 0.5026041666666666,
+      "keep_selecting_nll": 2.400779170799069,
+      "stop_selecting_nll": 1.93800242318927,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "checkpoint_chunk": 1024,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.3766276041666667,
+      "stop_selecting_accuracy": 0.6770833333333334,
+      "keep_selecting_nll": 2.2955480132610924,
+      "stop_selecting_nll": 1.4946739068351842,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "checkpoint_chunk": 1536,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.0,
+      "stop_selecting_accuracy": 0.0,
+      "keep_selecting_nll": 3.3885629574457803,
+      "stop_selecting_nll": 3.3885629574457803,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "checkpoint_chunk": 1536,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.0625,
+      "stop_selecting_accuracy": 0.2760416666666667,
+      "keep_selecting_nll": 3.1497814456621804,
+      "stop_selecting_nll": 2.543539294973016,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "checkpoint_chunk": 1536,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.20182291666666666,
+      "stop_selecting_accuracy": 0.5130208333333334,
+      "keep_selecting_nll": 2.7268133014440536,
+      "stop_selecting_nll": 1.962781522772275,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "checkpoint_chunk": 1536,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.21875,
+      "stop_selecting_accuracy": 0.6380208333333334,
+      "keep_selecting_nll": 2.6890067059818343,
+      "stop_selecting_nll": 1.6196326816182893,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "checkpoint_chunk": 1024,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.8333333333333334,
+      "stop_selecting_accuracy": 0.8333333333333334,
+      "keep_selecting_nll": 0.9611513440807661,
+      "stop_selecting_nll": 0.9611513440807661,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "checkpoint_chunk": 1024,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.9270833333333334,
+      "stop_selecting_accuracy": 0.7395833333333334,
+      "keep_selecting_nll": 0.8014619844034314,
+      "stop_selecting_nll": 1.2976527411180239,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "checkpoint_chunk": 1024,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.80078125,
+      "stop_selecting_accuracy": 0.8294270833333334,
+      "keep_selecting_nll": 1.1636191007952827,
+      "stop_selecting_nll": 1.0765567144262604,
+      "stop_nll_lower_seeds": 1
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "checkpoint_chunk": 1024,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.677734375,
+      "stop_selecting_accuracy": 0.8704427083333334,
+      "keep_selecting_nll": 1.5050010598109413,
+      "stop_selecting_nll": 0.950297908076512,
+      "stop_nll_lower_seeds": 3
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "checkpoint_chunk": 1536,
+      "horizon": 4,
+      "keep_selecting_accuracy": 0.3333333333333333,
+      "stop_selecting_accuracy": 0.3333333333333333,
+      "keep_selecting_nll": 1.9931869879364967,
+      "stop_selecting_nll": 1.9931869879364967,
+      "stop_nll_lower_seeds": 0
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "checkpoint_chunk": 1536,
+      "horizon": 64,
+      "keep_selecting_accuracy": 0.4322916666666667,
+      "stop_selecting_accuracy": 0.5572916666666666,
+      "keep_selecting_nll": 2.1728080021372684,
+      "stop_selecting_nll": 1.8097390923649073,
+      "stop_nll_lower_seeds": 2
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "checkpoint_chunk": 1536,
+      "horizon": 256,
+      "keep_selecting_accuracy": 0.5638020833333334,
+      "stop_selecting_accuracy": 0.73046875,
+      "keep_selecting_nll": 1.8139803167432547,
+      "stop_selecting_nll": 1.3843039809532154,
+      "stop_nll_lower_seeds": 2
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "checkpoint_chunk": 1536,
+      "horizon": 1024,
+      "keep_selecting_accuracy": 0.5947265625,
+      "stop_selecting_accuracy": 0.8723958333333334,
+      "keep_selecting_nll": 1.6916643530178892,
+      "stop_selecting_nll": 0.9480579512310214,
+      "stop_nll_lower_seeds": 3
+    }
+  ],
+  "exact_full_core_reference_chunks": 9216,
+  "seconds": 131.2283482219791
+}

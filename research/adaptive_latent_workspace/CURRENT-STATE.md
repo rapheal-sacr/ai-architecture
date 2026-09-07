@@ -9,8 +9,11 @@ function from further adaptation and shows what an oracle old snapshot recovers.
 E35-RESULT.md rejects the bounded short-sample archive selector: larger banks
 damage all whole-stream cells, while disabling selection restores exact active
 predictions. Preserve useful conditional-return subsets alongside this failure.
-Next: a local switch intervention, then action integration with the active E2E
-baseline. ActionE2E's checked real/imagined interface is not a trained agent.
+The local switch and finite-horizon interventions are complete: short-run gains
+can accompany long-run damage, and stopping later switches helps34/36 inherited
+states over1,024 targets, with explicit counterexamples. Next: actual action
+learning with the active E2E baseline. ActionE2E's checked real/imagined interface
+is not a trained agent. No experiment remains running at this update.
 RUNS/ACTIVE-STATE.json locates process handles; verify their current live/terminal
 state with the handles themselves rather than trusting a historical snapshot.
 

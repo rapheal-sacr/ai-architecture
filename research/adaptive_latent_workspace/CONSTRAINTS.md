@@ -182,3 +182,20 @@ to measure. E2E's fixed per-token fast update does not itself pay an external
 bank's maintenance cost. MSA-SOURCE-AUDIT.md gives a constructed coordinate
 change preserving the fresh function but reversing old-cache access. Testing
 only newly encoded inputs would miss that failure.
+
+## E35 recovery: selection can consume useful lifetime despite protected state
+
+E35-RECOVERY.md measures restricted observations to a75%-of16 criterion on every
+segment, including censoring. Carry-trained active versus bank8 recovers in
+280/281 versus78/281 drifting segments; mean restricted lifetime fraction is
+.315 versus.811. The single active non-recovery has no complete evaluable window;
+bank8 also fails202 segments with evaluable windows. Its successful-only median
+is slightly faster, illustrating why censoring cannot be dropped.
+
+The16–19-observation confirmation floor means this is not the earliest physical
+time of learning. No per-recovery wall time or universal information bound is
+measured. The same identifying observations permit active learning to recover
+where frequent archive selection fails. This supports a repairable access/update
+policy bottleneck, not a claim that immutable stored knowledge alone supplies
+an efficient improvement mechanism. E35's exact no-selection control is the
+whole-trajectory intervention supporting that policy attribution.

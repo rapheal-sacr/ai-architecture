@@ -117,6 +117,13 @@ real chunk, stratifying unchanged maps separately. The original trajectory must
 still replay exactly. This diagnosis cannot estimate a new controller's complete
 trajectory; it isolates local effects before a repair is proposed.
 
+Both diagnoses are now complete in E35-SELECTION-DIAGNOSIS.md. Local switches
+often help the next chunk, contradicting a general immediate-harm explanation.
+Nevertheless, stopping further switches from actual midway states improves
+1,024-target NLL/accuracy in34/36 branches, with two explicit counterexamples
+and important short-horizon reversals. This is evidence about the learning path,
+not a trained repair or proof that protected retrieval should always be disabled.
+
 ## Design consequence and remaining uncertainty
 
 E34's oracle snapshot recovery did not imply a useful autonomous selector.
@@ -129,8 +136,9 @@ Keep active E2E learning as the action-integration baseline. Do not carry the
 failed archive selector into the agent merely because its state is bounded.
 The operative bottleneck candidate remains recovery cost relative to useful
 knowledge lifetime; this experiment measures stream/return performance and
-costs, not a universal improvement-rate bound. A complete thresholded recovery
-time/censoring distribution is not established here.
+costs, not a universal improvement-rate bound. E35-RECOVERY.md subsequently adds
+the post hoc observation-delay/censoring assay, including all9,660 segment/learner
+occurrences. It does not measure per-recovery wall time or earliest acquisition.
 
 ActionE2E now has separate real and imagined interfaces and checked gradients,
 but no trained action agent. Learned compression, unknown-context evidence

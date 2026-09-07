@@ -2,11 +2,18 @@
 
 Read `FALSIFICATION.md` before design prose. This map preserves the user's full
 objective; component tests do not redefine success as a smaller graph or stream
-problem. E1–E34 are complete and audited. E32 conventional controls repair some
+problem. E1–E35 are complete and audited. E32 conventional controls repair some
 imitation fitting but not larger-world competence. E33 provides scoped positive
 evidence for update-trained acquisition and carried-state reuse in a synthetic
 grammar; it does not implement an autonomous long-horizon agent. Read the full
 results, including stronger controls and per-seed reversals.
+
+E35's archive selector fails every whole-stream comparison; its exact no-selection
+control and two subsequent interventions separate local prediction from the
+future learning trajectory. E35-RECOVERY.md includes censored contexts. The
+ActionE2E adapter passes mechanics checks but has no trained planner or task
+acquisition. Neither its implementation nor stopping a failed selector supplies
+the missing general-action or recursive-improvement evidence below.
 
 | Requirement | Authoritative evidence currently available | Status and missing evidence |
 |---|---|---|
