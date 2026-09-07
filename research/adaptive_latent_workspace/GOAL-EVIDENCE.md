@@ -72,3 +72,18 @@ additional updates. Earlier snapshots recover capability that current weights
 fail to express, but selection is oracle and first-chunk errors persist. This
 strengthens the case for testing bounded preserved fast states, not a claim that
 autonomous retrieval, compression or the full integrated architecture is solved.
+
+E35 rejects that particular autonomous snapshot-selection policy and diagnoses
+why short-run selected predictions cannot be substituted for whole learning
+trajectories. Stopping selection helps34/36 inherited branches at1,024 targets,
+with two counterexamples. All cases and diagnoses are complete and audited.
+
+The user subsequently supplied fourteen motivational/learning hypotheses.
+HYPOTHESES-LEDGER.md maps every one to the three roots, existing evidence and
+falsifiers. P1 audits576 acquisition trajectories and unchanged source fixtures.
+Surprise/noise and bounded-memory information-gain failures constrain the next
+controller; scalar/factored utility equivalence narrows an expressivity claim.
+These are targeted results, not all14 hypotheses tested or broad capability.
+The real-action interface and finite planner now pass mechanical/gradient checks.
+Training actual action competence, learned goals/consolidation, language transfer,
+efficient long horizons and reliable recursive self-improvement remain open.

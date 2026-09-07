@@ -1,5 +1,13 @@
 # Next work — actual action learning after E35's completed falsification
 
+Latest steering is the fourteen-hypothesis attachment. Read its full ledger and
+HYPOTHESES-P1-RESULT.md after the falsification record. P1 is complete/audited;
+do not repeat it as new evidence. It falsifies surprise-only acquisition under
+noise and stationary information gain as a general repair under finite memory
+and hidden change. It also narrows scalar/vector and adaptive-compute claims.
+The next learned experiment must include these controls, not assume that adding
+uncertainty/drive heads automatically supplies good goal choice.
+
 Read FALSIFICATION.md first. E1–E35 are complete/audited. E35 scorer14837,
 auditor52212, summarizer88879, local switch diagnosis28598, recovery87949 and
 stop-switching diagnosis69265 are all verified terminal exit0. No process is
@@ -23,8 +31,10 @@ Another grammar-only repair cannot establish that goal.
 ActionE2E is now implemented/preflighted in action_e2e.py. It trains through
 observation/executed-action/outcome updates and separates real state from
 read-only imagination. ACTION-E2E-PREFLIGHT.md records dense/gradient/causality/
-serialization checks and limitations. It is untrained: no goal planner, task-
-reward outer objective or action competence exists yet. Use the active E2E
+serialization checks and limitations. action_planning.py and action_navigation.py
+now implement a fixed finite planner and real-action world; their independent
+checks pass ACTION-PLANNING-PREFLIGHT.md. It is untrained: no task-reward outer
+objective or action competence exists yet. Use the active E2E
 trajectory as the action-integration baseline, without assuming bank8 improves it.
 
 Next implement and freeze a closed-loop action-conditioned learner/planner on
@@ -41,3 +51,9 @@ goal reasoning or task-return optimization. These are explicit work, not benefit
 to infer from lower transition NLL. E2E-REVISION.md preserves the complete target.
 Learned compression, slow-base migration and multiple genuine procedure-improvement
 generations remain open. Keep the full goal active.
+
+After action acquisition works, train the goal/acquisition controller against
+future actual task outcomes with equal-budget fixed and conditioned-scalar
+controls. Distinguish choosing known options from composing novel goal structure.
+Then train future-validated consolidation and native memory choices. The ledger
+specifies later social, homeostatic, topology and recursive procedure tests.

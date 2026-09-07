@@ -1,0 +1,25 @@
+{
+  "exhaustive_deterministic_values": 576,
+  "exhaustive_value_max_error": 0.0,
+  "stochastic_branch_reference_max_error": 0.0,
+  "observed_map_shortest_path_actions": 30,
+  "serialized_world_and_table_exact_steps": 38,
+  "vector_serial_max_error": 1.887379141862766e-15,
+  "hypothetical_work": {
+    "hypothetical_queries": 12,
+    "forward_tokens": 24,
+    "attention_score_elements": 864,
+    "inner_updates": 0,
+    "gradient_tokens": 0,
+    "vectorized_batches": 1
+  },
+  "vector_serial_outer_gradient_max_error": 1.3739009929736312e-15,
+  "full_outer_directional_derivative": -0.03667898388912422,
+  "finite_difference_absolute_errors": [
+    1.6382202816522806e-09,
+    5.637323940987926e-12
+  ],
+  "real_state_unchanged_after_planning": true,
+  "status": "ACTION_PLANNING_PREFLIGHT_PASS",
+  "seconds": 2.3661041340092197
+}

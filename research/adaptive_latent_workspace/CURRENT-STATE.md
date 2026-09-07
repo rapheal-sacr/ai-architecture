@@ -1,5 +1,14 @@
 # Research state — goal still active
 
+Latest user steering: test the attached fourteen hypotheses and use them to
+inform this same goal. HYPOTHESES-LEDGER.md covers all fourteen; P1 directly
+tests only restricted H4 acquisition, H4/H8 source mechanisms and H2 equivalence.
+HYPOTHESES-P1-RESULT.md records576 audited trajectories: surprise chases noise,
+information gain also fails under bounded memory/change, and retrospective CTM
+thinking time does not stop the inspected forward. The ledger retains positive
+cases and unmeasured claims. All P1 processes are terminal. Action planning/world
+mechanics now pass ACTION-PLANNING-PREFLIGHT.md; no action learner is trained yet.
+
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
 E1–E35 are complete and audited. E32-RESULT.md shows tutorial fitting can
@@ -12,8 +21,9 @@ predictions. Preserve useful conditional-return subsets alongside this failure.
 The local switch and finite-horizon interventions are complete: short-run gains
 can accompany long-run damage, and stopping later switches helps34/36 inherited
 states over1,024 targets, with explicit counterexamples. Next: actual action
-learning with the active E2E baseline. ActionE2E's checked real/imagined interface
-is not a trained agent. No experiment remains running at this update.
+learning with the active E2E baseline, incorporating the attachment's acquisition
+and diagnostic controls. ActionE2E's checked real/imagined interface and fixed
+planner are not a trained agent. No experiment remains running at this update.
 RUNS/ACTIVE-STATE.json locates process handles; verify their current live/terminal
 state with the handles themselves rather than trusting a historical snapshot.
 

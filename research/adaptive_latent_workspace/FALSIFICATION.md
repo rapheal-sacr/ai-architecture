@@ -482,3 +482,51 @@ This supports interference with the evolving learning trajectory while rejecting
 universal immediate-harm and universal disable-selection claims. No repaired
 learned selector or action competence is yet established. Move next to actual
 action learning using the checked ActionE2E interface and strong controls.
+
+## User attachment P1: surprise, uncertainty and modular motivation
+
+The attachment's fourteen hypotheses are recorded in HYPOTHESES-LEDGER.md.
+P1 directly tests a restricted acquisition version of H4, source mechanisms
+relevant to H4/H8, and a representational premise of H2. It does not claim to
+test all fourteen or establish a learned goal generator/consolidation policy.
+Scorer frozen at b0a4718 before execution. Read HYPOTHESES-P1-RESULT.md.
+
+Across576 trajectories and2,359,296 paid observations, raw surprise allocates
+94.25% of stationary mixed-source observations to irreducible noise and has
+3.68x uniform's excess Brier loss, worse on all24 seeds. It helps clean acquisition
+and some hidden-change recovery, so surprise is not universally useless. With
+rolling64-observation memory after hidden change, surprise improves second-half
+loss but worsens the endpoint; whole-stream difference is small/mixed. Information
+gain is also insufficient: rolling-memory change loss is2.07x uniform and endpoint
+loss .306504 versus .006300, worse on all24 seeds. Predictive entropy is not
+reducible uncertainty. Beta(1,1) and Beta(512,512) have identical predictive
+entropy but information gains .193147 and .000488 nats.
+
+Audit23142 terminal exit0: all576 action/outcome hashes replay exactly, every
+selected posterior is reconstructed from raw histories,1,179,648 snapshot source
+posteriors agree, and metrics have zero discrepancy. Replay reuses policy code;
+this is not a fully independent implementation. Scoring16671 and source39911
+are also terminal exit0; total scorer14.142s and audit24.085s. Source fixtures
+are untrained and must not be reported as full-model replications.
+
+Unchanged CTM forward executes all1/4/16 ticks even when both retrospective
+thinking-time selectors choose its first certain answer. Certainty is normalized
+entropy, and a confidently wrong fixture scores1.0. Neither adaptive runtime
+savings nor calibrated correctness follows. The unchanged Metis gated update
+and normalized read permit old orthogonal evidence to decay under chosen gates;
+the documented parallel approximation loses within-batch write order for fixed
+hidden vectors. Contextual vectors can still encode order. Full trained behavior
+is unmeasured. MemTensor's Metis is the likely attachment reference, not a verified
+identity for that ambiguous name; its training data are not included.
+
+Ten thousand known-model utility fixtures choose identical actions under
+factored desire/success and an equally informed scalar expected utility. Separate
+heads may improve learning/reweighting, but this is not a new objective class.
+The weaker stale scalar changes4,509 choices because it omits current weights.
+Do not count that omitted-input control as evidence of architecture superiority.
+
+Action-planning preflight82650 terminal exit0 subsequently checks576 exhaustive
+deterministic values, stochastic branching,30 shortest-path actions,38 serialized
+continuation steps, vector/serial queries and full outer gradients. Finite-difference
+error is at most1.64e-9 on two perturbation scales. This is working test machinery,
+not a trained action learner. The full goal remains active.
