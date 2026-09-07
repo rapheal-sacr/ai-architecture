@@ -38,7 +38,8 @@ class NavigationObservation:
 
 class NavigationWorld:
     """Agent receives observe()/step() observations, never this object's maps."""
-    def __init__(self, maps, durations, slots, *, goal_seed, initial_state=0):
+    def __init__(self, maps, durations, slots, *, goal_seed, initial_state=0,
+                 noise_rate=0., noise_seed=0):
         assert maps and len(durations) == len(slots) and all(d > 0 for d in durations)
         self._maps = maps
         self.states, self.actions = len(maps[0]), len(maps[0][0])
@@ -48,6 +49,9 @@ class NavigationWorld:
         self._durations, self._slots = list(durations), list(slots)
         self._schedule = [slot for slot, duration in zip(slots, durations) for _ in range(duration)]
         self._rng = random.Random(goal_seed)
+        assert 0 <= noise_rate <= 1
+        self._noise_rate = noise_rate
+        self._noise_rng = random.Random(noise_seed)
         self._state, self._step, self._completed = initial_state, 0, 0
         self._goal = self._next_goal(initial_state)
 
@@ -65,6 +69,8 @@ class NavigationWorld:
         old = self.observe()
         slot = self._schedule[self._step]
         self._state = self._maps[slot][self._state][action]
+        if self._noise_rate and self._noise_rng.random() < self._noise_rate:
+            self._state = self._noise_rng.randrange(self.states)
         self._step += 1
         reward = int(self._state == self._goal)
         if reward:
@@ -80,7 +86,8 @@ class NavigationWorld:
     def payload(self):
         return dict(maps=self._maps, durations=self._durations, slots=self._slots,
                     rng=self._rng.getstate(), state=self._state, step=self._step,
-                    completed=self._completed, goal=self._goal)
+                    completed=self._completed, goal=self._goal,
+                    noise_rate=self._noise_rate, noise_rng=self._noise_rng.getstate())
 
     @classmethod
     def restore(cls, payload):
@@ -88,6 +95,9 @@ class NavigationWorld:
         world._rng.setstate(payload["rng"])
         world._state, world._step = payload["state"], payload["step"]
         world._completed, world._goal = payload["completed"], payload["goal"]
+        world._noise_rate = payload.get("noise_rate",0.)
+        if "noise_rng" in payload:
+            world._noise_rng.setstate(payload["noise_rng"])
         return world
 
 

@@ -530,3 +530,16 @@ deterministic values, stochastic branching,30 shortest-path actions,38 serialize
 continuation steps, vector/serial queries and full outer gradients. Finite-difference
 error is at most1.64e-9 on two perturbation scales. This is working test machinery,
 not a trained action learner. The full goal remains active.
+
+## E36 preflight: real-action training and evaluation pipeline
+
+E36-PREFLIGHT.md records a final development run with unchanged sources:6 outer
+updates,144 training transitions,1,024 evaluation actions,384 inference updates
+and70 exact noninitial checkpoints. Independent physical/noise/goal receipts,
+explicit planner calculations, count histories and executed-work reconstruction
+pass. The first auditor needed the same floating-point clipped-update operation
+order to support bitwise replay; no learning settings changed. Development scores
+are not capability evidence. The next scored run freezes equal-data predictive
+static/first-order/E2E training and evaluates actual goal completion with a fixed
+planner, alongside cheap observed-memory controls. No task-reward outer training,
+learned goal generation or general reasoning is established by these checks.

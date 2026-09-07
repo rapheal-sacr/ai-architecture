@@ -1,0 +1,39 @@
+{
+  "experiment": "E36",
+  "purpose": "Train action-conditioned continual world prediction, then falsify its usefulness for actual goal completion with a fixed planner. Not learned general reasoning or the full architecture.",
+  "seeds": [38101, 38102, 38103],
+  "states": 6,
+  "actions": 2,
+  "training_arms": ["static", "first_order", "e2e"],
+  "outer_steps": 128,
+  "outer_lr": 0.001,
+  "outer_weight_decay": 0.01,
+  "outer_clip": 1.0,
+  "train_durations": [32, 32, 32],
+  "train_slots": [0, 1, 0],
+  "config": {
+    "vocab": 8, "width": 32, "hidden": 64, "layers": 4, "suffix": 1,
+    "heads": 4, "window": 4, "chunk": 2, "inner_lr": 0.3,
+    "clip": 1.0, "eps": 0.000001, "rope_theta": 500000.0, "init_std": 0.1
+  },
+  "planning": {"horizon": 6, "discount": 0.95, "temperature": 0.1, "exploration": 0.1},
+  "evaluation_steps": 512,
+  "evaluation_worlds_per_regime": 2,
+  "evaluation_regimes": ["stationary", "recurring", "drifting", "noisy"],
+  "evaluation_duration_range": [32, 96],
+  "evaluation_noise_rate": 0.2,
+  "evaluation_arms": [
+    {"name": "static_frozen", "training": "static", "update": "frozen"},
+    {"name": "static_ttt", "training": "static", "update": "first_order"},
+    {"name": "first_order_ttt", "training": "first_order", "update": "first_order"},
+    {"name": "e2e_ttt", "training": "e2e", "update": "first_order"},
+    {"name": "e2e_frozen", "training": "e2e", "update": "frozen"}
+  ],
+  "checkpoint_interval_train": 32,
+  "checkpoint_interval_eval": 128,
+  "count_control_window": 8,
+  "selection": "Final fixed128-update models only; no evaluated-world parameter or stopping selection. Development uses separate seeds and reduced budgets.",
+  "controls": "Within each initialization seed, all training arms receive identical actual uniform-action trajectories and initialization. Equal observations, not compute. Evaluation is closed-loop: agents therefore receive different observations; common maps/schedules/noise seeds and goal-request sequences do not make their evidence identical. Include random, observed-edge BFS and rolling-count model with the same finite Bellman planner.",
+  "primary": "Whole-world goals completed per512 paid actions, paired by world. Transition NLL and actual accuracy separately. Private full-map argmax coverage is diagnostic only; no controller sees it. A local acquisition criterion is at least11/12 current transition argmaxes correct, with nonrecoveries censored and the known noise probability explicitly retained.",
+  "decision": "Do not promote the neural mechanism if E2E action completion fails static-plus-TTT/first-order or the simple observed-memory controls at its extra cost. Prediction improvement without action improvement fails the action-usefulness claim. Six-state fixed planner success cannot establish general reasoning, open-ended goal generation, learned compression or recursive self-improvement."
+}
