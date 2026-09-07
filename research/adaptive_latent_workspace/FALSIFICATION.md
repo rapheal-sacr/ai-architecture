@@ -424,3 +424,31 @@ the current chunk and other memory. No runtime peak or Muse benchmark was measur
 E35 scorer subsequently completed all90 cases,951.7907s, exit0. Independent
 auditor52212 is running; first four cases passed at the verified poll. No scored
 benefit is interpreted yet. Read E35-INTERIM.md and poll the live handle.
+
+## E35 complete: autonomous archive selection damages continual learning
+
+Auditor52212 subsequently finished E35_AUDITED exit0:184,320 exact chunks,
+149,810 gradient updates,923,525 candidate forwards and360 saved checkpoints.
+The larger archive worsens NLL/accuracy on every seed and regime for both
+E2E objectives. Carry-trained recurring accuracy drops95.53%→73.35%; drifting
+drops88.68%→34.92% and reaches26.87% in the latter half. Bank2 is also worse
+than active-only but better than bank8. The no-selection bank exactly matches
+active-only predictions, losses, fast state and KV. Selection is an identified
+policy-level failure; capacity alone does not repair it.
+
+Some common-acquired return subsets improve under expansion/drift, so old
+snapshots are not universally useless. They do not repay whole-stream damage,
+1.72–1.85x aggregate compute time or244vs28KiB persistent tensor state. Every
+limited recurrence gate fails. Read E35-RESULT.md and E35-TABLES.md. Frequent
+retrospective four-token switching may interrupt learning; the new post hoc
+next-chunk switch intervention will test that local mechanism. No repair is
+yet scored. A universal numeric improvement-rate bound remains unmeasured.
+
+## Action interface preflight: actual outcomes are separate from imagination
+
+ActionE2E predicts subsequent categorical observations from observation/action
+pairs and learns only after the declared real outcome. Twelve execution receipts
+exclude conflicting advisory labels. Abandoned imaginary branches leave exact
+real continuation unchanged; save/load and two-layer second-order gradients
+pass. These are checked mechanics, not a trained planner or action-acquisition
+result. ACTION-E2E-PREFLIGHT.md records the limits. Full goal remains active.

@@ -2,13 +2,17 @@
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.
-E1–E34 are complete and audited. E32-RESULT.md shows tutorial fitting can
+E1–E35 are complete and audited. E32-RESULT.md shows tutorial fitting can
 improve without larger-world competence. E33-RESULT.md establishes scoped
 E2E acquisition and carried-state reuse. E34-RESULT.md separates retained
 function from further adaptation and shows what an oracle old snapshot recovers.
-There is no running scored process at this update. Next: bounded fast-state
-preservation and selection from observed evidence, without oracle context IDs.
-Consult RUNS/ACTIVE-STATE.json for authoritative process state.
+E35-RESULT.md rejects the bounded short-sample archive selector: larger banks
+damage all whole-stream cells, while disabling selection restores exact active
+predictions. Preserve useful conditional-return subsets alongside this failure.
+Next: a local switch intervention, then action integration with the active E2E
+baseline. ActionE2E's checked real/imagined interface is not a trained agent.
+RUNS/ACTIVE-STATE.json locates process handles; verify their current live/terminal
+state with the handles themselves rather than trusting a historical snapshot.
 
 ## What is locally established
 

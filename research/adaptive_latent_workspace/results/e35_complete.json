@@ -11,5 +11,5 @@
   "full_complete_bytes": 7942559,
   "no_select_outputs_states_exact": true,
   "source_files_unchanged": true,
-  "audit_status": "Pending: full-core auditor session52212; no scored interpretation yet"
+  "audit_status": "Complete: E35_AUDITED exit0; results/e35_audit.json"
 }

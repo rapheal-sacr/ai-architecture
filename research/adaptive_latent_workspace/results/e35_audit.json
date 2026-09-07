@@ -1,0 +1,647 @@
+{
+  "event": "E35_AUDITED",
+  "cases": [
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "active_always",
+      "stream_index": 0
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "active_gated",
+      "stream_index": 0
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank2_gated",
+      "stream_index": 0
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank8_gated",
+      "stream_index": 0
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 0
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "active_always",
+      "stream_index": 0
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "active_gated",
+      "stream_index": 0
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank2_gated",
+      "stream_index": 0
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank8_gated",
+      "stream_index": 0
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 0
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "active_always",
+      "stream_index": 1
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "active_gated",
+      "stream_index": 1
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank2_gated",
+      "stream_index": 1
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank8_gated",
+      "stream_index": 1
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 1
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "active_always",
+      "stream_index": 1
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "active_gated",
+      "stream_index": 1
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank2_gated",
+      "stream_index": 1
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank8_gated",
+      "stream_index": 1
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 1
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "active_always",
+      "stream_index": 2
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "active_gated",
+      "stream_index": 2
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank2_gated",
+      "stream_index": 2
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank8_gated",
+      "stream_index": 2
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 2
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "active_always",
+      "stream_index": 2
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "active_gated",
+      "stream_index": 2
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank2_gated",
+      "stream_index": 2
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank8_gated",
+      "stream_index": 2
+    },
+    {
+      "seed": 33101,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 2
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "active_always",
+      "stream_index": 3
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "active_gated",
+      "stream_index": 3
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank2_gated",
+      "stream_index": 3
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank8_gated",
+      "stream_index": 3
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 3
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "active_always",
+      "stream_index": 3
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "active_gated",
+      "stream_index": 3
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank2_gated",
+      "stream_index": 3
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank8_gated",
+      "stream_index": 3
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 3
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "active_always",
+      "stream_index": 4
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "active_gated",
+      "stream_index": 4
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank2_gated",
+      "stream_index": 4
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank8_gated",
+      "stream_index": 4
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 4
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "active_always",
+      "stream_index": 4
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "active_gated",
+      "stream_index": 4
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank2_gated",
+      "stream_index": 4
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank8_gated",
+      "stream_index": 4
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 4
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "active_always",
+      "stream_index": 5
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "active_gated",
+      "stream_index": 5
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank2_gated",
+      "stream_index": 5
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank8_gated",
+      "stream_index": 5
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 5
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "active_always",
+      "stream_index": 5
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "active_gated",
+      "stream_index": 5
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank2_gated",
+      "stream_index": 5
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank8_gated",
+      "stream_index": 5
+    },
+    {
+      "seed": 33102,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 5
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "active_always",
+      "stream_index": 6
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "active_gated",
+      "stream_index": 6
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank2_gated",
+      "stream_index": 6
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank8_gated",
+      "stream_index": 6
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 6
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "active_always",
+      "stream_index": 6
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "active_gated",
+      "stream_index": 6
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank2_gated",
+      "stream_index": 6
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank8_gated",
+      "stream_index": 6
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 6
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "active_always",
+      "stream_index": 7
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "active_gated",
+      "stream_index": 7
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank2_gated",
+      "stream_index": 7
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank8_gated",
+      "stream_index": 7
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 7
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "active_always",
+      "stream_index": 7
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "active_gated",
+      "stream_index": 7
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank2_gated",
+      "stream_index": 7
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank8_gated",
+      "stream_index": 7
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 7
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "active_always",
+      "stream_index": 8
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "active_gated",
+      "stream_index": 8
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank2_gated",
+      "stream_index": 8
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank8_gated",
+      "stream_index": 8
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 8
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "active_always",
+      "stream_index": 8
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "active_gated",
+      "stream_index": 8
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank2_gated",
+      "stream_index": 8
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank8_gated",
+      "stream_index": 8
+    },
+    {
+      "seed": 33103,
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank8_no_select_gated",
+      "stream_index": 8
+    }
+  ],
+  "checkpoints_exact": 360,
+  "chunks_exact": 184320,
+  "gradient_updates_exact": 149810,
+  "full_core_suffix_candidate_forwards_exact": 923525,
+  "independent_policy_events": true,
+  "independent_metric_and_transition_checks": true,
+  "source_and_base_unchanged": true,
+  "no_select_exact_control": true,
+  "data_sha256": "8f0fb3172b4649ca59e74e7d5058a9bc7e12681114ce9d02241b07271735d30c",
+  "complete_sha256": "e6c1f2f59722f528c3fb0e7a11bde420244289ba32163fcabb42418c020d02f7",
+  "manifest_sha256": "cc53d58fbb7eba132c99666eebfa9bcc422352917c8fd7614d0d808d4856bf92",
+  "seconds": 3685.6357022130105
+}

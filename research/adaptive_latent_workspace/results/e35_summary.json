@@ -1,0 +1,1781 @@
+{
+  "event": "E35_SUMMARY",
+  "preflight": false,
+  "source_commit": "4e7730fc5445313455dd85f44bc9d00472aaa574",
+  "aggregate": [
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "active_always",
+      "all": {
+        "n": 24576,
+        "correct": 21772,
+        "accuracy": 0.8859049479166666,
+        "mean_nll": 0.8137379916928088,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11146,
+        "accuracy": 0.9070638020833334,
+        "mean_nll": 0.7353969889736618,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 2599,
+        "correct": 1927,
+        "accuracy": 0.7414390150057715,
+        "mean_nll": 1.2609613423291974,
+        "occurrences": 163
+      },
+      "compute_seconds": 24.11875912695541,
+      "checkpoint_seconds": 0.05781223496887833,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 6144,
+        "gradient_tokens": 24576,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 1.0,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "active_gated",
+      "all": {
+        "n": 24576,
+        "correct": 21795,
+        "accuracy": 0.8868408203125,
+        "mean_nll": 0.8476360671381068,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11127,
+        "accuracy": 0.905517578125,
+        "mean_nll": 0.7856733297339815,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 2599,
+        "correct": 1950,
+        "accuracy": 0.7502885725278954,
+        "mean_nll": 1.2686463495076459,
+        "occurrences": 163
+      },
+      "compute_seconds": 22.420393935404718,
+      "checkpoint_seconds": 0.058199132996378466,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 3825,
+        "gradient_tokens": 15300,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 0.62255859375,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank2_gated",
+      "all": {
+        "n": 24576,
+        "correct": 14572,
+        "accuracy": 0.5929361979166666,
+        "mean_nll": 1.7012279470964131,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 7857,
+        "accuracy": 0.639404296875,
+        "mean_nll": 1.5625844352968368,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 1607,
+        "correct": 1036,
+        "accuracy": 0.6446795270690728,
+        "mean_nll": 1.5694666974149138,
+        "occurrences": 101
+      },
+      "compute_seconds": 29.978901860973565,
+      "checkpoint_seconds": 0.15128551304223947,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 103776,
+        "suffix_forwards": 25944,
+        "gradient_updates": 5644,
+        "gradient_tokens": 22576,
+        "switches": 1563,
+        "admissions": 190,
+        "duplicates": 352,
+        "rejections": 994,
+        "evictions": 184
+      },
+      "suffix_forward_multiplier": 4.22265625,
+      "gradient_chunk_fraction": 0.9186197916666666,
+      "peak_persistent_tensor_bytes": 102400,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank8_gated",
+      "all": {
+        "n": 24576,
+        "correct": 8582,
+        "accuracy": 0.3492024739583333,
+        "mean_nll": 2.325810619916107,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 3302,
+        "accuracy": 0.2687174479166667,
+        "mean_nll": 2.530766446923129,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 752,
+        "correct": 577,
+        "accuracy": 0.7672872340425532,
+        "mean_nll": 1.282247232530821,
+        "occurrences": 47
+      },
+      "compute_seconds": 41.09087680428638,
+      "checkpoint_seconds": 0.21139124906039797,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 233132,
+        "suffix_forwards": 58283,
+        "gradient_updates": 5762,
+        "gradient_tokens": 23048,
+        "switches": 3476,
+        "admissions": 56,
+        "duplicates": 220,
+        "rejections": 1260,
+        "evictions": 32
+      },
+      "suffix_forward_multiplier": 9.486165364583334,
+      "gradient_chunk_fraction": 0.9378255208333334,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "policy": "bank8_no_select_gated",
+      "all": {
+        "n": 24576,
+        "correct": 21795,
+        "accuracy": 0.8868408203125,
+        "mean_nll": 0.8476360671381068,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11127,
+        "accuracy": 0.905517578125,
+        "mean_nll": 0.7856733297339815,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 2599,
+        "correct": 1950,
+        "accuracy": 0.7502885725278954,
+        "mean_nll": 1.2686463495076459,
+        "occurrences": 163
+      },
+      "compute_seconds": 39.37965676479507,
+      "checkpoint_seconds": 0.2066798839950934,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 238464,
+        "suffix_forwards": 59616,
+        "gradient_updates": 3825,
+        "gradient_tokens": 15300,
+        "switches": 0,
+        "admissions": 315,
+        "duplicates": 796,
+        "rejections": 425,
+        "evictions": 291
+      },
+      "suffix_forward_multiplier": 9.703125,
+      "gradient_chunk_fraction": 0.62255859375,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "active_always",
+      "all": {
+        "n": 24576,
+        "correct": 20847,
+        "accuracy": 0.8482666015625,
+        "mean_nll": 0.9514398172814253,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11164,
+        "accuracy": 0.9085286458333334,
+        "mean_nll": 0.7612686606031881,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 5536,
+        "correct": 3655,
+        "accuracy": 0.6602239884393064,
+        "mean_nll": 1.5073108252116365,
+        "occurrences": 346
+      },
+      "compute_seconds": 23.78685292994487,
+      "checkpoint_seconds": 0.058823238912737,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 6144,
+        "gradient_tokens": 24576,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 1.0,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "active_gated",
+      "all": {
+        "n": 24576,
+        "correct": 21000,
+        "accuracy": 0.8544921875,
+        "mean_nll": 0.9533844413690531,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11250,
+        "accuracy": 0.91552734375,
+        "mean_nll": 0.7690446930840457,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 5520,
+        "correct": 3713,
+        "accuracy": 0.6726449275362318,
+        "mean_nll": 1.4774050767250035,
+        "occurrences": 345
+      },
+      "compute_seconds": 22.860799936403055,
+      "checkpoint_seconds": 0.05755881604272872,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 4406,
+        "gradient_tokens": 17624,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 0.7171223958333334,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank2_gated",
+      "all": {
+        "n": 24576,
+        "correct": 11931,
+        "accuracy": 0.4854736328125,
+        "mean_nll": 1.9705330739858862,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 6774,
+        "accuracy": 0.55126953125,
+        "mean_nll": 1.7940853628691305,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 2976,
+        "correct": 1702,
+        "accuracy": 0.5719086021505376,
+        "mean_nll": 1.7471007882637442,
+        "occurrences": 186
+      },
+      "compute_seconds": 30.600556624500314,
+      "checkpoint_seconds": 0.10971028602216393,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 103964,
+        "suffix_forwards": 25991,
+        "gradient_updates": 5831,
+        "gradient_tokens": 23324,
+        "switches": 1610,
+        "admissions": 192,
+        "duplicates": 235,
+        "rejections": 1109,
+        "evictions": 186
+      },
+      "suffix_forward_multiplier": 4.230305989583333,
+      "gradient_chunk_fraction": 0.9490559895833334,
+      "peak_persistent_tensor_bytes": 102400,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank8_gated",
+      "all": {
+        "n": 24576,
+        "correct": 9591,
+        "accuracy": 0.3902587890625,
+        "mean_nll": 2.2185853029465457,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 4753,
+        "accuracy": 0.3868001302083333,
+        "mean_nll": 2.2274014616620357,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 2304,
+        "correct": 1736,
+        "accuracy": 0.7534722222222222,
+        "mean_nll": 1.2984618676645268,
+        "occurrences": 144
+      },
+      "compute_seconds": 40.762144419393735,
+      "checkpoint_seconds": 0.2048757880111225,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 238320,
+        "suffix_forwards": 59580,
+        "gradient_updates": 5698,
+        "gradient_tokens": 22792,
+        "switches": 3110,
+        "admissions": 44,
+        "duplicates": 370,
+        "rejections": 1122,
+        "evictions": 20
+      },
+      "suffix_forward_multiplier": 9.697265625,
+      "gradient_chunk_fraction": 0.9274088541666666,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "policy": "bank8_no_select_gated",
+      "all": {
+        "n": 24576,
+        "correct": 21000,
+        "accuracy": 0.8544921875,
+        "mean_nll": 0.9533844413690531,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11250,
+        "accuracy": 0.91552734375,
+        "mean_nll": 0.7690446930840457,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 5520,
+        "correct": 3713,
+        "accuracy": 0.6726449275362318,
+        "mean_nll": 1.4774050767250035,
+        "occurrences": 345
+      },
+      "compute_seconds": 39.718687470041914,
+      "checkpoint_seconds": 0.20639459995436482,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 236816,
+        "suffix_forwards": 59204,
+        "gradient_updates": 4406,
+        "gradient_tokens": 17624,
+        "switches": 0,
+        "admissions": 258,
+        "duplicates": 733,
+        "rejections": 545,
+        "evictions": 234
+      },
+      "suffix_forward_multiplier": 9.636067708333334,
+      "gradient_chunk_fraction": 0.7171223958333334,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "active_always",
+      "all": {
+        "n": 24576,
+        "correct": 23472,
+        "accuracy": 0.955078125,
+        "mean_nll": 0.5312471285687934,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11966,
+        "accuracy": 0.9737955729166666,
+        "mean_nll": 0.4393417137071083,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 4241,
+        "correct": 3512,
+        "accuracy": 0.8281065786371139,
+        "mean_nll": 0.9813022101032259,
+        "occurrences": 266
+      },
+      "compute_seconds": 24.04907506122254,
+      "checkpoint_seconds": 0.060464590962510556,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 6144,
+        "gradient_tokens": 24576,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 1.0,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "active_gated",
+      "all": {
+        "n": 24576,
+        "correct": 23478,
+        "accuracy": 0.955322265625,
+        "mean_nll": 0.6048594732880398,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11959,
+        "accuracy": 0.9732259114583334,
+        "mean_nll": 0.5348953707058778,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 4241,
+        "correct": 3517,
+        "accuracy": 0.829285545861825,
+        "mean_nll": 1.0152895864212577,
+        "occurrences": 266
+      },
+      "compute_seconds": 21.63146118420991,
+      "checkpoint_seconds": 0.05763875207048841,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 1704,
+        "gradient_tokens": 6816,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 0.27734375,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank2_gated",
+      "all": {
+        "n": 24576,
+        "correct": 20520,
+        "accuracy": 0.8349609375,
+        "mean_nll": 1.0241322902359873,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11575,
+        "accuracy": 0.9419759114583334,
+        "mean_nll": 0.7471928318082064,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 3777,
+        "correct": 2770,
+        "accuracy": 0.7333862854117024,
+        "mean_nll": 1.3903486677222319,
+        "occurrences": 237
+      },
+      "compute_seconds": 29.880636194517137,
+      "checkpoint_seconds": 0.11252929802867584,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 100808,
+        "suffix_forwards": 25202,
+        "gradient_updates": 4609,
+        "gradient_tokens": 18436,
+        "switches": 826,
+        "admissions": 171,
+        "duplicates": 892,
+        "rejections": 473,
+        "evictions": 165
+      },
+      "suffix_forward_multiplier": 4.101888020833333,
+      "gradient_chunk_fraction": 0.7501627604166666,
+      "peak_persistent_tensor_bytes": 102400,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank8_gated",
+      "all": {
+        "n": 24576,
+        "correct": 18026,
+        "accuracy": 0.7334798177083334,
+        "mean_nll": 1.3551651482648595,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 9693,
+        "accuracy": 0.788818359375,
+        "mean_nll": 1.1979669782983062,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 3345,
+        "correct": 2544,
+        "accuracy": 0.7605381165919283,
+        "mean_nll": 1.3572624944206133,
+        "occurrences": 210
+      },
+      "compute_seconds": 39.020405225950526,
+      "checkpoint_seconds": 0.1948534050025046,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 213372,
+        "suffix_forwards": 53343,
+        "gradient_updates": 5218,
+        "gradient_tokens": 20872,
+        "switches": 2056,
+        "admissions": 36,
+        "duplicates": 891,
+        "rejections": 609,
+        "evictions": 12
+      },
+      "suffix_forward_multiplier": 8.68212890625,
+      "gradient_chunk_fraction": 0.8492838541666666,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "policy": "bank8_no_select_gated",
+      "all": {
+        "n": 24576,
+        "correct": 23478,
+        "accuracy": 0.955322265625,
+        "mean_nll": 0.6048594732880398,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11959,
+        "accuracy": 0.9732259114583334,
+        "mean_nll": 0.5348953707058778,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 4241,
+        "correct": 3517,
+        "accuracy": 0.829285545861825,
+        "mean_nll": 1.0152895864212577,
+        "occurrences": 266
+      },
+      "compute_seconds": 37.778468912729295,
+      "checkpoint_seconds": 0.2164564389968291,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 234528,
+        "suffix_forwards": 58632,
+        "gradient_updates": 1704,
+        "gradient_tokens": 6816,
+        "switches": 0,
+        "admissions": 78,
+        "duplicates": 1330,
+        "rejections": 128,
+        "evictions": 54
+      },
+      "suffix_forward_multiplier": 9.54296875,
+      "gradient_chunk_fraction": 0.27734375,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "active_always",
+      "all": {
+        "n": 24576,
+        "correct": 21597,
+        "accuracy": 0.8787841796875,
+        "mean_nll": 0.8804249110301802,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11083,
+        "accuracy": 0.9019368489583334,
+        "mean_nll": 0.7997269986796406,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 2599,
+        "correct": 1807,
+        "accuracy": 0.6952674105425164,
+        "mean_nll": 1.3935701145305686,
+        "occurrences": 163
+      },
+      "compute_seconds": 23.73750673729228,
+      "checkpoint_seconds": 0.05819132601027377,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 6144,
+        "gradient_tokens": 24576,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 1.0,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "active_gated",
+      "all": {
+        "n": 24576,
+        "correct": 21623,
+        "accuracy": 0.8798421223958334,
+        "mean_nll": 0.8944127181936589,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11099,
+        "accuracy": 0.9032389322916666,
+        "mean_nll": 0.8182569848528752,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 2599,
+        "correct": 1830,
+        "accuracy": 0.7041169680646402,
+        "mean_nll": 1.3906241043077703,
+        "occurrences": 163
+      },
+      "compute_seconds": 22.920793629746186,
+      "checkpoint_seconds": 0.056954003986902535,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 4721,
+        "gradient_tokens": 18884,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 0.7683919270833334,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank2_gated",
+      "all": {
+        "n": 24576,
+        "correct": 14843,
+        "accuracy": 0.6039632161458334,
+        "mean_nll": 1.6555593603528298,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 7461,
+        "accuracy": 0.607177734375,
+        "mean_nll": 1.625614862805378,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 1671,
+        "correct": 996,
+        "accuracy": 0.5960502692998204,
+        "mean_nll": 1.6804946827931293,
+        "occurrences": 105
+      },
+      "compute_seconds": 30.380515449418453,
+      "checkpoint_seconds": 0.11043203092413023,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 103388,
+        "suffix_forwards": 25847,
+        "gradient_updates": 5856,
+        "gradient_tokens": 23424,
+        "switches": 1501,
+        "admissions": 205,
+        "duplicates": 337,
+        "rejections": 994,
+        "evictions": 199
+      },
+      "suffix_forward_multiplier": 4.206868489583333,
+      "gradient_chunk_fraction": 0.953125,
+      "peak_persistent_tensor_bytes": 102400,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank8_gated",
+      "all": {
+        "n": 24576,
+        "correct": 9365,
+        "accuracy": 0.3810628255208333,
+        "mean_nll": 2.2475355548067455,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 3786,
+        "accuracy": 0.30810546875,
+        "mean_nll": 2.4191509252887045,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 768,
+        "correct": 584,
+        "accuracy": 0.7604166666666666,
+        "mean_nll": 1.3002318023354746,
+        "occurrences": 48
+      },
+      "compute_seconds": 41.09851210328634,
+      "checkpoint_seconds": 0.20701165607897565,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 239964,
+        "suffix_forwards": 59991,
+        "gradient_updates": 5956,
+        "gradient_tokens": 23824,
+        "switches": 3527,
+        "admissions": 61,
+        "duplicates": 213,
+        "rejections": 1262,
+        "evictions": 37
+      },
+      "suffix_forward_multiplier": 9.76416015625,
+      "gradient_chunk_fraction": 0.9694010416666666,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "policy": "bank8_no_select_gated",
+      "all": {
+        "n": 24576,
+        "correct": 21623,
+        "accuracy": 0.8798421223958334,
+        "mean_nll": 0.8944127181936589,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11099,
+        "accuracy": 0.9032389322916666,
+        "mean_nll": 0.8182569848528752,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 2599,
+        "correct": 1830,
+        "accuracy": 0.7041169680646402,
+        "mean_nll": 1.3906241043077703,
+        "occurrences": 163
+      },
+      "compute_seconds": 40.39990953958477,
+      "checkpoint_seconds": 0.20570515302824788,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 238256,
+        "suffix_forwards": 59564,
+        "gradient_updates": 4721,
+        "gradient_tokens": 18884,
+        "switches": 0,
+        "admissions": 328,
+        "duplicates": 730,
+        "rejections": 478,
+        "evictions": 304
+      },
+      "suffix_forward_multiplier": 9.694661458333334,
+      "gradient_chunk_fraction": 0.7683919270833334,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "active_always",
+      "all": {
+        "n": 24576,
+        "correct": 20406,
+        "accuracy": 0.830322265625,
+        "mean_nll": 1.0529197467640188,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11022,
+        "accuracy": 0.89697265625,
+        "mean_nll": 0.8607326092884856,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 5488,
+        "correct": 3297,
+        "accuracy": 0.6007653061224489,
+        "mean_nll": 1.6635394056460686,
+        "occurrences": 343
+      },
+      "compute_seconds": 24.033412760822102,
+      "checkpoint_seconds": 0.05996566903195344,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 6144,
+        "gradient_tokens": 24576,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 1.0,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "active_gated",
+      "all": {
+        "n": 24576,
+        "correct": 20466,
+        "accuracy": 0.832763671875,
+        "mean_nll": 1.053498080466549,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11065,
+        "accuracy": 0.9004720052083334,
+        "mean_nll": 0.8607512449852948,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 5552,
+        "correct": 3384,
+        "accuracy": 0.6095100864553314,
+        "mean_nll": 1.6459773997709113,
+        "occurrences": 347
+      },
+      "compute_seconds": 22.952228645735886,
+      "checkpoint_seconds": 0.05872231497778557,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 5315,
+        "gradient_tokens": 21260,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 0.8650716145833334,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank2_gated",
+      "all": {
+        "n": 24576,
+        "correct": 10808,
+        "accuracy": 0.4397786458333333,
+        "mean_nll": 2.1138860803894204,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 5962,
+        "accuracy": 0.4851888020833333,
+        "mean_nll": 2.006644711798193,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 2752,
+        "correct": 1368,
+        "accuracy": 0.49709302325581395,
+        "mean_nll": 1.9563718187178722,
+        "occurrences": 172
+      },
+      "compute_seconds": 30.113743834430352,
+      "checkpoint_seconds": 0.11085508699761704,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 104388,
+        "suffix_forwards": 26097,
+        "gradient_updates": 6072,
+        "gradient_tokens": 24288,
+        "switches": 1765,
+        "admissions": 128,
+        "duplicates": 208,
+        "rejections": 1200,
+        "evictions": 122
+      },
+      "suffix_forward_multiplier": 4.24755859375,
+      "gradient_chunk_fraction": 0.98828125,
+      "peak_persistent_tensor_bytes": 102400,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank8_gated",
+      "all": {
+        "n": 24576,
+        "correct": 8461,
+        "accuracy": 0.3442789713541667,
+        "mean_nll": 2.368992652893818,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 4093,
+        "accuracy": 0.3330891927083333,
+        "mean_nll": 2.400753468603701,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 1904,
+        "correct": 1410,
+        "accuracy": 0.740546218487395,
+        "mean_nll": 1.3435500640375149,
+        "occurrences": 119
+      },
+      "compute_seconds": 39.4206773233891,
+      "checkpoint_seconds": 0.1918614599853754,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 217808,
+        "suffix_forwards": 54452,
+        "gradient_updates": 5959,
+        "gradient_tokens": 23836,
+        "switches": 3308,
+        "admissions": 44,
+        "duplicates": 285,
+        "rejections": 1207,
+        "evictions": 20
+      },
+      "suffix_forward_multiplier": 8.862630208333334,
+      "gradient_chunk_fraction": 0.9698893229166666,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "policy": "bank8_no_select_gated",
+      "all": {
+        "n": 24576,
+        "correct": 20466,
+        "accuracy": 0.832763671875,
+        "mean_nll": 1.053498080466549,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11065,
+        "accuracy": 0.9004720052083334,
+        "mean_nll": 0.8607512449852948,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 5552,
+        "correct": 3384,
+        "accuracy": 0.6095100864553314,
+        "mean_nll": 1.6459773997709113,
+        "occurrences": 347
+      },
+      "compute_seconds": 40.34033987301518,
+      "checkpoint_seconds": 0.20934892699006014,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 234944,
+        "suffix_forwards": 58736,
+        "gradient_updates": 5315,
+        "gradient_tokens": 21260,
+        "switches": 0,
+        "admissions": 251,
+        "duplicates": 608,
+        "rejections": 677,
+        "evictions": 227
+      },
+      "suffix_forward_multiplier": 9.559895833333334,
+      "gradient_chunk_fraction": 0.8650716145833334,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "active_always",
+      "all": {
+        "n": 24576,
+        "correct": 23324,
+        "accuracy": 0.9490559895833334,
+        "mean_nll": 0.6083873373524208,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11929,
+        "accuracy": 0.9707845052083334,
+        "mean_nll": 0.5020425845153417,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 4241,
+        "correct": 3393,
+        "accuracy": 0.8000471586889885,
+        "mean_nll": 1.0854239592474042,
+        "occurrences": 266
+      },
+      "compute_seconds": 23.69987438598764,
+      "checkpoint_seconds": 0.056661201000679284,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 6144,
+        "gradient_tokens": 24576,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 1.0,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "active_gated",
+      "all": {
+        "n": 24576,
+        "correct": 23345,
+        "accuracy": 0.9499104817708334,
+        "mean_nll": 0.6481654493509268,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11936,
+        "accuracy": 0.9713541666666666,
+        "mean_nll": 0.5610220153503178,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 4241,
+        "correct": 3407,
+        "accuracy": 0.8033482669181796,
+        "mean_nll": 1.090177995234243,
+        "occurrences": 266
+      },
+      "compute_seconds": 21.444164638698567,
+      "checkpoint_seconds": 0.05723081200267188,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 24576,
+        "suffix_forwards": 6144,
+        "gradient_updates": 2635,
+        "gradient_tokens": 10540,
+        "switches": 0,
+        "admissions": 0,
+        "duplicates": 0,
+        "rejections": 0,
+        "evictions": 0
+      },
+      "suffix_forward_multiplier": 1.0,
+      "gradient_chunk_fraction": 0.4288736979166667,
+      "peak_persistent_tensor_bytes": 28672,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank2_gated",
+      "all": {
+        "n": 24576,
+        "correct": 18755,
+        "accuracy": 0.7631429036458334,
+        "mean_nll": 1.2631904046763036,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 10345,
+        "accuracy": 0.8418782552083334,
+        "mean_nll": 1.050210344316535,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 3329,
+        "correct": 2423,
+        "accuracy": 0.727846200060078,
+        "mean_nll": 1.390614174098251,
+        "occurrences": 209
+      },
+      "compute_seconds": 29.71731512172846,
+      "checkpoint_seconds": 0.11040170793421566,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 102516,
+        "suffix_forwards": 25629,
+        "gradient_updates": 5596,
+        "gradient_tokens": 22384,
+        "switches": 1211,
+        "admissions": 193,
+        "duplicates": 699,
+        "rejections": 644,
+        "evictions": 187
+      },
+      "suffix_forward_multiplier": 4.17138671875,
+      "gradient_chunk_fraction": 0.9108072916666666,
+      "peak_persistent_tensor_bytes": 102400,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank8_gated",
+      "all": {
+        "n": 24576,
+        "correct": 15407,
+        "accuracy": 0.6269124348958334,
+        "mean_nll": 1.6223993000682337,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 7583,
+        "accuracy": 0.6171061197916666,
+        "mean_nll": 1.633283694358397,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 2817,
+        "correct": 2162,
+        "accuracy": 0.7674831380901669,
+        "mean_nll": 1.2960476979777287,
+        "occurrences": 177
+      },
+      "compute_seconds": 39.67157930895337,
+      "checkpoint_seconds": 0.1976908479409758,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 218024,
+        "suffix_forwards": 54506,
+        "gradient_updates": 5533,
+        "gradient_tokens": 22132,
+        "switches": 2241,
+        "admissions": 33,
+        "duplicates": 756,
+        "rejections": 747,
+        "evictions": 9
+      },
+      "suffix_forward_multiplier": 8.871419270833334,
+      "gradient_chunk_fraction": 0.9005533854166666,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "policy": "bank8_no_select_gated",
+      "all": {
+        "n": 24576,
+        "correct": 23345,
+        "accuracy": 0.9499104817708334,
+        "mean_nll": 0.6481654493509268,
+        "occurrences": 0
+      },
+      "latter_half": {
+        "n": 12288,
+        "correct": 11936,
+        "accuracy": 0.9713541666666666,
+        "mean_nll": 0.5610220153503178,
+        "occurrences": 0
+      },
+      "acquired_return_first_window": {
+        "n": 4241,
+        "correct": 3407,
+        "accuracy": 0.8033482669181796,
+        "mean_nll": 1.090177995234243,
+        "occurrences": 266
+      },
+      "compute_seconds": 38.79251605574973,
+      "checkpoint_seconds": 0.20958078900002874,
+      "totals": {
+        "prefix_tokens": 24576,
+        "attention_score_elements": 3144960,
+        "suffix_tokens": 236720,
+        "suffix_forwards": 59180,
+        "gradient_updates": 2635,
+        "gradient_tokens": 10540,
+        "switches": 0,
+        "admissions": 99,
+        "duplicates": 1271,
+        "rejections": 166,
+        "evictions": 75
+      },
+      "suffix_forward_multiplier": 9.632161458333334,
+      "gradient_chunk_fraction": 0.4288736979166667,
+      "peak_persistent_tensor_bytes": 249856,
+      "base_parameter_bytes": 193152
+    }
+  ],
+  "paired_seeds": [
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "seed": 33101,
+      "active_gated_accuracy": 0.951171875,
+      "bank8_accuracy": 0.698974609375,
+      "active_gated_nll": 0.6487222988980648,
+      "bank8_nll": 1.4337964159349212,
+      "bank8_time_ratio": 1.73333654816292,
+      "common_acquired_return_occurrences": 66,
+      "common_acquired_return_active": {
+        "n": 1051,
+        "correct": 851,
+        "loss_sum": 1137.2135077416897
+      },
+      "common_acquired_return_bank8": {
+        "n": 1051,
+        "correct": 780,
+        "loss_sum": 1422.1961031854153
+      }
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "seed": 33102,
+      "active_gated_accuracy": 0.954833984375,
+      "bank8_accuracy": 0.493408203125,
+      "active_gated_nll": 0.6313508865714539,
+      "bank8_nll": 1.9476948911178624,
+      "bank8_time_ratio": 1.9757521144355055,
+      "common_acquired_return_occurrences": 44,
+      "common_acquired_return_active": {
+        "n": 704,
+        "correct": 581,
+        "loss_sum": 749.3797540962696
+      },
+      "common_acquired_return_bank8": {
+        "n": 704,
+        "correct": 562,
+        "loss_sum": 873.3149885833263
+      }
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "recurring",
+      "seed": 33103,
+      "active_gated_accuracy": 0.9437255859375,
+      "bank8_accuracy": 0.6883544921875,
+      "active_gated_nll": 0.6644231625832617,
+      "bank8_nll": 1.4857065931519173,
+      "bank8_time_ratio": 1.8443945421567842,
+      "common_acquired_return_occurrences": 67,
+      "common_acquired_return_active": {
+        "n": 1062,
+        "correct": 850,
+        "loss_sum": 1148.9419833421707
+      },
+      "common_acquired_return_bank8": {
+        "n": 1062,
+        "correct": 820,
+        "loss_sum": 1355.4552734345198
+      }
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "seed": 33101,
+      "active_gated_accuracy": 0.8206787109375,
+      "bank8_accuracy": 0.390869140625,
+      "active_gated_nll": 1.0775639944931754,
+      "bank8_nll": 2.2676820406340994,
+      "bank8_time_ratio": 1.7544887603641948,
+      "common_acquired_return_occurrences": 40,
+      "common_acquired_return_active": {
+        "n": 640,
+        "correct": 382,
+        "loss_sum": 1066.6062377095222
+      },
+      "common_acquired_return_bank8": {
+        "n": 640,
+        "correct": 499,
+        "loss_sum": 758.8470413088799
+      }
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "seed": 33102,
+      "active_gated_accuracy": 0.829833984375,
+      "bank8_accuracy": 0.3536376953125,
+      "active_gated_nll": 1.066074869097065,
+      "bank8_nll": 2.323403117250564,
+      "bank8_time_ratio": 1.6018645957921678,
+      "common_acquired_return_occurrences": 46,
+      "common_acquired_return_active": {
+        "n": 736,
+        "correct": 453,
+        "loss_sum": 1209.1221919953823
+      },
+      "common_acquired_return_bank8": {
+        "n": 736,
+        "correct": 481,
+        "loss_sum": 1193.9952395558357
+      }
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "expanding",
+      "seed": 33103,
+      "active_gated_accuracy": 0.8477783203125,
+      "bank8_accuracy": 0.288330078125,
+      "active_gated_nll": 1.0168553778094065,
+      "bank8_nll": 2.5158928007967916,
+      "bank8_time_ratio": 1.796253862611584,
+      "common_acquired_return_occurrences": 32,
+      "common_acquired_return_active": {
+        "n": 512,
+        "correct": 321,
+        "loss_sum": 805.4601125568151
+      },
+      "common_acquired_return_bank8": {
+        "n": 512,
+        "correct": 417,
+        "loss_sum": 585.988005682826
+      }
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "seed": 33101,
+      "active_gated_accuracy": 0.88330078125,
+      "bank8_accuracy": 0.4156494140625,
+      "active_gated_nll": 0.8797485379018326,
+      "bank8_nll": 2.1519293125711556,
+      "bank8_time_ratio": 1.867155067231851,
+      "common_acquired_return_occurrences": 20,
+      "common_acquired_return_active": {
+        "n": 320,
+        "correct": 197,
+        "loss_sum": 499.89207607507706
+      },
+      "common_acquired_return_bank8": {
+        "n": 320,
+        "correct": 235,
+        "loss_sum": 420.34768557548523
+      }
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "seed": 33102,
+      "active_gated_accuracy": 0.8748779296875,
+      "bank8_accuracy": 0.3568115234375,
+      "active_gated_nll": 0.9117400705508771,
+      "bank8_nll": 2.3454780839056184,
+      "bank8_time_ratio": 1.698243124974865,
+      "common_acquired_return_occurrences": 13,
+      "common_acquired_return_active": {
+        "n": 208,
+        "correct": 147,
+        "loss_sum": 275.867260068655
+      },
+      "common_acquired_return_bank8": {
+        "n": 208,
+        "correct": 163,
+        "loss_sum": 262.4682558774948
+      }
+    },
+    {
+      "arm": "e2e_reset",
+      "regime": "drifting",
+      "seed": 33103,
+      "active_gated_accuracy": 0.88134765625,
+      "bank8_accuracy": 0.3707275390625,
+      "active_gated_nll": 0.891749546128267,
+      "bank8_nll": 2.2451992679434625,
+      "bank8_time_ratio": 1.820082706696785,
+      "common_acquired_return_occurrences": 15,
+      "common_acquired_return_active": {
+        "n": 240,
+        "correct": 165,
+        "loss_sum": 353.7468001097441
+      },
+      "common_acquired_return_bank8": {
+        "n": 240,
+        "correct": 186,
+        "loss_sum": 315.7620827406645
+      }
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "seed": 33101,
+      "active_gated_accuracy": 0.9547119140625,
+      "bank8_accuracy": 0.9149169921875,
+      "active_gated_nll": 0.6114779798608652,
+      "bank8_nll": 0.9039536294167192,
+      "bank8_time_ratio": 1.661567043522509,
+      "common_acquired_return_occurrences": 89,
+      "common_acquired_return_active": {
+        "n": 1419,
+        "correct": 1180,
+        "loss_sum": 1460.0324080735445
+      },
+      "common_acquired_return_bank8": {
+        "n": 1419,
+        "correct": 1063,
+        "loss_sum": 2024.4496600329876
+      }
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "seed": 33102,
+      "active_gated_accuracy": 0.955810546875,
+      "bank8_accuracy": 0.659423828125,
+      "active_gated_nll": 0.603841176329297,
+      "bank8_nll": 1.510393098480563,
+      "bank8_time_ratio": 1.8655823096822406,
+      "common_acquired_return_occurrences": 59,
+      "common_acquired_return_active": {
+        "n": 944,
+        "correct": 781,
+        "loss_sum": 969.9057421684265
+      },
+      "common_acquired_return_bank8": {
+        "n": 944,
+        "correct": 706,
+        "loss_sum": 1244.2428586483002
+      }
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "recurring",
+      "seed": 33103,
+      "active_gated_accuracy": 0.9554443359375,
+      "bank8_accuracy": 0.6260986328125,
+      "active_gated_nll": 0.5992592636739573,
+      "bank8_nll": 1.6511487168972963,
+      "bank8_time_ratio": 1.8895339064094672,
+      "common_acquired_return_occurrences": 62,
+      "common_acquired_return_active": {
+        "n": 982,
+        "correct": 827,
+        "loss_sum": 954.9162488281727
+      },
+      "common_acquired_return_bank8": {
+        "n": 982,
+        "correct": 775,
+        "loss_sum": 1271.3505251556635
+      }
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "seed": 33101,
+      "active_gated_accuracy": 0.8555908203125,
+      "bank8_accuracy": 0.4794921875,
+      "active_gated_nll": 0.9444542116198136,
+      "bank8_nll": 2.0267053593379387,
+      "bank8_time_ratio": 1.829082758121441,
+      "common_acquired_return_occurrences": 54,
+      "common_acquired_return_active": {
+        "n": 864,
+        "correct": 601,
+        "loss_sum": 1205.5603022426367
+      },
+      "common_acquired_return_bank8": {
+        "n": 864,
+        "correct": 667,
+        "loss_sum": 1078.2354082465172
+      }
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "seed": 33102,
+      "active_gated_accuracy": 0.8428955078125,
+      "bank8_accuracy": 0.2841796875,
+      "active_gated_nll": 0.9905189288547263,
+      "bank8_nll": 2.4620359122855007,
+      "bank8_time_ratio": 1.6895627778245286,
+      "common_acquired_return_occurrences": 35,
+      "common_acquired_return_active": {
+        "n": 560,
+        "correct": 364,
+        "loss_sum": 880.2994413375854
+      },
+      "common_acquired_return_bank8": {
+        "n": 560,
+        "correct": 388,
+        "loss_sum": 797.7603039741516
+      }
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "expanding",
+      "seed": 33103,
+      "active_gated_accuracy": 0.864990234375,
+      "bank8_accuracy": 0.4071044921875,
+      "active_gated_nll": 0.9251801836326194,
+      "bank8_nll": 2.167014637216198,
+      "bank8_time_ratio": 1.834979266938468,
+      "common_acquired_return_occurrences": 52,
+      "common_acquired_return_active": {
+        "n": 832,
+        "correct": 633,
+        "loss_sum": 1063.698737114668
+      },
+      "common_acquired_return_bank8": {
+        "n": 832,
+        "correct": 642,
+        "loss_sum": 1059.7493935525417
+      }
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "seed": 33101,
+      "active_gated_accuracy": 0.8984375,
+      "bank8_accuracy": 0.3466796875,
+      "active_gated_nll": 0.8038598999028181,
+      "bank8_nll": 2.379824404222745,
+      "bank8_time_ratio": 1.9131372713613195,
+      "common_acquired_return_occurrences": 13,
+      "common_acquired_return_active": {
+        "n": 208,
+        "correct": 149,
+        "loss_sum": 285.4021163880825
+      },
+      "common_acquired_return_bank8": {
+        "n": 208,
+        "correct": 157,
+        "loss_sum": 277.0568536221981
+      }
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "seed": 33102,
+      "active_gated_accuracy": 0.8734130859375,
+      "bank8_accuracy": 0.33349609375,
+      "active_gated_nll": 0.8876215542222781,
+      "bank8_nll": 2.36488294366427,
+      "bank8_time_ratio": 1.8150241802141764,
+      "common_acquired_return_occurrences": 17,
+      "common_acquired_return_active": {
+        "n": 272,
+        "correct": 215,
+        "loss_sum": 317.8609025776386
+      },
+      "common_acquired_return_bank8": {
+        "n": 272,
+        "correct": 202,
+        "loss_sum": 371.536043792963
+      }
+    },
+    {
+      "arm": "e2e_carry",
+      "regime": "drifting",
+      "seed": 33103,
+      "active_gated_accuracy": 0.888671875,
+      "bank8_accuracy": 0.367431640625,
+      "active_gated_nll": 0.8514267472892243,
+      "bank8_nll": 2.2327245118613064,
+      "bank8_time_ratio": 1.7741279390596245,
+      "common_acquired_return_occurrences": 17,
+      "common_acquired_return_active": {
+        "n": 272,
+        "correct": 205,
+        "loss_sum": 344.254094645381
+      },
+      "common_acquired_return_bank8": {
+        "n": 272,
+        "correct": 218,
+        "loss_sum": 315.65702144801617
+      }
+    }
+  ],
+  "limited_recurrence_criterion": [
+    {
+      "arm": "e2e_reset",
+      "aggregate_nll_lower": false,
+      "aggregate_error_lower": false,
+      "every_seed_nll_nonworsening": false
+    },
+    {
+      "arm": "e2e_carry",
+      "aggregate_nll_lower": false,
+      "aggregate_error_lower": false,
+      "every_seed_nll_nonworsening": false
+    }
+  ],
+  "limited_recurrence_criterion_passed": false,
+  "table_control": [
+    {
+      "regime": "recurring",
+      "n": 24576,
+      "correct": 20484,
+      "accuracy": 0.83349609375,
+      "compute_seconds": 0.008705015992745757,
+      "max_logical_tensor_equivalent_bytes": 256
+    },
+    {
+      "regime": "expanding",
+      "n": 24576,
+      "correct": 18496,
+      "accuracy": 0.7526041666666666,
+      "compute_seconds": 0.008860789006575942,
+      "max_logical_tensor_equivalent_bytes": 256
+    },
+    {
+      "regime": "drifting",
+      "n": 24576,
+      "correct": 20454,
+      "accuracy": 0.832275390625,
+      "compute_seconds": 0.01037451098090969,
+      "max_logical_tensor_equivalent_bytes": 256
+    }
+  ],
+  "audit_sha256": "3057fa7d734045a865286fe7e04f6ef6a48bdc7c0b8f19d0b51d181fda327460",
+  "complete_sha256": "e6c1f2f59722f528c3fb0e7a11bde420244289ba32163fcabb42418c020d02f7",
+  "full_goal_achieved": false
+}

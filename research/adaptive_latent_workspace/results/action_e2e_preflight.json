@@ -1,0 +1,59 @@
+{
+  "event": "ACTION_E2E_PREFLIGHT_PASS",
+  "checks": {
+    "frozen_dense_max_logit_error": 2.220446049250313e-15,
+    "executed_not_advisory_receipts": 12,
+    "outcome_intervention_preserves_prior_logits_and_cache": true,
+    "abandoned_imagination_real_continuation_exact": true,
+    "imagined_forward_tokens_charged": 10,
+    "imagined_labels_and_persistence_rejected": 5,
+    "serialized_adaptive_continuation_exact": true,
+    "different_model_rejected_and_base_immutable": true,
+    "adaptive_fixture_real_steps": 12,
+    "adaptive_fixture_forward_tokens": 24,
+    "adaptive_fixture_gradient_tokens": 24,
+    "final_persistent_tensor_bytes": 12288,
+    "two_suffix_action_meta_gradient": [
+      {
+        "clip": 100.0,
+        "inner_norms": [
+          3.216171836620565,
+          5.689500874843913,
+          1.9984977164719486,
+          1.7850455239663232
+        ],
+        "analytic": -0.07630790795003706,
+        "central_difference": -0.07630790777257701,
+        "absolute_error": 1.7746004665752935e-10,
+        "full_vs_first_order_gradient_l2": 11.76402756403763
+      },
+      {
+        "clip": 0.001,
+        "inner_norms": [
+          3.216171836620565,
+          6.81172297666859,
+          5.663011341520813,
+          13.002995451334412
+        ],
+        "analytic": -0.06026624580791311,
+        "central_difference": -0.060266245780482564,
+        "absolute_error": 2.743054394738209e-11,
+        "full_vs_first_order_gradient_l2": 0.012069675051336142
+      }
+    ],
+    "range_checks": true
+  },
+  "scope": "Development mechanics only; no training, acquisition, planning-quality, continual-efficiency or RSI result.",
+  "runtime": {
+    "torch": "2.5.1+cu118",
+    "device": "cpu",
+    "threads": 1
+  },
+  "seconds": 0.42768437397899106,
+  "sources": {
+    "action_e2e.py": "69a6e472ef512af3a8a139b03e9f17702589c5c50147bd64f0ea13d250be982f",
+    "preflight_action_e2e.py": "6e9ae830241db17c992c280c7ca5bd9d1d860e37ec0f6fba667c26bad751c36a",
+    "e2e_core.py": "7328c37da9f9ee1a1a36fceb060012ff78d8709c201986e386230107dafd87f2",
+    "preflight_e2e_core.py": "ea44acca1a080cd9b3bd2723d57e8ce87fdd06187292bec74db300b7a128d8e5"
+  }
+}
