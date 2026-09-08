@@ -2,8 +2,33 @@
 
 Read `FALSIFICATION.md` first. This is a proposed integrated system, not a claim
 that the components below already form a validated or scientifically novel
-agent. E1–E29 have implemented and tested only subsets. The original supplied
+agent. E1–E36 have implemented and tested only subsets. The original supplied
 papers and model gallery were reviewed through the preserved WD corpus/clones.
+
+Current evidence supersedes older proposed next steps below. E35 rejects its
+short-sample adaptive-bank selector; E36 supports scoped active acquisition but
+fails the efficiency gate. HYPOTHESES-LEDGER.md records all fourteen attachment
+proposals and their open claims. Do not treat the original module list as a
+validated integration.
+
+The remaining candidate has three coupled decisions: which real evidence to
+obtain (R1), which distinctions and update state to retain (R2), and which reads,
+updates or actions are worth their cost (R3). P1 rejects raw surprise or stationary
+information gain as sufficient allocation rules. E36 shows that a weak action
+selector can waste even exact world knowledge. Increasing plasticity or memory
+in response to that failure would target the wrong root.
+
+Learn intervention effects on subsequent actual task outcomes, with explicit
+cost and delayed-regression controls. This is a hypothesis about a controller's
+training target, not a claim that it already estimates those effects correctly.
+The attachment's separate uncertainty/value heads need equal-information scalar
+controls; their presence supplies neither new expressivity nor calibration.
+
+For H5 consolidation, LEARNING-STATE-MIGRATION.md now specifies a stronger
+falsifier: unchanged present predictions need not preserve response to later
+evidence. A compressed memory must either preserve the relevant future update
+behavior or explicitly measure the cost of changing it. No learned compressor
+or general migration repair has passed this requirement yet.
 
 ## The change that the failures require
 

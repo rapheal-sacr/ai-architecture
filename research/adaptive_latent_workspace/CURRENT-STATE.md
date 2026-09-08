@@ -1,18 +1,22 @@
 # Research state — goal still active
 
-E36 main scoring and both audit stages are complete. Read E36-RESULT.md and
-E36-TABLES.md: scoped acquisition improves, second-order superiority remains
-mixed, and the present action integration fails the efficiency comparison.
-The constant-action shortcut and exact-model planner intervention are also
-complete. Original scorer/training handles51019/24107 disappeared after reset;
-completion is established from validated artifacts, not invented exit codes.
-Do not poll or restart those handles.
+E36 main and all training/evaluation/metadata audits are complete. The80-case
+frozen-checkpoint greedy intervention is also complete and independently audited
+at terminal exit0 (session18749). Read E36-GREEDY-RESULT.md and E36-RESULT.md.
+No experiment is currently running; no old handle should be polled or restarted.
 
-E36-GREEDY-PROTOCOL.md registers a post hoc80-case controller intervention
-on frozen models and the same worlds. Its four-case preflight passes2,048
-actions,1,536 updates and16 evaluation checkpoints (plus36 inherited training
-checkpoints). Check RUNS/ACTIVE-STATE.json for live status. Full-goal novelty,
-compression, broad reasoning and reliable recursive improvement remain open.
+Greedy at unchanged exploration improves E2E24/24cases, mean64extra goals per512
+paid actions, with identical query/update counts. It also improves first-order
+24/24 and counts8/8, while static TTT loses6/24. E2E remains about25times counts'
+acting time and loses the mean noisy comparison. This is a local R3 controller
+repair, not a generally efficient architecture or autonomous RSI.
+
+Next bounded H5/H6 falsifier is specified in LEARNING-STATE-MIGRATION.md:
+current functional equality need not preserve future update behavior. Source,
+tolerances and implementation still need freezing before execution. It has NOT
+run. Fresh contingent-action families, learned goal allocation, consolidation,
+general reasoning and actual repeated procedure improvement remain required.
+The full goal remains active, with novelty and broad efficiency unproven.
 
 Latest user steering: test the attached fourteen hypotheses and use them to
 inform this same goal. HYPOTHESES-LEDGER.md covers all fourteen; P1 directly

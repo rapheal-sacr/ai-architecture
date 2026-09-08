@@ -94,3 +94,10 @@ dynamics. Main audits cover1,152updates/73,728actions/612checkpoints. E2E has no
 established first-order advantage and fails the cheap-control efficiency gate.
 Its post hoc learned-controller intervention remains a component diagnosis,
 not a substitute for fresh contingent action, compression or actual RSI.
+
+E36-GREEDY-RESULT.md completes the post hoc80-case controller intervention.
+All E2E/first-order/count cases improve at unchanged query/update counts, while
+six static cases regress. New audits cover40,960actions/36,864updates/320evalCP.
+The neural mechanism remains about25times counts' acting time. This advances
+root attribution and scoped action competence; the researcher-written change
+is not actual RSI. LEARNING-STATE-MIGRATION.md is a proposed, unexecuted test.

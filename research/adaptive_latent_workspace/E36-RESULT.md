@@ -98,8 +98,8 @@ temperature .1. A one-step versus two-step deterministic goal can differ in
 value by only .05, so soft selection substantially randomizes useful choices.
 This is a repairable action-use cost under R3, independent of absent model
 knowledge. It rejects a memory-only explanation of this gap. It does not show
-that greedy choices improve a learned, imperfect model: that is the separately
-registered frozen-checkpoint intervention in E36-GREEDY-PROTOCOL.md.
+that greedy choices improve a learned, imperfect model: the completed
+frozen-checkpoint intervention is reported separately in E36-GREEDY-RESULT.md.
 
 All 12,288 oracle diagnostic receipts were independently physically replayed;
 the original soft probabilities agree with explicit NumPy Bellman calculations

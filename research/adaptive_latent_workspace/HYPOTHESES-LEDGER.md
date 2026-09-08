@@ -98,10 +98,11 @@ meta-learning. Scientific novelty and broad capability are not established.
 
 1. **Done:** P1 surprise/noise/change ablations, source execution-cost probes and
    scalar/factored equivalence fixtures. Exact outcomes and caveats are recorded.
-2. **Next:** complete the new action-world/planning preflight, then train active
-   E2E from real transitions and compare matched acquisition/objective controls.
-   Preference changes must be separate from dynamics changes. This supplies a
-   working action learner before adding a learned goal policy.
+2. **Main assay done:** E36 compares static/first-order/E2E real-action learning.
+   It establishes scoped acquisition but fails the efficiency gate. The exact
+   current-model diagnostic identifies an action-selection limit; the registered
+   learned-model controller intervention is complete and audited. Preference changes remain
+   separate from dynamics changes; no learned goal generator has been tested.
 3. Train goal/acquisition and diagnostic intervention control (H1/H2/H4/H12),
    keeping fixed-control and noise-frontier counterexamples in the frozen tests.
 4. Train future-validated consolidation and memory actions (H5/H6/H7), including
@@ -115,3 +116,15 @@ What is currently settled is narrower than the desired architecture. The new
 goal generator, learned consolidation, general reasoning, efficient persistent
 long-horizon behavior and reliable recursive improvement remain unmeasured or
 unsolved. An honest failure record is retained rather than renamed a success.
+
+## E36 evidence update
+
+H4/H8 must also distinguish uncertainty from a poorly scaled decision rule.
+With perfect current dynamics, soft action selection still loses to greedy
+selection on all8worlds at the same exploration. More memory or prediction
+training cannot repair that controller by itself. This is R3 evidence. E36-GREEDY-RESULT.md shows the hand-written repair improves all meta-trained
+cases but fails some static-trained cases. It does not establish calibrated
+adaptive computation or an autonomously learned repair. H5 gains
+scoped real-action adaptation evidence, but second-order versus first-order
+results are mixed and simple memory controls are much cheaper. H1, H2 learning,
+H3 and H6–H14 stronger claims retain their explicit open status above.

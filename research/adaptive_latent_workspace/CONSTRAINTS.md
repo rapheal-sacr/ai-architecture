@@ -224,3 +224,10 @@ cannot close that gap. The effect on imperfect learned models is separately
 registered; privileged scores are neither achievable-learning claims nor
 universal upper bounds on realized stochastic trajectories. Acquisition and
 use remain separate quantities in recovery cost relative to useful lifetime.
+
+The completed imperfect-model intervention, E36-GREEDY-RESULT.md, now improves
+all48meta-trained and8count cases at identical query/update counts; it harms6of24
+static-trained cases. R3 repair therefore survives learned dynamics here but is
+not universal. Counts remain about25times cheaper than E2E. A planner's ability
+to exploit knowledge and its computational price are separate parts of the same
+root; fixing one does not prove the other is no longer binding.

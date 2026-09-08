@@ -1,0 +1,17 @@
+{
+  "training_updates": 1152,
+  "training_records": 110592,
+  "evaluation_actions": 40960,
+  "evaluation_updates": 36864,
+  "exact_checkpoints": 356,
+  "serial_map_queries": 3456,
+  "max_serial_map_error": 3.337860107421875e-06,
+  "max_independent_policy_error": 0.0,
+  "development_source_changes": [],
+  "training_audit_file_sha256": "eb0c8f3f434bc3a037b3e0fdfa995a4e8b67e659e5319fb38c71d43bf9a76893",
+  "status": "complete",
+  "seconds": 1777.3860363670155,
+  "current_stage_seconds": 212.83693779699934,
+  "prior_training_audit_seconds": 1564.5490985700162,
+  "scored_complete_sha256": "633d8b09a5a73e118b4712de3644a18d59b627bb815b391dbf07ed9c2ee0f0b8"
+}

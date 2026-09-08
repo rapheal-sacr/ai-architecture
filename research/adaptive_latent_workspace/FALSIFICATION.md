@@ -581,3 +581,21 @@ Map first hits commonly fail later; current query answers do not identify
 irreversible erasure. Constant actions exploit the cycle family. General
 reasoning, compression, reliable RSI and a universal improvement-rate bound
 remain unmeasured/unestablished. Earlier running statements are superseded.
+
+## E36 greedy intervention: R3 repair survives learned models, efficiency still fails
+
+All80cases complete and audit at exit0:40,960physical actions,36,864gradient
+updates,320new evaluation checkpoints and3,456serial queries. Prior training
+checks are inherited via hashes, not new work. E2E improves24/24paired cases
+by44–101goals, mean64per512actions. First-order improves24/24; counts8/8.
+Static TTT improves18/24 and loses6/24, worst−49goals. See E36-GREEDY-RESULT.md.
+The intervention changes future evidence, so it is a whole-policy effect.
+
+Greedy E2E beats greedy first-order14cases/ties3/loses7 with small mean gains;
+it remains24.5–25.8times counts' observed acting time and loses4of6noisy paired
+comparisons. All worlds are reused; three seeds do not make shared worlds
+independent. No general second-order or efficiency superiority is established.
+The same query/update counts produce better outcomes after action-selection
+repair, identifying a repairable R3 limitation. This was a researcher-written
+change; it is not autonomous recursive self-improvement. LEARNING-STATE-MIGRATION.md
+specifies the next unexecuted H5/H6 test; no migration/compression pass is claimed.

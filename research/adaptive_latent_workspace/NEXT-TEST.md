@@ -1,15 +1,25 @@
-# Next work — test use of the learned model
+# Next work — future learning under memory migration
 
-E36 main, training/evaluation/metadata audits, both constant controls and the
-privileged planner diagnostic are complete. E36-RESULT.md is authoritative.
-The exact current model still underperforms with soft action selection; greedy
-selection with the same exploration improves all8worlds. This is R3 evidence.
+Main E36, both constant controls, exact-model diagnosis and80-case learned-model
+greedy intervention are complete. Session18749 terminal exit0. The latter audits
+40,960actions,36,864updates and320evaluation checkpoints; inherited training
+checks are not new work. All neural/control pairs are retained in the summary.
+No live experiment remains. Read E36-GREEDY-RESULT.md first after FALSIFICATION.md.
 
-Run the registered80-case frozen-model intervention and its independent audit.
-Four-case preflight is complete, with exact states and zero policy discrepancy.
-Do not retrain or restart completed main experiments. Preserve every reversal,
-shared-world dependence, and supplemental versus original protocol distinction.
-Then require fresh families needing contingent decisions before promotion.
+The next concrete diagnostic is LEARNING-STATE-MIGRATION.md for attachment H5/H6.
+Implement and freeze the144-origin rescaling experiment with explicit numerical
+tolerances before scoring. Test equal present function, ordinary subsequent
+updates, a frozen control and known coordinate transport. Use actual recorded
+next16evidence tuples, compare every origin and preserve source checkpoints.
+This is an equal-evidence diagnostic, not memory compression or new closed-loop
+success. A failed migration can be an update-interface failure without erasure.
+
+Then train/evaluate actual memory migration only if the diagnostic supports a
+specific repair. Do not confuse retained forward answers with preserved ability
+to learn. The broad goal still requires a learned goal/acquisition controller,
+compression savings, fresh tasks requiring contingent action and general
+reasoning, followed by actual repeated self-improvement with total cost controls.
+Repeatedly retuning the eight E36 worlds is not sufficient evidence.
 
 Latest steering is the fourteen-hypothesis attachment. Read its full ledger and
 HYPOTHESES-P1-RESULT.md after the falsification record. P1 is complete/audited;
@@ -47,8 +57,8 @@ checks pass ACTION-PLANNING-PREFLIGHT.md. E36 now establishes scoped predictive 
 outer objective or learned general-action policy exists yet. Use the active E2E
 trajectory as the action-integration baseline, without assuming bank8 improves it.
 
-E36 has completed the initial closed-loop predictive test. Diagnose action
-selection using E36-GREEDY-PROTOCOL.md before attributing every gap to memory.
+E36 has completed the initial closed-loop predictive test. The completed
+E36-GREEDY-RESULT.md identifies a controller limitation and repairs it locally.
 The next task family must require contingent action and resist constant and
 short-period shortcuts; do not retune the frozen E36 worlds as general progress.
 
