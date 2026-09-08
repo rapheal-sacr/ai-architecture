@@ -1,3 +1,10 @@
+# E36 historical progress record — superseded
+
+E36 main and audits are complete. Read E36-RESULT.md for results and process
+provenance. The live-handle statements below are historical only; do not restart
+51019/24107. The current supplemental intervention is tracked separately in
+RUNS/ACTIVE-STATE.json.
+
 # E36 in progress — no scored conclusion
 
 Scorer51019 is running under frozen commit
@@ -26,3 +33,21 @@ before interpreting improvement, failure, acquisition or efficiency.
 The broad architecture goal is still active. Passing this six-state finite
 planner assay would not establish learned goal invention, general reasoning,
 learned memory compression or recursive self-improvement.
+
+Later verified progress: scorer51019 finished128 training rounds for all9 models
+and entered action evaluation. Read-only training auditor24107 was then launched
+after the final training checkpoints were available. Staged training/evaluation
+audits match the complete development audit on all counts and numerical checks.
+Do not repeat scored training replay when the training-stage artifact completes;
+evaluation mode validates its source/data/final-checkpoint hashes before using it.
+Both processes remain live at this update. Some action timings now overlap the
+one-thread audit on another CPU; they are observed timings, not isolated latency.
+Training timings precede this overlap. The scorer's seven frozen sources remain
+byte-identical to2d3eff3.
+
+E36-CONSTANT-CONTROL.md adds8192 independently checked actions and312 cycle
+checks. Both fixed actions complete many goals without learning, so the final
+tables must include them. This was added before scored action outputs were
+available and changes none of the primary experiment. The updated summarizer
+accepts --constant-control, checks the frozen data hash, and includes both fixed
+policies without per-world best-selection.

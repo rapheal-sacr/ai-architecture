@@ -1,11 +1,15 @@
-# Next work — actual action learning after E35's completed falsification
+# Next work — test use of the learned model
 
-E36 scorer51019 is live, frozen at2d3eff32a79a1561ba76d98a81b6a7f10bc92c04.
-Next poll that handle; do not restart it from a stale manifest or quiet output.
-After terminal completion, run audit_e36.py on RUNS/e36, then summarize actual
-goal completion, transition prediction, censored map acquisition and all costs.
-No result yet. E36-PROTOCOL.md preserves the limited predictive training claim;
-the broader learned-goal/consolidation/RSI scope below remains required.
+E36 main, training/evaluation/metadata audits, both constant controls and the
+privileged planner diagnostic are complete. E36-RESULT.md is authoritative.
+The exact current model still underperforms with soft action selection; greedy
+selection with the same exploration improves all8worlds. This is R3 evidence.
+
+Run the registered80-case frozen-model intervention and its independent audit.
+Four-case preflight is complete, with exact states and zero policy discrepancy.
+Do not retrain or restart completed main experiments. Preserve every reversal,
+shared-world dependence, and supplemental versus original protocol distinction.
+Then require fresh families needing contingent decisions before promotion.
 
 Latest steering is the fourteen-hypothesis attachment. Read its full ledger and
 HYPOTHESES-P1-RESULT.md after the falsification record. P1 is complete/audited;
@@ -17,8 +21,7 @@ uncertainty/drive heads automatically supplies good goal choice.
 
 Read FALSIFICATION.md first. E1–E35 are complete/audited. E35 scorer14837,
 auditor52212, summarizer88879, local switch diagnosis28598, recovery87949 and
-stop-switching diagnosis69265 are all verified terminal exit0. E36 is the newly
-running process. Do not restart those completed experiments or poll old
+stop-switching diagnosis69265 are all verified terminal exit0. E36 main scoring and auditing are complete. Do not restart those completed experiments or poll old
 handles as though they were live. RUNS/ACTIVE-STATE.json locates saved evidence.
 
 E35-RESULT.md rejects the short-sample snapshot selector on every whole-stream
@@ -40,18 +43,14 @@ observation/executed-action/outcome updates and separates real state from
 read-only imagination. ACTION-E2E-PREFLIGHT.md records dense/gradient/causality/
 serialization checks and limitations. action_planning.py and action_navigation.py
 now implement a fixed finite planner and real-action world; their independent
-checks pass ACTION-PLANNING-PREFLIGHT.md. It is untrained: no task-reward outer
-objective or action competence exists yet. Use the active E2E
+checks pass ACTION-PLANNING-PREFLIGHT.md. E36 now establishes scoped predictive meta-training acquisition. No task-reward
+outer objective or learned general-action policy exists yet. Use the active E2E
 trajectory as the action-integration baseline, without assuming bank8 improves it.
 
-Next implement and freeze a closed-loop action-conditioned learner/planner on
-fresh environments with unknown consequences. Preserve actual executed actions
-and observed outcomes; imagined labels never become real feedback. Compare E2E
-training through future updates with conventional/static-plus-TTT controls, and
-include a strong observed-transition planner. Hidden maps/context IDs and private
-oracles belong only to evaluator diagnostics. Establish acquisition before
-retention; include unannounced changes/returns and longer task compositions;
-charge exploration, every planning branch, updates, evidence, memory and bootstrap.
+E36 has completed the initial closed-loop predictive test. Diagnose action
+selection using E36-GREEDY-PROTOCOL.md before attributing every gap to memory.
+The next task family must require contingent action and resist constant and
+short-period shortcuts; do not retune the frozen E36 worlds as general progress.
 
 The current categorical adapter does not solve partial observability, learned
 goal reasoning or task-return optimization. These are explicit work, not benefits

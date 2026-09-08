@@ -1,0 +1,194 @@
+{
+  "status": "complete",
+  "independently_checked_actions": 8192,
+  "cycle_checks": 312,
+  "stationary_expected_goals": 170.44444444444443,
+  "stationary_asymptotic_goals_per_action": 0.3333333333333333,
+  "input_data_sha256": "3b13d16a22d0b80d4c52aeb332a75be958e7b94818434070262465c2d35f4d59",
+  "frozen_e36_commit": "2d3eff32a79a1561ba76d98a81b6a7f10bc92c04",
+  "own_sha256": "66f143dfadf447b3cc98762c48108f6d5dd51a35650a8616279440865ef5dc69",
+  "cases": [
+    {
+      "world": "stationary-0",
+      "regime": "stationary",
+      "fixed_action": 0,
+      "actions": 512,
+      "goals": 175,
+      "acting_and_receipt_seconds": 0.0030829219904262573,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "stationary-0",
+      "regime": "stationary",
+      "fixed_action": 1,
+      "actions": 512,
+      "goals": 169,
+      "acting_and_receipt_seconds": 0.004186583013506606,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "stationary-1",
+      "regime": "stationary",
+      "fixed_action": 0,
+      "actions": 512,
+      "goals": 166,
+      "acting_and_receipt_seconds": 0.0011014160118065774,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "stationary-1",
+      "regime": "stationary",
+      "fixed_action": 1,
+      "actions": 512,
+      "goals": 169,
+      "acting_and_receipt_seconds": 0.0010700070124585181,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "recurring-0",
+      "regime": "recurring",
+      "fixed_action": 0,
+      "actions": 512,
+      "goals": 176,
+      "acting_and_receipt_seconds": 0.0011030800233129412,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "recurring-0",
+      "regime": "recurring",
+      "fixed_action": 1,
+      "actions": 512,
+      "goals": 174,
+      "acting_and_receipt_seconds": 0.0011563099978957325,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "recurring-1",
+      "regime": "recurring",
+      "fixed_action": 0,
+      "actions": 512,
+      "goals": 175,
+      "acting_and_receipt_seconds": 0.001998237014049664,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "recurring-1",
+      "regime": "recurring",
+      "fixed_action": 1,
+      "actions": 512,
+      "goals": 170,
+      "acting_and_receipt_seconds": 0.001961918984306976,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "drifting-0",
+      "regime": "drifting",
+      "fixed_action": 0,
+      "actions": 512,
+      "goals": 169,
+      "acting_and_receipt_seconds": 0.0019175350025761873,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "drifting-0",
+      "regime": "drifting",
+      "fixed_action": 1,
+      "actions": 512,
+      "goals": 168,
+      "acting_and_receipt_seconds": 0.0018933190149255097,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "drifting-1",
+      "regime": "drifting",
+      "fixed_action": 0,
+      "actions": 512,
+      "goals": 167,
+      "acting_and_receipt_seconds": 0.0018879289855249226,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "drifting-1",
+      "regime": "drifting",
+      "fixed_action": 1,
+      "actions": 512,
+      "goals": 168,
+      "acting_and_receipt_seconds": 0.0019926870008930564,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "noisy-0",
+      "regime": "noisy",
+      "fixed_action": 0,
+      "actions": 512,
+      "goals": 130,
+      "acting_and_receipt_seconds": 0.002416935982182622,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "noisy-0",
+      "regime": "noisy",
+      "fixed_action": 1,
+      "actions": 512,
+      "goals": 145,
+      "acting_and_receipt_seconds": 0.0012114439741708338,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "noisy-1",
+      "regime": "noisy",
+      "fixed_action": 0,
+      "actions": 512,
+      "goals": 139,
+      "acting_and_receipt_seconds": 0.0011897829826921225,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    },
+    {
+      "world": "noisy-1",
+      "regime": "noisy",
+      "fixed_action": 1,
+      "actions": 512,
+      "goals": 128,
+      "acting_and_receipt_seconds": 0.0011591459915507585,
+      "learned_state_bytes": 0,
+      "transition_queries": 0,
+      "updates": 0
+    }
+  ],
+  "timing_provenance": {
+    "constant_complete_mtime_utc": "2026-09-07T21:19:03.173225+00:00",
+    "first_main_eval_result_mtime_utc": "2026-09-07T21:33:07.435409+00:00",
+    "constant_completed_before_first_main_result": true
+  },
+  "raw_complete_sha256": "6a9fc7b9c9610f82d15fe6f0c885077764392f01b3f3d5dac4bda134412c947b"
+}

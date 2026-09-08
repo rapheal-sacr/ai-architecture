@@ -199,3 +199,28 @@ where frequent archive selection fails. This supports a repairable access/update
 policy bottleneck, not a claim that immutable stored knowledge alone supplies
 an efficient improvement mechanism. E35's exact no-selection control is the
 whole-trajectory intervention supporting that policy attribution.
+
+## Outcomes must identify improvement rather than task shortcuts
+
+E36-CONSTANT-CONTROL.md adds a measurement falsifier before scored neural
+evaluation: either constant action tours every state in the stationary worlds,
+completing about170 goals per512 actions without learning. Raw accumulated goals
+therefore cannot measure an improvement rate in this family. Compare adapted
+behavior with frozen/nonlearning controls and test contingencies those controls
+cannot solve. This is an identifying-evidence requirement for the claim, not a
+fourth architectural root.
+
+The recovery-cost/lifetime ratio needs a competence criterion requiring the
+relevant learned distinctions. Neither rewards obtainable without learning nor
+an oracle-only readout provides that evidence by itself. A general numerical
+improvement-rate bound remains unmeasured; the shortcut result does not supply one.
+
+## E36 distinguishes model knowledge from its use
+
+Even exact current dynamics leave the original soft controller below greedy
+selection in all8worlds at identical exploration. This intervenes on R3: how
+available predicted consequences select actions. Persistent storage alone
+cannot close that gap. The effect on imperfect learned models is separately
+registered; privileged scores are neither achievable-learning claims nor
+universal upper bounds on realized stochastic trajectories. Acquisition and
+use remain separate quantities in recovery cost relative to useful lifetime.

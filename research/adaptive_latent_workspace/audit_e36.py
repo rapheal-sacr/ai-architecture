@@ -75,11 +75,11 @@ def independent_plan(scores,current,goal,protocol):
     return (1-cfg['exploration'])*p+cfg['exploration']/protocol['actions']
 
 
-def run(folder,out,allow_source_change=False):
+def run(folder,out,allow_source_change=False,stage='all',training_audit=None):
     started=time.perf_counter()
     torch.set_num_threads(1)
     torch.use_deterministic_algorithms(True)
-    complete=json.loads((folder/'complete.json').read_text())
+    complete=None if stage=='training' else json.loads((folder/'complete.json').read_text())
     manifest=json.loads((folder/'manifest.json').read_text())
     protocol=manifest['protocol']
     root=Path(__file__).parent
@@ -94,7 +94,27 @@ def run(folder,out,allow_source_change=False):
                 exact_checkpoints=0,serial_map_queries=0,max_serial_map_error=0.,max_independent_policy_error=0.,
                 development_source_changes=changed)
     models={}
-    for seed in protocol['seeds']:
+    previous_seconds=0.
+    if stage=='evaluation':
+        assert training_audit is not None
+        previous=json.loads(training_audit.read_text())
+        assert previous['status']=='complete_training'
+        assert previous['data_sha256']==manifest['data_sha256']
+        assert previous['sources']==manifest['sources']
+        assert previous['frozen_commit']==manifest['commit']
+        for path,sha in previous['final_checkpoint_sha256'].items():
+            assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==sha
+        for key in ['training_updates','training_records','exact_checkpoints']:
+            result[key]=previous[key]
+        previous_seconds=previous['seconds']
+        result['training_audit_file_sha256']=hashlib.sha256(training_audit.read_bytes()).hexdigest()
+        for seed in protocol['seeds']:
+            for arm in protocol['training_arms']:
+                model=E2ECore(Config(**protocol['config']),seed=domain_seed(seed,'e36_init'))
+                saved=torch.load(folder/f'{seed}-{arm}'/f'training-{protocol["outer_steps"]}.pt',weights_only=False)
+                model.load_state_dict(saved['model'])
+                models[seed,arm]=model
+    for seed in ([] if stage=='evaluation' else protocol['seeds']):
         for arm in protocol['training_arms']:
             case=folder/f'{seed}-{arm}'
             model=E2ECore(Config(**protocol['config']),seed=domain_seed(seed,'e36_init'))
@@ -103,6 +123,7 @@ def run(folder,out,allow_source_change=False):
             equal(model.state_dict(),initial['model'])
             equal(optimizer.state_dict(),initial['optimizer'])
             logs=json.loads((case/'training.json').read_text())
+            assert len(logs)==protocol['outer_steps'], 'Final training checkpoints are not all available'
             for t,example in enumerate(data['training'][str(seed)]):
                 direct_world_check(example['world'],example['records'],protocol['states'])
                 optimizer.zero_grad(set_to_none=True)
@@ -125,6 +146,15 @@ def run(folder,out,allow_source_change=False):
                     result['exact_checkpoints']+=1
             models[seed,arm]=model
             print('E36_AUDIT_TRAIN',seed,arm,flush=True)
+    if stage=='training':
+        result.update(status='complete_training',seconds=time.perf_counter()-started,
+                      frozen_commit=manifest['commit'],sources=manifest['sources'],data_sha256=manifest['data_sha256'],
+                      final_checkpoint_sha256={str(folder/f'{seed}-{arm}'/f'training-{protocol["outer_steps"]}.pt'):
+                          hashlib.sha256((folder/f'{seed}-{arm}'/f'training-{protocol["outer_steps"]}.pt').read_bytes()).hexdigest()
+                          for seed in protocol['seeds'] for arm in protocol['training_arms']})
+        out.write_text(json.dumps(result,indent=2)+'\n')
+        print('E36_TRAINING_AUDITED',json.dumps(result),flush=True)
+        return
     lookup={spec['name']:spec for spec in data['evaluation']}
     for case in complete['evaluation']:
         raw=json.loads(Path(case['result_file']).read_text())
@@ -234,7 +264,9 @@ def run(folder,out,allow_source_change=False):
         equal(total,raw['work'])
         assert abs(sum(r['nll'] for r in raw['rows'])/len(raw['rows'])-raw['mean_nll'])<1e-14
         print('E36_AUDIT_EVAL',case['seed'],condition['name'],raw['world'],flush=True)
-    result.update(status='complete',seconds=time.perf_counter()-started,
+    elapsed=time.perf_counter()-started
+    result.update(status='complete',seconds=elapsed+previous_seconds,
+                  current_stage_seconds=elapsed,prior_training_audit_seconds=previous_seconds,
                   scored_complete_sha256=hashlib.sha256((folder/'complete.json').read_bytes()).hexdigest())
     out.write_text(json.dumps(result,indent=2)+'\n')
     print('E36_AUDITED',json.dumps(result),flush=True)
@@ -245,5 +277,7 @@ if __name__=='__main__':
     p.add_argument('--input',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True)
     p.add_argument('--allow-development-source-change',action='store_true')
+    p.add_argument('--stage',choices=['all','training','evaluation'],default='all')
+    p.add_argument('--training-audit',type=Path)
     a=p.parse_args()
-    run(a.input,a.out,a.allow_development_source_change)
+    run(a.input,a.out,a.allow_development_source_change,a.stage,a.training_audit)

@@ -54,7 +54,7 @@ def acquisition(rows,spec):
     return records
 
 
-def run(folder,auditfile,dest):
+def run(folder,auditfile,dest,constantfolder=None):
     complete=json.loads((folder/'complete.json').read_text())
     audit=json.loads(auditfile.read_text())
     assert complete['status']==audit['status']=='complete'
@@ -76,6 +76,23 @@ def run(folder,auditfile,dest):
                   source_file=metadata['result_file'])
         cases.append(case)
         grouped[condition,spec['regime']].append(case)
+    supplemental=None
+    if constantfolder is not None:
+        supplemental=json.loads((constantfolder/'complete.json').read_text())
+        assert supplemental['status']=='complete'
+        assert supplemental['input_data_sha256']==hashlib.sha256((folder/'data.json').read_bytes()).hexdigest()
+        assert supplemental['frozen_e36_commit']==complete['manifest']['commit']
+        for c in supplemental['cases']:
+            assert c['goals']==sum(r['reward'] for r in c['receipts'])
+            case=dict(seed=None,condition=f"fixed{c['fixed_action']}",world=c['world'],regime=c['regime'],
+                      actions=c['actions'],goals=c['goals'],accuracy=None,mean_nll=None,
+                      acting_seconds=c['acting_and_receipt_seconds'],total_seconds=c['acting_and_receipt_seconds'],
+                      work=dict(transition_queries=0,updates=0),
+                      storage=dict(learned_state_bytes=0,constant_action=c['fixed_action']),acquisition=None,
+                      late_goals=sum(r['reward'] for r in c['receipts'][len(c['receipts'])//2:]),
+                      source_file=str(constantfolder/'complete.json'))
+            cases.append(case)
+            grouped[case['condition'],case['regime']].append(case)
     aggregates=[]
     for (condition,regime),group in grouped.items():
         rec=[r for c in group for r in (c['acquisition'] or [])]
@@ -84,7 +101,7 @@ def run(folder,auditfile,dest):
                                mean_goals=mean([c['goals'] for c in group]),
                                min_goals=min(c['goals'] for c in group),max_goals=max(c['goals'] for c in group),
                                mean_late_goals=mean([c['late_goals'] for c in group]),
-                               mean_actual_accuracy=mean([c['accuracy'] for c in group]),
+                               mean_actual_accuracy=mean([c['accuracy'] for c in group]) if group[0]['accuracy'] is not None else None,
                                mean_nll=mean([c['mean_nll'] for c in group]) if group[0]['mean_nll'] is not None else None,
                                acting_seconds=sum(c['acting_seconds'] for c in group),
                                total_seconds=sum(c['total_seconds'] for c in group),
@@ -96,10 +113,10 @@ def run(folder,auditfile,dest):
     for c in cases:
         if c['condition']!='e2e_ttt':
             continue
-        for baseline in ['static_ttt','first_order_ttt','e2e_frozen','bfs','counts','random']:
-            other=indexed[c['seed'] if baseline not in ['bfs','counts','random'] else None,baseline,c['world']]
+        for baseline in ['static_ttt','first_order_ttt','e2e_frozen','bfs','counts','random']+(['fixed0','fixed1'] if supplemental is not None else []):
+            other=indexed[c['seed'] if baseline not in ['bfs','counts','random','fixed0','fixed1'] else None,baseline,c['world']]
             paired.append(dict(seed=c['seed'],world=c['world'],regime=c['regime'],baseline=baseline,
-                               goal_difference=c['goals']-other['goals'],accuracy_difference=c['accuracy']-other['accuracy'],
+                               goal_difference=c['goals']-other['goals'],accuracy_difference=c['accuracy']-other['accuracy'] if other['accuracy'] is not None else None,
                                nll_difference=c['mean_nll']-other['mean_nll'] if other['mean_nll'] is not None else None,
                                acting_time_ratio=c['acting_seconds']/other['acting_seconds']))
     noise=complete['manifest']['protocol']['evaluation_noise_rate']
@@ -111,6 +128,8 @@ def run(folder,auditfile,dest):
                  scored_seconds=complete['seconds'],process_max_rss_kib=complete['process_max_rss_kib'],
                  noisy_perfect_map_expected_accuracy=best,noisy_perfect_map_expected_nll=entropy,
                  input_sha256=hashlib.sha256((folder/'complete.json').read_bytes()).hexdigest())
+    if supplemental is not None:
+        summary['supplemental_constant_control']={k:v for k,v in supplemental.items() if k!='cases'}
     dest.mkdir(parents=True,exist_ok=True)
     (dest/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
     lines=['# E36 audited action results', '',
@@ -127,7 +146,8 @@ def run(folder,auditfile,dest):
            '|---|---|---:|---:|---:|---:|---:|']
     for a in aggregates:
         nll='—' if a['mean_nll'] is None else f"{a['mean_nll']:.4f}"
-        lines.append(f"| {a['condition']} | {a['regime']} | {a['cases']} / {a['worlds']} | {a['mean_goals']:.2f} | {a['min_goals']}–{a['max_goals']} | {a['mean_actual_accuracy']:.2%} | {nll} |")
+        accuracy='—' if a['mean_actual_accuracy'] is None else f"{a['mean_actual_accuracy']:.2%}"
+        lines.append(f"| {a['condition']} | {a['regime']} | {a['cases']} / {a['worlds']} | {a['mean_goals']:.2f} | {a['min_goals']}–{a['max_goals']} | {accuracy} | {nll} |")
     lines+=['','## E2E paired differences','',
             'Positive goal differences favor E2E TTT. Counts are descriptive paired',
             'cases, not independent population trials or significance tests.','',
@@ -142,7 +162,8 @@ def run(folder,auditfile,dest):
     lines+=['','## Acquisition and failure after first acquisition','',
             'Threshold: at least 11 of 12 transition argmaxes correct at a pre-action',
             'probe. Probes reuse already-paid model queries; labels are evaluator-only.',
-            'This measures map knowledge, not actual noisy-outcome accuracy. Time starts',
+            'This measures the map predictions expressed by this query interface, not',
+            'irreversibly retained information or actual noisy-outcome accuracy. Time starts',
             'at each hidden segment boundary. Zero means threshold held before any new',
             'segment action. A never-hit segment is censored at its full duration.',
             'The first point hit is not stable acquisition; later failures are retained.',
@@ -173,6 +194,18 @@ def run(folder,auditfile,dest):
             'Neither a local gain nor failure identifies a universal AI improvement-rate',
             'bound. Use goal outcomes, retained knowledge and costs together before',
             'deciding the next architecture change. The full goal remains active.','']
+    if supplemental is not None:
+        lines+=['## Supplemental constant-action falsifier','',
+                'Fixed0 and fixed1 were added before scored neural action results were',
+                'available. They do not change the frozen primary experiment, and both',
+                'are retained without selecting the better action per world. Because each',
+                'action independently tours every state, these policies complete goals',
+                'without learning. Raw goal count cannot establish acquired map knowledge.',
+                f"Their {supplemental['independently_checked_actions']} receipts were separately physically audited.",
+                'Their timing includes world construction and receipt generation, excludes',
+                'audit/file writing, and is not isolated kernel latency. Accuracy/NLL are',
+                'omitted because these policies do not predict transitions. See',
+                'E36-CONSTANT-CONTROL.md for the structural derivation and scope.','']
     (dest/'tables.md').write_text('\n'.join(lines))
     print('E36_SUMMARIZED',len(cases),sum(len(c['acquisition'] or []) for c in cases),flush=True)
 
@@ -182,5 +215,6 @@ if __name__=='__main__':
     p.add_argument('--input',type=Path,required=True)
     p.add_argument('--audit',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True)
+    p.add_argument('--constant-control',type=Path)
     a=p.parse_args()
-    run(a.input,a.audit,a.out)
+    run(a.input,a.audit,a.out,a.constant_control)

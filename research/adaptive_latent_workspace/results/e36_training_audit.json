@@ -1,0 +1,35 @@
+{
+  "training_updates": 1152,
+  "training_records": 110592,
+  "evaluation_actions": 0,
+  "evaluation_updates": 0,
+  "exact_checkpoints": 36,
+  "serial_map_queries": 0,
+  "max_serial_map_error": 0.0,
+  "max_independent_policy_error": 0.0,
+  "development_source_changes": [],
+  "status": "complete_training",
+  "seconds": 1564.5490985700162,
+  "frozen_commit": "2d3eff32a79a1561ba76d98a81b6a7f10bc92c04",
+  "sources": {
+    "e36_action_learning.py": "3a070c49b608b979d7d7a4bc758dd584502f92b4b0e4db3eb742f62d53f0c1d4",
+    "e36_data.py": "f3d9327872a70a887acbdfbe9f14ab9389bd2a399a6d346e825ed17a8b2a253f",
+    "protocol_e36.json": "364f5bdcd2b971153e17c7efd405a1043c98411a9daa1a7eed21c54e24bc0ca3",
+    "e2e_core.py": "7328c37da9f9ee1a1a36fceb060012ff78d8709c201986e386230107dafd87f2",
+    "action_e2e.py": "69a6e472ef512af3a8a139b03e9f17702589c5c50147bd64f0ea13d250be982f",
+    "action_navigation.py": "2a060d54a01a27e8315342f452af17ce3490c98630ae26d04ab5adac2b74aef6",
+    "action_planning.py": "bf12bf9daa7fc29c657b541012427187fd0755d60e6ad6bca147d49814ef15c4"
+  },
+  "data_sha256": "3b13d16a22d0b80d4c52aeb332a75be958e7b94818434070262465c2d35f4d59",
+  "final_checkpoint_sha256": {
+    "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e36/38101-static/training-128.pt": "b6da1ee2dbb05e8dfebcf0302aec4fb6fd0c3f24e532c03616c73778ba0242a1",
+    "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e36/38101-first_order/training-128.pt": "268fdf6252ef7c01ddab06738e1147a0f8f5eb3da27de12b1b74398a7f9a94d4",
+    "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e36/38101-e2e/training-128.pt": "a8070d9b124b69aba76753ba96416ddcdf076c2f088e8bfc6f258580bb45d7ec",
+    "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e36/38102-static/training-128.pt": "999739e025194fba2cae71d663862934b243287117a1af1d3d6436a246aaf21e",
+    "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e36/38102-first_order/training-128.pt": "4c5cc2e83a353d4a96e862410406b0fecd0b9a7dcdab7be121d9270d25082e06",
+    "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e36/38102-e2e/training-128.pt": "795db5d9cde65810888bcc26ed9c05ecd2b298e4b6863907b6e4f7ffab753d7e",
+    "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e36/38103-static/training-128.pt": "0fc3321797d555809a33c5f7c2bfb2e15fe0741b002403df651bf0d5487be362",
+    "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e36/38103-first_order/training-128.pt": "88551330c162309173128d290901b03d3eaa456cfe68f237708c679ef9056c0d",
+    "/media/rapheal/New WD m2 Udemba Boys/AI Architecture Research/alw-runs/e36/38103-e2e/training-128.pt": "df635d2917d45db3fe7dfa38ced3f5853cebbcf1cfb9ef5cd1d3325ed0d47150"
+  }
+}

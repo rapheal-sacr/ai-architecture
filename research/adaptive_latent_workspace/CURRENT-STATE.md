@@ -1,11 +1,18 @@
 # Research state — goal still active
 
-E36 is now source-frozen at `2d3eff32a79a1561ba76d98a81b6a7f10bc92c04` and
-scorer51019 is running on the WD drive. It trains static, first-order and full
-E2E predictive learners on identical real-action data, then evaluates actual
-goal completion in eight fresh worlds. Read E36-PROTOCOL.md and poll51019;
-no scored conclusion or audit is available yet. Training/evaluation maps are
-disjoint (768/26 unique maps). E36-PREFLIGHT.md is development-only evidence.
+E36 main scoring and both audit stages are complete. Read E36-RESULT.md and
+E36-TABLES.md: scoped acquisition improves, second-order superiority remains
+mixed, and the present action integration fails the efficiency comparison.
+The constant-action shortcut and exact-model planner intervention are also
+complete. Original scorer/training handles51019/24107 disappeared after reset;
+completion is established from validated artifacts, not invented exit codes.
+Do not poll or restart those handles.
+
+E36-GREEDY-PROTOCOL.md registers a post hoc80-case controller intervention
+on frozen models and the same worlds. Its four-case preflight passes2,048
+actions,1,536 updates and16 evaluation checkpoints (plus36 inherited training
+checkpoints). Check RUNS/ACTIVE-STATE.json for live status. Full-goal novelty,
+compression, broad reasoning and reliable recursive improvement remain open.
 
 Latest user steering: test the attached fourteen hypotheses and use them to
 inform this same goal. HYPOTHESES-LEDGER.md covers all fourteen; P1 directly
@@ -14,8 +21,8 @@ HYPOTHESES-P1-RESULT.md records576 audited trajectories: surprise chases noise,
 information gain also fails under bounded memory/change, and retrospective CTM
 thinking time does not stop the inspected forward. The ledger retains positive
 cases and unmeasured claims. All P1 processes are terminal. Action planning/world
-mechanics pass ACTION-PLANNING-PREFLIGHT.md; E36 training is in progress and no
-scored action competence is established yet.
+mechanics pass ACTION-PLANNING-PREFLIGHT.md; E36 establishes scoped predictive/action acquisition; it does not meet the
+full efficiency or general-action requirement.
 
 Read `FALSIFICATION.md` first. No result establishes a scientifically novel,
 general continually improving agent or efficient very long-horizon reasoning.

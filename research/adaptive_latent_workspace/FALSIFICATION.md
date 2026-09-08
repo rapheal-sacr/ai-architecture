@@ -543,3 +543,41 @@ are not capability evidence. The next scored run freezes equal-data predictive
 static/first-order/E2E training and evaluates actual goal completion with a fixed
 planner, alongside cheap observed-memory controls. No task-reward outer training,
 learned goal generation or general reasoning is established by these checks.
+
+## E36 supplementary constant-action falsifier, during scored training
+
+Each action's Hamiltonian cycle is a task shortcut. Constant0/1 policies reach
+175/166 and169/169 goals in the two stationary512-action worlds without learned
+state, transition queries or updates. Expected stationary completion is170.444;
+mean goal distance is3. They also complete128–176 goals in the changing/noisy
+worlds. All8,192 supplemental receipts and312 cycle traversals are checked.
+Read E36-CONSTANT-CONTROL.md. Both constants are retained and neither changes
+the frozen primary experiment. Scorer51019 is still training (latest verified
+round64/128); neural action results remain pending.
+
+This falsifies raw goal count as sufficient evidence for acquired map knowledge.
+Private map probes likewise measure current query-access behavior, not proof
+that an incorrect answer reflects irreversible erasure. Preserve these limits
+when interpreting the trained mechanism. General reasoning must survive task
+families that require contingent choices, not only universal cycle traversal.
+
+## E36 completed: learned acquisition, failed efficiency, planner limitation
+
+All1,152 training updates,73,728 evaluation actions and612 noninitial checkpoints
+are audited. E2E TTT improves goal completion over static TTT in24/24 paired
+cases, but beats first-order in12, ties1 and loses11. It loses to observed-edge
+BFS on every recurring/drifting/noisy paired case while costing about500 times
+observed acting time; counts cost about1/25–1/27 as much. Two shared worlds per
+regime limit inference. Read E36-RESULT.md and all E36-TABLES.md rows.
+
+With exact CURRENT map/noise, the original soft planner reaches mean181.5/186/
+170.5/159.5 goals (stationary/recurring/drift/noise). Greedy at the same exploration
+reaches256/264/263.5/219, improving all8worlds. All12,288 oracle actions physically
+replay. This rejects a memory-only explanation of the gap and identifies R3
+action selection as a limitation. It is privileged, post hoc evidence, not
+learned performance. The80-case learned-checkpoint intervention is now registered.
+
+Map first hits commonly fail later; current query answers do not identify
+irreversible erasure. Constant actions exploit the cycle family. General
+reasoning, compression, reliable RSI and a universal improvement-rate bound
+remain unmeasured/unestablished. Earlier running statements are superseded.
